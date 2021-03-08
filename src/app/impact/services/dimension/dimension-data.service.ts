@@ -14,6 +14,10 @@ export class DimensionDataService {
 	public dimensions: Dimension[] = [];
 
 	constructor(private restService: DimensionRestService) {
+
+	}
+
+	onInit() {
 		// Load dimensions.
 		this.restService.getDimensions().subscribe(dims => {
 			this.dimensions = dims;
