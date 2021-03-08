@@ -30,7 +30,7 @@ import { CreateAnalysisDialogComponent } from './home/create-analysis-dialog/cre
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule,
+    MatInputModule
   ],
   exports: [
     ShellMain,
