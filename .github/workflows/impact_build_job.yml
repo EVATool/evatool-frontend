@@ -2,9 +2,9 @@ name: CI Testing
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ impact ]
   pull_request:
-    branches: [ dev ]
+    branches: [ impact ]
 
 jobs:
   build:
