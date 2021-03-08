@@ -10,7 +10,7 @@ echo STOP DOCKER IMAGE
 docker stop evatoolui_container
 echo ------------------------------
 echo START DOCKER IMAGE
-docker run --name evatoolui_container -d --rm -p 80:8080 evatoolui_image --server.port=8080
+docker run --name evatoolui_container -d --rm -p 80:80 evatoolui_image
 echo ------------------------------
 echo RUNNING CONTAINERS
 docker ps
