@@ -27,8 +27,8 @@ jobs:
     - name: Transfer docker folder to remote server
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: docker
-        remote: evatool/frontend/docker
+        local: docker/deploy.sh
+        remote: evatool/frontend/docker/deploy.sh
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         privatekey: ${{ secrets.SSH_PRIVATE_KEY }}
