@@ -5,43 +5,43 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const httpOptions = { // Outsource!
-	headers: new HttpHeaders({
-		'Content-Type': 'application/json'
-	})
-}
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+};
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class DimensionRestService {
 
-	dimensionsUrl: string = '/api/dimensions'; // Outsource!
+  dimensionsUrl = '/api/dimensions'; // Outsource!
 
-	constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {
 
-	}
+  }
 
-	onInit() {
+  onInit(): void {
 
-	}
+  }
 
-	getDimensions(): Observable<Dimension[]> {
-		return this.http.get<Dimension[]>(this.dimensionsUrl);
-	}
+  getDimensions(): Observable<Dimension[]> {
+    return this.http.get<Dimension[]>(this.dimensionsUrl);
+  }
 
-	getDimensionTypes(): Observable<string[]> {
-		return this.http.get<string[]>(this.dimensionsUrl + "/types");
-	}
+  getDimensionTypes(): Observable<string[]> {
+    return this.http.get<string[]>(this.dimensionsUrl + '/types');
+  }
 
-	createDimension(dimension: Dimension): Observable<any> {
-		return this.http.post(this.dimensionsUrl, dimension, httpOptions);
-	}
+  createDimension(dimension: Dimension): Observable<any> {
+    return this.http.post(this.dimensionsUrl, dimension, httpOptions);
+  }
 
-	updateDimension(dimension: Dimension): Observable<any> {
-		return this.http.put(this.dimensionsUrl, dimension, httpOptions);
-	}
+  updateDimension(dimension: Dimension): Observable<any> {
+    return this.http.put(this.dimensionsUrl, dimension, httpOptions);
+  }
 
-	deleteDimension(dimension: Dimension) {
-		return this.http.delete(this.dimensionsUrl + "/" + dimension.id);
-	}
+  deleteDimension(dimension: Dimension): Observable<any> {
+    return this.http.delete(this.dimensionsUrl + '/' + dimension.id);
+  }
 }
