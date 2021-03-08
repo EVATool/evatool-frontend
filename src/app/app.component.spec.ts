@@ -20,9 +20,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'evatoolModuleLayout'`, () => {
+  it(`should have as title 'evatool-frontend'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('evatoolModuleLayout');
+    expect(app.title).toEqual('evatool-frontend');
   });
 });
