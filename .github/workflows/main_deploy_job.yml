@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm build:prod
+    - run: npm run build:prod
 
     - name: Transfer docker folder to remote server
       uses: garygrossgarten/github-action-scp@release
