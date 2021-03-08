@@ -1,4 +1,4 @@
-name: CI Deployment
+name: CI Deployment (main)
 
 on:
   push:
@@ -22,4 +22,33 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run lint
+    - run: npm build:prod
+
+    - name: Transfer docker folder to remote server
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: docker
+        remote: evatool/frontend/docker
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        privatekey: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+
+    - name: Transfer dist folder to remote server
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: dist
+        remote: evatool/frontend/dist
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        privatekey: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+
+    - name: Run deploy script
+      uses: appleboy/ssh-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        PORT: ${{ secrets.PORT }}
+        SCRIPT: sh evatool/frontend/docker/deploy.sh
