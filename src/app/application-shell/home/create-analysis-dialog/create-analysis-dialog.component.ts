@@ -11,21 +11,22 @@ export class CreateAnalysisDialogComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<CreateAnalysisDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       id: new FormControl(null),
-    })
+    });
   }
 
-  abort() {
+  abort(): void {
     this.dialogRef.close({ accept: false });
   }
 
-  ok() {
+  ok(): void {
     this.dialogRef.close({ accept: true, form: this.form.value });
   }
 }

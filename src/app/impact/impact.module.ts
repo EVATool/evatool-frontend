@@ -6,7 +6,7 @@ import { ImpactMainComponent } from './impact-main/impact-main.component';
   declarations: [ImpactMainComponent],
   imports: [
     CommonModule
-  ], 
+  ],
   exports: [
     ImpactMainComponent
   ]

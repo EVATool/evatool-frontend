@@ -16,15 +16,15 @@ export class HomeComponent implements OnInit {
 
   btnClick(): void {
     this.router.navigate(['/main'], { queryParams: { id: 'analysisUUID' }, queryParamsHandling: 'merge' });
-  };
+  }
 
-  openDialog() {
-    let dialogRef = this.dialog.open(CreateAnalysisDialogComponent, { data: { p: "test", b: "auch test" } });
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateAnalysisDialogComponent, { data: { p: 'test', b: 'auch test' } });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result.accept) {
-        console.log("asdasdasd")
+        console.log('asdasdasd');
         this.router.navigate(['/main'], { queryParams: { id: result.form.id }, queryParamsHandling: 'merge' });
       }
     });

@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ShellMain } from './shell-main.component';
+import { ShellMainComponent } from './shell-main.component';
 
-describe('ShellMain', () => {
-  let component: ShellMain;
-  let fixture: ComponentFixture<ShellMain>;
+describe('ShellMainComponent', () => {
+  let component: ShellMainComponent;
+  let fixture: ComponentFixture<ShellMainComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -13,13 +13,13 @@ describe('ShellMain', () => {
         RouterTestingModule
       ],
       declarations: [
-        ShellMain
+        ShellMainComponent
       ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ShellMain);
+    fixture = TestBed.createComponent(ShellMainComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

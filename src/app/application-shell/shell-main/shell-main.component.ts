@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
   templateUrl: './shell-main.component.html',
   styleUrls: ['./shell-main.component.css', '../../layout/style/style.css']
 })
-export class ShellMain implements OnInit {
+export class ShellMainComponent implements OnInit {
 
-  analysisId: string = "";
+  analysisId = '';
 
   constructor(private router: Router) {
 
@@ -17,11 +17,11 @@ export class ShellMain implements OnInit {
   ngOnInit(): void {
     this.router.routerState.root.queryParams
       .subscribe(params => {
-        console.log(params.id)
+        console.log(params.id);
         this.analysisId = params.id;
       });
 
-    if (this.analysisId == undefined) {
+    if (this.analysisId === undefined) {
       console.log('Throw error? How to handle this? This should not be allowed.');
     }
   }
