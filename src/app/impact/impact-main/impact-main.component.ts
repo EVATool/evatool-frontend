@@ -15,7 +15,7 @@ export class ImpactMainComponent implements OnInit {
 
   }
 
-  addImpact(){
+  addImpact(): void {
     console.log('add impact...');
   }
 }
