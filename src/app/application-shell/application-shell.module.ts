@@ -1,3 +1,4 @@
+import { DashboardModule } from './../dashboard/dashboard.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,7 @@ import { CreateAnalysisDialogComponent } from './home/create-analysis-dialog/cre
     AnalysisModule,
     RequirementModule,
     VariantModule,
+    DashboardModule,
     BrowserAnimationsModule,
     MatTabsModule,
     MatDialogModule,
