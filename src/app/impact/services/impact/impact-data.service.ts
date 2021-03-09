@@ -28,8 +28,16 @@ export class ImpactDataService {
       id: '3',
       value: 0.9,
       description: 'This is the third read-only impact',
-      dimension: { id: '23', name: 'Fiannces', description: 'Economics of Family', type: 'ECONOMIC' },
+      dimension: { id: '23', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC' },
       stakeholder: { id: '13', name: 'Family' },
+      analysis: { id: '7' }
+    },
+    {
+      id: '4',
+      value: 0.2,
+      description: 'This is the fourth read-only impact',
+      dimension: { id: '24', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL' },
+      stakeholder: { id: '14', name: 'Ensurance' },
       analysis: { id: '7' }
     }
   ];

@@ -14,4 +14,8 @@ export class ImpactMainComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  addImpact(){
+    console.log('add impact...');
+  }
 }
