@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ImpactRestService {
+export class StakeholderRestService {
 
-  constructor() { 
+  constructor() {
     
-  }
+   }
 }

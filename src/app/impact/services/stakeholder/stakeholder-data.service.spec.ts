@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ImpactDataService } from './impact-data.service';
+import { StakeholderDataService } from './stakeholder-data.service';
 
-describe('ImpactDataService', () => {
-  let service: ImpactDataService;
+describe('StakeholderDataService', () => {
+  let service: StakeholderDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule]
     });
-    service = TestBed.inject(ImpactDataService);
+    service = TestBed.inject(StakeholderDataService);
   });
 
   it('should be created', () => {

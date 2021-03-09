@@ -10,8 +10,25 @@ export class DimensionDataService {
   @Output() dimensionsLoaded: EventEmitter<void> = new EventEmitter();
   @Output() dimensionTypesLoaded: EventEmitter<void> = new EventEmitter();
 
-  public dimensionTypes: string[] = [];
-  public dimensions: Dimension[] = [];
+  dummyDimensions: Dimension[] = [
+    {
+      id: '21', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
+    },
+    {
+      id: '22', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL'
+    },
+    {
+      id: '23', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC'
+    },
+    {
+      id: '24', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
+    }
+  ];
+
+  dummyDimensionTypes: string[] = ['SOCIAL', 'ECONOMIC'];
+
+  public dimensions: Dimension[] = this.dummyDimensions;
+  public dimensionTypes: string[] = this.dummyDimensionTypes;
 
   constructor(private restService: DimensionRestService) {
 
@@ -33,6 +50,10 @@ export class DimensionDataService {
 
   getDimensions(): Dimension[] {
     return this.dimensions;
+  }
+
+  getDimensionTypes(): string[] {
+    return this.dimensionTypes;
   }
 
   getDefaultDimensionType(): string {
