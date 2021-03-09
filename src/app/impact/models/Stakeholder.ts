@@ -1,4 +1,4 @@
 export class Stakeholder {
-	id = '';
-	name = '';
+  id = '';
+  name = '';
 }

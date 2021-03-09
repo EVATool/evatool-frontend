@@ -1,6 +1,6 @@
 import { Analysis } from './Analysis';
 import { Stakeholder } from './Stakeholder';
-import { Dimension } from "./Dimension";
+import { Dimension } from './Dimension';
 
 export class Impact {
   id = '';
