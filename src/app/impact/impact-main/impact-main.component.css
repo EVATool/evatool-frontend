@@ -1,0 +1,19 @@
+#search-description-div {
+  margin: 30px;
+  margin-left: 45px;
+}
+
+#impact-table-div {
+  display: inline-block;
+  margin: 25px;
+  height: 10%;
+  max-height: 20%;
+}
+
+#add-impact-button-div {
+  position: fixed;
+  left: 30px;
+  bottom: 80px;
+  height: 30px;
+  width: 100%;
+}

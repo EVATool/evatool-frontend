@@ -1,7 +1,13 @@
-<input matInput placeholder="Search...">
+<div id="search-description-div">
+  <input matInput placeholder="Search...">
+</div>
 
-<app-impact-table></app-impact-table>
+<div id="impact-table-div">
+  <app-impact-table></app-impact-table>
+</div>
 
-<button id="basic" type="button" mat-button (click)="addImpact()">
-  +
-</button>
+<div id="add-impact-button-div">
+  <button id="add-impact-button" type="button" mat-fab (click)="addImpact()">
+    <p style="font-size:180%;"> +</p>
+  </button>
+</div>
