@@ -30,4 +30,8 @@ export class StakeholderDataService {
   getStakeholders(): Stakeholder[] {
     return this.stakeholders;
   }
+
+  getDefaultStakeholder(): Stakeholder {
+    return this.stakeholders[0];
+  }
 }

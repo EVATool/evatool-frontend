@@ -3,12 +3,13 @@ import { Stakeholder } from './../../models/Stakeholder';
 import { StakeholderDataService } from './../stakeholder/stakeholder-data.service';
 import { Analysis } from './../../models/Analysis';
 import { Impact } from './../../models/Impact';
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImpactDataService {
+  @Output() onCreateImpact: EventEmitter<Impact> = new EventEmitter();
 
   dummyImpacts: Impact[] = [
     {
@@ -58,5 +59,24 @@ export class ImpactDataService {
 
   getImpacts(): Impact[] {
     return this.impacts;
+  }
+
+  private createDefaultImpact(): Impact {
+    let impact = new Impact();
+
+    impact.id = 'TEST';
+    impact.value = -0.9;
+    impact.description = "Dieser Impact wurde erstellt";
+    impact.dimension = this.dimensionDataService.getDefaultDimension();
+    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
+
+    return impact;
+  }
+
+  createImpact(): Impact {
+    let impact = this.createDefaultImpact();
+    this.impacts.push(impact);
+    this.onCreateImpact.emit(impact);
+    return impact;
   }
 }

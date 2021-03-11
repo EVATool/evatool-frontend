@@ -37,12 +37,16 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
-      switch(property) {
+      switch (property) {
         case 'stakeholder': return impact.stakeholder.name;
         case 'dimension': return impact.dimension.name;
         default: return impact[property];
       }
     };
+
+    this.impactDataService.onCreateImpact.subscribe(impact => {
+      this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
+    });
   }
 
   ngAfterViewInit(): void {

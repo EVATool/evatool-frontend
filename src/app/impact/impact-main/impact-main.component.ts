@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ImpactDataService } from './../services/impact/impact-data.service';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Impact } from '../models/Impact';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-impact-main',
@@ -6,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./impact-main.component.css']
 })
 export class ImpactMainComponent implements OnInit {
+  @ViewChild(MatTable) table!: MatTable<any>;
 
-  constructor() {
+  constructor(private impactDataService: ImpactDataService) {
 
   }
 
@@ -17,5 +21,6 @@ export class ImpactMainComponent implements OnInit {
 
   addImpact(): void {
     console.log('add impact...');
+    this.impactDataService.createImpact();
   }
 }

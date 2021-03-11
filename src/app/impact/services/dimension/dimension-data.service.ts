@@ -52,6 +52,10 @@ export class DimensionDataService {
     return this.dimensions;
   }
 
+  getDefaultDimension(): Dimension {
+    return this.dimensions[0];
+  }
+
   getDimensionTypes(): string[] {
     return this.dimensionTypes;
   }
