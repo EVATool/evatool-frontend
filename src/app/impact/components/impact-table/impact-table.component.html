@@ -1,4 +1,5 @@
-<table mat-table [dataSource]='impacts'>
+<table mat-table [dataSource]='tableDataSource' matSort>
+  <caption class="screen-reader-only">List of impacts</caption>
   <ng-container matColumnDef='id'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
     <td mat-cell *matCellDef='let element'> {{element.id}} </td>
