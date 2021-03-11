@@ -1,3 +1,5 @@
+import { Stakeholder } from './../../models/Stakeholder';
+import { StakeholderDataService } from './../stakeholder/stakeholder-data.service';
 import { Analysis } from './../../models/Analysis';
 import { Impact } from './../../models/Impact';
 import { Injectable } from '@angular/core';
@@ -44,8 +46,8 @@ export class ImpactDataService {
 
   impacts: Impact[] = this.dummyImpacts;
 
-  constructor() {
-
+  constructor(private stakeholderDataService: StakeholderDataService) {
+    this.dummyImpacts[0].stakeholder = this.stakeholderDataService.getStakeholders()[0];
   }
 
   getImpacts(): Impact[] {
