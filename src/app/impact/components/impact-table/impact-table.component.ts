@@ -1,23 +1,28 @@
-import { DimensionDataService } from './../../services/dimension/dimension-data.service';
-import { Dimension } from './../../models/Dimension';
-import { Stakeholder } from './../../models/Stakeholder';
-import { StakeholderDataService } from './../../services/stakeholder/stakeholder-data.service';
-import { ImpactDataService } from './../../services/impact/impact-data.service';
-import { Impact } from './../../models/Impact';
-import { Component, OnInit } from '@angular/core';
+import { DimensionDataService } from '../../services/dimension/dimension-data.service';
+import { Dimension } from '../../models/Dimension';
+import { Stakeholder } from '../../models/Stakeholder';
+import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
+import { ImpactDataService } from '../../services/impact/impact-data.service';
+import { Impact } from '../../models/Impact';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-impact-table',
   templateUrl: './impact-table.component.html',
-  styleUrls: ['./impact-table.component.css']
+  styleUrls: ['./impact-table.component.css', '../../../layout/style/style.css']
 })
-export class ImpactTableComponent implements OnInit {
+export class ImpactTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
   impacts: Impact[] = [];
   dimensions: Dimension[] = [];
   dimensionTypes: string[] = [];
   stakeholders: Stakeholder[] = [];
+
+  tableDataSource: MatTableDataSource<Impact>;
 
   constructor(
     private impactDataService: ImpactDataService,
@@ -27,9 +32,14 @@ export class ImpactTableComponent implements OnInit {
     this.dimensions = this.dimensionDataService.getDimensions();
     this.dimensionTypes = this.dimensionDataService.getDimensionTypes();
     this.stakeholders = this.stakeholderDataService.getStakeholders();
+    this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
   }
 
   ngOnInit(): void {
 
+  }
+
+  ngAfterViewInit(): void {
+    this.tableDataSource.sort = this.sort;
   }
 }

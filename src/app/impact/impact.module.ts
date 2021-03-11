@@ -7,6 +7,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [ImpactMainComponent, ImpactTableComponent],
@@ -16,7 +18,9 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSelectModule,
     FormsModule,
     MatSliderModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSortModule,
+    MatInputModule
   ],
   exports: [
     ImpactMainComponent
