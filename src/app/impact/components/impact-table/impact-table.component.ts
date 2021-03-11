@@ -36,7 +36,13 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    this.tableDataSource.sortingDataAccessor = (impact, property) => {
+      switch(property) {
+        case 'stakeholder': return impact.stakeholder.name;
+        case 'dimension': return impact.dimension.name;
+        default: return impact[property];
+      }
+    };
   }
 
   ngAfterViewInit(): void {
