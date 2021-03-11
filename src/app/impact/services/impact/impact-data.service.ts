@@ -1,3 +1,4 @@
+import { DimensionDataService } from './../dimension/dimension-data.service';
 import { Stakeholder } from './../../models/Stakeholder';
 import { StakeholderDataService } from './../stakeholder/stakeholder-data.service';
 import { Analysis } from './../../models/Analysis';
@@ -46,8 +47,13 @@ export class ImpactDataService {
 
   impacts: Impact[] = this.dummyImpacts;
 
-  constructor(private stakeholderDataService: StakeholderDataService) {
-    this.dummyImpacts[0].stakeholder = this.stakeholderDataService.getStakeholders()[0];
+  constructor(
+    private stakeholderDataService: StakeholderDataService,
+    private dimensionDataService: DimensionDataService) {
+    for (let impact of this.impacts) {
+      impact.stakeholder = this.stakeholderDataService.getStakeholders()[Math.floor(Math.random() * Math.floor(4))];
+      impact.dimension = this.dimensionDataService.getDimensions()[Math.floor(Math.random() * Math.floor(4))];
+    }
   }
 
   getImpacts(): Impact[] {
