@@ -4,10 +4,9 @@
 }
 
 #impact-table-div {
-  display: inline-block;
   margin: 25px;
-  height: 10%;
-  max-height: 20%;
+  height: 600px;
+  overflow: auto;
 }
 
 #add-impact-button-div {
