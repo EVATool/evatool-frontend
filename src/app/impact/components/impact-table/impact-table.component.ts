@@ -7,7 +7,7 @@ import { Impact } from '../../models/Impact';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-impact-table',
@@ -23,7 +23,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   dimensionTypes: string[] = [];
   stakeholders: Stakeholder[] = [];
 
-  tableDataSource: MatTableDataSource<Impact>;
+  tableDataSource!: MatTableDataSource<Impact>;
 
   stakeholderFilter = new FormControl();
   dimensionFilter = new FormControl();
@@ -45,17 +45,13 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.dimensionTypes = this.dimensionDataService.getDimensionTypes();
     this.stakeholders = this.stakeholderDataService.getStakeholders();
     this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
-    this.tableDataSource.filterPredicate = this.createFilter();
+
   }
 
   ngOnInit(): void {
-    this.tableDataSource.sortingDataAccessor = (impact, property) => {
-      switch (property) {
-        case 'stakeholder': return impact.stakeholder.name;
-        case 'dimension': return impact.dimension.name;
-        default: return impact[property];
-      }
-    };
+    this.impactDataService.onImpactsLoaded.subscribe(_ => {
+      this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
+    });
 
     this.impactDataService.onCreateImpact.subscribe(_ => {
       this.tableDataSource.data = this.impacts;
@@ -64,10 +60,22 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.tableDataSource.sort = this.sort;
-    this.initFilterOnChangeListeners();
+    this.initSorting();
+    this.initFiltering();
   }
 
-  private initFilterOnChangeListeners(): void {
+  private initSorting(): void {
+    this.tableDataSource.sortingDataAccessor = (impact, property) => {
+      switch (property) {
+        case 'stakeholder': return impact.stakeholder.name;
+        case 'dimension': return impact.dimension.name;
+        default: return impact[property];
+      }
+    };
+    this.tableDataSource.filterPredicate = this.createFilter();
+  }
+
+  private initFiltering(): void {
     this.stakeholderFilter.valueChanges.subscribe(newStakeholder => {
       this.filterValues.stakeholder = newStakeholder;
       this.tableDataSource.filter = JSON.stringify(this.filterValues);
