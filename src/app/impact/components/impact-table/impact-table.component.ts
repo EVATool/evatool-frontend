@@ -51,12 +51,12 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.tableDataSource.sort = this.sort;
     this.initSorting();
     this.initFiltering();
   }
 
   private initSorting(): void {
+    this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
         case 'stakeholder': return impact.stakeholder.name;
@@ -89,6 +89,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       filterValues.value = newValue;
       this.tableDataSource.filter = JSON.stringify(filterValues);
     });
+
     this.tableDataSource.filterPredicate = this.createFilter();
   }
 
