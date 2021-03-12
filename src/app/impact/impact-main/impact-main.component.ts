@@ -8,6 +8,7 @@ import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/cor
 })
 export class ImpactMainComponent implements OnInit {
 
+
   constructor(private impactDataService: ImpactDataService) {
 
   }
@@ -17,6 +18,6 @@ export class ImpactMainComponent implements OnInit {
   }
 
   addImpact(): void {
-    this.impactDataService.createImpact();
+    this.impactDataService.addImpact();
   }
 }

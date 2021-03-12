@@ -44,11 +44,11 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.impactDataService.onImpactsLoaded.subscribe(_ => {
+    this.impactDataService.loadedImpacts.subscribe(_ => {
       this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
     });
 
-    this.impactDataService.onCreateImpact.subscribe(_ => {
+    this.impactDataService.createImpact.subscribe(_ => {
       this.tableDataSource.data = this.impacts;
     });
   }
