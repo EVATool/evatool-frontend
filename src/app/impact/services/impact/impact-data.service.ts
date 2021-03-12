@@ -10,6 +10,9 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 })
 export class ImpactDataService {
   @Output() onCreateImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() onUpdateImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() onDeleteImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() onImpactsLoaded: EventEmitter<Impact> = new EventEmitter();
 
   dummyImpacts: Impact[] = [
     {
@@ -55,6 +58,7 @@ export class ImpactDataService {
       impact.stakeholder = this.stakeholderDataService.getStakeholders()[Math.floor(Math.random() * Math.floor(4))];
       impact.dimension = this.dimensionDataService.getDimensions()[Math.floor(Math.random() * Math.floor(4))];
     }
+    this.onImpactsLoaded.emit();
   }
 
   getImpacts(): Impact[] {

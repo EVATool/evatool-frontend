@@ -20,7 +20,6 @@ export class ImpactMainComponent implements OnInit {
   }
 
   addImpact(): void {
-    console.log('add impact...');
     this.impactDataService.createImpact();
   }
 }

@@ -17,24 +17,20 @@ import { FormControl } from '@angular/forms';
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
+  // Used by table.
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
+  tableDataSource!: MatTableDataSource<Impact>;
+
+  // Data arrays from services.
   impacts: Impact[] = [];
   dimensions: Dimension[] = [];
   dimensionTypes: string[] = [];
   stakeholders: Stakeholder[] = [];
 
-  tableDataSource: MatTableDataSource<Impact>;
-
+  // Filter components in UI.
   stakeholderFilter = new FormControl();
   dimensionFilter = new FormControl();
   valueFilter = new FormControl();
-  filterValues = {
-    id: '',
-    stakeholder: '',
-    dimension: '',
-    value: '',
-    description: ''
-  };
   searchToggles = new Map<string, boolean>();
 
   constructor(
@@ -49,6 +45,23 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.impactDataService.onImpactsLoaded.subscribe(_ => {
+      this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
+    });
+
+    this.impactDataService.onCreateImpact.subscribe(_ => {
+      this.tableDataSource.data = this.impacts;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.initSorting();
+    this.initFiltering();
+    this.initFilterVisibilityToggles();
+  }
+
+  private initSorting(): void {
+    this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
         case 'stakeholder': return impact.stakeholder.name;
@@ -63,27 +76,31 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    this.tableDataSource.sort = this.sort;
-    this.initFilterOnChangeListeners();
-    this.initFilterVisibilityToggles();
-  }
+  private initFiltering(): void {
+    const filterValues = {
+      id: '',
+      stakeholder: '',
+      dimension: '',
+      value: '',
+      description: ''
+    };
 
-  private initFilterOnChangeListeners(): void {
     this.stakeholderFilter.valueChanges.subscribe(newStakeholder => {
-      this.filterValues.stakeholder = newStakeholder;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+      filterValues.stakeholder = newStakeholder;
+      this.tableDataSource.filter = JSON.stringify(filterValues);
     });
 
     this.dimensionFilter.valueChanges.subscribe(newDimension => {
-      this.filterValues.dimension = newDimension;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+      filterValues.dimension = newDimension;
+      this.tableDataSource.filter = JSON.stringify(filterValues);
     });
 
     this.valueFilter.valueChanges.subscribe(newValue => {
-      this.filterValues.value = newValue;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+      filterValues.value = newValue;
+      this.tableDataSource.filter = JSON.stringify(filterValues);
     });
+
+    this.tableDataSource.filterPredicate = this.createFilter();
   }
 
   private createFilter(): (data: any, filter: string) => boolean {
