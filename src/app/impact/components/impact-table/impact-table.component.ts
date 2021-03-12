@@ -71,7 +71,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     };
 
     this.tableDataSource.filterPredicate = this.createFilter();
-    this.impactDataService.onCreateImpact.subscribe(_ => {
+    this.impactDataService.createImpact.subscribe(_ => {
       this.tableDataSource.data = this.impacts;
     });
   }
