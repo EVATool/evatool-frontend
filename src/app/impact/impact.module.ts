@@ -11,9 +11,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AddImpactButtonComponent } from './components/add-impact-button/add-impact-button.component';
 
 @NgModule({
-  declarations: [ImpactMainComponent, ImpactTableComponent],
+  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent],
   imports: [
     CommonModule,
     MatTableModule,
