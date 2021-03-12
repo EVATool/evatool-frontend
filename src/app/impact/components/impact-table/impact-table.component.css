@@ -1,3 +1,22 @@
+.show {
+  display: block;
+  max-width: 200px;
+  transform: scale(1);
+}
+
+.hide {
+  display: none;
+  max-width: 0;
+  transform: scale(0);
+}
+
+.floating {
+  position: absolute;
+  background: white !important;
+  opacity: 1 !important;
+  top: 100%;
+}
+
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-wrapper {
   top: 18px;
 }

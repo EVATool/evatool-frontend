@@ -31,6 +31,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   stakeholderFilter = new FormControl();
   dimensionFilter = new FormControl();
   valueFilter = new FormControl();
+  searchToggles = new Map<string, boolean>();
 
   constructor(
     private impactDataService: ImpactDataService,
@@ -56,6 +57,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.initSorting();
     this.initFiltering();
+    this.initFilterVisibilityToggles();
   }
 
   private initSorting(): void {
@@ -67,6 +69,11 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         default: return impact[property];
       }
     };
+
+    this.tableDataSource.filterPredicate = this.createFilter();
+    this.impactDataService.onCreateImpact.subscribe(_ => {
+      this.tableDataSource.data = this.impacts;
+    });
   }
 
   private initFiltering(): void {
@@ -103,5 +110,15 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         && data.dimension.name.toLowerCase().indexOf(searchTerms.dimension.toLowerCase()) !== -1
         && data.value.toString().toLowerCase().indexOf(searchTerms.value.toLowerCase()) !== -1;
     };
+  }
+
+  toggleFilterVisibility(key: string): void {
+    this.searchToggles.set(key, !this.searchToggles.get(key));
+  }
+
+  private initFilterVisibilityToggles(): void {
+    this.searchToggles.set('stakeholder', false);
+    this.searchToggles.set('dimension', false);
+    this.searchToggles.set('value', false);
   }
 }
