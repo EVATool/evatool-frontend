@@ -28,13 +28,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   stakeholderFilter = new FormControl();
   dimensionFilter = new FormControl();
   valueFilter = new FormControl();
-  filterValues = {
-    id: '',
-    stakeholder: '',
-    dimension: '',
-    value: '',
-    description: ''
-  };
 
   constructor(
     private impactDataService: ImpactDataService,
@@ -45,7 +38,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.dimensionTypes = this.dimensionDataService.getDimensionTypes();
     this.stakeholders = this.stakeholderDataService.getStakeholders();
     this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
-
   }
 
   ngOnInit(): void {
@@ -72,24 +64,32 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         default: return impact[property];
       }
     };
-    this.tableDataSource.filterPredicate = this.createFilter();
   }
 
   private initFiltering(): void {
+    const filterValues = {
+      id: '',
+      stakeholder: '',
+      dimension: '',
+      value: '',
+      description: ''
+    };
+
     this.stakeholderFilter.valueChanges.subscribe(newStakeholder => {
-      this.filterValues.stakeholder = newStakeholder;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+      filterValues.stakeholder = newStakeholder;
+      this.tableDataSource.filter = JSON.stringify(filterValues);
     });
 
     this.dimensionFilter.valueChanges.subscribe(newDimension => {
-      this.filterValues.dimension = newDimension;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+      filterValues.dimension = newDimension;
+      this.tableDataSource.filter = JSON.stringify(filterValues);
     });
 
     this.valueFilter.valueChanges.subscribe(newValue => {
-      this.filterValues.value = newValue;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+      filterValues.value = newValue;
+      this.tableDataSource.filter = JSON.stringify(filterValues);
     });
+    this.tableDataSource.filterPredicate = this.createFilter();
   }
 
   private createFilter(): (data: any, filter: string) => boolean {
