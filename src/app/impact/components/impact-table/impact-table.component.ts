@@ -7,7 +7,7 @@ import { Impact } from '../../models/Impact';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-impact-table',
@@ -35,6 +35,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     value: '',
     description: ''
   };
+  searchToggles = new Map<string, boolean>();
 
   constructor(
     private impactDataService: ImpactDataService,
@@ -45,7 +46,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.dimensionTypes = this.dimensionDataService.getDimensionTypes();
     this.stakeholders = this.stakeholderDataService.getStakeholders();
     this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
-    this.tableDataSource.filterPredicate = this.createFilter();
   }
 
   ngOnInit(): void {
@@ -57,6 +57,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       }
     };
 
+    this.tableDataSource.filterPredicate = this.createFilter();
     this.impactDataService.onCreateImpact.subscribe(_ => {
       this.tableDataSource.data = this.impacts;
     });
@@ -65,6 +66,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.tableDataSource.sort = this.sort;
     this.initFilterOnChangeListeners();
+    this.initFilterVisibilityToggles();
   }
 
   private initFilterOnChangeListeners(): void {
@@ -91,5 +93,15 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         && data.dimension.name.toLowerCase().indexOf(searchTerms.dimension.toLowerCase()) !== -1
         && data.value.toString().toLowerCase().indexOf(searchTerms.value.toLowerCase()) !== -1;
     };
+  }
+
+  toggleFilterVisibility(key: string): void {
+    this.searchToggles.set(key, !this.searchToggles.get(key));
+  }
+
+  private initFilterVisibilityToggles(): void {
+    this.searchToggles.set('stakeholder', false);
+    this.searchToggles.set('dimension', false);
+    this.searchToggles.set('value', false);
   }
 }
