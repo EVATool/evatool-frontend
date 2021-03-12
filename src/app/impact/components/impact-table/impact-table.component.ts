@@ -7,6 +7,7 @@ import { Impact } from '../../models/Impact';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-impact-table',
@@ -24,6 +25,17 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   tableDataSource: MatTableDataSource<Impact>;
 
+  stakeholderFilter = new FormControl();
+  dimensionFilter = new FormControl();
+  valueFilter = new FormControl();
+  filterValues = {
+    id: '',
+    stakeholder: '',
+    dimension: '',
+    value: '',
+    description: ''
+  };
+
   constructor(
     private impactDataService: ImpactDataService,
     private dimensionDataService: DimensionDataService,
@@ -33,6 +45,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.dimensionTypes = this.dimensionDataService.getDimensionTypes();
     this.stakeholders = this.stakeholderDataService.getStakeholders();
     this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
+    this.tableDataSource.filterPredicate = this.createFilter();
   }
 
   ngOnInit(): void {
@@ -44,12 +57,39 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       }
     };
 
-    this.impactDataService.onCreateImpact.subscribe(impact => {
+    this.impactDataService.onCreateImpact.subscribe(_ => {
       this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
     });
   }
 
   ngAfterViewInit(): void {
     this.tableDataSource.sort = this.sort;
+    this.initFilterOnChangeListeners();
+  }
+
+  private initFilterOnChangeListeners(): void {
+    this.stakeholderFilter.valueChanges.subscribe(newStakeholder => {
+      this.filterValues.stakeholder = newStakeholder;
+      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+    });
+
+    this.dimensionFilter.valueChanges.subscribe(newDimension => {
+      this.filterValues.dimension = newDimension;
+      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+    });
+
+    this.valueFilter.valueChanges.subscribe(newValue => {
+      this.filterValues.value = newValue;
+      this.tableDataSource.filter = JSON.stringify(this.filterValues);
+    });
+  }
+
+  private createFilter(): (data: any, filter: string) => boolean {
+    return (data: Impact, filter: string): boolean => {
+      const searchTerms = JSON.parse(filter);
+      return data.stakeholder.name.toLowerCase().indexOf(searchTerms.stakeholder) !== -1
+        && data.dimension.name.toLowerCase().indexOf(searchTerms.dimension) !== -1
+        && data.value.toString().toLowerCase().indexOf(searchTerms.value) !== -1;
+    };
   }
 }

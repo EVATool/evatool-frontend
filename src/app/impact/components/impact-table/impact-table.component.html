@@ -1,5 +1,23 @@
+<form>
+  <mat-form-field class="filter">
+    <mat-label>Stakeholder-Filter</mat-label>
+    <input matInput [formControl]="stakeholderFilter" placeholder="Stakeholder">
+  </mat-form-field>
+
+  <mat-form-field class="filter">
+    <mat-label>Dimension-Filter</mat-label>
+    <input matInput [formControl]="dimensionFilter" placeholder="Dimension">
+  </mat-form-field>
+
+  <mat-form-field class="filter">
+    <mat-label>Impact-Value-Filter</mat-label>
+    <input matInput [formControl]="valueFilter" placeholder="Impact-Value">
+  </mat-form-field>
+</form>
+
 <table mat-table [dataSource]='tableDataSource' matSort>
   <caption class="screen-reader-only">List of impacts</caption>
+
   <ng-container matColumnDef='id'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
     <td mat-cell *matCellDef='let impact'> {{impact.id}} </td>
