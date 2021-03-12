@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AddImpactButtonComponent } from './components/add-impact-button/add-impact-button.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent],
@@ -26,7 +27,8 @@ import { AddImpactButtonComponent } from './components/add-impact-button/add-imp
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTooltipModule
   ],
   exports: [
     ImpactMainComponent
