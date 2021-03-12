@@ -58,7 +58,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     };
 
     this.impactDataService.onCreateImpact.subscribe(_ => {
-      this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
+      this.tableDataSource.data = this.impacts;
     });
   }
 
@@ -87,9 +87,9 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   private createFilter(): (data: any, filter: string) => boolean {
     return (data: Impact, filter: string): boolean => {
       const searchTerms = JSON.parse(filter);
-      return data.stakeholder.name.toLowerCase().indexOf(searchTerms.stakeholder) !== -1
-        && data.dimension.name.toLowerCase().indexOf(searchTerms.dimension) !== -1
-        && data.value.toString().toLowerCase().indexOf(searchTerms.value) !== -1;
+      return data.stakeholder.name.toLowerCase().indexOf(searchTerms.stakeholder.toLowerCase()) !== -1
+        && data.dimension.name.toLowerCase().indexOf(searchTerms.dimension.toLowerCase()) !== -1
+        && data.value.toString().toLowerCase().indexOf(searchTerms.value.toLowerCase()) !== -1;
     };
   }
 }
