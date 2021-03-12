@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Requirements} from '../models/Requirements';
 
 @Component({
   selector: 'app-requirement-main',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequirementMainComponent implements OnInit {
 
-  constructor() { }
+  data: Requirements[] = [];
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
