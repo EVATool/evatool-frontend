@@ -17,14 +17,17 @@ import { FormControl } from '@angular/forms';
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
+  // Used by table.
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
+  tableDataSource!: MatTableDataSource<Impact>;
+
+  // Data arrays from services.
   impacts: Impact[] = [];
   dimensions: Dimension[] = [];
   dimensionTypes: string[] = [];
   stakeholders: Stakeholder[] = [];
 
-  tableDataSource!: MatTableDataSource<Impact>;
-
+  // Filter components in UI.
   stakeholderFilter = new FormControl();
   dimensionFilter = new FormControl();
   valueFilter = new FormControl();
