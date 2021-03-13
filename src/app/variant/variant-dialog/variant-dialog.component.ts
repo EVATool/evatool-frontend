@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../models/Variant';
 import {VariantDataService} from '../services/variant-data.service';
+import {Impact} from '../../impact/models/Impact';
 
 @Component({
   selector: 'app-variant-dialog',
@@ -40,10 +41,7 @@ export class VariantDialogComponent implements OnInit {
       editable: new FormControl(null)
    })});
 
-    this.variantDataService.onCreateVariant.subscribe(variant => {
-      console.log(variant);
-      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-    });
+
   }
 
   abort(): void {
