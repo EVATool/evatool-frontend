@@ -1,0 +1,49 @@
+<div class="stakeholder-dialog">
+  <h2 mat-dialog-title>Stakeholder</h2>
+  <mat-dialog-content [formGroup]="form">
+    <div class="container">
+      <table mat-table [dataSource]='matDataSource' class="stakeholder-table">
+
+        <ng-container matColumnDef='Stakeholder'>
+          <td mat-cell *matCellDef='let stakeholder'>
+            <input type="text" matInput value="{{stakeholder.name}}" readonly="{{!stakeholder.editable}}"
+                   name="Stakeholder"
+                   formControlName="Stakeholder">
+            {{stakeholder.name}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef='Ebene'>
+          <td mat-cell *matCellDef='let stakeholder'>
+            <input type="text" matInput value="{{stakeholder.level}}" readonly="{{!stakeholder.editable}}" name="Ebene"
+                   formControlName="Ebene">
+            {{stakeholder.level}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef='Prio'>
+          <td mat-cell *matCellDef='let stakeholder'>
+            <input type="text" matInput value="{{stakeholder.prio}}" readonly="{{!stakeholder.editable}}" name="Prio"
+                   formControlName="Prio">
+            {{stakeholder.prio}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef='Impact'>
+          <td mat-cell *matCellDef='let stakeholder'>
+            <input type="text" matInput value="{{stakeholder.impact}}" readonly="{{!stakeholder.editable}}"
+                   name="Impact"
+                   formControlName="Impact">
+            {{stakeholder.impact}}
+          </td>
+        </ng-container>
+
+      </table>
+    </div>
+
+    <button mat-icon-button aria-label="Add Stakeholder" class="addStakeholderButton" (click)="addStakeholder()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </mat-dialog-content>
+</div>
