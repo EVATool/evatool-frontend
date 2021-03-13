@@ -1,3 +1,5 @@
 export class Analysis{
-  id = '';
+  id: any = '';
+  title: any = '';
+  description: any = '';
 }
