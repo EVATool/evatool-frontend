@@ -60,6 +60,6 @@ export class VariantDialogComponent implements OnInit {
   }
 
   addVariant(): void{
-
+    this.matDataSource.filteredData.push(new Variant());
   }
 }
