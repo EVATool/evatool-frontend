@@ -1,8 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatTableDataSource} from "@angular/material/table";
-import {Impact} from "../../impact/models/Impact";
+import {MatTableDataSource} from '@angular/material/table';
+import {Impact} from '../../impact/models/Impact';
+import {Variant} from '../models/Variant';
 
 @Component({
   selector: 'app-variant-dialog',
@@ -12,28 +13,29 @@ import {Impact} from "../../impact/models/Impact";
 export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
-  displayedColumns =  ['titel', 'description']
-  matDataSource = new MatTableDataSource<items>();
-
-  dummyVariants: items[] = [
+  displayedColumns =  ['title', 'description'];
+  variants: Variant[] = [
     {
-      id: 0,
-      titel: '1',
+      id: '0',
+      title: '1',
       description: 'This is the first read-only impact',
 
     },
     {
       id: '2',
-      titel: 0.5,
+      title: '0.5',
       description: 'This is the second read-only impact',
 
     },
     {
       id: '3',
-      titel: 0.9,
+      title: '0.9',
       description: 'This is the third read-only impact',
     }
   ];
+  matDataSource = new MatTableDataSource<Variant>();
+
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +44,7 @@ export class VariantDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.matDataSource.data.push(this.dummyVariants)
+    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     this.form = this.formBuilder.group({
       id: new FormControl(null),
 
@@ -58,7 +60,3 @@ export class VariantDialogComponent implements OnInit {
   }
 
 }
-
-export interface items{}
-
-
