@@ -1,5 +1,6 @@
 import { ImpactDataService } from './../services/impact/impact-data.service';
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Inject, HostListener } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-impact-main',
@@ -8,10 +9,9 @@ import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/cor
 })
 export class ImpactMainComponent implements OnInit {
 
+  windowScrolled = true;
 
-  constructor(private impactDataService: ImpactDataService) {
-
-  }
+  constructor(private impactDataService: ImpactDataService) { }
 
   ngOnInit(): void {
 
@@ -19,5 +19,10 @@ export class ImpactMainComponent implements OnInit {
 
   addImpact(): void {
     this.impactDataService.addImpact();
+  }
+
+  
+  onScroll(e: any) {
+    console.log('lol');
   }
 }
