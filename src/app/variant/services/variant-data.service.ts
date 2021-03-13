@@ -9,7 +9,7 @@ import {VariantRestService} from "./variant-rest.service";
 export class VariantDataService {
   @Output() onCreateVariant: EventEmitter<Variant> = new EventEmitter();
 
-  dummyVariant: Variant[] = [
+ /** dummyVariant: Variant[] = [
     {
       id: '0',
       title: 'title',
@@ -27,8 +27,8 @@ export class VariantDataService {
       description: 'This is the third read-only impact',
     }
   ];
-
-  variants: Variant[] = this.dummyVariant;
+**/
+  variants: Variant[] = [];
 
   constructor( private variantRestService: VariantRestService){
   }
@@ -50,11 +50,10 @@ export class VariantDataService {
     return variant;
   }
 
-  save(variant: Variant): Variant{
-    this.variantRestService.save(variant);
-    this.variants.push(variant);
+  save(variant: Variant): void{
+    console.log(variant.title);
     variant.editable = false;
-    return variant;
+    this.variantRestService.save(variant);
   }
 
 }
