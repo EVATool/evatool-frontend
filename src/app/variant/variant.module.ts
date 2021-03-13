@@ -7,6 +7,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from "@angular/material/table";
 import {MatSliderModule} from '@angular/material/slider';
+import {MatSortModule} from '@angular/material/sort';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [VariantMainComponent, VariantDialogComponent],
@@ -17,7 +19,9 @@ import {MatSliderModule} from '@angular/material/slider';
     ReactiveFormsModule,
     MatTableModule,
     FormsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSortModule,
+    MatInputModule
   ],
   exports: [
     VariantMainComponent

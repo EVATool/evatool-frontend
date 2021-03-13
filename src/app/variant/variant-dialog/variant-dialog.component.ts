@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
-import {Impact} from '../../impact/models/Impact';
 import {Variant} from '../models/Variant';
 
 @Component({
@@ -17,19 +16,19 @@ export class VariantDialogComponent implements OnInit {
   variants: Variant[] = [
     {
       id: '0',
-      title: '1',
+      title: 'title',
       description: 'This is the first read-only impact',
 
     },
     {
       id: '2',
-      title: '0.5',
+      title: 'title0.5',
       description: 'This is the second read-only impact',
 
     },
     {
       id: '3',
-      title: '0.9',
+      title: 'title0.9',
       description: 'This is the third read-only impact',
     }
   ];
@@ -44,11 +43,12 @@ export class VariantDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+
     this.form = this.formBuilder.group({
       id: new FormControl(null),
 
     });
+    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
   }
 
   abort(): void {

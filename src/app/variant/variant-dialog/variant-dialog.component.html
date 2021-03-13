@@ -1,26 +1,22 @@
 <div class="variant-dialog">
   <h2 mat-dialog-title>Variant(s)</h2>
   <mat-dialog-content [formGroup]="form">
-    <div class="container" #table>
-      <mat-table style="width: 100%" [dataSource]="matDataSource">
+    <div class="container">
+      <table mat-table [dataSource]='matDataSource' matSort>
 
-        <ng-container matColumnDef="title">
-          <mat-header-cell *matHeaderCellDef> title</mat-header-cell>
-          <mat-cell *matCellDef="let row" class="table-cell"> {{row.title}} </mat-cell>
+        <ng-container matColumnDef='title'>
+          <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> title </th>
+          <td mat-cell *matCellDef='let variant'> {{variant.title}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="description">
-          <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
-          <mat-cell *matCellDef="let row" class="table-cell"> {{row.description}}</mat-cell>
+        <ng-container matColumnDef='description'>
+          <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+          <td mat-cell *matCellDef='let variant'> {{variant.description}} </td>
         </ng-container>
 
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></mat-row>
-      </mat-table>
-      <mat-form-field>
-        <input matInput formControlName="id" placeholder="Dummy Variant Id...">
-      </mat-form-field>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </div>
 
   </mat-dialog-content>
