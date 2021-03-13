@@ -18,8 +18,8 @@ export class ImpactDataService {
     {
       id: '1',
       value: -0.3,
-      description: 'This is the first read-only impact',
-      dimension: { id: '21', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL' },
+      description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
+      dimension: { id: '21', name: 'Feelings', description: 'Feelings of Patient ', type: 'SOCIAL' },
       stakeholder: { id: '11', name: 'Patient' },
       analysis: { id: '7' }
     },
