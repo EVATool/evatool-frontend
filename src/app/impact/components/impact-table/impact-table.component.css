@@ -1,4 +1,5 @@
-/* Filter */ 
+/* Filter */
+
 .show {
   display: block;
   max-width: 200px;
@@ -18,7 +19,8 @@
   top: 100%;
 }
 
-/* Table */ 
+/* Table */
+
 table {
   width: 100%;
 }
@@ -36,7 +38,16 @@ table {
   text-overflow: ellipsis;
 }
 
-/* Slider */ 
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 0px 20px 0px 0;
+}
+
+/* Slider */
+
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-wrapper {
   top: 18px;
 }
