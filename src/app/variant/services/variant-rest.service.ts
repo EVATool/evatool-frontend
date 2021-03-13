@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Variant} from '../models/Variant';
 import {map} from 'rxjs/operators';
+import {Dimension} from '../../impact/models/Dimension';
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({
@@ -33,18 +34,9 @@ export class VariantRestService {
   }
 
 
-  getVariants(): void {
+  getVariants(): Observable<any> {
 
-    console.log("methode getVariants");
-    this.http.get<Variant[]>(this.variantUrl).pipe(map((result) => {
-      console.log(result);
-      return result;
-    }));
-
-
-
-    //return this.http.get<Variant[]>(this.variantUrl);
-
+    return this.http.get<any>(this.variantUrl);
 
   }
 }

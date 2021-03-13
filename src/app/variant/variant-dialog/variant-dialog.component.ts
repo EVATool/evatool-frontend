@@ -23,7 +23,13 @@ export class VariantDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<VariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private variantDataService: VariantDataService) {
-    this.variants = this.variantDataService.getVariants();
+
+    this.variantDataService.onCreateVariant.subscribe(variant => {
+      console.log(variant);
+      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+    });
+
+    this.variantDataService.getVariants();
     this.matDataSource = new MatTableDataSource<Variant>(this.variants);
   }
 
@@ -37,10 +43,7 @@ export class VariantDialogComponent implements OnInit {
       editable: new FormControl(null)
    });
 
-    this.variantDataService.onCreateVariant.subscribe(variant => {
-      console.log(variant);
-      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-    });
+
   }
 
   abort(): void {
