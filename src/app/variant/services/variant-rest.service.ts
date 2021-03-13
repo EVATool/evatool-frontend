@@ -29,18 +29,20 @@ export class VariantRestService {
 
   }
 
-
-  save(variant: Variant): void {
-    // call server
-  }
-
-
   getVariants(): Observable<any> {
     return this.http.get<any>(this.variantUrl);
   }
 
+  getVariantsById(id: any): Observable<any> {
+    return this.http.get<any>(this.variantUrl + '/' + id);
+  }
+
   createVariants(variantDTO: VariantDTO): Observable<any> {
     return this.http.post(this.variantUrl, variantDTO, httpOptions);
+  }
+
+  updateVariants(variantDTO: VariantDTO): Observable<any> {
+    return this.http.put(this.variantUrl, variantDTO, httpOptions);
   }
 
   deleteVariants(variant: Variant): Observable<any> {
