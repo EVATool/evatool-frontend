@@ -12,10 +12,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AddImpactButtonComponent } from './components/add-impact-button/add-impact-button.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
 
 @NgModule({
-  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent],
+  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective],
   imports: [
     CommonModule,
     MatTableModule,

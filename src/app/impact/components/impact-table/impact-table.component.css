@@ -1,4 +1,4 @@
-/* mat-select-focus */
+/* mat-select */
 
 mat-select:focus {
   border-bottom: solid rgb(255, 64, 129);
@@ -49,7 +49,7 @@ table {
 }
 
 .mat-cell {
-  padding: 0px 20px 0px 0;
+  padding: 0 20px 0 0;
 }
 
 /* Slider */
