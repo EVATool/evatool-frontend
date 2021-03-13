@@ -20,6 +20,8 @@ mat-select:focus {
 
 .floating {
   position: absolute;
+  background: white !important;
+  opacity: 1 !important;
   top: 100%;
 }
 
