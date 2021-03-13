@@ -16,7 +16,7 @@
         <mat-icon>filter_alt</mat-icon>
       </button>
 
-      <div class="floating">
+      <div class="floating" appClickOutside (clickOutside)="searchToggles.set('stakeholder', false)">
         <mat-form-field (click)="$event.stopPropagation()"
           [ngClass]="searchToggles.get('stakeholder') ? 'show' : 'hide'">
           <mat-label>Stakeholder-Filter</mat-label>
@@ -41,7 +41,7 @@
         <mat-icon>filter_alt</mat-icon>
       </button>
 
-      <div class="floating">
+      <div class="floating" appClickOutside (clickOutside)="searchToggles.set('dimension', false)">
         <mat-form-field (click)="$event.stopPropagation()" [ngClass]="searchToggles.get('dimension') ? 'show' : 'hide'">
           <mat-label>Dimension-Filter</mat-label>
           <input matInput [formControl]="dimensionFilter" placeholder="Dimension">
@@ -64,7 +64,7 @@
         <mat-icon>filter_alt</mat-icon>
       </button>
 
-      <div class="floating">
+      <div class="floating" appClickOutside (clickOutside)="searchToggles.set('value', false)">
         <mat-form-field (click)="$event.stopPropagation()" [ngClass]="searchToggles.get('value') ? 'show' : 'hide'">
           <mat-label>Dimension-Filter</mat-label>
           <input matInput [formControl]="valueFilter" placeholder="Dimension">
