@@ -9,7 +9,24 @@ export class VariantDataService {
   @Output() onCreateVariant: EventEmitter<Variant> = new EventEmitter();
 
   dummyVariant: Variant[] = [
-    ];
+    {
+      id: '0',
+      title: 'title',
+      description: 'This is the first read-only impact',
+
+    },
+    {
+      id: '2',
+      title: 'title0.5',
+      description: 'This is the second read-only impact',
+
+    },
+    {
+      id: '3',
+      title: 'title0.9',
+      description: 'This is the third read-only impact',
+    }
+  ];
 
   variants: Variant[] = this.dummyVariant;
 

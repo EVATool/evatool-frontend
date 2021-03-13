@@ -3,6 +3,8 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../models/Variant';
+import {VariantDataService} from '../services/variant-data.service';
+import {Impact} from '../../impact/models/Impact';
 
 @Component({
   selector: 'app-variant-dialog',
@@ -13,42 +15,29 @@ export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
   displayedColumns =  ['title', 'description'];
-  variants: Variant[] = [
-    {
-      id: '0',
-      title: 'title',
-      description: 'This is the first read-only impact',
-
-    },
-    {
-      id: '2',
-      title: 'title0.5',
-      description: 'This is the second read-only impact',
-
-    },
-    {
-      id: '3',
-      title: 'title0.9',
-      description: 'This is the third read-only impact',
-    }
-  ];
+  variants: Variant[] = [];
   matDataSource = new MatTableDataSource<Variant>();
-
-
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<VariantDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private variantDataService: VariantDataService) {
+    this.variants = this.variantDataService.getVariants();
+    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+  }
+
 
   ngOnInit(): void {
-
 
     this.form = this.formBuilder.group({
       id: new FormControl(null),
 
     });
-    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+
+    this.variantDataService.onCreateVariant.subscribe(variant => {
+      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+    });
   }
 
   abort(): void {
@@ -60,6 +49,6 @@ export class VariantDialogComponent implements OnInit {
   }
 
   addVariant(): void{
-    this.matDataSource.filteredData.push(new Variant());
+    this.variantDataService.createVariant();
   }
 }
