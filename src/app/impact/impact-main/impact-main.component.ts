@@ -25,12 +25,12 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     })
   }
 
-  addImpact(): void {
-    this.impactDataService.addImpact();
-  }
-
   scrollToTop() {
     const options = { top: 0, duration: 250 };
     this.scrollbarRef.scrollTo(options);
+  }
+
+  addImpact(): void {
+    this.impactDataService.addImpact();
   }
 }

@@ -2,9 +2,10 @@
   <input matInput placeholder="Search...">
 </div>
 
-<div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
-  <button type="button" mat-fab (click)="scrollToTop()">
-    <mat-icon matTooltip="Scroll to Top" matTooltipHideDelay="100" matTooltipPosition="above">arrow_upward</mat-icon>
+<div class="scroll-to-top" [hidden]="!windowScrolled" [ngClass]="{'show-scrollTop': windowScrolled}">
+  <button type="button" mat-fab (click)="scrollToTop()" matTooltip="Scroll to Top" matTooltipHideDelay="100"
+    matTooltipPosition="above">
+    <mat-icon>arrow_upward</mat-icon>
   </button>
 </div>
 
