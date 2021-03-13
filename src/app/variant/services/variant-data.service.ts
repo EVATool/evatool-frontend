@@ -1,6 +1,7 @@
 
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import {Variant} from '../models/Variant';
+import {VariantRestService} from "./variant-rest.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class VariantDataService {
       id: '2',
       title: 'title0.5',
       description: 'This is the second read-only impact',
-
     },
     {
       id: '3',
@@ -30,7 +30,7 @@ export class VariantDataService {
 
   variants: Variant[] = this.dummyVariant;
 
-  constructor(){
+  constructor( private variantRestService: VariantRestService){
   }
 
   getVariants(): Variant[] {
@@ -38,7 +38,9 @@ export class VariantDataService {
   }
 
   private createDefaultVariant(): Variant {
-    return new Variant();
+    const variant = new Variant();
+    variant.editable = true;
+    return variant;
   }
 
   createVariant(): Variant {
@@ -47,4 +49,12 @@ export class VariantDataService {
     this.onCreateVariant.emit(variant);
     return variant;
   }
+
+  save(variant: Variant): Variant{
+    this.variantRestService.save(variant);
+    this.variants.push(variant);
+    variant.editable = false;
+    return variant;
+  }
+
 }

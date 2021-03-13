@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Variant} from "../models/Variant";
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({
@@ -26,4 +27,7 @@ export class VariantRestService {
   }
 
 
+  save(variant: Variant): void {
+    //call server
+  }
 }
