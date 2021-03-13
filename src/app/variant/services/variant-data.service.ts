@@ -59,10 +59,11 @@ export class VariantDataService {
     return variant;
   }
 
+
   save(variant: Variant): void{
     console.log(variant.title);
     variant.editable = false;
-    this.variantRestService.save(variant);
+    //this.variantRestService.save(variant);
   }
 
 }
