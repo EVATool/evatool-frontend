@@ -41,21 +41,9 @@ export class VariantDataService {
     return this.variants;
   }
 
-  getVariantsFromServer(): void {
+  getVariantsFromServer(): Observable<any> {
     console.log('methode getVariants');
-
-    this.variantRestService.getVariants().subscribe((result: any) =>  {
-      this.variants = [];
-      result.content.forEach((variantDTO: any) => {
-        const variant = {
-          id: variantDTO.uuid,
-          description: variantDTO.description,
-          title: variantDTO.title
-        };
-        this.variants.push(variant);
-      });
-      console.log(this.variants);
-    });
+    return this.variantRestService.getVariants();
   }
 
   private createDefaultVariant(): Variant {

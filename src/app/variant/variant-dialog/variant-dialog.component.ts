@@ -14,7 +14,7 @@ import {Impact} from '../../impact/models/Impact';
 export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
-  displayedColumns =  ['title', 'description', 'options'];
+  displayedColumns = ['title', 'description', 'options'];
   variants: Variant[] = [];
   matDataSource = new MatTableDataSource<Variant>();
 
@@ -29,12 +29,24 @@ export class VariantDialogComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({index: new FormGroup({
+    this.form = this.formBuilder.group({
       id: new FormControl(null),
       title: new FormControl(null),
       description: new FormControl(null),
       editable: new FormControl(null)
-   })});
+    });
+    this.variantDataService.getVariantsFromServer().subscribe((result: any) =>  {
+      this.variants = [];
+      result.content.forEach((variantDTO: any) => {
+        const variant = {
+          id: variantDTO.uuid,
+          description: variantDTO.description,
+          title: variantDTO.title
+        };
+        this.variants.push(variant);
+      });
+      console.log(this.variants);
+    });
     this.variantDataService.onCreateVariant.subscribe(variant => {
       console.log(variant);
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
@@ -44,18 +56,18 @@ export class VariantDialogComponent implements OnInit {
   }
 
   abort(): void {
-    this.dialogRef.close({ accept: false });
+    this.dialogRef.close({accept: false});
   }
 
   ok(): void {
-    this.dialogRef.close({ accept: true, form: this.form.value });
+    this.dialogRef.close({accept: true, form: this.form.value});
   }
 
-  addVariant(): void{
+  addVariant(): void {
     this.variantDataService.createVariant();
   }
 
-  save(variant: Variant): void{
+  save(variant: Variant): void {
     //variant.title = this.index.value.title;
     //variant.description = this.index.value.description;
 
