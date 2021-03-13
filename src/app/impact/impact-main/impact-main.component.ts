@@ -1,13 +1,15 @@
+import { element } from 'protractor';
 import { ImpactDataService } from './../services/impact/impact-data.service';
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, Inject, HostListener, ViewChild, AfterViewInit } from '@angular/core';
+import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
   selector: 'app-impact-main',
   templateUrl: './impact-main.component.html',
   styleUrls: ['./impact-main.component.css']
 })
-export class ImpactMainComponent implements OnInit {
+export class ImpactMainComponent implements OnInit, AfterViewInit {
+  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
 
   windowScrolled = false;
 
@@ -17,23 +19,18 @@ export class ImpactMainComponent implements OnInit {
 
   }
 
+  ngAfterViewInit() {
+    this.scrollbarRef.scrolled.subscribe(e => {
+      this.windowScrolled = e.target.scrollTop !== 0;
+    })
+  }
+
   addImpact(): void {
     this.impactDataService.addImpact();
   }
 
-  onScroll(event: Event) {
-    let scrollDiv = document.getElementById('impact-table-div');
-    this.windowScrolled = scrollDiv?.scrollTop !== 0;
-  }
-
   scrollToTop() {
-    let scrollDiv = document.getElementById('impact-table-div');
-    var scrollOptions = {
-      left: 0,
-      top: 0,
-      behavior: 'smooth'
-    }
-    //scrollDiv?.scrollTo(scrollOptions); // TODO smooth animation
-    scrollDiv?.scroll(0, 0);
+    const options = { top: 0, duration: 250 };
+    this.scrollbarRef.scrollTo(options);
   }
 }

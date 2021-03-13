@@ -3,14 +3,15 @@
 </div>
 
 <div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
-  <button type="button" mat-fab matTooltip="Scroll to Top" matTooltipHideDelay="100" matTooltipPosition="above"
-    (click)="scrollToTop()">
-    <mat-icon>arrow_upward</mat-icon>
+  <button type="button" mat-fab (click)="scrollToTop()">
+    <mat-icon matTooltip="Scroll to Top" matTooltipHideDelay="100" matTooltipPosition="above">arrow_upward</mat-icon>
   </button>
 </div>
 
-<div id="impact-table-div" (scroll)="onScroll($event)">
-  <app-impact-table></app-impact-table>
+<div id="impact-table-div">
+  <ng-scrollbar>
+    <app-impact-table></app-impact-table>
+  </ng-scrollbar>
 </div>
 
 <div id="add-impact-button-div">
