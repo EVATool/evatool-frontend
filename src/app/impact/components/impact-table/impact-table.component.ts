@@ -4,7 +4,7 @@ import { Stakeholder } from '../../models/Stakeholder';
 import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
 import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, Inject, HostListener } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
@@ -16,6 +16,8 @@ import { FormControl } from '@angular/forms';
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
+
+  windowScrolled = true;
 
   // Used by table.
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
