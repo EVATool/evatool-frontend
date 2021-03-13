@@ -9,7 +9,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class ImpactMainComponent implements OnInit {
 
-  windowScrolled = true;
+  windowScrolled = false;
 
   constructor(private impactDataService: ImpactDataService) { }
 
@@ -21,8 +21,19 @@ export class ImpactMainComponent implements OnInit {
     this.impactDataService.addImpact();
   }
 
-  
-  onScroll(e: any) {
-    console.log('lol');
+  onScroll(event: Event) {
+    let scrollDiv = document.getElementById('impact-table-div');
+    this.windowScrolled = scrollDiv?.scrollTop !== 0;
+  }
+
+  scrollToTop() {
+    let scrollDiv = document.getElementById('impact-table-div');
+    var scrollOptions = {
+      left: 0,
+      top: 0,
+      behavior: 'smooth'
+    }
+    //scrollDiv?.scrollTo(scrollOptions); // TODO smooth animation
+    scrollDiv?.scroll(0, 0);
   }
 }

@@ -3,7 +3,9 @@
 </div>
 
 <div class="scroll-to-top" [ngClass]="{'show-scrollTop': windowScrolled}">
-  <button>
+  <button type="button" mat-fab matTooltip="Scroll to Top" matTooltipHideDelay="100" matTooltipPosition="above"
+    (click)="scrollToTop()">
+    <mat-icon>arrow_upward</mat-icon>
   </button>
 </div>
 

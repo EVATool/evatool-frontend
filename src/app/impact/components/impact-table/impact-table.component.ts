@@ -123,11 +123,4 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.searchToggles.set('dimension', false);
     this.searchToggles.set('value', false);
   }
-
-
-
-
-  onScroll(e: any) {
-    console.log('lol');
-  }
 }
