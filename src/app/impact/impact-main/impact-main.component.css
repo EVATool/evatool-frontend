@@ -5,8 +5,7 @@
 
 #impact-table-div {
   margin: 25px;
-  height: 600px;
-  overflow: auto;
+  height: calc(100vh - 350px);
 }
 
 #add-impact-button-div {
