@@ -16,11 +16,19 @@
           <td mat-cell *matCellDef='let variant'>  <input matInput value="{{variant.description}}" readonly="{{!variant.editable}}" name="description" ></td>
         </ng-container>
 
-        <ng-container matColumnDef="save">
+        <ng-container matColumnDef="options">
           <th scope="col" mat-header-cell *matHeaderCellDef > </th>
-          <tr mat-cell *matCellDef='let variant'>  <button mat-icon-button  (show)="!variant.editable" name="save"  (click)="save(variant)"><mat-icon>save</mat-icon> </button></tr>
+          <tr mat-cell *matCellDef='let variant'>
+            <button mat-icon-button  *ngIf="variant.editable" name="save"  (click)="save(variant)">
+              <mat-icon>save</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="!variant.editable" name="archive">
+              <mat-icon>archive</mat-icon>
+            </button>
+          </tr>
 
         </ng-container>
+
 
 
         <tr mat-row *matRowDef="let variant; columns: displayedColumns;" ></tr>

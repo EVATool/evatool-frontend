@@ -14,7 +14,7 @@ import {Impact} from '../../impact/models/Impact';
 export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
-  displayedColumns =  ['title', 'description', 'save'];
+  displayedColumns =  ['title', 'description', 'options'];
   variants: Variant[] = [];
   matDataSource = new MatTableDataSource<Variant>();
 
