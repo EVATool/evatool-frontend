@@ -1,13 +1,30 @@
-<h2 mat-dialog-title>Neues variant</h2>
+<div class="variant-dialog">
+<h2 mat-dialog-title>Variant(s)</h2>
 <mat-dialog-content [formGroup]="form">
-  {{data.p}}...{{data.b}}
+  <div class="container" #table>
+  <mat-table style="width: 100%" [dataSource]="matDataSource" >
 
+    <ng-container matColumnDef="titel">
+      <mat-header-cell *matHeaderCellDef> TITEL </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="table-cell"> {{row.titel}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef > Description </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="table-cell"> {{row.dscription}}</mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></mat-row>
+  </mat-table>
   <mat-form-field>
     <input matInput formControlName="id" placeholder="Dummy Variant Id...">
   </mat-form-field>
+  </div>
 
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close (click)="abort()">Abbrechen</button>
   <button mat-button mat-dialog-close (click)="ok()">OK</button>
 </mat-dialog-actions>
+</div>

@@ -5,6 +5,7 @@ import { VariantDialogComponent } from './variant-dialog/variant-dialog.componen
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [VariantMainComponent, VariantDialogComponent],
@@ -12,7 +13,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     MatDialogModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ],
   exports: [
     VariantMainComponent
