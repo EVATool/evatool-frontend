@@ -2,3 +2,11 @@
   min-height: 80vh;
   min-width: 60vw;
 }
+
+.variant-table{
+  width: 100%;
+}
+
+.addVariantButton{
+  background: white;
+}

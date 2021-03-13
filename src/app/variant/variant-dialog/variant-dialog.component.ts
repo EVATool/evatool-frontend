@@ -59,4 +59,7 @@ export class VariantDialogComponent implements OnInit {
     this.dialogRef.close({ accept: true, form: this.form.value });
   }
 
+  addVariant(): void{
+
+  }
 }
