@@ -14,7 +14,7 @@ import {Impact} from '../../impact/models/Impact';
 export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
-  displayedColumns =  ['title', 'description', 'save'];
+  displayedColumns =  ['title', 'description', 'options'];
   variants: Variant[] = [];
   matDataSource = new MatTableDataSource<Variant>();
 
@@ -32,10 +32,13 @@ export class VariantDialogComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       id: new FormControl(null),
-
-    });
+      title: new FormControl(null),
+      description: new FormControl(null),
+      editable: new FormControl(null)
+   });
 
     this.variantDataService.onCreateVariant.subscribe(variant => {
+      console.log(variant);
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     });
   }
@@ -53,6 +56,8 @@ export class VariantDialogComponent implements OnInit {
   }
 
   save(variant: Variant): void{
+    variant.title = this.form.value.title;
+    variant.description = this.form.value.description;
 
     this.variantDataService.save(variant);
   }
