@@ -2,6 +2,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import {Variant} from '../models/Variant';
 import {VariantRestService} from "./variant-rest.service";
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,7 @@ export class VariantDataService {
   }
 
   getVariants(): Variant[] {
+    this.variantRestService.getVariants();
     return this.variants;
   }
 
