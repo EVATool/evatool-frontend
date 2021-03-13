@@ -23,23 +23,22 @@ export class VariantDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<VariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private variantDataService: VariantDataService) {
-    this.variantDataService.onCreateVariant.subscribe(variant => {
-      console.log(variant);
-      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-    });
-    this.variants = this.variantDataService.getVariants();
+    this.variants = variantDataService.getVariants();
     this.matDataSource = new MatTableDataSource<Variant>(this.variants);
   }
 
 
   ngOnInit(): void {
-
     this.form = this.formBuilder.group({index: new FormGroup({
       id: new FormControl(null),
       title: new FormControl(null),
       description: new FormControl(null),
       editable: new FormControl(null)
    })});
+    this.variantDataService.onCreateVariant.subscribe(variant => {
+      console.log(variant);
+      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+    });
 
 
   }

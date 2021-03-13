@@ -1,16 +1,16 @@
 
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import {Variant} from '../models/Variant';
-import {VariantRestService} from "./variant-rest.service";
 import {Observable, Subscribable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatTableDataSource} from '@angular/material/table';
+import {VariantRestService} from './variant-rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VariantDataService {
-  @Output() onCreateVariant: EventEmitter<Variant> = new EventEmitter();
+ onCreateVariant: EventEmitter<Variant> = new EventEmitter();
 
  /** dummyVariant: Variant[] = [
     {
@@ -34,12 +34,17 @@ export class VariantDataService {
   variants: Variant[] = [];
 
   constructor( private variantRestService: VariantRestService){
+    this.getVariantsFromServer();
   }
 
-  getVariants(): void {
+  getVariants(): Variant[]{
+    return this.variants;
+  }
+
+  getVariantsFromServer(): void {
     console.log('methode getVariants');
 
-    this.variantRestService.getVariants().subscribe(result =>  {
+    this.variantRestService.getVariants().subscribe((result: any) =>  {
       this.variants = [];
       result.content.forEach((variantDTO: any) => {
         const variant = {
@@ -48,7 +53,6 @@ export class VariantDataService {
           title: variantDTO.title
         };
         this.variants.push(variant);
-        this.onCreateVariant.emit(variant);
       });
       console.log(this.variants);
     });
