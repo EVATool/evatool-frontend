@@ -6,6 +6,7 @@ import {Variant} from '../models/Variant';
 import {VariantDataService} from '../services/variant-data.service';
 import {Impact} from '../../impact/models/Impact';
 import {VariantRestService} from '../services/variant-rest.service';
+import {VariantDTO} from '../models/VariantDTO';
 
 @Component({
   selector: 'app-variant-dialog',
@@ -55,6 +56,20 @@ export class VariantDialogComponent implements OnInit {
       this.variants.push(variant);
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     });
+  }
+
+  createVariant(): void {
+    const variantDTO = new VariantDTO();
+    variantDTO.criterion = 'criterion new from here';
+    variantDTO.description = 'description new from here';
+    variantDTO.title = 'title new from here';
+    this.variantRestService.createVariants(variantDTO).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log('Error occured');
+      });;
   }
 
   abort(): void {

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import {Variant} from '../models/Variant';
 import {map} from 'rxjs/operators';
 import {Dimension} from '../../impact/models/Dimension';
+import {VariantDTO} from '../models/VariantDTO';
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ const httpOptions = { // Outsource!
 })
 export class VariantRestService {
 
-  variantUrl = 'http://localhost:8080/variants/'; // Outsource!
+  variantUrl = 'http://localhost:8080/variants'; // Outsource!
 
   constructor(private http: HttpClient) {
 
@@ -35,8 +36,14 @@ export class VariantRestService {
 
 
   getVariants(): Observable<any> {
-
     return this.http.get<any>(this.variantUrl);
+  }
 
+  createVariants(variantDTO: VariantDTO): Observable<any> {
+    return this.http.post(this.variantUrl, variantDTO, httpOptions);
+  }
+
+  deleteVariants(variant: Variant): Observable<any> {
+    return this.http.delete(this.variantUrl + '/' + variant.id);
   }
 }
