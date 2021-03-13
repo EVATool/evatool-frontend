@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../models/Variant';
 import {VariantDataService} from '../services/variant-data.service';
 import {Impact} from '../../impact/models/Impact';
+import {VariantRestService} from '../services/variant-rest.service';
 
 @Component({
   selector: 'app-variant-dialog',
@@ -22,20 +23,22 @@ export class VariantDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<VariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private variantDataService: VariantDataService) {
-    this.variants = variantDataService.getVariants();
+    private variantDataService: VariantDataService,
+    private variantRestService: VariantRestService) {
     this.matDataSource = new MatTableDataSource<Variant>(this.variants);
   }
 
 
   ngOnInit(): void {
+
     this.form = this.formBuilder.group({
       id: new FormControl(null),
       title: new FormControl(null),
       description: new FormControl(null),
       editable: new FormControl(null)
     });
-    this.variantDataService.getVariantsFromServer().subscribe((result: any) =>  {
+
+    this.variantRestService.getVariants().subscribe((result: any) =>  {
       this.variants = [];
       result.content.forEach((variantDTO: any) => {
         const variant = {
@@ -46,22 +49,19 @@ export class VariantDialogComponent implements OnInit {
         this.variants.push(variant);
       });
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-      console.log(this.variants);
     });
 
     this.variantDataService.onCreateVariant.subscribe(variant => {
-      console.log(variant);
+      this.variants.push(variant);
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     });
-
-
   }
 
   abort(): void {
     this.dialogRef.close({accept: false});
   }
 
-  ok(): void {
+  closeModal(): void {
     this.dialogRef.close({accept: true, form: this.form.value});
   }
 
@@ -70,8 +70,8 @@ export class VariantDialogComponent implements OnInit {
   }
 
   save(variant: Variant): void {
-    //variant.title = this.index.value.title;
-    //variant.description = this.index.value.description;
+    // variant.title = this.index.value.title;
+    // variant.description = this.index.value.description;
 
     this.variantDataService.save(variant);
   }

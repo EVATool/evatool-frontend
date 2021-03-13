@@ -1,5 +1,11 @@
 <div class="variant-dialog">
+  <div class="container">
   <h2 mat-dialog-title>Variant(s)</h2>
+    <button>
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
   <mat-dialog-content [formGroup]="form">
     <div class="container">
       <table mat-table [dataSource]='matDataSource' class="variant-table">
@@ -7,8 +13,7 @@
         <ng-container matColumnDef='title'>
 
           <td mat-cell *matCellDef='let variant'>
-            <input type="text" matInput value="{{variant.title}}" readonly="{{!variant.editable}}" name="title"
-                   >
+            <input type="text" matInput value="{{variant.title}}" readonly="{{!variant.editable}}" name="title">
             {{variant.title}}
           </td>
         </ng-container>
