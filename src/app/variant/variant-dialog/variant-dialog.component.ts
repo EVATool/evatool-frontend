@@ -45,8 +45,10 @@ export class VariantDialogComponent implements OnInit {
         };
         this.variants.push(variant);
       });
+      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
       console.log(this.variants);
     });
+
     this.variantDataService.onCreateVariant.subscribe(variant => {
       console.log(variant);
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
