@@ -12,3 +12,15 @@
   background: white;
 }
 
+.variant-modal-close{
+  float: right;
+}
+
+.variants-close-div{
+  width: 90vw;
+}
+
+.variants-close-div{
+  width: 10vw;
+  float: top;
+}
