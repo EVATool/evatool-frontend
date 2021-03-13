@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddImpactButtonComponent } from './components/add-impact-button/add-impact-button.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+
 
 @NgModule({
   declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective],
@@ -29,7 +31,8 @@ import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgScrollbarModule
   ],
   exports: [
     ImpactMainComponent
