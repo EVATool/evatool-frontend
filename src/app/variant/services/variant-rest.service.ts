@@ -1,11 +1,8 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Variant} from '../models/Variant';
-import {map} from 'rxjs/operators';
-import {Dimension} from '../../impact/models/Dimension';
 import {VariantDTO} from '../models/VariantDTO';
 
 const httpOptions = { // Outsource!
