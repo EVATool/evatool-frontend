@@ -1,25 +1,7 @@
-<p>requirement-main-form works!</p>
-<div>
-  <h1>NgFor Table Example</h1>
-  <table>
-    <thead>
-    <tr>
-      <th id="ID_Column">ID</th>
-      <th id="ID_Requirement">Requirement</th>
-      <th id="ID_Variant">Variant(s)</th>
-      <th id="ID_Dimension">Dimension</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th>RE01</th>
-      <td>Hier steht eine super beschreibung die extrem lang ist und nicht von lorem ipsum ist.</td>
-      <td>Single Person</td>
-      <td>Safety</td>
-      <td>
-        <button type="button" >Delete</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div id="search-description-div">
+  <input matInput placeholder="Search...">
+</div>
+
+<div id="requirement-table-div">
+  <app-requirement-table id="table"></app-requirement-table>
 </div>

@@ -17,3 +17,19 @@ table{
 #ID_Dimension{
   width: 100px;
 }
+
+#search-description-div {
+  margin-left: 45px;
+}
+
+#add-requirement-button-div {
+  position: fixed;
+  left: 30px;
+  bottom: 80px;
+  height: 30px;
+  width: 100%;
+}
+
+/*#requirement-table-div{*/
+/*  max-height: 400px;*/
+/*}*/

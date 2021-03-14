@@ -1,0 +1,34 @@
+<div class="example-table-container">
+<table mat-table [dataSource]="requirementsSource" class="example-table">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="ID">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{element.requirementTitle}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Requirements">
+    <th mat-header-cell *matHeaderCellDef> Requirement </th>
+    <td mat-cell *matCellDef="let element"> {{element.requirementDescription}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="Variants">
+    <th mat-header-cell *matHeaderCellDef> Variant(s) </th>
+    <td mat-cell *matCellDef="let element"> {{element.projetid}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="Dimension">
+    <th mat-header-cell *matHeaderCellDef> Dimension </th>
+    <td mat-cell *matCellDef="let element"> <p *ngFor="let dimension in element.dimensions">{{dimension.name}}</p> </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
