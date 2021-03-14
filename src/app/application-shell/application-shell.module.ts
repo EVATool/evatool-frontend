@@ -16,24 +16,26 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateAnalysisDialogComponent } from './home/create-analysis-dialog/create-analysis-dialog.component';
+import {StakeholderModule} from '../stakeholder/stakeholder-module';
 
 @NgModule({
   declarations: [ShellMainComponent, LoginFormComponent, HomeComponent, CreateAnalysisDialogComponent],
-  imports: [
-    CommonModule,
-    ImpactModule,
-    AnalysisModule,
-    RequirementModule,
-    VariantModule,
-    DashboardModule,
-    BrowserAnimationsModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule
-  ],
+    imports: [
+        CommonModule,
+        ImpactModule,
+        AnalysisModule,
+        RequirementModule,
+        VariantModule,
+        DashboardModule,
+        BrowserAnimationsModule,
+        MatTabsModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        StakeholderModule
+    ],
   exports: [
     ShellMainComponent,
     LoginFormComponent,
