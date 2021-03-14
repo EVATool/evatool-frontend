@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {AnalysisDataService} from "../service/analysis-service/analysis-data.service";
+import {MatTable} from "@angular/material/table";
 
 @Component({
   selector: 'app-analysis-main',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./analysis-main.component.css']
 })
 export class AnalysisMainComponent implements OnInit {
+  @ViewChild(MatTable) table!: MatTable<any>;
 
-  constructor() { }
+
+  constructor(private analysisDataService: AnalysisDataService) { }
 
   ngOnInit(): void {
+  }
+
+  addAnalysis(): void {
+    console.log('add analysis...');
+    this.analysisDataService.createAnalysis();
   }
 
 }
