@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {AnalysisDataService} from "../service/analysis-service/analysis-data.service";
-import {MatTable} from "@angular/material/table";
+import {MatTable} from '@angular/material/table';
 
 @Component({
   selector: 'app-analysis-main',
@@ -11,14 +10,14 @@ export class AnalysisMainComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<any>;
 
 
-  constructor(private analysisDataService: AnalysisDataService) { }
+  constructor() {}
 
   ngOnInit(): void {
   }
 
   addAnalysis(): void {
     console.log('add analysis...');
-    this.analysisDataService.createAnalysis();
+    // this.analysisDataService.createAnalysis();
   }
 
 }
