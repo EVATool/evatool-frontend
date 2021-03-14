@@ -24,6 +24,7 @@
 		"@angular/platform-browser-dynamic": "~11.2.3",
 		"@angular/router": "~11.2.3",
 		"@neomorphism/ng-neomorphism": "^0.46.1",
+		"ng-keyboard-shortcuts": "^10.1.17",
 		"rxjs": "~6.6.0",
 		"tslib": "^2.0.0",
 		"uuid": "^8.3.2",

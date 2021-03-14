@@ -1,15 +1,16 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
 import {Requirements} from '../models/Requirements';
 import {MatTable} from '@angular/material/table';
 import {ImpactDataService} from '../services/impact/impact-data.service';
 import {Datagenerator} from '../services/datagenerator';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-requirement-main',
   templateUrl: './requirement-main.component.html',
   styleUrls: ['./requirement-main.component.css']
 })
-export class RequirementMainComponent implements OnInit {
+export class RequirementMainComponent implements OnInit  {
   @ViewChild(MatTable) table!: MatTable<any>;
   editField: string;
   personList: Array<any> = [
@@ -28,6 +29,7 @@ export class RequirementMainComponent implements OnInit {
     { id: 10, name: 'John Maklowicz', age: 36, companyName: 'Mako', country: 'Poland', city: 'Bialystok' },
   ];
   data: Requirements[] = [];
+  private key = '';
   constructor(private datagenerator: Datagenerator) {
     this.editField = '';
   }
@@ -61,5 +63,10 @@ export class RequirementMainComponent implements OnInit {
   addRequirements(): void {
     this.datagenerator.addRequirement();
   }
-
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if(event.ctrlKey && event.keyCode == 10){
+      this.addRequirements();
+    }
+  }
 }

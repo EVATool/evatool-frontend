@@ -11,6 +11,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
 
 @NgModule({
   declarations: [RequirementMainComponent, RequirementsTableComponent],
@@ -24,7 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
       MatSortModule,
       MatInputModule,
       MatIconModule,
-      MatButtonModule
+      MatButtonModule,
+      KeyboardShortcutsModule.forRoot()
     ],
   exports: [
     RequirementMainComponent
