@@ -1,18 +1,136 @@
 import {Injectable} from '@angular/core';
 import {Requirements} from '../models/Requirements';
 import {Dimension} from '../models/Dimension';
+import {Impact} from '../models/Impact';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Datagenerator {
   requirements: Requirements[] = this.createDumyyRequirements();
+  impacts: Impact[] = [
+    {
+      id: '1',
+      value: -0.3,
+      description: 'This is the first read-only impact',
+      dimension: { id: '21', name: 'Feelings'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '2',
+      value: 0.5,
+      description: 'This is the second read-only impact',
+      dimension: { id: '22', name: 'Control' },
+      analysis: { id: '7' }
+    },
+    {
+      id: '3',
+      value: 0.9,
+      description: 'This is the third read-only impact',
+      dimension: { id: '23', name: 'Finances'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '4',
+      value: 0.2,
+      description: 'This is the fourth read-only impact',
+      dimension: { id: '24', name: 'Safety'},
+      analysis: { id: '7' }
+    }
+    ,{
+      id: '5',
+      value: -0.3,
+      description: 'This is the first read-only impact',
+      dimension: { id: '21', name: 'Feelings'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '6',
+      value: 0.5,
+      description: 'This is the second read-only impact',
+      dimension: { id: '22', name: 'Control' },
+      analysis: { id: '7' }
+    },
+    {
+      id: '7',
+      value: 0.9,
+      description: 'This is the third read-only impact',
+      dimension: { id: '23', name: 'Finances'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '8',
+      value: 0.2,
+      description: 'This is the fourth read-only impact',
+      dimension: { id: '24', name: 'Safety'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '9',
+      value: -0.3,
+      description: 'This is the first read-only impact',
+      dimension: { id: '21', name: 'Feelings'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '10',
+      value: 0.5,
+      description: 'This is the second read-only impact',
+      dimension: { id: '22', name: 'Control' },
+      analysis: { id: '7' }
+    },
+    {
+      id: '11',
+      value: 0.9,
+      description: 'This is the third read-only impact',
+      dimension: { id: '23', name: 'Finances'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '12',
+      value: 0.2,
+      description: 'This is the fourth read-only impact',
+      dimension: { id: '24', name: 'Safety'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '13',
+      value: -0.3,
+      description: 'This is the first read-only impact',
+      dimension: { id: '21', name: 'Feelings'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '14',
+      value: 0.5,
+      description: 'This is the second read-only impact',
+      dimension: { id: '22', name: 'Control' },
+      analysis: { id: '7' }
+    },
+    {
+      id: '15',
+      value: 0.9,
+      description: 'This is the third read-only impact',
+      dimension: { id: '23', name: 'Finances'},
+      analysis: { id: '7' }
+    },
+    {
+      id: '16',
+      value: 0.2,
+      description: 'This is the fourth read-only impact',
+      dimension: { id: '24', name: 'Safety'},
+      analysis: { id: '7' }
+    }
+  ];
 
   constructor() {
   }
 
   getRequirements(): Requirements[] {
     return this.requirements;
+  }
+  getImpacts(): Impact[] {
+    return this.impacts;
   }
 
   private createDumyyRequirements(): Requirements[] {
@@ -48,4 +166,5 @@ export class Datagenerator {
     const array: Requirements[] = [requirement1, requirement2];
     return array;
   }
+
 }

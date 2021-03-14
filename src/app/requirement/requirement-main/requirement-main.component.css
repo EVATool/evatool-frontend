@@ -1,22 +1,4 @@
-table{
-  border-collapse: collapse;
-}
 
-#ID_Column{
-  width: 40px;
-}
-
-#ID_Requirement{
-  width: 350px;
-}
-
-#ID_Variant{
-  width: 100px;
-}
-
-#ID_Dimension{
-  width: 100px;
-}
 
 #search-description-div {
   margin-left: 45px;

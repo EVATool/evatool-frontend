@@ -2,6 +2,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {Datagenerator} from '../../services/datagenerator';
 import {Requirements} from '../../models/Requirements';
+import {Dimension} from '../../models/Dimension';
+import {Impact} from '../../models/Impact';
 
 export interface PeriodicElement {
   name: string;
@@ -28,11 +30,18 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['ID', 'Requirements', 'Variants', 'Dimension'];
+  displayedColumns: string[];
+  displayedColumnsImpacts: string[] = ['ID'];
   dataSource = ELEMENT_DATA;
   requirementsSource: Requirements[];
+  impactSoureces: Impact[];
   constructor(datagenerator: Datagenerator) {
     this.requirementsSource = datagenerator.getRequirements();
+    this.impactSoureces = datagenerator.getImpacts();
+    let impactIdList: string[] = [];
+    this.impactSoureces.forEach(value => impactIdList = impactIdList.concat(value.id));
+    this.displayedColumns = ['ID', 'Requirements', 'Variants', 'Dimension'];
+    this.displayedColumns = this.displayedColumns.concat(impactIdList);
   }
 
   ngOnInit(): void {
@@ -42,4 +51,17 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   }
 
+  concatDimension(parameter: any): string {
+    let value = '';
+    const dimension: Set<Dimension> = parameter.dimensions;
+    dimension.forEach(value1 => value = value.concat(value1.name, '\n'));
+    return value;
+  }
+
+  concatVariants(element: any): string {
+    let value = '';
+    const variants: Map<string, string> = element.variantsTitle;
+    variants.forEach(value1 => value = value.concat(value1, '\n'));
+    return value;
+  }
 }
