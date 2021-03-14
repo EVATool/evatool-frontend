@@ -6,7 +6,16 @@ div{
 table {
   width: 100%;
 }
-/* Structure */
+
+th{
+  border-bottom: 2px solid black;
+}
+
+td {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
 .example-container {
   position: relative;
   min-height: 200px;
@@ -51,19 +60,37 @@ table{
   border-collapse: collapse;
 }
 
+.mat-header-cell{
+  text-align: center;
+}
+
 .mat-column-ID{
+  text-align: left;
   width:50px;
   min-width:50px;
 }
 
 .mat-column-Requirements{
+  text-align: left;
   min-width:500px;
 }
 .mat-column-Variants{
+  text-align: left;
   width:100px;
   min-width:100px;
 }
 .mat-column-Dimension{
+  text-align: left;
   width:100px;
   min-width:100px;
+}
+
+.positiv{
+  background: limegreen;
+  text-align: center;
+}
+
+.negativ{
+  background: red;
+  text-align: center;
 }

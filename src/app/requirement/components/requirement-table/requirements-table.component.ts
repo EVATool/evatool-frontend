@@ -64,4 +64,37 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     variants.forEach(value1 => value = value.concat(value1, '\n'));
     return value;
   }
+
+  checkValue(element: Requirements, impact: Impact): string{
+    let value = '';
+    if (element.requirementImpactPoints.get(impact.id) != null){
+      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+      if (points && 0 < points){
+        value = '' + points;
+      }else{
+        value = '' + points;
+      }
+    }
+    return  value;
+  }
+
+  isPositiv(element: Requirements, impact: Impact): boolean {
+    if (element.requirementImpactPoints.get(impact.id) != null){
+      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+      if (points && 0 < points) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isNegativ(element: Requirements, impact: Impact): boolean {
+    if (element.requirementImpactPoints.get(impact.id) != null){
+      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+      if (points && 0 > points) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
