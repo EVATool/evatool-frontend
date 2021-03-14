@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnalysisMainComponent } from './analysis-main/analysis-main.component';
-import {StakeholderDialogComponent} from './stakeholder-dialog/stakeholder-dialog.component';
+import {StakeholderDialogComponent} from './components/stakeholder-dialog/stakeholder-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';

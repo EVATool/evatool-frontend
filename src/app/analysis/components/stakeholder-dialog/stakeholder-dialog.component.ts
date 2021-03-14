@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {Stakeholder} from '../model/Stakeholder';
+import {Stakeholder} from '../../model/Stakeholder';
 import {MatTableDataSource} from '@angular/material/table';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {StakeholderDataService} from '../service/stakeholder-service/stakeholder-data.service';
+import {StakeholderDataService} from '../../service/stakeholder-service/stakeholder-data.service';
 
 @Component({
   selector: 'app-stakeholder-dialog',
