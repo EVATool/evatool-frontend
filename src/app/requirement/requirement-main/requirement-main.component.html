@@ -1,6 +1,11 @@
 <div id="search-description-div">
   <input matInput placeholder="Search...">
 </div>
+<div id="add-impact-button-div">
+  <button id="add-impact-button" type="button" mat-fab (click)="addRequirements()">
+    <p style="font-size:180%;">+</p>
+  </button>
+</div>
 
 <div id="requirement-table-div">
   <app-requirement-table id="table"></app-requirement-table>

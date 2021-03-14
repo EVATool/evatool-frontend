@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Requirements} from '../models/Requirements';
 import {MatTable} from '@angular/material/table';
 import {ImpactDataService} from '../services/impact/impact-data.service';
+import {Datagenerator} from '../services/datagenerator';
 
 @Component({
   selector: 'app-requirement-main',
@@ -27,7 +28,7 @@ export class RequirementMainComponent implements OnInit {
     { id: 10, name: 'John Maklowicz', age: 36, companyName: 'Mako', country: 'Poland', city: 'Bialystok' },
   ];
   data: Requirements[] = [];
-  constructor(private impactDataService: ImpactDataService) {
+  constructor(private datagenerator: Datagenerator) {
     this.editField = '';
   }
 
@@ -57,9 +58,8 @@ export class RequirementMainComponent implements OnInit {
     this.editField = event.target.textContent;
   }
 
-  addImpact(): void {
-    console.log('add impact...');
-    this.impactDataService.createImpact();
+  addRequirements(): void {
+    this.datagenerator.addRequirement();
   }
 
 }
