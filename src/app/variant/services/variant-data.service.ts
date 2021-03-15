@@ -61,9 +61,7 @@ export class VariantDataService {
 
 
   save(variant: Variant): void{
-    console.log(variant.title);
-    variant.editable = false;
-    //this.variantRestService.save(variant);
+    this.variantRestService.createVariants({title: variant.title, description: variant.description}).subscribe();
   }
 
 }
