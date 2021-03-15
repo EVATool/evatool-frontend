@@ -88,3 +88,8 @@ table {
   opacity: 1;
   transition: 250ms ease-out 100ms
 }
+
+.delete-button-container:focus-within {
+  opacity: 1;
+  transition: 250ms ease-out 100ms
+}

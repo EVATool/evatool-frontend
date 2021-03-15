@@ -88,7 +88,8 @@
             placeholder="Describe the impact..."></textarea>
         </div>
         <div class="delete-button-container">
-          <button mat-fab (click)="deleteImpact(impact)">
+          <button mat-fab (click)="deleteImpact(impact)" matTooltip="Delete Impact" matTooltipHideDelay="100"
+            matTooltipPosition="above">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
