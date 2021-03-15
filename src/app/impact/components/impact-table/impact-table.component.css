@@ -63,6 +63,8 @@ table {
   border-left: 0px solid rgba(0, 0, 0, 0);
 }
 
+/* Delete row button */
+
 .description-wrapper {
   display: table;
   width: 100%;

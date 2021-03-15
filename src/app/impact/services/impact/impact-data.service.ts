@@ -68,7 +68,7 @@ export class ImpactDataService {
   private createDefaultImpact(): Impact {
     const impact = new Impact();
 
-    impact.id = 'I007';
+    impact.id = 'I00' + (this.impacts.length + 1);
     impact.value = 0.0;
     impact.description = '';
     impact.dimension = this.dimensionDataService.getDefaultDimension();
@@ -77,10 +77,15 @@ export class ImpactDataService {
     return impact;
   }
 
-  addImpact(): Impact {
+  addImpact(): void {
     const impact = this.createDefaultImpact();
     this.impacts.push(impact);
     this.createImpact.emit(impact);
-    return impact;
+  }
+
+  removeImpact(impact: Impact): void {
+    const index: number = this.impacts.indexOf(impact, 0);
+    this.impacts.splice(index, 1);
+    this.deleteImpact.emit();
   }
 }
