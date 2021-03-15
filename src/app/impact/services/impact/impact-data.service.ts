@@ -68,8 +68,8 @@ export class ImpactDataService {
   private createDefaultImpact(): Impact {
     const impact = new Impact();
 
-    impact.id = 'TEST';
-    impact.value = -0.9;
+    impact.id = 'I007';
+    impact.value = 0.0;
     impact.description = '';
     impact.dimension = this.dimensionDataService.getDefaultDimension();
     impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();

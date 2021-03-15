@@ -37,7 +37,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     this.scrollbarRef.scrollTo(options);
 
     // Test debug
-    console.log(this.impactDataService.impacts[0].value);
+    //console.log(this.impactDataService.impacts[0].value);
     //this.impactDataService.impacts[0].value = 1;
   }
 }

@@ -1,5 +1,4 @@
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
-import { Impact } from './../../models/Impact';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -17,7 +16,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    //console.log(this.value);
+
   }
 
   ngAfterViewInit(): void {
