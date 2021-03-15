@@ -63,6 +63,14 @@ table {
   border-left: 0px solid rgba(0, 0, 0, 0);
 }
 
+.mat-row:hover {
+  background-color: red;
+}
+
+.mat-row:focus-within {
+  background-color: blue;
+}
+
 /* Delete row button */
 
 .description-wrapper {
@@ -78,7 +86,7 @@ table {
 
 .delete-button-container {
   display: table-cell;
-  opacity: 0.2;
+  opacity: 0.0;
   vertical-align: middle;
   text-align: right;
   transition: 250ms ease-out 100ms;
