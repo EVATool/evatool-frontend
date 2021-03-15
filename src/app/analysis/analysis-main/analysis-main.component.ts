@@ -1,5 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTable} from '@angular/material/table';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
+import {AnalysisDialogComponent} from "../analysis-dialog/analysis-dialog.component";
+
 
 @Component({
   selector: 'app-analysis-main',
@@ -7,17 +9,18 @@ import {MatTable} from '@angular/material/table';
   styleUrls: ['./analysis-main.component.css']
 })
 export class AnalysisMainComponent implements OnInit {
-  @ViewChild(MatTable) table!: MatTable<any>;
 
 
-  constructor() {}
+  constructor(private dialog: MatDialog) {}
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AnalysisDialogComponent, { data: { p: 'test', b: 'auch test' } });
+  }
   ngOnInit(): void {
   }
 
-  addAnalysis(): void {
-    console.log('add analysis...');
-    // this.analysisDataService.createAnalysis();
-  }
+  // addAnalysis(): void {
+  //   console.log('add analysis...');
+  // }
 
 }
