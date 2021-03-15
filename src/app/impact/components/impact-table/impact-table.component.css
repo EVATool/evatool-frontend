@@ -78,6 +78,13 @@ table {
 
 .delete-button-container {
   display: table-cell;
+  opacity: 0.2;
   vertical-align: middle;
   text-align: right;
+  transition: 250ms ease-out 100ms
+}
+
+.delete-button-container:hover {
+  opacity: 1;
+  transition: 250ms ease-out 100ms
 }
