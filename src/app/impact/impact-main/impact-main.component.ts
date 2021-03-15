@@ -20,7 +20,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.scrollbarRef.scrolled.subscribe(e => {
+    this.scrollbarRef?.scrolled.subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
     })
   }
