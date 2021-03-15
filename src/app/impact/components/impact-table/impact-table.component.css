@@ -63,14 +63,6 @@ table {
   border-left: 0px solid rgba(0, 0, 0, 0);
 }
 
-.mat-row:hover {
-  background-color: red;
-}
-
-.mat-row:focus-within {
-  background-color: blue;
-}
-
 /* Delete row button */
 
 .description-wrapper {
@@ -92,7 +84,17 @@ table {
   transition: 250ms ease-out 100ms;
 }
 
-.delete-button-container:hover, .delete-button-container:focus-within {
-  opacity: 1;
+.delete-button-container:focus-within, .delete-button-container:hover {
+  opacity: 1 !important;
+  transition: 250ms ease-out 100ms;
+}
+
+.mat-row:hover .delete-button-container {
+  opacity: 0.2;
+  transition: 250ms ease-out 100ms;
+}
+
+.mat-row:focus-within .delete-button-container {
+  opacity: 0.5;
   transition: 250ms ease-out 100ms;
 }
