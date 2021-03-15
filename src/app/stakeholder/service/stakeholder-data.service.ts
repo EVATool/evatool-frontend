@@ -1,6 +1,6 @@
 
 import { Injectable, EventEmitter } from '@angular/core';
-import {Stakeholder} from '../../model/Stakeholder';
+import {Stakeholder} from '../model/Stakeholder';
 import {Observable} from 'rxjs';
 import {StakeholderRestService} from './stakeholder-rest.service';
 
