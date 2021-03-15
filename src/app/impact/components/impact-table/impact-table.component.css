@@ -32,26 +32,16 @@ table {
 }
 
 .mat-column-id {
-  width: 10% !important;
-}
-
-.mat-column-stakeholder {
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-.mat-column-dimension {
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  width: 5% !important;
 }
 
 .mat-column-value {
   width: 10% !important;
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .mat-column-description {
   width: 60% !important;
   text-overflow: ellipsis;
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .mat-row {
@@ -64,7 +54,11 @@ table {
 }
 
 .mat-cell {
-  padding: 5px;
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 8px;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-cell:first-child {
+  border-left: 0px solid rgba(0, 0, 0, 0);
 }
