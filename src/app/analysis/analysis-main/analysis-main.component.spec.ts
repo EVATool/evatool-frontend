@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnalysisMainComponent } from './analysis-main.component';
 
-describe('AnalysisMainComponent', () => {
+describe('StakeholderMainComponent', () => {
   let component: AnalysisMainComponent;
   let fixture: ComponentFixture<AnalysisMainComponent>;
 
