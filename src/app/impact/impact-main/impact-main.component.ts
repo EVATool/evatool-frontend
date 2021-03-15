@@ -32,5 +32,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   addImpact(): void {
     this.impactDataService.addImpact();
+    const options = { bottom: -50, duration: 250 }; // Why does the method require -50 and does not scroll to bottom with 0?
+    this.scrollbarRef.scrollTo(options);
   }
 }
