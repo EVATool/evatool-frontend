@@ -1,12 +1,26 @@
-#add-analysis-button-div {
-  position: fixed;
-  left: 30px;
-  bottom: 80px;
-  height: 30px;
-  width: 100%;
-}
-.add-analysis-button{
- font-size: 20px;
+/*--------button----------------------*/
+/*#add-analysis-button-div {*/
+/*  position: fixed;*/
+/*  left: 30px;*/
+/*  bottom: 80px;*/
+/*  height: 30px;*/
+/*  width: 100%;*/
+/*}*/
+/*.add-analysis-button{*/
+/* font-size: 20px;*/
+/*}*/
+.b1 {
+  border: none;
+  background: #404040;
+  color: #ffffff !important;
+  font-weight: 100;
+  padding: 10px;
+  margin-left: 50px;
+  margin-top: 50px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
 }
 /*--------searchbar-----------*/
 
@@ -15,12 +29,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Open Sans";
+  font-family: "sans-serif";
 }
 
-.content-wrapper{
-  float: right;
-}
 body {
   background-color: #555;
 }
