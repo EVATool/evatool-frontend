@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { ImpactDataService } from './../services/impact/impact-data.service';
 import { Component, OnInit, Inject, HostListener, ViewChild, AfterViewInit } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';

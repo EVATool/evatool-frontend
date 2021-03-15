@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Impact } from './../../models/Impact';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-impact-slider',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./impact-slider.component.css']
 })
 export class ImpactSliderComponent implements OnInit {
+  @Input() value!: string;
 
-  constructor() { }
+  readonly min = -1.0;
+  readonly max = 1.0;
+  readonly step = 0.1;
 
-  ngOnInit(): void {
+  constructor() {
+
   }
 
+  ngOnInit(): void {
+    console.log(this.value);
+  }
 }
