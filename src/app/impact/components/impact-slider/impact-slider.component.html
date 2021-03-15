@@ -1,1 +1,1 @@
-<mat-slider min="min" max="max" step="step" [ngModel]="value"></mat-slider>
+<mat-slider min="-1.0" max="1.0" step="0.1" [(ngModel)]="value" (input)="sliderValueChanged($event)"></mat-slider>

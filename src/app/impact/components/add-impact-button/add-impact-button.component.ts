@@ -6,7 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./add-impact-button.component.css']
 })
 export class AddImpactButtonComponent implements OnInit {
-  @Output() buttonClick = new EventEmitter<void>();
+  @Output() addButtonClick = new EventEmitter<void>();
 
   constructor() {
 
@@ -17,6 +17,6 @@ export class AddImpactButtonComponent implements OnInit {
   }
 
   addButtonClicked(): void {
-    this.buttonClick.emit();
+    this.addButtonClick.emit();
   }
 }

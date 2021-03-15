@@ -1,6 +1,6 @@
-import { MatSlider } from '@angular/material/slider';
+import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Impact } from './../../models/Impact';
-import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-impact-slider',
@@ -9,21 +9,22 @@ import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/cor
 })
 export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @Input() value!: number;
+  @Output() valueChange = new EventEmitter<number | null>();
   @ViewChild(MatSlider) slider!: MatSlider;
-
-  readonly min = -1.0;
-  readonly max = 1.0;
-  readonly step = 0.1;
 
   constructor() {
 
   }
 
   ngOnInit(): void {
-    console.log(this.value);
+    //console.log(this.value);
   }
 
   ngAfterViewInit(): void {
-    console.log(this.slider.value);
+
+  }
+
+  sliderValueChanged(event: MatSliderChange) {
+    this.valueChange.emit(event.value);
   }
 }
