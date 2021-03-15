@@ -81,15 +81,10 @@ table {
   opacity: 0.2;
   vertical-align: middle;
   text-align: right;
-  transition: 250ms ease-out 100ms
+  transition: 250ms ease-out 100ms;
 }
 
-.delete-button-container:hover {
+.delete-button-container:hover, .delete-button-container:focus-within {
   opacity: 1;
-  transition: 250ms ease-out 100ms
-}
-
-.delete-button-container:focus-within {
-  opacity: 1;
-  transition: 250ms ease-out 100ms
+  transition: 250ms ease-out 100ms;
 }
