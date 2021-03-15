@@ -35,19 +35,36 @@ table {
   width: 10% !important;
 }
 
+.mat-column-stakeholder {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-dimension {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
 .mat-column-value {
   width: 10% !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .mat-column-description {
   width: 60% !important;
   text-overflow: ellipsis;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .mat-row {
   height: auto;
 }
 
+.mat-header-cell {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+  padding: 5px;
+}
+
 .mat-cell {
-  padding: 0 20px 0 0;
+  padding: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
