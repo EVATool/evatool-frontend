@@ -20,17 +20,6 @@ export class VariantMainComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(VariantDialogComponent, { data: { p: 'test', b: 'auch test' } });
-
-    /*
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if (result.accept) {
-        console.log('asdasdasd');
-        this.router.navigate(['/main'], { queryParams: { id: result.form.id }, queryParamsHandling: 'merge' });
-      }
-    });
-    */
-
   }
 
   ngOnInit(): void {

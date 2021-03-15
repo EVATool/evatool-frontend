@@ -4,4 +4,5 @@ export class Variant {
   title: any = '';
   description: any = '';
   editable?: boolean;
+  analysesId: any = '';
 }

@@ -42,7 +42,8 @@ export class VariantDialogComponent implements OnInit {
         const variant = {
           id: variantDTO.uuid,
           description: variantDTO.description,
-          title: variantDTO.title
+          title: variantDTO.title,
+          analysesId: variantDTO.analysesId
         };
         this.variants.push(variant);
       });
@@ -53,29 +54,6 @@ export class VariantDialogComponent implements OnInit {
       this.variants.push(variant);
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     });
-  }
-
-  createVariant(): void {
-    const variantDTO = new VariantDTO();
-    variantDTO.criterion = 'criterion new from here';
-    variantDTO.description = 'description new from here';
-    variantDTO.title = 'title new from here';
-    this.variantRestService.createVariants(variantDTO).subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log('Error occured');
-      });
-    ;
-  }
-
-  abort(): void {
-    this.dialogRef.close({accept: false});
-  }
-
-  closeModal(): void {
-    this.dialogRef.close({accept: true, form: this.form.value});
   }
 
   addVariant(): void {
