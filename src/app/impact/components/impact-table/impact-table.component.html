@@ -84,8 +84,17 @@
       <div matTooltip="The impact description" matTooltipHideDelay="100" matTooltipPosition="above">Description</div>
     </th>
     <td mat-cell *matCellDef='let impact'>
-      <textarea matInput cdkTextareaAutosize [(ngModel)]="impact.description"
-        placeholder="Describe the impact..."></textarea>
+      <div class="description-wrapper">
+        <div class="description-container">
+          <textarea matInput cdkTextareaAutosize [(ngModel)]="impact.description"
+            placeholder="Describe the impact..."></textarea>
+        </div>
+        <div class="delete-button-container">
+          <button mat-fab>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
     </td>
   </ng-container>
 

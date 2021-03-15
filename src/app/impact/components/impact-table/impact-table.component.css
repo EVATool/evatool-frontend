@@ -62,3 +62,20 @@ table {
 .mat-cell:first-child {
   border-left: 0px solid rgba(0, 0, 0, 0);
 }
+
+.description-wrapper {
+  display: table;
+  width: 100%;
+}
+
+.description-container {
+  display: table-cell;
+  text-align: left;
+  width: 99%;
+}
+
+.delete-button-container {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
