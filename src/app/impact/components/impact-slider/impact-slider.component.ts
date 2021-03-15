@@ -1,13 +1,15 @@
+import { MatSlider } from '@angular/material/slider';
 import { Impact } from './../../models/Impact';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-impact-slider',
   templateUrl: './impact-slider.component.html',
   styleUrls: ['./impact-slider.component.css']
 })
-export class ImpactSliderComponent implements OnInit {
-  @Input() value!: string;
+export class ImpactSliderComponent implements OnInit, AfterViewInit {
+  @Input() value!: number;
+  @ViewChild(MatSlider) slider!: MatSlider;
 
   readonly min = -1.0;
   readonly max = 1.0;
@@ -19,5 +21,9 @@ export class ImpactSliderComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.value);
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.slider.value);
   }
 }
