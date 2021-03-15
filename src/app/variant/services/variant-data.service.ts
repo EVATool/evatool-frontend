@@ -61,7 +61,9 @@ export class VariantDataService {
 
 
   save(variant: Variant): void{
-    this.variantRestService.createVariants({title: variant.title, description: variant.description}).subscribe();
+    this.variantRestService.createVariants({title: variant.title, description: variant.description,
+      stFlagsReal: false, criterion: '', stFlagsPot: false, subVariant: {}, variantsAnalyses: {},
+      variantsRequirements: {}, variantsStakeholder: {}}).subscribe();
   }
 
 }
