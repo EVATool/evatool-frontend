@@ -13,6 +13,12 @@
   border: none;
 }
 /* create analysis button style-----------------------------------------------*/
+.createButton {
+  border: none;
+  background-color: transparent;
+  alignment: center;
+  margin-left: 32%;
+}
 .b1 {
   border: none;
   background: #404040;
@@ -24,7 +30,7 @@
   display: inline-block;
   transition: all 0.3s ease 0s;
 }
-.b1:hover {
+/*.b1:hover {
   color: #404040 !important;
   font-weight: 700 !important;
   letter-spacing: 3px;
@@ -32,7 +38,7 @@
   -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
   -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
   transition: all 0.3s ease 0s;
-}
+}*/
 
 /*input fields----------------------------------------------------------------------*/
 * {

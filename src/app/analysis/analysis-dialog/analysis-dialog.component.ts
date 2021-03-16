@@ -6,8 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./analysis-dialog.component.css']
 })
 export class AnalysisDialogComponent implements OnInit {
+  analyseName: any;
+  analysisDescription: any;
+
+  onSubmit(): void {
+    console.log(this.analyseName);
+    console.log(this.analysisDescription);
+  }
 
   constructor() { }
+
 
   ngOnInit(): void {
   }
