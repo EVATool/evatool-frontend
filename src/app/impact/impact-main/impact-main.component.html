@@ -2,12 +2,19 @@
   <input matInput placeholder="Search...">
 </div>
 
+<div class="scroll-to-top" [hidden]="!windowScrolled" >
+  <button type="button" mat-fab (click)="scrollToTop()" matTooltip="Scroll to Top" matTooltipHideDelay="100"
+    matTooltipPosition="above">
+    <mat-icon>arrow_upward</mat-icon>
+  </button>
+</div>
+
 <div id="impact-table-div">
-  <app-impact-table></app-impact-table>
+  <ng-scrollbar>
+    <app-impact-table></app-impact-table>
+  </ng-scrollbar>
 </div>
 
 <div id="add-impact-button-div">
-  <button id="add-impact-button" type="button" mat-fab (click)="addImpact()">
-    <p style="font-size:180%;"> +</p>
-  </button>
+  <app-add-impact-button (buttonClick)="addImpact()"> </app-add-impact-button>
 </div>

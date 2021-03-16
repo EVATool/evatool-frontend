@@ -4,10 +4,10 @@
 }
 
 #impact-table-div {
-  display: inline-block;
   margin: 25px;
-  height: 10%;
-  max-height: 20%;
+  height: calc(100vh - 330px);
+  overflow-y: hidden;
+  scroll-behavior: smooth;
 }
 
 #add-impact-button-div {
@@ -16,4 +16,10 @@
   bottom: 80px;
   height: 30px;
   width: 100%;
+}
+
+.scroll-to-top {
+  position: fixed;
+  top: 125px;
+  right: 50px;
 }

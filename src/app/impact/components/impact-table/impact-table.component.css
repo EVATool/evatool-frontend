@@ -1,0 +1,82 @@
+/* mat-select */
+
+mat-select:focus {
+  border-bottom: solid rgb(255, 64, 129);
+}
+
+/* Filter */
+
+.show {
+  display: block;
+  max-width: 200px;
+  transform: scale(1);
+}
+
+.hide {
+  display: none;
+  max-width: 0;
+  transform: scale(0);
+}
+
+.floating {
+  position: absolute;
+  background: white !important;
+  opacity: 1 !important;
+  top: 100%;
+}
+
+/* Table */
+
+table {
+  width: 100%;
+}
+
+.mat-column-id {
+  width: 7% !important;
+}
+
+.mat-column-value {
+  width: 10% !important;
+}
+
+.mat-column-description {
+  width: 60% !important;
+  text-overflow: ellipsis;
+}
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 0 20px 0 0;
+}
+
+/* Slider */
+
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-wrapper {
+  top: 18px;
+}
+
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
+  height: 12px;
+  border-radius: 10px
+}
+
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-background, ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+  height: 100%;
+}
+
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+  background-color: blue;
+  color: black;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border: solid 2px gray;
+  bottom: -20px;
+  right: -20px;
+}

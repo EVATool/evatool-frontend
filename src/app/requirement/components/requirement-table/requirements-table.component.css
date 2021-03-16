@@ -1,11 +1,12 @@
 div{
   padding:25px;
-  max-height: 500px;
+  max-height: 800px;
 }
 
 table {
   width: 100%;
 }
+
 
 th{
   border-bottom: 2px solid black;

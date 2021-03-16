@@ -28,7 +28,8 @@
           (dblclick)="clickFunction(element,impact)">{{checkValue(element,impact)}}</td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>

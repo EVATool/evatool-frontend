@@ -1,15 +1,15 @@
 #!/bin/bash
 echo ------------------------------
-echo DOCKER BUILD
+echo BUILD DOCKER IMAGE
 docker build -t evatoolui_image /home/evauser/evatool/frontend/docker
 echo ------------------------------
 echo RUNNING CONTAINERS
 docker ps
 echo ------------------------------
-echo STOP DOCKER IMAGE
+echo STOP DOCKER CONTAINER
 docker stop evatoolui_container
 echo ------------------------------
-echo START DOCKER IMAGE
+echo START DOCKER CONTAINER
 docker run --name evatoolui_container -d --rm -p 80:80 evatoolui_image
 echo ------------------------------
 echo RUNNING CONTAINERS

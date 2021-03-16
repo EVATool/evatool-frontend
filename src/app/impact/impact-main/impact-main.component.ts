@@ -1,26 +1,36 @@
+import { element } from 'protractor';
 import { ImpactDataService } from './../services/impact/impact-data.service';
-import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
-import { Impact } from '../models/Impact';
-import { MatTable } from '@angular/material/table';
+import { Component, OnInit, Inject, HostListener, ViewChild, AfterViewInit } from '@angular/core';
+import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
   selector: 'app-impact-main',
   templateUrl: './impact-main.component.html',
   styleUrls: ['./impact-main.component.css']
 })
-export class ImpactMainComponent implements OnInit {
-  @ViewChild(MatTable) table!: MatTable<any>;
+export class ImpactMainComponent implements OnInit, AfterViewInit {
+  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
 
-  constructor(private impactDataService: ImpactDataService) {
+  windowScrolled = false;
 
-  }
+  constructor(private impactDataService: ImpactDataService) { }
 
   ngOnInit(): void {
 
   }
 
+  ngAfterViewInit() {
+    this.scrollbarRef.scrolled.subscribe(e => {
+      this.windowScrolled = e.target.scrollTop !== 0;
+    })
+  }
+
+  scrollToTop() {
+    const options = { top: 0, duration: 250 };
+    this.scrollbarRef.scrollTo(options);
+  }
+
   addImpact(): void {
-    console.log('add impact...');
-    this.impactDataService.createImpact();
+    this.impactDataService.addImpact();
   }
 }
