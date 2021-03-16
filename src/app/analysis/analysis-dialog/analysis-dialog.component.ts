@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {AnalysisDataService} from "../services/analysis/analysis-data.service";
+import {AnalysisDTO} from "../model/AnalysisDTO";
+import {Analysis} from "../model/Analysis";
+import {analyticsPackageSafelist} from "@angular/cli/models/analytics";
 
 @Component({
   selector: 'app-analysis-dialog',
@@ -12,12 +16,18 @@ export class AnalysisDialogComponent implements OnInit {
   onSubmit(): void {
     console.log(this.analyseName);
     console.log(this.analysisDescription);
+    let analysis: Analysis = new Analysis();
+    analysis.title = this.analyseName;
+    analysis.description = this.analysisDescription;
+
+    this.analysisDataService.save(analysis);
+    // TODO: Close input dialog
+    // TODO: Reload Analysis Panel
   }
 
-  constructor() { }
+  constructor(private analysisDataService: AnalysisDataService) { }
 
 
   ngOnInit(): void {
   }
-
 }

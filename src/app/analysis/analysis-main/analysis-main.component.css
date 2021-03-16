@@ -45,13 +45,14 @@ body {
 .delete{
   width: 2px;
   float: right;
+  margin-left: 25px;
+  margin-right: 15px;
 }
 .settings {
   width: 2px;
   float: right;
-  margin-left: 20px;
-  margin-right: 15px;
 }
+/*-------------card options_end-------------------------*/
 .content-wrapper {
   margin: 0 auto;
   max-width: 1200px;
@@ -117,7 +118,7 @@ body {
 }
 
 .news-card__text-wrapper {
-  position: absolute;
+  position: sticky;
   bottom: 0rem;
   padding: 1rem;
   color: white;
