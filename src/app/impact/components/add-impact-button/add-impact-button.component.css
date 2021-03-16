@@ -1,11 +1,13 @@
-#add-impact-button-div {
-  display: inline-block;
+.container {
   vertical-align: middle;
 }
 
 #add-impact-button-div {
+  display: inline-block;
+}
+
+#add-impact-button-div {
   opacity: 0.8;
-  vertical-align: middle;
   text-align: right;
   transition: 250ms ease-out 100ms;
 }
@@ -19,6 +21,5 @@
   margin-left: 1.5vw;
   margin-top: 1vh;
   display: inline-block;
-  vertical-align: middle;
   font-size: 150%;
 }
