@@ -1,20 +1,20 @@
-#search-description-div {
-  margin: 30px;
-  margin-left: 45px;
+.search-description-div {
+  margin-top: 2%;
+  margin-left: 2%;
 }
 
-#impact-table-div {
-  margin: 25px;
-  height: calc(100vh - 330px);
+.impact-table-div {
+  margin: 1%;
+  margin-left: 2%;
+  height: calc(100vh - 300px);
   overflow-y: hidden;
   scroll-behavior: smooth;
 }
 
-#add-impact-button-div {
+.add-impact-button-div {
   position: fixed;
-  left: 30px;
-  bottom: 80px;
-  height: 30px;
+  left: 1.5%;
+  bottom: 2.5%;
   width: 100%;
 }
 
@@ -22,4 +22,5 @@
   position: fixed;
   top: 125px;
   right: 50px;
+  z-index: 10;
 }

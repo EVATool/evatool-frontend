@@ -1,8 +1,8 @@
 .header {
   background-color: #333333;
   color: white;
-  padding: 15px;
-  padding-left: 25px;
+  padding: 0.8%;
+  padding-left: 1.5%;
 }
 
 .navbar {
@@ -14,11 +14,12 @@
 }
 
 #action-container {
-  padding-left: 1.5vw;
+  padding-left: 1.8vw;
 }
 
 #user-container {
   float: right;
+  right: 1vw;
 }
 
 h1 {
@@ -31,7 +32,6 @@ h1 {
   height: 35px;
   position: absolute;
   margin-left: -1vw;
-  top: 1.5vh;
 }
 
 a {
