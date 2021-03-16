@@ -46,4 +46,5 @@ ul {
 li {
   display: inline;
   padding-left: 1vw;
+  vertical-align: middle;
 }
