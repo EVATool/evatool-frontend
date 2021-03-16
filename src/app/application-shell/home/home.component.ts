@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   }
 
   btnClick(): void {
-    this.router.navigate(['/main'], { queryParams: { id: 'analysisUUID' }, queryParamsHandling: 'merge' });
+    this.router.navigate(['/analysis'], { queryParams: { id: 'analysisUUID' }, queryParamsHandling: 'merge' });
   }
 
   openDialog(): void {
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       console.log(result);
       if (result.accept) {
         console.log('asdasdasd');
-        this.router.navigate(['/main'], { queryParams: { id: result.form.id }, queryParamsHandling: 'merge' });
+        this.router.navigate(['/analysis'], { queryParams: { id: result.form.id }, queryParamsHandling: 'merge' });
       }
     });
   }
