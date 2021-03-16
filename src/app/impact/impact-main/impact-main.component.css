@@ -1,6 +1,10 @@
 .search-description-div {
-  margin-top: 2%;
-  margin-left: 2%;
+  align-content: center;
+  margin: 2%;
+  margin-bottom: 0%;
+  width: 20%;
+  font-size: 150%;
+  background-color: rgb(235, 235, 235);
 }
 
 .impact-table-div {
