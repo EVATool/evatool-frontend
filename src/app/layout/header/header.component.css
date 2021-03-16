@@ -1,0 +1,47 @@
+.header {
+  background-color: #333333;
+  color: white;
+  padding: 0.8%;
+  padding-left: 1.5%;
+  vertical-align: middle;
+}
+
+.container {
+  display: inline;
+  position: relative;
+}
+
+#action-container {
+  padding-left: 2%;
+}
+
+#user-container {
+  float: right;
+}
+
+h1 {
+  display: inline;
+}
+
+.vl {
+  display: inline-block;
+  border-left: 1px solid white;
+  height: 35px;
+  position: absolute;
+  margin-left: -1vw;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+ul {
+  display: inline;
+}
+
+li {
+  display: inline;
+  padding-left: 1vw;
+  vertical-align: middle;
+}

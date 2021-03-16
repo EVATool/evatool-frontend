@@ -9,14 +9,17 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class ImpactDataService {
-  @Output() onCreateImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() createImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() updateImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() deleteImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() loadedImpacts: EventEmitter<Impact> = new EventEmitter();
 
   dummyImpacts: Impact[] = [
     {
       id: '1',
       value: -0.3,
-      description: 'This is the first read-only impact',
-      dimension: { id: '21', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL' },
+      description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
+      dimension: { id: '21', name: 'Feelings', description: 'Feelings of Patient ', type: 'SOCIAL' },
       stakeholder: { id: '11', name: 'Patient' },
       analysis: { id: '7' }
     },
@@ -51,10 +54,11 @@ export class ImpactDataService {
   constructor(
     private stakeholderDataService: StakeholderDataService,
     private dimensionDataService: DimensionDataService) {
-    for (let impact of this.impacts) {
+    for (const impact of this.impacts) {
       impact.stakeholder = this.stakeholderDataService.getStakeholders()[Math.floor(Math.random() * Math.floor(4))];
       impact.dimension = this.dimensionDataService.getDimensions()[Math.floor(Math.random() * Math.floor(4))];
     }
+    this.loadedImpacts.emit();
   }
 
   getImpacts(): Impact[] {
@@ -62,21 +66,26 @@ export class ImpactDataService {
   }
 
   private createDefaultImpact(): Impact {
-    let impact = new Impact();
+    const impact = new Impact();
 
-    impact.id = 'TEST';
-    impact.value = -0.9;
-    impact.description = "Dieser Impact wurde erstellt";
+    impact.id = 'I00' + (this.impacts.length + 1);
+    impact.value = 0.0;
+    impact.description = '';
     impact.dimension = this.dimensionDataService.getDefaultDimension();
     impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
 
     return impact;
   }
 
-  createImpact(): Impact {
-    let impact = this.createDefaultImpact();
+  addImpact(): void {
+    const impact = this.createDefaultImpact();
     this.impacts.push(impact);
-    this.onCreateImpact.emit(impact);
-    return impact;
+    this.createImpact.emit(impact);
+  }
+
+  removeImpact(impact: Impact): void {
+    const index: number = this.impacts.indexOf(impact, 0);
+    this.impacts.splice(index, 1);
+    this.deleteImpact.emit();
   }
 }
