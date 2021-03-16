@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { isDevMode } from '@angular/core';
 
 @Component({
   selector: 'app-shell-main',
@@ -30,7 +31,7 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // @ DevTeams: Change this to your tab index and do not commit it.
-    if (this.tab !== undefined) {
+    if (isDevMode() && this.tab !== undefined) {
       this.tab.selectedIndex = 1;
     }
   }
