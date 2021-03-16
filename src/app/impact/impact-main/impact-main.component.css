@@ -6,7 +6,7 @@
 .impact-table-div {
   margin: 1%;
   margin-left: 2%;
-  height: calc(100vh - 300px);
+  height: calc(85vh - 150px);
   overflow-y: hidden;
   scroll-behavior: smooth;
 }
