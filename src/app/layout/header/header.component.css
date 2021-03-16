@@ -1,16 +1,49 @@
 .header {
   background-color: #333333;
   color: white;
+  padding: 15px;
+  padding-left: 25px;
+}
+
+.navbar {
+  display: inline;
+}
+
+.container {
+  display: inline;
+}
+
+#action-container {
+  padding-left: 1.5vw;
+}
+
+#user-container {
+  float: right;
 }
 
 h1 {
-  color: white;
+  display: inline;
 }
 
-.nav-container {
-  color: white;
+.vl {
+  display: inline-block;
+  border-left: 1px solid white;
+  height: 35px;
+  position: absolute;
+  margin-left: -1vw;
+  top: 1.5vh;
 }
 
 a {
   color: white;
+  text-decoration: none;
+}
+
+ul {
+  display: inline;
+}
+
+li {
+  display: inline;
+  padding-left: 1vw;
 }
