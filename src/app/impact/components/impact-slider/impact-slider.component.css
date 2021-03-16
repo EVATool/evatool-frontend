@@ -8,6 +8,10 @@
   color: black;
 }
 
+::ng-deep .mat-slider {
+  width: 100%;
+}
+
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-wrapper {
   top: 18px;
 }
