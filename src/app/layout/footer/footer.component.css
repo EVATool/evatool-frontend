@@ -2,6 +2,26 @@ footer {
   background-color: white;
 }
 
+.container {
+  float: right;
+  display: inline;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+ul {
+  display: inline;
+}
+
+li {
+  display: inline;
+  padding-left: 1vw;
+}
+
 .mat-icon {
-  color: gray
+  color: gray;
+  margin-right: 10px;
 }

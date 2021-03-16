@@ -30,6 +30,8 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     // @ DevTeams: Change this to your tab index and do not commit it.
-    this.tab.selectedIndex = 1;
+    if (this.tab !== undefined) {
+      this.tab.selectedIndex = 1;
+    }
   }
 }
