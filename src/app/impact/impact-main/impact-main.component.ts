@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { ImpactDataService } from './../services/impact/impact-data.service';
 import { Component, OnInit, Inject, HostListener, ViewChild, AfterViewInit } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
@@ -20,7 +19,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.scrollbarRef.scrolled.subscribe(e => {
+    this.scrollbarRef?.scrolled.subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
     })
   }
@@ -31,6 +30,14 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
   }
 
   addImpact(): void {
+    // TODO Remove filter that hide newly created impact? Set default values to match filters?
+    // TODO Highlight newly create row.
     this.impactDataService.addImpact();
+    const options = { bottom: -50, duration: 250 }; // Why does the method require -50 and does not scroll to bottom with 0?
+    this.scrollbarRef.scrollTo(options);
+
+    // Test debug
+    //console.log(this.impactDataService.impacts[0].value);
+    //this.impactDataService.impacts[0].value = 1;
   }
 }

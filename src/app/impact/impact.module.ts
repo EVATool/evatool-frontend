@@ -15,10 +15,11 @@ import { AddImpactButtonComponent } from './components/add-impact-button/add-imp
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { ImpactSliderComponent } from './components/impact-slider/impact-slider.component';
 
 
 @NgModule({
-  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective],
+  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective, ImpactSliderComponent],
   imports: [
     CommonModule,
     MatTableModule,

@@ -17,8 +17,6 @@ import { FormControl } from '@angular/forms';
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
-  windowScrolled = true;
-
   // Used by table.
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
   tableDataSource!: MatTableDataSource<Impact>;
@@ -47,6 +45,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // Listen for changes in data.
     this.impactDataService.loadedImpacts.subscribe(_ => {
       this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
     });
@@ -54,12 +53,15 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.impactDataService.createImpact.subscribe(_ => {
       this.tableDataSource.data = this.impacts;
     });
+
+    this.impactDataService.deleteImpact.subscribe(_ => {
+      this.tableDataSource.data = this.impacts;
+    });
   }
 
   ngAfterViewInit(): void {
     this.initSorting();
     this.initFiltering();
-    this.initFilterVisibilityToggles();
   }
 
   private initSorting(): void {
@@ -71,11 +73,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         default: return impact[property];
       }
     };
-
     this.tableDataSource.filterPredicate = this.createFilter();
-    this.impactDataService.createImpact.subscribe(_ => {
-      this.tableDataSource.data = this.impacts;
-    });
   }
 
   private initFiltering(): void {
@@ -103,6 +101,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     });
 
     this.tableDataSource.filterPredicate = this.createFilter();
+
+    this.searchToggles.set('stakeholder', false);
+    this.searchToggles.set('dimension', false);
+    this.searchToggles.set('value', false);
   }
 
   private createFilter(): (data: any, filter: string) => boolean {
@@ -118,9 +120,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.searchToggles.set(key, !this.searchToggles.get(key));
   }
 
-  private initFilterVisibilityToggles(): void {
-    this.searchToggles.set('stakeholder', false);
-    this.searchToggles.set('dimension', false);
-    this.searchToggles.set('value', false);
+  deleteImpact(impact: Impact) {
+    this.impactDataService.removeImpact(impact);
   }
 }
