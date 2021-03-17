@@ -65,11 +65,9 @@ export class ImpactDataService {
   }
 
   onInit() {
-
-  }
-
-  invalidate() {
-    this.loadedImpacts.emit(this.impacts);
+    if (this.impacts.length > 0) {
+      this.loadedImpacts.emit(this.impacts);
+    }
   }
 
   private createDefaultImpact(): Impact {
