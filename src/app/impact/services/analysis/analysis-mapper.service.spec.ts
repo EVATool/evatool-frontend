@@ -1,3 +1,5 @@
+import { AnalysisDto } from './../../dtos/AnalysisDto';
+import { Analysis } from './../../models/Analysis';
 import { TestBed } from '@angular/core/testing';
 
 import { AnalysisMapperService } from './analysis-mapper.service';
@@ -13,4 +15,28 @@ describe('AnalysisMapperService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should convert to dto', () => {
+    // given
+    let analysis = new Analysis();
+    analysis.id = 'string';
+
+    // when
+    let analysisDto = AnalysisMapperService.toDto(analysis);
+
+    // then
+    expect(analysis.id === analysisDto.id).toBeTruthy();
+  })
+
+  it('should convert from dto', () => {
+    // given
+    let analysisDto = new AnalysisDto();
+    analysisDto.id = 'string';
+
+    // when
+    let analysis = AnalysisMapperService.fromDto(analysisDto);
+
+    // then
+    expect(analysisDto.id === analysis.id).toBeTruthy();
+  })
 });
