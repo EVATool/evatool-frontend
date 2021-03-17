@@ -6,7 +6,7 @@ import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
 import { AfterViewInit, Component, OnInit, ViewChild, Inject, HostListener } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -16,10 +16,11 @@ import { FormControl } from '@angular/forms';
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
+  @ViewChild(MatTable) table!: MatTable<any>;
 
   // Used by table.
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
-  tableDataSource!: MatTableDataSource<Impact>;
+  tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
   // Data arrays from services.
   dimensions: Dimension[] = [];
@@ -36,23 +37,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     private impactDataService: ImpactDataService,
     private dimensionDataService: DimensionDataService,
     private stakeholderDataService: StakeholderDataService) {
-
-    // Listen for changes in data.
-    this.impactDataService.loadedImpacts.subscribe(impacts => {
-      this.tableDataSource = new MatTableDataSource<Impact>(impacts);
-      this.initSorting();
-      this.initFiltering();
-    });
-
-    this.impactDataService.changedImpacts.subscribe(impacts => {
-      //this.tableDataSource.data = impacts;
-      this.tableDataSource = new MatTableDataSource<Impact>(impacts);
-      this.initSorting();
-      this.initFiltering();
-    });
-
-    // Initially, due to timing, fire loadedImpacts event manually.
-    this.impactDataService.invalidate();
   }
 
   ngOnInit(): void {
@@ -60,7 +44,20 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
+      this.tableDataSource = new MatTableDataSource<Impact>(impacts);
+      this.initSorting();
+      this.initFiltering();
+    });
 
+    this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
+      this.table.renderRows();
+      this.initSorting();
+      this.initFiltering();
+    });
+
+    // Initially, due to timing, fire event(s) manually.
+    this.impactDataService.invalidate();
   }
 
   private initSorting(): void {
