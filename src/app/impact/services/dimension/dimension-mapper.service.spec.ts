@@ -32,7 +32,7 @@ describe('DimensionMapperService', () => {
     expect(dimension.name === dimensionDto.name).toBeTruthy();
     expect(dimension.type === dimensionDto.type).toBeTruthy();
     expect(dimension.description === dimensionDto.description).toBeTruthy();
-  })
+  });
 
   it('should convert from dto', () => {
     // given
@@ -50,5 +50,5 @@ describe('DimensionMapperService', () => {
     expect(dimension.name === dimensionDto.name).toBeTruthy();
     expect(dimension.type === dimensionDto.type).toBeTruthy();
     expect(dimension.description === dimensionDto.description).toBeTruthy();
-  })
+  });
 });

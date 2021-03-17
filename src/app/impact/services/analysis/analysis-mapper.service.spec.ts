@@ -26,7 +26,7 @@ describe('AnalysisMapperService', () => {
 
     // then
     expect(analysis.id === analysisDto.id).toBeTruthy();
-  })
+  });
 
   it('should convert from dto', () => {
     // given
@@ -38,5 +38,5 @@ describe('AnalysisMapperService', () => {
 
     // then
     expect(analysis.id === analysisDto.id).toBeTruthy();
-  })
+  });
 });

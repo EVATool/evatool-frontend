@@ -1,3 +1,4 @@
+import { AnalysisDto } from './AnalysisDto';
 import { StakeholderDto } from './StakeholderDto';
 import { DimensionDto } from './DimensionDto';
 
@@ -7,4 +8,5 @@ export class ImpactDto {
   description = '';
   dimension!: DimensionDto;
   stakeholder!: StakeholderDto;
+  analysis!: AnalysisDto;
 }

@@ -1,3 +1,5 @@
+import { StakeholderDto } from './../../dtos/StakeholderDto';
+import { Stakeholder } from './../../models/Stakeholder';
 import { TestBed } from '@angular/core/testing';
 
 import { StakeholderMapperService } from './stakeholder-mapper.service';
@@ -12,5 +14,33 @@ describe('StakeholderMapperService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should convert to dto', () => {
+    // given
+    let stakeholder = new Stakeholder();
+    stakeholder.id = 'id';
+    stakeholder.name = 'name';
+
+    // when
+    let stakeholderDto = StakeholderMapperService.toDto(stakeholder);
+
+    // then
+    expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
+    expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
+  });
+
+  it('should convert from dto', () => {
+    // given
+    let stakeholderDto = new StakeholderDto();
+    stakeholderDto.id = 'id';
+    stakeholderDto.name = 'name';
+
+    // when
+    let stakeholder = StakeholderMapperService.fromDto(stakeholderDto);
+
+    // then
+    expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
+    expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
   });
 });

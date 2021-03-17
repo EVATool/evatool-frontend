@@ -1,3 +1,4 @@
+import { Analysis } from './../../models/Analysis';
 import { Stakeholder } from './../../models/Stakeholder';
 import { Dimension } from './../../models/Dimension';
 import { StakeholderMapperService } from './../stakeholder/stakeholder-mapper.service';
@@ -26,7 +27,7 @@ export class ImpactMapperService {
     return impactDto;
   }
 
-  static fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[]): Impact {
+  static fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
     let impact = new Impact();
 
     impact.id = impactDto.id;
@@ -35,14 +36,21 @@ export class ImpactMapperService {
 
     dimensions.forEach(dimension => {
       if (dimension.id === impactDto.dimension.id) {
-        impactDto.dimension = dimension;
+        impact.dimension = dimension;
         return;
       }
     });
 
     stakeholders.forEach(stakeholder => {
       if (stakeholder.id === impactDto.stakeholder.id) {
-        impactDto.stakeholder = stakeholder;
+        impact.stakeholder = stakeholder;
+        return;
+      }
+    });
+
+    analyses.forEach(analysis => {
+      if (analysis.id === impactDto.analysis.id) {
+        impact.analysis = analysis;
         return;
       }
     });
