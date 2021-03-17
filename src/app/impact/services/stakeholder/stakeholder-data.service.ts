@@ -1,3 +1,4 @@
+import { DataLoader } from '../../settings/DataLoader';
 import { StakeholderDto } from './../../dtos/StakeholderDto';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 import { StakeholderRestService } from './stakeholder-rest.service';
@@ -32,12 +33,16 @@ export class StakeholderDataService {
   }
 
   onInit() {
-    // Load dummy stakeholders.
-    this.dummyStakeholderDtos.forEach(stk => {
-      this.stakeholders.push(StakeholderMapperService.fromDto(stk));
-    });
-    console.log('Stakeholders loaded.');
-    this.loadedStakeholders.emit(this.stakeholders);
+    if (DataLoader.useDummyData) {
+      // Load dummy stakeholders.
+      this.dummyStakeholderDtos.forEach(stk => {
+        this.stakeholders.push(StakeholderMapperService.fromDto(stk));
+      });
+      console.log('Stakeholders loaded.');
+      this.loadedStakeholders.emit(this.stakeholders);
+    } else {
+
+    }
   }
 
   invalidate() {

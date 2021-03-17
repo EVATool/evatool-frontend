@@ -1,3 +1,4 @@
+import { DataLoader } from '../../settings/DataLoader';
 import { Analysis } from './../../models/Analysis';
 import { Dimension } from './../../models/Dimension';
 import { Stakeholder } from './../../models/Stakeholder';
@@ -55,7 +56,7 @@ export class ImpactDataService {
   ];
 
   impacts: Impact[] = [];
-
+  impactsLoaded = false;
   stakeholders: Stakeholder[] = [];
   stakeholdersLoaded = false;
   dimensions: Dimension[] = [];
@@ -73,19 +74,19 @@ export class ImpactDataService {
     this.stakeholderDataService.loadedStakeholders.subscribe(stakeholders => {
       this.stakeholders = stakeholders;
       this.stakeholdersLoaded = true;
-      this.fireIfChildrenAreLoaded();
+      this.loadIfChildrenAreLoaded();
     });
 
     this.dimensionDataService.loadedDimensions.subscribe(dimensions => {
       this.dimensions = dimensions;
       this.dimensionsLoaded = true;
-      this.fireIfChildrenAreLoaded();
+      this.loadIfChildrenAreLoaded();
     });
 
     this.analysisDataService.loadedAnalyses.subscribe(analyses => {
       this.analyses = analyses;
       this.analysesLoaded = true;
-      this.fireIfChildrenAreLoaded();
+      this.loadIfChildrenAreLoaded();
     });
 
     this.stakeholderDataService.onInit();
@@ -93,25 +94,24 @@ export class ImpactDataService {
     this.analysisDataService.onInit();
   }
 
-  invalidate() {
-    if (this.impacts.length > 0) {
-      this.loadedImpacts.emit(this.impacts);
+  private loadIfChildrenAreLoaded() {
+    if (DataLoader.useDummyData) {
+      if (this.getChildrenLoaded() && !this.impactsLoaded) {
+        // Load dummy dimensions.
+        this.dummyImpactDtos.forEach(imp => {
+          this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+        });
+        console.log('Impacts loaded.');
+        this.loadedImpacts.emit(this.impacts);
+        this.impactsLoaded = true;
+      }
+    } else {
+
     }
   }
 
-  getChildrenLoaded(): boolean {
+  private getChildrenLoaded(): boolean {
     return this.stakeholdersLoaded && this.dimensionsLoaded && this.analysesLoaded;
-  }
-
-  fireIfChildrenAreLoaded() {
-    if (this.getChildrenLoaded()) {
-      // Load dummy dimensions.
-      this.dummyImpactDtos.forEach(imp => {
-        this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
-      });
-      console.log('Impacts loaded.');
-      this.loadedImpacts.emit(this.impacts);
-    }
   }
 
   private createDefaultImpact(): Impact {

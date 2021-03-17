@@ -1,4 +1,4 @@
-import { DataLoader } from './../../settings/DataLoader';
+import { DataLoader } from '../../settings/DataLoader';
 import { DimensionDto } from './../../dtos/DimensionDto';
 import { DimensionMapperService } from './dimension-mapper.service';
 import { Dimension } from './../../models/Dimension';
@@ -51,6 +51,7 @@ export class DimensionDataService {
       this.dummyDimensionTypes.forEach(dimType => {
         this.dimensionTypes.push(dimType);
       });
+      console.log('Dimension types loaded.');
       this.loadedDimensionTypes.emit(this.dimensionTypes);
     } else {
       // Load dimensions.
@@ -67,7 +68,6 @@ export class DimensionDataService {
       });
       this.loadedDimensionTypes.emit(this.dimensionTypes);
     }
-
   }
 
   invalidate() {

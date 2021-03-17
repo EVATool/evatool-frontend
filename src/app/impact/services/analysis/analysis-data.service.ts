@@ -1,3 +1,4 @@
+import { DataLoader } from '../../settings/DataLoader';
 import { AnalysisDto } from './../../dtos/AnalysisDto';
 import { AnalysisMapperService } from './analysis-mapper.service';
 import { Analysis } from './../../models/Analysis';
@@ -31,12 +32,16 @@ export class AnalysisDataService {
   }
 
   onInit() {
-    // Load dummy stakeholders.
-    this.dummyAnalysisDtos.forEach(ana => {
-      this.analyses.push(AnalysisMapperService.fromDto(ana));
-    });
-    console.log('Analyses loaded.');
-    this.loadedAnalyses.emit(this.analyses);
+    if (DataLoader.useDummyData) {
+      // Load dummy stakeholders.
+      this.dummyAnalysisDtos.forEach(ana => {
+        this.analyses.push(AnalysisMapperService.fromDto(ana));
+      });
+      console.log('Analyses loaded.');
+      this.loadedAnalyses.emit(this.analyses);
+    } else {
+
+    }
   }
 
   invalidate() {
