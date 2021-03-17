@@ -1,19 +1,25 @@
-
-
 #search-description-div {
-  margin: 30px 30px 30px 45px;
-  border-bottom: 1px groove #000000;
-  box-shadow: 0px 1px 0px 0px #000000 !important;
-  width: 200px;
+  margin: 30px;
+  margin-left: 45px;
 }
 
 #requirement-table-div {
   margin: 25px;
-  height: calc(100vh - 330px);
-  scroll-behavior: smooth;
+  height: calc(100vh - 350px);
+  /*overflow-y: hidden;*/
+  /*scroll-behavior: smooth;*/
 }
 
-#add-requirement-button{
-  position: absolute;
-  bottom: 10px;
+#add-impact-button-div {
+  position: fixed;
+  left: 30px;
+  bottom: 80px;
+  height: 30px;
+  width: 100%;
+}
+
+.scroll-to-top {
+  position: fixed;
+  top: 125px;
+  right: 50px;
 }

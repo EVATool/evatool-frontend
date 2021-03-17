@@ -2,12 +2,16 @@
   <input matInput placeholder="Search...">
 </div>
 
+<div id="add-impact-button-div">
 <button id="add-requirement-button" type="button" (click)="addRequirements()">
   <p style="font-size:180%;">+</p>
 </button>
+</div>
 
-<div id="requirement-table-div">
-  <app-requirement-table id="table"></app-requirement-table>
+<div id="requirement-table-div" >
+<!--  <ng-scrollbar>-->
+    <app-requirement-table></app-requirement-table>
+<!--  </ng-scrollbar>-->
 </div>
 
 

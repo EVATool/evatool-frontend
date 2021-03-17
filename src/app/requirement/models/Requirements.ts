@@ -6,7 +6,7 @@ export class Requirements{
   projetid = '';
   requirementTitle = '';
   requirementDescription = '';
-  dimensions!: Set<Dimension>;
+  dimensions!: Dimension[];
   impactDescription!: Map<string, string>;
   requirementImpactPoints!: Map<string, number>;
   variantsTitle!: Map<string, string>;

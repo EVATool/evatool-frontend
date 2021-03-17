@@ -1,22 +1,22 @@
 <div class="example-table-container">
   <table mat-table [dataSource]="tableDatasource" class="example-table table-fixed">
 
-    <ng-container matColumnDef="ID">
+    <ng-container matColumnDef="ID" sticky>
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let element"> {{element.requirementTitle}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Requirements">
+    <ng-container matColumnDef="Requirements" sticky>
       <th mat-header-cell *matHeaderCellDef> Requirement </th>
       <td mat-cell *matCellDef="let element"> {{element.requirementDescription}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Variants">
+    <ng-container matColumnDef="Variants" sticky>
       <th mat-header-cell *matHeaderCellDef> Variant(s) </th>
       <td mat-cell *matCellDef="let element"> {{concatVariants(element)}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="Dimension">
+    <ng-container matColumnDef="Dimension" sticky>
       <th mat-header-cell *matHeaderCellDef> Dimension </th>
       <td mat-cell *matCellDef="let element">{{concatDimension(element)}}</td>
     </ng-container>

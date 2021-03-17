@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [RequirementMainComponent, RequirementsTableComponent],
@@ -26,7 +28,8 @@ import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
       MatInputModule,
       MatIconModule,
       MatButtonModule,
-      KeyboardShortcutsModule.forRoot()
+      KeyboardShortcutsModule.forRoot(),
+      NgScrollbarModule
     ],
   exports: [
     RequirementMainComponent
