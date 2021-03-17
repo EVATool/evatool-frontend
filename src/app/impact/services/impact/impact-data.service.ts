@@ -65,6 +65,10 @@ export class ImpactDataService {
   }
 
   onInit() {
+
+  }
+
+  invalidate() {
     if (this.impacts.length > 0) {
       this.loadedImpacts.emit(this.impacts);
     }
