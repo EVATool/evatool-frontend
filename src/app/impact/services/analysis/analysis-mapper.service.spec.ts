@@ -19,7 +19,7 @@ describe('AnalysisMapperService', () => {
   it('should convert to dto', () => {
     // given
     let analysis = new Analysis();
-    analysis.id = 'string';
+    analysis.id = 'id';
 
     // when
     let analysisDto = AnalysisMapperService.toDto(analysis);
@@ -31,12 +31,12 @@ describe('AnalysisMapperService', () => {
   it('should convert from dto', () => {
     // given
     let analysisDto = new AnalysisDto();
-    analysisDto.id = 'string';
+    analysisDto.id = 'id';
 
     // when
     let analysis = AnalysisMapperService.fromDto(analysisDto);
 
     // then
-    expect(analysisDto.id === analysis.id).toBeTruthy();
+    expect(analysis.id === analysisDto.id).toBeTruthy();
   })
 });
