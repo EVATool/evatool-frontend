@@ -10,21 +10,6 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 export class AnalysisDataService {
   @Output() loadedAnalyses: EventEmitter<Analysis[]> = new EventEmitter();
 
-  dummyAnalysisDtos: AnalysisDto[] = [
-    {
-      id: '1'
-    },
-    {
-      id: '2'
-    },
-    {
-      id: '3'
-    },
-    {
-      id: '4'
-    }
-  ];
-
   analyses: Analysis[] = [];
 
   constructor() {
@@ -34,19 +19,13 @@ export class AnalysisDataService {
   onInit() {
     if (DataLoader.useDummyData) {
       // Load dummy stakeholders.
-      this.dummyAnalysisDtos.forEach(ana => {
+      DataLoader.dummyAnalysisDtos.forEach(ana => {
         this.analyses.push(AnalysisMapperService.fromDto(ana));
       });
       console.log('Analyses loaded.');
       this.loadedAnalyses.emit(this.analyses);
     } else {
 
-    }
-  }
-
-  invalidate() {
-    if (this.analyses.length > 0) {
-      this.loadedAnalyses.emit(this.analyses);
     }
   }
 }

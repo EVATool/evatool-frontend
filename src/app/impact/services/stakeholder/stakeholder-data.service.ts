@@ -11,21 +11,6 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 export class StakeholderDataService {
   @Output() loadedStakeholders: EventEmitter<Stakeholder[]> = new EventEmitter();
 
-  dummyStakeholderDtos: StakeholderDto[] = [
-    {
-      id: '1', name: 'Patient'
-    },
-    {
-      id: '2', name: 'Doctor'
-    },
-    {
-      id: '3', name: 'Family'
-    },
-    {
-      id: '4', name: 'Ensurance'
-    }
-  ];
-
   stakeholders: Stakeholder[] = [];
 
   constructor(private stakeholderRestService: StakeholderRestService) {
@@ -35,19 +20,13 @@ export class StakeholderDataService {
   onInit() {
     if (DataLoader.useDummyData) {
       // Load dummy stakeholders.
-      this.dummyStakeholderDtos.forEach(stk => {
+      DataLoader.dummyStakeholderDtos.forEach(stk => {
         this.stakeholders.push(StakeholderMapperService.fromDto(stk));
       });
       console.log('Stakeholders loaded.');
       this.loadedStakeholders.emit(this.stakeholders);
     } else {
 
-    }
-  }
-
-  invalidate() {
-    if (this.stakeholders.length > 0) {
-      this.loadedStakeholders.emit(this.stakeholders);
     }
   }
 

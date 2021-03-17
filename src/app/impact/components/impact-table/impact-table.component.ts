@@ -110,6 +110,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteImpact(impact: Impact) {
-    this.impactDataService.removeImpact(impact);
+    this.impactDataService.deleteImpact(impact);
   }
 }

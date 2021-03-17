@@ -11,25 +11,9 @@ import { Injectable, EventEmitter, Output } from '@angular/core';
 export class DimensionDataService {
   @Output() loadedDimensions: EventEmitter<Dimension[]> = new EventEmitter();
   @Output() loadedDimensionTypes: EventEmitter<string[]> = new EventEmitter();
-  @Output() insertedDimension: EventEmitter<Dimension> = new EventEmitter();
-  @Output() updatedDimension: EventEmitter<Dimension> = new EventEmitter();
-  @Output() deletedDimension: EventEmitter<Dimension> = new EventEmitter();
-
-  dummyDimensionDtos: DimensionDto[] = [
-    {
-      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
-    },
-    {
-      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL'
-    },
-    {
-      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC'
-    },
-    {
-      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
-    }
-  ];
-  dummyDimensionTypes: string[] = ['SOCIAL', 'ECONOMIC'];
+  @Output() addedDimension: EventEmitter<Dimension> = new EventEmitter();
+  @Output() changedDimension: EventEmitter<Dimension> = new EventEmitter();
+  @Output() removedDimension: EventEmitter<Dimension> = new EventEmitter();
 
   public dimensions: Dimension[] = [];
   public dimensionTypes: string[] = [];
@@ -41,14 +25,14 @@ export class DimensionDataService {
   onInit(): void {
     if (DataLoader.useDummyData) {
       // Load dummy dimensions.
-      this.dummyDimensionDtos.forEach(dim => {
+      DataLoader.dummyDimensionDtos.forEach(dim => {
         this.dimensions.push(DimensionMapperService.fromDto(dim));
       });
       console.log('Dimensions loaded.');
       this.loadedDimensions.emit(this.dimensions);
 
       // Load dummy dimension types.
-      this.dummyDimensionTypes.forEach(dimType => {
+      DataLoader.dummyDimensionTypes.forEach(dimType => {
         this.dimensionTypes.push(dimType);
       });
       console.log('Dimension types loaded.');
@@ -67,12 +51,6 @@ export class DimensionDataService {
         this.dimensionTypes = dimTypes;
       });
       this.loadedDimensionTypes.emit(this.dimensionTypes);
-    }
-  }
-
-  invalidate() {
-    if (this.dimensions.length > 0) {
-      this.loadedDimensions.emit(this.dimensions);
     }
   }
 
