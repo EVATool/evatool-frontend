@@ -30,7 +30,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
           requirementDescription : requirementRest.requirementDescription,
           dimensions : requirementRest.dimensions,
           impactDescription : requirementRest.impactDescription,
-          requirementImpactPoints : requirementRest.requirementImpactPoints,
+          requirementImpactPoints : new Map(Object.entries(requirementRest.requirementImpactPoints)),
           variantsTitle : requirementRest.variantsTitle
         };
         this.requirementsSource.push(requirement);
@@ -84,8 +84,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   checkValue(element: Requirements, impact: Impact): string{
     let value = '';
     const map = new Map(Object.entries(element.requirementImpactPoints));
-    if (map.has(impact.id)){
-      const points: number | undefined = map.get(impact.id);
+    if (element.requirementImpactPoints.has(impact.id)){
+      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
       if (points && 0 < points){
         value = '' + points;
       }else{
@@ -97,8 +97,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   isPositiv(element: Requirements, impact: Impact): boolean {
     const map = new Map(Object.entries(element.requirementImpactPoints));
-    if (map.has(impact.id)){
-      const points: number | undefined = map.get(impact.id);
+    if (element.requirementImpactPoints.has(impact.id)){
+      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
       if (points && 0 < points) {
         return true;
       }
@@ -108,8 +108,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   isNegativ(element: Requirements, impact: Impact): boolean {
     const map = new Map(Object.entries(element.requirementImpactPoints));
-    if (map.has(impact.id)){
-      const points: number | undefined = map.get(impact.id);
+    if (element.requirementImpactPoints.has(impact.id)){
+      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
       if (points && 0 > points) {
         return true;
       }
@@ -119,12 +119,12 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   clickFunction(element: Requirements, impact: Impact): void {
     const map = new Map(Object.entries(element.requirementImpactPoints));
-    if (map.has(impact.id)){
-      map.set(impact.id, 1);
-    } else if (map.get(impact.id) === 1){
-      map.set(impact.id, -1);
+    if (!element.requirementImpactPoints.has(impact.id)){
+      element.requirementImpactPoints.set(impact.id, 1);
+    } else if (element.requirementImpactPoints.get(impact.id) === 1){
+      element.requirementImpactPoints.set(impact.id, -1);
     } else {
-      map.delete(impact.id);
+      element.requirementImpactPoints.delete(impact.id);
     }
   }
 }
