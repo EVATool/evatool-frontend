@@ -1,3 +1,4 @@
+import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
 import { Analysis } from './../../models/Analysis';
 import { Stakeholder } from './../../models/Stakeholder';
 import { Dimension } from './../../models/Dimension';
@@ -21,8 +22,9 @@ export class ImpactMapperService {
     impactDto.value = impact.value;
     impactDto.description = impact.description;
 
-    impactDto.dimension = DimensionMapperService.toDto(impact.dimension);
-    impactDto.stakeholder = StakeholderMapperService.toDto(impact.stakeholder);
+    impactDto.dimensionDto = DimensionMapperService.toDto(impact.dimension);
+    impactDto.stakeholderDto = StakeholderMapperService.toDto(impact.stakeholder);
+    impactDto.analysisDto = AnalysisMapperService.toDto(impact.stakeholder);
 
     return impactDto;
   }
