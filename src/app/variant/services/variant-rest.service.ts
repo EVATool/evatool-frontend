@@ -16,7 +16,7 @@ const httpOptions = { // Outsource!
 })
 export class VariantRestService {
 
-  variantUrl = 'http://localhost:8080/variants'; // Outsource!
+  variantUrl = 'http://79.171.179.211:443/variants'; // Outsource!
 
   constructor(private http: HttpClient) {
 
@@ -26,18 +26,20 @@ export class VariantRestService {
 
   }
 
-
-  save(variant: Variant): void {
-    // call server
-  }
-
-
   getVariants(): Observable<any> {
     return this.http.get<any>(this.variantUrl);
   }
 
+  getVariantsById(id: any): Observable<any> {
+    return this.http.get<any>(this.variantUrl + '/' + id);
+  }
+
   createVariants(variantDTO: VariantDTO): Observable<any> {
     return this.http.post(this.variantUrl, variantDTO, httpOptions);
+  }
+
+  updateVariants(variantDTO: VariantDTO): Observable<any> {
+    return this.http.put(this.variantUrl, variantDTO, httpOptions);
   }
 
   deleteVariants(variant: Variant): Observable<any> {

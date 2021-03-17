@@ -24,3 +24,8 @@
   width: 10vw;
   float: top;
 }
+
+.cdk-overlay-pane{
+  border-radius: 100px;
+}
+

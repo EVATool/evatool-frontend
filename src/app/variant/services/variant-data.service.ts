@@ -12,25 +12,6 @@ import {VariantRestService} from './variant-rest.service';
 export class VariantDataService {
  onCreateVariant: EventEmitter<Variant> = new EventEmitter();
 
- /** dummyVariant: Variant[] = [
-    {
-      id: '0',
-      title: 'title',
-      description: 'This is the first read-only impact',
-
-    },
-    {
-      id: '2',
-      title: 'title0.5',
-      description: 'This is the second read-only impact',
-    },
-    {
-      id: '3',
-      title: 'title0.9',
-      description: 'This is the third read-only impact',
-    }
-  ];
-**/
   variants: Variant[] = [];
 
   constructor( private variantRestService: VariantRestService){
@@ -59,10 +40,10 @@ export class VariantDataService {
     return variant;
   }
 
+
   save(variant: Variant): void{
-    console.log(variant.title);
-    variant.editable = false;
-    this.variantRestService.save(variant);
+    this.variantRestService.createVariants({title: variant.title, description: variant.description,
+      stFlagsReal: false, stFlagsPot: false, subVariant: {}, analysisId: '5cf54163-c47b-4e11-a8c0-262e7c0fce2e'}).subscribe();
   }
 
 }

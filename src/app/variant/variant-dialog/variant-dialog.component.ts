@@ -33,19 +33,17 @@ export class VariantDialogComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = this.formBuilder.group({
-      id: new FormControl(null),
-      title: new FormControl(null),
-      description: new FormControl(null),
-      editable: new FormControl(null)
+      id: new FormControl(null)
     });
 
-    this.variantRestService.getVariants().subscribe((result: any) =>  {
+    this.variantRestService.getVariants().subscribe((result: any) => {
       this.variants = [];
       result.content.forEach((variantDTO: any) => {
         const variant = {
           id: variantDTO.uuid,
           description: variantDTO.description,
-          title: variantDTO.title
+          title: variantDTO.title,
+          analysesId: variantDTO.analysesId
         };
         this.variants.push(variant);
       });
@@ -58,36 +56,13 @@ export class VariantDialogComponent implements OnInit {
     });
   }
 
-  createVariant(): void {
-    const variantDTO = new VariantDTO();
-    variantDTO.criterion = 'criterion new from here';
-    variantDTO.description = 'description new from here';
-    variantDTO.title = 'title new from here';
-    this.variantRestService.createVariants(variantDTO).subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log('Error occured');
-      });;
-  }
-
-  abort(): void {
-    this.dialogRef.close({accept: false});
-  }
-
-  closeModal(): void {
-    this.dialogRef.close({accept: true, form: this.form.value});
-  }
-
   addVariant(): void {
     this.variantDataService.createVariant();
   }
 
   save(variant: Variant): void {
-    // variant.title = this.index.value.title;
-    // variant.description = this.index.value.description;
-
+    variant.editable = false;
     this.variantDataService.save(variant);
   }
+
 }
