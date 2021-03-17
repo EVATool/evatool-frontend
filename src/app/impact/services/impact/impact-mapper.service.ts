@@ -35,21 +35,21 @@ export class ImpactMapperService {
     impact.description = impactDto.description;
 
     dimensions.forEach(dimension => {
-      if (dimension.id === impactDto.dimension.id) {
+      if (dimension.id === impactDto.dimensionDto.id) {
         impact.dimension = dimension;
         return;
       }
     });
 
     stakeholders.forEach(stakeholder => {
-      if (stakeholder.id === impactDto.stakeholder.id) {
+      if (stakeholder.id === impactDto.stakeholderDto.id) {
         impact.stakeholder = stakeholder;
         return;
       }
     });
 
     analyses.forEach(analysis => {
-      if (analysis.id === impactDto.analysis.id) {
+      if (analysis.id === impactDto.analysisDto.id) {
         impact.analysis = analysis;
         return;
       }

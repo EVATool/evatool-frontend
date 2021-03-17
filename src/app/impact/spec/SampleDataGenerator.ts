@@ -1,3 +1,6 @@
+import { StakeholderMapperService } from './../services/stakeholder/stakeholder-mapper.service';
+import { AnalysisMapperService } from './../services/analysis/analysis-mapper.service';
+import { DimensionMapperService } from './../services/dimension/dimension-mapper.service';
 import { Impact } from './../models/Impact';
 import { ImpactDto } from './../dtos/ImpactDto';
 import { StakeholderDto } from './../dtos/StakeholderDto';
@@ -25,9 +28,9 @@ export class SampleDataGenerator {
     impactDto.id = 'id';
     impactDto.value = 0.0;
     impactDto.description = 'description';
-    impactDto.dimension = this.getDummyDimensionDto();
-    impactDto.stakeholder = this.getDummyStakeholderDto();
-    impactDto.analysis = this.getDummyAnalysisDto();
+    impactDto.dimensionDto = this.getDummyDimensionDto();
+    impactDto.stakeholderDto = this.getDummyStakeholderDto();
+    impactDto.analysisDto = this.getDummyAnalysisDto();
     return impactDto;
   }
 
@@ -36,9 +39,9 @@ export class SampleDataGenerator {
     impactDto.id = 'id';
     impactDto.value = 0.0;
     impactDto.description = 'description';
-    impactDto.dimension = dimension;
-    impactDto.stakeholder = stakeholder;
-    impactDto.analysis = analysis;
+    impactDto.dimensionDto = DimensionMapperService.toDto(dimension);
+    impactDto.stakeholderDto = StakeholderMapperService.toDto(stakeholder);
+    impactDto.analysisDto = AnalysisMapperService.toDto(analysis);
     return impactDto;
   }
 

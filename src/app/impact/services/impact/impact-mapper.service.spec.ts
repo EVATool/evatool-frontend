@@ -45,8 +45,8 @@ describe('ImpactMapperService', () => {
     expect(impact.value === impactDto.value).toBeTruthy();
     expect(impact.description === impactDto.description).toBeTruthy();
 
-    expect(impact.dimension.id === impactDto.dimension.id).toBeTruthy();
-    expect(impact.stakeholder.id === impactDto.stakeholder.id).toBeTruthy();
-    expect(impact.analysis.id === impactDto.analysis.id).toBeTruthy();
+    expect(impact.dimension.id === impactDto.dimensionDto.id).toBeTruthy();
+    expect(impact.stakeholder.id === impactDto.stakeholderDto.id).toBeTruthy();
+    expect(impact.analysis.id === impactDto.analysisDto.id).toBeTruthy();
   });
 });
