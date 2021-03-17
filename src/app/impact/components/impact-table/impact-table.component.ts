@@ -8,7 +8,6 @@ import { AfterViewInit, Component, OnInit, ViewChild, Inject, HostListener } fro
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
-import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-impact-table',
@@ -32,6 +31,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   dimensionFilter = new FormControl();
   valueFilter = new FormControl();
   searchToggles = new Map<string, boolean>();
+
+  loaded: Promise<boolean> = Promise.resolve(false);
 
   constructor(
     private impactDataService: ImpactDataService,
