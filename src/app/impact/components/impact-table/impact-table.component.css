@@ -35,8 +35,16 @@ table {
   width: 5% !important;
 }
 
-.mat-column-value {
+.mat-column-stakeholder {
   width: 10% !important;
+}
+
+.mat-column-dimension {
+  width: 10% !important;
+}
+
+.mat-column-value {
+  width: 15% !important;
 }
 
 .mat-column-description {
