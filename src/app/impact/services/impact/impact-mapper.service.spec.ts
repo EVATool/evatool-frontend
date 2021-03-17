@@ -32,11 +32,10 @@ describe('ImpactMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let impactDto = SampleDataGenerator.getDummyImpactDto();
-
     let dimension = SampleDataGenerator.getDummyDimensionDto();
     let stakeholder = SampleDataGenerator.getDummyStakeholderDto();
     let analysis = SampleDataGenerator.getDummyAnalysisDto();
+    let impactDto = SampleDataGenerator.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
 
     // when
     let impact = ImpactMapperService.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
