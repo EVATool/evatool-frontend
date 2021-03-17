@@ -1,3 +1,4 @@
+import { DimensionDto } from './../../dtos/DimensionDto';
 import { DimensionMapperService } from './dimension-mapper.service';
 import { Dimension } from './../../models/Dimension';
 import { DimensionRestService } from './dimension-rest.service';
@@ -13,18 +14,18 @@ export class DimensionDataService {
   @Output() dimensionUpdated: EventEmitter<Dimension> = new EventEmitter();
   @Output() dimensionDeleted: EventEmitter<Dimension> = new EventEmitter();
 
-  dummyDimensionDtos: Dimension[] = [
+  dummyDimensionDtos: DimensionDto[] = [
     {
-      id: '21', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
+      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
     },
     {
-      id: '22', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL'
+      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL'
     },
     {
-      id: '23', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC'
     },
     {
-      id: '24', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
+      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
     }
   ];
   dummyDimensionTypes: string[] = ['SOCIAL', 'ECONOMIC'];
@@ -35,7 +36,7 @@ export class DimensionDataService {
   constructor(private dimensionRestService: DimensionRestService) {
     // Load dummy dimensions.
     this.dummyDimensionDtos.forEach(dim => {
-      this.dimensions.push(DimensionMapperService.toDto(dim));
+      this.dimensions.push(DimensionMapperService.fromDto(dim));
     });
     this.dimensionsLoaded.emit(this.dimensions);
 
@@ -50,7 +51,7 @@ export class DimensionDataService {
     // Load dimensions.
     this.dimensionRestService.getDimensions().subscribe(dims => {
       dims.forEach(dim => {
-        this.dimensions.push(DimensionMapperService.toDto(dim));
+        this.dimensions.push(DimensionMapperService.fromDto(dim));
       });
       this.dimensionsLoaded.emit(this.dimensions);
     });

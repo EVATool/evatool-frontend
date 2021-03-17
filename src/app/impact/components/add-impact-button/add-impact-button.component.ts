@@ -1,3 +1,5 @@
+import { ImpactDataService } from './../../services/impact/impact-data.service';
+import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,7 +10,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class AddImpactButtonComponent implements OnInit {
   @Output() addButtonClick = new EventEmitter<void>();
 
-  constructor() {
+  constructor(private impactDataService: ImpactDataService) {
 
   }
 

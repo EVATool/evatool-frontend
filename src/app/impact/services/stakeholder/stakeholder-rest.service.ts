@@ -14,7 +14,7 @@ const httpOptions = { // Outsource!
 })
 export class StakeholderRestService {
 
-  stakeholdersUrl = '/api/dimensions'; // Outsource!
+  stakeholdersUrl = '/api/stakeholders'; // Outsource!
 
   constructor(private http: HttpClient) {
 

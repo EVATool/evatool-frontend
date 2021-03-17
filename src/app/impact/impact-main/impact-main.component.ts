@@ -33,7 +33,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     // TODO Remove filter that hide newly created impact? Set default values to match filters?
     // TODO Highlight newly create row.
     this.impactDataService.addImpact();
-    const options = { bottom: -50, duration: 250 }; // Why does the method require -50 and does not scroll to bottom with 0?
+    const options = { bottom: -100, duration: 250 }; // Why does the method require -50 and does not scroll to bottom with 0?
     this.scrollbarRef.scrollTo(options);
 
     // Test debug

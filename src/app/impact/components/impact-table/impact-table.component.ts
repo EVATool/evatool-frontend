@@ -22,7 +22,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   tableDataSource!: MatTableDataSource<Impact>;
 
   // Data arrays from services.
-  impacts: Impact[] = [];
   dimensions: Dimension[] = [];
   dimensionTypes: string[] = [];
   stakeholders: Stakeholder[] = [];
@@ -37,30 +36,31 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     private impactDataService: ImpactDataService,
     private dimensionDataService: DimensionDataService,
     private stakeholderDataService: StakeholderDataService) {
-    this.impacts = this.impactDataService.getImpacts();
 
-    this.stakeholders = this.stakeholderDataService.getStakeholders();
-    this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
+    // Listen for changes in data.
+    this.impactDataService.loadedImpacts.subscribe(impacts => {
+      this.tableDataSource = new MatTableDataSource<Impact>(impacts);
+      this.initSorting();
+      this.initFiltering();
+    });
+
+    this.impactDataService.changedImpacts.subscribe(impacts => {
+      //this.tableDataSource.data = impacts;
+      this.tableDataSource = new MatTableDataSource<Impact>(impacts);
+      this.initSorting();
+      this.initFiltering();
+    });
+
+    // Initially, due to timing, fire loadedImpacts event manually.
+    this.impactDataService.invalidate();
   }
 
   ngOnInit(): void {
-    // Listen for changes in data.
-    this.impactDataService.loadedImpacts.subscribe(_ => {
-      this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
-    });
 
-    this.impactDataService.createImpact.subscribe(_ => {
-      this.tableDataSource.data = this.impacts;
-    });
-
-    this.impactDataService.deleteImpact.subscribe(_ => {
-      this.tableDataSource.data = this.impacts;
-    });
   }
 
   ngAfterViewInit(): void {
-    this.initSorting();
-    this.initFiltering();
+
   }
 
   private initSorting(): void {
