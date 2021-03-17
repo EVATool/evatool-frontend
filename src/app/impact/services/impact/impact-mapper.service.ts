@@ -12,7 +12,6 @@ import { Injectable } from '@angular/core';
 export class ImpactMapperService {
 
   constructor() { }
-
   
   static toDto(impact: Impact): ImpactDto {
     let impactDto = new ImpactDto();
