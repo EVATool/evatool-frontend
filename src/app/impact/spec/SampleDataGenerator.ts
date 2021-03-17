@@ -31,6 +31,17 @@ export class SampleDataGenerator {
     return impactDto;
   }
 
+  static getDummyImpactDtoWithMyChildren(dimension: Dimension, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
+    let impactDto = new ImpactDto();
+    impactDto.id = 'id';
+    impactDto.value = 0.0;
+    impactDto.description = 'description';
+    impactDto.dimension = dimension;
+    impactDto.stakeholder = stakeholder;
+    impactDto.analysis = analysis;
+    return impactDto;
+  }
+
   static getDummyDimension(): Dimension {
     let dimension = new Dimension();
     dimension.id = 'dimensionId';

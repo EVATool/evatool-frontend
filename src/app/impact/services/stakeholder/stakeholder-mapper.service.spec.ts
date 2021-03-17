@@ -1,7 +1,5 @@
-import { StakeholderDto } from './../../dtos/StakeholderDto';
-import { Stakeholder } from './../../models/Stakeholder';
+import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
 import { TestBed } from '@angular/core/testing';
-
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 
 describe('StakeholderMapperService', () => {
@@ -18,9 +16,7 @@ describe('StakeholderMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    let stakeholder = new Stakeholder();
-    stakeholder.id = 'id';
-    stakeholder.name = 'name';
+    let stakeholder = SampleDataGenerator.getDummyStakeholder();
 
     // when
     let stakeholderDto = StakeholderMapperService.toDto(stakeholder);
@@ -32,9 +28,7 @@ describe('StakeholderMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let stakeholderDto = new StakeholderDto();
-    stakeholderDto.id = 'id';
-    stakeholderDto.name = 'name';
+    let stakeholderDto = SampleDataGenerator.getDummyStakeholderDto();
 
     // when
     let stakeholder = StakeholderMapperService.fromDto(stakeholderDto);

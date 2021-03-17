@@ -1,7 +1,5 @@
-import { AnalysisDto } from './../../dtos/AnalysisDto';
-import { Analysis } from './../../models/Analysis';
+import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
 import { TestBed } from '@angular/core/testing';
-
 import { AnalysisMapperService } from './analysis-mapper.service';
 
 describe('AnalysisMapperService', () => {
@@ -18,8 +16,7 @@ describe('AnalysisMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    let analysis = new Analysis();
-    analysis.id = 'id';
+    let analysis = SampleDataGenerator.getDummyAnalysis();
 
     // when
     let analysisDto = AnalysisMapperService.toDto(analysis);
@@ -30,8 +27,7 @@ describe('AnalysisMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let analysisDto = new AnalysisDto();
-    analysisDto.id = 'id';
+    let analysisDto = SampleDataGenerator.getDummyAnalysisDto();
 
     // when
     let analysis = AnalysisMapperService.fromDto(analysisDto);

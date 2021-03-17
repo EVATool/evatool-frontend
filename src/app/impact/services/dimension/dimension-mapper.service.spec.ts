@@ -1,7 +1,5 @@
-import { DimensionDto } from './../../dtos/DimensionDto';
-import { Dimension } from './../../models/Dimension';
+import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
 import { TestBed } from '@angular/core/testing';
-
 import { DimensionMapperService } from './dimension-mapper.service';
 
 describe('DimensionMapperService', () => {
@@ -18,11 +16,7 @@ describe('DimensionMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    let dimension = new Dimension();
-    dimension.id = 'id';
-    dimension.name = 'name';
-    dimension.type = 'type';
-    dimension.description = 'description';
+    let dimension = SampleDataGenerator.getDummyDimension();
 
     // when
     let dimensionDto = DimensionMapperService.toDto(dimension);
@@ -36,11 +30,7 @@ describe('DimensionMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let dimensionDto = new DimensionDto();
-    dimensionDto.id = 'id';
-    dimensionDto.name = 'name';
-    dimensionDto.type = 'type';
-    dimensionDto.description = 'description';
+    let dimensionDto =SampleDataGenerator.getDummyDimensionDto();
 
     // when
     let dimension = DimensionMapperService.fromDto(dimensionDto);

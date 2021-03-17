@@ -1,14 +1,9 @@
+import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
 import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
 import { StakeholderMapperService } from './../stakeholder/stakeholder-mapper.service';
 import { DimensionMapperService } from './../dimension/dimension-mapper.service';
-import { ImpactDto } from './../../dtos/ImpactDto';
-import { Impact } from './../../models/Impact';
 import { TestBed } from '@angular/core/testing';
-
 import { ImpactMapperService } from './impact-mapper.service';
-import { Dimension } from '../../models/Dimension';
-import { Stakeholder } from '../../models/Stakeholder';
-import { Analysis } from '../../models/Analysis';
 
 describe('ImpactMapperService', () => {
   let service: ImpactMapperService;
@@ -24,13 +19,7 @@ describe('ImpactMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    let impact = new Impact();
-    impact.id = 'id';
-    impact.value = 0.0;
-    impact.description = 'description';
-    impact.dimension = new Dimension();
-    impact.stakeholder = new Stakeholder();
-    impact.analysis = new Analysis();
+    let impact = SampleDataGenerator.getDummyImpact();
 
     // when
     let impactDto = ImpactMapperService.toDto(impact);
@@ -43,22 +32,11 @@ describe('ImpactMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let impactDto = new ImpactDto();
-    impactDto.id = 'id';
-    impactDto.value = 0.0;
-    impactDto.description = 'description';
+    let impactDto = SampleDataGenerator.getDummyImpactDto();
 
-    let dimension = new Dimension();
-    dimension.id = "dimensionId"; 
-    impactDto.dimension = DimensionMapperService.toDto(dimension);
-
-    let stakeholder = new Stakeholder();
-    stakeholder.id = "stakeholderId"; 
-    impactDto.stakeholder = StakeholderMapperService.toDto(stakeholder);
-
-    let analysis = new Dimension();
-    analysis.id = "analysisId"; 
-    impactDto.analysis = AnalysisMapperService.toDto(analysis);
+    let dimension = SampleDataGenerator.getDummyDimensionDto();
+    let stakeholder = SampleDataGenerator.getDummyStakeholderDto();
+    let analysis = SampleDataGenerator.getDummyAnalysisDto();
 
     // when
     let impact = ImpactMapperService.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
