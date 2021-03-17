@@ -39,19 +39,35 @@ export class DimensionDataService {
   }
 
   onInit(): void {
-    // Load dimensions.
-    this.dimensionRestService.getDimensions().subscribe(dims => {
-      dims.forEach(dim => {
+    if (DataLoader.useDummyData) {
+      // Load dummy dimensions.
+      this.dummyDimensionDtos.forEach(dim => {
         this.dimensions.push(DimensionMapperService.fromDto(dim));
       });
+      console.log('Dimensions loaded.');
       this.loadedDimensions.emit(this.dimensions);
-    });
 
-    // Load dimension types.
-    this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
-      this.dimensionTypes = dimTypes;
-    });
-    this.loadedDimensionTypes.emit(this.dimensionTypes);
+      // Load dummy dimension types.
+      this.dummyDimensionTypes.forEach(dimType => {
+        this.dimensionTypes.push(dimType);
+      });
+      this.loadedDimensionTypes.emit(this.dimensionTypes);
+    } else {
+      // Load dimensions.
+      this.dimensionRestService.getDimensions().subscribe(dims => {
+        dims.forEach(dim => {
+          this.dimensions.push(DimensionMapperService.fromDto(dim));
+        });
+        this.loadedDimensions.emit(this.dimensions);
+      });
+
+      // Load dimension types.
+      this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
+        this.dimensionTypes = dimTypes;
+      });
+      this.loadedDimensionTypes.emit(this.dimensionTypes);
+    }
+
   }
 
   invalidate() {
