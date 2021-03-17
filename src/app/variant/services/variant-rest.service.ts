@@ -17,7 +17,7 @@ const httpOptions = { // Outsource!
 })
 export class VariantRestService {
 
-  variantUrl = 'http://localhost:8080/variants'; // Outsource!
+  variantUrl = 'http://79.171.179.211:443/variants'; // Outsource!
 
   constructor(private http: HttpClient) {
 

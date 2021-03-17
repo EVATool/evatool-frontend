@@ -64,4 +64,5 @@ export class VariantDialogComponent implements OnInit {
     variant.editable = false;
     this.variantDataService.save(variant);
   }
+
 }

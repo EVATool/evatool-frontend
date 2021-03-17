@@ -5,6 +5,6 @@ export class VariantDTO {
   stFlagsPot: any = false;
   stFlagsReal: any = false;
   subVariant: any = {};
-  analysesId: any = '';
+  analysisId: any = '';
 
 }

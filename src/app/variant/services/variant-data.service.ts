@@ -43,7 +43,7 @@ export class VariantDataService {
 
   save(variant: Variant): void{
     this.variantRestService.createVariants({title: variant.title, description: variant.description,
-      stFlagsReal: false, stFlagsPot: false, subVariant: {}, analysesId: ''}).subscribe();
+      stFlagsReal: false, stFlagsPot: false, subVariant: {}, analysisId: '5cf54163-c47b-4e11-a8c0-262e7c0fce2e'}).subscribe();
   }
 
 }
