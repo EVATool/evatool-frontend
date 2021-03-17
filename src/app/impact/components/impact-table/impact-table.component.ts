@@ -21,11 +21,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
-  // Data arrays from services.
-  dimensions: Dimension[] = [];
-  dimensionTypes: string[] = [];
-  stakeholders: Stakeholder[] = [];
-
   // Filter components in UI.
   stakeholderFilter = new FormControl();
   dimensionFilter = new FormControl();
@@ -35,7 +30,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   loaded: Promise<boolean> = Promise.resolve(false);
 
   constructor(
-    private impactDataService: ImpactDataService,
+    public impactDataService: ImpactDataService,
     private dimensionDataService: DimensionDataService,
     private stakeholderDataService: StakeholderDataService) {
   }
@@ -46,8 +41,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
-      this.stakeholders = this.stakeholderDataService.stakeholders;
-
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
       this.initSorting();
       this.initFiltering();

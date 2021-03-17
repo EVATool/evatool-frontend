@@ -1,3 +1,6 @@
+import { Analysis } from './../../models/Analysis';
+import { Dimension } from './../../models/Dimension';
+import { Stakeholder } from './../../models/Stakeholder';
 import { ImpactDto } from './../../dtos/ImpactDto';
 import { ImpactMapperService } from './impact-mapper.service';
 import { AnalysisDataService } from './../analysis/analysis-data.service';
@@ -16,52 +19,70 @@ export class ImpactDataService {
   @Output() deleteImpact: EventEmitter<Impact> = new EventEmitter();
   @Output() changedImpacts: EventEmitter<Impact[]> = new EventEmitter();
 
-  dummyImpactDtos: ImpactDto[] = [
+  dummyImpactDtos: any[] = [
     {
       id: '1',
       value: -0.3,
       description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
-      dimensionDto: { id: '21', name: 'Feelings', description: 'Feelings of Patient ', type: 'SOCIAL' },
-      stakeholderDto: { id: '11', name: 'Patient' },
-      analysisDto: { id: '7' }
+      dimensionDto: { id: '1' },
+      stakeholderDto: { id: '1' },
+      analysisDto: { id: '1' }
     },
     {
       id: '2',
       value: 0.5,
       description: 'This is the second read-only impact',
-      dimensionDto: { id: '22', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL' },
-      stakeholderDto: { id: '12', name: 'Doctor' },
-      analysisDto: { id: '7' }
+      dimensionDto: { id: '4' },
+      stakeholderDto: { id: '1' },
+      analysisDto: { id: '1' }
     },
     {
       id: '3',
       value: 0.9,
       description: 'This is the third read-only impact',
-      dimensionDto: { id: '23', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC' },
-      stakeholderDto: { id: '13', name: 'Family' },
-      analysisDto: { id: '7' }
+      dimensionDto: { id: '2' },
+      stakeholderDto: { id: '4' },
+      analysisDto: { id: '1' }
     },
     {
       id: '4',
       value: 0.2,
       description: 'This is the fourth read-only impact',
-      dimensionDto: { id: '24', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL' },
-      stakeholderDto: { id: '14', name: 'Ensurance' },
-      analysisDto: { id: '7' }
+      dimensionDto: { id: '2' },
+      stakeholderDto: { id: '3' },
+      analysisDto: { id: '1' }
     }
   ];
 
   impacts: Impact[] = [];
 
+  stakeholders: Stakeholder[] = [];
+  dimensions: Dimension[] = [];
+  analyses: Analysis[] = [];
+
   constructor(
     private stakeholderDataService: StakeholderDataService,
     private dimensionDataService: DimensionDataService,
     private analysisDataService: AnalysisDataService) {
-    // Load dummy dimensions.
-    this.dummyImpactDtos.forEach(imp => {
-      this.impacts.push(ImpactMapperService.fromDto(imp, [], [], []));
+
+    this.stakeholderDataService.stakeholdersLoaded.subscribe(stakeholders => {
+      this.stakeholders = stakeholders;
+      this.fireIfChildrenAreLoaded();
     });
-    this.loadedImpacts.emit(this.impacts);
+
+    this.dimensionDataService.dimensionsLoaded.subscribe(dimensions => {
+      this.dimensions = dimensions;
+      this.fireIfChildrenAreLoaded();
+    });
+
+    this.analysisDataService.analysesLoaded.subscribe(analyses => {
+      this.analyses = analyses;
+      this.fireIfChildrenAreLoaded();
+    });
+
+    stakeholderDataService.invalidate();
+    dimensionDataService.invalidate();
+    analysisDataService.invalidate();
   }
 
   onInit() {
@@ -70,6 +91,21 @@ export class ImpactDataService {
 
   invalidate() {
     if (this.impacts.length > 0) {
+      this.loadedImpacts.emit(this.impacts);
+    }
+  }
+
+  getChildrenLoaded(): boolean {
+    return this.stakeholders.length > 0 && this.analyses.length > 0 && this.dimensions.length > 0;
+  }
+
+  fireIfChildrenAreLoaded() {
+    if (this.getChildrenLoaded()) {
+      // Load dummy dimensions.
+      this.dummyImpactDtos.forEach(imp => {
+        this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+      });
+      console.log('Impacts loaded.');
       this.loadedImpacts.emit(this.impacts);
     }
   }

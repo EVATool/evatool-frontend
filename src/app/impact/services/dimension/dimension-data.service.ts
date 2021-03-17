@@ -38,6 +38,7 @@ export class DimensionDataService {
     this.dummyDimensionDtos.forEach(dim => {
       this.dimensions.push(DimensionMapperService.fromDto(dim));
     });
+    console.log('Dimensions loaded.');
     this.dimensionsLoaded.emit(this.dimensions);
 
     // Load dummy dimension types.
@@ -61,6 +62,12 @@ export class DimensionDataService {
       this.dimensionTypes = dimTypes;
     });
     this.dimensionTypesLoaded.emit(this.dimensionTypes);
+  }
+
+  invalidate() {
+    if (this.dimensions.length > 0) {
+      this.dimensionsLoaded.emit(this.dimensions);
+    }
   }
 
   getDefaultDimension(): Dimension {
