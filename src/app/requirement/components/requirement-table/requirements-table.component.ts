@@ -14,15 +14,15 @@ import {RequirementsRestService} from '../../services/requirements/requirements-
 })
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[];
+  displayedColumns: string[] = [];
   requirementsSource: Requirements[] = [];
-  impactSoureces: Impact[];
+  impactSoureces: Impact[] = [];
   tableDatasource: MatTableDataSource<Requirements>;
   constructor(private datagenerator: Datagenerator,
               private requirementsRestService: RequirementsRestService) {
     this.requirementsRestService.getRequirements().subscribe((result: any) => {
       this.requirementsSource = [];
-      result.forEach((requirementRest: any) => {
+      result.forEach((requirementRest: Requirements) => {
         const requirement: Requirements = {
           rootid : requirementRest.rootEntityId,
           projetid : requirementRest.projectID,
@@ -37,12 +37,24 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       });
       this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
     });
+    this.requirementsRestService.getImpacts().subscribe((result: any) => {
+      this.impactSoureces = [];
+      result.forEach((impactRest: Impact) => {
+        const impact: Impact = {
+          id: impactRest.id,
+          description: impactRest.description,
+          value: impactRest.value,
+          dimension: impactRest.dimension
+        };
+        this.impactSoureces.push(impact);
+      });
+      let impactIdList: string[] = [];
+      this.impactSoureces.forEach(value => impactIdList = impactIdList.concat(value.id));
+      this.displayedColumns = ['ID', 'Requirements', 'Variants', 'Dimension'];
+      this.displayedColumns = this.displayedColumns.concat(impactIdList);
+    });
     // this.requirementsSource = datagenerator.getRequirements();
-    this.impactSoureces = datagenerator.getImpacts();
-    let impactIdList: string[] = [];
-    this.impactSoureces.forEach(value => impactIdList = impactIdList.concat(value.id));
-    this.displayedColumns = ['ID', 'Requirements', 'Variants', 'Dimension'];
-    this.displayedColumns = this.displayedColumns.concat(impactIdList);
+    // this.impactSoureces = datagenerator.getImpacts();
     this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
   }
 
@@ -71,8 +83,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   checkValue(element: Requirements, impact: Impact): string{
     let value = '';
-    if (element.requirementImpactPoints.has(impact.id)){
-      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+    const map = new Map(Object.entries(element.requirementImpactPoints));
+    if (map.has(impact.id)){
+      const points: number | undefined = map.get(impact.id);
       if (points && 0 < points){
         value = '' + points;
       }else{
@@ -83,8 +96,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   isPositiv(element: Requirements, impact: Impact): boolean {
-    if (element.requirementImpactPoints.has(impact.id)){
-      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+    const map = new Map(Object.entries(element.requirementImpactPoints));
+    if (map.has(impact.id)){
+      const points: number | undefined = map.get(impact.id);
       if (points && 0 < points) {
         return true;
       }
@@ -93,8 +107,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   isNegativ(element: Requirements, impact: Impact): boolean {
-    if (element.requirementImpactPoints.has(impact.id)){
-      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+    const map = new Map(Object.entries(element.requirementImpactPoints));
+    if (map.has(impact.id)){
+      const points: number | undefined = map.get(impact.id);
       if (points && 0 > points) {
         return true;
       }
@@ -103,12 +118,13 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   clickFunction(element: Requirements, impact: Impact): void {
-    if (element.requirementImpactPoints.has(impact.id)){
-      element.requirementImpactPoints.set(impact.id, 1);
-    } else if (element.requirementImpactPoints.get(impact.id) === 1){
-      element.requirementImpactPoints.set(impact.id, -1);
+    const map = new Map(Object.entries(element.requirementImpactPoints));
+    if (map.has(impact.id)){
+      map.set(impact.id, 1);
+    } else if (map.get(impact.id) === 1){
+      map.set(impact.id, -1);
     } else {
-      element.requirementImpactPoints.delete(impact.id);
+      map.delete(impact.id);
     }
   }
 }

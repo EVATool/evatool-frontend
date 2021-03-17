@@ -22,7 +22,7 @@
     </ng-container>
 
     <ng-container *ngFor = "let impact of impactSoureces" matColumnDef="{{impact.id}}">
-      <th mat-header-cell *matHeaderCellDef [width]="50" style="min-width: 50px;">{{impact.id}}</th>
+      <th mat-header-cell *matHeaderCellDef [width]="50" style="min-width: 50px;">{{impact.description}}</th>
       <td mat-cell  *matCellDef="let element"
           [ngClass]="{'positiv' : isPositiv(element,impact),'negativ' : isNegativ(element,impact)}"
           (dblclick)="clickFunction(element,impact)">{{checkValue(element,impact)}}</td>
