@@ -1,16 +1,19 @@
+import { DimensionMapperService } from './dimension-mapper.service';
 import { Dimension } from './../../models/Dimension';
 import { DimensionRestService } from './dimension-rest.service';
 import { Injectable, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DimensionDataService {
-  @Output() dimensionsLoaded: EventEmitter<void> = new EventEmitter();
-  @Output() dimensionTypesLoaded: EventEmitter<void> = new EventEmitter();
+  @Output() dimensionsLoaded: EventEmitter<Dimension[]> = new EventEmitter();
+  @Output() dimensionTypesLoaded: EventEmitter<string[]> = new EventEmitter();
+  @Output() dimensionInserted: EventEmitter<Dimension> = new EventEmitter();
+  @Output() dimensionUpdated: EventEmitter<Dimension> = new EventEmitter();
+  @Output() dimensionDeleted: EventEmitter<Dimension> = new EventEmitter();
 
-  dummyDimensions: Dimension[] = [
+  dummyDimensionDtos: Dimension[] = [
     {
       id: '21', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
     },
@@ -24,40 +27,43 @@ export class DimensionDataService {
       id: '24', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
     }
   ];
-
   dummyDimensionTypes: string[] = ['SOCIAL', 'ECONOMIC'];
 
-  public dimensions: Dimension[] = this.dummyDimensions;
-  public dimensionTypes: string[] = this.dummyDimensionTypes;
+  public dimensions: Dimension[] = [];
+  public dimensionTypes: string[] = [];
 
-  constructor(private restService: DimensionRestService) {
+  constructor(private dimensionRestService: DimensionRestService) {
+    // Load dummy dimensions.
+    this.dummyDimensionDtos.forEach(dim => {
+      this.dimensions.push(DimensionMapperService.toDto(dim));
+    });
+    this.dimensionsLoaded.emit(this.dimensions);
 
+    // Load dummy dimension types.
+    this.dummyDimensionTypes.forEach(dimType => {
+      this.dimensionTypes.push(dimType);
+    });
+    this.dimensionTypesLoaded.emit(this.dimensionTypes);
   }
 
   onInit(): void {
     // Load dimensions.
-    this.restService.getDimensions().subscribe(dims => {
-      this.dimensions = dims;
-      this.dimensionsLoaded.emit();
+    this.dimensionRestService.getDimensions().subscribe(dims => {
+      dims.forEach(dim => {
+        this.dimensions.push(DimensionMapperService.toDto(dim));
+      });
+      this.dimensionsLoaded.emit(this.dimensions);
     });
 
     // Load dimension types.
-    this.restService.getDimensionTypes().subscribe(dimTypes => {
+    this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
       this.dimensionTypes = dimTypes;
-      this.dimensionTypesLoaded.emit();
     });
-  }
-
-  getDimensions(): Dimension[] {
-    return this.dimensions;
+    this.dimensionTypesLoaded.emit(this.dimensionTypes);
   }
 
   getDefaultDimension(): Dimension {
     return this.dimensions[0];
-  }
-
-  getDimensionTypes(): string[] {
-    return this.dimensionTypes;
   }
 
   getDefaultDimensionType(): string {
@@ -65,20 +71,20 @@ export class DimensionDataService {
   }
 
   createDimension(dimension: Dimension): void {
-    this.restService.createDimension(dimension).subscribe(dim => {
+    this.dimensionRestService.createDimension(dimension).subscribe(dim => {
       this.dimensions.push(dim);
     });
   }
 
   updateDimension(dimension: Dimension): void {
-    this.restService.updateDimension(dimension).subscribe(dim => {
+    this.dimensionRestService.updateDimension(dimension).subscribe(dim => {
       const index: number = this.dimensions.indexOf(dimension, 0);
       this.dimensions[index] = dim;
     });
   }
 
   deleteDimension(dimension: Dimension): void {
-    this.restService.deleteDimension(dimension).subscribe(() => {
+    this.dimensionRestService.deleteDimension(dimension).subscribe(() => {
       const index: number = this.dimensions.indexOf(dimension, 0);
       this.dimensions.splice(index, 1);
     });

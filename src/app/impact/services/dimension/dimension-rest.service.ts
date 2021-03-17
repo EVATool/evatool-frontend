@@ -1,4 +1,4 @@
-import { Dimension } from './../../models/Dimension';
+import { DimensionDto } from './../../dtos/DimensionDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
@@ -25,23 +25,23 @@ export class DimensionRestService {
 
   }
 
-  getDimensions(): Observable<Dimension[]> {
-    return this.http.get<Dimension[]>(this.dimensionsUrl);
+  getDimensions(): Observable<DimensionDto[]> {
+    return this.http.get<DimensionDto[]>(this.dimensionsUrl);
   }
 
   getDimensionTypes(): Observable<string[]> {
     return this.http.get<string[]>(this.dimensionsUrl + '/types');
   }
 
-  createDimension(dimension: Dimension): Observable<any> {
-    return this.http.post(this.dimensionsUrl, dimension, httpOptions);
+  createDimension(dimensionDto: DimensionDto): Observable<any> {
+    return this.http.post(this.dimensionsUrl, dimensionDto, httpOptions);
   }
 
-  updateDimension(dimension: Dimension): Observable<any> {
-    return this.http.put(this.dimensionsUrl, dimension, httpOptions);
+  updateDimension(dimensionDto: DimensionDto): Observable<any> {
+    return this.http.put(this.dimensionsUrl, dimensionDto, httpOptions);
   }
 
-  deleteDimension(dimension: Dimension): Observable<any> {
-    return this.http.delete(this.dimensionsUrl + '/' + dimension.id);
+  deleteDimension(dimensionDto: DimensionDto): Observable<any> {
+    return this.http.delete(this.dimensionsUrl + '/' + dimensionDto.id);
   }
 }

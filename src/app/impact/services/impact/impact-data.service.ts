@@ -53,8 +53,8 @@ export class ImpactDataService {
     private stakeholderDataService: StakeholderDataService,
     private dimensionDataService: DimensionDataService) {
     for (const impact of this.impacts) {
-      impact.stakeholder = this.stakeholderDataService.getStakeholders()[Math.floor(Math.random() * Math.floor(4))];
-      impact.dimension = this.dimensionDataService.getDimensions()[Math.floor(Math.random() * Math.floor(4))];
+      //impact.stakeholder = this.stakeholderDataService.getStakeholders()[Math.floor(Math.random() * Math.floor(4))];
+      //impact.dimension = this.dimensionDataService.getDimensions()[Math.floor(Math.random() * Math.floor(4))];
     }
     this.loadedImpacts.emit();
   }

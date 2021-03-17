@@ -38,8 +38,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     private dimensionDataService: DimensionDataService,
     private stakeholderDataService: StakeholderDataService) {
     this.impacts = this.impactDataService.getImpacts();
-    this.dimensions = this.dimensionDataService.getDimensions();
-    this.dimensionTypes = this.dimensionDataService.getDimensionTypes();
+
     this.stakeholders = this.stakeholderDataService.getStakeholders();
     this.tableDataSource = new MatTableDataSource<Impact>(this.impacts);
   }
