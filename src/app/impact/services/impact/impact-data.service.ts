@@ -57,8 +57,11 @@ export class ImpactDataService {
   impacts: Impact[] = [];
 
   stakeholders: Stakeholder[] = [];
+  stakeholdersLoaded = false;
   dimensions: Dimension[] = [];
+  dimensionsLoaded = false;
   analyses: Analysis[] = [];
+  analysesLoaded = false;
 
   constructor(
     private stakeholderDataService: StakeholderDataService,
@@ -67,16 +70,19 @@ export class ImpactDataService {
 
     this.stakeholderDataService.loadedStakeholders.subscribe(stakeholders => {
       this.stakeholders = stakeholders;
+      this.stakeholdersLoaded = true;
       this.fireIfChildrenAreLoaded();
     });
 
     this.dimensionDataService.loadedDimensions.subscribe(dimensions => {
       this.dimensions = dimensions;
+      this.dimensionsLoaded = true;
       this.fireIfChildrenAreLoaded();
     });
 
     this.analysisDataService.loadedAnalyses.subscribe(analyses => {
       this.analyses = analyses;
+      this.analysesLoaded = true;
       this.fireIfChildrenAreLoaded();
     });
 
@@ -96,7 +102,7 @@ export class ImpactDataService {
   }
 
   getChildrenLoaded(): boolean {
-    return this.stakeholders.length > 0 && this.analyses.length > 0 && this.dimensions.length > 0;
+    return this.stakeholdersLoaded && this.dimensionsLoaded && this.analysesLoaded;
   }
 
   fireIfChildrenAreLoaded() {
