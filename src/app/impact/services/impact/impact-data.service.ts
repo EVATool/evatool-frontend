@@ -1,7 +1,5 @@
 import { DimensionDataService } from './../dimension/dimension-data.service';
-import { Stakeholder } from './../../models/Stakeholder';
 import { StakeholderDataService } from './../stakeholder/stakeholder-data.service';
-import { Analysis } from './../../models/Analysis';
 import { Impact } from './../../models/Impact';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 
