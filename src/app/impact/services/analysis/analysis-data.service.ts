@@ -7,7 +7,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class AnalysisDataService {
-  @Output() analysesLoaded: EventEmitter<Analysis[]> = new EventEmitter();
+  @Output() loadedAnalyses: EventEmitter<Analysis[]> = new EventEmitter();
 
   dummyAnalysisDtos: AnalysisDto[] = [
     {
@@ -32,7 +32,7 @@ export class AnalysisDataService {
       this.analyses.push(AnalysisMapperService.fromDto(ana));
     });
     console.log('Analyses loaded.');
-    this.analysesLoaded.emit(this.analyses);
+    this.loadedAnalyses.emit(this.analyses);
   }
 
   onInit() {
@@ -41,7 +41,7 @@ export class AnalysisDataService {
 
   invalidate() {
     if (this.analyses.length > 0) {
-      this.analysesLoaded.emit(this.analyses);
+      this.loadedAnalyses.emit(this.analyses);
     }
   }
 }

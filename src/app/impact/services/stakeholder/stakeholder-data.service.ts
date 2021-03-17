@@ -8,7 +8,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class StakeholderDataService {
-  @Output() stakeholdersLoaded: EventEmitter<Stakeholder[]> = new EventEmitter();
+  @Output() loadedStakeholders: EventEmitter<Stakeholder[]> = new EventEmitter();
 
   dummyStakeholderDtos: StakeholderDto[] = [
     {
@@ -33,7 +33,7 @@ export class StakeholderDataService {
       this.stakeholders.push(StakeholderMapperService.fromDto(stk));
     });
     console.log('Stakeholders loaded.');
-    this.stakeholdersLoaded.emit(this.stakeholders);
+    this.loadedStakeholders.emit(this.stakeholders);
   }
 
   onInit() {
@@ -42,7 +42,7 @@ export class StakeholderDataService {
 
   invalidate() {
     if (this.stakeholders.length > 0) {
-      this.stakeholdersLoaded.emit(this.stakeholders);
+      this.loadedStakeholders.emit(this.stakeholders);
     }
   }
 

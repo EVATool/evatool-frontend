@@ -65,17 +65,17 @@ export class ImpactDataService {
     private dimensionDataService: DimensionDataService,
     private analysisDataService: AnalysisDataService) {
 
-    this.stakeholderDataService.stakeholdersLoaded.subscribe(stakeholders => {
+    this.stakeholderDataService.loadedStakeholders.subscribe(stakeholders => {
       this.stakeholders = stakeholders;
       this.fireIfChildrenAreLoaded();
     });
 
-    this.dimensionDataService.dimensionsLoaded.subscribe(dimensions => {
+    this.dimensionDataService.loadedDimensions.subscribe(dimensions => {
       this.dimensions = dimensions;
       this.fireIfChildrenAreLoaded();
     });
 
-    this.analysisDataService.analysesLoaded.subscribe(analyses => {
+    this.analysisDataService.loadedAnalyses.subscribe(analyses => {
       this.analyses = analyses;
       this.fireIfChildrenAreLoaded();
     });
