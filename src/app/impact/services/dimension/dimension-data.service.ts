@@ -1,3 +1,4 @@
+import { DataLoader } from './../../settings/DataLoader';
 import { DimensionDto } from './../../dtos/DimensionDto';
 import { DimensionMapperService } from './dimension-mapper.service';
 import { Dimension } from './../../models/Dimension';
@@ -34,18 +35,7 @@ export class DimensionDataService {
   public dimensionTypes: string[] = [];
 
   constructor(private dimensionRestService: DimensionRestService) {
-    // Load dummy dimensions.
-    this.dummyDimensionDtos.forEach(dim => {
-      this.dimensions.push(DimensionMapperService.fromDto(dim));
-    });
-    console.log('Dimensions loaded.');
-    this.loadedDimensions.emit(this.dimensions);
 
-    // Load dummy dimension types.
-    this.dummyDimensionTypes.forEach(dimType => {
-      this.dimensionTypes.push(dimType);
-    });
-    this.loadedDimensionTypes.emit(this.dimensionTypes);
   }
 
   onInit(): void {

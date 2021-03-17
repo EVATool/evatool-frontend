@@ -27,16 +27,16 @@ export class AnalysisDataService {
   analyses: Analysis[] = [];
 
   constructor() {
+
+  }
+
+  onInit() {
     // Load dummy stakeholders.
     this.dummyAnalysisDtos.forEach(ana => {
       this.analyses.push(AnalysisMapperService.fromDto(ana));
     });
     console.log('Analyses loaded.');
     this.loadedAnalyses.emit(this.analyses);
-  }
-
-  onInit() {
-
   }
 
   invalidate() {

@@ -67,7 +67,9 @@ export class ImpactDataService {
     private stakeholderDataService: StakeholderDataService,
     private dimensionDataService: DimensionDataService,
     private analysisDataService: AnalysisDataService) {
+  }
 
+  onInit() {
     this.stakeholderDataService.loadedStakeholders.subscribe(stakeholders => {
       this.stakeholders = stakeholders;
       this.stakeholdersLoaded = true;
@@ -86,13 +88,9 @@ export class ImpactDataService {
       this.fireIfChildrenAreLoaded();
     });
 
-    stakeholderDataService.invalidate();
-    dimensionDataService.invalidate();
-    analysisDataService.invalidate();
-  }
-
-  onInit() {
-
+    this.stakeholderDataService.onInit();
+    this.dimensionDataService.onInit();
+    this.analysisDataService.onInit();
   }
 
   invalidate() {

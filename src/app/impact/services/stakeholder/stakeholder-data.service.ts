@@ -28,16 +28,16 @@ export class StakeholderDataService {
   stakeholders: Stakeholder[] = [];
 
   constructor(private stakeholderRestService: StakeholderRestService) {
+
+  }
+
+  onInit() {
     // Load dummy stakeholders.
     this.dummyStakeholderDtos.forEach(stk => {
       this.stakeholders.push(StakeholderMapperService.fromDto(stk));
     });
     console.log('Stakeholders loaded.');
     this.loadedStakeholders.emit(this.stakeholders);
-  }
-
-  onInit() {
-
   }
 
   invalidate() {

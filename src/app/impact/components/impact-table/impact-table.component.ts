@@ -50,7 +50,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       this.tableDataSource.data = impacts;
     });
 
-    this.impactDataService.invalidate();
+    this.impactDataService.onInit();
   }
 
   private initSorting(): void {
