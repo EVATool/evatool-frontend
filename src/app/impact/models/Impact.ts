@@ -6,6 +6,7 @@ export class Impact {
   [k: string]: any;
 
   id = '';
+  numericId = '';
   value = 0;
   description = '';
   dimension!: Dimension;

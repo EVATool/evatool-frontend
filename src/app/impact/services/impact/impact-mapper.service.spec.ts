@@ -23,6 +23,7 @@ describe('ImpactMapperService', () => {
 
     // then
     expect(impact.id === impactDto.id).toBeTruthy();
+    expect(impact.numericId === impactDto.numericId).toBeTruthy();
     expect(impact.value === impactDto.value).toBeTruthy();
     expect(impact.description === impactDto.description).toBeTruthy();
   });
@@ -39,6 +40,7 @@ describe('ImpactMapperService', () => {
 
     // then
     expect(impact.id === impactDto.id).toBeTruthy();
+    expect(impact.numericId === impactDto.numericId).toBeTruthy();
     expect(impact.value === impactDto.value).toBeTruthy();
     expect(impact.description === impactDto.description).toBeTruthy();
 

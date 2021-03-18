@@ -4,6 +4,7 @@ import { DimensionDto } from './DimensionDto';
 
 export class ImpactDto {
   id = '';
+  numericId = '';
   value = 0;
   description = '';
   dimension!: DimensionDto;

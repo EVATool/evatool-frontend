@@ -2,11 +2,11 @@
   <caption class="screen-reader-only">List of impacts</caption>
 
   <!-- TODO: ToolTips when tabbing through headers -->
-  <ng-container matColumnDef='id'>
+  <ng-container matColumnDef='numericId'>
     <th scope="col" mat-header-cell *matHeaderCellDef>
       <div mat-sort-header matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
     </th>
-    <td mat-cell *matCellDef='let impact'> {{impact.id}} </td>
+    <td mat-cell *matCellDef='let impact'> {{impact.numericId}} </td>
   </ng-container>
 
   <ng-container matColumnDef='stakeholder'>
