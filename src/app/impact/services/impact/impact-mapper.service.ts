@@ -39,10 +39,6 @@ export class ImpactMapperService {
     impact.value = impactDto.value;
     impact.description = impactDto.description;
 
-    console.log('IMPACT DTO');
-    console.log(impactDto);
-    console.log('DIMENSIONS');
-    console.log(dimensions);
     dimensions.forEach(dimension => {
       if (dimension.id === impactDto.dimension.id) {
         impact.dimension = dimension;
