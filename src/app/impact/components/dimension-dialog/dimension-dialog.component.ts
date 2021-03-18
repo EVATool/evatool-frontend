@@ -25,7 +25,7 @@ export class DimensionDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    
+
   }
 
   closeClick(): void {
