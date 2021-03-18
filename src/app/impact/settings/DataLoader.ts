@@ -1,4 +1,3 @@
-import { isDevMode } from '@angular/core';
 import { AnalysisDto } from './../dtos/AnalysisDto';
 import { StakeholderDto } from './../dtos/StakeholderDto';
 import { DimensionDto } from './../dtos/DimensionDto';

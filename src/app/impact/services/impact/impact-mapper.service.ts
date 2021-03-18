@@ -22,9 +22,9 @@ export class ImpactMapperService {
     impactDto.value = impact.value;
     impactDto.description = impact.description;
 
-    impactDto.dimensionDto = DimensionMapperService.toDto(impact.dimension);
-    impactDto.stakeholderDto = StakeholderMapperService.toDto(impact.stakeholder);
-    impactDto.analysisDto = AnalysisMapperService.toDto(impact.stakeholder);
+    impactDto.dimension = DimensionMapperService.toDto(impact.dimension);
+    impactDto.stakeholder = StakeholderMapperService.toImpactDto(impact.stakeholder);
+    impactDto.analysis = AnalysisMapperService.toImpactDto(impact.stakeholder);
 
     return impactDto;
   }
@@ -32,7 +32,7 @@ export class ImpactMapperService {
   // impactDto: any has to be used, because the backend sends other names for both:
   // The child Dtos: The Dtos are not suffixed with *Dto in the backend return content.
   // The child Dtos attributes: The ids do not have the names of the owner domain, due to the domain impact using other names.
-  static fromDto(impactDto: any, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
+  static fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
     const impact = new Impact();
 
     impact.id = impactDto.id;

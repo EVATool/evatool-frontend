@@ -22,8 +22,8 @@ describe('StakeholderMapperService', () => {
     const stakeholderDto = StakeholderMapperService.toDto(stakeholder);
 
     // then
-    expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
-    expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
+    expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
+    expect(stakeholder.name === stakeholderDto.stakeholderName).toBeTruthy();
   });
 
   it('should convert from dto', () => {
@@ -34,7 +34,7 @@ describe('StakeholderMapperService', () => {
     const stakeholder = StakeholderMapperService.fromDto(stakeholderDto);
 
     // then
-    expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
-    expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
+    expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
+    expect(stakeholder.name === stakeholderDto.stakeholderName).toBeTruthy();
   });
 });
