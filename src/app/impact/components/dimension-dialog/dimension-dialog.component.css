@@ -4,19 +4,15 @@
   height: 100%;
 }
 
-/*
-.title-container {
-  height: 5%;
+.container .title-container {
+  flex: 0 1 auto;
 }
-*/
 
 .container .panel-container {
-  flex: 1 1 auto;}
-
-/*
-.action-container {
-  position: relative;
-  height: 5%;
-  float: right;
+  flex: 1 1 auto;
 }
-*/
+
+.container .action-container {
+  flex: 0 1 auto;
+  margin-left: auto;
+}
