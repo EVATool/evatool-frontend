@@ -1,5 +1,22 @@
-.panel-container {
-  height: 80%;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
+.container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
+
+/*
+.title-container {
+  height: 5%;
+}
+*/
+
+.container .panel-container {
+  flex: 1 1 auto;}
+
+/*
+.action-container {
+  position: relative;
+  height: 5%;
+  float: right;
+}
+*/

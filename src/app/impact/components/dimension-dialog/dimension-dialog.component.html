@@ -1,58 +1,64 @@
-<h2 mat-dialog-title>Dimensions</h2>
+<div class="container">
+  <div class="title-container">
+    <h2 mat-dialog-title>Dimensions</h2>
+  </div>
 
-<div class="panel-container">
-  <ng-scrollbar>
-    <mat-expansion-panel (opened)="socialDimensionState = true" (closed)="socialDimensionState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Social Dimensions
-        </mat-panel-title>
-        <mat-panel-description>
+  <div class="panel-container">
+    <ng-scrollbar>
+      <mat-expansion-panel (opened)="socialDimensionState = true" (closed)="socialDimensionState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Social Dimensions
+          </mat-panel-title>
+          <mat-panel-description>
 
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div>
-        <p>I'm visible because I am open</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-      </div>
-    </mat-expansion-panel>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <p>I'm visible because I am open</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+        </div>
+      </mat-expansion-panel>
 
-    <mat-expansion-panel (opened)="economicDimensionState = true" (closed)="economicDimensionState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Economic Dimensions
-        </mat-panel-title>
-        <mat-panel-description>
+      <mat-expansion-panel (opened)="economicDimensionState = true" (closed)="economicDimensionState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Economic Dimensions
+          </mat-panel-title>
+          <mat-panel-description>
 
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div>
-        <p>I'm visible because I am open</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-        <p>Here would be the table</p>
-      </div>
-    </mat-expansion-panel>
-  </ng-scrollbar>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <p>I'm visible because I am open</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+          <p>Here would be the table</p>
+        </div>
+      </mat-expansion-panel>
+    </ng-scrollbar>
+  </div>
+
+  <div class="action-container">
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close (click)="closeClick()">Schließen</button>
+    </mat-dialog-actions>
+  </div>
 </div>
-
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="closeClick()">Schließen</button>
-</mat-dialog-actions>
