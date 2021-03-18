@@ -1,5 +1,3 @@
-import { Dimension } from './../../models/Dimension';
-import { DataLoader } from './../../settings/DataLoader';
 import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';

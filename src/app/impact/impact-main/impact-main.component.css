@@ -1,17 +1,35 @@
-.above-table-container {
+.container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.container .search-bar-container {
+  flex: 0 1 auto;
+}
+
+.container .impact-table-container {
+  flex: 1 1 auto;
+}
+
+.container .add-impact-button-container {
+  flex: 0 1 auto;
+  margin-left: auto;
+}
+
+.search-bar-container {
   margin-top: 3%;
   margin-left: 5%;
 }
 
-.impact-table-div {
+.impact-table-container {
   margin: 1%;
   margin-left: 5%;
   height: calc(85vh - 150px);
   overflow-y: hidden;
-  scroll-behavior: smooth;
 }
 
-.add-impact-button-div {
+.add-impact-button-container {
   position: fixed;
   left: 1.5%;
   bottom: 2.5%;
