@@ -21,10 +21,11 @@ import { ImpactSliderComponent } from './components/impact-slider/impact-slider.
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
 import { AddDimensionButtonComponent } from './components/add-dimension-button/add-dimension-button.component';
-import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatExpansionModule} from '@angular/material/expansion';
+import { DimensionTableComponent } from './components/dimension-table/dimension-table.component'; 
 
 @NgModule({
-  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective, ImpactSliderComponent, SearchBarComponent, DimensionDialogComponent, AddDimensionButtonComponent],
+  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective, ImpactSliderComponent, SearchBarComponent, DimensionDialogComponent, AddDimensionButtonComponent, DimensionTableComponent],
   imports: [
     CommonModule,
     MatTableModule,
