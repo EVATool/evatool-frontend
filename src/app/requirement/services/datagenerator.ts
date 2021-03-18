@@ -295,28 +295,4 @@ export class Datagenerator {
     return [];
   }
 
-  public addRequirement(): void {
-    const requirement1: Requirements = new Requirements();
-    requirement1.rootid = ( Math.random() * 16 ) + '';
-    requirement1.projetid = '1';
-    if (this.requirements.length < 10){
-      requirement1.requirementTitle = 'RE0' + (this.requirements.length + 1);
-    }else{
-      requirement1.requirementTitle = 'RE' + (this.requirements.length + 1);
-    }
-    let randomID: number = Math.round(Math.random() * 16);
-    requirement1.requirementDescription = 'This is a random created requirement';
-    requirement1.dimensions = [];
-    requirement1.dimensions.push({id: '21', name: 'Feelings'});
-    requirement1.impactDescription = new Map<string, string>();
-    requirement1.impactDescription.set('' + randomID, 'This is the first read-only impact');
-    requirement1.requirementImpactPoints = new Map<string, number>();
-    requirement1.requirementImpactPoints.set('' + randomID, 1);
-    requirement1.variantsTitle = new Map<string, string>();
-    // this.requirements = this.requirements.concat(requirement1);
-
-    this.requirements.push(requirement1);
-    this.onCreateImpact.emit(requirement1);
-  }
-
 }

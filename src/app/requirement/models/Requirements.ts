@@ -2,12 +2,12 @@ import { Dimension } from './Dimension';
 
 export class Requirements{
   [k: string]: any;
-  rootid = '';
-  projetid = '';
+  rootEntityId!: any;
+  projectID = '';
   requirementTitle = '';
   requirementDescription = '';
   dimensions!: Dimension[];
-  impactDescription!: Map<string, string>;
-  requirementImpactPoints!: Map<string, number>;
-  variantsTitle!: Map<string, string>;
+  impactDescription!: [];
+  requirementImpactPoints!: any;
+  variantsTitle!: [];
 }

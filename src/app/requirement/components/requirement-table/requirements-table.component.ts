@@ -18,21 +18,24 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   requirementsSource: Requirements[] = [];
   impactSoureces: Impact[] = [];
   tableDatasource: MatTableDataSource<Requirements>;
+  idForProject = '';
   constructor(private datagenerator: Datagenerator,
               private requirementsRestService: RequirementsRestService) {
     this.requirementsRestService.getRequirements().subscribe((result: any) => {
       this.requirementsSource = [];
       result.forEach((requirementRest: Requirements) => {
         const requirement: Requirements = {
-          rootid : requirementRest.rootEntityId,
-          projetid : requirementRest.projectID,
+          rootEntityId : requirementRest.rootEntityId,
+          projectID : requirementRest.projectID,
           requirementTitle : requirementRest.requirementTitle,
           requirementDescription : requirementRest.requirementDescription,
           dimensions : requirementRest.dimensions,
           impactDescription : requirementRest.impactDescription,
-          requirementImpactPoints : new Map(Object.entries(requirementRest.requirementImpactPoints)),
+          // requirementImpactPoints : new Map(Object.entries(requirementRest.requirementImpactPoints)),
+          requirementImpactPoints : requirementRest.requirementImpactPoints,
           variantsTitle : requirementRest.variantsTitle
         };
+        this.idForProject = requirement.projectID;
         this.requirementsSource.push(requirement);
       });
       this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
@@ -70,6 +73,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   concatDimension(parameter: any): string {
     let value = '';
     const dimension: [] = parameter.dimensions;
+    if (dimension == null){ return value; }
     dimension.forEach(value1 => value = value.concat(value1, '\n'));
     return value;
   }
@@ -77,15 +81,16 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   concatVariants(element: any): string {
     let value = '';
     const variants: any = element.variantsTitle;
+    if (variants == null){ return value; }
     Object.keys(variants).forEach(value1 => value = value.concat(variants[value1], '\n'));
     return value;
   }
 
   checkValue(element: Requirements, impact: Impact): string{
     let value = '';
-    const map = new Map(Object.entries(element.requirementImpactPoints));
-    if (element.requirementImpactPoints.has(impact.id)){
-      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+    if (element.requirementImpactPoints == null){ return value; }
+    if (element.requirementImpactPoints[impact.id] != null){
+      const points: number | undefined = element.requirementImpactPoints[impact.id];
       if (points && 0 < points){
         value = '' + points;
       }else{
@@ -96,9 +101,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   isPositiv(element: Requirements, impact: Impact): boolean {
-    const map = new Map(Object.entries(element.requirementImpactPoints));
-    if (element.requirementImpactPoints.has(impact.id)){
-      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+    if (element.requirementImpactPoints == null){ return false; }
+    if (element.requirementImpactPoints[impact.id] != null){
+      const points: number | undefined = element.requirementImpactPoints[impact.id];
       if (points && 0 < points) {
         return true;
       }
@@ -107,9 +112,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   isNegativ(element: Requirements, impact: Impact): boolean {
-    const map = new Map(Object.entries(element.requirementImpactPoints));
-    if (element.requirementImpactPoints.has(impact.id)){
-      const points: number | undefined = element.requirementImpactPoints.get(impact.id);
+    if (element.requirementImpactPoints == null){ return false; }
+    if (element.requirementImpactPoints[impact.id] != null){
+      const points: number | undefined = element.requirementImpactPoints[impact.id];
       if (points && 0 > points) {
         return true;
       }
@@ -118,13 +123,38 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   clickFunction(element: Requirements, impact: Impact): void {
-    const map = new Map(Object.entries(element.requirementImpactPoints));
-    if (!element.requirementImpactPoints.has(impact.id)){
-      element.requirementImpactPoints.set(impact.id, 1);
-    } else if (element.requirementImpactPoints.get(impact.id) === 1){
-      element.requirementImpactPoints.set(impact.id, -1);
+    if (element.requirementImpactPoints == null){ element.requirementImpactPoints = {}; }
+    if (element.requirementImpactPoints[impact.id] == null){
+      element.requirementImpactPoints[impact.id] = 1;
+    } else if (element.requirementImpactPoints[impact.id] === 1){
+      element.requirementImpactPoints[impact.id] = -1;
     } else {
-      element.requirementImpactPoints.delete(impact.id);
+      delete element.requirementImpactPoints[impact.id];
     }
+    if (element.rootEntityId != null) {
+      this.requirementsRestService.updateRequirements(element).subscribe(value => {
+        this.ngOnInit();
+      });
+    }else{
+      this.requirementsRestService.createRequirements(element).subscribe(value => {
+        this.requirementsSource.pop();
+        this.requirementsSource.push(value);
+        this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+      });
+    }
+  }
+
+  addRequirements(): void {
+    const requirementNew: Requirements = new Requirements();
+    requirementNew.projectID = this.idForProject;
+    const size: number = this.requirementsSource.length;
+    if (size < 10){
+      requirementNew.requirementTitle = 'RE0' + (size + 1);
+    }else{
+      requirementNew.requirementTitle = 'RE' + (size + 1);
+    }
+    requirementNew.requirementDescription = 'generated requirement';
+    this.requirementsSource.push(requirementNew);
+    this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
   }
 }

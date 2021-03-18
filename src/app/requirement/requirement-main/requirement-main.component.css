@@ -10,14 +10,6 @@
   /*scroll-behavior: smooth;*/
 }
 
-#add-impact-button-div {
-  position: fixed;
-  left: 30px;
-  bottom: 80px;
-  height: 30px;
-  width: 100%;
-}
-
 .scroll-to-top {
   position: fixed;
   top: 125px;

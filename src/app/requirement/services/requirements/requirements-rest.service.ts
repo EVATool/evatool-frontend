@@ -31,4 +31,7 @@ export class RequirementsRestService {
   createRequirements(requirement: Requirements): Observable<any> {
     return this.http.post(this.analysisUrl, requirement, httpOptions);
   }
+  updateRequirements(requirement: Requirements): Observable<any> {
+    return this.http.put(this.analysisUrl, requirement, httpOptions);
+  }
 }

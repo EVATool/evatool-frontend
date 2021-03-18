@@ -28,12 +28,14 @@ input{
 }
 .mat-column-Variants{
   text-align: left;
+  white-space: break-spaces;
   width:100px;
   min-width:100px;
   left: 575px !important;
 }
 .mat-column-Dimension{
   text-align: left;
+  white-space: break-spaces;
   width:100px;
   min-width:100px;
   left: 675px !important;
@@ -47,4 +49,11 @@ input{
 .negativ{
   background: red;
   text-align: center;
+}
+
+#add-impact-button-div {
+  position: fixed;
+  left: 300px;
+  bottom: 500px;
+  height: 30px;
 }
