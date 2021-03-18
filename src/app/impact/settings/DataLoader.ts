@@ -1,3 +1,4 @@
+import { Dimension } from './../models/Dimension';
 import { AnalysisDto } from './../dtos/AnalysisDto';
 import { StakeholderDto } from './../dtos/StakeholderDto';
 import { DimensionDto } from './../dtos/DimensionDto';
@@ -38,6 +39,20 @@ export class DataLoader {
   ];
 
   public static readonly dummyDimensionDtos: DimensionDto[] = [
+    {
+      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
+    },
+    {
+      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL'
+    },
+    {
+      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC'
+    },
+    {
+      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
+    }
+  ];
+  public static readonly dummyDimensions: Dimension[] = [
     {
       id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
     },

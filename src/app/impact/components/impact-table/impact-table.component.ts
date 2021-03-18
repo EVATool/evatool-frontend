@@ -2,7 +2,7 @@ import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog
 import { MatDialog } from '@angular/material/dialog';
 import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, isDevMode } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
@@ -52,7 +52,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.impactDataService.onInit();
 
     const openDialog = true;
-    if (openDialog) {
+    if (isDevMode() && openDialog) {
       this.openDimensionModal();
     }
   }

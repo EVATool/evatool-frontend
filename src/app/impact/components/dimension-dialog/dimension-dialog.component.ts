@@ -1,3 +1,4 @@
+import { DataLoader } from './../../settings/DataLoader';
 import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -12,7 +13,10 @@ export class DimensionDialogComponent implements OnInit, AfterViewInit {
 
   socialDimensionState = true;
   economicDimensionState = true;
-  
+
+  socialDimensions = DataLoader.dummyDimensions;
+  displayedColumns = ['id', 'name', 'type', 'description']
+
   form!: FormGroup;
 
   constructor(
