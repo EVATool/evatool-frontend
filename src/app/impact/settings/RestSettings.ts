@@ -13,5 +13,4 @@ export class RestSettings {
   public static readonly stakeholdersUrl = '/api/stakeholders';
   public static readonly analysesUrl = '/api/analysis';
   public static readonly impactsUrl = '/api/impacts';
-
 }

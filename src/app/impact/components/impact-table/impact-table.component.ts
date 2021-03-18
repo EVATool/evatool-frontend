@@ -30,9 +30,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   loaded: Promise<boolean> = Promise.resolve(false);
 
   constructor(
-    public impactDataService: ImpactDataService,
-    private dimensionDataService: DimensionDataService,
-    private stakeholderDataService: StakeholderDataService) {
+    public impactDataService: ImpactDataService) {
   }
 
   ngOnInit(): void {
