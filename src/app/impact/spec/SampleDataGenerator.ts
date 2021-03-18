@@ -1,3 +1,5 @@
+import { ImpactAnalysisDto } from './../dtos/ImpactAnalysisDto';
+import { ImpactStakeholderDto } from './../dtos/ImpactStakeholderDto';
 import { StakeholderMapperService } from './../services/stakeholder/stakeholder-mapper.service';
 import { AnalysisMapperService } from './../services/analysis/analysis-mapper.service';
 import { DimensionMapperService } from './../services/dimension/dimension-mapper.service';
@@ -14,9 +16,9 @@ export class SampleDataGenerator {
 
   static getDummyImpact(): Impact {
     let impact = new Impact();
-    impact.id = 'id';
+    impact.id = 'imapctId';
     impact.value = 0.0;
-    impact.description = 'description';
+    impact.description = 'imapctDescription';
     impact.dimension = this.getDummyDimension();
     impact.stakeholder = this.getDummyStakeholder();
     impact.analysis = this.getDummyAnalysis();
@@ -25,23 +27,23 @@ export class SampleDataGenerator {
 
   static getDummyImpactDto(): ImpactDto {
     let impactDto = new ImpactDto();
-    impactDto.id = 'id';
+    impactDto.id = 'imapctId';
     impactDto.value = 0.0;
-    impactDto.description = 'description';
-    impactDto.dimension = this.getDummyDimensionDto();
-    impactDto.stakeholder = this.getDummyStakeholderDto();
-    impactDto.analysis = this.getDummyAnalysisDto();
+    impactDto.description = 'imapctDescription';
+    impactDto.dimensionDto = this.getDummyDimensionDto();
+    impactDto.stakeholderDto = this.getDummyImpactStakeholderDto();
+    impactDto.analysisDto = this.getDummyImpactAnalysisDto();
     return impactDto;
   }
 
   static getDummyImpactDtoWithMyChildren(dimension: Dimension, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
     let impactDto = new ImpactDto();
-    impactDto.id = 'id';
+    impactDto.id = 'imapctId';
     impactDto.value = 0.0;
-    impactDto.description = 'description';
-    impactDto.dimension = DimensionMapperService.toDto(dimension);
-    impactDto.stakeholder = StakeholderMapperService.toDto(stakeholder);
-    impactDto.analysis = AnalysisMapperService.toDto(analysis);
+    impactDto.description = 'imapctDescription';
+    impactDto.dimensionDto = DimensionMapperService.toDto(dimension);
+    impactDto.stakeholderDto = StakeholderMapperService.toImpactDto(stakeholder);
+    impactDto.analysisDto = AnalysisMapperService.toImpactDto(analysis);
     return impactDto;
   }
 
@@ -65,15 +67,20 @@ export class SampleDataGenerator {
 
   static getDummyStakeholder(): Stakeholder {
     let stakeholder = new Stakeholder();
-    stakeholder.id = 'id';
-    stakeholder.name = 'name';
+    stakeholder.id = 'stakeholderId';
+    stakeholder.name = 'stakeholderName';
     return stakeholder
   }
 
   static getDummyStakeholderDto(): StakeholderDto {
     let stakeholderDto = new StakeholderDto();
-    stakeholderDto.rootEntityID = 'id';
-    stakeholderDto.stakeholderName = 'name';
+    stakeholderDto.rootEntityID = 'stakeholderId';
+    return stakeholderDto;
+  }
+
+  static getDummyImpactStakeholderDto(): ImpactStakeholderDto {
+    let stakeholderDto = new ImpactStakeholderDto();
+    stakeholderDto.id = 'stakeholderId';
     return stakeholderDto;
   }
 
@@ -86,6 +93,12 @@ export class SampleDataGenerator {
   static getDummyAnalysisDto(): AnalysisDto {
     let analysisDto = new AnalysisDto();
     analysisDto.rootEntityID = 'analysisId';
+    return analysisDto;
+  }
+
+  static getDummyImpactAnalysisDto(): ImpactAnalysisDto {
+    let analysisDto = new ImpactAnalysisDto();
+    analysisDto.id = 'analysisId';
     return analysisDto;
   }
 }

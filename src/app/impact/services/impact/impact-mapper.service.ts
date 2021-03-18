@@ -22,9 +22,9 @@ export class ImpactMapperService {
     impactDto.value = impact.value;
     impactDto.description = impact.description;
 
-    impactDto.dimension = DimensionMapperService.toDto(impact.dimension);
-    impactDto.stakeholder = StakeholderMapperService.toDto(impact.stakeholder);
-    impactDto.analysis = AnalysisMapperService.toDto(impact.stakeholder);
+    impactDto.dimensionDto = DimensionMapperService.toDto(impact.dimension);
+    impactDto.stakeholderDto = StakeholderMapperService.toImpactDto(impact.stakeholder);
+    impactDto.analysisDto = AnalysisMapperService.toImpactDto(impact.stakeholder);
 
     return impactDto;
   }
@@ -32,7 +32,7 @@ export class ImpactMapperService {
   // impactDto: any has to be used, because the backend sends other names for both:
   // The child Dtos: The Dtos are not suffixed with *Dto in the backend return content.
   // The child Dtos attributes: The ids do not have the names of the owner domain, due to the domain impact using other names.
-  static fromDto(impactDto: any, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
+  static fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
     let impact = new Impact();
 
     impact.id = impactDto.id;
@@ -40,21 +40,21 @@ export class ImpactMapperService {
     impact.description = impactDto.description;
 
     dimensions.forEach(dimension => {
-      if (dimension.id === impactDto.dimension.id) {
+      if (dimension.id === impactDto.dimensionDto.id) {
         impact.dimension = dimension;
         return;
       }
     });
 
     stakeholders.forEach(stakeholder => {
-      if (stakeholder.id === impactDto.stakeholder.id) {
+      if (stakeholder.id === impactDto.stakeholderDto.id) {
         impact.stakeholder = stakeholder;
         return;
       }
     });
 
     analyses.forEach(analysis => {
-      if (analysis.id === impactDto.analysis.id) {
+      if (analysis.id === impactDto.analysisDto.id) {
         impact.analysis = analysis;
         return;
       }
