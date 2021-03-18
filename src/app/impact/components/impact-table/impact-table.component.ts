@@ -6,7 +6,7 @@ import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
 import { AfterViewInit, Component, OnInit, ViewChild, Inject, HostListener } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -16,6 +16,7 @@ import { FormControl } from '@angular/forms';
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
+  @ViewChild(MatTable) table!: MatTable<any>;
 
   // Used by table.
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
@@ -46,6 +47,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
       this.tableDataSource.data = impacts;
+      //this.table.renderRows();
     });
 
     this.impactDataService.onInit();

@@ -38,4 +38,8 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     //console.log(this.impactDataService.impacts[0].value);
     //this.impactDataService.impacts[0].value = 1;
   }
+
+  searchTextChange(searchValue: string) {
+    console.log(searchValue);
+  }
 }

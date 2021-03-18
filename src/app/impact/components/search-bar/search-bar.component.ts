@@ -15,7 +15,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   searchTextChange(event: any) {
-    //console.log(event.target.value);
+    console.log(`Search Bar Text Changed: ${event.target.value}`);
     this.searchTextChanged.emit(event.target.value);
   }
 }
