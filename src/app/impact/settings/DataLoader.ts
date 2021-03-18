@@ -59,33 +59,33 @@ export class DataLoader {
       id: '1',
       value: -0.3,
       description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
-      dimensionDto: { id: '1' },
-      stakeholderDto: { id: '1' },
-      analysisDto: { id: '1' }
+      dimension: { id: '1' },
+      stakeholder: { id: '1' },
+      analysis: { id: '1' }
     },
     {
       id: '2',
       value: 0.5,
       description: 'This is the second read-only impact',
-      dimensionDto: { id: '4' },
-      stakeholderDto: { id: '1' },
-      analysisDto: { id: '1' }
+      dimension: { id: '4' },
+      stakeholder: { id: '1' },
+      analysis: { id: '1' }
     },
     {
       id: '3',
       value: 0.9,
       description: 'This is the third read-only impact',
-      dimensionDto: { id: '2' },
-      stakeholderDto: { id: '4' },
-      analysisDto: { id: '1' }
+      dimension: { id: '2' },
+      stakeholder: { id: '4' },
+      analysis: { id: '1' }
     },
     {
       id: '4',
       value: 0.2,
       description: 'This is the fourth read-only impact',
-      dimensionDto: { id: '2' },
-      stakeholderDto: { id: '3' },
-      analysisDto: { id: '1' }
+      dimension: { id: '2' },
+      stakeholder: { id: '3' },
+      analysis: { id: '1' }
     }
   ];
 }
