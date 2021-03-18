@@ -1,3 +1,6 @@
+import { FormBuilder } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,8 +12,11 @@ describe('ImpactTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      declarations: [ImpactTableComponent]
+      imports: [HttpClientModule, MatDialogModule, BrowserAnimationsModule],
+      declarations: [ImpactTableComponent],
+      providers: [FormBuilder,
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} }]
     })
       .compileComponents();
   });

@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,8 +22,8 @@ import { ImpactSliderComponent } from './components/impact-slider/impact-slider.
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
 import { AddDimensionButtonComponent } from './components/add-dimension-button/add-dimension-button.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { DimensionTableComponent } from './components/dimension-table/dimension-table.component'; 
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DimensionTableComponent } from './components/dimension-table/dimension-table.component';
 
 @NgModule({
   declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective, ImpactSliderComponent, SearchBarComponent, DimensionDialogComponent, AddDimensionButtonComponent, DimensionTableComponent],
@@ -42,7 +43,8 @@ import { DimensionTableComponent } from './components/dimension-table/dimension-
     NgScrollbarModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatExpansionModule
+    MatExpansionModule,
+    BrowserAnimationsModule
   ],
   exports: [
     ImpactMainComponent
