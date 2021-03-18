@@ -1,3 +1,4 @@
+import { Dimension } from './../../models/Dimension';
 import { DataLoader } from './../../settings/DataLoader';
 import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -14,7 +15,7 @@ export class DimensionDialogComponent implements OnInit, AfterViewInit {
   socialDimensionState = true;
   economicDimensionState = true;
 
-  socialDimensions = DataLoader.dummyDimensions;
+  socialDimensions: Dimension[] = [];
   displayedColumns = ['id', 'name', 'type', 'description']
 
   form!: FormGroup;
@@ -23,7 +24,9 @@ export class DimensionDialogComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DimensionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dimensionDataService: DimensionDataService) { }
+    private dimensionDataService: DimensionDataService) {
+    this.socialDimensions = dimensionDataService.dimensions;
+  }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
