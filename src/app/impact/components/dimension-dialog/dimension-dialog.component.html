@@ -18,52 +18,7 @@
           </mat-expansion-panel-header>
           <div>
 
-            <table mat-table [dataSource]='socialDimensions' matSort>
-              <caption class="screen-reader-only">List of Dimensions</caption>
-
-              <!-- TODO: ToolTips when tabbing through headers -->
-              <ng-container matColumnDef='id'>
-                <th scope="col" mat-header-cell *matHeaderCellDef>
-                  <div mat-sort-header matTooltip="An artificial ID" matTooltipHideDelay="100"
-                    matTooltipPosition="above">ID</div>
-                </th>
-                <td mat-cell *matCellDef='let dimension'> {{dimension.id}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef='name'>
-                <th scope="col" mat-header-cell *matHeaderCellDef>
-                  <div mat-sort-header matTooltip="An artificial ID" matTooltipHideDelay="100"
-                    matTooltipPosition="above">Name</div>
-                </th>
-                <td mat-cell *matCellDef='let dimension'> {{dimension.name}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef='type'>
-                <th scope="col" mat-header-cell *matHeaderCellDef>
-                  <div mat-sort-header matTooltip="An artificial ID" matTooltipHideDelay="100"
-                    matTooltipPosition="above">Type</div>
-                </th>
-                <td mat-cell *matCellDef='let dimension'> {{dimension.type}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef='description'>
-                <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-                  <div matTooltip="The dimension description" matTooltipHideDelay="100" matTooltipPosition="above">
-                    Description</div>
-                </th>
-                <td mat-cell *matCellDef='let dimension'>
-                  <div class="description-wrapper">
-                    <div class="description-container">
-                      <textarea matInput cdkTextareaAutosize [(ngModel)]="dimension.description"
-                        placeholder="Describe the dimension..."></textarea>
-                    </div>
-                  </div>
-                </td>
-              </ng-container>
-
-              <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+            <app-dimension-table></app-dimension-table>
 
             <p>I'm visible because I am open</p>
             <p>Here would be the table</p>

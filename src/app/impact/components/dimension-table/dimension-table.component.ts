@@ -1,3 +1,5 @@
+import { DimensionDataService } from './../../services/dimension/dimension-data.service';
+import { Dimension } from './../../models/Dimension';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DimensionTableComponent implements OnInit {
 
-  constructor() { }
+  dimensions: Dimension[] = [];
+  displayedColumns = ['name', 'description']
 
-  ngOnInit(): void {
+  constructor(private dimensionDataService: DimensionDataService) {
+    this.dimensions = dimensionDataService.dimensions;
   }
 
+  ngOnInit(): void {
+
+  }
 }

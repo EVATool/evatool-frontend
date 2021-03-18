@@ -15,18 +15,12 @@ export class DimensionDialogComponent implements OnInit, AfterViewInit {
   socialDimensionState = true;
   economicDimensionState = true;
 
-  socialDimensions: Dimension[] = [];
-  displayedColumns = ['id', 'name', 'type', 'description']
-
   form!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DimensionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private dimensionDataService: DimensionDataService) {
-    this.socialDimensions = dimensionDataService.dimensions;
-  }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
