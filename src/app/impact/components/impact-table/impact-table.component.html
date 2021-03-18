@@ -37,7 +37,7 @@
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The dimension affecting the stakeholder" matTooltipHideDelay="100" matTooltipPosition="above">
         Dimension</div>
-      <mat-icon (click)="$event.stopPropagation(); openDimensionModal();">info</mat-icon>
+      <mat-icon id="dimension-modal" (click)="$event.stopPropagation(); openDimensionModal();">info</mat-icon>
       <button mat-icon-button color="accent" (click)="$event.stopPropagation();toggleFilterVisibility('dimension')"
         aria-label="Stakeholder-Filter">
         <mat-icon>filter_alt</mat-icon>

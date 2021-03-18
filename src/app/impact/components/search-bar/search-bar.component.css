@@ -1,6 +1,5 @@
 .search-bar {
-  margin: 2%;
-  margin-bottom: 0%;
+  padding: 0.5%;
   width: 40%;
   font-size: 150%;
   background-color: rgb(235, 235, 235);
@@ -9,6 +8,6 @@
 }
 
 #search-icon {
-  position: fixed;
+  position: absolute;
   left: 40%;
 }

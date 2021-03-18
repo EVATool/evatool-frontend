@@ -1,6 +1,11 @@
+.above-table-container {
+  margin-top: 3%;
+  margin-left: 5%;
+}
+
 .impact-table-div {
   margin: 1%;
-  margin-left: 2%;
+  margin-left: 5%;
   height: calc(85vh - 150px);
   overflow-y: hidden;
   scroll-behavior: smooth;

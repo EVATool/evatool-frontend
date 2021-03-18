@@ -71,6 +71,10 @@ table {
   border-left: 0px solid rgba(0, 0, 0, 0);
 }
 
+#dimension-modal {
+  margin-left: 10px;
+}
+
 /* Delete row button */
 
 .description-wrapper {
