@@ -5,7 +5,8 @@
 
   <div class="panel-container">
     <ng-scrollbar>
-      <mat-expansion-panel (opened)="socialDimensionState = true" (closed)="socialDimensionState = false">
+      <mat-expansion-panel expanded="socialDimensionState" (opened)="socialDimensionState = true"
+        (closed)="socialDimensionState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Social Dimensions
@@ -15,6 +16,15 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div>
+          
+
+
+
+
+
+
+
+
           <p>I'm visible because I am open</p>
           <p>Here would be the table</p>
           <p>Here would be the table</p>
@@ -30,7 +40,8 @@
         </div>
       </mat-expansion-panel>
 
-      <mat-expansion-panel (opened)="economicDimensionState = true" (closed)="economicDimensionState = false">
+      <mat-expansion-panel expanded="economicDimensionState" (opened)="economicDimensionState = true"
+        (closed)="economicDimensionState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Economic Dimensions
