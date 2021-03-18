@@ -50,22 +50,27 @@ export class DataLoader {
     },
     {
       id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
+    },
+    {
+      id: '5', name: 'Care', description: 'Economics of Family', type: 'ECONOMIC'
+    },
+    {
+      id: '6', name: 'Privacy', description: 'Economics of Family', type: 'ECONOMIC'
+    },
+    {
+      id: '7', name: 'Self-Conception', description: 'Economics of Family', type: 'SOCIAL'
+    },
+    {
+      id: '8', name: 'Participation', description: 'Economics of Family', type: 'SOCIAL'
+    },
+    {
+      id: '9', name: 'Autonomy', description: 'Economics of Family', type: 'ECONOMIC'
+    },
+    {
+      id: '10', name: 'Irgendwas', description: 'Economics of Family', type: 'SOCIAL'
     }
   ];
-  public static readonly dummyDimensions: Dimension[] = [
-    {
-      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
-    },
-    {
-      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL'
-    },
-    {
-      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC'
-    },
-    {
-      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
-    }
-  ];
+
   public static readonly dummyDimensionTypes: string[] = ['SOCIAL', 'ECONOMIC'];
 
   public static readonly dummyImpactDtos: any[] = [
