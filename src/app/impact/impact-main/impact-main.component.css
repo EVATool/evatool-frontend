@@ -26,7 +26,6 @@
   margin: 1%;
   margin-left: 5%;
   height: calc(85vh - 150px);
-  overflow-y: hidden;
 }
 
 .add-impact-button-container {

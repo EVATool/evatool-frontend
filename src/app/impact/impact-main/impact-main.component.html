@@ -1,10 +1,5 @@
 <div class="container">
-  <div class="scroll-to-top" [hidden]="!windowScrolled">
-    <button type="button" mat-fab (click)="scrollToTop()" matTooltip="Scroll to Top" matTooltipHideDelay="100"
-      matTooltipPosition="above">
-      <mat-icon>arrow_upward</mat-icon>
-    </button>
-  </div>
+
 
   <div class="search-bar-container">
     <app-search-bar (searchTextChanged)="searchTextChange($event)"></app-search-bar>
@@ -20,4 +15,11 @@
     <app-add-impact-button (addButtonClick)="addImpact()"> </app-add-impact-button>
   </div>
 
+</div>
+
+<div class="scroll-to-top" [hidden]="!windowScrolled">
+  <button type="button" mat-fab (click)="scrollToTop()" matTooltip="Scroll to Top" matTooltipHideDelay="100"
+    matTooltipPosition="above">
+    <mat-icon>arrow_upward</mat-icon>
+  </button>
 </div>
