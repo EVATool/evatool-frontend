@@ -22,9 +22,9 @@ export class ImpactMapperService {
     impactDto.value = impact.value;
     impactDto.description = impact.description;
 
-    impactDto.dimensionDto = DimensionMapperService.toDto(impact.dimension);
-    impactDto.stakeholderDto = StakeholderMapperService.toImpactDto(impact.stakeholder);
-    impactDto.analysisDto = AnalysisMapperService.toImpactDto(impact.stakeholder);
+    impactDto.dimension = DimensionMapperService.toDto(impact.dimension);
+    impactDto.stakeholder = StakeholderMapperService.toImpactDto(impact.stakeholder);
+    impactDto.analysis = AnalysisMapperService.toImpactDto(impact.stakeholder);
 
     return impactDto;
   }
@@ -39,22 +39,26 @@ export class ImpactMapperService {
     impact.value = impactDto.value;
     impact.description = impactDto.description;
 
+    console.log('IMPACT DTO');
+    console.log(impactDto);
+    console.log('DIMENSIONS');
+    console.log(dimensions);
     dimensions.forEach(dimension => {
-      if (dimension.id === impactDto.dimensionDto.id) {
+      if (dimension.id === impactDto.dimension.id) {
         impact.dimension = dimension;
         return;
       }
     });
 
     stakeholders.forEach(stakeholder => {
-      if (stakeholder.id === impactDto.stakeholderDto.id) {
+      if (stakeholder.id === impactDto.stakeholder.id) {
         impact.stakeholder = stakeholder;
         return;
       }
     });
 
     analyses.forEach(analysis => {
-      if (analysis.id === impactDto.analysisDto.id) {
+      if (analysis.id === impactDto.analysis.id) {
         impact.analysis = analysis;
         return;
       }

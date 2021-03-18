@@ -6,7 +6,7 @@ export class ImpactDto {
   id = '';
   value = 0;
   description = '';
-  dimensionDto!: DimensionDto;
-  stakeholderDto!: ImpactStakeholderDto;
-  analysisDto!: ImpactAnalysisDto;
+  dimension!: DimensionDto;
+  stakeholder!: ImpactStakeholderDto;
+  analysis!: ImpactAnalysisDto;
 }

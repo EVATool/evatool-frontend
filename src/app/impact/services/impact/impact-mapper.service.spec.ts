@@ -36,20 +36,14 @@ describe('ImpactMapperService', () => {
 
     // when
     let impact = ImpactMapperService.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
-    console.log("LOOOOOOOOOOOOOL");
-    console.log(impact);
-    console.log(impactDto);
-    console.log(dimension);
-    console.log(stakeholder);
-    console.log(analysis);
 
     // then
     expect(impact.id === impactDto.id).toBeTruthy();
     expect(impact.value === impactDto.value).toBeTruthy();
     expect(impact.description === impactDto.description).toBeTruthy();
 
-    expect(impact.dimension.id === impactDto.dimensionDto.id).toBeTruthy();
-    expect(impact.stakeholder.id === impactDto.stakeholderDto.id).toBeTruthy();
-    expect(impact.analysis.id === impactDto.analysisDto.id).toBeTruthy();
+    expect(impact.dimension.id === impactDto.dimension.id).toBeTruthy();
+    expect(impact.stakeholder.id === impactDto.stakeholder.id).toBeTruthy();
+    expect(impact.analysis.id === impactDto.analysis.id).toBeTruthy();
   });
 });
