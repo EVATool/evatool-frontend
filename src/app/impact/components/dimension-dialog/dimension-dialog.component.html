@@ -16,23 +16,7 @@
               Dimension with a social impact
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div>
-
-            <app-dimension-table></app-dimension-table>
-
-            <p>I'm visible because I am open</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-          </div>
+          <app-dimension-table type='SOCIAL'></app-dimension-table>
         </mat-expansion-panel>
 
         <mat-expansion-panel expanded="economicDimensionState" (opened)="economicDimensionState = true"
@@ -45,19 +29,7 @@
               Dimension with an economic impact
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <div>
-            <p>I'm visible because I am open</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-            <p>Here would be the table</p>
-          </div>
+          <app-dimension-table type='ECONOMIC'></app-dimension-table>
         </mat-expansion-panel>
       </mat-accordion>
     </ng-scrollbar>
