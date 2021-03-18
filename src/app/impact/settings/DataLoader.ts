@@ -6,7 +6,7 @@ import { DimensionDto } from './../dtos/DimensionDto';
 export class DataLoader {
 
   // isDevMode();
-  public static readonly useDummyData: boolean = false;
+  public static readonly useDummyData: boolean = true;
 
   public static readonly dummyAnalysisDtos: AnalysisDto[] = [
     {
