@@ -15,7 +15,6 @@ import { FormControl } from '@angular/forms';
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
-  @ViewChild(MatTable) table!: MatTable<any>;
 
   // Used by table.
   displayedColumns: string[] = ['id', 'stakeholder', 'dimension', 'value', 'description'];
@@ -48,7 +47,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
       this.tableDataSource.data = impacts;
-      // this.table.renderRows();
     });
 
     this.impactDataService.onInit();
@@ -68,7 +66,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         default: return impact[property];
       }
     };
-    this.tableDataSource.filterPredicate = this.createFilter();
   }
 
   private initFiltering(): void {
