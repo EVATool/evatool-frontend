@@ -20,7 +20,8 @@ export class DimensionDialogComponent implements OnInit, AfterViewInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<DimensionDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dimensionDataService: DimensionDataService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({

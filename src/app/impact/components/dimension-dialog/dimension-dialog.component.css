@@ -16,3 +16,11 @@
   flex: 0 1 auto;
   margin-left: auto;
 }
+
+.lowercase-capitalize {
+  text-transform: lowercase;
+}
+
+.lowercase-capitalize::first-line {
+  text-transform: capitalize;
+}
