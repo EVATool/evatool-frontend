@@ -10,6 +10,9 @@ import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 })
 export class DimensionDialogComponent implements OnInit, AfterViewInit {
 
+  socialDimensionState = true;
+  economicDimensionState = true;
+  
   form!: FormGroup;
 
   constructor(

@@ -1,0 +1,5 @@
+.panel-container {
+  height: 80%;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+}

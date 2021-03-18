@@ -119,7 +119,11 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   openDimensionModal() {
     console.log("Opening Dimension Modal Dialog.");
-    const dialogRef = this.dialog.open(DimensionDialogComponent, { data: { parameter: 'I left this here because maybe we will need it c:' } });
+    const dialogRef = this.dialog.open(DimensionDialogComponent, {
+      height: '80%',
+      width: '50%',
+      data: { parameter: 'I left this here because maybe we will need it c:' }
+    });
     dialogRef.afterClosed().subscribe(() => {
       console.log("Closing Dimension Modal Dialog.");
     });
