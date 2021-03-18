@@ -118,4 +118,8 @@ export class ImpactDataService {
     this.removedImpact.emit();
     this.changedImpacts.emit(this.impacts);
   }
+
+  calculateDecimalPlaces(number: number): number {
+    return `${number}`.length;
+  }
 }
