@@ -1,0 +1,14 @@
+.search-bar {
+  margin: 2%;
+  margin-bottom: 0%;
+  width: 40%;
+  font-size: 150%;
+  background-color: rgb(235, 235, 235);
+  border-bottom: 1px solid black;
+  vertical-align: middle;
+}
+
+#search-icon {
+  position: fixed;
+  left: 40%;
+}

@@ -1,8 +1,6 @@
 <div class="container">
   <div class="above-table-container">
-    <div class="search-description-div">
-      <input matInput placeholder="Search...">
-    </div>
+    <app-search-bar></app-search-bar>
 
     <div class="scroll-to-top" [hidden]="!windowScrolled">
       <button type="button" mat-fab (click)="scrollToTop()" matTooltip="Scroll to Top" matTooltipHideDelay="100"
