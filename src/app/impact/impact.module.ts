@@ -1,3 +1,5 @@
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -35,7 +37,9 @@ import { DimensionDialogComponent } from './components/dimension-dialog/dimensio
     MatButtonModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    MatDialogModule,
+    MatFormFieldModule
   ],
   exports: [
     ImpactMainComponent

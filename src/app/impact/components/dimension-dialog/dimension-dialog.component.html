@@ -1,1 +1,13 @@
-<p>dimension-dialog works!</p>
+<h2 mat-dialog-title>Neue Analyse</h2>
+<mat-dialog-content [formGroup]="form">
+  {{data.p}}...{{data.b}}
+
+  <mat-form-field>
+    <input matInput formControlName="id" placeholder="Dummy Analysis Id...">
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="closeClick()">Abbrechen</button>
+  <button mat-button mat-dialog-close>OK</button>
+</mat-dialog-actions>
