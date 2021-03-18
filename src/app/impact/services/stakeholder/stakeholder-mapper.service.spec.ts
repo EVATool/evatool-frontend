@@ -37,4 +37,28 @@ describe('StakeholderMapperService', () => {
     expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
     expect(stakeholder.name === stakeholderDto.stakeholderName).toBeTruthy();
   });
+
+  it('should convert to impact dto', () => {
+    // given
+    const stakeholder = SampleDataGenerator.getDummyStakeholder();
+
+    // when
+    const stakeholderDto = StakeholderMapperService.toImpactDto(stakeholder);
+
+    // then
+    expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
+    expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
+  });
+
+  it('should convert from impact dto', () => {
+    // given
+    const stakeholderDto = SampleDataGenerator.getDummyImpactStakeholderDto();
+
+    // when
+    const stakeholder = StakeholderMapperService.fromImpactDto(stakeholderDto);
+
+    // then
+    expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
+    expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
+  });
 });

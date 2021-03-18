@@ -35,4 +35,26 @@ describe('AnalysisMapperService', () => {
     // then
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
   });
+
+  it('should convert to impact dto', () => {
+    // given
+    const analysis = SampleDataGenerator.getDummyAnalysis();
+
+    // when
+    const analysisDto = AnalysisMapperService.toImpactDto(analysis);
+
+    // then
+    expect(analysis.id === analysisDto.id).toBeTruthy();
+  });
+
+  it('should convert from impact dto', () => {
+    // given
+    const analysisDto = SampleDataGenerator.getDummyImpactAnalysisDto();
+
+    // when
+    const analysis = AnalysisMapperService.fromImpactDto(analysisDto);
+
+    // then
+    expect(analysis.id === analysisDto.id).toBeTruthy();
+  });
 });
