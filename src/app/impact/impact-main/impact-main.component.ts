@@ -1,5 +1,6 @@
+import { MatDialog } from '@angular/material/dialog';
 import { ImpactDataService } from './../services/impact/impact-data.service';
-import { Component, OnInit, Inject, HostListener, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
@@ -12,7 +13,8 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   windowScrolled = false;
 
-  constructor(private impactDataService: ImpactDataService) { }
+  constructor(
+    private impactDataService: ImpactDataService) { }
 
   ngOnInit(): void {
 

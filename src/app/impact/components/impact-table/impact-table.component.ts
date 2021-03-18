@@ -1,3 +1,5 @@
+import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { Dimension } from '../../models/Dimension';
 import { Stakeholder } from '../../models/Stakeholder';
@@ -31,7 +33,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   loaded: Promise<boolean> = Promise.resolve(false);
 
   constructor(
-    public impactDataService: ImpactDataService) {
+    public impactDataService: ImpactDataService,
+    private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -111,5 +114,15 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   deleteImpact(impact: Impact) {
     this.impactDataService.deleteImpact(impact);
+  }
+
+  openDimensionModal() {
+    console.log("Opening Dimension Modal Dialog.");
+    const dialogRef = this.dialog.open(DimensionDialogComponent, { data: { p: 'test', b: 'auch test' } });
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('asdasdasd');
+
+
+    });
   }
 }
