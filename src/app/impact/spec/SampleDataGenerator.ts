@@ -72,8 +72,8 @@ export class SampleDataGenerator {
 
   static getDummyStakeholderDto(): StakeholderDto {
     let stakeholderDto = new StakeholderDto();
-    stakeholderDto.id = 'id';
-    stakeholderDto.name = 'name';
+    stakeholderDto.rootEntityID = 'id';
+    stakeholderDto.stakeholderName = 'name';
     return stakeholderDto;
   }
 
@@ -85,7 +85,7 @@ export class SampleDataGenerator {
 
   static getDummyAnalysisDto(): AnalysisDto {
     let analysisDto = new AnalysisDto();
-    analysisDto.id = 'analysisId';
+    analysisDto.rootEntityID = 'analysisId';
     return analysisDto;
   }
 }

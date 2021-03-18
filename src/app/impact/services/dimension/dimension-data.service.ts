@@ -43,12 +43,16 @@ export class DimensionDataService {
         dims.forEach(dim => {
           this.dimensions.push(DimensionMapperService.fromDto(dim));
         });
+        console.log('Dimensions loaded.');
+        console.log(this.dimensions);
         this.loadedDimensions.emit(this.dimensions);
       });
 
       // Load dimension types.
       this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
         this.dimensionTypes = dimTypes;
+        console.log('Dimension types loaded.');
+        console.log(this.dimensionTypes);
       });
       this.loadedDimensionTypes.emit(this.dimensionTypes);
     }

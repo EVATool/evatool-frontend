@@ -6,35 +6,35 @@ import { DimensionDto } from './../dtos/DimensionDto';
 export class DataLoader {
 
   // isDevMode();
-  public static readonly useDummyData: boolean = true;
+  public static readonly useDummyData: boolean = false;
 
   public static readonly dummyAnalysisDtos: AnalysisDto[] = [
     {
-      id: '1'
+      rootEntityID: '1'
     },
     {
-      id: '2'
+      rootEntityID: '2'
     },
     {
-      id: '3'
+      rootEntityID: '3'
     },
     {
-      id: '4'
+      rootEntityID: '4'
     }
   ];
 
   public static readonly dummyStakeholderDtos: StakeholderDto[] = [
     {
-      id: '1', name: 'Patient'
+      rootEntityID: '1', stakeholderName: 'Patient'
     },
     {
-      id: '2', name: 'Doctor'
+      rootEntityID: '2', stakeholderName: 'Doctor'
     },
     {
-      id: '3', name: 'Family'
+      rootEntityID: '3', stakeholderName: 'Family'
     },
     {
-      id: '4', name: 'Ensurance'
+      rootEntityID: '4', stakeholderName: 'Ensurance'
     }
   ];
 

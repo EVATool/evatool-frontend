@@ -12,7 +12,7 @@ export class AnalysisMapperService {
   static toDto(analysis: Analysis): AnalysisDto {
     let analysisDto = new AnalysisDto();
 
-    analysisDto.id = analysis.id;
+    analysisDto.rootEntityID = analysis.id;
 
     return analysisDto;
   }
@@ -20,7 +20,7 @@ export class AnalysisMapperService {
   static fromDto(analysisDto: AnalysisDto): Analysis {
     let analysis = new Analysis();
 
-    analysis.id = analysisDto.id;
+    analysis.id = analysisDto.rootEntityID;
 
     return analysis;
   }

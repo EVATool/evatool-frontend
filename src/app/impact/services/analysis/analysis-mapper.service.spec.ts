@@ -22,7 +22,7 @@ describe('AnalysisMapperService', () => {
     let analysisDto = AnalysisMapperService.toDto(analysis);
 
     // then
-    expect(analysis.id === analysisDto.id).toBeTruthy();
+    expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
   });
 
   it('should convert from dto', () => {
@@ -33,6 +33,6 @@ describe('AnalysisMapperService', () => {
     let analysis = AnalysisMapperService.fromDto(analysisDto);
 
     // then
-    expect(analysis.id === analysisDto.id).toBeTruthy();
+    expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
   });
 });

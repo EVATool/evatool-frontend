@@ -1,4 +1,4 @@
 export class StakeholderDto {
-  id = '';
-  name = '';
+  rootEntityID = '';
+  stakeholderName = '';
 }

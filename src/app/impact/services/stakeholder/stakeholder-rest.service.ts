@@ -17,19 +17,19 @@ export class StakeholderRestService {
 
   }
 
-  getDimensions(): Observable<StakeholderDto[]> {
+  getStakeholders(): Observable<StakeholderDto[]> {
     return this.http.get<StakeholderDto[]>(RestSettings.stakeholdersUrl);
   }
 
-  createDimension(stakeholderDto: StakeholderDto): Observable<any> {
+  createStakeholder(stakeholderDto: StakeholderDto): Observable<any> {
     return this.http.post(RestSettings.stakeholdersUrl, stakeholderDto, RestSettings.httpOptions);
   }
 
-  updateDimension(stakeholderDto: StakeholderDto): Observable<any> {
+  updateStakeholder(stakeholderDto: StakeholderDto): Observable<any> {
     return this.http.put(RestSettings.stakeholdersUrl, stakeholderDto, RestSettings.httpOptions);
   }
 
-  deleteDimension(stakeholderDto: StakeholderDto): Observable<any> {
-    return this.http.delete(RestSettings.stakeholdersUrl + '/' + stakeholderDto.id);
+  deleteStakeholder(stakeholderDto: StakeholderDto): Observable<any> {
+    return this.http.delete(RestSettings.stakeholdersUrl + '/' + stakeholderDto.rootEntityID);
   }
 }

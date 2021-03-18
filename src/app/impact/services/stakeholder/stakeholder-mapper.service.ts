@@ -12,8 +12,8 @@ export class StakeholderMapperService {
   static toDto(stakeholder: Stakeholder): StakeholderDto {
     let stakeholderDto = new StakeholderDto();
 
-    stakeholderDto.id = stakeholder.id;
-    stakeholderDto.name = stakeholder.name;
+    stakeholderDto.rootEntityID = stakeholder.id;
+    stakeholderDto.stakeholderName = stakeholder.name;
 
     return stakeholderDto;
   }
@@ -21,8 +21,8 @@ export class StakeholderMapperService {
   static fromDto(stakeholderDto: StakeholderDto): Stakeholder {
     let stakeholder = new Stakeholder();
 
-    stakeholder.id = stakeholderDto.id;
-    stakeholder.name = stakeholderDto.name;
+    stakeholder.id = stakeholderDto.rootEntityID;
+    stakeholder.name = stakeholderDto.stakeholderName;
 
     return stakeholder;
   }

@@ -44,14 +44,14 @@ export class ImpactMapperService {
     });
 
     stakeholders.forEach(stakeholder => {
-      if (stakeholder.id === impactDto.stakeholderDto.id) {
+      if (stakeholder.id === impactDto.stakeholderDto.rootEntityID) {
         impact.stakeholder = stakeholder;
         return;
       }
     });
 
     analyses.forEach(analysis => {
-      if (analysis.id === impactDto.analysisDto.id) {
+      if (analysis.id === impactDto.analysisDto.rootEntityID) {
         impact.analysis = analysis;
         return;
       }

@@ -1,3 +1,4 @@
+import { AnalysisRestService } from './analysis-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { AnalysisDto } from './../../dtos/AnalysisDto';
 import { AnalysisMapperService } from './analysis-mapper.service';
@@ -12,20 +13,28 @@ export class AnalysisDataService {
 
   analyses: Analysis[] = [];
 
-  constructor() {
+  constructor(private analysisRestService: AnalysisRestService) {
 
   }
 
   onInit() {
     if (DataLoader.useDummyData) {
-      // Load dummy stakeholders.
+      // Load dummy analyses.
       DataLoader.dummyAnalysisDtos.forEach(ana => {
         this.analyses.push(AnalysisMapperService.fromDto(ana));
       });
       console.log('Analyses loaded.');
       this.loadedAnalyses.emit(this.analyses);
     } else {
-
+      // Load analyses.
+      this.analysisRestService.getAnalyses().subscribe(anas => {
+        anas.forEach(ana => {
+          this.analyses.push(AnalysisMapperService.fromDto(ana));
+        });
+        console.log('Analyses loaded.');
+        console.log(this.analyses);
+        this.loadedAnalyses.emit(this.analyses);
+      });
     }
   }
 }

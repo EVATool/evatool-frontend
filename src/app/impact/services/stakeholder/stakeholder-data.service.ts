@@ -19,14 +19,22 @@ export class StakeholderDataService {
 
   onInit() {
     if (DataLoader.useDummyData) {
-      // Load dummy stakeholders.
+      // Load dummy Stakeholders.
       DataLoader.dummyStakeholderDtos.forEach(stk => {
         this.stakeholders.push(StakeholderMapperService.fromDto(stk));
       });
       console.log('Stakeholders loaded.');
       this.loadedStakeholders.emit(this.stakeholders);
     } else {
-
+      // Load stakeholders.
+      this.stakeholderRestService.getStakeholders().subscribe(stks => {
+        stks.forEach(stk => {
+          this.stakeholders.push(StakeholderMapperService.fromDto(stk));
+        });
+        console.log('Stakeholders loaded.');
+        console.log(this.stakeholders);
+        this.loadedStakeholders.emit(this.stakeholders);
+      });
     }
   }
 

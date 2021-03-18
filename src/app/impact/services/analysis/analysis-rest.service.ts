@@ -17,7 +17,7 @@ export class AnalysisRestService {
 
   }
 
-  getDimensions(): Observable<AnalysisDto[]> {
+  getAnalyses(): Observable<AnalysisDto[]> {
     return this.http.get<AnalysisDto[]>(RestSettings.analysesUrl);
   }
 }
