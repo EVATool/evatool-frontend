@@ -1,5 +1,5 @@
-import { StakeholderDto } from './../../dtos/StakeholderDto';
-import { Stakeholder } from './../../models/Stakeholder';
+import { StakeholderDto } from '../../dtos/StakeholderDto';
+import { Stakeholder } from '../../models/Stakeholder';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class StakeholderMapperService {
   constructor() { }
 
   static toDto(stakeholder: Stakeholder): StakeholderDto {
-    let stakeholderDto = new StakeholderDto();
+    const stakeholderDto = new StakeholderDto();
 
     stakeholderDto.rootEntityID = stakeholder.id;
     stakeholderDto.stakeholderName = stakeholder.name;
@@ -19,7 +19,7 @@ export class StakeholderMapperService {
   }
 
   static fromDto(stakeholderDto: StakeholderDto): Stakeholder {
-    let stakeholder = new Stakeholder();
+    const stakeholder = new Stakeholder();
 
     stakeholder.id = stakeholderDto.rootEntityID;
     stakeholder.name = stakeholderDto.stakeholderName;

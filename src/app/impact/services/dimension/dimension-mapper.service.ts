@@ -1,5 +1,5 @@
-import { DimensionDto } from './../../dtos/DimensionDto';
-import { Dimension } from './../../models/Dimension';
+import { DimensionDto } from '../../dtos/DimensionDto';
+import { Dimension } from '../../models/Dimension';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class DimensionMapperService {
   constructor() { }
 
   static toDto(dimension: Dimension): DimensionDto {
-    let dimensionDto = new DimensionDto();
+    const dimensionDto = new DimensionDto();
 
     dimensionDto.id = dimension.id;
     dimensionDto.name = dimension.name;
@@ -21,7 +21,7 @@ export class DimensionMapperService {
   }
 
   static fromDto(dimensionDto: DimensionDto): Dimension {
-    let dimension = new Dimension();
+    const dimension = new Dimension();
 
     dimension.id = dimensionDto.id;
     dimension.name = dimensionDto.name;

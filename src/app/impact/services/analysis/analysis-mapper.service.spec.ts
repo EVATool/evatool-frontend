@@ -1,4 +1,4 @@
-import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
+import { SampleDataGenerator } from '../../spec/SampleDataGenerator';
 import { TestBed } from '@angular/core/testing';
 import { AnalysisMapperService } from './analysis-mapper.service';
 
@@ -16,10 +16,10 @@ describe('AnalysisMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    let analysis = SampleDataGenerator.getDummyAnalysis();
+    const analysis = SampleDataGenerator.getDummyAnalysis();
 
     // when
-    let analysisDto = AnalysisMapperService.toDto(analysis);
+    const analysisDto = AnalysisMapperService.toDto(analysis);
 
     // then
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
@@ -27,10 +27,10 @@ describe('AnalysisMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let analysisDto = SampleDataGenerator.getDummyAnalysisDto();
+    const analysisDto = SampleDataGenerator.getDummyAnalysisDto();
 
     // when
-    let analysis = AnalysisMapperService.fromDto(analysisDto);
+    const analysis = AnalysisMapperService.fromDto(analysisDto);
 
     // then
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();

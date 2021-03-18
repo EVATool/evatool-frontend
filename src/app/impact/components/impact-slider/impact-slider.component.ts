@@ -23,7 +23,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
 
   }
 
-  sliderValueChanged(event: MatSliderChange) {
+  sliderValueChanged(event: MatSliderChange): void {
     this.valueChange.emit(event.value);
   }
 }

@@ -1,7 +1,7 @@
-import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
-import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
-import { StakeholderMapperService } from './../stakeholder/stakeholder-mapper.service';
-import { DimensionMapperService } from './../dimension/dimension-mapper.service';
+import { SampleDataGenerator } from '../../spec/SampleDataGenerator';
+import { AnalysisMapperService } from '../analysis/analysis-mapper.service';
+import { StakeholderMapperService } from '../stakeholder/stakeholder-mapper.service';
+import { DimensionMapperService } from '../dimension/dimension-mapper.service';
 import { TestBed } from '@angular/core/testing';
 import { ImpactMapperService } from './impact-mapper.service';
 
@@ -19,10 +19,10 @@ describe('ImpactMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    let impact = SampleDataGenerator.getDummyImpact();
+    const impact = SampleDataGenerator.getDummyImpact();
 
     // when
-    let impactDto = ImpactMapperService.toDto(impact);
+    const impactDto = ImpactMapperService.toDto(impact);
 
     // then
     expect(impact.id === impactDto.id).toBeTruthy();
@@ -32,13 +32,13 @@ describe('ImpactMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let dimension = SampleDataGenerator.getDummyDimensionDto();
-    let stakeholder = SampleDataGenerator.getDummyStakeholderDto();
-    let analysis = SampleDataGenerator.getDummyAnalysisDto();
-    let impactDto = SampleDataGenerator.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
+    const dimension = SampleDataGenerator.getDummyDimensionDto();
+    const stakeholder = SampleDataGenerator.getDummyStakeholderDto();
+    const analysis = SampleDataGenerator.getDummyAnalysisDto();
+    const impactDto = SampleDataGenerator.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
 
     // when
-    let impact = ImpactMapperService.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
+    const impact = ImpactMapperService.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
 
     // then
     expect(impact.id === impactDto.id).toBeTruthy();

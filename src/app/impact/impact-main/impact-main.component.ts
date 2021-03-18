@@ -1,5 +1,5 @@
-import { ImpactDataService } from './../services/impact/impact-data.service';
-import { Component, OnInit, Inject, HostListener, ViewChild, AfterViewInit } from '@angular/core';
+import { ImpactDataService } from '../services/impact/impact-data.service';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
@@ -18,13 +18,13 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.scrollbarRef?.scrolled.subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
-    })
+    });
   }
 
-  scrollToTop() {
+  scrollToTop(): void {
     const options = { top: 0, duration: 250 };
     this.scrollbarRef.scrollTo(options);
   }
@@ -35,11 +35,11 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     this.scrollbarRef.scrollTo(options);
 
     // Test debug
-    //console.log(this.impactDataService.impacts[0].value);
-    //this.impactDataService.impacts[0].value = 1;
+    // console.log(this.impactDataService.impacts[0].value);
+    // this.impactDataService.impacts[0].value = 1;
   }
 
-  searchTextChange(searchValue: string) {
+  searchTextChange(searchValue: string): void {
     console.log(searchValue);
   }
 }

@@ -1,5 +1,5 @@
-import { AnalysisDto } from './../../dtos/AnalysisDto';
-import { Analysis } from './../../models/Analysis';
+import { AnalysisDto } from '../../dtos/AnalysisDto';
+import { Analysis } from '../../models/Analysis';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class AnalysisMapperService {
   constructor() { }
 
   static toDto(analysis: Analysis): AnalysisDto {
-    let analysisDto = new AnalysisDto();
+    const analysisDto = new AnalysisDto();
 
     analysisDto.rootEntityID = analysis.id;
 
@@ -18,7 +18,7 @@ export class AnalysisMapperService {
   }
 
   static fromDto(analysisDto: AnalysisDto): Analysis {
-    let analysis = new Analysis();
+    const analysis = new Analysis();
 
     analysis.id = analysisDto.rootEntityID;
 
