@@ -1,4 +1,3 @@
-import { Dimension } from './../models/Dimension';
 import { AnalysisDto } from './../dtos/AnalysisDto';
 import { StakeholderDto } from './../dtos/StakeholderDto';
 import { DimensionDto } from './../dtos/DimensionDto';

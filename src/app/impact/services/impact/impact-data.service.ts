@@ -92,7 +92,6 @@ export class ImpactDataService {
   private createDefaultImpact(): Impact {
     const impact = new Impact();
 
-    impact.id = 'I00' + (this.impacts.length + 1);
     impact.value = 0.0;
     impact.description = '';
     impact.dimension = this.dimensionDataService.getDefaultDimension();
