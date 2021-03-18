@@ -22,9 +22,9 @@ export class ImpactMapperService {
     impactDto.value = impact.value;
     impactDto.description = impact.description;
 
-    impactDto.dimensionDto = DimensionMapperService.toDto(impact.dimension);
-    impactDto.stakeholderDto = StakeholderMapperService.toDto(impact.stakeholder);
-    impactDto.analysisDto = AnalysisMapperService.toDto(impact.stakeholder);
+    impactDto.dimension = DimensionMapperService.toDto(impact.dimension);
+    impactDto.stakeholder = StakeholderMapperService.toDto(impact.stakeholder);
+    impactDto.analysis = AnalysisMapperService.toDto(impact.stakeholder);
 
     return impactDto;
   }

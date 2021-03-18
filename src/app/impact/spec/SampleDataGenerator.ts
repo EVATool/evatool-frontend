@@ -28,9 +28,9 @@ export class SampleDataGenerator {
     impactDto.id = 'id';
     impactDto.value = 0.0;
     impactDto.description = 'description';
-    impactDto.dimensionDto = this.getDummyDimensionDto();
-    impactDto.stakeholderDto = this.getDummyStakeholderDto();
-    impactDto.analysisDto = this.getDummyAnalysisDto();
+    impactDto.dimension = this.getDummyDimensionDto();
+    impactDto.stakeholder = this.getDummyStakeholderDto();
+    impactDto.analysis = this.getDummyAnalysisDto();
     return impactDto;
   }
 
@@ -39,9 +39,9 @@ export class SampleDataGenerator {
     impactDto.id = 'id';
     impactDto.value = 0.0;
     impactDto.description = 'description';
-    impactDto.dimensionDto = DimensionMapperService.toDto(dimension);
-    impactDto.stakeholderDto = StakeholderMapperService.toDto(stakeholder);
-    impactDto.analysisDto = AnalysisMapperService.toDto(analysis);
+    impactDto.dimension = DimensionMapperService.toDto(dimension);
+    impactDto.stakeholder = StakeholderMapperService.toDto(stakeholder);
+    impactDto.analysis = AnalysisMapperService.toDto(analysis);
     return impactDto;
   }
 

@@ -1,7 +1,4 @@
 import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
-import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
-import { StakeholderMapperService } from './../stakeholder/stakeholder-mapper.service';
-import { DimensionMapperService } from './../dimension/dimension-mapper.service';
 import { TestBed } from '@angular/core/testing';
 import { ImpactMapperService } from './impact-mapper.service';
 
@@ -32,9 +29,9 @@ describe('ImpactMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let dimension = SampleDataGenerator.getDummyDimensionDto();
-    let stakeholder = SampleDataGenerator.getDummyStakeholderDto();
-    let analysis = SampleDataGenerator.getDummyAnalysisDto();
+    let dimension = SampleDataGenerator.getDummyDimension();
+    let stakeholder = SampleDataGenerator.getDummyStakeholder();
+    let analysis = SampleDataGenerator.getDummyAnalysis();
     let impactDto = SampleDataGenerator.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
 
     // when
@@ -45,8 +42,8 @@ describe('ImpactMapperService', () => {
     expect(impact.value === impactDto.value).toBeTruthy();
     expect(impact.description === impactDto.description).toBeTruthy();
 
-    expect(impact.dimension.id === impactDto.dimensionDto.id).toBeTruthy();
-    expect(impact.stakeholder.id === impactDto.stakeholderDto.id).toBeTruthy();
-    expect(impact.analysis.id === impactDto.analysisDto.id).toBeTruthy();
+    expect(impact.dimension.id === impactDto.dimension.id).toBeTruthy();
+    expect(impact.stakeholder.rootEntityID === impactDto.stakeholder.rootEntityID).toBeTruthy();
+    expect(impact.analysis.rootEntityID === impactDto.analysis.rootEntityID).toBeTruthy();
   });
 });
