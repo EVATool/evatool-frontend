@@ -5,65 +5,67 @@
 
   <div class="panel-container">
     <ng-scrollbar>
-      <mat-expansion-panel expanded="socialDimensionState" (opened)="socialDimensionState = true"
-        (closed)="socialDimensionState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Social Dimensions
-          </mat-panel-title>
-          <mat-panel-description>
+      <mat-accordion multi>
+        <mat-expansion-panel expanded="socialDimensionState" (opened)="socialDimensionState = true"
+          (closed)="socialDimensionState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Social Dimensions
+            </mat-panel-title>
+            <mat-panel-description>
 
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div>
-          
-
-
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div>
 
 
 
 
 
 
-          <p>I'm visible because I am open</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-        </div>
-      </mat-expansion-panel>
 
-      <mat-expansion-panel expanded="economicDimensionState" (opened)="economicDimensionState = true"
-        (closed)="economicDimensionState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Economic Dimensions
-          </mat-panel-title>
-          <mat-panel-description>
 
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div>
-          <p>I'm visible because I am open</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-          <p>Here would be the table</p>
-        </div>
-      </mat-expansion-panel>
+
+            <p>I'm visible because I am open</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="economicDimensionState" (opened)="economicDimensionState = true"
+          (closed)="economicDimensionState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Economic Dimensions
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div>
+            <p>I'm visible because I am open</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+            <p>Here would be the table</p>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </ng-scrollbar>
   </div>
 
