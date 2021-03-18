@@ -1,4 +1,4 @@
-import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
+import { SampleDataGenerator } from '../../spec/SampleDataGenerator';
 import { TestBed } from '@angular/core/testing';
 import { DimensionMapperService } from './dimension-mapper.service';
 
@@ -16,10 +16,10 @@ describe('DimensionMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    let dimension = SampleDataGenerator.getDummyDimension();
+    const dimension = SampleDataGenerator.getDummyDimension();
 
     // when
-    let dimensionDto = DimensionMapperService.toDto(dimension);
+    const dimensionDto = DimensionMapperService.toDto(dimension);
 
     // then
     expect(dimension.id === dimensionDto.id).toBeTruthy();
@@ -30,10 +30,10 @@ describe('DimensionMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let dimensionDto =SampleDataGenerator.getDummyDimensionDto();
+    const dimensionDto = SampleDataGenerator.getDummyDimensionDto();
 
     // when
-    let dimension = DimensionMapperService.fromDto(dimensionDto);
+    const dimension = DimensionMapperService.fromDto(dimensionDto);
 
     // then
     expect(dimension.id === dimensionDto.id).toBeTruthy();

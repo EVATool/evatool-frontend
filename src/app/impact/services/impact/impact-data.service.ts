@@ -1,14 +1,13 @@
 import { ImpactRestService } from './impact-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
-import { Analysis } from './../../models/Analysis';
-import { Dimension } from './../../models/Dimension';
-import { Stakeholder } from './../../models/Stakeholder';
-import { ImpactDto } from './../../dtos/ImpactDto';
+import { Analysis } from '../../models/Analysis';
+import { Dimension } from '../../models/Dimension';
+import { Stakeholder } from '../../models/Stakeholder';
 import { ImpactMapperService } from './impact-mapper.service';
-import { AnalysisDataService } from './../analysis/analysis-data.service';
-import { DimensionDataService } from './../dimension/dimension-data.service';
-import { StakeholderDataService } from './../stakeholder/stakeholder-data.service';
-import { Impact } from './../../models/Impact';
+import { AnalysisDataService } from '../analysis/analysis-data.service';
+import { DimensionDataService } from '../dimension/dimension-data.service';
+import { StakeholderDataService } from '../stakeholder/stakeholder-data.service';
+import { Impact } from '../../models/Impact';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
@@ -37,7 +36,7 @@ export class ImpactDataService {
     private analysisDataService: AnalysisDataService) {
   }
 
-  onInit() {
+  onInit(): void {
     this.stakeholderDataService.loadedStakeholders.subscribe(stakeholders => {
       this.stakeholders = stakeholders;
       this.stakeholdersLoaded = true;
@@ -61,7 +60,7 @@ export class ImpactDataService {
     this.analysisDataService.onInit();
   }
 
-  private loadIfChildrenAreLoaded() {
+  private loadIfChildrenAreLoaded(): void {
     if (DataLoader.useDummyData) {
       if (this.getChildrenLoaded() && !this.impactsLoaded) {
         // Load dummy impacts.
@@ -98,7 +97,7 @@ export class ImpactDataService {
     impact.description = '';
     impact.dimension = this.dimensionDataService.getDefaultDimension();
     impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
-    //impact.analysis = this.analysisDataService.getCurrentAnalyses();???
+    // impact.analysis = this.analysisDataService.getCurrentAnalyses();???
 
     return impact;
   }

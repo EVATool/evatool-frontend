@@ -1,21 +1,21 @@
-import { ImpactAnalysisDto } from './../dtos/ImpactAnalysisDto';
-import { ImpactStakeholderDto } from './../dtos/ImpactStakeholderDto';
-import { StakeholderMapperService } from './../services/stakeholder/stakeholder-mapper.service';
-import { AnalysisMapperService } from './../services/analysis/analysis-mapper.service';
-import { DimensionMapperService } from './../services/dimension/dimension-mapper.service';
-import { Impact } from './../models/Impact';
-import { ImpactDto } from './../dtos/ImpactDto';
-import { StakeholderDto } from './../dtos/StakeholderDto';
-import { Stakeholder } from './../models/Stakeholder';
-import { Analysis } from './../models/Analysis';
-import { AnalysisDto } from './../dtos/AnalysisDto';
-import { DimensionDto } from './../dtos/DimensionDto';
-import { Dimension } from './../models/Dimension';
+import { StakeholderMapperService } from '../services/stakeholder/stakeholder-mapper.service';
+import { AnalysisMapperService } from '../services/analysis/analysis-mapper.service';
+import { DimensionMapperService } from '../services/dimension/dimension-mapper.service';
+import { Impact } from '../models/Impact';
+import { ImpactDto } from '../dtos/ImpactDto';
+import { StakeholderDto } from '../dtos/StakeholderDto';
+import { Stakeholder } from '../models/Stakeholder';
+import { Analysis } from '../models/Analysis';
+import { AnalysisDto } from '../dtos/AnalysisDto';
+import { DimensionDto } from '../dtos/DimensionDto';
+import { Dimension } from '../models/Dimension';
+import { ImpactStakeholderDto } from '../dtos/ImpactStakeholderDto';
+import { ImpactAnalysisDto } from '../dtos/ImpactAnalysisDto';
 
 export class SampleDataGenerator {
 
   static getDummyImpact(): Impact {
-    let impact = new Impact();
+    const impact = new Impact();
     impact.id = 'imapctId';
     impact.value = 0.0;
     impact.description = 'imapctDescription';
@@ -26,7 +26,7 @@ export class SampleDataGenerator {
   }
 
   static getDummyImpactDto(): ImpactDto {
-    let impactDto = new ImpactDto();
+    const impactDto = new ImpactDto();
     impactDto.id = 'imapctId';
     impactDto.value = 0.0;
     impactDto.description = 'imapctDescription';
@@ -37,7 +37,7 @@ export class SampleDataGenerator {
   }
 
   static getDummyImpactDtoWithMyChildren(dimension: Dimension, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
-    let impactDto = new ImpactDto();
+    const impactDto = new ImpactDto();
     impactDto.id = 'imapctId';
     impactDto.value = 0.0;
     impactDto.description = 'imapctDescription';
@@ -48,7 +48,7 @@ export class SampleDataGenerator {
   }
 
   static getDummyDimension(): Dimension {
-    let dimension = new Dimension();
+    const dimension = new Dimension();
     dimension.id = 'dimensionId';
     dimension.name = 'dimensionName';
     dimension.type = 'dimensionType';
@@ -57,7 +57,7 @@ export class SampleDataGenerator {
   }
 
   static getDummyDimensionDto(): DimensionDto {
-    let dimensionDto = new DimensionDto();
+    const dimensionDto = new DimensionDto();
     dimensionDto.id = 'dimensionId';
     dimensionDto.name = 'dimensionName';
     dimensionDto.type = 'dimensionType';
@@ -66,38 +66,38 @@ export class SampleDataGenerator {
   }
 
   static getDummyStakeholder(): Stakeholder {
-    let stakeholder = new Stakeholder();
+    const stakeholder = new Stakeholder();
     stakeholder.id = 'stakeholderId';
     stakeholder.name = 'stakeholderName';
-    return stakeholder
+    return stakeholder;
   }
 
   static getDummyStakeholderDto(): StakeholderDto {
-    let stakeholderDto = new StakeholderDto();
+    const stakeholderDto = new StakeholderDto();
     stakeholderDto.rootEntityID = 'stakeholderId';
     return stakeholderDto;
   }
 
   static getDummyImpactStakeholderDto(): ImpactStakeholderDto {
-    let stakeholderDto = new ImpactStakeholderDto();
+    const stakeholderDto = new ImpactStakeholderDto();
     stakeholderDto.id = 'stakeholderId';
     return stakeholderDto;
   }
 
   static getDummyAnalysis(): Analysis {
-    let analysis = new Analysis();
+    const analysis = new Analysis();
     analysis.id = 'analysisId';
-    return analysis
+    return analysis;
   }
 
   static getDummyAnalysisDto(): AnalysisDto {
-    let analysisDto = new AnalysisDto();
+    const analysisDto = new AnalysisDto();
     analysisDto.rootEntityID = 'analysisId';
     return analysisDto;
   }
 
   static getDummyImpactAnalysisDto(): ImpactAnalysisDto {
-    let analysisDto = new ImpactAnalysisDto();
+    const analysisDto = new ImpactAnalysisDto();
     analysisDto.id = 'analysisId';
     return analysisDto;
   }

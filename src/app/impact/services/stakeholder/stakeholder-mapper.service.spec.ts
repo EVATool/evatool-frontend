@@ -1,4 +1,4 @@
-import { SampleDataGenerator } from './../../spec/SampleDataGenerator';
+import { SampleDataGenerator } from '../../spec/SampleDataGenerator';
 import { TestBed } from '@angular/core/testing';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 
@@ -16,10 +16,10 @@ describe('StakeholderMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    let stakeholder = SampleDataGenerator.getDummyStakeholder();
+    const stakeholder = SampleDataGenerator.getDummyStakeholder();
 
     // when
-    let stakeholderDto = StakeholderMapperService.toDto(stakeholder);
+    const stakeholderDto = StakeholderMapperService.toDto(stakeholder);
 
     // then
     expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
@@ -28,10 +28,10 @@ describe('StakeholderMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    let stakeholderDto = SampleDataGenerator.getDummyStakeholderDto();
+    const stakeholderDto = SampleDataGenerator.getDummyStakeholderDto();
 
     // when
-    let stakeholder = StakeholderMapperService.fromDto(stakeholderDto);
+    const stakeholder = StakeholderMapperService.fromDto(stakeholderDto);
 
     // then
     expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();

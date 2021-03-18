@@ -1,8 +1,7 @@
 import { DataLoader } from '../../settings/DataLoader';
-import { StakeholderDto } from './../../dtos/StakeholderDto';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 import { StakeholderRestService } from './stakeholder-rest.service';
-import { Stakeholder } from './../../models/Stakeholder';
+import { Stakeholder } from '../../models/Stakeholder';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
@@ -17,7 +16,7 @@ export class StakeholderDataService {
 
   }
 
-  onInit() {
+  onInit(): void {
     if (DataLoader.useDummyData) {
       // Load dummy Stakeholders.
       DataLoader.dummyStakeholderDtos.forEach(stk => {

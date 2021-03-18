@@ -1,6 +1,6 @@
 import { ImpactAnalysisDto } from './../../dtos/ImpactAnalysisDto';
-import { AnalysisDto } from './../../dtos/AnalysisDto';
-import { Analysis } from './../../models/Analysis';
+import { AnalysisDto } from '../../dtos/AnalysisDto';
+import { Analysis } from '../../models/Analysis';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class AnalysisMapperService {
   constructor() { }
 
   static toDto(analysis: Analysis): AnalysisDto {
-    let analysisDto = new AnalysisDto();
+    const analysisDto = new AnalysisDto();
 
     analysisDto.rootEntityID = analysis.id;
 
@@ -19,7 +19,7 @@ export class AnalysisMapperService {
   }
 
   static fromDto(analysisDto: AnalysisDto): Analysis {
-    let analysis = new Analysis();
+    const analysis = new Analysis();
 
     analysis.id = analysisDto.rootEntityID;
 
@@ -27,7 +27,7 @@ export class AnalysisMapperService {
   }
 
   static toImpactDto(analysis: Analysis): ImpactAnalysisDto {
-    let analysisDto = new ImpactAnalysisDto();
+    const analysisDto = new ImpactAnalysisDto();
 
     analysisDto.id = analysis.id;
 
@@ -35,7 +35,7 @@ export class AnalysisMapperService {
   }
 
   static fromImpactDto(analysisDto: ImpactAnalysisDto): Analysis {
-    let analysis = new Analysis();
+    const analysis = new Analysis();
 
     analysis.id = analysisDto.id;
 

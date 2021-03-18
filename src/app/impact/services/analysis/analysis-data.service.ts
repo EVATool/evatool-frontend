@@ -1,8 +1,7 @@
 import { AnalysisRestService } from './analysis-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
-import { AnalysisDto } from './../../dtos/AnalysisDto';
 import { AnalysisMapperService } from './analysis-mapper.service';
-import { Analysis } from './../../models/Analysis';
+import { Analysis } from '../../models/Analysis';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
@@ -17,7 +16,7 @@ export class AnalysisDataService {
 
   }
 
-  onInit() {
+  onInit(): void {
     if (DataLoader.useDummyData) {
       // Load dummy analyses.
       DataLoader.dummyAnalysisDtos.forEach(ana => {

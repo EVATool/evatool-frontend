@@ -1,11 +1,11 @@
-import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
-import { Analysis } from './../../models/Analysis';
-import { Stakeholder } from './../../models/Stakeholder';
-import { Dimension } from './../../models/Dimension';
-import { StakeholderMapperService } from './../stakeholder/stakeholder-mapper.service';
-import { DimensionMapperService } from './../dimension/dimension-mapper.service';
-import { ImpactDto } from './../../dtos/ImpactDto';
-import { Impact } from './../../models/Impact';
+import { AnalysisMapperService } from '../analysis/analysis-mapper.service';
+import { Analysis } from '../../models/Analysis';
+import { Stakeholder } from '../../models/Stakeholder';
+import { Dimension } from '../../models/Dimension';
+import { StakeholderMapperService } from '../stakeholder/stakeholder-mapper.service';
+import { DimensionMapperService } from '../dimension/dimension-mapper.service';
+import { ImpactDto } from '../../dtos/ImpactDto';
+import { Impact } from '../../models/Impact';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ImpactMapperService {
   constructor() { }
 
   static toDto(impact: Impact): ImpactDto {
-    let impactDto = new ImpactDto();
+    const impactDto = new ImpactDto();
 
     impactDto.id = impact.id;
     impactDto.value = impact.value;
@@ -33,7 +33,7 @@ export class ImpactMapperService {
   // The child Dtos: The Dtos are not suffixed with *Dto in the backend return content.
   // The child Dtos attributes: The ids do not have the names of the owner domain, due to the domain impact using other names.
   static fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
-    let impact = new Impact();
+    const impact = new Impact();
 
     impact.id = impactDto.id;
     impact.value = impactDto.value;

@@ -1,12 +1,8 @@
 import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DimensionDataService } from '../../services/dimension/dimension-data.service';
-import { Dimension } from '../../models/Dimension';
-import { Stakeholder } from '../../models/Stakeholder';
-import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
 import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
-import { AfterViewInit, Component, OnInit, ViewChild, Inject, HostListener } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
@@ -50,7 +46,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
       this.tableDataSource.data = impacts;
-      //this.table.renderRows();
+      // this.table.renderRows();
     });
 
     this.impactDataService.onInit();
@@ -112,7 +108,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.searchToggles.set(key, !this.searchToggles.get(key));
   }
 
-  deleteImpact(impact: Impact) {
+  deleteImpact(impact: Impact): void {
     this.impactDataService.deleteImpact(impact);
   }
 

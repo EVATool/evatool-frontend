@@ -1,6 +1,6 @@
-import { RestSettings } from './../../settings/RestSettings';
+import { RestSettings } from '../../settings/RestSettings';
 import { Observable } from 'rxjs';
-import { AnalysisDto } from './../../dtos/AnalysisDto';
+import { AnalysisDto } from '../../dtos/AnalysisDto';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -13,7 +13,7 @@ export class AnalysisRestService {
 
   }
 
-  onInit() {
+  onInit(): void {
 
   }
 
