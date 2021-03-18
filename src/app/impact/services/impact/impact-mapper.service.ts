@@ -14,7 +14,7 @@ import { Injectable } from '@angular/core';
 export class ImpactMapperService {
 
   constructor() { }
-  
+
   static toDto(impact: Impact): ImpactDto {
     let impactDto = new ImpactDto();
 
@@ -29,7 +29,10 @@ export class ImpactMapperService {
     return impactDto;
   }
 
-  static fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
+  // impactDto: any has to be used, because the backend sends other names for both:
+  // The child Dtos: The Dtos are not suffixed with *Dto in the backend return content.
+  // The child Dtos attributes: The ids do not have the names of the owner domain, due to the domain impact using other names.
+  static fromDto(impactDto: any, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
     let impact = new Impact();
 
     impact.id = impactDto.id;
@@ -37,26 +40,29 @@ export class ImpactMapperService {
     impact.description = impactDto.description;
 
     dimensions.forEach(dimension => {
-      if (dimension.id === impactDto.dimensionDto.id) {
+      console.log(impact);
+      console.log(impactDto);
+
+      if (dimension.id === impactDto.dimension.id) {
         impact.dimension = dimension;
         return;
       }
     });
 
     stakeholders.forEach(stakeholder => {
-      if (stakeholder.id === impactDto.stakeholderDto.rootEntityID) {
+      if (stakeholder.id === impactDto.stakeholder.id) {
         impact.stakeholder = stakeholder;
         return;
       }
     });
 
     analyses.forEach(analysis => {
-      if (analysis.id === impactDto.analysisDto.rootEntityID) {
+      if (analysis.id === impactDto.analysis.id) {
         impact.analysis = analysis;
         return;
       }
     });
-    
+
     return impact;
   }
 }

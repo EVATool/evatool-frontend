@@ -1,3 +1,4 @@
+import { ImpactRestService } from './impact-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { Analysis } from './../../models/Analysis';
 import { Dimension } from './../../models/Dimension';
@@ -30,6 +31,7 @@ export class ImpactDataService {
   analysesLoaded = false;
 
   constructor(
+    private impactRestService: ImpactRestService,
     private stakeholderDataService: StakeholderDataService,
     private dimensionDataService: DimensionDataService,
     private analysisDataService: AnalysisDataService) {
@@ -62,7 +64,7 @@ export class ImpactDataService {
   private loadIfChildrenAreLoaded() {
     if (DataLoader.useDummyData) {
       if (this.getChildrenLoaded() && !this.impactsLoaded) {
-        // Load dummy dimensions.
+        // Load dummy impacts.
         DataLoader.dummyImpactDtos.forEach(imp => {
           this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
         });
@@ -71,6 +73,15 @@ export class ImpactDataService {
         this.impactsLoaded = true;
       }
     } else {
+      // Load impacts.
+      this.impactRestService.getImpacts().subscribe(imps => {
+        imps.forEach(imp => {
+          this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+        });
+        console.log('Impacts loaded.');
+        console.log(this.impacts);
+        this.loadedImpacts.emit(this.impacts);
+      });
 
     }
   }
