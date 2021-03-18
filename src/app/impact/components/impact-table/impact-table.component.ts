@@ -1,3 +1,4 @@
+import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ImpactDataService } from '../../services/impact/impact-data.service';
@@ -30,6 +31,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   constructor(
     public impactDataService: ImpactDataService,
+    public dimensionDataService: DimensionDataService,
     private dialog: MatDialog) {
   }
 
@@ -118,6 +120,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   openDimensionModal() {
+    if (!this.impactDataService.dimensionsLoaded) {
+      console.log("Dimensions not yet loaded.");
+      return;
+    }
     console.log("Opening Dimension Modal Dialog.");
     const dialogRef = this.dialog.open(DimensionDialogComponent, {
       height: '80%',
