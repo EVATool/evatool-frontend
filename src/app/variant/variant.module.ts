@@ -12,10 +12,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http';
-import { TestComponent } from './test/test.component';
 
 @NgModule({
-  declarations: [VariantMainComponent, VariantDialogComponent, TestComponent],
+  declarations: [VariantMainComponent, VariantDialogComponent],
   imports: [
     CommonModule,
     MatDialogModule,
