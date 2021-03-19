@@ -41,9 +41,17 @@ export class VariantDataService {
   }
 
 
-  save(variant: Variant): void{
-    this.variantRestService.createVariants({title: variant.title, description: variant.description,
-      stFlagsReal: false, stFlagsPot: false, subVariant: {}, analysisId: '5cf54163-c47b-4e11-a8c0-262e7c0fce2e'}).subscribe();
+  save(variant: Variant): void {
+    this.variantRestService.createVariants(
+      {
+        id: '',
+        archived: false,
+        guiId: '' ,
+        title: variant.title,
+        description: variant.description,
+        subVariant: {},
+        analysisId: '5cf54163-c47b-4e11-a8c0-262e7c0fce2e'
+      }).subscribe();
   }
 
 }

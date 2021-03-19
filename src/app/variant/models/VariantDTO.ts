@@ -1,10 +1,10 @@
 
 export class VariantDTO {
+  id: any = '';
   title: any = '';
   description: any = '';
-  stFlagsPot: any = false;
-  stFlagsReal: any = false;
   subVariant: any = {};
   analysisId: any = '';
-
+  guiId: any = '';
+  archived: any = false;
 }
