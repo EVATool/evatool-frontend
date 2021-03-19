@@ -22,20 +22,19 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.slider.value);
-    this.drawSlider();
+    this.drawSlider(this.value);
   }
 
   sliderValueChanged(event: MatSliderChange): void {
-    console.log(event.value);
+    console.log(`Slider Value Changed: ${event.value}`);
     this.valueChange.emit(event.value);
     if (event.value !== null) {
-      this.drawSlider();
+      this.drawSlider(event.value);
     }
   }
 
-  drawSlider(): void {
-    this.riskBar.nativeElement.style.width = Math.max(-this.value * 50, 0) + "%";
-    this.goalBar.nativeElement.style.width = Math.max(this.value * 50, 0) + "%";
+  drawSlider(value: number): void {
+    this.riskBar.nativeElement.style.width = Math.max(-value * 50, 0) + "%";
+    this.goalBar.nativeElement.style.width = Math.max(value * 50, 0) + "%";
   }
 }

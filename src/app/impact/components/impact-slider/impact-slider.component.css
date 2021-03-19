@@ -9,20 +9,21 @@
 
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-background, ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
   height: 100%;
+  background-color: transparent;
 }
 
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
-  background-color: blue;
-  color: black;
+  color: transparent;
+  background-color: transparent;
 }
 
 ::ng-deep .mat-accent .mat-slider-thumb {
   height: 30px;
   width: 30px;
-  background-color: white;
-  border: solid 2px gray;
-  bottom: -20px;
-  right: -20px;
+  color: transparent;
+  /* Make this transparent and draw custom slider handle. */
+  /* Where to hide the slider when its all the way to the left? */
+  background-color: gray;
 }
 
 ::ng-deep .mat-slider-track-background {
@@ -34,6 +35,8 @@
 .container {
   vertical-align: middle;
   position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 #goal-bar {
@@ -41,7 +44,7 @@
   width: 50%;
   height: 30px;
   float: left;
-  left: 10%;
+  margin-left: 50%;
 }
 
 #risk-bar {
@@ -49,8 +52,12 @@
   width: 50%;
   height: 30px;
   float: right;
+  margin-right: 50%;
 }
 
 #slider-container {
   position: relative;
+  width: 100%;
+  height: 100%;
+  left: 3%;
 }
