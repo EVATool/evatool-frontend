@@ -6,7 +6,7 @@ import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component
 @Component({
   selector: 'app-variant-main',
   templateUrl: './variant-main.component.html',
-  styleUrls: ['./variant-main.component.css']
+  styleUrls: ['./variant-main.component.scss']
 })
 export class VariantMainComponent implements OnInit {
 

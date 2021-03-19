@@ -11,7 +11,7 @@ import {BrowserModule} from '@angular/platform-browser';
 @Component({
   selector: 'app-variant-dialog',
   templateUrl: './variant-dialog.component.html',
-  styleUrls: ['./variant-dialog.component.css']
+  styleUrls: ['./variant-dialog.component.scss']
 })
 export class VariantDialogComponent implements OnInit {
 
