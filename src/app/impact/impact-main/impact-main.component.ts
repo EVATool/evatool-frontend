@@ -12,8 +12,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   windowScrolled = false;
 
-  constructor(
-    private impactDataService: ImpactDataService) { }
+  constructor(private impactDataService: ImpactDataService) { }
 
   ngOnInit(): void {
 

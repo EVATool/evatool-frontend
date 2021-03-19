@@ -1,5 +1,5 @@
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
-import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-impact-slider',
@@ -10,6 +10,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @Input() value!: number;
   @Output() valueChange = new EventEmitter<number | null>();
   @ViewChild(MatSlider) slider!: MatSlider;
+  @ViewChild('goal') goalBar!: ElementRef;
+  @ViewChild('risk') riskBar!: ElementRef;
 
   constructor() {
 
@@ -20,10 +22,22 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
+    console.log(this.slider.value);
+    this.drawSlider(this.value);
   }
 
   sliderValueChanged(event: MatSliderChange): void {
+    console.log(event.value);
     this.valueChange.emit(event.value);
+    if (event.value !== null) {
+      this.drawSlider(event.value);
+    }
+  }
+
+  drawSlider(value: number): void {
+    if (value !== null) {
+      this.riskBar.nativeElement.style.width = Math.max(-value * 50, 0) + "%";
+      this.goalBar.nativeElement.style.width = Math.max(value * 50, 0) + "%";
+    }
   }
 }

@@ -50,11 +50,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     });
 
     this.impactDataService.onInit();
-
-    const openDialog = true;
-    if (isDevMode() && openDialog) {
-      this.openDimensionModal();
-    }
   }
 
   private initSorting(): void {
