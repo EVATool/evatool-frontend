@@ -1,6 +1,6 @@
 .variant-dialog{
-  min-height: 50vh;
-  min-width: 30vw;
+  height: 50vh;
+  width: 30vw;
 }
 
 .variant-table{
