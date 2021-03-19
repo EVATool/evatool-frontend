@@ -1,7 +1,6 @@
 .variant-dialog{
-  min-height: 80vh;
-  min-width: 60vw;
-  font-size: 16px;
+  min-height: 50vh;
+  min-width: 30vw;
 }
 
 .variant-table{
@@ -29,3 +28,7 @@
   border-radius: 100px;
 }
 
+.mat-cell, .mat-footer-cell {
+  font-size: 20px;
+  word-wrap: break-word;
+}
