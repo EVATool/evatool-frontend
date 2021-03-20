@@ -123,24 +123,29 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.searchToggles.set(key, !this.searchToggles.get(key));
   }
 
+  updateImpact(impact: Impact): void {
+    this.impactDataService.updateImpact(impact);
+  }
+
   deleteImpact(impact: Impact): void {
     this.impactDataService.deleteImpact(impact);
   }
 
-  stakeholderChange(event: MatSelectChange) {
+  stakeholderChange(impact: Impact, event: MatSelectChange) {
     console.log("Stakeholder changed");
   }
 
-  dimensionChange(event: MatSelectChange) {
+  dimensionChange(impact: Impact, event: MatSelectChange) {
     console.log("Dimension changed");
   }
 
-  valueChange(event: MatSliderChange) {
+  valueChange(impact: Impact, event: MatSliderChange) {
     console.log("Value changed");
   }
 
-  descriptionChange(event: Event) {
+  descriptionChange(impact: Impact, event: Event) {
     console.log("Description changed");
+    //this.updateImpact();
   }
 
   openDimensionModal(): void {
