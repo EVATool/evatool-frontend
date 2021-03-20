@@ -18,7 +18,9 @@ export class DimensionDataService {
   public dimensions: Dimension[] = [];
   public dimensionTypes: string[] = [];
 
-  constructor(private dimensionRestService: DimensionRestService) {
+  constructor(
+    private dimensionMapperService: DimensionMapperService,
+    private dimensionRestService: DimensionRestService) {
 
   }
 
@@ -26,7 +28,7 @@ export class DimensionDataService {
     if (DataLoader.useDummyData) {
       // Load dummy dimensions.
       DataLoader.dummyDimensionDtos.forEach(dim => {
-        this.dimensions.push(DimensionMapperService.fromDto(dim));
+        this.dimensions.push(this.dimensionMapperService.fromDto(dim));
       });
       console.log('Dimensions loaded.');
       this.loadedDimensions.emit(this.dimensions);
@@ -41,7 +43,7 @@ export class DimensionDataService {
       // Load dimensions.
       this.dimensionRestService.getDimensions().subscribe(dims => {
         dims.forEach(dim => {
-          this.dimensions.push(DimensionMapperService.fromDto(dim));
+          this.dimensions.push(this.dimensionMapperService.fromDto(dim));
         });
         console.log('Dimensions loaded.');
         console.log(this.dimensions);

@@ -12,15 +12,15 @@ export class StakeholderDataService {
 
   stakeholders: Stakeholder[] = [];
 
-  constructor(private stakeholderRestService: StakeholderRestService) {
-
-  }
+  constructor(
+    private stakeholderMapperService: StakeholderMapperService,
+    private stakeholderRestService: StakeholderRestService) { }
 
   onInit(): void {
     if (DataLoader.useDummyData) {
       // Load dummy Stakeholders.
       DataLoader.dummyStakeholderDtos.forEach(stk => {
-        this.stakeholders.push(StakeholderMapperService.fromDto(stk));
+        this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
       });
       console.log('Stakeholders loaded.');
       this.loadedStakeholders.emit(this.stakeholders);
@@ -28,7 +28,7 @@ export class StakeholderDataService {
       // Load stakeholders.
       this.stakeholderRestService.getStakeholders().subscribe(stks => {
         stks.forEach(stk => {
-          this.stakeholders.push(StakeholderMapperService.fromDto(stk));
+          this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
         });
         console.log('Stakeholders loaded.');
         console.log(this.stakeholders);

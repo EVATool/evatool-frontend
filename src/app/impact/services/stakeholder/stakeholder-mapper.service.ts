@@ -10,7 +10,7 @@ export class StakeholderMapperService {
 
   constructor() { }
 
-  static toDto(stakeholder: Stakeholder): StakeholderDto {
+  toDto(stakeholder: Stakeholder): StakeholderDto {
     const stakeholderDto = new StakeholderDto();
 
     stakeholderDto.rootEntityID = stakeholder.id;
@@ -19,7 +19,7 @@ export class StakeholderMapperService {
     return stakeholderDto;
   }
 
-  static fromDto(stakeholderDto: StakeholderDto): Stakeholder {
+  fromDto(stakeholderDto: StakeholderDto): Stakeholder {
     const stakeholder = new Stakeholder();
 
     stakeholder.id = stakeholderDto.rootEntityID;
@@ -28,7 +28,7 @@ export class StakeholderMapperService {
     return stakeholder;
   }
 
-  static toImpactDto(stakeholder: Stakeholder): ImpactStakeholderDto {
+  toImpactDto(stakeholder: Stakeholder): ImpactStakeholderDto {
     const stakeholderDto = new ImpactStakeholderDto();
 
     stakeholderDto.id = stakeholder.id;
@@ -37,7 +37,7 @@ export class StakeholderMapperService {
     return stakeholderDto;
   }
 
-  static fromImpactDto(stakeholderDto: ImpactStakeholderDto): Stakeholder {
+  fromImpactDto(stakeholderDto: ImpactStakeholderDto): Stakeholder {
     const stakeholder = new Stakeholder();
 
     stakeholder.id = stakeholderDto.id;

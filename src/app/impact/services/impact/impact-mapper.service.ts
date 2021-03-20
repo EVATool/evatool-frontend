@@ -1,4 +1,4 @@
-import { AnalysisMapperService } from '../analysis/analysis-mapper.service';
+import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
 import { Analysis } from '../../models/Analysis';
 import { Stakeholder } from '../../models/Stakeholder';
 import { Dimension } from '../../models/Dimension';
@@ -13,9 +13,13 @@ import { Injectable } from '@angular/core';
 })
 export class ImpactMapperService {
 
-  constructor() { }
+  constructor(
+    private dimensionMapperService: DimensionMapperService,
+    private stakeholderMapperService: StakeholderMapperService,
+    private analysisMapperService: AnalysisMapperService
+  ) { }
 
-  static toDto(impact: Impact): ImpactDto {
+  toDto(impact: Impact): ImpactDto {
     console.log('Mapping Impact to ImpactDto');
 
     const impactDto = new ImpactDto();
@@ -25,9 +29,9 @@ export class ImpactMapperService {
     impactDto.value = impact.value;
     impactDto.description = impact.description;
 
-    impactDto.dimension = DimensionMapperService.toDto(impact.dimension);
-    impactDto.stakeholder = StakeholderMapperService.toImpactDto(impact.stakeholder);
-    impactDto.analysis = AnalysisMapperService.toImpactDto(impact.analysis);
+    impactDto.dimension = this.dimensionMapperService.toDto(impact.dimension);
+    impactDto.stakeholder = this.stakeholderMapperService.toImpactDto(impact.stakeholder);
+    impactDto.analysis = this.analysisMapperService.toImpactDto(impact.analysis);
 
     return impactDto;
   }
@@ -35,7 +39,7 @@ export class ImpactMapperService {
   // impactDto: any has to be used, because the backend sends other names for both:
   // The child Dtos: The Dtos are not suffixed with *Dto in the backend return content.
   // The child Dtos attributes: The ids do not have the names of the owner domain, due to the domain impact using other names.
-  static fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
+  fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
     console.log('Mapping ImpactDto to Impact');
 
     const impact = new Impact();

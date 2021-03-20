@@ -12,7 +12,9 @@ export class AnalysisDataService {
 
   analyses: Analysis[] = [];
 
-  constructor(private analysisRestService: AnalysisRestService) {
+  constructor(
+    private analysisMapperService:AnalysisMapperService,
+    private analysisRestService: AnalysisRestService) {
 
   }
 
@@ -20,7 +22,7 @@ export class AnalysisDataService {
     if (DataLoader.useDummyData) {
       // Load dummy analyses.
       DataLoader.dummyAnalysisDtos.forEach(ana => {
-        this.analyses.push(AnalysisMapperService.fromDto(ana));
+        this.analyses.push(this.analysisMapperService.fromDto(ana));
       });
       console.log('Analyses loaded.');
       this.loadedAnalyses.emit(this.analyses);
@@ -28,7 +30,7 @@ export class AnalysisDataService {
       // Load analyses.
       this.analysisRestService.getAnalyses().subscribe(anas => {
         anas.forEach(ana => {
-          this.analyses.push(AnalysisMapperService.fromDto(ana));
+          this.analyses.push(this.analysisMapperService.fromDto(ana));
         });
         console.log('Analyses loaded.');
         console.log(this.analyses);

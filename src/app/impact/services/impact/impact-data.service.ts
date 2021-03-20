@@ -32,6 +32,7 @@ export class ImpactDataService {
 
   constructor(
     private logger: LogServiceService,
+    private impactMapperService: ImpactMapperService,
     private impactRestService: ImpactRestService,
     private stakeholderDataService: StakeholderDataService,
     private dimensionDataService: DimensionDataService,
@@ -67,7 +68,7 @@ export class ImpactDataService {
       if (DataLoader.useDummyData) {
         // Load dummy impacts.
         DataLoader.dummyImpactDtos.forEach(imp => {
-          this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+          this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
         });
         this.logger.info('Impacts loaded');
         this.loadedImpacts.emit(this.impacts);
@@ -76,7 +77,7 @@ export class ImpactDataService {
         // Load impacts.
         this.impactRestService.getImpacts().subscribe(imps => {
           imps.forEach(imp => {
-            this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+            this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
           });
           this.logger.info('Impacts loaded');
           this.logger.info(this.impacts);
@@ -111,7 +112,7 @@ export class ImpactDataService {
       this.changedImpacts.emit(this.impacts);
     } else {
       const impact = this.createDefaultImpact();
-      const impactDto = ImpactMapperService.toDto(impact);
+      const impactDto = this.impactMapperService.toDto(impact);
       console.log(impactDto);
       this.impactRestService.createImpact(impactDto).subscribe(impDto => {
         this.impacts.push(impact);
@@ -128,7 +129,7 @@ export class ImpactDataService {
       this.changedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
     } else {
-      const impactDto = ImpactMapperService.toDto(impact);
+      const impactDto = this.impactMapperService.toDto(impact);
       this.impactRestService.updateImpact(impactDto).subscribe((impact: Impact) => {
         this.changedImpact.emit(impact);
         //this.changedImpacts.emit(this.impacts);
@@ -144,7 +145,7 @@ export class ImpactDataService {
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
     } else {
-      const impactDto = ImpactMapperService.toDto(impact);
+      const impactDto = this.impactMapperService.toDto(impact);
       this.impactRestService.deleteImpact(impactDto).subscribe((impDto) => {
         const index: number = this.impacts.indexOf(impact, 0);
         this.impacts.splice(index, 1);

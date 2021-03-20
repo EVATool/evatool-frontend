@@ -9,7 +9,7 @@ export class DimensionMapperService {
 
   constructor() { }
 
-  static toDto(dimension: Dimension): DimensionDto {
+  toDto(dimension: Dimension): DimensionDto {
     const dimensionDto = new DimensionDto();
 
     dimensionDto.id = dimension.id;
@@ -20,7 +20,7 @@ export class DimensionMapperService {
     return dimensionDto;
   }
 
-  static fromDto(dimensionDto: DimensionDto): Dimension {
+  fromDto(dimensionDto: DimensionDto): Dimension {
     const dimension = new Dimension();
 
     dimension.id = dimensionDto.id;
