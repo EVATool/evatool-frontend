@@ -1,3 +1,4 @@
+import { LogServiceService } from './../../settings/log-service.service';
 import { ImpactRestService } from './impact-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { Analysis } from '../../models/Analysis';
@@ -30,6 +31,7 @@ export class ImpactDataService {
   analysesLoaded = false;
 
   constructor(
+    private logger: LogServiceService,
     private impactRestService: ImpactRestService,
     private stakeholderDataService: StakeholderDataService,
     private dimensionDataService: DimensionDataService,
@@ -67,7 +69,7 @@ export class ImpactDataService {
         DataLoader.dummyImpactDtos.forEach(imp => {
           this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
         });
-        console.log('Impacts loaded.');
+        this.logger.info('Impacts loaded');
         this.loadedImpacts.emit(this.impacts);
         this.impactsLoaded = true;
       } else {
@@ -76,8 +78,8 @@ export class ImpactDataService {
           imps.forEach(imp => {
             this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
           });
-          console.log('Impacts loaded.');
-          console.log(this.impacts);
+          this.logger.info('Impacts loaded');
+          this.logger.info(this.impacts);
           this.loadedImpacts.emit(this.impacts);
         });
       }
