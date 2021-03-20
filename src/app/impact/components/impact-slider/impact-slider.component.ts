@@ -29,10 +29,16 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   }
 
   sliderValueChanged(event: MatSliderChange): void {
-    console.log(`Slider Value Changed: ${event.value}`);
-    this.valueChange.emit(event.value);
     if (event.value !== null) {
-      this.drawSlider(event.value);
+      const deadzone = 0.3;
+      if (-deadzone < event.value && event.value < deadzone && event.value !== 0) {
+        console.log("Slider Deadzone Around Zero.");
+      }
+      else {
+        console.log(`Slider Value Changed: ${event.value}`);
+        this.valueChange.emit(event.value);
+        this.drawSlider(event.value);
+      }
     }
   }
 
