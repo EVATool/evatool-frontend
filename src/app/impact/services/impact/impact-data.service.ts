@@ -108,8 +108,7 @@ export class ImpactDataService {
       this.impacts.push(impact);
       this.addedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
-    }
-    else {
+    } else {
 
     }
   }
@@ -120,8 +119,7 @@ export class ImpactDataService {
 
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
-    }
-    else {
+    } else {
 
     }
   }
@@ -134,8 +132,7 @@ export class ImpactDataService {
       this.impacts.splice(index, 1);
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
-    }
-    else {
+    } else {
 
     }
   }
