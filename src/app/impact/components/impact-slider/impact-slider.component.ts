@@ -17,6 +17,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @ViewChild('thumb') thumb!: ElementRef;
   @ViewChild('matSlider') matSlider!: ElementRef;
 
+  legalValue!: number;
+
   constructor() {
 
   }
@@ -26,6 +28,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.legalValue = this.value;
     this.drawSlider();
   }
 
@@ -36,22 +39,23 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
       } else {
         console.log(`Slider Value Changed: ${event.value}`);
         this.value = event.value;
+        this.legalValue = event.value;
         this.drawSlider();
       }
     }
   }
 
   sliderValueChangedFinal(event: MatSliderChange): void {
-    event.value = this.value;
+    this.slider.value = this.legalValue
+    event.value = this.legalValue;
     this.sliderValueChange.emit(event);
   }
 
   drawSlider(): void {
-    const value = this.value;
-    this.riskBar.nativeElement.style.width = Math.max(-value * 50, 0) + '%';
-    this.goalBar.nativeElement.style.width = Math.max(value * 50, 0) + '%';
+    this.riskBar.nativeElement.style.width = Math.max(-this.value * 50, 0) + '%';
+    this.goalBar.nativeElement.style.width = Math.max(this.value * 50, 0) + '%';
     const map = (mapValue: number, x1: number, y1: number, x2: number, y2: number) => (mapValue - x1) * (y2 - x2) / (y1 - x1) + x2;
-    const val = map(value, -1, 1, -3, 97);
+    const val = map(this.value, -1, 1, -3, 97);
     this.thumb.nativeElement.style.left = val + '%';
   }
 }
