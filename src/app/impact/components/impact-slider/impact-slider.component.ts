@@ -9,6 +9,7 @@ import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitte
 })
 export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @Input() value!: number;
+  @Input() deadzone: number = 0.0;
   @Output() sliderValueChange = new EventEmitter<MatSliderChange>();
   @ViewChild(MatSlider) slider!: MatSlider;
   @ViewChild('goal') goalBar!: ElementRef;
@@ -30,8 +31,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
 
   sliderValueChanged(event: MatSliderChange): void {
     if (event.value !== null) {
-      const deadzone = 0.3;
-      if (-deadzone < event.value && event.value < deadzone && event.value !== 0) {
+      if (-this.deadzone < event.value && event.value < this.deadzone && event.value !== 0) {
         console.log('Slider Deadzone Around Zero');
       }
       else {
@@ -42,7 +42,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  update(){
+  update() {
     console.log("fdasdsfdS");
   }
 
