@@ -49,17 +49,17 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       this.tableDataSource.data = impacts;
     });
 
-    this.impactDataService.addedImpact.subscribe((impact: Impact) => [
+    this.impactDataService.addedImpact.subscribe((impact: Impact) => {
+      console.log('Impact Table received addedImpact event.');
+    });
 
-    ]);
+    this.impactDataService.changedImpact.subscribe((impact: Impact) => {
+      console.log('Impact Table received changedImpact event.');
+    });
 
-    this.impactDataService.changedImpact.subscribe((impact: Impact) => [
-
-    ]);
-
-    this.impactDataService.removedImpact.subscribe((impact: Impact) => [
-
-    ]);
+    this.impactDataService.removedImpact.subscribe((impact: Impact) => {
+      console.log('Impact Table received removedImpact event.');
+    });
 
     this.impactDataService.onInit();
   }

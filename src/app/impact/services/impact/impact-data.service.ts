@@ -73,8 +73,6 @@ export class ImpactDataService {
       } else {
         // Load impacts.
         this.impactRestService.getImpacts().subscribe(imps => {
-          console.log("LOADUINGASDIPBBHOUADFSBDGHIJVAESHJK");
-          console.log(imps);
           imps.forEach(imp => {
             this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
           });
@@ -113,6 +111,8 @@ export class ImpactDataService {
       const impact = this.createDefaultImpact();
       this.impactRestService.createImpact(impact).subscribe(imp => {
         this.impacts.push(imp);
+        this.addedImpact.emit(impact);
+        this.changedImpacts.emit(this.impacts);
       });
     }
   }
@@ -126,6 +126,8 @@ export class ImpactDataService {
       this.changedImpacts.emit(this.impacts);
     } else {
 
+      this.removedImpact.emit(impact);
+      this.changedImpacts.emit(this.impacts);
     }
   }
 
@@ -140,6 +142,8 @@ export class ImpactDataService {
       this.impactRestService.deleteImpact(impact).subscribe((impact) => {
         const index: number = this.impacts.indexOf(impact, 0);
         this.impacts.splice(index, 1);
+        this.removedImpact.emit(impact);
+        this.changedImpacts.emit(this.impacts);
       });
     }
   }
