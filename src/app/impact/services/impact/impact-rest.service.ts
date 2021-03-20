@@ -22,6 +22,8 @@ export class ImpactRestService {
   }
 
   createImpact(impactDto: ImpactDto): Observable<any> {
+    console.log(impactDto);
+
     return this.http.post(RestSettings.impactsUrl, impactDto, RestSettings.httpOptions);
   }
 

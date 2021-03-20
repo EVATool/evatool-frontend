@@ -16,6 +16,8 @@ export class ImpactMapperService {
   constructor() { }
 
   static toDto(impact: Impact): ImpactDto {
+    console.log('Mapping Impact to ImpactDto');
+
     const impactDto = new ImpactDto();
 
     impactDto.id = impact.id;
@@ -25,7 +27,7 @@ export class ImpactMapperService {
 
     impactDto.dimension = DimensionMapperService.toDto(impact.dimension);
     impactDto.stakeholder = StakeholderMapperService.toImpactDto(impact.stakeholder);
-    impactDto.analysis = AnalysisMapperService.toImpactDto(impact.stakeholder);
+    impactDto.analysis = AnalysisMapperService.toImpactDto(impact.analysis);
 
     return impactDto;
   }
@@ -34,6 +36,8 @@ export class ImpactMapperService {
   // The child Dtos: The Dtos are not suffixed with *Dto in the backend return content.
   // The child Dtos attributes: The ids do not have the names of the owner domain, due to the domain impact using other names.
   static fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
+    console.log('Mapping ImpactDto to Impact');
+
     const impact = new Impact();
 
     impact.id = impactDto.id;

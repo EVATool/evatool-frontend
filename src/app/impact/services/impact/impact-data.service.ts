@@ -109,8 +109,10 @@ export class ImpactDataService {
       this.changedImpacts.emit(this.impacts);
     } else {
       const impact = this.createDefaultImpact();
-      this.impactRestService.createImpact(impact).subscribe(imp => {
-        this.impacts.push(imp);
+      const impactDto = ImpactMapperService.toDto(impact);
+      console.log(impactDto);
+      this.impactRestService.createImpact(impactDto).subscribe(impDto => {
+        this.impacts.push(impact);
         this.addedImpact.emit(impact);
         this.changedImpacts.emit(this.impacts);
       });
@@ -120,11 +122,10 @@ export class ImpactDataService {
   updateImpact(impact: Impact): void {
     console.log('Update Impact')
     if (DataLoader.useDummyData) {
-      // TODO: When to call update? Only makes sense when using rest
-
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
     } else {
+      // TODO: When to call update? Only makes sense when using rest
 
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
@@ -139,7 +140,8 @@ export class ImpactDataService {
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
     } else {
-      this.impactRestService.deleteImpact(impact).subscribe((impact) => {
+      const impactDto = ImpactMapperService.toDto(impact);
+      this.impactRestService.deleteImpact(impactDto).subscribe((impDto) => {
         const index: number = this.impacts.indexOf(impact, 0);
         this.impacts.splice(index, 1);
         this.removedImpact.emit(impact);

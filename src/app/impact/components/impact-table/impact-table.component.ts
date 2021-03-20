@@ -51,6 +51,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       console.log('Impact Table received addedImpact event.');
+      console.log(impact.stakeholder.id);
+      console.log(this.impactDataService.stakeholders);
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
