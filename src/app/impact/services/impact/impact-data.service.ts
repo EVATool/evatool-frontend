@@ -61,8 +61,8 @@ export class ImpactDataService {
   }
 
   private loadIfChildrenAreLoaded(): void {
-    if (DataLoader.useDummyData) {
-      if (this.getChildrenLoaded() && !this.impactsLoaded) {
+    if (this.getChildrenLoaded() && !this.impactsLoaded) {
+      if (DataLoader.useDummyData) {
         // Load dummy impacts.
         DataLoader.dummyImpactDtos.forEach(imp => {
           this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
@@ -70,18 +70,19 @@ export class ImpactDataService {
         console.log('Impacts loaded.');
         this.loadedImpacts.emit(this.impacts);
         this.impactsLoaded = true;
-      }
-    } else {
-      // Load impacts.
-      this.impactRestService.getImpacts().subscribe(imps => {
-        imps.forEach(imp => {
-          this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+      } else {
+        // Load impacts.
+        this.impactRestService.getImpacts().subscribe(imps => {
+          console.log("LOADUINGASDIPBBHOUADFSBDGHIJVAESHJK");
+          console.log(imps);
+          imps.forEach(imp => {
+            this.impacts.push(ImpactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+          });
+          console.log('Impacts loaded.');
+          console.log(this.impacts);
+          this.loadedImpacts.emit(this.impacts);
         });
-        console.log('Impacts loaded.');
-        console.log(this.impacts);
-        this.loadedImpacts.emit(this.impacts);
-      });
-
+      }
     }
   }
 
@@ -96,7 +97,7 @@ export class ImpactDataService {
     impact.description = '';
     impact.dimension = this.dimensionDataService.getDefaultDimension();
     impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
-    // impact.analysis = this.analysisDataService.getCurrentAnalyses();???
+    impact.analysis = this.analysisDataService.getCurrentAnalysis();
 
     return impact;
   }
@@ -109,13 +110,17 @@ export class ImpactDataService {
       this.addedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
     } else {
-
+      const impact = this.createDefaultImpact();
+      this.impactRestService.createImpact(impact).subscribe(imp => {
+        this.impacts.push(imp);
+      });
     }
   }
 
   updateImpact(impact: Impact): void {
     console.log('Update Impact')
     if (DataLoader.useDummyData) {
+      // TODO: When to call update? Only makes sense when using rest
 
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
@@ -127,13 +132,15 @@ export class ImpactDataService {
   deleteImpact(impact: Impact): void {
     console.log('Delete Impact')
     if (DataLoader.useDummyData) {
-
       const index: number = this.impacts.indexOf(impact, 0);
       this.impacts.splice(index, 1);
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
     } else {
-
+      this.impactRestService.deleteImpact(impact).subscribe((impact) => {
+        const index: number = this.impacts.indexOf(impact, 0);
+        this.impacts.splice(index, 1);
+      });
     }
   }
 

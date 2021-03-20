@@ -3,8 +3,8 @@ import { ImpactStakeholderDto } from './ImpactStakeholderDto';
 import { DimensionDto } from './DimensionDto';
 
 export class ImpactDto {
-  id = '';
-  numericId = '';
+  id: string | null = '';
+  uniqueString: string | null = '';
   value = 0;
   description = '';
   dimension!: DimensionDto;

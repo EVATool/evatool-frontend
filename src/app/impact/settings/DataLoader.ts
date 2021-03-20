@@ -5,7 +5,7 @@ import { DimensionDto } from './../dtos/DimensionDto';
 export class DataLoader {
 
   // isDevMode();
-  public static readonly useDummyData: boolean = true;
+  public static readonly useDummyData: boolean = false;
 
   public static readonly dummyAnalysisDtos: AnalysisDto[] = [
     {
@@ -75,7 +75,7 @@ export class DataLoader {
   public static readonly dummyImpactDtos: any[] = [
     {
       id: '11111',
-      numericId: '1',
+      uniqueString: 'IMP1',
       value: -0.3,
       description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
       dimension: { id: '1' },
@@ -84,7 +84,7 @@ export class DataLoader {
     },
     {
       id: '22222',
-      numericId: '2',
+      uniqueString: 'IMP2',
       value: 0.5,
       description: 'This is the second read-only impact',
       dimension: { id: '4' },
@@ -93,7 +93,7 @@ export class DataLoader {
     },
     {
       id: '33333',
-      numericId: '3',
+      uniqueString: 'IMP3',
       value: 0.9,
       description: 'This is the third read-only impact',
       dimension: { id: '2' },
@@ -102,7 +102,7 @@ export class DataLoader {
     },
     {
       id: '44444',
-      numericId: '4',
+      uniqueString: 'IMP4',
       value: 0.2,
       description: 'This is the fourth read-only impact',
       dimension: { id: '2' },

@@ -13,6 +13,10 @@ export class ImpactRestService {
 
   }
 
+  onInit() {
+
+  }
+
   getImpacts(): Observable<ImpactDto[]> {
     return this.http.get<ImpactDto[]>(RestSettings.impactsUrl);
   }

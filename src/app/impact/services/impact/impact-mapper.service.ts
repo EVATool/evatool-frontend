@@ -19,7 +19,7 @@ export class ImpactMapperService {
     const impactDto = new ImpactDto();
 
     impactDto.id = impact.id;
-    impactDto.numericId = impact.numericId;
+    impactDto.uniqueString = impact.uniqueString;
     impactDto.value = impact.value;
     impactDto.description = impact.description;
 
@@ -37,7 +37,7 @@ export class ImpactMapperService {
     const impact = new Impact();
 
     impact.id = impactDto.id;
-    impact.numericId = impactDto.numericId;
+    impact.uniqueString = impactDto.uniqueString;
     impact.value = impactDto.value;
     impact.description = impactDto.description;
 

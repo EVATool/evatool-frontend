@@ -36,4 +36,9 @@ export class AnalysisDataService {
       });
     }
   }
+
+  getCurrentAnalysis() {
+    // TODO Get current analysis from router url.
+    return this.analyses[0];
+  }
 }

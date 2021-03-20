@@ -5,8 +5,8 @@ import { Dimension } from './Dimension';
 export class Impact {
   [k: string]: any;
 
-  id = '';
-  numericId = '';
+  id: string | null = '';
+  uniqueString: string | null = '';
   value = 0;
   description = '';
   dimension!: Dimension;

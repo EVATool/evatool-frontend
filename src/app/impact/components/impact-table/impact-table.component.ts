@@ -17,7 +17,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   // Used by table.
-  displayedColumns: string[] = ['numericId', 'stakeholder', 'dimension', 'value', 'description'];
+  displayedColumns: string[] = ['uniqueString', 'stakeholder', 'dimension', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
   // Filter components in UI.
