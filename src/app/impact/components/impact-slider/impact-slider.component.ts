@@ -1,4 +1,4 @@
-import { LogServiceService } from '../../settings/log-service.service';
+import { LogService } from '../../settings/log.service';
 import { Stakeholder } from './../../models/Stakeholder';
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
@@ -20,7 +20,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
 
   legalValue!: number;
 
-  constructor(private logger: LogServiceService) { }
+  constructor(private logger: LogService) { }
 
   ngOnInit(): void {
 

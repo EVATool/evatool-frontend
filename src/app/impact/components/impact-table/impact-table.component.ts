@@ -1,4 +1,4 @@
-import { LogServiceService } from '../../settings/log-service.service';
+import { LogService } from '../../settings/log.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
@@ -32,7 +32,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   loaded: Promise<boolean> = Promise.resolve(false);
 
   constructor(
-    private logger: LogServiceService,
+    private logger: LogService,
     public impactDataService: ImpactDataService,
     public dimensionDataService: DimensionDataService,
     private dialog: MatDialog) {

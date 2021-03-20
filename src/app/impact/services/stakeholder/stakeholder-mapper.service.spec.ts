@@ -8,7 +8,7 @@ describe('StakeholderMapperService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SampleDataGenerator]
+      providers: [SampleDataGenerator]
     });
     service = TestBed.inject(StakeholderMapperService);
     data = TestBed.inject(SampleDataGenerator);

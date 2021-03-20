@@ -13,46 +13,46 @@ export enum LogLevel {
 @Injectable({
   providedIn: 'root'
 })
-export class LogServiceService {
+export class LogService {
 
   public static readonly logLevel: LogLevel = LogLevel.Info;
 
   public static shouldLog(logLevel: LogLevel): boolean {
-    return LogServiceService.logLevel <= logLevel;
+    return LogService.logLevel <= logLevel;
   }
 
   trace(msg: any) {
-    if (LogServiceService.shouldLog(LogLevel.Trace)) {
+    if (LogService.shouldLog(LogLevel.Trace)) {
       console.log(msg);
     }
   }
 
   debug(msg: any) {
-    if (LogServiceService.shouldLog(LogLevel.Debug)) {
+    if (LogService.shouldLog(LogLevel.Debug)) {
       console.log(msg);
     }
   }
 
   info(msg: any) {
-    if (LogServiceService.shouldLog(LogLevel.Info)) {
+    if (LogService.shouldLog(LogLevel.Info)) {
       console.log(msg);
     }
   }
 
   warn(msg: any) {
-    if (LogServiceService.shouldLog(LogLevel.Warn)) {
+    if (LogService.shouldLog(LogLevel.Warn)) {
       console.log(msg);
     }
   }
 
   error(msg: any) {
-    if (LogServiceService.shouldLog(LogLevel.Error)) {
+    if (LogService.shouldLog(LogLevel.Error)) {
       console.log(msg);
     }
   }
 
   fatal(msg: any) {
-    if (LogServiceService.shouldLog(LogLevel.Fatal)) {
+    if (LogService.shouldLog(LogLevel.Fatal)) {
       console.log(msg);
     }
   }

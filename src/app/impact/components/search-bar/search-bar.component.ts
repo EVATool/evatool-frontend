@@ -1,4 +1,4 @@
-import { LogServiceService } from '../../settings/log-service.service';
+import { LogService } from '../../settings/log.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class SearchBarComponent implements OnInit {
   @Output() searchTextChanged = new EventEmitter<string>();
 
-  constructor(private logger: LogServiceService) { }
+  constructor(private logger: LogService) { }
 
   ngOnInit(): void {
 

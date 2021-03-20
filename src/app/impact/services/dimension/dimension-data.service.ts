@@ -1,4 +1,4 @@
-import { LogServiceService } from '../../settings/log-service.service';
+import { LogService } from '../../settings/log.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { DimensionDto } from './../../dtos/DimensionDto';
 import { DimensionMapperService } from './dimension-mapper.service';
@@ -20,7 +20,7 @@ export class DimensionDataService {
   public dimensionTypes: string[] = [];
 
   constructor(
-    private logger: LogServiceService,
+    private logger: LogService,
     private dimensionMapperService: DimensionMapperService,
     private dimensionRestService: DimensionRestService) {
   }

@@ -1,4 +1,4 @@
-import { LogServiceService } from '../../settings/log-service.service';
+import { LogService } from '../../settings/log.service';
 import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
 import { Analysis } from '../../models/Analysis';
 import { Stakeholder } from '../../models/Stakeholder';
@@ -15,7 +15,7 @@ import { Injectable } from '@angular/core';
 export class ImpactMapperService {
 
   constructor(
-    private logger: LogServiceService,
+    private logger: LogService,
     private dimensionMapperService: DimensionMapperService,
     private stakeholderMapperService: StakeholderMapperService,
     private analysisMapperService: AnalysisMapperService

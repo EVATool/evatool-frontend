@@ -8,7 +8,7 @@ describe('AnalysisMapperService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SampleDataGenerator]
+      providers: [SampleDataGenerator]
     });
     service = TestBed.inject(AnalysisMapperService);
     data = TestBed.inject(SampleDataGenerator);

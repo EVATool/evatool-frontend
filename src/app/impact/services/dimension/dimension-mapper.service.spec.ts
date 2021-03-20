@@ -8,7 +8,7 @@ describe('DimensionMapperService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SampleDataGenerator]
+      providers: [SampleDataGenerator]
     });
     service = TestBed.inject(DimensionMapperService);
     data = TestBed.inject(SampleDataGenerator);

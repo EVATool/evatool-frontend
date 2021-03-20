@@ -1,4 +1,4 @@
-import { LogServiceService } from '../settings/log-service.service';
+import { LogService } from '../settings/log.service';
 import { Impact } from './../models/Impact';
 import { ImpactDataService } from '../services/impact/impact-data.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
@@ -15,7 +15,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
   windowScrolled = false;
 
   constructor(
-    private logger: LogServiceService,
+    private logger: LogService,
     private impactDataService: ImpactDataService) { }
 
   ngOnInit(): void {

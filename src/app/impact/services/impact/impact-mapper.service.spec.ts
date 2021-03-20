@@ -8,7 +8,7 @@ describe('ImpactMapperService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [SampleDataGenerator]
+      providers: [SampleDataGenerator]
     });
     service = TestBed.inject(ImpactMapperService);
     data = TestBed.inject(SampleDataGenerator);

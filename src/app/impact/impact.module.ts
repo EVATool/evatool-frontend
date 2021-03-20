@@ -1,3 +1,5 @@
+import { LogService } from './settings/log.service';
+import { SampleDataGenerator } from './spec/sample-data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -35,7 +37,8 @@ import { DimensionTableComponent } from './components/dimension-table/dimension-
     SearchBarComponent,
     DimensionDialogComponent,
     AddDimensionButtonComponent,
-    DimensionTableComponent],
+    DimensionTableComponent
+  ],
   imports: [
     CommonModule,
     MatTableModule,

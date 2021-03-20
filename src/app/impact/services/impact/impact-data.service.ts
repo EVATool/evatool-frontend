@@ -1,4 +1,4 @@
-import { LogServiceService } from '../../settings/log-service.service';
+import { LogService } from '../../settings/log.service';
 import { ImpactRestService } from './impact-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { Analysis } from '../../models/Analysis';
@@ -31,7 +31,7 @@ export class ImpactDataService {
   analysesLoaded = false;
 
   constructor(
-    private logger: LogServiceService,
+    private logger: LogService,
     private impactMapperService: ImpactMapperService,
     private impactRestService: ImpactRestService,
     private stakeholderDataService: StakeholderDataService,
