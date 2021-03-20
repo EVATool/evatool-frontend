@@ -33,13 +33,16 @@
 }
 
 .container {
+  display: table;
   vertical-align: middle;
-  position: relative;
+  text-align: center;
   height: 100%;
   width: 100%;
+  background-color: rgb(235, 235, 235);
 }
 
 #goal-bar {
+  vertical-align: middle;
   background-color: green;
   width: 50%;
   height: 30px;
@@ -48,6 +51,7 @@
 }
 
 #risk-bar {
+  vertical-align: middle;
   background-color: red;
   width: 50%;
   height: 30px;
@@ -56,8 +60,9 @@
 }
 
 #slider-container {
-  position: relative;
+  vertical-align: middle;
   width: 100%;
   height: 100%;
-  left: 3%;
+  margin-left: 3%;
+  right: 0%;
 }
