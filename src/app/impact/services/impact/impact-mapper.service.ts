@@ -1,3 +1,4 @@
+import { LogServiceService } from './../../settings/LogService.service';
 import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
 import { Analysis } from '../../models/Analysis';
 import { Stakeholder } from '../../models/Stakeholder';
@@ -14,13 +15,14 @@ import { Injectable } from '@angular/core';
 export class ImpactMapperService {
 
   constructor(
+    private logger: LogServiceService,
     private dimensionMapperService: DimensionMapperService,
     private stakeholderMapperService: StakeholderMapperService,
     private analysisMapperService: AnalysisMapperService
   ) { }
 
   toDto(impact: Impact): ImpactDto {
-    console.log('Mapping Impact to ImpactDto');
+    this.logger.info('Mapping Impact to ImpactDto');
 
     const impactDto = new ImpactDto();
 
@@ -40,7 +42,7 @@ export class ImpactMapperService {
   // The child Dtos: The Dtos are not suffixed with *Dto in the backend return content.
   // The child Dtos attributes: The ids do not have the names of the owner domain, due to the domain impact using other names.
   fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
-    console.log('Mapping ImpactDto to Impact');
+    this.logger.info('Mapping ImpactDto to Impact');
 
     const impact = new Impact();
 

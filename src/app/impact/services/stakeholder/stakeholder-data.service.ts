@@ -1,3 +1,4 @@
+import { LogServiceService } from './../../settings/LogService.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 import { StakeholderRestService } from './stakeholder-rest.service';
@@ -13,6 +14,7 @@ export class StakeholderDataService {
   stakeholders: Stakeholder[] = [];
 
   constructor(
+    private logger: LogServiceService,
     private stakeholderMapperService: StakeholderMapperService,
     private stakeholderRestService: StakeholderRestService) { }
 
@@ -22,7 +24,7 @@ export class StakeholderDataService {
       DataLoader.dummyStakeholderDtos.forEach(stk => {
         this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
       });
-      console.log('Stakeholders loaded.');
+      this.logger.info('Stakeholders loaded.');
       this.loadedStakeholders.emit(this.stakeholders);
     } else {
       // Load stakeholders.
@@ -30,8 +32,8 @@ export class StakeholderDataService {
         stks.forEach(stk => {
           this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
         });
-        console.log('Stakeholders loaded.');
-        console.log(this.stakeholders);
+        this.logger.info('Stakeholders loaded.');
+        this.logger.info(this.stakeholders);
         this.loadedStakeholders.emit(this.stakeholders);
       });
     }

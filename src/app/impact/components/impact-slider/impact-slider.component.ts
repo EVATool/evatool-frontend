@@ -1,3 +1,4 @@
+import { LogServiceService } from './../../settings/LogService.service';
 import { Stakeholder } from './../../models/Stakeholder';
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
@@ -19,9 +20,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
 
   legalValue!: number;
 
-  constructor() {
-
-  }
+  constructor(private logger: LogServiceService) { }
 
   ngOnInit(): void {
 
@@ -35,9 +34,9 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   sliderValueChanged(event: MatSliderChange): void {
     if (event.value !== null) {
       if (-this.deadzone < event.value && event.value < this.deadzone && event.value !== 0) {
-        console.log('Slider Deadzone Around Zero');
+        this.logger.info('Slider Deadzone Around Zero');
       } else {
-        console.log(`Slider Value Changed: ${event.value}`);
+        this.logger.info(`Slider Value Changed: ${event.value}`);
         this.value = event.value;
         this.legalValue = event.value;
         this.drawSlider();

@@ -104,7 +104,7 @@ export class ImpactDataService {
   }
 
   createImpact(): void {
-    console.log('Create Impact')
+    this.logger.info('Create Impact')
     if (DataLoader.useDummyData) {
       const impact = this.createDefaultImpact();
       this.impacts.push(impact);
@@ -113,7 +113,7 @@ export class ImpactDataService {
     } else {
       const impact = this.createDefaultImpact();
       const impactDto = this.impactMapperService.toDto(impact);
-      console.log(impactDto);
+      this.logger.info(impactDto);
       this.impactRestService.createImpact(impactDto).subscribe(impDto => {
         this.impacts.push(impact);
         this.addedImpact.emit(impact);
@@ -123,7 +123,7 @@ export class ImpactDataService {
   }
 
   updateImpact(impact: Impact): void {
-    console.log('Update Impact');
+    this.logger.info('Update Impact');
     if (DataLoader.useDummyData) {
       // Dummy data does not require any updating.
       this.changedImpact.emit(impact);
@@ -138,7 +138,7 @@ export class ImpactDataService {
   }
 
   deleteImpact(impact: Impact): void {
-    console.log('Delete Impact')
+    this.logger.info('Delete Impact')
     if (DataLoader.useDummyData) {
       const index: number = this.impacts.indexOf(impact, 0);
       this.impacts.splice(index, 1);

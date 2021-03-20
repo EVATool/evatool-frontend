@@ -1,3 +1,4 @@
+import { LogServiceService } from './../settings/LogService.service';
 import { Impact } from './../models/Impact';
 import { ImpactDataService } from '../services/impact/impact-data.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
@@ -13,7 +14,9 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   windowScrolled = false;
 
-  constructor(private impactDataService: ImpactDataService) { }
+  constructor(
+    private logger: LogServiceService,
+    private impactDataService: ImpactDataService) { }
 
   ngOnInit(): void {
 
@@ -37,14 +40,9 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   addImpact(): void {
     this.impactDataService.createImpact();
-
-
-    // Test debug
-    // console.log(this.impactDataService.impacts[0].value);
-    // this.impactDataService.impacts[0].value = 1;
   }
 
   searchTextChange(searchValue: string): void {
-    console.log(searchValue);
+    this.logger.info(searchValue);
   }
 }

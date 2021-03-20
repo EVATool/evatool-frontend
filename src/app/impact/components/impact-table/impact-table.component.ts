@@ -1,3 +1,4 @@
+import { LogServiceService } from './../../settings/LogService.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
@@ -31,6 +32,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   loaded: Promise<boolean> = Promise.resolve(false);
 
   constructor(
+    private logger: LogServiceService,
     public impactDataService: ImpactDataService,
     public dimensionDataService: DimensionDataService,
     private dialog: MatDialog) {
@@ -42,29 +44,29 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
-      console.log('Impact Table received loadedImpacts event.');
+      this.logger.info('Impact Table received loadedImpacts event.');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
       this.initSorting();
       this.initFiltering();
     });
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
-      console.log('Impact Table received changedImpact[S] event.');
+      this.logger.info('Impact Table received changedImpact[S] event.');
       this.tableDataSource.data = impacts;
     });
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
-      console.log('Impact Table received addedImpact event.');
-      console.log(impact.stakeholder.id);
-      console.log(this.impactDataService.stakeholders);
+      this.logger.info('Impact Table received addedImpact event.');
+      this.logger.info(impact.stakeholder.id);
+      this.logger.info(this.impactDataService.stakeholders);
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
-      console.log('Impact Table received changedImpact event.');
+      this.logger.info('Impact Table received changedImpact event.');
     });
 
     this.impactDataService.removedImpact.subscribe((impact: Impact) => {
-      console.log('Impact Table received removedImpact event.');
+      this.logger.info('Impact Table received removedImpact event.');
     });
 
     this.impactDataService.onInit();
@@ -134,17 +136,17 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   stakeholderChange(impact: Impact, event: MatSelectChange) {
-    console.log("Stakeholder changed");
+    this.logger.info("Stakeholder changed");
     this.updateImpact(impact);
   }
 
   dimensionChange(impact: Impact, event: MatSelectChange) {
-    console.log("Dimension changed");
+    this.logger.info("Dimension changed");
     this.updateImpact(impact);
   }
 
   valueChange(impact: Impact, event: MatSliderChange) {
-    console.log("Value changed");
+    this.logger.info("Value changed");
     if (event.value !== null) {
       impact.value = event.value;
     }
@@ -152,27 +154,27 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   descriptionChange(impact: Impact, event: Event) {
-    console.log("Description changed");
+    this.logger.info("Description changed");
     this.updateImpact(impact);
   }
 
   lol() {
-    console.log("focus");
+    this.logger.info("focus");
   }
 
   openDimensionModal(): void {
     if (!this.impactDataService.dimensionsLoaded) {
-      console.log('Dimensions not yet loaded.');
+      this.logger.info('Dimensions not yet loaded.');
       return;
     }
-    console.log('Opening Dimension Modal Dialog.');
+    this.logger.info('Opening Dimension Modal Dialog.');
     const dialogRef = this.dialog.open(DimensionDialogComponent, {
       height: '80%',
       width: '50%',
       data: { parameter: 'I left this here because maybe we will need it c:' }
     });
     dialogRef.afterClosed().subscribe(() => {
-      console.log('Closing Dimension Modal Dialog.');
+      this.logger.info('Closing Dimension Modal Dialog.');
     });
   }
 }

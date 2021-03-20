@@ -1,3 +1,4 @@
+import { LogServiceService } from './../../settings/LogService.service';
 import { AnalysisRestService } from './analysis-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { AnalysisMapperService } from './analysis-mapper.service';
@@ -13,6 +14,7 @@ export class AnalysisDataService {
   analyses: Analysis[] = [];
 
   constructor(
+    private logger: LogServiceService,
     private analysisMapperService:AnalysisMapperService,
     private analysisRestService: AnalysisRestService) {
 
@@ -24,7 +26,7 @@ export class AnalysisDataService {
       DataLoader.dummyAnalysisDtos.forEach(ana => {
         this.analyses.push(this.analysisMapperService.fromDto(ana));
       });
-      console.log('Analyses loaded.');
+      this.logger.info('Analyses loaded.');
       this.loadedAnalyses.emit(this.analyses);
     } else {
       // Load analyses.
@@ -32,8 +34,8 @@ export class AnalysisDataService {
         anas.forEach(ana => {
           this.analyses.push(this.analysisMapperService.fromDto(ana));
         });
-        console.log('Analyses loaded.');
-        console.log(this.analyses);
+        this.logger.info('Analyses loaded.');
+        this.logger.info(this.analyses);
         this.loadedAnalyses.emit(this.analyses);
       });
     }
