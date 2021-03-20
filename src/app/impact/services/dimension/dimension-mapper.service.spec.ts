@@ -19,7 +19,7 @@ describe('DimensionMapperService', () => {
     const dimension = SampleDataGenerator.getDummyDimension();
 
     // when
-    const dimensionDto = DimensionMapperService.toDto(dimension);
+    const dimensionDto = service.toDto(dimension);
 
     // then
     expect(dimension.id === dimensionDto.id).toBeTruthy();
@@ -33,7 +33,7 @@ describe('DimensionMapperService', () => {
     const dimensionDto = SampleDataGenerator.getDummyDimensionDto();
 
     // when
-    const dimension = DimensionMapperService.fromDto(dimensionDto);
+    const dimension = service.fromDto(dimensionDto);
 
     // then
     expect(dimension.id === dimensionDto.id).toBeTruthy();

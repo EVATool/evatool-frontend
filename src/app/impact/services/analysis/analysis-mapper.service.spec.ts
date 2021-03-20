@@ -19,7 +19,7 @@ describe('AnalysisMapperService', () => {
     const analysis = SampleDataGenerator.getDummyAnalysis();
 
     // when
-    const analysisDto = AnalysisMapperService.toDto(analysis);
+    const analysisDto = service.toDto(analysis);
 
     // then
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
@@ -30,7 +30,7 @@ describe('AnalysisMapperService', () => {
     const analysisDto = SampleDataGenerator.getDummyAnalysisDto();
 
     // when
-    const analysis = AnalysisMapperService.fromDto(analysisDto);
+    const analysis = service.fromDto(analysisDto);
 
     // then
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
@@ -41,7 +41,7 @@ describe('AnalysisMapperService', () => {
     const analysis = SampleDataGenerator.getDummyAnalysis();
 
     // when
-    const analysisDto = AnalysisMapperService.toImpactDto(analysis);
+    const analysisDto = service.toImpactDto(analysis);
 
     // then
     expect(analysis.id === analysisDto.id).toBeTruthy();
@@ -52,7 +52,7 @@ describe('AnalysisMapperService', () => {
     const analysisDto = SampleDataGenerator.getDummyImpactAnalysisDto();
 
     // when
-    const analysis = AnalysisMapperService.fromImpactDto(analysisDto);
+    const analysis = service.fromImpactDto(analysisDto);
 
     // then
     expect(analysis.id === analysisDto.id).toBeTruthy();

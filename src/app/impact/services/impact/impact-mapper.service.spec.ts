@@ -19,7 +19,7 @@ describe('ImpactMapperService', () => {
     const impact = SampleDataGenerator.getDummyImpact();
 
     // when
-    const impactDto = ImpactMapperService.toDto(impact);
+    const impactDto = service.toDto(impact);
 
     // then
     expect(impact.id === impactDto.id).toBeTruthy();
@@ -36,7 +36,7 @@ describe('ImpactMapperService', () => {
     const impactDto = SampleDataGenerator.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
 
     // when
-    const impact = ImpactMapperService.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
+    const impact = service.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
 
     // then
     expect(impact.id === impactDto.id).toBeTruthy();

@@ -19,7 +19,7 @@ describe('StakeholderMapperService', () => {
     const stakeholder = SampleDataGenerator.getDummyStakeholder();
 
     // when
-    const stakeholderDto = StakeholderMapperService.toDto(stakeholder);
+    const stakeholderDto = service.toDto(stakeholder);
 
     // then
     expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
@@ -31,7 +31,7 @@ describe('StakeholderMapperService', () => {
     const stakeholderDto = SampleDataGenerator.getDummyStakeholderDto();
 
     // when
-    const stakeholder = StakeholderMapperService.fromDto(stakeholderDto);
+    const stakeholder = service.fromDto(stakeholderDto);
 
     // then
     expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
@@ -43,7 +43,7 @@ describe('StakeholderMapperService', () => {
     const stakeholder = SampleDataGenerator.getDummyStakeholder();
 
     // when
-    const stakeholderDto = StakeholderMapperService.toImpactDto(stakeholder);
+    const stakeholderDto = service.toImpactDto(stakeholder);
 
     // then
     expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
@@ -55,7 +55,7 @@ describe('StakeholderMapperService', () => {
     const stakeholderDto = SampleDataGenerator.getDummyImpactStakeholderDto();
 
     // when
-    const stakeholder = StakeholderMapperService.fromImpactDto(stakeholderDto);
+    const stakeholder = service.fromImpactDto(stakeholderDto);
 
     // then
     expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
