@@ -1,3 +1,4 @@
+import { Impact } from './../models/Impact';
 import { ImpactDataService } from '../services/impact/impact-data.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
@@ -22,6 +23,11 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     this.scrollbarRef?.scrolled.subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
     });
+
+    this.impactDataService.addedImpact.subscribe((impact: Impact) => {
+      const options = { bottom: -100, duration: 250 };
+      this.scrollbarRef.scrollTo(options);
+    });
   }
 
   scrollToTop(): void {
@@ -31,8 +37,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   addImpact(): void {
     this.impactDataService.createImpact();
-    const options = { bottom: -100, duration: 250 };
-    this.scrollbarRef.scrollTo(options);
+
 
     // Test debug
     // console.log(this.impactDataService.impacts[0].value);

@@ -102,21 +102,39 @@ export class ImpactDataService {
   }
 
   createImpact(): void {
-    const impact = this.createDefaultImpact();
-    this.impacts.push(impact);
-    this.addedImpact.emit(impact);
-    this.changedImpacts.emit(this.impacts);
+    if (DataLoader.useDummyData) {
+      const impact = this.createDefaultImpact();
+      this.impacts.push(impact);
+      this.addedImpact.emit(impact);
+      this.changedImpacts.emit(this.impacts);
+    }
+    else {
+
+    }
   }
 
-  updateImpact(): void {
+  updateImpact(impact: Impact): void {
+    if (DataLoader.useDummyData) {
 
+      this.removedImpact.emit(impact);
+      this.changedImpacts.emit(this.impacts);
+    }
+    else {
+
+    }
   }
 
   deleteImpact(impact: Impact): void {
-    const index: number = this.impacts.indexOf(impact, 0);
-    this.impacts.splice(index, 1);
-    this.removedImpact.emit();
-    this.changedImpacts.emit(this.impacts);
+    if (DataLoader.useDummyData) {
+
+      const index: number = this.impacts.indexOf(impact, 0);
+      this.impacts.splice(index, 1);
+      this.removedImpact.emit(impact);
+      this.changedImpacts.emit(this.impacts);
+    }
+    else {
+
+    }
   }
 
   calculateDecimalPlaces(num: number): number {
