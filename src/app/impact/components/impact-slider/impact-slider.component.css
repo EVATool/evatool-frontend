@@ -29,7 +29,7 @@
 ::ng-deep .mat-slider-track-background {
   /*
   background-color: transparent;
-*/
+  */
 }
 
 .container {
@@ -61,4 +61,29 @@
   right: 0px;
   top: -9px;
   bottom: 0px;
+}
+
+#slider-thumb {
+  position: absolute;
+  background-color: black;
+  height: 20px;
+  width: 10px;
+  float: left;
+  opacity: 0.5;
+  transition: 250ms ease-out 100ms;
+}
+
+#slider-thumb:hover, #slider-thumb:focus {
+  opacity: 1;
+  transition: 250ms ease-out 100ms;
+}
+
+#slider-middle {
+  position: absolute;
+  background-color: gray;
+  margin-top: -10px;
+  height: 40px;
+  width: 1px;
+  float: left;
+  margin-left: 50%;
 }

@@ -1,3 +1,4 @@
+import { Stakeholder } from './../../models/Stakeholder';
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
 
@@ -12,6 +13,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSlider) slider!: MatSlider;
   @ViewChild('goal') goalBar!: ElementRef;
   @ViewChild('risk') riskBar!: ElementRef;
+  @ViewChild('thumb') thumb!: ElementRef;
 
   constructor() {
 
@@ -36,5 +38,9 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   drawSlider(value: number): void {
     this.riskBar.nativeElement.style.width = Math.max(-value * 50, 0) + "%";
     this.goalBar.nativeElement.style.width = Math.max(value * 50, 0) + "%";
+    const map = (value: number, x1: number, y1: number, x2: number, y2: number) => (value - x1) * (y2 - x2) / (y1 - x1) + x2;
+    const val = map(value, -1, 1, 0, 94);
+    this.thumb.nativeElement.style.left = val + "%";
+    console.log(val);
   }
 }
