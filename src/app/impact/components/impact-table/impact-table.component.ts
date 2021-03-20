@@ -148,13 +148,16 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     if (event.value !== null) {
       impact.value = event.value;
     }
-    console.log(impact.value);
     this.updateImpact(impact);
   }
 
   descriptionChange(impact: Impact, event: Event) {
     console.log("Description changed");
     this.updateImpact(impact);
+  }
+
+  lol() {
+    console.log("focus");
   }
 
   openDimensionModal(): void {
