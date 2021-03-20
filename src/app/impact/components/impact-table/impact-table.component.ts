@@ -27,8 +27,17 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   dimensionFilter = new FormControl();
   valueFilter = new FormControl();
   searchToggles = new Map<string, boolean>();
+  stakeholderNames: string[] = [];
 
   loaded: Promise<boolean> = Promise.resolve(false);
+
+  filterValues = {
+    id: '',
+    stakeholder: [''],
+    dimension: '',
+    value: '',
+    description: ''
+  };
 
   constructor(
     public impactDataService: ImpactDataService,
@@ -37,7 +46,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
   }
 
   ngAfterViewInit(): void {
@@ -81,28 +89,25 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     };
   }
 
+  public updateFilter(): void {
+    this.tableDataSource.filter = JSON.stringify(this.filterValues);
+  }
   private initFiltering(): void {
-    const filterValues = {
-      id: '',
-      stakeholder: '',
-      dimension: '',
-      value: '',
-      description: ''
-    };
+    this.stakeholderNames = this.impactDataService.stakeholders.map(value => value.name);
 
     this.stakeholderFilter.valueChanges.subscribe(newStakeholder => {
-      filterValues.stakeholder = newStakeholder;
-      this.tableDataSource.filter = JSON.stringify(filterValues);
+      this.filterValues.stakeholder = newStakeholder;
+      this.tableDataSource.filter = JSON.stringify(this.filterValues);
     });
 
     this.dimensionFilter.valueChanges.subscribe(newDimension => {
-      filterValues.dimension = newDimension;
-      this.tableDataSource.filter = JSON.stringify(filterValues);
+      this.filterValues.dimension = newDimension;
+      this.tableDataSource.filter = JSON.stringify(this.filterValues);
     });
 
     this.valueFilter.valueChanges.subscribe(newValue => {
-      filterValues.value = newValue;
-      this.tableDataSource.filter = JSON.stringify(filterValues);
+      this.filterValues.value = newValue;
+      this.tableDataSource.filter = JSON.stringify(this.filterValues);
     });
 
     this.tableDataSource.filterPredicate = this.createFilter();
@@ -115,7 +120,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   private createFilter(): (data: any, filter: string) => boolean {
     return (data: Impact, filter: string): boolean => {
       const searchTerms = JSON.parse(filter);
-      return data.stakeholder.name.toLowerCase().indexOf(searchTerms.stakeholder.toLowerCase()) !== -1
+      return searchTerms.stakeholder.length === 0 || searchTerms.stakeholder.indexOf(data.stakeholder.name) !== -1
         && data.dimension.name.toLowerCase().indexOf(searchTerms.dimension.toLowerCase()) !== -1
         && data.value.toString().toLowerCase().indexOf(searchTerms.value.toLowerCase()) !== -1;
     };
