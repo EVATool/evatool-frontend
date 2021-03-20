@@ -102,6 +102,7 @@ export class ImpactDataService {
   }
 
   createImpact(): void {
+    console.log('Create Impact')
     if (DataLoader.useDummyData) {
       const impact = this.createDefaultImpact();
       this.impacts.push(impact);
@@ -114,6 +115,7 @@ export class ImpactDataService {
   }
 
   updateImpact(impact: Impact): void {
+    console.log('Update Impact')
     if (DataLoader.useDummyData) {
 
       this.removedImpact.emit(impact);
@@ -125,6 +127,7 @@ export class ImpactDataService {
   }
 
   deleteImpact(impact: Impact): void {
+    console.log('Delete Impact')
     if (DataLoader.useDummyData) {
 
       const index: number = this.impacts.indexOf(impact, 0);
