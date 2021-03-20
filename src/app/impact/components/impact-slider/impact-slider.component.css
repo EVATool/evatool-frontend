@@ -12,7 +12,7 @@
   width: 30px;
   color: transparent;
   background-color: black;
-  opacity: 0.5;
+  opacity: 0.0;
 }
 
 ::ng-deep .mat-slider-thumb {
