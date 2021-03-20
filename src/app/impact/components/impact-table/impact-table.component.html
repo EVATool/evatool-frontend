@@ -27,7 +27,7 @@
     </th>
 
     <td mat-cell *matCellDef='let impact'>
-      <mat-select [(ngModel)]="impact.stakeholder">
+      <mat-select [(ngModel)]="impact.stakeholder" (selectionChange)="stakeholderChange($event)">
         <mat-option *ngFor="let stk of impactDataService.stakeholders" [value]="stk">{{stk.name}}</mat-option>
       </mat-select>
     </td>
@@ -52,7 +52,7 @@
     </th>
 
     <td mat-cell *matCellDef='let impact'>
-      <mat-select [(ngModel)]="impact.dimension">
+      <mat-select [(ngModel)]="impact.dimension" (selectionChange)="dimensionChange($event)">
         <mat-option *ngFor="let dim of impactDataService.dimensions" [value]="dim">{{dim.name}}</mat-option>
       </mat-select>
     </td>
@@ -75,7 +75,7 @@
     </th>
 
     <td mat-cell *matCellDef='let impact'>
-      <app-impact-slider [(value)]="impact.value"></app-impact-slider>
+      <app-impact-slider [(value)]="impact.value" ></app-impact-slider>
     </td>
   </ng-container>
 

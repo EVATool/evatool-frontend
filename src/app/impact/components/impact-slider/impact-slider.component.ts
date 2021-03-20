@@ -9,7 +9,7 @@ import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitte
 })
 export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @Input() value!: number;
-  @Output() valueChange = new EventEmitter<number | null>();
+  @Output() valueChange = new EventEmitter<number>();
   @ViewChild(MatSlider) slider!: MatSlider;
   @ViewChild('goal') goalBar!: ElementRef;
   @ViewChild('risk') riskBar!: ElementRef;

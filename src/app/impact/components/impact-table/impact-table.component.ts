@@ -1,3 +1,4 @@
+import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +8,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, isDevMode } from '@angular
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-impact-table',
@@ -123,6 +125,22 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   deleteImpact(impact: Impact): void {
     this.impactDataService.deleteImpact(impact);
+  }
+
+  stakeholderChange(event: MatSelectChange) {
+    console.log("Stakeholder changed");
+  }
+
+  dimensionChange(event: MatSelectChange) {
+    console.log("Dimension changed");
+  }
+
+  valueChange(event: MatSliderChange) {
+    console.log("Value changed");
+  }
+
+  descriptionChange(event: Event) {
+    console.log("Description changed");
   }
 
   openDimensionModal(): void {
