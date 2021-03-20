@@ -1,4 +1,4 @@
-import { LogServiceService } from './../../settings/LogService.service';
+import { LogServiceService } from '../../settings/log-service.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from './../../services/dimension/dimension-data.service';
 import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';

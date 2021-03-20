@@ -1,4 +1,4 @@
-import { LogServiceService } from './../../settings/LogService.service';
+import { LogServiceService } from '../../settings/log-service.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { DimensionDto } from './../../dtos/DimensionDto';
 import { DimensionMapperService } from './dimension-mapper.service';

@@ -1,4 +1,4 @@
-import { LogServiceService } from './../../settings/LogService.service';
+import { LogServiceService } from '../../settings/log-service.service';
 import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
 import { Analysis } from '../../models/Analysis';
 import { Stakeholder } from '../../models/Stakeholder';

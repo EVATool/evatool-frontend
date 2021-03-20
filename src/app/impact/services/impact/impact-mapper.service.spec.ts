@@ -1,13 +1,17 @@
-import { SampleDataGenerator } from '../../spec/SampleDataGenerator';
+import { SampleDataGenerator } from '../../spec/sample-data.service';
 import { TestBed } from '@angular/core/testing';
 import { ImpactMapperService } from './impact-mapper.service';
 
 describe('ImpactMapperService', () => {
   let service: ImpactMapperService;
+  let data: SampleDataGenerator;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [SampleDataGenerator]
+    });
     service = TestBed.inject(ImpactMapperService);
+    data = TestBed.inject(SampleDataGenerator);
   });
 
   it('should be created', () => {
@@ -16,7 +20,7 @@ describe('ImpactMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    const impact = SampleDataGenerator.getDummyImpact();
+    const impact = data.getDummyImpact();
 
     // when
     const impactDto = service.toDto(impact);
@@ -30,10 +34,10 @@ describe('ImpactMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    const dimension = SampleDataGenerator.getDummyDimension();
-    const stakeholder = SampleDataGenerator.getDummyStakeholder();
-    const analysis = SampleDataGenerator.getDummyAnalysis();
-    const impactDto = SampleDataGenerator.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
+    const dimension = data.getDummyDimension();
+    const stakeholder = data.getDummyStakeholder();
+    const analysis = data.getDummyAnalysis();
+    const impactDto = data.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
 
     // when
     const impact = service.fromDto(impactDto, [dimension], [stakeholder], [analysis]);

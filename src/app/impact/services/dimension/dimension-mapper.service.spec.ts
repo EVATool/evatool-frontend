@@ -1,13 +1,17 @@
-import { SampleDataGenerator } from '../../spec/SampleDataGenerator';
+import { SampleDataGenerator } from '../../spec/sample-data.service';
 import { TestBed } from '@angular/core/testing';
 import { DimensionMapperService } from './dimension-mapper.service';
 
 describe('DimensionMapperService', () => {
   let service: DimensionMapperService;
+  let data: SampleDataGenerator;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [SampleDataGenerator]
+    });
     service = TestBed.inject(DimensionMapperService);
+    data = TestBed.inject(SampleDataGenerator);
   });
 
   it('should be created', () => {
@@ -16,7 +20,7 @@ describe('DimensionMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    const dimension = SampleDataGenerator.getDummyDimension();
+    const dimension = data.getDummyDimension();
 
     // when
     const dimensionDto = service.toDto(dimension);
@@ -30,7 +34,7 @@ describe('DimensionMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    const dimensionDto = SampleDataGenerator.getDummyDimensionDto();
+    const dimensionDto = data.getDummyDimensionDto();
 
     // when
     const dimension = service.fromDto(dimensionDto);

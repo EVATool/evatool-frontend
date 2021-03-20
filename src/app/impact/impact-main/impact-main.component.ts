@@ -1,4 +1,4 @@
-import { LogServiceService } from './../settings/LogService.service';
+import { LogServiceService } from '../settings/log-service.service';
 import { Impact } from './../models/Impact';
 import { ImpactDataService } from '../services/impact/impact-data.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
