@@ -26,27 +26,28 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.drawSlider(this.value);
+    this.drawSlider();
   }
 
   sliderValueChanged(event: MatSliderChange): void {
     if (event.value !== null) {
       if (-this.deadzone < event.value && event.value < this.deadzone && event.value !== 0) {
         console.log('Slider Deadzone Around Zero');
-      }
-      else {
+      } else {
         console.log(`Slider Value Changed: ${event.value}`);
-        this.sliderValueChange.emit(event);
-        this.drawSlider(event.value);
+        this.value = event.value;
+        this.drawSlider();
       }
     }
   }
 
-  update() {
-    console.log("fdasdsfdS");
+  sliderValueChangedFinal(event: MatSliderChange): void {
+    event.value = this.value;
+    this.sliderValueChange.emit(event);
   }
 
-  drawSlider(value: number): void {
+  drawSlider(): void {
+    const value = this.value;
     this.riskBar.nativeElement.style.width = Math.max(-value * 50, 0) + '%';
     this.goalBar.nativeElement.style.width = Math.max(value * 50, 0) + '%';
     const map = (mapValue: number, x1: number, y1: number, x2: number, y2: number) => (mapValue - x1) * (y2 - x2) / (y1 - x1) + x2;
