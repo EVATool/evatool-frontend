@@ -9,7 +9,7 @@
   </div>
 
   <div #matSlider id="slider-container">
-    <mat-slider min="-1.0" max="1.0" step="0.1" [(ngModel)]="value" (input)="sliderValueChanged($event)"></mat-slider>
+    <mat-slider min="-1.0" max="1.0" step="0.1" [(ngModel)]="value" (input)="sliderValueChanged($event)" (valueChange)="update" ></mat-slider>
   </div>
 
   <div #thumb id="slider-thumb">

@@ -42,12 +42,14 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
+      console.log('Impact Table received loadedImpacts event.');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
       this.initSorting();
       this.initFiltering();
     });
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
+      console.log('Impact Table received changedImpact[S] event.');
       this.tableDataSource.data = impacts;
     });
 
@@ -143,6 +145,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   valueChange(impact: Impact, event: MatSliderChange) {
     console.log("Value changed");
+    if (event.value !== null) {
+      impact.value = event.value;
+    }
+    console.log(impact.value);
     this.updateImpact(impact);
   }
 

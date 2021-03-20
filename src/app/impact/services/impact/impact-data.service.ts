@@ -129,7 +129,7 @@ export class ImpactDataService {
       const impactDto = ImpactMapperService.toDto(impact);
       this.impactRestService.updateImpact(impactDto).subscribe((impact: Impact) => {
         this.changedImpact.emit(impact);
-        this.changedImpacts.emit(this.impacts);
+        //this.changedImpacts.emit(this.impacts);
       });
     }
   }
