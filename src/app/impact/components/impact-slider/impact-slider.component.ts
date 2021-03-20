@@ -32,7 +32,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
     if (event.value !== null) {
       const deadzone = 0.3;
       if (-deadzone < event.value && event.value < deadzone && event.value !== 0) {
-        console.log("Slider Deadzone Around Zero.");
+        console.log('Slider Deadzone Around Zero');
       }
       else {
         console.log(`Slider Value Changed: ${event.value}`);
@@ -43,10 +43,10 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   }
 
   drawSlider(value: number): void {
-    this.riskBar.nativeElement.style.width = Math.max(-value * 50, 0) + "%";
-    this.goalBar.nativeElement.style.width = Math.max(value * 50, 0) + "%";
-    const map = (value: number, x1: number, y1: number, x2: number, y2: number) => (value - x1) * (y2 - x2) / (y1 - x1) + x2;
+    this.riskBar.nativeElement.style.width = Math.max(-value * 50, 0) + '%';
+    this.goalBar.nativeElement.style.width = Math.max(value * 50, 0) + '%';
+    const map = (mapValue: number, x1: number, y1: number, x2: number, y2: number) => (mapValue - x1) * (y2 - x2) / (y1 - x1) + x2;
     const val = map(value, -1, 1, -3, 97);
-    this.thumb.nativeElement.style.left = val + "%";
+    this.thumb.nativeElement.style.left = val + '%';
   }
 }

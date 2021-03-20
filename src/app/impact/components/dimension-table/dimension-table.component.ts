@@ -14,7 +14,7 @@ export class DimensionTableComponent implements OnInit, AfterViewInit {
   @Input() type!: string;
 
   tableDataSource: MatTableDataSource<Dimension> = new MatTableDataSource<Dimension>();
-  displayedColumns = ['name', 'description']
+  displayedColumns = ['name', 'description'];
 
   constructor(private dimensionDataService: DimensionDataService) { }
 

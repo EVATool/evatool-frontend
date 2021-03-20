@@ -119,7 +119,7 @@ export class ImpactDataService {
     this.changedImpacts.emit(this.impacts);
   }
 
-  calculateDecimalPlaces(number: number): number {
-    return `${number}`.length;
+  calculateDecimalPlaces(num: number): number {
+    return `${num}`.length;
   }
 }

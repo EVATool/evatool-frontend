@@ -26,7 +26,16 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { DimensionTableComponent } from './components/dimension-table/dimension-table.component';
 
 @NgModule({
-  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective, ImpactSliderComponent, SearchBarComponent, DimensionDialogComponent, AddDimensionButtonComponent, DimensionTableComponent],
+  declarations: [
+    ImpactMainComponent,
+    ImpactTableComponent,
+    AddImpactButtonComponent,
+    ClickOutsideDirective,
+    ImpactSliderComponent,
+    SearchBarComponent,
+    DimensionDialogComponent,
+    AddDimensionButtonComponent,
+    DimensionTableComponent],
   imports: [
     CommonModule,
     MatTableModule,
