@@ -1,4 +1,4 @@
-import { LogServiceService } from './../../settings/log-service.service';
+import { LogServiceService } from '../../settings/LogService.service';
 import { ImpactRestService } from './impact-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { Analysis } from '../../models/Analysis';
