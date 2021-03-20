@@ -1,5 +1,5 @@
-import { RestSettings } from './../../settings/RestSettings';
-import { DimensionDto } from './../../dtos/DimensionDto';
+import { RestSettings } from '../../settings/RestSettings';
+import { DimensionDto } from '../../dtos/DimensionDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

@@ -1,7 +1,7 @@
-import { RestSettings } from './../../settings/RestSettings';
-import { StakeholderDto } from './../../dtos/StakeholderDto';
+import { RestSettings } from '../../settings/RestSettings';
+import { StakeholderDto } from '../../dtos/StakeholderDto';
 import { Observable } from 'rxjs';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({

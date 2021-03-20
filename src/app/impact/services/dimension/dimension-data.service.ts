@@ -1,7 +1,6 @@
 import { DataLoader } from '../../settings/DataLoader';
-import { DimensionDto } from './../../dtos/DimensionDto';
 import { DimensionMapperService } from './dimension-mapper.service';
-import { Dimension } from './../../models/Dimension';
+import { Dimension } from '../../models/Dimension';
 import { DimensionRestService } from './dimension-rest.service';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 

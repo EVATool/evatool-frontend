@@ -1,6 +1,6 @@
-import { AnalysisDto } from './../dtos/AnalysisDto';
-import { StakeholderDto } from './../dtos/StakeholderDto';
-import { DimensionDto } from './../dtos/DimensionDto';
+import { AnalysisDto } from '../dtos/AnalysisDto';
+import { StakeholderDto } from '../dtos/StakeholderDto';
+import { DimensionDto } from '../dtos/DimensionDto';
 
 export class DataLoader {
 

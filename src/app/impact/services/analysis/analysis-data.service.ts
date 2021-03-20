@@ -37,7 +37,7 @@ export class AnalysisDataService {
     }
   }
 
-  getCurrentAnalysis() {
+  getCurrentAnalysis(): Analysis {
     // TODO Get current analysis from router url.
     return this.analyses[0];
   }

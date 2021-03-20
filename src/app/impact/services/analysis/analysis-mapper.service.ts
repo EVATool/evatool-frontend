@@ -1,4 +1,4 @@
-import { ImpactAnalysisDto } from './../../dtos/ImpactAnalysisDto';
+import { ImpactAnalysisDto } from '../../dtos/ImpactAnalysisDto';
 import { AnalysisDto } from '../../dtos/AnalysisDto';
 import { Analysis } from '../../models/Analysis';
 import { Injectable } from '@angular/core';

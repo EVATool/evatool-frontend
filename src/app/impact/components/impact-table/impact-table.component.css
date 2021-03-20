@@ -68,7 +68,7 @@ table {
 }
 
 .mat-cell:first-child {
-  border-left: 0px solid rgba(0, 0, 0, 0);
+  border-left: 0 solid rgba(0, 0, 0, 0);
 }
 
 #dimension-modal {

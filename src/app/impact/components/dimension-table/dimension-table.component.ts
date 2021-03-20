@@ -1,7 +1,7 @@
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DimensionDataService } from './../../services/dimension/dimension-data.service';
-import { Dimension } from './../../models/Dimension';
+import { DimensionDataService } from '../../services/dimension/dimension-data.service';
+import { Dimension } from '../../models/Dimension';
 import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
 @Component({

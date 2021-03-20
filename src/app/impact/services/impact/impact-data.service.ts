@@ -101,7 +101,7 @@ export class ImpactDataService {
   }
 
   createImpact(): void {
-    console.log('Create Impact')
+    console.log('Create Impact');
     if (DataLoader.useDummyData) {
       const impact = this.createDefaultImpact();
       this.impacts.push(impact);
@@ -127,15 +127,15 @@ export class ImpactDataService {
       this.changedImpacts.emit(this.impacts);
     } else {
       const impactDto = ImpactMapperService.toDto(impact);
-      this.impactRestService.updateImpact(impactDto).subscribe((impact: Impact) => {
-        this.changedImpact.emit(impact);
-        //this.changedImpacts.emit(this.impacts);
+      this.impactRestService.updateImpact(impactDto).subscribe((newImpact: Impact) => {
+        this.changedImpact.emit(newImpact);
+        // this.changedImpacts.emit(this.impacts);
       });
     }
   }
 
   deleteImpact(impact: Impact): void {
-    console.log('Delete Impact')
+    console.log('Delete Impact');
     if (DataLoader.useDummyData) {
       const index: number = this.impacts.indexOf(impact, 0);
       this.impacts.splice(index, 1);

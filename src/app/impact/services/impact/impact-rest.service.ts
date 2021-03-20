@@ -1,7 +1,7 @@
-import { ImpactDto } from './../../dtos/ImpactDto';
+import { ImpactDto } from '../../dtos/ImpactDto';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { RestSettings } from './../../settings/RestSettings';
+import { RestSettings } from '../../settings/RestSettings';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ImpactRestService {
 
   }
 
-  onInit() {
+  onInit(): void {
 
   }
 

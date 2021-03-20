@@ -1,4 +1,3 @@
-import { Stakeholder } from './../../models/Stakeholder';
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
 
@@ -42,8 +41,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  update(){
-    console.log("fdasdsfdS");
+  update(): void {
+    console.log('fdasdsfdS');
   }
 
   drawSlider(value: number): void {
