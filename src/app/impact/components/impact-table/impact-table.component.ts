@@ -1,14 +1,15 @@
-import {MatSliderChange} from '@angular/material/slider';
-import {DimensionDataService} from '../../services/dimension/dimension-data.service';
-import {DimensionDialogComponent} from '../dimension-dialog/dimension-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
-import {ImpactDataService} from '../../services/impact/impact-data.service';
-import {Impact} from '../../models/Impact';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-import {FormControl} from '@angular/forms';
-import {MatSelectChange} from '@angular/material/select';
+import { LogServiceService } from './../../settings/LogService.service';
+import { MatSliderChange } from '@angular/material/slider';
+import { DimensionDataService } from '../../services/dimension/dimension-data.service';
+import { DimensionDialogComponent } from '../dimension-dialog/dimension-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ImpactDataService } from '../../services/impact/impact-data.service';
+import { Impact } from '../../models/Impact';
+import { AfterViewInit, Component, OnInit, ViewChild, isDevMode } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-impact-table',
@@ -40,39 +41,41 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
+    private logger: LogServiceService,
     public impactDataService: ImpactDataService,
     public dimensionDataService: DimensionDataService,
     private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit(): void {
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
-      console.log('Impact Table received loadedImpacts event.');
+      this.logger.info('Impact Table received loadedImpacts event.');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
       this.initSorting();
       this.initFiltering();
     });
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
-      console.log('Impact Table received changedImpact[S] event.');
+      this.logger.info('Impact Table received changedImpact[S] event.');
       this.tableDataSource.data = impacts;
     });
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
-      console.log('Impact Table received addedImpact event.');
-      console.log(impact.stakeholder.id);
-      console.log(this.impactDataService.stakeholders);
+      this.logger.info('Impact Table received addedImpact event.');
+      this.logger.info(impact.stakeholder.id);
+      this.logger.info(this.impactDataService.stakeholders);
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
-      console.log('Impact Table received changedImpact event.');
+      this.logger.info('Impact Table received changedImpact event.');
     });
 
     this.impactDataService.removedImpact.subscribe((impact: Impact) => {
-      console.log('Impact Table received removedImpact event.');
+      this.logger.info('Impact Table received removedImpact event.');
     });
 
     this.impactDataService.onInit();
@@ -139,42 +142,45 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   stakeholderChange(impact: Impact, event: MatSelectChange): void {
-    console.log('Stakeholder changed');
+    this.logger.info('Stakeholder changed');
     this.updateImpact(impact);
   }
 
   dimensionChange(impact: Impact, event: MatSelectChange): void {
-    console.log('Dimension changed');
+    this.logger.info('Dimension changed');
     this.updateImpact(impact);
   }
 
   valueChange(impact: Impact, event: MatSliderChange): void {
-    console.log('Value changed');
+    this.logger.info('Value changed');
     if (event.value !== null) {
       impact.value = event.value;
     }
-    console.log(impact.value);
     this.updateImpact(impact);
   }
 
   descriptionChange(impact: Impact, event: Event): void {
-    console.log('Description changed');
+    this.logger.info('Description changed');
     this.updateImpact(impact);
+  }
+
+  lol(): void {
+    this.logger.info('focus');
   }
 
   openDimensionModal(): void {
     if (!this.impactDataService.dimensionsLoaded) {
-      console.log('Dimensions not yet loaded.');
+      this.logger.info('Dimensions not yet loaded.');
       return;
     }
-    console.log('Opening Dimension Modal Dialog.');
+    this.logger.info('Opening Dimension Modal Dialog.');
     const dialogRef = this.dialog.open(DimensionDialogComponent, {
       height: '80%',
       width: '50%',
       data: { parameter: 'I left this here because maybe we will need it c:' }
     });
     dialogRef.afterClosed().subscribe(() => {
-      console.log('Closing Dimension Modal Dialog.');
+      this.logger.info('Closing Dimension Modal Dialog.');
     });
   }
 }

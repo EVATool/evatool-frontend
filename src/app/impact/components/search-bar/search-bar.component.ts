@@ -1,3 +1,4 @@
+import { LogServiceService } from './../../settings/LogService.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,14 +9,14 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class SearchBarComponent implements OnInit {
   @Output() searchTextChanged = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private logger: LogServiceService) { }
 
   ngOnInit(): void {
 
   }
 
   searchTextChange(event: any): void {
-    console.log(`Search Bar Text Changed: ${event.target.value}`);
+    this.logger.info(`Search Bar Text Changed: ${event.target.value}`);
     this.searchTextChanged.emit(event.target.value);
   }
 }

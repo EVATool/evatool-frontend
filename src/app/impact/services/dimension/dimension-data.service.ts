@@ -1,3 +1,4 @@
+import { LogServiceService } from './../../settings/LogService.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { DimensionMapperService } from './dimension-mapper.service';
 import { Dimension } from '../../models/Dimension';
@@ -17,41 +18,43 @@ export class DimensionDataService {
   public dimensions: Dimension[] = [];
   public dimensionTypes: string[] = [];
 
-  constructor(private dimensionRestService: DimensionRestService) {
-
+  constructor(
+    private logger: LogServiceService,
+    private dimensionMapperService: DimensionMapperService,
+    private dimensionRestService: DimensionRestService) {
   }
 
   onInit(): void {
     if (DataLoader.useDummyData) {
       // Load dummy dimensions.
       DataLoader.dummyDimensionDtos.forEach(dim => {
-        this.dimensions.push(DimensionMapperService.fromDto(dim));
+        this.dimensions.push(this.dimensionMapperService.fromDto(dim));
       });
-      console.log('Dimensions loaded.');
+      this.logger.info('Dimensions loaded.');
       this.loadedDimensions.emit(this.dimensions);
 
       // Load dummy dimension types.
       DataLoader.dummyDimensionTypes.forEach(dimType => {
         this.dimensionTypes.push(dimType);
       });
-      console.log('Dimension types loaded.');
+      this.logger.info('Dimension types loaded.');
       this.loadedDimensionTypes.emit(this.dimensionTypes);
     } else {
       // Load dimensions.
       this.dimensionRestService.getDimensions().subscribe(dims => {
         dims.forEach(dim => {
-          this.dimensions.push(DimensionMapperService.fromDto(dim));
+          this.dimensions.push(this.dimensionMapperService.fromDto(dim));
         });
-        console.log('Dimensions loaded.');
-        console.log(this.dimensions);
+        this.logger.info('Dimensions loaded.');
+        this.logger.info(this.dimensions);
         this.loadedDimensions.emit(this.dimensions);
       });
 
       // Load dimension types.
       this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
         this.dimensionTypes = dimTypes;
-        console.log('Dimension types loaded.');
-        console.log(this.dimensionTypes);
+        this.logger.info('Dimension types loaded.');
+        this.logger.info(this.dimensionTypes);
       });
       this.loadedDimensionTypes.emit(this.dimensionTypes);
     }

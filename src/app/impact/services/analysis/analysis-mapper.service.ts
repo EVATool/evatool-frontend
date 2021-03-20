@@ -10,7 +10,7 @@ export class AnalysisMapperService {
 
   constructor() { }
 
-  static toDto(analysis: Analysis): AnalysisDto {
+  toDto(analysis: Analysis): AnalysisDto {
     const analysisDto = new AnalysisDto();
 
     analysisDto.rootEntityID = analysis.id;
@@ -18,7 +18,7 @@ export class AnalysisMapperService {
     return analysisDto;
   }
 
-  static fromDto(analysisDto: AnalysisDto): Analysis {
+  fromDto(analysisDto: AnalysisDto): Analysis {
     const analysis = new Analysis();
 
     analysis.id = analysisDto.rootEntityID;
@@ -26,7 +26,7 @@ export class AnalysisMapperService {
     return analysis;
   }
 
-  static toImpactDto(analysis: Analysis): ImpactAnalysisDto {
+  toImpactDto(analysis: Analysis): ImpactAnalysisDto {
     const analysisDto = new ImpactAnalysisDto();
 
     analysisDto.id = analysis.id;
@@ -34,7 +34,7 @@ export class AnalysisMapperService {
     return analysisDto;
   }
 
-  static fromImpactDto(analysisDto: ImpactAnalysisDto): Analysis {
+  fromImpactDto(analysisDto: ImpactAnalysisDto): Analysis {
     const analysis = new Analysis();
 
     analysis.id = analysisDto.id;

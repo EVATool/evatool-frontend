@@ -1,3 +1,5 @@
+import { LogServiceService } from './../../settings/LogService.service';
+import { Stakeholder } from './../../models/Stakeholder';
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
 
@@ -8,6 +10,7 @@ import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitte
 })
 export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @Input() value!: number;
+  @Input() deadzone: number = 0.0;
   @Output() sliderValueChange = new EventEmitter<MatSliderChange>();
   @ViewChild(MatSlider) slider!: MatSlider;
   @ViewChild('goal') goalBar!: ElementRef;
@@ -15,41 +18,43 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @ViewChild('thumb') thumb!: ElementRef;
   @ViewChild('matSlider') matSlider!: ElementRef;
 
-  constructor() {
+  legalValue!: number;
 
-  }
+  constructor(private logger: LogServiceService) { }
 
   ngOnInit(): void {
 
   }
 
   ngAfterViewInit(): void {
-    this.drawSlider(this.value);
+    this.legalValue = this.value;
+    this.drawSlider();
   }
 
   sliderValueChanged(event: MatSliderChange): void {
     if (event.value !== null) {
-      const deadzone = 0.3;
-      if (-deadzone < event.value && event.value < deadzone && event.value !== 0) {
-        console.log('Slider Deadzone Around Zero');
-      }
-      else {
-        console.log(`Slider Value Changed: ${event.value}`);
-        this.sliderValueChange.emit(event);
-        this.drawSlider(event.value);
+      if (-this.deadzone < event.value && event.value < this.deadzone && event.value !== 0) {
+        this.logger.info('Slider Deadzone Around Zero');
+      } else {
+        this.logger.info(`Slider Value Changed: ${event.value}`);
+        this.value = event.value;
+        this.legalValue = event.value;
+        this.drawSlider();
       }
     }
   }
 
-  update(): void {
-    console.log('fdasdsfdS');
+  sliderValueChangedFinal(event: MatSliderChange): void {
+    this.slider.value = this.legalValue;
+    event.value = this.legalValue;
+    this.sliderValueChange.emit(event);
   }
 
-  drawSlider(value: number): void {
-    this.riskBar.nativeElement.style.width = Math.max(-value * 50, 0) + '%';
-    this.goalBar.nativeElement.style.width = Math.max(value * 50, 0) + '%';
+  drawSlider(): void {
+    this.riskBar.nativeElement.style.width = Math.max(-this.value * 50, 0) + '%';
+    this.goalBar.nativeElement.style.width = Math.max(this.value * 50, 0) + '%';
     const map = (mapValue: number, x1: number, y1: number, x2: number, y2: number) => (mapValue - x1) * (y2 - x2) / (y1 - x1) + x2;
-    const val = map(value, -1, 1, -3, 97);
+    const val = map(this.value, -1, 1, -3, 97);
     this.thumb.nativeElement.style.left = val + '%';
   }
 }
