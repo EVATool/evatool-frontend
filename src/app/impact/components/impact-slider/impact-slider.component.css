@@ -34,7 +34,8 @@
 
 .container {
   position: relative;
-  background-color: rgb(235, 235, 235);
+  height: 20px;
+  background-color: rgb(220, 220, 220);
 }
 
 #goal-bar {
