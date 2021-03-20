@@ -1,14 +1,14 @@
-import { MatSliderChange } from '@angular/material/slider';
-import { DimensionDataService } from './../../services/dimension/dimension-data.service';
-import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ImpactDataService } from '../../services/impact/impact-data.service';
-import { Impact } from '../../models/Impact';
-import { AfterViewInit, Component, OnInit, ViewChild, isDevMode } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { FormControl } from '@angular/forms';
-import { MatSelectChange } from '@angular/material/select';
+import {MatSliderChange} from '@angular/material/slider';
+import {DimensionDataService} from '../../services/dimension/dimension-data.service';
+import {DimensionDialogComponent} from '../dimension-dialog/dimension-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {ImpactDataService} from '../../services/impact/impact-data.service';
+import {Impact} from '../../models/Impact';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {FormControl} from '@angular/forms';
+import {MatSelectChange} from '@angular/material/select';
 
 @Component({
   selector: 'app-impact-table',
@@ -133,18 +133,18 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.impactDataService.deleteImpact(impact);
   }
 
-  stakeholderChange(impact: Impact, event: MatSelectChange) {
-    console.log("Stakeholder changed");
+  stakeholderChange(impact: Impact, event: MatSelectChange): void {
+    console.log('Stakeholder changed');
     this.updateImpact(impact);
   }
 
-  dimensionChange(impact: Impact, event: MatSelectChange) {
-    console.log("Dimension changed");
+  dimensionChange(impact: Impact, event: MatSelectChange): void {
+    console.log('Dimension changed');
     this.updateImpact(impact);
   }
 
-  valueChange(impact: Impact, event: MatSliderChange) {
-    console.log("Value changed");
+  valueChange(impact: Impact, event: MatSliderChange): void {
+    console.log('Value changed');
     if (event.value !== null) {
       impact.value = event.value;
     }
@@ -152,8 +152,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.updateImpact(impact);
   }
 
-  descriptionChange(impact: Impact, event: Event) {
-    console.log("Description changed");
+  descriptionChange(impact: Impact, event: Event): void {
+    console.log('Description changed');
     this.updateImpact(impact);
   }
 
