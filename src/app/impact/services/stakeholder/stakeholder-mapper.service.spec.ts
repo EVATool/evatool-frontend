@@ -1,13 +1,17 @@
-import { SampleDataGenerator } from '../../spec/SampleDataGenerator';
+import { SampleDataGenerator } from '../../spec/sample-data.service';
 import { TestBed } from '@angular/core/testing';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 
 describe('StakeholderMapperService', () => {
   let service: StakeholderMapperService;
+  let data: SampleDataGenerator;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [SampleDataGenerator]
+    });
     service = TestBed.inject(StakeholderMapperService);
+    data = TestBed.inject(SampleDataGenerator);
   });
 
   it('should be created', () => {
@@ -16,7 +20,7 @@ describe('StakeholderMapperService', () => {
 
   it('should convert to dto', () => {
     // given
-    const stakeholder = SampleDataGenerator.getDummyStakeholder();
+    const stakeholder = data.getDummyStakeholder();
 
     // when
     const stakeholderDto = service.toDto(stakeholder);
@@ -28,7 +32,7 @@ describe('StakeholderMapperService', () => {
 
   it('should convert from dto', () => {
     // given
-    const stakeholderDto = SampleDataGenerator.getDummyStakeholderDto();
+    const stakeholderDto = data.getDummyStakeholderDto();
 
     // when
     const stakeholder = service.fromDto(stakeholderDto);
@@ -40,7 +44,7 @@ describe('StakeholderMapperService', () => {
 
   it('should convert to impact dto', () => {
     // given
-    const stakeholder = SampleDataGenerator.getDummyStakeholder();
+    const stakeholder = data.getDummyStakeholder();
 
     // when
     const stakeholderDto = service.toImpactDto(stakeholder);
@@ -52,7 +56,7 @@ describe('StakeholderMapperService', () => {
 
   it('should convert from impact dto', () => {
     // given
-    const stakeholderDto = SampleDataGenerator.getDummyImpactStakeholderDto();
+    const stakeholderDto = data.getDummyImpactStakeholderDto();
 
     // when
     const stakeholder = service.fromImpactDto(stakeholderDto);

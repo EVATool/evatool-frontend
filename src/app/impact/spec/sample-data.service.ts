@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { StakeholderMapperService } from '../services/stakeholder/stakeholder-mapper.service';
 import { AnalysisMapperService } from '../services/analysis/analysis-mapper.service';
 import { DimensionMapperService } from '../services/dimension/dimension-mapper.service';
@@ -12,9 +13,17 @@ import { Dimension } from '../models/Dimension';
 import { ImpactStakeholderDto } from '../dtos/ImpactStakeholderDto';
 import { ImpactAnalysisDto } from '../dtos/ImpactAnalysisDto';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class SampleDataGenerator {
 
-  static getDummyImpact(): Impact {
+  constructor(
+    private dimensionMapperService: DimensionMapperService,
+    private stakeholderMapperService: StakeholderMapperService,
+    private analysisMapperService: AnalysisMapperService) { }
+
+  getDummyImpact(): Impact {
     const impact = new Impact();
     impact.id = 'imapctId';
     impact.value = 0.0;
@@ -25,7 +34,7 @@ export class SampleDataGenerator {
     return impact;
   }
 
-  static getDummyImpactDto(): ImpactDto {
+  getDummyImpactDto(): ImpactDto {
     const impactDto = new ImpactDto();
     impactDto.id = 'imapctId';
     impactDto.value = 0.0;
@@ -36,18 +45,18 @@ export class SampleDataGenerator {
     return impactDto;
   }
 
-  static getDummyImpactDtoWithMyChildren(dimension: Dimension, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
+  getDummyImpactDtoWithMyChildren(dimension: Dimension, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
     const impactDto = new ImpactDto();
     impactDto.id = 'imapctId';
     impactDto.value = 0.0;
     impactDto.description = 'imapctDescription';
-    impactDto.dimension = DimensionMapperService.toDto(dimension);
-    impactDto.stakeholder = StakeholderMapperService.toImpactDto(stakeholder);
-    impactDto.analysis = AnalysisMapperService.toImpactDto(analysis);
+    impactDto.dimension = this.dimensionMapperService.toDto(dimension);
+    impactDto.stakeholder = this.stakeholderMapperService.toImpactDto(stakeholder);
+    impactDto.analysis = this.analysisMapperService.toImpactDto(analysis);
     return impactDto;
   }
 
-  static getDummyDimension(): Dimension {
+  getDummyDimension(): Dimension {
     const dimension = new Dimension();
     dimension.id = 'dimensionId';
     dimension.name = 'dimensionName';
@@ -56,7 +65,7 @@ export class SampleDataGenerator {
     return dimension;
   }
 
-  static getDummyDimensionDto(): DimensionDto {
+  getDummyDimensionDto(): DimensionDto {
     const dimensionDto = new DimensionDto();
     dimensionDto.id = 'dimensionId';
     dimensionDto.name = 'dimensionName';
@@ -65,38 +74,38 @@ export class SampleDataGenerator {
     return dimensionDto;
   }
 
-  static getDummyStakeholder(): Stakeholder {
+  getDummyStakeholder(): Stakeholder {
     const stakeholder = new Stakeholder();
     stakeholder.id = 'stakeholderId';
     stakeholder.name = 'stakeholderName';
     return stakeholder;
   }
 
-  static getDummyStakeholderDto(): StakeholderDto {
+  getDummyStakeholderDto(): StakeholderDto {
     const stakeholderDto = new StakeholderDto();
     stakeholderDto.rootEntityID = 'stakeholderId';
     return stakeholderDto;
   }
 
-  static getDummyImpactStakeholderDto(): ImpactStakeholderDto {
+  getDummyImpactStakeholderDto(): ImpactStakeholderDto {
     const stakeholderDto = new ImpactStakeholderDto();
     stakeholderDto.id = 'stakeholderId';
     return stakeholderDto;
   }
 
-  static getDummyAnalysis(): Analysis {
+  getDummyAnalysis(): Analysis {
     const analysis = new Analysis();
     analysis.id = 'analysisId';
     return analysis;
   }
 
-  static getDummyAnalysisDto(): AnalysisDto {
+  getDummyAnalysisDto(): AnalysisDto {
     const analysisDto = new AnalysisDto();
     analysisDto.rootEntityID = 'analysisId';
     return analysisDto;
   }
 
-  static getDummyImpactAnalysisDto(): ImpactAnalysisDto {
+  getDummyImpactAnalysisDto(): ImpactAnalysisDto {
     const analysisDto = new ImpactAnalysisDto();
     analysisDto.id = 'analysisId';
     return analysisDto;

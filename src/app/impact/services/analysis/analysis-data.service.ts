@@ -1,4 +1,4 @@
-import { LogServiceService } from './../../settings/LogService.service';
+import { LogService } from '../../settings/log.service';
 import { AnalysisRestService } from './analysis-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { AnalysisMapperService } from './analysis-mapper.service';
@@ -14,7 +14,7 @@ export class AnalysisDataService {
   analyses: Analysis[] = [];
 
   constructor(
-    private logger: LogServiceService,
+    private logger: LogService,
     private analysisMapperService:AnalysisMapperService,
     private analysisRestService: AnalysisRestService) {
 

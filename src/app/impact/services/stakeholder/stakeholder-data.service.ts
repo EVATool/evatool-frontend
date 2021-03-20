@@ -1,4 +1,4 @@
-import { LogServiceService } from './../../settings/LogService.service';
+import { LogService } from '../../settings/log.service';
 import { DataLoader } from '../../settings/DataLoader';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 import { StakeholderRestService } from './stakeholder-rest.service';
@@ -14,7 +14,7 @@ export class StakeholderDataService {
   stakeholders: Stakeholder[] = [];
 
   constructor(
-    private logger: LogServiceService,
+    private logger: LogService,
     private stakeholderMapperService: StakeholderMapperService,
     private stakeholderRestService: StakeholderRestService) { }
 

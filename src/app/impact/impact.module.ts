@@ -1,3 +1,5 @@
+import { LogService } from './settings/log.service';
+import { SampleDataGenerator } from './spec/sample-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -37,7 +39,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     SearchBarComponent,
     DimensionDialogComponent,
     AddDimensionButtonComponent,
-    DimensionTableComponent,
+    DimensionTableComponent
+  ,
     ColumnCategoryFilterComponent,
   ],
   imports: [
