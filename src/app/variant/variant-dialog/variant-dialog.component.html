@@ -1,48 +1,51 @@
-<div class="variant-dialog">
-  <div hidden cdkFocusInitial></div>
-  <button mat-dialog-close mat-icon-button class="variant-modal-close">
+<div mat-dialog-title>
+  <button mat-dialog-close mat-icon-button class="variant-modal-close" tabindex="-1">
     <mat-icon>close</mat-icon>
   </button>
   <div class="container" mat-dialog-title>
-      <h2>Variant(s)</h2>
+    <h2>Variant(s)</h2>
   </div>
-  <mat-dialog-content>
-      <mat-table mat-table [dataSource]='matDataSource' class="variant-table">
-        <ng-container matColumnDef='title'>
-          <mat-cell *matCellDef='let variant'>
-            <input type="text" matInput value="{{variant.title}}"
-                   readonly="{{!variant.editable}}" name="title"
-                   [(ngModel)]="variant.title" *ngIf="variant.editable" id="titleinput" id="{{variant.id}}_title">
-            <div *ngIf="!variant.editable">
-              {{variant.title}}
-            </div>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef='description'>
-          <mat-cell *matCellDef='let variant'  >
-            <input matInput type="text" value="{{variant.description}}"
-                   readonly="{{!variant.editable}}" [(ngModel)]="variant.description"  *ngIf="variant.editable" id="{{variant.id}}_description">
-            <div *ngIf="!variant.editable">
-              {{variant.description}}
-            </div>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="options">
-          <mat-cell *matCellDef='let variant'>
-            <button mat-icon-button *ngIf="variant.editable" name="save" (click)="save(variant);">
-              <mat-icon>save</mat-icon>
-            </button>
-            <button mat-icon-button *ngIf="!variant.editable" name="archive">
-              <mat-icon>archive</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container>
-        <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-icon-button aria-label="Add Variant" class="addVariantButton" (click)="addVariant()">
-      <mat-icon>add</mat-icon> Variant
-    </button>
-  </mat-dialog-actions>
 </div>
+<mat-dialog-content>
+  <div class="variant-dialog">
+    <mat-table mat-table [dataSource]='matDataSource' class="variant-table">
+      <ng-container matColumnDef='title'>
+        <mat-cell *matCellDef='let variant'>
+          <input type="text" matInput value="{{variant.title}}"
+                 readonly="{{!variant.editable}}" name="title"
+                 [(ngModel)]="variant.title" *ngIf="variant.editable" id="titleinput" id="{{variant.id}}_title">
+          <div *ngIf="!variant.editable">
+            {{variant.title}}
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef='description'>
+        <mat-cell *matCellDef='let variant'>
+          <input matInput type="text" value="{{variant.description}}"
+                 readonly="{{!variant.editable}}" [(ngModel)]="variant.description" *ngIf="variant.editable"
+                 id="{{variant.id}}_description">
+          <div *ngIf="!variant.editable">
+            {{variant.description}}
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="options">
+        <mat-cell *matCellDef='let variant'>
+          <button mat-icon-button *ngIf="variant.editable" name="save" (click)="save(variant);">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="!variant.editable" name="archive">
+            <mat-icon>archive</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-icon-button aria-label="Add Variant" class="addVariantButton" (click)="addVariant()" tabindex="-1">
+    <mat-icon>add</mat-icon>
+    Variant
+  </button>
+</mat-dialog-actions>

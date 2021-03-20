@@ -12,6 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http';
+import {NgScrollbarModule} from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [VariantMainComponent, VariantDialogComponent],
@@ -27,7 +28,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    NgScrollbarModule
   ],
   exports: [
     VariantMainComponent
