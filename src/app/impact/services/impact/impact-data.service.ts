@@ -120,15 +120,17 @@ export class ImpactDataService {
   }
 
   updateImpact(impact: Impact): void {
-    console.log('Update Impact')
+    console.log('Update Impact');
     if (DataLoader.useDummyData) {
-      this.removedImpact.emit(impact);
+      // Dummy data does not require any updating.
+      this.changedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
     } else {
-      // TODO: When to call update? Only makes sense when using rest
-
-      this.removedImpact.emit(impact);
-      this.changedImpacts.emit(this.impacts);
+      const impactDto = ImpactMapperService.toDto(impact);
+      this.impactRestService.updateImpact(impactDto).subscribe((impact: Impact) => {
+        this.changedImpact.emit(impact);
+        this.changedImpacts.emit(this.impacts);
+      });
     }
   }
 

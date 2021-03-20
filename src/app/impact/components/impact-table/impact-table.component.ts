@@ -133,19 +133,22 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   stakeholderChange(impact: Impact, event: MatSelectChange) {
     console.log("Stakeholder changed");
+    this.updateImpact(impact);
   }
 
   dimensionChange(impact: Impact, event: MatSelectChange) {
     console.log("Dimension changed");
+    this.updateImpact(impact);
   }
 
   valueChange(impact: Impact, event: MatSliderChange) {
     console.log("Value changed");
+    this.updateImpact(impact);
   }
 
   descriptionChange(impact: Impact, event: Event) {
     console.log("Description changed");
-    //this.updateImpact();
+    this.updateImpact(impact);
   }
 
   openDimensionModal(): void {
