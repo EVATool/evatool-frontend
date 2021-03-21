@@ -5,9 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../models/Variant';
 import {VariantDataService} from '../services/variant-data.service';
 import {VariantRestService} from '../services/variant-rest.service';
-import {VariantDTO} from '../models/VariantDTO';
-import {BrowserModule} from '@angular/platform-browser';
-import {mixinTabIndex} from "@angular/material/core";
+import {VariantDTO} from "../models/VariantDTO";
 
 @Component({
   selector: 'app-variant-dialog',
@@ -17,7 +15,7 @@ import {mixinTabIndex} from "@angular/material/core";
 export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
-  displayedColumns = ['title', 'description', 'options'];
+  displayedColumns = ['guiId', 'title', 'description'];
   variants: Variant[] = [];
   matDataSource = new MatTableDataSource<Variant>();
 
@@ -39,12 +37,14 @@ export class VariantDialogComponent implements OnInit {
 
     this.variantRestService.getVariants().subscribe((result: any) => {
       this.variants = [];
-      result.content.forEach((variantDTO: any) => {
-        const variant = {
-          id: variantDTO.uuid,
+      result.content.forEach((variantDTO: VariantDTO) => {
+        const variant: Variant = {
+          id: variantDTO.id,
+          guiId: variantDTO.guiId,
           description: variantDTO.description,
           title: variantDTO.title,
-          analysesId: variantDTO.analysesId
+          analysisId: variantDTO.analysisId,
+          archived: variantDTO.archived
         };
         this.variants.push(variant);
       });

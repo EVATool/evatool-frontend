@@ -3,9 +3,6 @@
   min-width: 40vw;
 }
 
-.variant-table{
-  width: 100%;
-}
 
 .addVariantButton{
   background: white;
@@ -27,6 +24,47 @@
 
 .mat-cell, .mat-footer-cell {
   word-wrap: break-word;
+}
+
+
+
+
+
+
+.mat-table{
+  width: 100%;
+  padding-right: 2%;
+
+.description-wrapper{
+  display: table-cell;
+  text-align: left;
+  width: 95%;
+}
+
+  .options{
+    display: none;
+  }
+
+  .mat-row:hover{
+    .options{
+      vertical-align: middle;
+      text-align: right;
+      display: table-cell;
+    }
+  }
+
+  .mat-column-title{
+    width: 10% !important;
+  }
+
+  .mat-column-guiId{
+    width: 5% !important;
+  }
+
+  .mat-column-description{
+    width: 85% !important;
+  }
+
 }
 
 

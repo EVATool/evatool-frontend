@@ -8,12 +8,19 @@
 </div>
 <mat-dialog-content>
   <div class="variant-dialog">
-    <mat-table mat-table [dataSource]='matDataSource' class="variant-table">
+    <mat-table mat-table [dataSource]='matDataSource'>
+      <ng-container matColumnDef='guiId'>
+        <mat-cell *matCellDef='let variant' id="guiId">
+          <div>
+            {{variant.guiId}}
+          </div>
+        </mat-cell>
+      </ng-container>
       <ng-container matColumnDef='title'>
         <mat-cell *matCellDef='let variant'>
           <input type="text" matInput value="{{variant.title}}"
                  readonly="{{!variant.editable}}" name="title"
-                 [(ngModel)]="variant.title" *ngIf="variant.editable" id="titleinput" id="{{variant.id}}_title" autofocus tabindex="0">
+                 [(ngModel)]="variant.title" *ngIf="variant.editable" autofocus tabindex="0">
           <div *ngIf="!variant.editable">
             {{variant.title}}
           </div>
@@ -21,22 +28,22 @@
       </ng-container>
       <ng-container matColumnDef='description'>
         <mat-cell *matCellDef='let variant'>
-          <input matInput type="text" value="{{variant.description}}"
-                 readonly="{{!variant.editable}}" [(ngModel)]="variant.description" *ngIf="variant.editable"
-                 id="{{variant.id}}_description" tabindex="1">
-          <div *ngIf="!variant.editable">
-            {{variant.description}}
+          <div class="description-wrapper">
+            <input matInput type="text" value="{{variant.description}}"
+                   readonly="{{!variant.editable}}" [(ngModel)]="variant.description" *ngIf="variant.editable"
+                   tabindex="1">
+            <div *ngIf="!variant.editable">
+              {{variant.description}}
+            </div>
           </div>
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="options">
-        <mat-cell *matCellDef='let variant'>
-          <button mat-icon-button *ngIf="variant.editable" name="save" (click)="save(variant);">
-            <mat-icon>save</mat-icon>
-          </button>
-          <button mat-icon-button *ngIf="!variant.editable" name="archive">
-            <mat-icon>archive</mat-icon>
-          </button>
+          <div class="options">
+            <button mat-icon-button *ngIf="variant.editable" name="save" (click)="save(variant);">
+              <mat-icon>save</mat-icon>
+            </button>
+            <button mat-icon-button *ngIf="!variant.editable" name="archive">
+              <mat-icon>archive</mat-icon>
+            </button>
+          </div>
         </mat-cell>
       </ng-container>
       <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
