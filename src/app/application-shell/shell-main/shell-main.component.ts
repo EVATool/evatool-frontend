@@ -6,7 +6,7 @@ import { isDevMode } from '@angular/core';
 @Component({
   selector: 'app-shell-main',
   templateUrl: './shell-main.component.html',
-  styleUrls: ['./shell-main.component.css', '../../layout/style/style.css']
+  styleUrls: ['./shell-main.component.scss', '../../layout/style/style.css']
 })
 export class ShellMainComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTabGroup) tab!: MatTabGroup;
