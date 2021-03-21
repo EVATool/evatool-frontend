@@ -7,6 +7,7 @@ import {VariantDataService} from '../services/variant-data.service';
 import {VariantRestService} from '../services/variant-rest.service';
 import {VariantDTO} from '../models/VariantDTO';
 import {BrowserModule} from '@angular/platform-browser';
+import {mixinTabIndex} from "@angular/material/core";
 
 @Component({
   selector: 'app-variant-dialog',
