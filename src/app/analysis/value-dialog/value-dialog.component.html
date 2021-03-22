@@ -11,18 +11,21 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Social Value</mat-panel-title>
         </mat-expansion-panel-header>
-          <mat-table mat-table [dataSource]='matDataSourceSocial' class="variant-table">
+          <mat-table mat-table [dataSource]='matDataSourceSocial'>
             <ng-container matColumnDef='id'>
+              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
               <mat-cell *matCellDef='let value'>
                 {{value.id}}
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef='title'>
+              <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
               <mat-cell *matCellDef='let value' >
                 {{value.title}}
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef>Descirption</mat-header-cell>
               <mat-cell *matCellDef='let value'>
                 {{value.description}}
               </mat-cell>
@@ -36,20 +39,20 @@
           <mat-panel-title>Economic Value</mat-panel-title>
         </mat-expansion-panel-header>
           <mat-table mat-table [dataSource]='matDataSourceEconomic' class="variant-table">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
             <ng-container matColumnDef='id'>
+              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
               <mat-cell *matCellDef='let value'>
                 {{value.id}}
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef='title'>
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Title</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
               <mat-cell *matCellDef='let value'>
                 {{value.title}}
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description">
-              <mat-header-cell *matHeaderCellDef mat-sort-header> Description</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
               <mat-cell *matCellDef='let value'>
                 {{value.description}}
               </mat-cell>
