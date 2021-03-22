@@ -2,13 +2,18 @@
   <ng-container matColumnDef='Stakeholder'>
     <mat-header-cell *matHeaderCellDef>Stakeholder</mat-header-cell>
     <mat-cell *matCellDef='let value'>
+      <div>
 
+      </div>
+      <div>
+        <app-stakeholder-level></app-stakeholder-level>
+      </div>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef='Prio'>
     <mat-header-cell *matHeaderCellDef>Prio</mat-header-cell>
     <mat-cell *matCellDef='let value' >
-
+      <app-stakeholder-prio></app-stakeholder-prio>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="Impact">
