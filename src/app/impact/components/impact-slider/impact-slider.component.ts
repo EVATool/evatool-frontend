@@ -54,7 +54,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
     this.riskBar.nativeElement.style.width = Math.max(-this.value * 50, 0) + '%';
     this.goalBar.nativeElement.style.width = Math.max(this.value * 50, 0) + '%';
     const map = (mapValue: number, x1: number, y1: number, x2: number, y2: number) => (mapValue - x1) * (y2 - x2) / (y1 - x1) + x2;
-    const val = map(this.value, -1, 1, -3, 97);
-    this.thumb.nativeElement.style.left = val + '%';
+    const val = map(this.value, -1, 1, 3, 97);
+    this.thumb.nativeElement.style.left = 'calc(' + val + '% - 5px)';
   }
 }
