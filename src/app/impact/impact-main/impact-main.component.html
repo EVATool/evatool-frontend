@@ -1,13 +1,24 @@
-<div id="search-description-div">
-  <input matInput placeholder="Search...">
-</div>
+<div class="container">
+  <div class="above-table-container">
+    <div class="search-description-div">
+      <input matInput placeholder="Search...">
+    </div>
 
-<div id="impact-table-div">
-  <app-impact-table></app-impact-table>
-</div>
+    <div class="scroll-to-top" [hidden]="!windowScrolled">
+      <button type="button" mat-fab (click)="scrollToTop()" matTooltip="Scroll to Top" matTooltipHideDelay="100"
+        matTooltipPosition="above">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    </div>
+  </div>
 
-<div id="add-impact-button-div">
-  <button id="add-impact-button" type="button" mat-fab (click)="addImpact()">
-    <p style="font-size:180%;"> +</p>
-  </button>
+  <div class="impact-table-div">
+    <ng-scrollbar>
+      <app-impact-table></app-impact-table>
+    </ng-scrollbar>
+  </div>
+
+  <div class="add-impact-button-div">
+    <app-add-impact-button (addButtonClick)="addImpact()"> </app-add-impact-button>
+  </div>
 </div>

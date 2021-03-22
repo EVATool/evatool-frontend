@@ -5,15 +5,21 @@ import { ImpactMainComponent } from './impact-main/impact-main.component';
 import { ImpactTableComponent } from './components/impact-table/impact-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AddImpactButtonComponent } from './components/add-impact-button/add-impact-button.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { ImpactSliderComponent } from './components/impact-slider/impact-slider.component';
+
 
 @NgModule({
-  declarations: [ImpactMainComponent, ImpactTableComponent],
+  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective, ImpactSliderComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -24,7 +30,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatSortModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatTooltipModule,
+    NgScrollbarModule
   ],
   exports: [
     ImpactMainComponent
