@@ -75,6 +75,16 @@ table {
   margin-left: 10px;
 }
 
+.impact-slider-container {
+  margin-top: 2%;
+}
+
+.value-percentage {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: -5%;
+}
+
 /* Delete row button */
 
 .description-wrapper {
