@@ -3,6 +3,8 @@ import {AnalysisDataService} from "../services/analysis/analysis-data.service";
 import {AnalysisDTO} from "../model/AnalysisDTO";
 import {Analysis} from "../model/Analysis";
 import {analyticsPackageSafelist} from "@angular/cli/models/analytics";
+import {Router} from "@angular/router";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-analysis-dialog',
@@ -25,9 +27,14 @@ export class AnalysisDialogComponent implements OnInit {
     // TODO: Reload Analysis Panel
   }
 
-  constructor(private analysisDataService: AnalysisDataService) { }
+  constructor(private analysisDataService: AnalysisDataService, private router: Router, private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>) { }
 
 
   ngOnInit(): void {
+  }
+
+  GoToStakeholder(): void {
+    this.router.navigate(['/analysis']);
+    this.analysisDialogComponent.close();
   }
 }
