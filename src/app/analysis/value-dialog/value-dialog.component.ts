@@ -9,7 +9,7 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class ValueDialogComponent implements OnInit {
 
-  public displayedColumns = ['id', 'title', 'description']
+  public displayedColumns = ['id', 'title', 'description'];
   public matDataSourceEconomic = new MatTableDataSource();
   public matDataSourceSocial = new MatTableDataSource();
 

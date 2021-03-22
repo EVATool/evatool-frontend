@@ -1,16 +1,17 @@
 import {NgModule} from '@angular/core';
 import {StakeholderMainComponent} from './stakeholder-main/stakeholder-main.component';
 import {CommonModule} from '@angular/common';
-import {AppModule} from "../app.module";
+import {StakeholderTableComponent} from './components/stakeholder-table/stakeholder-table.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
-  declarations: [StakeholderMainComponent],
+  declarations: [StakeholderMainComponent, StakeholderTableComponent],
   imports: [
     CommonModule,
-    AppModule
+    MatTableModule,
   ],
   exports: [
-    StakeholderMainComponent
+    StakeholderMainComponent,
   ]
 })
 export class StakeholderModule{

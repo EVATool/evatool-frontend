@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StakeholderTableComponent implements OnInit {
 
+  public displayedColumns = ['Stakeholder', 'Prio', 'Impact'];
+
   constructor() { }
 
   ngOnInit(): void {
