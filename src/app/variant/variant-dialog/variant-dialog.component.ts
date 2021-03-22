@@ -37,7 +37,8 @@ export class VariantDialogComponent implements OnInit {
 
     this.variantRestService.getVariants().subscribe((result: any) => {
       this.variants = [];
-      result.content.forEach((variantDTO: VariantDTO) => {
+      console.log(result);
+      result.forEach((variantDTO: VariantDTO) => {
         const variant: Variant = {
           id: variantDTO.id,
           guiId: variantDTO.guiId,
