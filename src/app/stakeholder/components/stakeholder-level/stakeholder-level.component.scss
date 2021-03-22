@@ -1,13 +1,24 @@
 @mixin circle {
+  border-start-end-radius: 100%;
   border-end-end-radius: 100%;
+  border-start-start-radius: 100%;
+  border-end-start-radius: 100%;
+
+
+
+
+
 }
 
-$size: 100px;
+$size: 3vh;
 
 
 .stakeholder-level{
+  float: right;
   .level-gesellschaft{
     width: $size;
+    height: $size;
+    background-color: lightblue;
     @include circle;
   }
   .level-organisation{
