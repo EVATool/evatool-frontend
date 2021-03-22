@@ -8,8 +8,8 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class StakeholderTableComponent implements OnInit {
 
-  public displayedColumns = ['guiId', 'Stakeholder', 'Prio', 'Impact'];
-  matDataSource: any = new MatTableDataSource<any>([{guiId: '1', Stakeholder: 'TEST'}]);
+  public displayedColumns = ['guiId', 'Stakeholder', 'Ebene', 'Prio', 'Impact'];
+  matDataSource: any = new MatTableDataSource<any>([{guiId: '1', Stakeholder: 'TEST'}, {guiId: '2', Stakeholder: 'TEST'}]);
 
   constructor() { }
 
