@@ -4,6 +4,7 @@ import {AnalysisDialogComponent} from "../analysis-dialog/analysis-dialog.compon
 import {Analysis} from "../model/Analysis";
 import {AnalysisRestService} from "../services/analysis/analysis-rest.service";
 import {AnalysisDataService} from "../services/analysis/analysis-data.service";
+import {ValueDialogComponent} from "../value-dialog/value-dialog.component";
 
 @Component({
   selector: 'app-analysis-main',
@@ -37,6 +38,11 @@ export class AnalysisMainComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(AnalysisDialogComponent, { data: { p: 'test', b: 'auch test' } });
   }
+
+  openValueDialog(): void {
+    const valueDialogRef = this.dialog.open(ValueDialogComponent, { data: { p: 'test', b: 'auch test' } });
+  }
+
   ngOnInit(): void {
 
     this.analysisRestService.getVariants().subscribe((result: any) => {

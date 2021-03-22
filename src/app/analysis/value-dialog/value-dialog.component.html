@@ -1,0 +1,68 @@
+<div class="value-dialog">
+  <button mat-dialog-close mat-icon-button class="value-modal-close">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="container" mat-dialog-title>
+    <h2>Values bearbeiten</h2>
+  </div>
+  <mat-dialog-content>
+    <div class="card-container">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Social Value</mat-panel-title>
+        </mat-expansion-panel-header>
+          <mat-table mat-table [dataSource]='matDataSourceSocial' class="variant-table">
+            <ng-container matColumnDef='id'>
+              <mat-cell *matCellDef='let value'>
+                {{value.id}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef='title'>
+              <mat-cell *matCellDef='let value' >
+                {{value.title}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="description">
+              <mat-cell *matCellDef='let value'>
+                {{value.description}}
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Economic Value</mat-panel-title>
+        </mat-expansion-panel-header>
+          <mat-table mat-table [dataSource]='matDataSourceEconomic' class="variant-table">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <ng-container matColumnDef='id'>
+              <mat-cell *matCellDef='let value'>
+                {{value.id}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef='title'>
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Title</mat-header-cell>
+              <mat-cell *matCellDef='let value'>
+                {{value.title}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Description</mat-header-cell>
+              <mat-cell *matCellDef='let value'>
+                {{value.description}}
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row mat-row *matRowDef="let value; columns: displayedColumns;"></mat-row>
+          </mat-table>
+      </mat-expansion-panel>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-icon-button aria-label="Add Variant" class="addVariantButton" >
+      <mat-icon>add</mat-icon> Value
+    </button>
+  </mat-dialog-actions>
+</div>

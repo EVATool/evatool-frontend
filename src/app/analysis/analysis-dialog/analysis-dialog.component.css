@@ -14,12 +14,12 @@
 }
 /* create analysis button style-----------------------------------------------*/
 .createButton {
-  border: none;
+  /*border: none;*/
   background-color: transparent;
   alignment: center;
   margin-left: 32%;
 }
-.b1 {
+.createAnalysisButton {
   border: none;
   background: #404040;
   color: #ffffff !important;

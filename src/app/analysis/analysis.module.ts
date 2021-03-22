@@ -8,18 +8,23 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {AnalysisDialogComponent } from './analysis-dialog/analysis-dialog.component';
 import {MatButtonModule} from "@angular/material/button";
+import { ValueDialogComponent } from './value-dialog/value-dialog.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
-  declarations: [AnalysisMainComponent, AnalysisDialogComponent],
+  declarations: [AnalysisMainComponent, AnalysisDialogComponent, ValueDialogComponent],
   imports: [
     CommonModule,
+    MatCardModule,
     MatDialogModule,
     ReactiveFormsModule,
     MatTableModule,
     MatIconModule,
     FormsModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatExpansionModule,
   ],
   exports: [
     AnalysisMainComponent

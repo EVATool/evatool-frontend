@@ -14,13 +14,18 @@
 <!--left-->
 <div id="left"><!--linker Bereich-->
   <div>
-    <button mat-raised-button (click)="openDialog()" class="b1">+ Neue Analyse</button>
+    <button mat-raised-button (click)="openValueDialog()" class="valueButton">+ Values bearbeiten</button>
+  </div>
+  <br>
+  <div>
+    <button mat-raised-button (click)="openDialog()" class="createAnalysisButton">+ Neue Analyse</button>
   </div>
 </div>
 
 <!--cards-->
 <!--right-->
 <div id="right"><!--rechter Bereich-->
+
   <div class="headertitle">Alle Analysen</div>
   <hr style="width:50%; margin: auto;">
   <div class="content-wrapper">
