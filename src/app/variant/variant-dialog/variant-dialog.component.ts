@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../models/Variant';
 import {VariantDataService} from '../services/variant-data.service';
 import {VariantRestService} from '../services/variant-rest.service';
-import {VariantDTO} from "../models/VariantDTO";
+import {VariantDTO} from '../models/VariantDTO';
 
 @Component({
   selector: 'app-variant-dialog',
@@ -66,4 +66,7 @@ export class VariantDialogComponent implements OnInit {
     this.variantDataService.save(variant);
   }
 
+  archive(variant: Variant): void {
+    this.variantDataService.archive(variant);
+  }
 }

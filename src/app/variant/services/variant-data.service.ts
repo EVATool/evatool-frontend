@@ -5,6 +5,7 @@ import {Observable, Subscribable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
+import {VariantDTO} from "../models/VariantDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -54,4 +55,17 @@ export class VariantDataService {
       }).subscribe();
   }
 
+  archive(variant: Variant): void {
+    this.variantRestService.updateVariants({
+      id: variant.id,
+      archived: true,
+      guiId: variant.guiId ,
+      title: variant.title,
+      description: variant.description,
+      subVariant: {},
+      analysisId: variant.analysisId
+    }).subscribe(() => {
+      return;
+    });
+  }
 }

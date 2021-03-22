@@ -10,6 +10,7 @@
   <div class="variant-dialog">
     <mat-table mat-table [dataSource]='matDataSource'>
       <ng-container matColumnDef='guiId'>
+
         <mat-cell *matCellDef='let variant' id="guiId">
           <div>
             {{variant.guiId}}
@@ -17,10 +18,11 @@
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef='title'>
+
         <mat-cell *matCellDef='let variant'>
-          <input type="text" matInput value="{{variant.title}}"
+          <textarea type="text" matInput value="{{variant.title}}"
                  readonly="{{!variant.editable}}" name="title"
-                 [(ngModel)]="variant.title" *ngIf="variant.editable" autofocus tabindex="0">
+                    [(ngModel)]="variant.title" *ngIf="variant.editable" placeholder="Title"></textarea>
           <div *ngIf="!variant.editable">
             {{variant.title}}
           </div>
@@ -29,24 +31,24 @@
       <ng-container matColumnDef='description'>
         <mat-cell *matCellDef='let variant'>
           <div class="description-wrapper">
-            <input matInput type="text" value="{{variant.description}}"
+            <textarea matInput type="text" value="{{variant.description}}"
                    readonly="{{!variant.editable}}" [(ngModel)]="variant.description" *ngIf="variant.editable"
-                   tabindex="1">
+                     placeholder="Description"></textarea>
             <div *ngIf="!variant.editable">
               {{variant.description}}
             </div>
           </div>
-          <div class="options">
+          <div class="options" *ngIf="!variant.archived">
             <button mat-icon-button *ngIf="variant.editable" name="save" (click)="save(variant);">
               <mat-icon>save</mat-icon>
             </button>
-            <button mat-icon-button *ngIf="!variant.editable" name="archive">
+            <button mat-icon-button *ngIf="!variant.editable" name="archive" (click)="archive(variant)">
               <mat-icon>archive</mat-icon>
             </button>
           </div>
         </mat-cell>
       </ng-container>
-      <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row mat-row *matRowDef="let variant; columns: displayedColumns;" class="archieved-{{variant.archived}}"></mat-row>
     </mat-table>
   </div>
 </mat-dialog-content>
