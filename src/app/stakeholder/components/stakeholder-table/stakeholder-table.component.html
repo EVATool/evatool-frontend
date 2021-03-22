@@ -3,10 +3,9 @@
     <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
     <mat-cell *matCellDef='let value'>
       <div>
-{{value.guiID}}
+      {{value.guiId}}
       </div>
       <div>
-        <app-stakeholder-level></app-stakeholder-level>
       </div>
     </mat-cell>
   </ng-container>
@@ -16,8 +15,13 @@
       <div>
         {{value.Stakeholder}}
       </div>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef='Ebene'>
+    <mat-header-cell *matHeaderCellDef>Level</mat-header-cell>
+    <mat-cell *matCellDef='let value'>
       <div>
-        <app-stakeholder-level></app-stakeholder-level>
+        <app-stakeholder-level ></app-stakeholder-level>
       </div>
     </mat-cell>
   </ng-container>
@@ -30,7 +34,7 @@
   <ng-container matColumnDef="Impact">
     <mat-header-cell *matHeaderCellDef>Impact</mat-header-cell>
     <mat-cell *matCellDef='let value'>
-
+      <app-stakeholder-impact></app-stakeholder-impact>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -1,21 +1,43 @@
 @mixin circle {
+  border-start-end-radius: 100%;
   border-end-end-radius: 100%;
+  border-start-start-radius: 100%;
+  border-end-start-radius: 100%;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  margin: auto;
+
 }
 
-$size: 100px;
+@mixin child{
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 
+$size: 3vh;
 
 .stakeholder-level{
+  justify-content: center;
   .level-gesellschaft{
     width: $size;
+    height: $size;
     @include circle;
   }
   .level-organisation{
-    width: $size/100*80;
+    width: $size/100*70;
+    height: $size/100*70;
+    background: white;
     @include circle;
+    @include child;
   }
   .level-individual{
-    width: $size/100*60;
+    width: $size/100*40;
+    height: $size/100*40;
     @include circle;
+    @include child;
   }
 }
