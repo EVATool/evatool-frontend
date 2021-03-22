@@ -30,11 +30,13 @@ export class VariantDialogComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.loadVariants();
     this.form = this.formBuilder.group({
       id: new FormControl(null)
     });
+  }
 
+  loadVariants(): void{
     this.variantRestService.getVariants().subscribe((result: any) => {
       this.variants = [];
       console.log(result);
@@ -64,10 +66,10 @@ export class VariantDialogComponent implements OnInit {
 
   save(variant: Variant): void {
     variant.editable = false;
-    this.variantDataService.save(variant);
+    this.variantDataService.save(variant, this);
   }
 
   archive(variant: Variant): void {
-    this.variantDataService.archive(variant);
+    this.variantDataService.archive(variant, this );
   }
 }
