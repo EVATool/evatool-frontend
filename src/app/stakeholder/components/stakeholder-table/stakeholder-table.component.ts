@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-stakeholder-table',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StakeholderTableComponent implements OnInit {
 
-  public displayedColumns = ['Stakeholder', 'Prio', 'Impact'];
+  public displayedColumns = ['guiId', 'Stakeholder', 'Prio', 'Impact'];
+  matDataSource: any = new MatTableDataSource<any>([{guiId: '1', Stakeholder: 'TEST'}]);
 
   constructor() { }
 

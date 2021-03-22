@@ -1,5 +1,18 @@
+
+
+$height: 20px;
+
+.prio{
+  display: inline-block;
+  width: 100%;
+  height: $height;
+
+}
+
 .prio-level{
-  width: 50px;
-  height: 150px;
+  width: $height/2;
+  height: $height;
   background-color: blue;
+  margin: 3px;
+  float:left;
 }

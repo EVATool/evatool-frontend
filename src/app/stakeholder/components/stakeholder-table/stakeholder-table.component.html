@@ -1,9 +1,20 @@
-<mat-table mat-table >
+<mat-table mat-table [dataSource]="matDataSource" >
+  <ng-container matColumnDef='guiId'>
+    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+    <mat-cell *matCellDef='let value'>
+      <div>
+{{value.guiID}}
+      </div>
+      <div>
+        <app-stakeholder-level></app-stakeholder-level>
+      </div>
+    </mat-cell>
+  </ng-container>
   <ng-container matColumnDef='Stakeholder'>
     <mat-header-cell *matHeaderCellDef>Stakeholder</mat-header-cell>
     <mat-cell *matCellDef='let value'>
       <div>
-
+        {{value.Stakeholder}}
       </div>
       <div>
         <app-stakeholder-level></app-stakeholder-level>

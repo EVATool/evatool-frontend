@@ -1,0 +1,21 @@
+@mixin circle {
+  border-end-end-radius: 100%;
+}
+
+$size: 100px;
+
+
+.stakeholder-level{
+  .level-gesellschaft{
+    width: $size;
+    @include circle;
+  }
+  .level-organisation{
+    width: $size/100*80;
+    @include circle;
+  }
+  .level-individual{
+    width: $size/100*60;
+    @include circle;
+  }
+}
