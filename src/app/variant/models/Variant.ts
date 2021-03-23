@@ -1,8 +1,10 @@
 
 export class Variant {
   id: any = '';
+  guiId: any = '';
   title: any = '';
   description: any = '';
   editable?: boolean;
-  analysesId: any = '';
+  analysisId: any = '';
+  archived = false;
 }

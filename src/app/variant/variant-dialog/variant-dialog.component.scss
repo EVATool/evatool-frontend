@@ -1,25 +1,22 @@
-.variant-dialog{
+.variant-dialog {
   height: 50vh;
   min-width: 40vw;
 }
 
-.variant-table{
-  width: 100%;
-}
 
-.addVariantButton{
+.addVariantButton {
   background: white;
 }
 
-.variant-modal-close{
+.variant-modal-close {
   float: right;
 }
 
-.variants-close-div{
+.variants-close-div {
   width: 90vw;
 }
 
-.variants-close-div{
+.variants-close-div {
   width: 10vw;
   float: top;
 
@@ -27,6 +24,58 @@
 
 .mat-cell, .mat-footer-cell {
   word-wrap: break-word;
+  word-break: normal;
+  padding: 8px 8px 8px 8px;
+}
+
+.mat-table {
+  width: 100%;
+  max-width: 100%;
+  word-break: normal;
+
+  .description-wrapper {
+    display: table-cell;
+    text-align: left;
+    width: 99%;
+  }
+
+  .options {
+    display: none;
+    margin-right: 0;
+  }
+
+  .archieved-true{
+    background-color: lightgrey;
+  }
+
+  .mat-row:hover {
+    .options {
+      vertical-align: middle;
+      text-align: right;
+      display: table-cell;
+    }
+  }
+
+  .mat-column-title {
+    width: 25%;
+    min-width: 25%;
+    max-width: 25%;
+
+
+  }
+
+  .mat-column-guiId {
+    width: 10%;
+    min-width: 10%;
+    max-width: 10%;
+
+  }
+
+  .mat-column-description {
+    width: 65%;
+
+  }
+
 }
 
 

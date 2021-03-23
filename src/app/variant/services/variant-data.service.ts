@@ -5,6 +5,8 @@ import {Observable, Subscribable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
+import {VariantDTO} from '../models/VariantDTO';
+import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +43,7 @@ export class VariantDataService {
   }
 
 
-  save(variant: Variant): void {
+  save(variant: Variant, variantDialogComponent: VariantDialogComponent): void {
     this.variantRestService.createVariants(
       {
         id: '',
@@ -50,8 +52,23 @@ export class VariantDataService {
         title: variant.title,
         description: variant.description,
         subVariant: {},
-        analysisId: '5cf54163-c47b-4e11-a8c0-262e7c0fce2e'
-      }).subscribe();
+        analysisId: '4fa9946b-8f57-4e08-a9c8-3d95e910c8bc'
+      }).subscribe(() => {
+        variantDialogComponent.loadVariants();
+    });
   }
 
+  archive(variant: Variant, variantDialogComponent: VariantDialogComponent): void {
+    this.variantRestService.updateVariants({
+      id: variant.id,
+      archived: true,
+      guiId: variant.guiId ,
+      title: variant.title,
+      description: variant.description,
+      subVariant: {},
+      analysisId: variant.analysisId
+    }).subscribe(() => {
+      variantDialogComponent.loadVariants();
+    });
+  }
 }
