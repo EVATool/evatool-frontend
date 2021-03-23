@@ -30,7 +30,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
           requirementTitle : requirementRest.requirementTitle,
           requirementDescription : requirementRest.requirementDescription,
           dimensions : requirementRest.dimensions,
-          impactDescription : requirementRest.impactDescription,
           // requirementImpactPoints : new Map(Object.entries(requirementRest.requirementImpactPoints)),
           requirementImpactPoints : requirementRest.requirementImpactPoints,
           variantsTitle : requirementRest.variantsTitle
@@ -72,9 +71,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   concatDimension(parameter: any): string {
     let value = '';
-    const dimension: [] = parameter.dimensions;
+    const dimension: Dimension[] = parameter.dimensions;
     if (dimension == null){ return value; }
-    dimension.forEach(value1 => value = value.concat(value1, '\n'));
+    dimension.forEach(value1 => value = value.concat(value1.dimensionTitle, '\n'));
     return value;
   }
 
@@ -82,7 +81,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     let value = '';
     const variants: any = element.variantsTitle;
     if (variants == null){ return value; }
-    Object.keys(variants).forEach(value1 => value = value.concat(variants[value1], '\n'));
+    Object.keys(variants).forEach(value1 => value = value.concat(variants[value1].variantsTitle, '\n'));
     return value;
   }
 
@@ -90,7 +89,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     let value = '';
     if (element.requirementImpactPoints == null){ return value; }
     if (element.requirementImpactPoints[impact.id] != null){
-      const points: number | undefined = element.requirementImpactPoints[impact.id];
+      const points: number | undefined = element.requirementImpactPoints[impact.id].points;
       if (points && 0 < points){
         value = '' + points;
       }else{
@@ -103,7 +102,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   isPositiv(element: Requirements, impact: Impact): boolean {
     if (element.requirementImpactPoints == null){ return false; }
     if (element.requirementImpactPoints[impact.id] != null){
-      const points: number | undefined = element.requirementImpactPoints[impact.id];
+      const points: number | undefined = element.requirementImpactPoints[impact.id].points;
       if (points && 0 < points) {
         return true;
       }
@@ -114,7 +113,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   isNegativ(element: Requirements, impact: Impact): boolean {
     if (element.requirementImpactPoints == null){ return false; }
     if (element.requirementImpactPoints[impact.id] != null){
-      const points: number | undefined = element.requirementImpactPoints[impact.id];
+      const points: number | undefined = element.requirementImpactPoints[impact.id].points;
       if (points && 0 > points) {
         return true;
       }
@@ -125,15 +124,19 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   clickFunction(element: Requirements, impact: Impact): void {
     if (element.requirementImpactPoints == null){ element.requirementImpactPoints = {}; }
     if (element.requirementImpactPoints[impact.id] == null){
-      element.requirementImpactPoints[impact.id] = 1;
-    } else if (element.requirementImpactPoints[impact.id] === 1){
-      element.requirementImpactPoints[impact.id] = -1;
+      element.requirementImpactPoints[impact.id] = {
+        entityId: impact.id,
+        impactDescription: impact.description,
+        points: 1
+      };
+      element.requirementImpactPoints[impact.id].points = 1;
+    } else if (element.requirementImpactPoints[impact.id].points === 1){
+      element.requirementImpactPoints[impact.id].points = -1;
     } else {
       delete element.requirementImpactPoints[impact.id];
     }
     if (element.rootEntityId != null) {
       this.requirementsRestService.updateRequirements(element).subscribe(value => {
-        this.ngOnInit();
       });
     }else{
       this.requirementsRestService.createRequirements(element).subscribe(value => {
@@ -154,7 +157,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       requirementNew.requirementTitle = 'RE' + (size + 1);
     }
     requirementNew.requirementDescription = 'generated requirement';
-    this.requirementsSource.push(requirementNew);
-    this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+    this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
+      this.requirementsSource.push(value);
+      this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+    });
   }
 }
