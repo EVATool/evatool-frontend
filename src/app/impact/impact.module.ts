@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { LogService } from './settings/log.service';
 import { SampleDataGenerator } from './spec/sample-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -28,6 +29,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {DimensionTableComponent} from './components/dimension-table/dimension-table.component';
 import {ColumnCategoryFilterComponent} from './components/column-category-filter/column-category-filter.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ColumnSliderFilterComponent } from './components/column-slider-filter/column-slider-filter.component';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     SearchBarComponent,
     DimensionDialogComponent,
     AddDimensionButtonComponent,
-    DimensionTableComponent
-  ,
+    DimensionTableComponent,
     ColumnCategoryFilterComponent,
+    ColumnSliderFilterComponent,
   ],
   imports: [
     CommonModule,
@@ -61,7 +63,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatFormFieldModule,
     MatExpansionModule,
     BrowserAnimationsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RouterModule
   ],
   exports: [
     ImpactMainComponent

@@ -1,3 +1,4 @@
+import { SliderFilterChange } from './../column-slider-filter/SliderFilterChange';
 import { LogService } from '../../settings/log.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
@@ -60,14 +61,12 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     });
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
-      this.logger.info('Impact Table received changedImpact[S] event.');
+      this.logger.info('Impact Table received changedImpacts event.');
       this.tableDataSource.data = impacts;
     });
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info('Impact Table received addedImpact event.');
-      this.logger.info(impact.stakeholder.id);
-      this.logger.info(this.impactDataService.stakeholders);
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
@@ -93,8 +92,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   public updateFilter(): void {
+    console.log(JSON.stringify(this.filterValues));
     this.tableDataSource.filter = JSON.stringify(this.filterValues);
   }
+  
   private initFiltering(): void {
     this.stakeholderNames = this.impactDataService.stakeholders.map(value => value.name);
 
@@ -125,8 +126,16 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       const searchTerms = JSON.parse(filter);
       return searchTerms.stakeholder.length === 0 || searchTerms.stakeholder.indexOf(data.stakeholder.name) !== -1
         && data.dimension.name.toLowerCase().indexOf(searchTerms.dimension.toLowerCase()) !== -1
-        && data.value.toString().toLowerCase().indexOf(searchTerms.value.toLowerCase()) !== -1;
+        && searchTerms.value.length === 0 || searchTerms.value.indexOf(data.value) !== -1;
     };
+  }
+
+  valueFilterChanged(event: SliderFilterChange) {
+    this.logger.info(event);
+
+    //this.filterValues.value = event;
+    this.filterValues.value = event.sliderFilterValues[0].toString();
+    this.updateFilter();
   }
 
   toggleFilterVisibility(key: string): void {
@@ -162,10 +171,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   descriptionChange(impact: Impact, event: Event): void {
     this.logger.info('Description changed');
     this.updateImpact(impact);
-  }
-
-  lol(): void {
-    this.logger.info('focus');
   }
 
   openDimensionModal(): void {

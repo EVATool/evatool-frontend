@@ -1,0 +1,18 @@
+<button mat-icon-button color="accent" (click)="$event.stopPropagation();toggleVisibility()" aria-label="Value-Filter">
+  <mat-icon>filter_alt</mat-icon>
+</button>
+<div class="floating lifted" appClickOutside (clickOutside)="setInvisible()">
+  <div (click)="$event.stopPropagation()" [ngClass]="isVisible ? 'show' : 'hide'">
+    <div class="filter-header">{{name}} Filter</div>
+    <div class="filter-slider-container">
+
+      <app-impact-slider [value]="0.5" (sliderValueChange)="sliderFilterValueChanged($event)">
+      </app-impact-slider>
+
+      <mat-checkbox (change)='filterTypeChanged()' [(ngModel)]='useBetween'>Between</mat-checkbox>
+      <mat-checkbox (change)='filterTypeChanged()' [(ngModel)]='useLessThan'>Less Than</mat-checkbox>
+      <mat-checkbox (change)='filterTypeChanged()' [(ngModel)]='useEquals'>Equals</mat-checkbox>
+
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { FormBuilder } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -12,7 +13,7 @@ describe('ImpactTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, MatDialogModule, BrowserAnimationsModule],
+      imports: [HttpClientModule, MatDialogModule, BrowserAnimationsModule, RouterTestingModule],
       declarations: [ImpactTableComponent],
       providers: [FormBuilder,
         { provide: MatDialogRef, useValue: {} },

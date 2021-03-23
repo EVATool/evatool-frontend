@@ -20,7 +20,6 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.router.routerState.root.queryParams
       .subscribe(params => {
-        console.log(params.id);
         this.analysisId = params.id;
       });
 

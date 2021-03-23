@@ -16,7 +16,6 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @ViewChild('goal') goalBar!: ElementRef;
   @ViewChild('risk') riskBar!: ElementRef;
   @ViewChild('thumb') thumb!: ElementRef;
-  @ViewChild('matSlider') matSlider!: ElementRef;
 
   legalValue!: number;
 
