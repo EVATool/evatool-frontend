@@ -1,22 +1,20 @@
-// @ts-ignore
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {StakeholderMainComponent} from './stakeholder-main.component';
 
-import { AnalysisMainComponent } from './analysis-main.component';
 
 describe('StakeholderMainComponent', () => {
-  let component: AnalysisMainComponent;
-  let fixture: ComponentFixture<AnalysisMainComponent>;
+  let component: StakeholderMainComponent;
+  let fixture: ComponentFixture<StakeholderMainComponent>;
 
-  // @ts-ignore
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AnalysisMainComponent ]
+      declarations: [ StakeholderMainComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnalysisMainComponent);
+    fixture = TestBed.createComponent(StakeholderMainComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
