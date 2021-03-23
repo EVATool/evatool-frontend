@@ -20,6 +20,9 @@ import { StakeholderImpactComponent } from './components/stakeholder-impact/stak
     CommonModule,
     MatTableModule,
     MatDialogModule
+  ],
+  exports: [
+    StakeholderMainComponent
   ]
 })
 export class StakeholderModule {
