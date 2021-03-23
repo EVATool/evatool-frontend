@@ -29,12 +29,14 @@ export class AnalysisDataService {
     } else {
       // Load current analysis.
       this.router.routerState.root.queryParams.subscribe(params => {
-        this.analysisRestService.getAnalysisById(params.id).subscribe(currentAnalysis => {
-          this.currentAnalysis = this.analysisMapperService.fromDto(currentAnalysis);
-          this.logger.info('Analysis from router parameter loaded.');
-          this.logger.info(this.currentAnalysis);
-          this.loadedAnalyses.emit(this.currentAnalysis);
-        });
+        if (params.id !== undefined) { // TODO check if valid UUID.
+          this.analysisRestService.getAnalysisById(params.id).subscribe(currentAnalysis => {
+            this.currentAnalysis = this.analysisMapperService.fromDto(currentAnalysis);
+            this.logger.info('Analysis from router parameter loaded.');
+            this.logger.info(this.currentAnalysis);
+            this.loadedAnalyses.emit(this.currentAnalysis);
+          });
+        }
       });
     }
   }
