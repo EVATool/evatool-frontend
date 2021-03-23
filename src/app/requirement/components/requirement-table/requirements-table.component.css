@@ -1,0 +1,59 @@
+div{
+  padding:25px;
+  max-height: 800px;
+}
+
+table {
+  width: 100%;
+}
+
+input{
+
+}
+.mat-header-cell{
+  text-align: center;
+}
+
+.mat-column-ID{
+  text-align: left;
+  width:50px;
+  min-width:50px;
+  left: 0px !important;
+}
+
+.mat-column-Requirements{
+  text-align: left;
+  min-width:500px;
+  left: 75px !important;
+}
+.mat-column-Variants{
+  text-align: left;
+  white-space: break-spaces;
+  width:100px;
+  min-width:100px;
+  left: 575px !important;
+}
+.mat-column-Dimension{
+  text-align: left;
+  white-space: break-spaces;
+  width:100px;
+  min-width:100px;
+  left: 675px !important;
+}
+
+.positiv{
+  background: limegreen;
+  text-align: center;
+}
+
+.negativ{
+  background: red;
+  text-align: center;
+}
+
+#add-impact-button-div {
+  position: fixed;
+  left: 300px;
+  bottom: 500px;
+  height: 30px;
+}
