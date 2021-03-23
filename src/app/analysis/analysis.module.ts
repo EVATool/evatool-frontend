@@ -25,6 +25,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
     MatSelectModule,
     MatButtonModule,
     MatExpansionModule,
+    MatDialogModule
   ],
   exports: [
     AnalysisMainComponent

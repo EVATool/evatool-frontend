@@ -1,5 +1,6 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {StakeholderMainComponent} from './stakeholder-main.component';
+import { StakeholderMainComponent } from './stakeholder-main.component';
 
 
 describe('StakeholderMainComponent', () => {
@@ -8,9 +9,10 @@ describe('StakeholderMainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StakeholderMainComponent ]
+      imports: [MatDialogModule],
+      declarations: [StakeholderMainComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

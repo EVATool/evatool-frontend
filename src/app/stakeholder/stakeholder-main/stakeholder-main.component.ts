@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
 import {Stakeholder} from '../model/Stakeholder';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatDialogRef} from '@angular/material/dialog';
 
 
 @Component({
