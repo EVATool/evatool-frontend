@@ -1,3 +1,5 @@
+import { RouterTestingModule } from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
@@ -8,7 +10,7 @@ describe('AnalysisDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      imports: [HttpClientModule, RouterTestingModule]
     });
     service = TestBed.inject(AnalysisDataService);
   });

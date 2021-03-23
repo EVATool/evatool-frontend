@@ -52,8 +52,8 @@ export class ImpactDataService {
       this.loadIfChildrenAreLoaded();
     });
 
-    this.analysisDataService.loadedAnalyses.subscribe(analyses => {
-      this.analyses = analyses;
+    this.analysisDataService.loadedAnalyses.subscribe(currentAnalysis => {
+      this.analyses = [currentAnalysis];
       this.analysesLoaded = true;
       this.loadIfChildrenAreLoaded();
     });
@@ -75,7 +75,8 @@ export class ImpactDataService {
         this.impactsLoaded = true;
       } else {
         // Load impacts.
-        this.impactRestService.getImpacts().subscribe(imps => {
+        this.impactRestService.getImpactsByAnalysisId(this.analysisDataService.getCurrentAnalysis().id).subscribe(imps => {
+          imps.sort((a, b) => this.sortImpactsById(a, b));
           imps.forEach(imp => {
             this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
           });
@@ -85,6 +86,12 @@ export class ImpactDataService {
         });
       }
     }
+  }
+
+  private sortImpactsById(a: Impact, b: Impact): number {
+    const numberA = + ("" + a.uniqueString?.replace("IMP", ""));
+    const numberB = + ("" + b.uniqueString?.replace("IMP", ""));
+    return numberA > numberB ? 1 : -1;
   }
 
   private getChildrenLoaded(): boolean {
@@ -113,8 +120,9 @@ export class ImpactDataService {
     } else {
       const impact = this.createDefaultImpact();
       const impactDto = this.impactMapperService.toDto(impact);
-      this.logger.info(impactDto);
       this.impactRestService.createImpact(impactDto).subscribe(impDto => {
+        impact.id = impDto.id;
+        impact.uniqueString = impDto.uniqueString;
         this.impacts.push(impact);
         this.addedImpact.emit(impact);
         this.changedImpacts.emit(this.impacts);

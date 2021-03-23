@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { RestSettings } from '../../settings/RestSettings';
 import { Observable } from 'rxjs';
 import { AnalysisDto } from '../../dtos/AnalysisDto';
@@ -9,7 +10,7 @@ import { Injectable } from '@angular/core';
 })
 export class AnalysisRestService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,) {
 
   }
 
@@ -17,7 +18,7 @@ export class AnalysisRestService {
 
   }
 
-  getAnalyses(): Observable<AnalysisDto[]> {
-    return this.http.get<AnalysisDto[]>(RestSettings.analysesUrl);
+  getAnalysisById(id: string): Observable<AnalysisDto> {
+    return this.http.get<AnalysisDto>(RestSettings.analysesUrl + "/" + id);
   }
 }

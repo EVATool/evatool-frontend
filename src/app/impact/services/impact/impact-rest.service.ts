@@ -21,6 +21,10 @@ export class ImpactRestService {
     return this.http.get<ImpactDto[]>(RestSettings.impactsUrl);
   }
 
+  getImpactsByAnalysisId(analysisId: string): Observable<ImpactDto[]> {
+    return this.http.get<ImpactDto[]>(RestSettings.impactsUrl + "?analysisId=" + analysisId);
+  }
+
   createImpact(impactDto: ImpactDto): Observable<any> {
     return this.http.post(RestSettings.impactsUrl, impactDto, RestSettings.httpOptions);
   }

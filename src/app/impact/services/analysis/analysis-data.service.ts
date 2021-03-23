@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { LogService } from '../../settings/log.service';
 import { AnalysisRestService } from './analysis-rest.service';
 import { DataLoader } from '../../settings/DataLoader';
@@ -9,40 +10,36 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class AnalysisDataService {
-  @Output() loadedAnalyses: EventEmitter<Analysis[]> = new EventEmitter();
+  @Output() loadedAnalyses: EventEmitter<Analysis> = new EventEmitter();
 
-  analyses: Analysis[] = [];
+  currentAnalysis!: Analysis;
 
   constructor(
     private logger: LogService,
-    private analysisMapperService:AnalysisMapperService,
-    private analysisRestService: AnalysisRestService) {
-
-  }
+    private analysisMapperService: AnalysisMapperService,
+    private analysisRestService: AnalysisRestService,
+    private router: Router) { }
 
   onInit(): void {
     if (DataLoader.useDummyData) {
       // Load dummy analyses.
-      DataLoader.dummyAnalysisDtos.forEach(ana => {
-        this.analyses.push(this.analysisMapperService.fromDto(ana));
-      });
+      this.currentAnalysis = this.analysisMapperService.fromDto(DataLoader.dummyAnalysisDtos[0]);
       this.logger.info('Analyses loaded.');
-      this.loadedAnalyses.emit(this.analyses);
+      this.loadedAnalyses.emit(this.currentAnalysis);
     } else {
-      // Load analyses.
-      this.analysisRestService.getAnalyses().subscribe(anas => {
-        anas.forEach(ana => {
-          this.analyses.push(this.analysisMapperService.fromDto(ana));
+      // Load current analysis.
+      this.router.routerState.root.queryParams.subscribe(params => {
+        this.analysisRestService.getAnalysisById(params.id).subscribe(currentAnalysis => {
+          this.currentAnalysis = this.analysisMapperService.fromDto(currentAnalysis);
+          this.logger.info('Analysis from router parameter loaded.');
+          this.logger.info(this.currentAnalysis);
+          this.loadedAnalyses.emit(this.currentAnalysis);
         });
-        this.logger.info('Analyses loaded.');
-        this.logger.info(this.analyses);
-        this.loadedAnalyses.emit(this.analyses);
       });
     }
   }
 
   getCurrentAnalysis(): Analysis {
-    // TODO Get current analysis from router url.
-    return this.analyses[0];
+    return this.currentAnalysis;
   }
 }

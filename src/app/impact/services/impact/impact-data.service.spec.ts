@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -8,7 +9,7 @@ describe('ImpactDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      imports: [HttpClientModule, RouterTestingModule]
     });
     service = TestBed.inject(ImpactDataService);
   });
