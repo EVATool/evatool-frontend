@@ -78,7 +78,28 @@ describe('DimensionRestService', () => {
       expect(service).toBeTruthy();
     });
 
+    describe('#getDimensions', () => {
+      it('should return an Observable<DimensionDto[]>', () => {
+        // Arrage
 
+        // Act
+        service.getDimensions().subscribe(dimensions => {
+        });
 
+        // Assert
+
+      });
+    });
+
+    describe('#getDimensionTypes', () => {
+      it('should return an Observable<string[]>', () => {
+        // Arrage
+
+        // Act
+
+        // Assert
+
+      });
+    });
   });
 });
