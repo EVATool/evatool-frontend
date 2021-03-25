@@ -8,9 +8,9 @@ describe('AddImpactButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddImpactButtonComponent ]
+      declarations: [AddImpactButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +21,16 @@ describe('AddImpactButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit click event', () => {
+    // Arrange
+    spyOn(component.addButtonClick, 'emit');
+
+    // Act
+    component.addButtonClicked();
+
+    // Assert
+    expect(component.addButtonClick.emit).toHaveBeenCalled();
   });
 });
