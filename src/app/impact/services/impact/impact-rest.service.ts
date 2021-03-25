@@ -1,6 +1,6 @@
 import { ImpactDto } from './../../dtos/ImpactDto';
 import { RestSettings } from './../../settings/RestSettings';
-import { LogService } from './../../settings/log.service';
+import { LogService } from '../../../shared/services/log.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

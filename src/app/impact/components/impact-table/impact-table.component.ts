@@ -1,6 +1,6 @@
 import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
 import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './../column-slider-filter/SliderFilterSettings';
-import { LogService } from './../../settings/log.service';
+import { LogService } from '../../../shared/services/log.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { MatDialog } from '@angular/material/dialog';

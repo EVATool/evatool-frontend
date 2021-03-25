@@ -1,4 +1,4 @@
-import { LogService } from './../../settings/log.service';
+import { LogService } from '../../../shared/services/log.service';
 import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './../column-slider-filter/SliderFilterSettings';
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';

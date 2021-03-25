@@ -1,4 +1,4 @@
-import { LogService } from './../../settings/log.service';
+import { LogService } from '../../../shared/services/log.service';
 import { ImpactSliderComponent } from './../impact-slider/impact-slider.component';
 import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './SliderFilterSettings';
 import { MatSliderChange } from '@angular/material/slider';
