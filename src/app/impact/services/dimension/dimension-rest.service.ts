@@ -27,6 +27,6 @@ export class DimensionRestService {
 
   getDimensionTypes(): Observable<string[]> {
     this.logger.info(this, 'Get all DimensionsTypes');
-    return this.http.get<string[]>(RestSettings.dimensionsUrl + '/types');
+    return this.http.get<string[]>(RestSettings.dimensionTypesUrl);
   }
 }
