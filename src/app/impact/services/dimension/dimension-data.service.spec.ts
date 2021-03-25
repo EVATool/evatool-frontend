@@ -36,10 +36,7 @@ describe('DimensionDataService', () => {
   it('should fire \'loadedDimensions\' event', () => {
     // Arrange
     spyOn(service.loadedDimensions, 'emit');
-    spyOn(restService, 'getDimensions').and.returnValue(new Observable((observer) => {
-      observer.next(sampleData.dummyDimensionDtos);
-      observer.complete();
-    }));
+    spyOn(restService, 'getDimensions').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionDtos));
 
     // Act
     service.onInit();

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { StakeholderMapperService } from '../services/stakeholder/stakeholder-mapper.service';
 import { AnalysisMapperService } from '../services/analysis/analysis-mapper.service';
@@ -109,6 +110,13 @@ export class SampleDataService {
     const analysisDto = new ImpactAnalysisDto();
     analysisDto.id = 'analysisId';
     return analysisDto;
+  }
+
+  getObservable<T>(content: T): Observable<T> {
+    return new Observable((observer) => {
+      observer.next(content);
+      observer.complete();
+    });
   }
 
   readonly dummyAnalysisDtos: AnalysisDto[] = [
