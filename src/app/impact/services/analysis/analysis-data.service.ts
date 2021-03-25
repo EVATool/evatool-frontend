@@ -31,6 +31,7 @@ export class AnalysisDataService {
     });
 
     this.router.routerState.root.queryParams.subscribe(params => {
+      // TODO Error handling.
       this.urlIdExtracted.emit(params.id);
     });
   }
