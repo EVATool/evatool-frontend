@@ -21,39 +21,47 @@ export class LogService {
     return LogService.logLevel <= logLevel;
   }
 
-  trace(msg: any) {
+  public static getClassName(object: any): string {
+    return object.constructor.name;
+  }
+
+  public static formatMessage(prefix: string, msg: string): string {
+    return prefix + ": " + msg;
+  }
+
+  trace(sender: any, msg: any) {
     if (LogService.shouldLog(LogLevel.Trace)) {
-      console.log(msg);
+      console.log(LogService.formatMessage(LogService.getClassName(sender), msg));
     }
   }
 
-  debug(msg: any) {
+  debug(sender: any, msg: any) {
     if (LogService.shouldLog(LogLevel.Debug)) {
-      console.log(msg);
+      console.log(LogService.formatMessage(LogService.getClassName(sender), msg));
     }
   }
 
-  info(msg: any) {
+  info(sender: any, msg: any) {
     if (LogService.shouldLog(LogLevel.Info)) {
-      console.log(msg);
+      console.log(LogService.formatMessage(LogService.getClassName(sender), msg));
     }
   }
 
-  warn(msg: any) {
+  warn(sender: any, msg: any) {
     if (LogService.shouldLog(LogLevel.Warn)) {
-      console.log(msg);
+      console.log(LogService.formatMessage(LogService.getClassName(sender), msg));
     }
   }
 
-  error(msg: any) {
+  error(sender: any, msg: any) {
     if (LogService.shouldLog(LogLevel.Error)) {
-      console.log(msg);
+      console.log(LogService.formatMessage(LogService.getClassName(sender), msg));
     }
   }
 
-  fatal(msg: any) {
+  fatal(sender: any, msg: any) {
     if (LogService.shouldLog(LogLevel.Fatal)) {
-      console.log(msg);
+      console.log(LogService.formatMessage(LogService.getClassName(sender), msg));
     }
   }
 }
