@@ -1,17 +1,17 @@
-import { SampleDataGenerator } from '../../spec/sample-data.service';
+import { SampleDataService } from '../../spec/sample-data.service';
 import { TestBed } from '@angular/core/testing';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 
 describe('StakeholderMapperService', () => {
   let service: StakeholderMapperService;
-  let data: SampleDataGenerator;
+  let data: SampleDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SampleDataGenerator]
+      providers: [SampleDataService]
     });
     service = TestBed.inject(StakeholderMapperService);
-    data = TestBed.inject(SampleDataGenerator);
+    data = TestBed.inject(SampleDataService);
   });
 
   it('should be created', () => {

@@ -1,4 +1,4 @@
-import { SampleDataGenerator } from './../../spec/sample-data.service';
+import { SampleDataService } from './../../spec/sample-data.service';
 import { DimensionRestService } from './dimension-rest.service';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,7 +7,7 @@ import { DimensionDataService } from './dimension-data.service';
 import { Observable } from 'rxjs';
 
 describe('DimensionDataService', () => {
-  let sampleData: SampleDataGenerator;
+  let sampleData: SampleDataService;
   let restService: DimensionRestService;
   let service: DimensionDataService;
 
@@ -15,7 +15,7 @@ describe('DimensionDataService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule]
     });
-    sampleData = TestBed.inject(SampleDataGenerator);
+    sampleData = TestBed.inject(SampleDataService);
     restService = TestBed.inject(DimensionRestService);
     service = TestBed.inject(DimensionDataService);
   });

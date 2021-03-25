@@ -16,7 +16,7 @@ import { ImpactAnalysisDto } from '../dtos/ImpactAnalysisDto';
 @Injectable({
   providedIn: 'root'
 })
-export class SampleDataGenerator {
+export class SampleDataService {
 
   constructor(
     private dimensionMapperService: DimensionMapperService,

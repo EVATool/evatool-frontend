@@ -1,4 +1,4 @@
-import { SampleDataGenerator } from './../../spec/sample-data.service';
+import { SampleDataService } from './../../spec/sample-data.service';
 import { RestSettings } from './../../settings/RestSettings';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -8,7 +8,7 @@ import { DimensionRestService } from './dimension-rest.service';
 
 describe('DimensionRestService', () => {
   describe('Mocked', () => {
-    let sampleData: SampleDataGenerator;
+    let sampleData: SampleDataService;
     let httpMock: HttpTestingController;
     let service: DimensionRestService;
 
@@ -16,7 +16,7 @@ describe('DimensionRestService', () => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule]
       });
-      sampleData = TestBed.inject(SampleDataGenerator);
+      sampleData = TestBed.inject(SampleDataService);
       httpMock = TestBed.inject(HttpTestingController);
       service = TestBed.inject(DimensionRestService);
     });

@@ -1,4 +1,4 @@
-import { SampleDataGenerator } from './../../spec/sample-data.service';
+import { SampleDataService } from './../../spec/sample-data.service';
 import { RestSettings } from './../../settings/RestSettings';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
@@ -7,7 +7,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { AnalysisRestService } from './analysis-rest.service';
 
 describe('AnalysisRestService', () => {
-  let sampleData: SampleDataGenerator;
+  let sampleData: SampleDataService;
   let httpMock: HttpTestingController;
   let service: AnalysisRestService;
 
@@ -15,7 +15,7 @@ describe('AnalysisRestService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    sampleData = TestBed.inject(SampleDataGenerator);
+    sampleData = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AnalysisRestService);
   });

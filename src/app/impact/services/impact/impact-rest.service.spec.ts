@@ -1,4 +1,4 @@
-import { SampleDataGenerator } from './../../spec/sample-data.service';
+import { SampleDataService } from './../../spec/sample-data.service';
 import { RestSettings } from './../../settings/RestSettings';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -6,7 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ImpactRestService } from './impact-rest.service';
 
 describe('ImpactRestService', () => {
-  let sampleData: SampleDataGenerator;
+  let sampleData: SampleDataService;
   let httpMock: HttpTestingController;
   let service: ImpactRestService;
 
@@ -14,7 +14,7 @@ describe('ImpactRestService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    sampleData = TestBed.inject(SampleDataGenerator);
+    sampleData = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ImpactRestService);
   });
