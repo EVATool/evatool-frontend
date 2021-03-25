@@ -18,5 +18,7 @@ describe('DimensionDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  
+  it('should load data when calling onInit', () => {
+
+  });
 });

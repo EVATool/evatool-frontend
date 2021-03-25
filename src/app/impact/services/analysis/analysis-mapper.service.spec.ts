@@ -19,46 +19,46 @@ describe('AnalysisMapperService', () => {
   });
 
   it('should convert to dto', () => {
-    // given
+    // Arrange
     const analysis = data.getDummyAnalysis();
 
-    // when
+    // Act
     const analysisDto = service.toDto(analysis);
 
-    // then
+    // Assert
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
   });
 
   it('should convert from dto', () => {
-    // given
+    // Arrange
     const analysisDto = data.getDummyAnalysisDto();
 
-    // when
+    // Act
     const analysis = service.fromDto(analysisDto);
 
-    // then
+    // Assert
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
   });
 
   it('should convert to impact dto', () => {
-    // given
+    // Arrange
     const analysis = data.getDummyAnalysis();
 
-    // when
+    // Act
     const analysisDto = service.toImpactDto(analysis);
 
-    // then
+    // Assert
     expect(analysis.id === analysisDto.id).toBeTruthy();
   });
 
   it('should convert from impact dto', () => {
-    // given
+    // Arrange
     const analysisDto = data.getDummyImpactAnalysisDto();
 
-    // when
+    // Act
     const analysis = service.fromImpactDto(analysisDto);
 
-    // then
+    // Assert
     expect(analysis.id === analysisDto.id).toBeTruthy();
   });
 });

@@ -19,13 +19,13 @@ describe('ImpactMapperService', () => {
   });
 
   it('should convert to dto', () => {
-    // given
+    // Arrange
     const impact = data.getDummyImpact();
 
-    // when
+    // Act
     const impactDto = service.toDto(impact);
 
-    // then
+    // Assert
     expect(impact.id === impactDto.id).toBeTruthy();
     expect(impact.uniqueString === impactDto.uniqueString).toBeTruthy();
     expect(impact.value === impactDto.value).toBeTruthy();
@@ -33,16 +33,16 @@ describe('ImpactMapperService', () => {
   });
 
   it('should convert from dto', () => {
-    // given
+    // Arrange
     const dimension = data.getDummyDimension();
     const stakeholder = data.getDummyStakeholder();
     const analysis = data.getDummyAnalysis();
     const impactDto = data.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
 
-    // when
+    // Act
     const impact = service.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
 
-    // then
+    // Assert
     expect(impact.id === impactDto.id).toBeTruthy();
     expect(impact.uniqueString === impactDto.uniqueString).toBeTruthy();
     expect(impact.value === impactDto.value).toBeTruthy();

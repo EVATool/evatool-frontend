@@ -19,13 +19,13 @@ describe('DimensionMapperService', () => {
   });
 
   it('should convert to dto', () => {
-    // given
+    // Arrange
     const dimension = data.getDummyDimension();
 
-    // when
+    // Act
     const dimensionDto = service.toDto(dimension);
 
-    // then
+    // Assert
     expect(dimension.id === dimensionDto.id).toBeTruthy();
     expect(dimension.name === dimensionDto.name).toBeTruthy();
     expect(dimension.type === dimensionDto.type).toBeTruthy();
@@ -33,13 +33,13 @@ describe('DimensionMapperService', () => {
   });
 
   it('should convert from dto', () => {
-    // given
+    // Arrange
     const dimensionDto = data.getDummyDimensionDto();
 
-    // when
+    // Act
     const dimension = service.fromDto(dimensionDto);
 
-    // then
+    // Assert
     expect(dimension.id === dimensionDto.id).toBeTruthy();
     expect(dimension.name === dimensionDto.name).toBeTruthy();
     expect(dimension.type === dimensionDto.type).toBeTruthy();
