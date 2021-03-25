@@ -27,24 +27,6 @@ describe('ImpactRestService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#getImpacts', () => {
-    it('should return an Observable<ImpactDto[]>', () => {
-      // Arrage
-      const dummyDtos = sampleData.dummyImpactDtos;
-
-      // Act
-      service.getImpacts().subscribe(impacts => {
-        expect(impacts.length).toBe(dummyDtos.length);
-        expect(impacts).toEqual(dummyDtos);
-      });
-
-      // Assert
-      const req = httpMock.expectOne(RestSettings.impactsUrl);
-      expect(req.request.method).toBe('GET');
-      req.flush(dummyDtos);
-    });
-  });
-
   describe('#getImpactsByAnalysisId', () => {
     it('should return an Observable<ImpactDto[]>', () => {
       // Arrage

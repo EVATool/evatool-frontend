@@ -20,11 +20,6 @@ export class ImpactRestService {
 
   }
 
-  getImpacts(): Observable<ImpactDto[]> {
-    this.logger.info(this, 'Get all Impacts');
-    return this.http.get<ImpactDto[]>(RestSettings.impactsUrl);
-  }
-
   getImpactsByAnalysisId(analysisId: string): Observable<ImpactDto[]> {
     this.logger.info(this, 'Get Impact by AnalysisId');
     return this.http.get<ImpactDto[]>(RestSettings.impactsUrl + "?analysisId=" + analysisId);
