@@ -224,10 +224,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   openDimensionModal(): void {
-    if (!this.impactDataService.dimensionsLoaded) {
-      this.logger.info(this, 'Dimensions not yet loaded');
-      return;
-    }
+    //if (!this.dimensionDataService.loaded) {
+    //  this.logger.info(this, 'Dimensions not yet loaded');
+    //  return;
+    //}
     this.logger.info(this, 'Opening Dimension Modal Dialog');
     const dialogRef = this.dialog.open(DimensionDialogComponent, {
       height: '80%',

@@ -21,13 +21,13 @@ export class ImpactDataService {
   @Output() changedImpacts: EventEmitter<Impact[]> = new EventEmitter();
 
   impacts: Impact[] = [];
-  impactsLoaded = false;
+  private impactsLoaded = false;
   stakeholders: Stakeholder[] = [];
-  stakeholdersLoaded = false;
+  private stakeholdersLoaded = false;
   dimensions: Dimension[] = [];
-  dimensionsLoaded = false;
+  private dimensionsLoaded = false;
   analyses: Analysis[] = [];
-  analysesLoaded = false;
+  private analysesLoaded = false;
 
   constructor(
     private logger: LogService,
