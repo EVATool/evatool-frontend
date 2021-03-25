@@ -10,6 +10,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 })
 export class AnalysisDataService {
   @Output() loadedAnalyses: EventEmitter<Analysis> = new EventEmitter();
+  @Output() urlIdExtracted: EventEmitter<string> = new EventEmitter();
 
   currentAnalysis!: Analysis;
 
@@ -21,12 +22,16 @@ export class AnalysisDataService {
 
   onInit(): void {
     // Load current analysis.
-    this.router.routerState.root.queryParams.subscribe(params => {
-      this.analysisRestService.getAnalysisById(params.id).subscribe(currentAnalysis => {
+    this.urlIdExtracted.subscribe(id => {
+      this.analysisRestService.getAnalysisById(id).subscribe(currentAnalysis => {
         this.currentAnalysis = this.analysisMapperService.fromDto(currentAnalysis);
         this.logger.info(this, 'Analysis loaded (from router parameter)');
         this.loadedAnalyses.emit(this.currentAnalysis);
       });
+    });
+
+    this.router.routerState.root.queryParams.subscribe(params => {
+      this.urlIdExtracted.emit(params.id);
     });
   }
 

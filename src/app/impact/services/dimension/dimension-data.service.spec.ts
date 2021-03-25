@@ -4,7 +4,6 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DimensionDataService } from './dimension-data.service';
-import { Observable } from 'rxjs';
 
 describe('DimensionDataService', () => {
   let sampleData: SampleDataService;
