@@ -50,10 +50,9 @@ describe('AddImpactButtonComponent', () => {
     // Act
     let button = fixture.debugElement.nativeElement.querySelector('button');
     button.click();
+    fixture.detectChanges();
 
     // Assert
-    fixture.whenStable().then(() => {
-      expect(component.addButtonClick).toHaveBeenCalled();
-    });
+    expect(component.addButtonClick.emit).toHaveBeenCalled();
   });
 });
