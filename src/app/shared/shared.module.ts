@@ -23,8 +23,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     MatSliderModule,
     MatIconModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-
+    HttpClientModule
   ],
   exports:[
     ImpactSliderComponent,
