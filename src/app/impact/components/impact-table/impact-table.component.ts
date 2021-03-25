@@ -31,8 +31,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   searchToggles = new Map<string, boolean>();
   stakeholderNames: string[] = [];
 
-  loaded: Promise<boolean> = Promise.resolve(false);
-
   // TODO: Extend these for more complex queries.
   filterValues: any = {
     id: '',
