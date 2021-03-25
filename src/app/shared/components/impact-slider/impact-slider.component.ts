@@ -1,7 +1,7 @@
-import { LogService } from '../../../shared/services/log.service';
-import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './../column-slider-filter/SliderFilterSettings';
+import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './SliderFilterSettings';
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
+import { LogService } from '../../services/log.service';
 
 @Component({
   selector: 'app-impact-slider',

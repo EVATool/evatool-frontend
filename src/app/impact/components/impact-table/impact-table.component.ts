@@ -1,5 +1,5 @@
 import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
-import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './../column-slider-filter/SliderFilterSettings';
+import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../../../shared/components/impact-slider/SliderFilterSettings';
 import { LogService } from '../../../shared/services/log.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
