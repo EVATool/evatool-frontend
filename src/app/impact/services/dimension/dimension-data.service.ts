@@ -18,14 +18,17 @@ export class DimensionDataService {
   public dimensions: Dimension[] = [];
   public dimensionTypes: string[] = [];
 
+  public useDummyData: boolean;
+
   constructor(
     private logger: LogService,
     private dimensionMapperService: DimensionMapperService,
     private dimensionRestService: DimensionRestService) {
+    this.useDummyData = DataLoader.useDummyData;
   }
 
   onInit(): void {
-    if (DataLoader.useDummyData) {
+    if (this.useDummyData) {
       // Load dummy dimensions.
       DataLoader.dummyDimensionDtos.forEach(dim => {
         this.dimensions.push(this.dimensionMapperService.fromDto(dim));

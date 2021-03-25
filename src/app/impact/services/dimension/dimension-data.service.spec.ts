@@ -11,9 +11,12 @@ describe('DimensionDataService', () => {
       imports: [HttpClientModule]
     });
     service = TestBed.inject(DimensionDataService);
+    service.useDummyData = false;
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  
 });
