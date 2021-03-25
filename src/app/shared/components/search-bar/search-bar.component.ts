@@ -1,4 +1,4 @@
-import { LogService } from '../../settings/log.service';
+import { LogService } from '../../services/log.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -16,7 +16,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   searchTextChange(event: any): void {
-    this.logger.info(`Search Bar Text Changed: ${event.target.value}`);
+    this.logger.info(this, `Search Bar Text Changed: ${event.target.value}`);
     this.searchTextChanged.emit(event.target.value);
   }
 }

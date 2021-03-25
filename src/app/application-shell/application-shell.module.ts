@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { DashboardModule } from './../dashboard/dashboard.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -29,6 +30,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
     RequirementModule,
     VariantModule,
     DashboardModule,
+    SharedModule,
     BrowserAnimationsModule,
     MatTabsModule,
     MatDialogModule,

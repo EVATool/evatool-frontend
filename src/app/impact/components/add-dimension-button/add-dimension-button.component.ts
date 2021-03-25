@@ -10,6 +10,6 @@ export class AddDimensionButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
 
+  }
 }

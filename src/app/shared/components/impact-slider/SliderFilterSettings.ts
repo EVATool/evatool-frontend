@@ -1,17 +1,17 @@
 export enum SliderFilterType {
-  LessThan,
-  GreaterThan,
-  Bewtween,
-  Equality,
-  Off
+  LessThan = 0,
+  GreaterThan = 1,
+  Bewtween = 2,
+  Equality = 3,
+  Off = 4
 }
 
 export enum SliderFilterBoundary {
-  Include,
-  Exclude
+  Include = 0,
+  Exclude = 1
 }
 
-export class SliderFilterChange {
+export class SliderFilterSettings {
 
   sliderFilterType: SliderFilterType;
   sliderFilterBoundary: SliderFilterBoundary;
@@ -24,5 +24,9 @@ export class SliderFilterChange {
     this.sliderFilterType = sliderFilterTypes;
     this.sliderFilterBoundary = sliderFilterBoundary;
     this.sliderFilterValues = sliderFilterValues;
+  }
+
+  static getDefault(): SliderFilterSettings {
+    return new SliderFilterSettings(0, 0, [0, 0]);
   }
 }

@@ -1,30 +1,31 @@
-import { ImpactSliderComponent } from './../impact-slider/impact-slider.component';
-import { SliderFilterChange, SliderFilterType, SliderFilterBoundary } from './SliderFilterChange';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { LogService } from '../../../shared/services/log.service';
+import { ImpactSliderComponent } from '../../../shared/components/impact-slider/impact-slider.component';
+import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../../../shared/components/impact-slider/SliderFilterSettings';
 import { MatSliderChange } from '@angular/material/slider';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'app-column-slider-filter',
   templateUrl: './column-slider-filter.component.html',
   styleUrls: ['./column-slider-filter.component.css']
 })
-export class ColumnSliderFilterComponent implements OnInit {
+export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
   @ViewChild(ImpactSliderComponent) slider!: ImpactSliderComponent;
-
   @Input() name = '';
+  @Output() filterChanged = new EventEmitter<SliderFilterSettings>();
 
-  @Output() filterChanged = new EventEmitter<SliderFilterChange>();
+  filterType: SliderFilterType = 0;
+  filterBoundary: SliderFilterBoundary = 0;
 
-
-  useBetween = true;
-  useLessThan = true;
-  useEquals = true;
   public isVisible = false;
 
-  constructor() { }
+  constructor(private logger: LogService) { }
 
   ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit(): void {
 
   }
 
@@ -37,15 +38,24 @@ export class ColumnSliderFilterComponent implements OnInit {
   }
 
   sliderFilterValueChanged(event: MatSliderChange) {
-    console.log("Filter Slider Changed: " + event.value);
-    const sliderFilterChange = new SliderFilterChange(
-      SliderFilterType.LessThan,
-      SliderFilterBoundary.Include,
-      [this.slider.value]);
-    this.filterChanged.emit(sliderFilterChange);
+    this.logger.info(this, 'Filter Slider Changed: ' + event.value);
+    this.filteringChanged();
   }
 
-  filterTypeChanged(): void {
-    console.log('New slider filter configuration: ' + this.useBetween + ", " + this.useLessThan + ", " + this.useEquals);
+  filteringChanged(): void {
+    this.logger.info(this, 'Filtering Changed');
+    this.slider.sliderFilterSettings.sliderFilterType = this.filterType;
+    this.slider.sliderFilterSettings.sliderFilterBoundary = this.filterBoundary;
+    this.slider.sliderFilterSettings.sliderFilterValues = [this.slider.value, this.slider.valueSecond];
+    this.slider.invalidate();
+    this.filterChanged.emit(this.slider.sliderFilterSettings);
+  }
+
+  clickClear() {
+    this.logger.info(this, 'Clearing Filtering');
+    this.filterType = SliderFilterType.LessThan;
+    this.filterBoundary = SliderFilterBoundary.Include;
+    this.slider.value = 1;
+    this.filteringChanged();
   }
 }
