@@ -1,3 +1,4 @@
+import { SampleDataGenerator } from './../../spec/sample-data.service';
 import { RestSettings } from './../../settings/RestSettings';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
@@ -6,6 +7,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { AnalysisRestService } from './analysis-rest.service';
 
 describe('AnalysisRestService', () => {
+  let sampleData: SampleDataGenerator;
   let httpMock: HttpTestingController;
   let service: AnalysisRestService;
 
@@ -13,6 +15,7 @@ describe('AnalysisRestService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
+    sampleData = TestBed.inject(SampleDataGenerator);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AnalysisRestService);
   });
@@ -28,7 +31,7 @@ describe('AnalysisRestService', () => {
   describe('#getAnalysisById', () => {
     it('should return an Observable<AnalysisDto>', () => {
       // Arrage
-      const dummyDto = DataLoader.dummyAnalysisDtos[0];
+      const dummyDto = sampleData.dummyAnalysisDtos[0];
 
       // Act
       service.getAnalysisById(dummyDto.rootEntityID).subscribe(analysis => {

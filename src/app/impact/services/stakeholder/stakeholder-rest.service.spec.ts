@@ -1,3 +1,4 @@
+import { SampleDataGenerator } from './../../spec/sample-data.service';
 import { RestSettings } from './../../settings/RestSettings';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
@@ -6,6 +7,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { StakeholderRestService } from './stakeholder-rest.service';
 
 describe('StakeholderRestService', () => {
+  let sampleData: SampleDataGenerator;
   let httpMock: HttpTestingController;
   let service: StakeholderRestService;
 
@@ -13,6 +15,7 @@ describe('StakeholderRestService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
+    sampleData = TestBed.inject(SampleDataGenerator);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(StakeholderRestService);
   });
@@ -28,7 +31,7 @@ describe('StakeholderRestService', () => {
   describe('#getStakeholders', () => {
     it('should return an Observable<StakeholderDto[]>', () => {
       // Arrage
-      const dummyDtos = DataLoader.dummyStakeholderDtos;
+      const dummyDtos = sampleData.dummyStakeholderDtos;
 
       // Act
       service.getStakeholders().subscribe(stakeholders => {

@@ -1,3 +1,4 @@
+import { SampleDataGenerator } from './../../spec/sample-data.service';
 import { RestSettings } from './../../settings/RestSettings';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -5,6 +6,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ImpactRestService } from './impact-rest.service';
 
 describe('ImpactRestService', () => {
+  let sampleData: SampleDataGenerator;
   let httpMock: HttpTestingController;
   let service: ImpactRestService;
 
@@ -12,6 +14,7 @@ describe('ImpactRestService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
+    sampleData = TestBed.inject(SampleDataGenerator);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ImpactRestService);
   });
@@ -27,7 +30,7 @@ describe('ImpactRestService', () => {
   describe('#getImpacts', () => {
     it('should return an Observable<ImpactDto[]>', () => {
       // Arrage
-      const dummyDtos = DataLoader.dummyImpactDtos;
+      const dummyDtos = sampleData.dummyImpactDtos;
 
       // Act
       service.getImpacts().subscribe(impacts => {
@@ -45,8 +48,8 @@ describe('ImpactRestService', () => {
   describe('#getImpactsByAnalysisId', () => {
     it('should return an Observable<ImpactDto[]>', () => {
       // Arrage
-      const analysisId = DataLoader.dummyImpactDtos[0].analysis.id
-      const dummyDtos = DataLoader.dummyImpactDtos.filter(impact => impact.analysis.id == analysisId);
+      const analysisId = sampleData.dummyImpactDtos[0].analysis.id
+      const dummyDtos = sampleData.dummyImpactDtos.filter(impact => impact.analysis.id == analysisId);
 
       // Act
       service.getImpactsByAnalysisId(analysisId).subscribe(impacts => {
@@ -64,7 +67,7 @@ describe('ImpactRestService', () => {
   describe('#createImpact', () => {
     it('should return an Observable<any>', () => {
       // Arrage
-      const dummyDto = DataLoader.dummyImpactDtos[0];
+      const dummyDto = sampleData.dummyImpactDtos[0];
 
       // Act
       service.createImpact(dummyDto).subscribe(impact => {
@@ -81,7 +84,7 @@ describe('ImpactRestService', () => {
   describe('#updateImpact', () => {
     it('should return an Observable<any>', () => {
       // Arrage
-      const dummyDto = DataLoader.dummyImpactDtos[0];
+      const dummyDto = sampleData.dummyImpactDtos[0];
 
       // Act
       service.updateImpact(dummyDto).subscribe(impact => {
@@ -98,7 +101,7 @@ describe('ImpactRestService', () => {
   describe('#deleteImpact', () => {
     it('should return an Observable<any>', () => {
       // Arrage
-      const dummyDto = DataLoader.dummyImpactDtos[0];
+      const dummyDto = sampleData.dummyImpactDtos[0];
 
       // Act
       service.deleteImpact(dummyDto).subscribe(impact => {

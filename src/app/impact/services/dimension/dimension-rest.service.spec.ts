@@ -1,3 +1,4 @@
+import { SampleDataGenerator } from './../../spec/sample-data.service';
 import { RestSettings } from './../../settings/RestSettings';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -7,6 +8,7 @@ import { DimensionRestService } from './dimension-rest.service';
 
 describe('DimensionRestService', () => {
   describe('Mocked', () => {
+    let sampleData: SampleDataGenerator;
     let httpMock: HttpTestingController;
     let service: DimensionRestService;
 
@@ -14,6 +16,7 @@ describe('DimensionRestService', () => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule]
       });
+      sampleData = TestBed.inject(SampleDataGenerator);
       httpMock = TestBed.inject(HttpTestingController);
       service = TestBed.inject(DimensionRestService);
     });
@@ -29,7 +32,7 @@ describe('DimensionRestService', () => {
     describe('#getDimensions', () => {
       it('should return an Observable<DimensionDto[]>', () => {
         // Arrage
-        const dummyDtos = DataLoader.dummyDimensionDtos;
+        const dummyDtos = sampleData.dummyDimensionDtos;
 
         // Act
         service.getDimensions().subscribe(dimensions => {
@@ -47,7 +50,7 @@ describe('DimensionRestService', () => {
     describe('#getDimensionTypes', () => {
       it('should return an Observable<string[]>', () => {
         // Arrage
-        const dummyDtos = DataLoader.dummyDimensionTypes;
+        const dummyDtos = sampleData.dummyDimensionTypes;
 
         // Act
         service.getDimensionTypes().subscribe(dimensionTypes => {

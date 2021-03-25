@@ -1,3 +1,4 @@
+import { SampleDataGenerator } from './../../spec/sample-data.service';
 import { DimensionRestService } from './dimension-rest.service';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
@@ -6,13 +7,15 @@ import { DimensionDataService } from './dimension-data.service';
 import { Observable } from 'rxjs';
 
 describe('DimensionDataService', () => {
-  let service: DimensionDataService;
+  let sampleData: SampleDataGenerator;
   let restService: DimensionRestService;
+  let service: DimensionDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule]
     });
+    sampleData = TestBed.inject(SampleDataGenerator);
     restService = TestBed.inject(DimensionRestService);
     service = TestBed.inject(DimensionDataService);
   });
@@ -34,7 +37,7 @@ describe('DimensionDataService', () => {
     // Arrange
     spyOn(service.loadedDimensions, 'emit');
     spyOn(restService, 'getDimensions').and.returnValue(new Observable((observer) => {
-      observer.next(DataLoader.dummyDimensionDtos);
+      observer.next(sampleData.dummyDimensionDtos);
       observer.complete();
     }));
 
@@ -49,7 +52,7 @@ describe('DimensionDataService', () => {
     // Arrange
     spyOn(service.loadedDimensionTypes, 'emit');
     spyOn(restService, 'getDimensionTypes').and.returnValue(new Observable((observer) => {
-      observer.next(DataLoader.dummyDimensionTypes);
+      observer.next(sampleData.dummyDimensionTypes);
       observer.complete();
     }));
 
