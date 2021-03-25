@@ -28,38 +28,12 @@
   background-color: rgb(220, 220, 220);
 }
 
-#goal-bar {
-  position: absolute;
-  background-color: green;
-  width: 50%;
-  height: 20px;
-  float: left;
-  margin-left: 50%;
-}
-
-#risk-bar {
-  background-color: red;
-  width: 50%;
-  height: 20px;
-  float: right;
-  margin-right: 50%;
-}
-
 #slider-container {
   position: absolute;
   left: 0;
   right: 0;
   top: -9px;
   bottom: 0;
-}
-
-#slider-thumb {
-  position: absolute;
-  background-color: gray;
-  height: 20px;
-  width: 11px;
-  float: left;
-  opacity: 1;
 }
 
 #slider-middle {
