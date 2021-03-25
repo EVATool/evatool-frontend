@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { AddImpactButtonComponent } from './add-impact-button.component';
 
@@ -8,9 +9,9 @@ describe('AddImpactButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddImpactButtonComponent ]
+      declarations: [AddImpactButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +22,24 @@ describe('AddImpactButtonComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have \'+\' on button', () => {
+    expect(fixture.debugElement.query(By.css('#plus')).nativeElement.textContent).toEqual('+');
+  })
+
+  it('should have \'Impact\' as text', () => {
+    expect(fixture.debugElement.query(By.css('#text')).nativeElement.textContent).toEqual('Impact');
+  })
+
+  it('should emit click event', () => {
+    // Arrange
+    spyOn(component.addButtonClick, 'emit');
+
+    // Act
+    component.addButtonClicked();
+
+    // Assert
+    expect(component.addButtonClick.emit).toHaveBeenCalled();
   });
 });

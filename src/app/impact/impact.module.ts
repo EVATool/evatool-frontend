@@ -1,6 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { LogService } from './settings/log.service';
-import { SampleDataGenerator } from './spec/sample-data.service';
+import { SampleDataService } from './spec/sample-data.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';

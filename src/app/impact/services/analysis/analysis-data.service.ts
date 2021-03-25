@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { LogService } from '../../settings/log.service';
 import { AnalysisRestService } from './analysis-rest.service';
-import { DataLoader } from '../../settings/DataLoader';
 import { AnalysisMapperService } from './analysis-mapper.service';
 import { Analysis } from '../../models/Analysis';
 import { Injectable, Output, EventEmitter } from '@angular/core';
@@ -11,6 +10,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 })
 export class AnalysisDataService {
   @Output() loadedAnalyses: EventEmitter<Analysis> = new EventEmitter();
+  @Output() urlIdExtracted: EventEmitter<string> = new EventEmitter();
 
   currentAnalysis!: Analysis;
 
@@ -21,21 +21,19 @@ export class AnalysisDataService {
     private router: Router) { }
 
   onInit(): void {
-    if (DataLoader.useDummyData) {
-      // Load dummy analyses.
-      this.currentAnalysis = this.analysisMapperService.fromDto(DataLoader.dummyAnalysisDtos[0]);
-      this.logger.info(this, 'Analyses loaded');
-      this.loadedAnalyses.emit(this.currentAnalysis);
-    } else {
-      // Load current analysis.
-      this.router.routerState.root.queryParams.subscribe(params => {
-        this.analysisRestService.getAnalysisById(params.id).subscribe(currentAnalysis => {
-          this.currentAnalysis = this.analysisMapperService.fromDto(currentAnalysis);
-          this.logger.info(this, 'Analysis loaded (from router parameter)');
-          this.loadedAnalyses.emit(this.currentAnalysis);
-        });
+    // Load current analysis.
+    this.urlIdExtracted.subscribe(id => {
+      this.analysisRestService.getAnalysisById(id).subscribe(currentAnalysis => {
+        this.currentAnalysis = this.analysisMapperService.fromDto(currentAnalysis);
+        this.logger.info(this, 'Analysis loaded (from router parameter)');
+        this.loadedAnalyses.emit(this.currentAnalysis);
       });
-    }
+    });
+
+    this.router.routerState.root.queryParams.subscribe(params => {
+      // TODO Error handling.
+      this.urlIdExtracted.emit(params.id);
+    });
   }
 
   getCurrentAnalysis(): Analysis {

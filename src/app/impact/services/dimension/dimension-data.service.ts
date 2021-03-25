@@ -1,4 +1,3 @@
-import { DataLoader } from './../../settings/DataLoader';
 import { DimensionMapperService } from './dimension-mapper.service';
 import { LogService } from './../../settings/log.service';
 import { Dimension } from '../../models/Dimension';
@@ -25,37 +24,21 @@ export class DimensionDataService {
   }
 
   onInit(): void {
-    if (DataLoader.useDummyData) {
-      // Load dummy dimensions.
-      DataLoader.dummyDimensionDtos.forEach(dim => {
+    // Load dimensions.
+    this.dimensionRestService.getDimensions().subscribe(dims => {
+      dims.forEach(dim => {
         this.dimensions.push(this.dimensionMapperService.fromDto(dim));
       });
       this.logger.info(this, 'Dimensions loaded');
       this.loadedDimensions.emit(this.dimensions);
+    });
 
-      // Load dummy dimension types.
-      DataLoader.dummyDimensionTypes.forEach(dimType => {
-        this.dimensionTypes.push(dimType);
-      });
+    // Load dimension types.
+    this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
+      this.dimensionTypes = dimTypes;
       this.logger.info(this, 'Dimension types loaded');
       this.loadedDimensionTypes.emit(this.dimensionTypes);
-    } else {
-      // Load dimensions.
-      this.dimensionRestService.getDimensions().subscribe(dims => {
-        dims.forEach(dim => {
-          this.dimensions.push(this.dimensionMapperService.fromDto(dim));
-        });
-        this.logger.info(this, 'Dimensions loaded');
-        this.loadedDimensions.emit(this.dimensions);
-      });
-
-      // Load dimension types.
-      this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
-        this.dimensionTypes = dimTypes;
-        this.logger.info(this, 'Dimension types loaded');
-      });
-      this.loadedDimensionTypes.emit(this.dimensionTypes);
-    }
+    });
   }
 
   getDefaultDimension(): Dimension {

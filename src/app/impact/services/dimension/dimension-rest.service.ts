@@ -1,6 +1,6 @@
+import { RestSettings } from './../../settings/RestSettings';
+import { DimensionDto } from './../../dtos/DimensionDto';
 import { LogService } from './../../settings/log.service';
-import { RestSettings } from '../../settings/RestSettings';
-import { DimensionDto } from '../../dtos/DimensionDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -27,6 +27,6 @@ export class DimensionRestService {
 
   getDimensionTypes(): Observable<string[]> {
     this.logger.info(this, 'Get all DimensionsTypes');
-    return this.http.get<string[]>(RestSettings.dimensionsUrl + '/types');
+    return this.http.get<string[]>(RestSettings.dimensionTypesUrl);
   }
 }

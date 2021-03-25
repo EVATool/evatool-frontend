@@ -1,17 +1,17 @@
-import { SampleDataGenerator } from '../../spec/sample-data.service';
+import { SampleDataService } from '../../spec/sample-data.service';
 import { TestBed } from '@angular/core/testing';
 import { DimensionMapperService } from './dimension-mapper.service';
 
 describe('DimensionMapperService', () => {
   let service: DimensionMapperService;
-  let data: SampleDataGenerator;
+  let data: SampleDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SampleDataGenerator]
+      providers: [SampleDataService]
     });
     service = TestBed.inject(DimensionMapperService);
-    data = TestBed.inject(SampleDataGenerator);
+    data = TestBed.inject(SampleDataService);
   });
 
   it('should be created', () => {
@@ -19,13 +19,13 @@ describe('DimensionMapperService', () => {
   });
 
   it('should convert to dto', () => {
-    // given
+    // Arrange
     const dimension = data.getDummyDimension();
 
-    // when
+    // Act
     const dimensionDto = service.toDto(dimension);
 
-    // then
+    // Assert
     expect(dimension.id === dimensionDto.id).toBeTruthy();
     expect(dimension.name === dimensionDto.name).toBeTruthy();
     expect(dimension.type === dimensionDto.type).toBeTruthy();
@@ -33,13 +33,13 @@ describe('DimensionMapperService', () => {
   });
 
   it('should convert from dto', () => {
-    // given
+    // Arrange
     const dimensionDto = data.getDummyDimensionDto();
 
-    // when
+    // Act
     const dimension = service.fromDto(dimensionDto);
 
-    // then
+    // Assert
     expect(dimension.id === dimensionDto.id).toBeTruthy();
     expect(dimension.name === dimensionDto.name).toBeTruthy();
     expect(dimension.type === dimensionDto.type).toBeTruthy();
