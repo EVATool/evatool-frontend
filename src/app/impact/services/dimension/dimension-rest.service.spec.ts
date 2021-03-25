@@ -5,8 +5,6 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { DimensionRestService } from './dimension-rest.service';
 
-//class MockedHttpClient
-
 describe('DimensionRestService', () => {
   let httpMock: HttpTestingController;
   let service: DimensionRestService;
