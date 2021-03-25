@@ -1,5 +1,4 @@
 import { RestSettings } from './../../settings/RestSettings';
-import { DataLoader } from './../../settings/DataLoader';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';

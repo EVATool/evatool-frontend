@@ -1,6 +1,5 @@
 import { LogService } from '../../settings/log.service';
 import { ImpactRestService } from './impact-rest.service';
-import { DataLoader } from '../../settings/DataLoader';
 import { Analysis } from '../../models/Analysis';
 import { Dimension } from '../../models/Dimension';
 import { Stakeholder } from '../../models/Stakeholder';
@@ -65,24 +64,15 @@ export class ImpactDataService {
 
   private loadIfChildrenAreLoaded(): void {
     if (this.getChildrenLoaded() && !this.impactsLoaded) {
-      if (DataLoader.useDummyData) {
-        // Load dummy impacts.
-        DataLoader.dummyImpactDtos.forEach(imp => {
+      // Load impacts.
+      this.impactRestService.getImpactsByAnalysisId(this.analysisDataService.getCurrentAnalysis().id).subscribe(imps => {
+        imps.sort((a, b) => this.sortImpactsById(a, b));
+        imps.forEach(imp => {
           this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
         });
         this.logger.info(this, 'Impacts loaded');
-        this.impactsLoaded = true;
-      } else {
-        // Load impacts.
-        this.impactRestService.getImpactsByAnalysisId(this.analysisDataService.getCurrentAnalysis().id).subscribe(imps => {
-          imps.sort((a, b) => this.sortImpactsById(a, b));
-          imps.forEach(imp => {
-            this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
-          });
-          this.logger.info(this, 'Impacts loaded');
-          this.loadedImpacts.emit(this.impacts);
-        });
-      }
+        this.loadedImpacts.emit(this.impacts);
+      });
     }
   }
 
@@ -112,54 +102,34 @@ export class ImpactDataService {
 
   createImpact(): void {
     this.logger.info(this, 'Create Impact');
-    if (DataLoader.useDummyData) {
-      const impact = this.createDefaultImpact();
+    const impact = this.createDefaultImpact();
+    const impactDto = this.impactMapperService.toDto(impact);
+    this.impactRestService.createImpact(impactDto).subscribe(impDto => {
+      impact.id = impDto.id;
+      impact.uniqueString = impDto.uniqueString;
       this.impacts.push(impact);
       this.addedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
-    } else {
-      const impact = this.createDefaultImpact();
-      const impactDto = this.impactMapperService.toDto(impact);
-      this.impactRestService.createImpact(impactDto).subscribe(impDto => {
-        impact.id = impDto.id;
-        impact.uniqueString = impDto.uniqueString;
-        this.impacts.push(impact);
-        this.addedImpact.emit(impact);
-        this.changedImpacts.emit(this.impacts);
-      });
-    }
+    });
   }
 
   updateImpact(impact: Impact): void {
     this.logger.info(this, 'Update Impact');
-    if (DataLoader.useDummyData) {
-      // Dummy data does not require any updating.
-      this.changedImpact.emit(impact);
-      this.changedImpacts.emit(this.impacts);
-    } else {
-      const impactDto = this.impactMapperService.toDto(impact);
-      this.impactRestService.updateImpact(impactDto).subscribe((newImpact: Impact) => {
-        this.changedImpact.emit(newImpact);
-        // this.changedImpacts.emit(this.impacts);
-      });
-    }
+    const impactDto = this.impactMapperService.toDto(impact);
+    this.impactRestService.updateImpact(impactDto).subscribe((newImpact: Impact) => {
+      this.changedImpact.emit(newImpact);
+      // this.changedImpacts.emit(this.impacts);
+    });
   }
 
   deleteImpact(impact: Impact): void {
     this.logger.info(this, 'Delete Impact');
-    if (DataLoader.useDummyData) {
+    const impactDto = this.impactMapperService.toDto(impact);
+    this.impactRestService.deleteImpact(impactDto).subscribe((impDto) => {
       const index: number = this.impacts.indexOf(impact, 0);
       this.impacts.splice(index, 1);
       this.removedImpact.emit(impact);
       this.changedImpacts.emit(this.impacts);
-    } else {
-      const impactDto = this.impactMapperService.toDto(impact);
-      this.impactRestService.deleteImpact(impactDto).subscribe((impDto) => {
-        const index: number = this.impacts.indexOf(impact, 0);
-        this.impacts.splice(index, 1);
-        this.removedImpact.emit(impact);
-        this.changedImpacts.emit(this.impacts);
-      });
-    }
+    });
   }
 }

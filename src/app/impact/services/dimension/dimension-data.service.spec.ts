@@ -1,5 +1,4 @@
 import { DimensionRestService } from './dimension-rest.service';
-import { DataLoader } from './../../settings/DataLoader';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,7 +15,6 @@ describe('DimensionDataService', () => {
     });
     restService = TestBed.inject(DimensionRestService);
     service = TestBed.inject(DimensionDataService);
-    service.useDummyData = false;
   });
 
   it('should be created', () => {
