@@ -1,6 +1,3 @@
-<button mat-icon-button color="accent" (click)="$event.stopPropagation();toggleVisibility()" aria-label="Value-Filter">
-  <mat-icon>filter_alt</mat-icon>
-</button>
 <div class="floating lifted" appClickOutside (clickOutside)="setInvisible()">
   <div (click)="$event.stopPropagation()" [ngClass]="isVisible ? 'show' : 'hide'">
     <div class="filter-header">{{name}} Filter</div>

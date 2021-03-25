@@ -9,7 +9,6 @@ import { Impact } from '../../models/Impact';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 
 @Component({
@@ -25,9 +24,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
   // Filter components in UI.
-  dimensionFilter = new FormControl();
-  valueFilter = new FormControl();
-  searchToggles = new Map<string, boolean>();
   stakeholderNames: string[] = [];
   dimensionNames: string[] = [];
 
@@ -101,17 +97,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.stakeholderNames = this.impactDataService.stakeholders.map(value => value.name);
     this.dimensionNames = this.impactDataService.dimensions.map(value => value.name);
 
-    this.valueFilter.valueChanges.subscribe(newValue => {
-      this.logger.info(this, 'Event \'valueChanges\' received from valueFilter');
-      this.filterValues.value = newValue;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
-    });
-
     this.tableDataSource.filterPredicate = this.createFilter();
-
-    this.searchToggles.set('stakeholder', false);
-    this.searchToggles.set('dimension', false);
-    this.searchToggles.set('value', false);
   }
 
   private createFilter(): (data: any, filter: string) => boolean {
@@ -172,11 +158,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.logger.info(this, 'Value Filter Changed');
     this.filterValues.value = event;
     this.updateFilter();
-  }
-
-  toggleFilterVisibility(key: string): void {
-    this.logger.info(this, 'Toggle Filter Visiblility');
-    this.searchToggles.set(key, !this.searchToggles.get(key));
   }
 
   updateImpact(impact: Impact): void {
