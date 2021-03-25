@@ -56,8 +56,8 @@ export class DimensionDataService {
       this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
         this.dimensionTypes = dimTypes;
         this.logger.info(this, 'Dimension types loaded');
+        this.loadedDimensionTypes.emit(this.dimensionTypes);
       });
-      this.loadedDimensionTypes.emit(this.dimensionTypes);
     }
   }
 
