@@ -1,3 +1,5 @@
+import { RestSettings } from './../../settings/RestSettings';
+import { DataLoader } from './../../settings/DataLoader';
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
@@ -19,4 +21,21 @@ describe('StakeholderRestService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should return an Observable<StakeholderDto[]>', () => {
+    // Arrage
+    const dummyDtos = DataLoader.dummyStakeholderDtos;
+
+    // Act
+    service.getStakeholders().subscribe(stakeholders => {
+      expect(stakeholders.length).toBe(dummyDtos.length);
+      expect(stakeholders).toEqual(dummyDtos);
+    });
+
+    // Assert
+    const req = httpMock.expectOne(RestSettings.stakeholdersUrl);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyDtos);
+  });
+
 });
