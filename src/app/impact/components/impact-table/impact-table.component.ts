@@ -1,14 +1,14 @@
-import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
-import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './../column-slider-filter/SliderFilterSettings';
-import { LogService } from './../../settings/log.service';
+import { DimensionDialogComponent } from '../dimension-dialog/dimension-dialog.component';
+import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../column-slider-filter/SliderFilterSettings';
+import { LogService } from '../../settings/log.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
-import { AfterViewInit, Component, OnInit, ViewChild, isDevMode } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 
@@ -29,12 +29,13 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   valueFilter = new FormControl();
   searchToggles = new Map<string, boolean>();
   stakeholderNames: string[] = [];
+  dimensionNames: string[] = [];
 
   // TODO: Extend these for more complex queries.
   filterValues: any = {
     id: '',
     stakeholder: [],
-    dimension: '',
+    dimension: [],
     value: '',
     description: ''
   };
@@ -98,12 +99,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   private initFiltering(): void {
     this.logger.info(this, 'Init Filtering');
     this.stakeholderNames = this.impactDataService.stakeholders.map(value => value.name);
-
-    this.dimensionFilter.valueChanges.subscribe(newDimension => {
-      this.logger.info(this, 'Event \'valueChanges\' received from dimensionFilter');
-      this.filterValues.dimension = newDimension;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
-    });
+    this.dimensionNames = this.impactDataService.dimensions.map(value => value.name);
 
     this.valueFilter.valueChanges.subscribe(newValue => {
       this.logger.info(this, 'Event \'valueChanges\' received from valueFilter');
@@ -125,7 +121,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
       const stakeholderFilter = searchTerms.stakeholder.length === 0 || searchTerms.stakeholder.indexOf(data.stakeholder.name) !== -1;
 
-      const dimensionFilter = searchTerms.stakeholder.length === 0 || data.dimension.name.toLowerCase().indexOf(searchTerms.dimension.toLowerCase()) !== -1;
+      const dimensionFilter = searchTerms.dimension.length === 0 || searchTerms.dimension.indexOf(data.dimension.name) !== -1;
 
       let valueFilter = false;
       switch (searchTerms.value.sliderFilterType) {
@@ -135,31 +131,31 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
         case SliderFilterType.LessThan:
           if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
-            valueFilter = data.value < searchTerms.value.sliderFilterValues[0]
+            valueFilter = data.value < searchTerms.value.sliderFilterValues[0];
           } else {
-            valueFilter = data.value <= searchTerms.value.sliderFilterValues[0]
+            valueFilter = data.value <= searchTerms.value.sliderFilterValues[0];
           }
           break;
 
         case SliderFilterType.GreaterThan:
           if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
-            valueFilter = data.value > searchTerms.value.sliderFilterValues[0]
+            valueFilter = data.value > searchTerms.value.sliderFilterValues[0];
           } else {
-            valueFilter = data.value >= searchTerms.value.sliderFilterValues[0]
+            valueFilter = data.value >= searchTerms.value.sliderFilterValues[0];
           }
           break;
 
         case SliderFilterType.Equality:
-          valueFilter = data.value === searchTerms.value.sliderFilterValues[0]
+          valueFilter = data.value === searchTerms.value.sliderFilterValues[0];
           break;
 
         case SliderFilterType.Bewtween:
           const minValue = Math.min(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
           const maxValue = Math.max(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
           if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
-            valueFilter = data.value > minValue && data.value < maxValue
+            valueFilter = data.value > minValue && data.value < maxValue;
           } else {
-            valueFilter = data.value >= minValue && data.value <= maxValue
+            valueFilter = data.value >= minValue && data.value <= maxValue;
           }
           break;
 
@@ -172,7 +168,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     };
   }
 
-  valueFilterChanged(event: SliderFilterSettings) {
+  valueFilterChanged(event: SliderFilterSettings): void {
     this.logger.info(this, 'Value Filter Changed');
     this.filterValues.value = event;
     this.updateFilter();
