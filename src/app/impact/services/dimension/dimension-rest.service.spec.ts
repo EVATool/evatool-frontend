@@ -64,6 +64,7 @@ describe('DimensionRestService', () => {
     });
   });
 
+  // TODO: Before writing these tests: Decide whether to add HttpResponse to ALL Rest service calls and check response here.
   describe('Backend', () => {
     let service: DimensionRestService;
 
@@ -83,8 +84,6 @@ describe('DimensionRestService', () => {
         // Arrage
 
         // Act
-        service.getDimensions().subscribe(dimensions => {
-        });
 
         // Assert
 
