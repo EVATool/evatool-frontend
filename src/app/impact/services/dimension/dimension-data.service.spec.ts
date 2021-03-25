@@ -24,36 +24,51 @@ describe('DimensionDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should load data', () => {
-    // Arrange
+  describe('#onInit', () => {
+    it('should load dimensions', () => {
+      // Arrange
+      spyOn(restService, 'getDimensions').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionDtos));
 
-    // Act
+      // Act
+      service.onInit();
 
-    // Assert
+      // Assert
+      expect(service.dimensions.length).toEqual(sampleData.dummyDimensionDtos.length);
+    });
 
-  });
+    it('should load dimensions types', () => {
+      // Arrange
+      spyOn(restService, 'getDimensionTypes').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionTypes));
 
-  it('should fire \'loadedDimensions\' event', () => {
-    // Arrange
-    spyOn(service.loadedDimensions, 'emit');
-    spyOn(restService, 'getDimensions').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionDtos));
+      // Act
+      service.onInit();
 
-    // Act
-    service.onInit();
+      // Assert
+      expect(service.dimensionTypes.length).toEqual(sampleData.dummyDimensionTypes.length);
+    });
 
-    // Assert
-    expect(service.loadedDimensions.emit).toHaveBeenCalled();
-  });
+    it('should fire \'loadedDimensions\' event', () => {
+      // Arrange
+      spyOn(service.loadedDimensions, 'emit');
+      spyOn(restService, 'getDimensions').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionDtos));
 
-  it('should fire \'loadedDimensionTypes\' event', () => {
-    // Arrange
-    spyOn(service.loadedDimensionTypes, 'emit');
-    spyOn(restService, 'getDimensionTypes').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionTypes));
+      // Act
+      service.onInit();
 
-    // Act
-    service.onInit();
+      // Assert
+      expect(service.loadedDimensions.emit).toHaveBeenCalled();
+    });
 
-    // Assert
-    expect(service.loadedDimensionTypes.emit).toHaveBeenCalled();
+    it('should fire \'loadedDimensionTypes\' event', () => {
+      // Arrange
+      spyOn(service.loadedDimensionTypes, 'emit');
+      spyOn(restService, 'getDimensionTypes').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionTypes));
+
+      // Act
+      service.onInit();
+
+      // Assert
+      expect(service.loadedDimensionTypes.emit).toHaveBeenCalled();
+    });
   });
 });
