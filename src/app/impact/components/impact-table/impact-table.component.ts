@@ -25,7 +25,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
   // Filter components in UI.
-  stakeholderFilter = new FormControl();
   dimensionFilter = new FormControl();
   valueFilter = new FormControl();
   searchToggles = new Map<string, boolean>();
@@ -99,12 +98,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   private initFiltering(): void {
     this.logger.info(this, 'Init Filtering');
     this.stakeholderNames = this.impactDataService.stakeholders.map(value => value.name);
-
-    this.stakeholderFilter.valueChanges.subscribe(newStakeholder => {
-      this.logger.info(this, 'Event \'valueChanges\' received from stakeholderFilter');
-      this.filterValues.stakeholder = newStakeholder;
-      this.tableDataSource.filter = JSON.stringify(this.filterValues);
-    });
 
     this.dimensionFilter.valueChanges.subscribe(newDimension => {
       this.logger.info(this, 'Event \'valueChanges\' received from dimensionFilter');

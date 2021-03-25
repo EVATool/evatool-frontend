@@ -12,8 +12,13 @@
   <ng-container matColumnDef='stakeholder'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The affected stakeholder" matTooltipHideDelay="100" matTooltipPosition="above">Stakeholder</div>
-      <app-column-category-filter [categories]="stakeholderNames"
-        (filterChanged)="filterValues.stakeholder = $event;updateFilter()" name="stakeholder">
+
+      <button mat-icon-button color="accent" (click)="$event.stopPropagation();stakeholderFilter.toggleVisibility()"
+              aria-label="Stakeholder-Filter">
+        <mat-icon>filter_alt</mat-icon>
+      </button>
+      <app-column-category-filter #stakeholderFilter [categories]="stakeholderNames"
+                                  (filterChanged)="filterValues.stakeholder = $event;updateFilter()" name="stakeholder">
       </app-column-category-filter>
     </th>
 
