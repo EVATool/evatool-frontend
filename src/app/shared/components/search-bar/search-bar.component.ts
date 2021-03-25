@@ -1,4 +1,4 @@
-import { LogService } from '../../../shared/services/log.service';
+import { LogService } from '../../services/log.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({

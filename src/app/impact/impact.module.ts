@@ -20,8 +20,6 @@ import { AddImpactButtonComponent } from './components/add-impact-button/add-imp
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { ImpactSliderComponent } from '../shared/components/impact-slider/impact-slider.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
 import { AddDimensionButtonComponent } from './components/add-dimension-button/add-dimension-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -36,8 +34,6 @@ import { ColumnSliderFilterComponent } from './components/column-slider-filter/c
     ImpactTableComponent,
     AddImpactButtonComponent,
     ClickOutsideDirective,
-    ImpactSliderComponent,
-    SearchBarComponent,
     DimensionDialogComponent,
     AddDimensionButtonComponent,
     DimensionTableComponent,
