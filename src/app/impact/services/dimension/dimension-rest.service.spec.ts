@@ -25,35 +25,40 @@ describe('DimensionRestService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an Observable<DimensionDto[]>', () => {
-    // Arrage
-    const dummyDtos = DataLoader.dummyDimensionDtos;
+  describe('#getDimensions', () => {
+    it('should return an Observable<DimensionDto[]>', () => {
+      // Arrage
+      const dummyDtos = DataLoader.dummyDimensionDtos;
 
-    // Act
-    service.getDimensions().subscribe(dimensions => {
-      expect(dimensions.length).toBe(dummyDtos.length);
-      expect(dimensions).toEqual(dummyDtos);
+      // Act
+      service.getDimensions().subscribe(dimensions => {
+        expect(dimensions.length).toBe(dummyDtos.length);
+        expect(dimensions).toEqual(dummyDtos);
+      });
+
+      // Assert
+      const req = httpMock.expectOne(RestSettings.dimensionsUrl);
+      expect(req.request.method).toBe('GET');
+      req.flush(dummyDtos);
     });
-
-    // Assert
-    const req = httpMock.expectOne(RestSettings.dimensionsUrl);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyDtos);
   });
 
-  it('should return an Observable<string[]>', () => {
-    // Arrage
-    const dummyDtos = DataLoader.dummyDimensionTypes;
+  describe('#getDimensionTypes', () => {
+    it('should return an Observable<string[]>', () => {
+      // Arrage
+      const dummyDtos = DataLoader.dummyDimensionTypes;
 
-    // Act
-    service.getDimensionTypes().subscribe(dimensionTypes => {
-      expect(dimensionTypes.length).toBe(dummyDtos.length);
-      expect(dimensionTypes).toEqual(dummyDtos);
+      // Act
+      service.getDimensionTypes().subscribe(dimensionTypes => {
+        expect(dimensionTypes.length).toBe(dummyDtos.length);
+        expect(dimensionTypes).toEqual(dummyDtos);
+      });
+
+      // Assert
+      const req = httpMock.expectOne(RestSettings.dimensionTypesUrl);
+      expect(req.request.method).toBe('GET');
+      req.flush(dummyDtos);
     });
-
-    // Assert
-    const req = httpMock.expectOne(RestSettings.dimensionTypesUrl);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyDtos);
   });
 });
+

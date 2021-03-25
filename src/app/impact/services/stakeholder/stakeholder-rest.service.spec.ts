@@ -18,24 +18,29 @@ describe('StakeholderRestService', () => {
     service = TestBed.inject(StakeholderRestService);
   });
 
+  afterEach(() => {
+    httpMock.verify();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an Observable<StakeholderDto[]>', () => {
-    // Arrage
-    const dummyDtos = DataLoader.dummyStakeholderDtos;
+  describe('#getStakeholders', () => {
+    it('should return an Observable<StakeholderDto[]>', () => {
+      // Arrage
+      const dummyDtos = DataLoader.dummyStakeholderDtos;
 
-    // Act
-    service.getStakeholders().subscribe(stakeholders => {
-      expect(stakeholders.length).toBe(dummyDtos.length);
-      expect(stakeholders).toEqual(dummyDtos);
+      // Act
+      service.getStakeholders().subscribe(stakeholders => {
+        expect(stakeholders.length).toBe(dummyDtos.length);
+        expect(stakeholders).toEqual(dummyDtos);
+      });
+
+      // Assert
+      const req = httpMock.expectOne(RestSettings.stakeholdersUrl);
+      expect(req.request.method).toBe('GET');
+      req.flush(dummyDtos);
     });
-
-    // Assert
-    const req = httpMock.expectOne(RestSettings.stakeholdersUrl);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyDtos);
   });
-
 });

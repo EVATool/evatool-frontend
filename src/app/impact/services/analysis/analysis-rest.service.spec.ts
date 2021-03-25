@@ -18,22 +18,28 @@ describe('AnalysisRestService', () => {
     service = TestBed.inject(AnalysisRestService);
   });
 
+  afterEach(() => {
+    httpMock.verify();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an Observable<AnalysisDto>', () => {
-    // Arrage
-    const dummyDto = DataLoader.dummyAnalysisDtos[0];
+  describe('#getAnalysisById', () => {
+    it('should return an Observable<AnalysisDto>', () => {
+      // Arrage
+      const dummyDto = DataLoader.dummyAnalysisDtos[0];
 
-    // Act
-    service.getAnalysisById(dummyDto.rootEntityID).subscribe(analysis => {
-      expect(analysis).toEqual(dummyDto);
+      // Act
+      service.getAnalysisById(dummyDto.rootEntityID).subscribe(analysis => {
+        expect(analysis).toEqual(dummyDto);
+      });
+
+      // Assert
+      const req = httpMock.expectOne(RestSettings.analysesUrl + '/' + dummyDto.rootEntityID);
+      expect(req.request.method).toBe('GET');
+      req.flush(dummyDto);
     });
-
-    // Assert
-    const req = httpMock.expectOne(RestSettings.analysesUrl + '/' + dummyDto.rootEntityID);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyDto);
   });
 });
