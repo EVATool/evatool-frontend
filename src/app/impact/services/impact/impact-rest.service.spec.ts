@@ -42,4 +42,23 @@ describe('ImpactRestService', () => {
       req.flush(dummyDtos);
     });
   });
+
+  describe('#getImpactsByAnalysisId', () => {
+    it('should return an Observable<ImpactDto[]>', () => {
+      // Arrage
+      const analysisId = DataLoader.dummyImpactDtos[0].analysis.id
+      const dummyDtos = DataLoader.dummyImpactDtos.filter(impact => impact.analysis.id == analysisId);;
+
+      // Act
+      service.getImpactsByAnalysisId(analysisId).subscribe(impacts => {
+        expect(impacts.length).toBe(dummyDtos.length);
+        expect(impacts).toEqual(dummyDtos);
+      });
+
+      // Assert
+      const req = httpMock.expectOne(RestSettings.impactsUrl + '?analysisId=' + analysisId);
+      expect(req.request.method).toBe('GET');
+      req.flush(dummyDtos);
+    });
+  });
 });
