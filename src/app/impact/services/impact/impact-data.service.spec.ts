@@ -17,14 +17,4 @@ describe('ImpactDataService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  it('should calculate decimal places required', () => {
-    const nums = [1, 9, 10, 99, 100, 999, 1000, 9999];
-    const decimalPlaces = [1, 1, 2, 2, 3, 3, 4, 4];
-
-    nums.forEach((number, index) => {
-      const decis = service.calculateDecimalPlaces(number);
-      expect(decis).toEqual(decimalPlaces[index]);
-    });
-  });
 });

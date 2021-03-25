@@ -1,3 +1,4 @@
+import { LogService } from './../../settings/log.service';
 import { DimensionDto } from '../../dtos/DimensionDto';
 import { Dimension } from '../../models/Dimension';
 import { Injectable } from '@angular/core';
@@ -7,9 +8,10 @@ import { Injectable } from '@angular/core';
 })
 export class DimensionMapperService {
 
-  constructor() { }
+  constructor(private logger: LogService) { }
 
   toDto(dimension: Dimension): DimensionDto {
+    this.logger.info(this, 'Mapping Dimension to DimensionDto');
     const dimensionDto = new DimensionDto();
 
     dimensionDto.id = dimension.id;
@@ -21,6 +23,7 @@ export class DimensionMapperService {
   }
 
   fromDto(dimensionDto: DimensionDto): Dimension {
+    this.logger.info(this, 'Mapping DimensionDto to Dimension');
     const dimension = new Dimension();
 
     dimension.id = dimensionDto.id;

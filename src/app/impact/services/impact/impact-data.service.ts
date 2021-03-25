@@ -70,8 +70,7 @@ export class ImpactDataService {
         DataLoader.dummyImpactDtos.forEach(imp => {
           this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
         });
-        this.logger.info('Impacts loaded');
-        this.loadedImpacts.emit(this.impacts);
+        this.logger.info(this, 'Impacts loaded');
         this.impactsLoaded = true;
       } else {
         // Load impacts.
@@ -80,8 +79,7 @@ export class ImpactDataService {
           imps.forEach(imp => {
             this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
           });
-          this.logger.info('Impacts loaded');
-          this.logger.info(this.impacts);
+          this.logger.info(this, 'Impacts loaded');
           this.loadedImpacts.emit(this.impacts);
         });
       }
@@ -89,6 +87,7 @@ export class ImpactDataService {
   }
 
   private sortImpactsById(a: Impact, b: Impact): number {
+    this.logger.debug(this, 'Sorting Impacts By Id');
     const numberA = + ("" + a.uniqueString?.replace("IMP", ""));
     const numberB = + ("" + b.uniqueString?.replace("IMP", ""));
     return numberA > numberB ? 1 : -1;
@@ -99,6 +98,7 @@ export class ImpactDataService {
   }
 
   private createDefaultImpact(): Impact {
+    this.logger.debug(this, 'Create Default Impact');
     const impact = new Impact();
 
     impact.value = 0.0;
@@ -111,7 +111,7 @@ export class ImpactDataService {
   }
 
   createImpact(): void {
-    this.logger.info('Create Impact');
+    this.logger.info(this, 'Create Impact');
     if (DataLoader.useDummyData) {
       const impact = this.createDefaultImpact();
       this.impacts.push(impact);
@@ -131,7 +131,7 @@ export class ImpactDataService {
   }
 
   updateImpact(impact: Impact): void {
-    this.logger.info('Update Impact');
+    this.logger.info(this, 'Update Impact');
     if (DataLoader.useDummyData) {
       // Dummy data does not require any updating.
       this.changedImpact.emit(impact);
@@ -146,7 +146,7 @@ export class ImpactDataService {
   }
 
   deleteImpact(impact: Impact): void {
-    this.logger.info('Delete Impact');
+    this.logger.info(this, 'Delete Impact');
     if (DataLoader.useDummyData) {
       const index: number = this.impacts.indexOf(impact, 0);
       this.impacts.splice(index, 1);
@@ -161,9 +161,5 @@ export class ImpactDataService {
         this.changedImpacts.emit(this.impacts);
       });
     }
-  }
-
-  calculateDecimalPlaces(num: number): number {
-    return `${num}`.length;
   }
 }

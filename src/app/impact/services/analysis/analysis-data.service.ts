@@ -24,15 +24,14 @@ export class AnalysisDataService {
     if (DataLoader.useDummyData) {
       // Load dummy analyses.
       this.currentAnalysis = this.analysisMapperService.fromDto(DataLoader.dummyAnalysisDtos[0]);
-      this.logger.info('Analyses loaded.');
+      this.logger.info(this, 'Analyses loaded');
       this.loadedAnalyses.emit(this.currentAnalysis);
     } else {
       // Load current analysis.
       this.router.routerState.root.queryParams.subscribe(params => {
         this.analysisRestService.getAnalysisById(params.id).subscribe(currentAnalysis => {
           this.currentAnalysis = this.analysisMapperService.fromDto(currentAnalysis);
-          this.logger.info('Analysis from router parameter loaded.');
-          this.logger.info(this.currentAnalysis);
+          this.logger.info(this, 'Analysis loaded (from router parameter)');
           this.loadedAnalyses.emit(this.currentAnalysis);
         });
       });
@@ -40,6 +39,7 @@ export class AnalysisDataService {
   }
 
   getCurrentAnalysis(): Analysis {
+    this.logger.debug(this, 'Get Current Analysis');
     return this.currentAnalysis;
   }
 }

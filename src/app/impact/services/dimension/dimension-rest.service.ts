@@ -1,3 +1,4 @@
+import { LogService } from './../../settings/log.service';
 import { RestSettings } from '../../settings/RestSettings';
 import { DimensionDto } from '../../dtos/DimensionDto';
 import { Injectable } from '@angular/core';
@@ -9,7 +10,9 @@ import { Observable } from 'rxjs';
 })
 export class DimensionRestService {
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private logger: LogService,
+    private http: HttpClient) {
 
   }
 
@@ -18,22 +21,12 @@ export class DimensionRestService {
   }
 
   getDimensions(): Observable<DimensionDto[]> {
+    this.logger.info(this, 'Get all Dimensions');
     return this.http.get<DimensionDto[]>(RestSettings.dimensionsUrl);
   }
 
   getDimensionTypes(): Observable<string[]> {
+    this.logger.info(this, 'Get all DimensionsTypes');
     return this.http.get<string[]>(RestSettings.dimensionsUrl + '/types');
-  }
-
-  createDimension(dimensionDto: DimensionDto): Observable<any> {
-    return this.http.post(RestSettings.dimensionsUrl, dimensionDto, RestSettings.httpOptions);
-  }
-
-  updateDimension(dimensionDto: DimensionDto): Observable<any> {
-    return this.http.put(RestSettings.dimensionsUrl, dimensionDto, RestSettings.httpOptions);
-  }
-
-  deleteDimension(dimensionDto: DimensionDto): Observable<any> {
-    return this.http.delete(RestSettings.dimensionsUrl + '/' + dimensionDto.id);
   }
 }

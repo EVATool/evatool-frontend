@@ -1,6 +1,6 @@
-import { LogService } from '../../settings/log.service';
-import { DataLoader } from '../../settings/DataLoader';
+import { DataLoader } from './../../settings/DataLoader';
 import { DimensionMapperService } from './dimension-mapper.service';
+import { LogService } from './../../settings/log.service';
 import { Dimension } from '../../models/Dimension';
 import { DimensionRestService } from './dimension-rest.service';
 import { Injectable, EventEmitter, Output } from '@angular/core';
@@ -30,14 +30,14 @@ export class DimensionDataService {
       DataLoader.dummyDimensionDtos.forEach(dim => {
         this.dimensions.push(this.dimensionMapperService.fromDto(dim));
       });
-      this.logger.info('Dimensions loaded.');
+      this.logger.info(this, 'Dimensions loaded');
       this.loadedDimensions.emit(this.dimensions);
 
       // Load dummy dimension types.
       DataLoader.dummyDimensionTypes.forEach(dimType => {
         this.dimensionTypes.push(dimType);
       });
-      this.logger.info('Dimension types loaded.');
+      this.logger.info(this, 'Dimension types loaded');
       this.loadedDimensionTypes.emit(this.dimensionTypes);
     } else {
       // Load dimensions.
@@ -45,46 +45,26 @@ export class DimensionDataService {
         dims.forEach(dim => {
           this.dimensions.push(this.dimensionMapperService.fromDto(dim));
         });
-        this.logger.info('Dimensions loaded.');
-        this.logger.info(this.dimensions);
+        this.logger.info(this, 'Dimensions loaded');
         this.loadedDimensions.emit(this.dimensions);
       });
 
       // Load dimension types.
       this.dimensionRestService.getDimensionTypes().subscribe(dimTypes => {
         this.dimensionTypes = dimTypes;
-        this.logger.info('Dimension types loaded.');
-        this.logger.info(this.dimensionTypes);
+        this.logger.info(this, 'Dimension types loaded');
       });
       this.loadedDimensionTypes.emit(this.dimensionTypes);
     }
   }
 
   getDefaultDimension(): Dimension {
+    this.logger.debug(this, 'Get Default Dimension');
     return this.dimensions[0];
   }
 
   getDefaultDimensionType(): string {
+    this.logger.debug(this, 'Get Default DimensionType');
     return this.dimensionTypes[0];
-  }
-
-  createDimension(dimension: Dimension): void {
-    this.dimensionRestService.createDimension(dimension).subscribe(dim => {
-      this.dimensions.push(dim);
-    });
-  }
-
-  updateDimension(dimension: Dimension): void {
-    this.dimensionRestService.updateDimension(dimension).subscribe(dim => {
-      const index: number = this.dimensions.indexOf(dimension, 0);
-      this.dimensions[index] = dim;
-    });
-  }
-
-  deleteDimension(dimension: Dimension): void {
-    this.dimensionRestService.deleteDimension(dimension).subscribe(() => {
-      const index: number = this.dimensions.indexOf(dimension, 0);
-      this.dimensions.splice(index, 1);
-    });
   }
 }

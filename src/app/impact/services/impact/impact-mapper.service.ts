@@ -22,7 +22,7 @@ export class ImpactMapperService {
   ) { }
 
   toDto(impact: Impact): ImpactDto {
-    this.logger.info('Mapping Impact to ImpactDto');
+    this.logger.info(this, 'Mapping Impact to ImpactDto');
 
     const impactDto = new ImpactDto();
 
@@ -38,11 +38,8 @@ export class ImpactMapperService {
     return impactDto;
   }
 
-  // impactDto: any has to be used, because the backend sends other names for both:
-  // The child Dtos: The Dtos are not suffixed with *Dto in the backend return content.
-  // The child Dtos attributes: The ids do not have the names of the owner domain, due to the domain impact using other names.
   fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
-    this.logger.info('Mapping ImpactDto to Impact');
+    this.logger.info(this, 'Mapping ImpactDto to Impact');
 
     const impact = new Impact();
 

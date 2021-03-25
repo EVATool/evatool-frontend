@@ -24,7 +24,7 @@ export class StakeholderDataService {
       DataLoader.dummyStakeholderDtos.forEach(stk => {
         this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
       });
-      this.logger.info('Stakeholders loaded.');
+      this.logger.info(this, 'Stakeholders loaded');
       this.loadedStakeholders.emit(this.stakeholders);
     } else {
       // Load stakeholders.
@@ -32,14 +32,14 @@ export class StakeholderDataService {
         stks.forEach(stk => {
           this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
         });
-        this.logger.info('Stakeholders loaded.');
-        this.logger.info(this.stakeholders);
+        this.logger.info(this, 'Stakeholders loaded');
         this.loadedStakeholders.emit(this.stakeholders);
       });
     }
   }
 
   getDefaultStakeholder(): Stakeholder {
+    this.logger.debug(this, 'Get Default Stakeholder');
     return this.stakeholders[0];
   }
 }
