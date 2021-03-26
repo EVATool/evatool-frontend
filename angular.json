@@ -13,7 +13,7 @@
           "strict": true
         },
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "scss"
         }
       },
       "root": "",
