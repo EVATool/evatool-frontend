@@ -1,5 +1,5 @@
 
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import {Injectable, Output, EventEmitter, OnInit} from '@angular/core';
 import {Variant} from '../models/Variant';
 import {Observable, Subscribable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -11,26 +11,36 @@ import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component
 @Injectable({
   providedIn: 'root'
 })
-export class VariantDataService {
- onCreateVariant: EventEmitter<Variant> = new EventEmitter();
-
+export class VariantDataService{
   variants: Variant[] = [];
+  matDataSource = new MatTableDataSource<Variant>();
 
   constructor( private variantRestService: VariantRestService){
-
+    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+    this.loadVariants();
   }
 
-  onInit(){ // Do not call this from the constructor!
-    this.getVariantsFromServer();
+  loadVariants(): void{
+    this.variantRestService.getVariants().subscribe((result: any) => {
+      this.variants = [];
+      console.log(result);
+      result.forEach((variantDTO: VariantDTO) => {
+        const variant: Variant = {
+          id: variantDTO.id,
+          guiId: variantDTO.guiId,
+          description: variantDTO.description,
+          title: variantDTO.title,
+          analysisId: variantDTO.analysisId,
+          archived: variantDTO.archived
+        };
+        this.variants.push(variant);
+      });
+      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+    });
   }
 
   getVariants(): Variant[]{
     return this.variants;
-  }
-
-  getVariantsFromServer(): Observable<any> {
-    console.log('methode getVariants');
-    return this.variantRestService.getVariants();
   }
 
   private createDefaultVariant(): Variant {
@@ -39,15 +49,13 @@ export class VariantDataService {
     return variant;
   }
 
-  createVariant(): Variant {
+  createVariant(): void {
     const variant = this.createDefaultVariant();
     this.variants.push(variant);
-    this.onCreateVariant.emit(variant);
-    return variant;
+    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
   }
 
-
-  save(variant: Variant, variantDialogComponent: VariantDialogComponent): void {
+  save(variant: Variant): void {
     this.variantRestService.createVariants(
       {
         id: '',
@@ -56,13 +64,13 @@ export class VariantDataService {
         title: variant.title,
         description: variant.description,
         subVariant: {},
-        analysisId: '4fa9946b-8f57-4e08-a9c8-3d95e910c8bc'
+        analysisId: '43344c13-f0d2-4a08-bfd5-60f30f847c56'
       }).subscribe(() => {
-        variantDialogComponent.loadVariants();
+        this.loadVariants();
     });
   }
 
-  archive(variant: Variant, variantDialogComponent: VariantDialogComponent): void {
+  archive(variant: Variant): void {
     this.variantRestService.updateVariants({
       id: variant.id,
       archived: true,
@@ -72,7 +80,7 @@ export class VariantDataService {
       subVariant: {},
       analysisId: variant.analysisId
     }).subscribe(() => {
-      variantDialogComponent.loadVariants();
+      this.loadVariants();
     });
   }
 }

@@ -16,47 +16,18 @@ export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
   displayedColumns = ['guiId', 'title', 'description'];
-  variants: Variant[] = [];
-  matDataSource = new MatTableDataSource<Variant>();
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<VariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private variantDataService: VariantDataService,
-    private variantRestService: VariantRestService) {
-    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-  }
+    public variantDataService: VariantDataService) {
 
+  }
 
   ngOnInit(): void {
-    this.loadVariants();
     this.form = this.formBuilder.group({
       id: new FormControl(null)
-    });
-
-    this.variantDataService.onCreateVariant.subscribe(variant => {
-      this.variants.push(variant);
-      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-    });
-  }
-
-  loadVariants(): void{
-    this.variantRestService.getVariants().subscribe((result: any) => {
-      this.variants = [];
-      console.log(result);
-      result.forEach((variantDTO: VariantDTO) => {
-        const variant: Variant = {
-          id: variantDTO.id,
-          guiId: variantDTO.guiId,
-          description: variantDTO.description,
-          title: variantDTO.title,
-          analysisId: variantDTO.analysisId,
-          archived: variantDTO.archived
-        };
-        this.variants.push(variant);
-      });
-      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     });
   }
 
@@ -66,10 +37,10 @@ export class VariantDialogComponent implements OnInit {
 
   save(variant: Variant): void {
     variant.editable = false;
-    this.variantDataService.save(variant, this);
+    this.variantDataService.save(variant);
   }
 
   archive(variant: Variant): void {
-    this.variantDataService.archive(variant, this );
+    this.variantDataService.archive(variant);
   }
 }
