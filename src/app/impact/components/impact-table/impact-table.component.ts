@@ -1,5 +1,5 @@
+import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
 import { ImpactTableFilterEvent } from './../impact-table-filter-bar/ImpactTableFilterEvent';
-import { DimensionDialogComponent } from '../dimension-dialog/dimension-dialog.component';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { MatDialog } from '@angular/material/dialog';

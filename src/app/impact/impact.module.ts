@@ -1,7 +1,8 @@
+import { DimensionTableComponent } from './components/impact-table/components/dimension-dialog/components/dimension-table/dimension-table.component';
+import { DimensionDialogComponent } from './components/impact-table/components/dimension-dialog/dimension-dialog.component';
 import { SharedModule } from './../shared/shared.module';
 import { ColumnSliderFilterComponent } from './components/column-slider-filter/column-slider-filter.component';
 import { ColumnCategoryFilterComponent } from './components/column-category-filter/column-category-filter.component';
-import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,7 +25,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { DimensionTableComponent } from './components/dimension-dialog/components/dimension-table/dimension-table.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
