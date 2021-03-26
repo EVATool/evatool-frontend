@@ -1,17 +1,12 @@
 <div class="container">
 
-
-  <div class="search-bar-container">
-    <app-search-bar (searchTextChanged)="searchTextChange($event)"></app-search-bar>
-  </div>
-
   <div class="impact-table-filter-bar-container">
-    <app-impact-table-filter-bar></app-impact-table-filter-bar>
+    <app-impact-table-filter-bar (filterChanged)="filterBarChanged($event)"></app-impact-table-filter-bar>
   </div>
 
   <div class="impact-table-container">
     <ng-scrollbar>
-      <app-impact-table></app-impact-table>
+      <app-impact-table #table></app-impact-table>
     </ng-scrollbar>
   </div>
 

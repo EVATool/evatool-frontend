@@ -1,3 +1,4 @@
+import { ImpactTableFilterEvent } from './../impact-table-filter-bar/ImpactTableFilterEvent';
 import { DimensionDialogComponent } from '../dimension-dialog/dimension-dialog.component';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
@@ -8,8 +9,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSelectChange } from '@angular/material/select';
-import {LogService} from '../../../shared/services/log.service';
-import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
+import { LogService } from '../../../shared/services/log.service';
+import { SliderFilterBoundary, SliderFilterSettings, SliderFilterType } from '../../../shared/components/impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-impact-table',
@@ -154,9 +155,9 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     };
   }
 
-  valueFilterChanged(event: SliderFilterSettings): void {
+  filterChange(event: ImpactTableFilterEvent): void {
     this.logger.info(this, 'Value Filter Changed');
-    this.filterValues.value = event;
+    this.filterValues.value = event.valueFilter;
     this.updateFilter();
   }
 
