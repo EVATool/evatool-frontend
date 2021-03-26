@@ -55,12 +55,6 @@
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The impact (Goal or Risk)" matTooltipHideDelay="100" matTooltipPosition="above">Impact</div>
 
-      <button mat-icon-button color="accent" (click)="$event.stopPropagation();columnSliderFilterComponent.toggleVisibility()" aria-label="Value-Filter">
-        <mat-icon>filter_alt</mat-icon>
-      </button>
-      <app-column-slider-filter #columnSliderFilterComponent (filterChanged)="valueFilterChanged($event)" name="value"></app-column-slider-filter>
-
-
       <!-- TODO why does removing this change the style of the complete site -->
       <mat-form-field style="display: none">
         <input matInput placeholder="Dimension">

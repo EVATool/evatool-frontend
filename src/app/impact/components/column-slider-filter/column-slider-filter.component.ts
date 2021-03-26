@@ -1,8 +1,8 @@
 import { LogService } from '../../../shared/services/log.service';
-import { ImpactSliderComponent } from '../../../shared/components/impact-slider/impact-slider.component';
 import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../../../shared/components/impact-slider/SliderFilterSettings';
 import { MatSliderChange } from '@angular/material/slider';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
+import { ImpactSliderComponent } from 'src/app/shared/components/impact-slider/impact-slider.component';
 
 @Component({
   selector: 'app-column-slider-filter',
@@ -27,14 +27,6 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
-  }
-
-  toggleVisibility(): void {
-    this.isVisible = !this.isVisible;
-  }
-
-  setInvisible(): void {
-    this.isVisible = false;
   }
 
   sliderFilterValueChanged(event: MatSliderChange) {

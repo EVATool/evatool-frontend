@@ -2,5 +2,7 @@
   <mat-list-item>Highlight-Search</mat-list-item>
   <mat-list-item>Stakeholder-Filter</mat-list-item>
   <mat-list-item>Value-Systems-Filter</mat-list-item>
-  <mat-list-item>Impact-Slider-Filter</mat-list-item>
+  <mat-list-item>
+    <app-column-slider-filter (filterChanged)="valueFilterChanged($event)"></app-column-slider-filter>
+  </mat-list-item>
 </mat-list>

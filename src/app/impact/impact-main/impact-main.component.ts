@@ -1,3 +1,6 @@
+import { ImpactTableComponent } from './../components/impact-table/impact-table.component';
+import { MatTable } from '@angular/material/table';
+import { SliderFilterSettings } from './../../shared/components/impact-slider/SliderFilterSettings';
 import { LogService } from '../../shared/services/log.service';
 import { Impact } from './../models/Impact';
 import { ImpactDataService } from '../services/impact/impact-data.service';
@@ -11,6 +14,7 @@ import { NgScrollbar } from 'ngx-scrollbar';
 })
 export class ImpactMainComponent implements OnInit, AfterViewInit {
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
+  @ViewChild(ImpactTableComponent) table!: ImpactTableComponent;
 
   windowScrolled = false;
 
@@ -48,5 +52,10 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   searchTextChange(searchValue: string): void {
     this.logger.info(this, `Search Bar Text Changed: ${searchValue}`);
+  }
+
+  filterBarChanged(event: SliderFilterSettings) {
+    this.logger.info(this, 'Filter Bar Changed');
+    this.table.filterChange(event);
   }
 }
