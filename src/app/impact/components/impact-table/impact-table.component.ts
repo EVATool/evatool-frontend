@@ -15,7 +15,7 @@ import { SliderFilterBoundary, SliderFilterType } from '../../../shared/componen
 @Component({
   selector: 'app-impact-table',
   templateUrl: './impact-table.component.html',
-  styleUrls: ['./impact-table.component.css', '../../../layout/style/style.css']
+  styleUrls: ['./impact-table.component.scss', '../../../layout/style/style.css']
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
