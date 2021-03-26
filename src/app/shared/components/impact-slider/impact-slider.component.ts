@@ -6,7 +6,7 @@ import { LogService } from '../../services/log.service';
 @Component({
   selector: 'app-impact-slider',
   templateUrl: './impact-slider.component.html',
-  styleUrls: ['./impact-slider.component.css']
+  styleUrls: ['./impact-slider.component.scss']
 })
 export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @Input() value: number = 0;
