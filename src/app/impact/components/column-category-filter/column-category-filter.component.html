@@ -1,10 +1,10 @@
-<div class="floating lifted" appClickOutside (clickOutside)="setInvisible()">
-  <div (click)="$event.stopPropagation()" [ngClass]="isVisible ? 'show' : 'hide'">
-    <div class="filter-header">{{name}} Filter</div>
-    <ul *ngFor="let category of categories">
-      <li>
+<div id="floating-filter-form" class="floating lifted" appClickOutside (clickOutside)="setInvisible()">
+  <div id="visibility-wrapper" (click)="$event.stopPropagation()" [hidden]="!isVisible">
+    <div id="filter-header-text" class="filter-header">{{name}} Filter</div>
+    <mat-list *ngFor="let category of categories">
+      <mat-list-item>
         <mat-checkbox (change)="updateFilterValues($event)" value="{{category}}">{{category}}</mat-checkbox>
-      </li>
-    </ul>
+      </mat-list-item>
+    </mat-list>
   </div>
 </div>

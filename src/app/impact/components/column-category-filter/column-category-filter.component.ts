@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatCheckboxChange} from '@angular/material/checkbox';
+import {LogService} from '../../settings/log.service';
 
 @Component({
   selector: 'app-column-category-filter',
@@ -15,7 +16,7 @@ export class ColumnCategoryFilterComponent implements OnInit {
   public filterValues: string[] = [];
   public isVisible = false;
 
-  constructor() { }
+  constructor(private logger: LogService) { }
 
   ngOnInit(): void {
   }
@@ -39,7 +40,7 @@ export class ColumnCategoryFilterComponent implements OnInit {
       this.filterValues.splice(index, 1);
     }
 
+    this.logger.info(this, 'emit new filterValues: ' + this.filterValues);
     this.filterChanged.emit(this.filterValues);
-    console.log('emit new filterValues: ' + this.filterValues);
   }
 }

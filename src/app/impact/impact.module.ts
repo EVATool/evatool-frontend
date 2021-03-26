@@ -30,6 +30,7 @@ import {DimensionTableComponent} from './components/dimension-table/dimension-ta
 import {ColumnCategoryFilterComponent} from './components/column-category-filter/column-category-filter.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ColumnSliderFilterComponent } from './components/column-slider-filter/column-slider-filter.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ColumnSliderFilterComponent } from './components/column-slider-filter/c
     MatExpansionModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
-    RouterModule
+    RouterModule,
+    MatListModule,
   ],
   exports: [
     ImpactMainComponent
