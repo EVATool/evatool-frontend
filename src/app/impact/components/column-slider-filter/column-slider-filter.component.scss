@@ -1,5 +1,16 @@
+p {
+  font-size: 80%;
+  margin-bottom: 0px;
+}
+
 mat-list.list-horizontal {
   padding: 0;
+  background-color: rgb(240, 240, 240);
+  border-bottom: 1px solid black;
+
+  p {
+    font-size: 80%;
+  }
 
   .mat-list-item {
     margin-right: -10px;
