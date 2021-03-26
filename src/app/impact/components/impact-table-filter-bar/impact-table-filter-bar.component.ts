@@ -26,6 +26,4 @@ export class ImpactTableFilterBarComponent implements OnInit {
     this.impactTableFilterEvent.valueFilter = event;
     this.filterChanged.emit(this.impactTableFilterEvent);
   }
-
-
 }
