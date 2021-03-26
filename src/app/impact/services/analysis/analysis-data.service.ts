@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { LogService } from '../../settings/log.service';
+import { LogService } from '../../../shared/services/log.service';
 import { AnalysisRestService } from './analysis-rest.service';
 import { AnalysisMapperService } from './analysis-mapper.service';
 import { Analysis } from '../../models/Analysis';

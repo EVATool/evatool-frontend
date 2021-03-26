@@ -16,7 +16,7 @@ const httpOptions = { // Outsource!
 })
 export class VariantRestService {
 
-  variantUrl = 'http://79.171.179.211:443/variants'; // Outsource!
+  variantUrl = 'http://localhost:8080/variants'; // Outsource!
 
   constructor(private http: HttpClient) {
 
@@ -45,4 +45,5 @@ export class VariantRestService {
   deleteVariants(variant: Variant): Observable<any> {
     return this.http.delete(this.variantUrl + '/' + variant.id);
   }
+
 }

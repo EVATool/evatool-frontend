@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchBarComponent } from './search-bar.component';
+import { StakeholderImpactComponent } from './stakeholder-impact.component';
 
-describe('SearchBarComponent', () => {
-  let component: SearchBarComponent;
-  let fixture: ComponentFixture<SearchBarComponent>;
+describe('StakeholderImpactComponent', () => {
+  let component: StakeholderImpactComponent;
+  let fixture: ComponentFixture<StakeholderImpactComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchBarComponent ]
+      declarations: [ StakeholderImpactComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchBarComponent);
+    fixture = TestBed.createComponent(StakeholderImpactComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

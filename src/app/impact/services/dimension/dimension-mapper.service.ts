@@ -1,4 +1,4 @@
-import { LogService } from './../../settings/log.service';
+import { LogService } from '../../../shared/services/log.service';
 import { DimensionDto } from '../../dtos/DimensionDto';
 import { Dimension } from '../../models/Dimension';
 import { Injectable } from '@angular/core';

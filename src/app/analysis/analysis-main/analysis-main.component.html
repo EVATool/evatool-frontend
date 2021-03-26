@@ -1,1 +1,52 @@
-<p>analysis-main-form works!</p>
+<head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+    .material-icons.md-48 { font-size: 48px; }
+  </style>
+</head>
+
+<head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+    .material-icons.md-48 { font-size: 48px; }
+  </style>
+</head>
+
+<!--container-->
+<!--left-->
+<div id="left"><!--linker Bereich-->
+  <div>
+    <button mat-raised-button (click)="openValueDialog()" class="valueButton">+ Values bearbeiten</button>
+  </div>
+  <br>
+  <div>
+    <button mat-raised-button (click)="openDialog()" class="createAnalysisButton">+ Neue Analyse</button>
+  </div>
+</div>
+
+<!--cards-->
+<!--right-->
+<div id="right"><!--rechter Bereich-->
+
+  <div class="headertitle">Alle Analysen</div>
+  <hr style="width:50%; margin: auto;">
+  <div class="content-wrapper">
+    <div *ngFor="let analysis of analysisArray;" class="news-card">
+      <a href="#" class="news-card__card-link"></a>
+      <img src="{{analysis.img}}" alt="" class="news-card__image">
+      <div class="news-card__text-wrapper">
+        <h2 class="news-card__title">{{analysis.title}}</h2>
+
+        <i class="material-icons delete">delete</i>
+        <i class="material-icons settings">settings</i>
+
+        <div class="news-card__post-date">{{"Letzte Änderung "}} {{analysis.lastUpdate}}</div>
+        <div class="news-card__details-wrapper">
+          <p class="news-card__excerpt">{{analysis.description}}</p>
+          <a href="#" class="news-card__read-more">Einsehen <i class="fas fa-long-arrow-alt-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

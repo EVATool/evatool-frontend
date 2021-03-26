@@ -1,6 +1,6 @@
-import { LogService } from './../../settings/log.service';
-import { ImpactSliderComponent } from './../impact-slider/impact-slider.component';
-import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './SliderFilterSettings';
+import { LogService } from '../../../shared/services/log.service';
+import { ImpactSliderComponent } from '../../../shared/components/impact-slider/impact-slider.component';
+import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../../../shared/components/impact-slider/SliderFilterSettings';
 import { MatSliderChange } from '@angular/material/slider';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
 

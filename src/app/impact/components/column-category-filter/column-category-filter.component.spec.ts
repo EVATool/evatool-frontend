@@ -42,5 +42,4 @@ describe('ColumnCategoryFilterComponent', () => {
     expect(fixture.debugElement.query(By.css('#visibility-wrapper')).nativeElement.hidden).toBeFalsy();
   });
 
-
 });

@@ -25,7 +25,7 @@ describe('AddImpactButtonComponent', () => {
   });
 
   it('should have \'+\' on button', () => {
-    expect(fixture.debugElement.query(By.css('#plus')).nativeElement.textContent).toEqual('+');
+    expect(fixture.debugElement.query(By.css('#plus')).nativeElement.textContent).toContain('+');
   })
 
   it('should have \'Impact\' as text', () => {
@@ -38,6 +38,19 @@ describe('AddImpactButtonComponent', () => {
 
     // Act
     component.addButtonClicked();
+
+    // Assert
+    expect(component.addButtonClick.emit).toHaveBeenCalled();
+  });
+
+  it('should emit click event on button click', () => {
+    // Arrange
+    spyOn(component.addButtonClick, 'emit');
+
+    // Act
+    let button = fixture.debugElement.nativeElement.querySelector('button');
+    button.click();
+    fixture.detectChanges();
 
     // Assert
     expect(component.addButtonClick.emit).toHaveBeenCalled();

@@ -1,4 +1,4 @@
-import { LogService } from '../../settings/log.service';
+import { LogService } from '../../../shared/services/log.service';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 import { StakeholderRestService } from './stakeholder-rest.service';
 import { Stakeholder } from '../../models/Stakeholder';

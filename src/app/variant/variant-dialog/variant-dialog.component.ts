@@ -1,11 +1,11 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Component, Inject, NgModule, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../models/Variant';
 import {VariantDataService} from '../services/variant-data.service';
 import {VariantRestService} from '../services/variant-rest.service';
-
+import {VariantDTO} from '../models/VariantDTO';
 
 @Component({
   selector: 'app-variant-dialog',
@@ -15,7 +15,7 @@ import {VariantRestService} from '../services/variant-rest.service';
 export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
-  displayedColumns = ['title', 'description', 'options'];
+  displayedColumns = ['guiId', 'title', 'description'];
   variants: Variant[] = [];
   matDataSource = new MatTableDataSource<Variant>();
 
@@ -30,19 +30,24 @@ export class VariantDialogComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.loadVariants();
     this.form = this.formBuilder.group({
       id: new FormControl(null)
     });
+  }
 
+  loadVariants(): void{
     this.variantRestService.getVariants().subscribe((result: any) => {
       this.variants = [];
-      result.content.forEach((variantDTO: any) => {
-        const variant = {
-          id: variantDTO.uuid,
+      console.log(result);
+      result.forEach((variantDTO: VariantDTO) => {
+        const variant: Variant = {
+          id: variantDTO.id,
+          guiId: variantDTO.guiId,
           description: variantDTO.description,
           title: variantDTO.title,
-          analysesId: variantDTO.analysesId
+          analysisId: variantDTO.analysisId,
+          archived: variantDTO.archived
         };
         this.variants.push(variant);
       });
@@ -61,7 +66,10 @@ export class VariantDialogComponent implements OnInit {
 
   save(variant: Variant): void {
     variant.editable = false;
-    this.variantDataService.save(variant);
+    this.variantDataService.save(variant, this);
   }
 
+  archive(variant: Variant): void {
+    this.variantDataService.archive(variant, this );
+  }
 }

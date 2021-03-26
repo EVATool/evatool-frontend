@@ -1,7 +1,7 @@
-import { LogService } from './../../settings/log.service';
-import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './../column-slider-filter/SliderFilterSettings';
+import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './SliderFilterSettings';
 import { MatSlider, MatSliderChange } from '@angular/material/slider';
 import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
+import { LogService } from '../../services/log.service';
 
 @Component({
   selector: 'app-impact-slider',
@@ -179,7 +179,6 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
           break;
 
         case SliderFilterBoundary.Exclude:
-
           thumbs.forEach((thumb: any) => {
             thumb.nativeElement.style.backgroundColor = 'red';
           });
