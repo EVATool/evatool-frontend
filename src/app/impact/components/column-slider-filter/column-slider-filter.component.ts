@@ -43,7 +43,7 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
     this.filterChanged.emit(this.slider.sliderFilterSettings);
   }
 
-  clickClear() {
+  public clearFilter() {
     this.logger.info(this, 'Clearing Filtering');
     this.filterType = SliderFilterType.LessThan;
     this.filterBoundary = SliderFilterBoundary.Include;

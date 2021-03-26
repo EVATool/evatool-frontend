@@ -1,0 +1,16 @@
+mat-list.list-horizontal {
+  padding: 0;
+  .mat-list-item {
+    display: inline-block;
+    height: auto;
+    width: auto;
+
+    .slider {
+      width: 150px;
+    }
+
+    .dropdown {
+      width: 150px;
+    }
+  }
+}

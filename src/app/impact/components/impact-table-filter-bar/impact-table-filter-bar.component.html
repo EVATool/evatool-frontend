@@ -1,12 +1,19 @@
 <mat-list class="list-horizontal">
+
   <mat-list-item>
-    <div class="search-bar-container">
-      <app-search-bar (searchTextChanged)="searchTextChange($event)"></app-search-bar>
-    </div>
+    <app-search-bar (searchTextChanged)="searchTextChange($event)"></app-search-bar>
   </mat-list-item>
+
   <mat-list-item>Stakeholder-Filter</mat-list-item>
+
   <mat-list-item>Value-Systems-Filter</mat-list-item>
+
   <mat-list-item>
     <app-column-slider-filter (filterChanged)="valueFilterChanged($event)"></app-column-slider-filter>
   </mat-list-item>
+
+  <mat-list-item>
+    <button (click)='clickClear()'>Clear</button>
+  </mat-list-item>
+
 </mat-list>

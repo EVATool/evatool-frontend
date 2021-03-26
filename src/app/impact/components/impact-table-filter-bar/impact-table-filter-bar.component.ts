@@ -1,6 +1,7 @@
+import { ColumnSliderFilterComponent } from './../column-slider-filter/column-slider-filter.component';
 import { ImpactTableFilterEvent } from './ImpactTableFilterEvent';
 import { LogService } from '../../../shared/services/log.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/SliderFilterSettings';
 
 @Component({
@@ -9,9 +10,11 @@ import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/Sl
   styleUrls: ['./impact-table-filter-bar.component.scss']
 })
 export class ImpactTableFilterBarComponent implements OnInit {
+  @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
   impactTableFilterEvent: ImpactTableFilterEvent;
+  suppressChildEvent: boolean = false;
 
   constructor(private logger: LogService) {
     this.impactTableFilterEvent = ImpactTableFilterEvent.getDefault();
@@ -24,9 +27,22 @@ export class ImpactTableFilterBarComponent implements OnInit {
   valueFilterChanged(event: SliderFilterSettings): void {
     this.logger.info(this, 'Slider Filter Changed');
     this.impactTableFilterEvent.valueFilter = event;
-    this.filterChanged.emit(this.impactTableFilterEvent);
+    if (!this.suppressChildEvent) {
+      this.filterChanged.emit(this.impactTableFilterEvent);
+    }
   }
 
   searchTextChange($event: string): void {
+  }
+
+  clickClear() {
+    this.logger.info(this, 'Clearing Filtering');
+    this.suppressChildEvent = true;
+
+    // Clear all children and suspent event firing in method above.
+    this.sliderFilter.clearFilter();
+
+    this.suppressChildEvent = false;
+    this.filterChanged.emit(this.impactTableFilterEvent);
   }
 }
