@@ -1,8 +1,8 @@
-import { SliderFilterChange } from './../column-slider-filter/SliderFilterChange';
-import { LogService } from '../../settings/log.service';
+import { DimensionDialogComponent } from './../dimension-dialog/dimension-dialog.component';
+import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../../../shared/components/impact-slider/SliderFilterSettings';
+import { LogService } from '../../../shared/services/log.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
-import { DimensionDialogComponent } from '../dimension-dialog/dimension-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
@@ -31,11 +31,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   searchToggles = new Map<string, boolean>();
   stakeholderNames: string[] = [];
 
-  loaded: Promise<boolean> = Promise.resolve(false);
-
-  filterValues = {
+  // TODO: Extend these for more complex queries.
+  filterValues: any = {
     id: '',
-    stakeholder: [''],
+    stakeholder: [],
     dimension: '',
     value: '',
     description: ''
@@ -54,33 +53,34 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
-      this.logger.info('Impact Table received loadedImpacts event.');
+      this.logger.info(this, 'Event \'loadedImpacts\' received from ImpactDataService');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
       this.initSorting();
       this.initFiltering();
     });
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
-      this.logger.info('Impact Table received changedImpacts event.');
+      this.logger.info(this, 'Event \'changedImpacts\' received from ImpactDataService');
       this.tableDataSource.data = impacts;
     });
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
-      this.logger.info('Impact Table received addedImpact event.');
+      this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
-      this.logger.info('Impact Table received changedImpact event.');
+      this.logger.info(this, 'Event \'changedImpact\' received from ImpactDataService');
     });
 
     this.impactDataService.removedImpact.subscribe((impact: Impact) => {
-      this.logger.info('Impact Table received removedImpact event.');
+      this.logger.info(this, 'Event \'removedImpact\' received from ImpactDataService');
     });
 
     this.impactDataService.onInit();
   }
 
   private initSorting(): void {
+    this.logger.info(this, 'Init Sorting');
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
@@ -92,24 +92,28 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   public updateFilter(): void {
-    console.log(JSON.stringify(this.filterValues));
+    this.logger.info(this, 'Update Filter');
     this.tableDataSource.filter = JSON.stringify(this.filterValues);
   }
-  
+
   private initFiltering(): void {
+    this.logger.info(this, 'Init Filtering');
     this.stakeholderNames = this.impactDataService.stakeholders.map(value => value.name);
 
     this.stakeholderFilter.valueChanges.subscribe(newStakeholder => {
+      this.logger.info(this, 'Event \'valueChanges\' received from stakeholderFilter');
       this.filterValues.stakeholder = newStakeholder;
       this.tableDataSource.filter = JSON.stringify(this.filterValues);
     });
 
     this.dimensionFilter.valueChanges.subscribe(newDimension => {
+      this.logger.info(this, 'Event \'valueChanges\' received from dimensionFilter');
       this.filterValues.dimension = newDimension;
       this.tableDataSource.filter = JSON.stringify(this.filterValues);
     });
 
     this.valueFilter.valueChanges.subscribe(newValue => {
+      this.logger.info(this, 'Event \'valueChanges\' received from valueFilter');
       this.filterValues.value = newValue;
       this.tableDataSource.filter = JSON.stringify(this.filterValues);
     });
@@ -122,46 +126,92 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   private createFilter(): (data: any, filter: string) => boolean {
+    this.logger.info(this, 'Create Filter');
     return (data: Impact, filter: string): boolean => {
       const searchTerms = JSON.parse(filter);
-      return searchTerms.stakeholder.length === 0 || searchTerms.stakeholder.indexOf(data.stakeholder.name) !== -1
-        && data.dimension.name.toLowerCase().indexOf(searchTerms.dimension.toLowerCase()) !== -1
-        && searchTerms.value.length === 0 || searchTerms.value.indexOf(data.value) !== -1;
+
+      const stakeholderFilter = searchTerms.stakeholder.length === 0 || searchTerms.stakeholder.indexOf(data.stakeholder.name) !== -1;
+
+      const dimensionFilter = searchTerms.stakeholder.length === 0 || data.dimension.name.toLowerCase().indexOf(searchTerms.dimension.toLowerCase()) !== -1;
+
+      let valueFilter = false;
+      switch (searchTerms.value.sliderFilterType) {
+        case SliderFilterType.Off:
+          valueFilter = true;
+          break;
+
+        case SliderFilterType.LessThan:
+          if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
+            valueFilter = data.value < searchTerms.value.sliderFilterValues[0]
+          } else {
+            valueFilter = data.value <= searchTerms.value.sliderFilterValues[0]
+          }
+          break;
+
+        case SliderFilterType.GreaterThan:
+          if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
+            valueFilter = data.value > searchTerms.value.sliderFilterValues[0]
+          } else {
+            valueFilter = data.value >= searchTerms.value.sliderFilterValues[0]
+          }
+          break;
+
+        case SliderFilterType.Equality:
+          valueFilter = data.value === searchTerms.value.sliderFilterValues[0]
+          break;
+
+        case SliderFilterType.Bewtween:
+          const minValue = Math.min(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
+          const maxValue = Math.max(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
+          if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
+            valueFilter = data.value > minValue && data.value < maxValue
+          } else {
+            valueFilter = data.value >= minValue && data.value <= maxValue
+          }
+          break;
+
+        default:
+          valueFilter = true;
+          break;
+      }
+
+      return stakeholderFilter && dimensionFilter && valueFilter;
     };
   }
 
-  valueFilterChanged(event: SliderFilterChange) {
-    this.logger.info(event);
-
-    //this.filterValues.value = event;
-    this.filterValues.value = event.sliderFilterValues[0].toString();
+  valueFilterChanged(event: SliderFilterSettings) {
+    this.logger.info(this, 'Value Filter Changed');
+    this.filterValues.value = event;
     this.updateFilter();
   }
 
   toggleFilterVisibility(key: string): void {
+    this.logger.info(this, 'Toggle Filter Visiblility');
     this.searchToggles.set(key, !this.searchToggles.get(key));
   }
 
   updateImpact(impact: Impact): void {
+    this.logger.info(this, 'Update Impact');
     this.impactDataService.updateImpact(impact);
   }
 
   deleteImpact(impact: Impact): void {
+    this.logger.info(this, 'Delete Impact');
     this.impactDataService.deleteImpact(impact);
   }
 
   stakeholderChange(impact: Impact, event: MatSelectChange): void {
-    this.logger.info('Stakeholder changed');
+    this.logger.info(this, 'Stakeholder changed');
     this.updateImpact(impact);
   }
 
   dimensionChange(impact: Impact, event: MatSelectChange): void {
-    this.logger.info('Dimension changed');
+    this.logger.info(this, 'Dimension changed');
     this.updateImpact(impact);
   }
 
   valueChange(impact: Impact, event: MatSliderChange): void {
-    this.logger.info('Value changed');
+    this.logger.info(this, 'Value changed');
     if (event.value !== null) {
       impact.value = event.value;
     }
@@ -169,23 +219,23 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   descriptionChange(impact: Impact, event: Event): void {
-    this.logger.info('Description changed');
+    this.logger.info(this, 'Description changed');
     this.updateImpact(impact);
   }
 
   openDimensionModal(): void {
-    if (!this.impactDataService.dimensionsLoaded) {
-      this.logger.info('Dimensions not yet loaded.');
-      return;
-    }
-    this.logger.info('Opening Dimension Modal Dialog.');
+    //if (!this.dimensionDataService.loaded) {
+    //  this.logger.info(this, 'Dimensions not yet loaded');
+    //  return;
+    //}
+    this.logger.info(this, 'Opening Dimension Modal Dialog');
     const dialogRef = this.dialog.open(DimensionDialogComponent, {
       height: '80%',
       width: '50%',
       data: { parameter: 'I left this here because maybe we will need it c:' }
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.logger.info('Closing Dimension Modal Dialog.');
+      this.logger.info(this, 'Closing Dimension Modal Dialog');
     });
   }
 }

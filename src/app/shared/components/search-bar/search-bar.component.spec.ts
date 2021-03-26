@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { SearchBarComponent } from './search-bar.component';
 
@@ -8,9 +9,9 @@ describe('SearchBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchBarComponent ]
+      declarations: [SearchBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +22,18 @@ describe('SearchBarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should fire \'searchTextChanged\' event', () => {
+    // Arrange
+    spyOn(component.searchTextChanged, 'emit');
+
+    // Act
+    const searchBar = fixture.debugElement.query(By.css('#search-desc')).nativeElement;
+    searchBar.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    // Assert
+    expect(component.searchTextChanged.emit).toHaveBeenCalled();
   });
 });

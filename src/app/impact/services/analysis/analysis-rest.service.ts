@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { LogService } from '../../../shared/services/log.service';
 import { RestSettings } from '../../settings/RestSettings';
 import { Observable } from 'rxjs';
 import { AnalysisDto } from '../../dtos/AnalysisDto';
@@ -10,7 +10,9 @@ import { Injectable } from '@angular/core';
 })
 export class AnalysisRestService {
 
-  constructor(private http: HttpClient,) {
+  constructor(
+    private logger: LogService,
+    private http: HttpClient,) {
 
   }
 
@@ -19,6 +21,7 @@ export class AnalysisRestService {
   }
 
   getAnalysisById(id: string): Observable<AnalysisDto> {
+    this.logger.info(this, 'Get Analysis by Id');
     return this.http.get<AnalysisDto>(RestSettings.analysesUrl + "/" + id);
   }
 }

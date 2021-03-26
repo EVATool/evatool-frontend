@@ -1,17 +1,17 @@
-import { SampleDataGenerator } from '../../spec/sample-data.service';
+import { SampleDataService } from '../../spec/sample-data.service';
 import { TestBed } from '@angular/core/testing';
 import { AnalysisMapperService } from './analysis-mapper.service';
 
 describe('AnalysisMapperService', () => {
   let service: AnalysisMapperService;
-  let data: SampleDataGenerator;
+  let data: SampleDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SampleDataGenerator]
+      providers: [SampleDataService]
     });
     service = TestBed.inject(AnalysisMapperService);
-    data = TestBed.inject(SampleDataGenerator);
+    data = TestBed.inject(SampleDataService);
   });
 
   it('should be created', () => {
@@ -19,46 +19,46 @@ describe('AnalysisMapperService', () => {
   });
 
   it('should convert to dto', () => {
-    // given
+    // Arrange
     const analysis = data.getDummyAnalysis();
 
-    // when
+    // Act
     const analysisDto = service.toDto(analysis);
 
-    // then
+    // Assert
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
   });
 
   it('should convert from dto', () => {
-    // given
+    // Arrange
     const analysisDto = data.getDummyAnalysisDto();
 
-    // when
+    // Act
     const analysis = service.fromDto(analysisDto);
 
-    // then
+    // Assert
     expect(analysis.id === analysisDto.rootEntityID).toBeTruthy();
   });
 
   it('should convert to impact dto', () => {
-    // given
+    // Arrange
     const analysis = data.getDummyAnalysis();
 
-    // when
+    // Act
     const analysisDto = service.toImpactDto(analysis);
 
-    // then
+    // Assert
     expect(analysis.id === analysisDto.id).toBeTruthy();
   });
 
   it('should convert from impact dto', () => {
-    // given
+    // Arrange
     const analysisDto = data.getDummyImpactAnalysisDto();
 
-    // when
+    // Act
     const analysis = service.fromImpactDto(analysisDto);
 
-    // then
+    // Assert
     expect(analysis.id === analysisDto.id).toBeTruthy();
   });
 });

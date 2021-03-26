@@ -1,3 +1,4 @@
+import { LogService } from '../../../shared/services/log.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class AddImpactButtonComponent implements OnInit {
   @Output() addButtonClick = new EventEmitter<void>();
 
-  constructor() {
+  constructor(private logger: LogService) {
 
   }
 
@@ -17,6 +18,7 @@ export class AddImpactButtonComponent implements OnInit {
   }
 
   addButtonClicked(): void {
+    this.logger.info(this, 'Add Button Clicked');
     this.addButtonClick.emit();
   }
 }

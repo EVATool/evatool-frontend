@@ -1,17 +1,17 @@
-import { SampleDataGenerator } from '../../spec/sample-data.service';
+import { SampleDataService } from '../../spec/sample-data.service';
 import { TestBed } from '@angular/core/testing';
 import { StakeholderMapperService } from './stakeholder-mapper.service';
 
 describe('StakeholderMapperService', () => {
   let service: StakeholderMapperService;
-  let data: SampleDataGenerator;
+  let data: SampleDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [SampleDataGenerator]
+      providers: [SampleDataService]
     });
     service = TestBed.inject(StakeholderMapperService);
-    data = TestBed.inject(SampleDataGenerator);
+    data = TestBed.inject(SampleDataService);
   });
 
   it('should be created', () => {
@@ -19,49 +19,49 @@ describe('StakeholderMapperService', () => {
   });
 
   it('should convert to dto', () => {
-    // given
+    // Arrange
     const stakeholder = data.getDummyStakeholder();
 
-    // when
+    // Act
     const stakeholderDto = service.toDto(stakeholder);
 
-    // then
+    // Assert
     expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
     expect(stakeholder.name === stakeholderDto.stakeholderName).toBeTruthy();
   });
 
   it('should convert from dto', () => {
-    // given
+    // Arrange
     const stakeholderDto = data.getDummyStakeholderDto();
 
-    // when
+    // Act
     const stakeholder = service.fromDto(stakeholderDto);
 
-    // then
+    // Assert
     expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
     expect(stakeholder.name === stakeholderDto.stakeholderName).toBeTruthy();
   });
 
   it('should convert to impact dto', () => {
-    // given
+    // Arrange
     const stakeholder = data.getDummyStakeholder();
 
-    // when
+    // Act
     const stakeholderDto = service.toImpactDto(stakeholder);
 
-    // then
+    // Assert
     expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
     expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
   });
 
   it('should convert from impact dto', () => {
-    // given
+    // Arrange
     const stakeholderDto = data.getDummyImpactStakeholderDto();
 
-    // when
+    // Act
     const stakeholder = service.fromImpactDto(stakeholderDto);
 
-    // then
+    // Assert
     expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
     expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
   });

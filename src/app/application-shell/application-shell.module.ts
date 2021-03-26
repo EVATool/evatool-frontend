@@ -16,9 +16,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateAnalysisDialogComponent } from './home/create-analysis-dialog/create-analysis-dialog.component';
-import {StakeholderModule} from '../stakeholder/stakeholder-module';
+import { StakeholderModule } from '../stakeholder/stakeholder-module';
 import { ImprintComponent } from './imprint/imprint.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [ShellMainComponent, LoginFormComponent, HomeComponent, CreateAnalysisDialogComponent, ImprintComponent, PrivacyComponent],
@@ -29,6 +30,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
     RequirementModule,
     VariantModule,
     DashboardModule,
+    SharedModule,
     BrowserAnimationsModule,
     MatTabsModule,
     MatDialogModule,
