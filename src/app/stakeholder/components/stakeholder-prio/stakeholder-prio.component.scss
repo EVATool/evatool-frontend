@@ -1,0 +1,20 @@
+
+
+$height: 2rem;
+
+.prio{
+  display: inline-block;
+  width: 100%;
+  height: $height;
+
+}
+
+.prio-level{
+  width: $height/2;
+  height: $height;
+  margin: 3px;
+  float:left;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+}

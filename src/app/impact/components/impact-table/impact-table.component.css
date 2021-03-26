@@ -31,12 +31,20 @@ table {
   width: 100%;
 }
 
-.mat-column-id {
-  width: 5% !important;
+.mat-column-uniqueString {
+  width: 8% !important;
+}
+
+.mat-column-stakeholder {
+  width: 10% !important;
+}
+
+.mat-column-dimension {
+  width: 10% !important;
 }
 
 .mat-column-value {
-  width: 10% !important;
+  width: 15% !important;
 }
 
 .mat-column-description {
@@ -60,7 +68,21 @@ table {
 }
 
 .mat-cell:first-child {
-  border-left: 0px solid rgba(0, 0, 0, 0);
+  border-left: 0 solid rgba(0, 0, 0, 0);
+}
+
+#dimension-modal {
+  margin-left: 10px;
+}
+
+.impact-slider-container {
+  margin-top: 2%;
+}
+
+.value-percentage {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: -5%;
 }
 
 /* Delete row button */

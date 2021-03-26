@@ -1,34 +1,42 @@
-import { Stakeholder } from './../../models/Stakeholder';
-import { Injectable } from '@angular/core';
+import { LogService } from '../../settings/log.service';
+import { DataLoader } from '../../settings/DataLoader';
+import { StakeholderMapperService } from './stakeholder-mapper.service';
+import { StakeholderRestService } from './stakeholder-rest.service';
+import { Stakeholder } from '../../models/Stakeholder';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StakeholderDataService {
+  @Output() loadedStakeholders: EventEmitter<Stakeholder[]> = new EventEmitter();
 
-  dummyStakeholders: Stakeholder[] = [
-    {
-      id: '11', name: 'Patient'
-    },
-    {
-      id: '12', name: 'Doctor'
-    },
-    {
-      id: '13', name: 'Family'
-    },
-    {
-      id: '14', name: 'Ensurance'
+  stakeholders: Stakeholder[] = [];
+
+  constructor(
+    private logger: LogService,
+    private stakeholderMapperService: StakeholderMapperService,
+    private stakeholderRestService: StakeholderRestService) { }
+
+  onInit(): void {
+    if (DataLoader.useDummyData) {
+      // Load dummy Stakeholders.
+      DataLoader.dummyStakeholderDtos.forEach(stk => {
+        this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
+      });
+      this.logger.info('Stakeholders loaded.');
+      this.loadedStakeholders.emit(this.stakeholders);
+    } else {
+      // Load stakeholders.
+      this.stakeholderRestService.getStakeholders().subscribe(stks => {
+        stks.forEach(stk => {
+          this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
+        });
+        this.logger.info('Stakeholders loaded.');
+        this.logger.info(this.stakeholders);
+        this.loadedStakeholders.emit(this.stakeholders);
+      });
     }
-  ];
-
-  stakeholders: Stakeholder[] = this.dummyStakeholders;
-
-  constructor() {
-
-  }
-
-  getStakeholders(): Stakeholder[] {
-    return this.stakeholders;
   }
 
   getDefaultStakeholder(): Stakeholder {

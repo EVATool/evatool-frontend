@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CreateAnalysisDialogComponent } from './home/create-analysis-dialog/create-analysis-dialog.component';
+import {StakeholderModule} from '../stakeholder/stakeholder-module';
 import { ImprintComponent } from './imprint/imprint.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 
@@ -34,7 +35,8 @@ import { PrivacyComponent } from './privacy/privacy.component';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    StakeholderModule
   ],
   exports: [
     ShellMainComponent,

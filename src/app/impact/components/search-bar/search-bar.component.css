@@ -1,0 +1,13 @@
+.search-bar {
+  padding: 0.5%;
+  width: 40%;
+  font-size: 150%;
+  background-color: rgb(235, 235, 235);
+  border-bottom: 1px solid black;
+  vertical-align: middle;
+}
+
+#search-icon {
+  position: absolute;
+  left: 40%;
+}

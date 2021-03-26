@@ -1,0 +1,39 @@
+.show {
+  display: block;
+  max-width: 200px;
+  transform: scale(1);
+}
+
+.hide {
+  display: none;
+  max-width: 0;
+  transform: scale(0);
+}
+
+.floating {
+  width: 150%;
+  min-width: 100%;
+  position: absolute;
+  background: white;
+  opacity: 1;
+  top: 125%;
+  left: 65%;
+}
+
+ul {
+  text-align: left;
+  list-style: none;
+  padding: 5px;
+}
+
+.lifted {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.filter-header {
+  font-size: 12px;
+  text-align: left;
+  padding: 5px;
+  text-transform: uppercase;
+  text-decoration:none;
+}

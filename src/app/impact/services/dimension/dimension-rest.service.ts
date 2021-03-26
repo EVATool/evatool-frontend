@@ -1,21 +1,13 @@
-import { Dimension } from './../../models/Dimension';
+import { RestSettings } from '../../settings/RestSettings';
+import { DimensionDto } from '../../dtos/DimensionDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const httpOptions = { // Outsource!
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
 
 @Injectable({
   providedIn: 'root'
 })
 export class DimensionRestService {
-
-  dimensionsUrl = '/api/dimensions'; // Outsource!
 
   constructor(private http: HttpClient) {
 
@@ -25,23 +17,23 @@ export class DimensionRestService {
 
   }
 
-  getDimensions(): Observable<Dimension[]> {
-    return this.http.get<Dimension[]>(this.dimensionsUrl);
+  getDimensions(): Observable<DimensionDto[]> {
+    return this.http.get<DimensionDto[]>(RestSettings.dimensionsUrl);
   }
 
   getDimensionTypes(): Observable<string[]> {
-    return this.http.get<string[]>(this.dimensionsUrl + '/types');
+    return this.http.get<string[]>(RestSettings.dimensionsUrl + '/types');
   }
 
-  createDimension(dimension: Dimension): Observable<any> {
-    return this.http.post(this.dimensionsUrl, dimension, httpOptions);
+  createDimension(dimensionDto: DimensionDto): Observable<any> {
+    return this.http.post(RestSettings.dimensionsUrl, dimensionDto, RestSettings.httpOptions);
   }
 
-  updateDimension(dimension: Dimension): Observable<any> {
-    return this.http.put(this.dimensionsUrl, dimension, httpOptions);
+  updateDimension(dimensionDto: DimensionDto): Observable<any> {
+    return this.http.put(RestSettings.dimensionsUrl, dimensionDto, RestSettings.httpOptions);
   }
 
-  deleteDimension(dimension: Dimension): Observable<any> {
-    return this.http.delete(this.dimensionsUrl + '/' + dimension.id);
+  deleteDimension(dimensionDto: DimensionDto): Observable<any> {
+    return this.http.delete(RestSettings.dimensionsUrl + '/' + dimensionDto.id);
   }
 }

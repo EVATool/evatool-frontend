@@ -1,5 +1,7 @@
-import { ImpactDataService } from './../services/impact/impact-data.service';
-import { Component, OnInit, Inject, HostListener, ViewChild, AfterViewInit } from '@angular/core';
+import { LogService } from '../settings/log.service';
+import { Impact } from './../models/Impact';
+import { ImpactDataService } from '../services/impact/impact-data.service';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';
 
 @Component({
@@ -12,32 +14,35 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   windowScrolled = false;
 
-  constructor(private impactDataService: ImpactDataService) { }
+  constructor(
+    private logger: LogService,
+    private impactDataService: ImpactDataService) { }
 
   ngOnInit(): void {
 
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.scrollbarRef?.scrolled.subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
-    })
+    });
+
+    this.impactDataService.addedImpact.subscribe((impact: Impact) => {
+      const options = { bottom: -100, duration: 250 };
+      this.scrollbarRef.scrollTo(options);
+    });
   }
 
-  scrollToTop() {
+  scrollToTop(): void {
     const options = { top: 0, duration: 250 };
     this.scrollbarRef.scrollTo(options);
   }
 
   addImpact(): void {
-    // TODO Remove filter that hide newly created impact? Set default values to match filters?
-    // TODO Highlight newly create row.
-    this.impactDataService.addImpact();
-    const options = { bottom: -50, duration: 250 }; // Why does the method require -50 and does not scroll to bottom with 0?
-    this.scrollbarRef.scrollTo(options);
+    this.impactDataService.createImpact();
+  }
 
-    // Test debug
-    //console.log(this.impactDataService.impacts[0].value);
-    //this.impactDataService.impacts[0].value = 1;
+  searchTextChange(searchValue: string): void {
+    this.logger.info(searchValue);
   }
 }

@@ -17,6 +17,10 @@ export class VariantDataService {
   variants: Variant[] = [];
 
   constructor( private variantRestService: VariantRestService){
+
+  }
+
+  onInit(){ // Do not call this from the constructor!
     this.getVariantsFromServer();
   }
 

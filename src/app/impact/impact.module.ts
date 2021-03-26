@@ -1,3 +1,11 @@
+import { ColumnSliderFilterComponent } from './components/column-slider-filter/column-slider-filter.component';
+import { ColumnCategoryFilterComponent } from './components/column-category-filter/column-category-filter.component';
+import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,10 +24,25 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { ImpactSliderComponent } from './components/impact-slider/impact-slider.component';
-
+import { AddDimensionButtonComponent } from './components/add-dimension-button/add-dimension-button.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DimensionTableComponent } from './components/dimension-table/dimension-table.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective, ImpactSliderComponent],
+  declarations: [
+    ImpactMainComponent,
+    ImpactTableComponent,
+    AddImpactButtonComponent,
+    ClickOutsideDirective,
+    ImpactSliderComponent,
+    SearchBarComponent,
+    DimensionDialogComponent,
+    AddDimensionButtonComponent,
+    DimensionTableComponent,
+    ColumnCategoryFilterComponent,
+    ColumnSliderFilterComponent
+  ],
   imports: [
     CommonModule,
     MatTableModule,
@@ -33,7 +56,13 @@ import { ImpactSliderComponent } from './components/impact-slider/impact-slider.
     MatButtonModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatExpansionModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    RouterModule
   ],
   exports: [
     ImpactMainComponent

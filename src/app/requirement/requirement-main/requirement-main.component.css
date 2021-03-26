@@ -1,0 +1,17 @@
+#search-description-div {
+  margin: 30px;
+  margin-left: 45px;
+}
+
+#requirement-table-div {
+  margin: 25px;
+  height: calc(100vh - 350px);
+  /*overflow-y: hidden;*/
+  /*scroll-behavior: smooth;*/
+}
+
+.scroll-to-top {
+  position: fixed;
+  top: 125px;
+  right: 50px;
+}

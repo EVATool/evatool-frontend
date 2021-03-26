@@ -1,0 +1,14 @@
+<button mat-icon-button color="accent" (click)="$event.stopPropagation();toggleVisibility()"
+        aria-label="Stakeholder-Filter">
+  <mat-icon>filter_alt</mat-icon>
+</button>
+<div class="floating lifted" appClickOutside (clickOutside)="setInvisible()">
+  <div (click)="$event.stopPropagation()" [ngClass]="isVisible ? 'show' : 'hide'">
+    <div class="filter-header">{{name}} Filter</div>
+    <ul *ngFor="let category of categories">
+      <li>
+        <mat-checkbox (change)="updateFilterValues($event)" value="{{category}}">{{category}}</mat-checkbox>
+      </li>
+    </ul>
+  </div>
+</div>
