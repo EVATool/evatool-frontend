@@ -7,7 +7,7 @@ import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatSelectChange } from '@angular/material/select';
 import { LogService } from '../../../shared/services/log.service';
 import { SliderFilterBoundary, SliderFilterSettings, SliderFilterType } from '../../../shared/components/impact-slider/SliderFilterSettings';
@@ -18,6 +18,7 @@ import { SliderFilterBoundary, SliderFilterSettings, SliderFilterType } from '..
   styleUrls: ['./impact-table.component.scss', '../../../layout/style/style.css']
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   // Used by table.

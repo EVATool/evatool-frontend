@@ -1,3 +1,4 @@
+import { ImpactTableFilterBarComponent } from './../components/impact-table-filter-bar/impact-table-filter-bar.component';
 import { ImpactTableFilterEvent } from './../components/impact-table-filter-bar/ImpactTableFilterEvent';
 import { ImpactTableComponent } from './../components/impact-table/impact-table.component';
 import { MatTable } from '@angular/material/table';
@@ -16,6 +17,7 @@ import { NgScrollbar } from 'ngx-scrollbar';
 export class ImpactMainComponent implements OnInit, AfterViewInit {
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(ImpactTableComponent) table!: ImpactTableComponent;
+  @ViewChild(ImpactTableFilterBarComponent) filterBat!: ImpactTableFilterBarComponent;
 
   windowScrolled = false;
 
@@ -35,6 +37,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
+      this.filterBat.clickClear();
       const options = { bottom: -100, duration: 250 };
       this.scrollbarRef.scrollTo(options);
     });
