@@ -1,0 +1,9 @@
+mat-list.list-horizontal {
+  padding: 0;
+  vertical-align: middle;
+  .mat-list-item {
+    display: inline-block;
+    height: auto;
+    width: auto;
+  }
+}

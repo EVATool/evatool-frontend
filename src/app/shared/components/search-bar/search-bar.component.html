@@ -1,4 +1,10 @@
-<div class="search-bar">
-  <input id="search-desc" matInput placeholder="Search..." (input)="searchTextChange($event)">
-  <mat-icon id="search-icon">search</mat-icon>
-</div>
+<mat-list class="list-horizontal">
+  <mat-list-item>
+    <input class="highlight-text" matInput placeholder="Search..." (input)="searchTextChange($event)">
+  </mat-list-item>
+
+  <mat-list-item>
+    <mat-icon class="search-icon">search</mat-icon>
+  </mat-list-item>
+
+</mat-list>

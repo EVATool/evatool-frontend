@@ -1,3 +1,4 @@
+import { MatListModule } from '@angular/material/list';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,7 +24,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     MatSliderModule,
     MatIconModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatListModule
   ],
   exports: [
     ImpactSliderComponent,
