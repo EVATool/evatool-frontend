@@ -1,7 +1,9 @@
 mat-list.list-horizontal {
   padding: 25px;
   padding-left: 60px;
+
   .mat-list-item {
+    vertical-align: middle;
     display: inline-block;
     height: auto;
     width: auto;

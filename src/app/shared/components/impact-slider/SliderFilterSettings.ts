@@ -27,6 +27,6 @@ export class SliderFilterSettings {
   }
 
   static getDefault(): SliderFilterSettings {
-    return new SliderFilterSettings(0, 0, [0, 0]);
+    return new SliderFilterSettings(0, 0, [1, -1]);
   }
 }

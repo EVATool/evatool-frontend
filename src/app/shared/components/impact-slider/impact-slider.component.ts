@@ -37,6 +37,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.legalValue = this.value;
+    this.value = this.sliderFilterSettings.sliderFilterValues[0];
+    this.legalValue = this.value;
     this.drawSlider();
   }
 
