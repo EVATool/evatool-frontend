@@ -1,7 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ColumnCategoryFilterComponent} from './column-category-filter.component';
-import {By} from '@angular/platform-browser';
 
 describe('ColumnCategoryFilterComponent', () => {
   let component: ColumnCategoryFilterComponent;

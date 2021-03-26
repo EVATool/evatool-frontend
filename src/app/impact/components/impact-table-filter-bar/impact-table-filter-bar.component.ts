@@ -1,7 +1,9 @@
-import { ImpactTableFilterEvent } from './ImpactTableFilterEvent';
-import { LogService } from '../../../shared/services/log.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/SliderFilterSettings';
+import {ImpactTableFilterEvent} from './ImpactTableFilterEvent';
+import {LogService} from '../../../shared/services/log.service';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {SliderFilterSettings} from 'src/app/shared/components/impact-slider/SliderFilterSettings';
+import {StakeholderDataService} from '../../services/stakeholder/stakeholder-data.service';
+import {DimensionDataService} from '../../services/dimension/dimension-data.service';
 
 @Component({
   selector: 'app-impact-table-filter-bar',
@@ -11,14 +13,26 @@ import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/Sl
 export class ImpactTableFilterBarComponent implements OnInit {
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
+  stakeholderNames: string[] = [];
+  dimensionNames: string[] = [];
+
   impactTableFilterEvent: ImpactTableFilterEvent;
 
-  constructor(private logger: LogService) {
+  constructor(
+    private logger: LogService,
+    private stakeholderDataService: StakeholderDataService,
+    private dimensionDataService: DimensionDataService) {
     this.impactTableFilterEvent = ImpactTableFilterEvent.getDefault();
   }
 
   ngOnInit(): void {
+    this.stakeholderDataService.loadedStakeholders.subscribe( (stakeholders) => {
+      this.stakeholderNames = stakeholders.map(value => value.name);
+    });
 
+    this.dimensionDataService.loadedDimensions.subscribe((dimensions) => {
+      this.dimensionNames = dimensions.map(value => value.name);
+    });
   }
 
   valueFilterChanged(event: SliderFilterSettings): void {
@@ -27,6 +41,16 @@ export class ImpactTableFilterBarComponent implements OnInit {
     this.filterChanged.emit(this.impactTableFilterEvent);
   }
 
-  searchTextChange($event: string): void {
+  stakeholderFilterChanged(event: string[]): void {
+    this.logger.info(this, 'Slider Filter Changed');
+    this.impactTableFilterEvent.stakeholderFilter = event;
+  }
+
+  dimensionFilterChanged(event: string[]): void {
+    this.logger.info(this, 'Slider Filter Changed');
+    this.impactTableFilterEvent.dimensionFilter = event;
+  }
+
+  highlightTextChange($event: string): void {
   }
 }
