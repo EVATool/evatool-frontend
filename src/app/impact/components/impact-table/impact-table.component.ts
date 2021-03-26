@@ -1,6 +1,4 @@
 import { DimensionDialogComponent } from '../dimension-dialog/dimension-dialog.component';
-import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../column-slider-filter/SliderFilterSettings';
-import { LogService } from '../../settings/log.service';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +8,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSelectChange } from '@angular/material/select';
+import {LogService} from '../../../shared/services/log.service';
+import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-impact-table',
@@ -194,10 +194,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   openDimensionModal(): void {
-    //if (!this.dimensionDataService.loaded) {
+    // if (!this.dimensionDataService.loaded) {
     //  this.logger.info(this, 'Dimensions not yet loaded');
     //  return;
-    //}
+    // }
     this.logger.info(this, 'Opening Dimension Modal Dialog');
     const dialogRef = this.dialog.open(DimensionDialogComponent, {
       height: '80%',

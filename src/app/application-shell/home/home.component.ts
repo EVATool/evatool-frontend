@@ -33,4 +33,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  openShell(): void {
+    this.router.navigate(['/analysis']);
+  }
 }

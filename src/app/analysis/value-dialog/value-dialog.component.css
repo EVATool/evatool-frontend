@@ -1,0 +1,18 @@
+.value-dialog {
+  min-height: 60vh;
+  min-width: 30vw;
+  font-size: 16px;
+}
+
+.value-modal-close{
+  float: right;
+  content: 'x';
+  color: #000000;
+  font-weight: 300;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  border: none;
+}
+
+.inputField {
+}

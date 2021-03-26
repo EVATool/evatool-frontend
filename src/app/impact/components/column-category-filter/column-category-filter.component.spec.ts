@@ -42,5 +42,10 @@ describe('ColumnCategoryFilterComponent', () => {
     expect(fixture.debugElement.query(By.css('#visibility-wrapper')).nativeElement.hidden).toBeFalsy();
   });
 
-
+  // visibility-wrapper
+  it('should display categories if given', () => {
+    component.categories = ['A', 'B'];
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('#visibility-wrapper')).nativeElement.hidden).toBeFalsy();
+  });
 });

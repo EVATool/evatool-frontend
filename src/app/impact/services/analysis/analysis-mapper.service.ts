@@ -1,4 +1,4 @@
-import { LogService } from './../../settings/log.service';
+import { LogService } from '../../../shared/services/log.service';
 import { ImpactAnalysisDto } from '../../dtos/ImpactAnalysisDto';
 import { AnalysisDto } from '../../dtos/AnalysisDto';
 import { Analysis } from '../../models/Analysis';
