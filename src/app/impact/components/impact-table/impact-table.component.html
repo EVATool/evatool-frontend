@@ -12,14 +12,6 @@
   <ng-container matColumnDef='stakeholder'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The affected stakeholder" matTooltipHideDelay="100" matTooltipPosition="above">Stakeholder</div>
-
-      <button mat-icon-button color="accent" (click)="$event.stopPropagation();stakeholderFilter.toggleVisibility()"
-              aria-label="Stakeholder-Filter">
-        <mat-icon>filter_alt</mat-icon>
-      </button>
-      <app-column-category-filter #stakeholderFilter [categories]="stakeholderNames"
-                                  (filterChanged)="filterValues.stakeholder = $event;updateFilter()" name="stakeholder">
-      </app-column-category-filter>
     </th>
 
     <td mat-cell *matCellDef='let impact'>
@@ -35,13 +27,6 @@
         Dimension</div>
 
       <mat-icon id="dimension-modal" (click)="$event.stopPropagation(); openDimensionModal();">info</mat-icon>
-      <button mat-icon-button color="accent" (click)="$event.stopPropagation();dimensionFilter.toggleVisibility()"
-        aria-label="Dimension-Filter">
-        <mat-icon>filter_alt</mat-icon>
-      </button>
-      <app-column-category-filter #dimensionFilter [categories]="dimensionNames"
-                                  (filterChanged)="filterValues.dimension = $event;updateFilter()" name="stakeholder">
-      </app-column-category-filter>
     </th>
 
     <td mat-cell *matCellDef='let impact'>
@@ -54,12 +39,6 @@
   <ng-container matColumnDef='value'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The impact (Goal or Risk)" matTooltipHideDelay="100" matTooltipPosition="above">Impact</div>
-
-      <button mat-icon-button color="accent" (click)="$event.stopPropagation();columnSliderFilterComponent.toggleVisibility()" aria-label="Value-Filter">
-        <mat-icon>filter_alt</mat-icon>
-      </button>
-      <app-column-slider-filter #columnSliderFilterComponent (filterChanged)="valueFilterChanged($event)" name="value"></app-column-slider-filter>
-
 
       <!-- TODO why does removing this change the style of the complete site -->
       <mat-form-field style="display: none">
