@@ -27,7 +27,6 @@ export class ImpactTableFilterBarComponent implements OnInit {
     this.filterChanged.emit(this.impactTableFilterEvent);
   }
 
-
   searchTextChange($event: string): void {
   }
 }
