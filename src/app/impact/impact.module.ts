@@ -25,7 +25,7 @@ import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AddDimensionButtonComponent } from './components/add-dimension-button/add-dimension-button.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { DimensionTableComponent } from './components/dimension-table/dimension-table.component';
+import { DimensionTableComponent } from './components/dimension-dialog/components/dimension-table/dimension-table.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
