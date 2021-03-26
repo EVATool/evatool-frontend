@@ -29,7 +29,7 @@ describe('SearchBarComponent', () => {
     spyOn(component.searchTextChanged, 'emit');
 
     // Act
-    const searchBar = fixture.debugElement.query(By.css('#search-desc')).nativeElement;
+    const searchBar = fixture.debugElement.query(By.css('.highlight-text')).nativeElement;
     searchBar.dispatchEvent(new Event('input'));
     fixture.detectChanges();
 
