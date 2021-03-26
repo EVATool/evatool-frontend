@@ -42,13 +42,15 @@ export class ImpactTableFilterBarComponent implements OnInit {
   }
 
   stakeholderFilterChanged(event: string[]): void {
-    this.logger.info(this, 'Slider Filter Changed');
+    this.logger.info(this, 'Slider Filter Changed (Stakeholder)');
     this.impactTableFilterEvent.stakeholderFilter = event;
+    this.filterChanged.emit(this.impactTableFilterEvent);
   }
 
   dimensionFilterChanged(event: string[]): void {
-    this.logger.info(this, 'Slider Filter Changed');
+    this.logger.info(this, 'Slider Filter Changed (Dimension)');
     this.impactTableFilterEvent.dimensionFilter = event;
+    this.filterChanged.emit(this.impactTableFilterEvent);
   }
 
   highlightTextChange($event: string): void {
