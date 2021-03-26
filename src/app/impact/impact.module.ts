@@ -28,6 +28,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { DimensionTableComponent } from './components/dimension-table/dimension-table.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ImpactTableFilterBarComponent } from './components/impact-table-filter-bar/impact-table-filter-bar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { MatListModule } from '@angular/material/list';
     AddDimensionButtonComponent,
     DimensionTableComponent,
     ColumnCategoryFilterComponent,
-    ColumnSliderFilterComponent
+    ColumnSliderFilterComponent,
+    ImpactTableFilterBarComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +67,7 @@ import { MatListModule } from '@angular/material/list';
     SharedModule,
     RouterModule,
     MatListModule,
+    NgMultiSelectDropDownModule,
   ],
   exports: [
     ImpactMainComponent

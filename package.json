@@ -25,6 +25,7 @@
 		"@angular/router": "~11.2.3",
 		"@neomorphism/ng-neomorphism": "^0.46.1",
 		"ng-keyboard-shortcuts": "^10.1.17",
+		"ng-multiselect-dropdown": "^0.3.4",
 		"ngx-scrollbar": "^7.5.4",
 		"rxjs": "~6.6.0",
 		"tslib": "^2.0.0",
