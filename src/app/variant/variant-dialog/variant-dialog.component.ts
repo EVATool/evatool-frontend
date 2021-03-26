@@ -34,6 +34,11 @@ export class VariantDialogComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: new FormControl(null)
     });
+
+    this.variantDataService.onCreateVariant.subscribe(variant => {
+      this.variants.push(variant);
+      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+    });
   }
 
   loadVariants(): void{
@@ -51,11 +56,6 @@ export class VariantDialogComponent implements OnInit {
         };
         this.variants.push(variant);
       });
-      this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-    });
-
-    this.variantDataService.onCreateVariant.subscribe(variant => {
-      this.variants.push(variant);
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     });
   }
