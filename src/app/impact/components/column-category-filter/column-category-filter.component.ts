@@ -5,7 +5,7 @@ import {LogService} from '../../../shared/services/log.service';
 @Component({
   selector: 'app-column-category-filter',
   templateUrl: './column-category-filter.component.html',
-  styleUrls: ['./column-category-filter.component.css']
+  styleUrls: ['./column-category-filter.component.scss']
 })
 export class ColumnCategoryFilterComponent implements OnInit {
   @Input() categories: string[] = [];

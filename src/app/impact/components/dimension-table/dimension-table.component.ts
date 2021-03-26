@@ -7,7 +7,7 @@ import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/cor
 @Component({
   selector: 'app-dimension-table',
   templateUrl: './dimension-table.component.html',
-  styleUrls: ['./dimension-table.component.css', '../../../layout/style/style.css']
+  styleUrls: ['./dimension-table.component.scss', '../../../layout/style/style.css']
 })
 export class DimensionTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();

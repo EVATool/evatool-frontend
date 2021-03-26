@@ -7,7 +7,7 @@ import { ImpactSliderComponent } from 'src/app/shared/components/impact-slider/i
 @Component({
   selector: 'app-column-slider-filter',
   templateUrl: './column-slider-filter.component.html',
-  styleUrls: ['./column-slider-filter.component.css']
+  styleUrls: ['./column-slider-filter.component.scss']
 })
 export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
   @ViewChild(ImpactSliderComponent) slider!: ImpactSliderComponent;

@@ -11,7 +11,7 @@ import { NgScrollbar } from 'ngx-scrollbar';
 @Component({
   selector: 'app-impact-main',
   templateUrl: './impact-main.component.html',
-  styleUrls: ['./impact-main.component.css']
+  styleUrls: ['./impact-main.component.scss']
 })
 export class ImpactMainComponent implements OnInit, AfterViewInit {
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
