@@ -2,7 +2,8 @@
   width: 100%;
 }
 
-::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-background, ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-background,
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
   color: transparent;
   background-color: transparent;
 }
