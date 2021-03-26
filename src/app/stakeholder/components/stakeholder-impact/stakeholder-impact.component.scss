@@ -1,5 +1,26 @@
-.container{
-  background: lightgrey;
-  height: 40%;
-  width: 80%;
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.stakeholder-impact-slider {
+  border-radius: 0;
+  width: 100%;
+  display: table-cell;
+
+}
+:host ::ng-deep {
+  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+    background-color: red;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-background{
+    background-color: green;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper{
+    border-radius: 0px;
+    background-color: red;
+  }
+
+  .mat-slider-thumb{
+    display: none;
+  }
 }

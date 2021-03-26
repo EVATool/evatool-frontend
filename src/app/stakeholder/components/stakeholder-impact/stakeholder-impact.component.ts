@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-stakeholder-impact',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StakeholderImpactComponent implements OnInit {
 
+  @Input() impactvalue = 0.0;
   constructor() { }
 
   ngOnInit(): void {

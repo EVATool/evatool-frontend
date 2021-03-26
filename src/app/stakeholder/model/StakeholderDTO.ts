@@ -4,4 +4,6 @@ export class StakeholderDTO{
   level: any = '';
   prio: any = '';
   impact: any = '';
+  guiId: any = '';
+  id: any = '';
 }

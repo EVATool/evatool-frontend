@@ -1,9 +1,9 @@
 <mat-table mat-table [dataSource]="matDataSource" >
   <ng-container matColumnDef='guiId'>
     <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-    <mat-cell *matCellDef='let value'>
+    <mat-cell *matCellDef='let stakeholder'>
       <div>
-      {{value.guiId}}
+      {{stakeholder.guiId}}
       </div>
       <div>
       </div>
@@ -11,29 +11,29 @@
   </ng-container>
   <ng-container matColumnDef='Stakeholder'>
     <mat-header-cell *matHeaderCellDef>Stakeholder</mat-header-cell>
-    <mat-cell *matCellDef='let value'>
+    <mat-cell *matCellDef='let stakeholder'>
       <div>
-        {{value.Stakeholder}}
+        {{stakeholder.Stakeholder}}
       </div>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef='Ebene'>
     <mat-header-cell *matHeaderCellDef>Level</mat-header-cell>
-    <mat-cell *matCellDef='let value'>
+    <mat-cell *matCellDef='let stakeholder'>
       <div>
-        <app-stakeholder-level ></app-stakeholder-level>
+        <app-stakeholder-level [editable]="stakeholder.editable" [(level)]="stakeholder.level" (levelChange)="stakeholder.level = $event" ></app-stakeholder-level>
       </div>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef='Prio'>
     <mat-header-cell *matHeaderCellDef>Prio</mat-header-cell>
-    <mat-cell *matCellDef='let value' >
-      <app-stakeholder-prio></app-stakeholder-prio>
+    <mat-cell *matCellDef='let stakeholder' >
+      <app-stakeholder-prio [editable]="stakeholder.editable" [(prio)]="stakeholder.priority" (prioChange)="stakeholder.priority = $event"></app-stakeholder-prio>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="Impact">
     <mat-header-cell *matHeaderCellDef>Impact</mat-header-cell>
-    <mat-cell *matCellDef='let value'>
+    <mat-cell *matCellDef='let stakeholder'>
       <app-stakeholder-impact></app-stakeholder-impact>
     </mat-cell>
   </ng-container>

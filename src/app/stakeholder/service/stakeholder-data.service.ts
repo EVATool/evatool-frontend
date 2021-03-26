@@ -3,6 +3,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import {Stakeholder} from '../model/Stakeholder';
 import {Observable} from 'rxjs';
 import {StakeholderRestService} from './stakeholder-rest.service';
+import {StakeholderDTO} from '../model/StakeholderDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,10 @@ export class StakeholderDataService {
   save(stakeholder: Stakeholder): void{
     console.log(stakeholder.name);
     stakeholder.editable = false;
+    const stakeholderDto = new StakeholderDTO();
+    stakeholderDto.guiId = '';
+    stakeholderDto.id = '';
+
     // this.stakeholderRestService.save(stakeholder);
   }
 
