@@ -8,8 +8,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSelectChange } from '@angular/material/select';
-import {LogService} from '../../../shared/services/log.service';
-import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
+import { LogService } from '../../../shared/services/log.service';
+import { SliderFilterBoundary, SliderFilterSettings, SliderFilterType } from '../../../shared/components/impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-impact-table',
