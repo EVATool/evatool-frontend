@@ -177,13 +177,13 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
       switch (this.sliderFilterSettings.sliderFilterBoundary) {
         case SliderFilterBoundary.Include:
           thumbs.forEach((thumb: any) => {
-            thumb.nativeElement.style.backgroundColor = 'green';
+            thumb.nativeElement.style.backgroundColor = '#1569C7';
           });
           break;
 
         case SliderFilterBoundary.Exclude:
           thumbs.forEach((thumb: any) => {
-            thumb.nativeElement.style.backgroundColor = 'red';
+            thumb.nativeElement.style.backgroundColor = 'orangered';
           });
           break;
 
