@@ -11,9 +11,21 @@ mat-list.list-horizontal {
     .slider {
       width: 150px;
     }
+  }
+}
+
+mat-list.list-vertical {
+  padding: 0;
+
+  .mat-list-item {
+    margin-right: -10px;
+    vertical-align: middle;
+    display: inline;
 
     .dropdown {
       width: 150px;
+      margin-bottom: -20px;
+      margin-top: 5px;
     }
   }
 }
