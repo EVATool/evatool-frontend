@@ -9,11 +9,13 @@
   <mat-list-item>Value-Systems-Filter</mat-list-item>
 
   <mat-list-item>
-    <app-column-slider-filter class="filter-slider" (filterChanged)="valueFilterChanged($event)"></app-column-slider-filter>
+    <app-column-slider-filter class="filter-slider" (filterChanged)="valueFilterChanged($event)">
+    </app-column-slider-filter>
   </mat-list-item>
 
   <mat-list-item>
-    <button (click)='clickClear()'>Clear</button>
+    <button mat-raised-button color="accent" (click)='clickClear()' matTooltip="Clear all filters"
+      matTooltipHideDelay="100" matTooltipPosition="above">Clear</button>
   </mat-list-item>
 
 </mat-list>

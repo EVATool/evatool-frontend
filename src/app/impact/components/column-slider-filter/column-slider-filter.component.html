@@ -6,7 +6,9 @@
   </mat-list-item>
 
   <mat-list-item>
-    <mat-select class="dropdown" [(ngModel)]='filterType' (selectionChange)='filteringChanged()'>
+    <mat-select class="dropdown" [(ngModel)]='filterType' (selectionChange)='filteringChanged()'
+      matTooltip="The mathematical operation applied to the values" matTooltipHideDelay="100"
+      matTooltipPosition="above">
       <mat-option [value]='0'>Less Than</mat-option>
       <mat-option [value]='1'>Greater Than</mat-option>
       <mat-option [value]='2'>Between</mat-option>
@@ -15,10 +17,11 @@
   </mat-list-item>
 
   <mat-list-item>
-    <mat-select class="dropdown" [(ngModel)]='filterBoundary' (selectionChange)='filteringChanged()'>
+    <mat-select class="dropdown" [(ngModel)]='filterBoundary' (selectionChange)='filteringChanged()'
+      matTooltip="The filter behavior at the edges" matTooltipHideDelay="100" matTooltipPosition="above">
       <mat-option [value]='0'>Include Borders</mat-option>
       <mat-option [value]='1'>Exclude Borders</mat-option>
     </mat-select>
   </mat-list-item>
-  
+
 </mat-list>
