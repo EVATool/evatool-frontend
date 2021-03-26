@@ -24,24 +24,6 @@ describe('ColumnCategoryFilterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have name in title', () => {
-    const testName = 'testName';
-    component.name = testName;
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('#filter-header-text')).nativeElement.textContent).toContain(testName);
-  });
-
-  it('should be invisible at start', () => {
-    console.log(fixture.debugElement.query(By.css('#visibility-wrapper')).nativeElement);
-    expect(fixture.debugElement.query(By.css('#visibility-wrapper')).nativeElement.hidden).toBeTruthy();
-  });
-
-  it('should be visible after toggling visibility', () => {
-    component.toggleVisibility();
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('#visibility-wrapper')).nativeElement.hidden).toBeFalsy();
-  });
-
   // visibility-wrapper
   it('should find <mat-list-item> with provided categories', () => {
     component.categories = ['A', 'B'];
