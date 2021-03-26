@@ -1,20 +1,16 @@
-<div class="filter-slider-container">
+<app-impact-slider [isFilter]='true' (sliderValueChange)='sliderFilterValueChanged($event)'>
+</app-impact-slider>
 
-  <app-impact-slider [isFilter]='true' (sliderValueChange)='sliderFilterValueChanged($event)'>
-  </app-impact-slider>
+<mat-select [(ngModel)]='filterType' (selectionChange)='filteringChanged()'>
+  <mat-option [value]='0'>Less Than</mat-option>
+  <mat-option [value]='1'>Greater Than</mat-option>
+  <mat-option [value]='2'>Between</mat-option>
+  <mat-option [value]='3'>Equality</mat-option>
+</mat-select>
 
-  <mat-select [(ngModel)]='filterType' (selectionChange)='filteringChanged()'>
-    <mat-option [value]='0'>Less Than</mat-option>
-    <mat-option [value]='1'>Greater Than</mat-option>
-    <mat-option [value]='2'>Between</mat-option>
-    <mat-option [value]='3'>Equality</mat-option>
-  </mat-select>
+<mat-select [(ngModel)]='filterBoundary' (selectionChange)='filteringChanged()'>
+  <mat-option [value]='0'>Include Borders</mat-option>
+  <mat-option [value]='1'>Exclude Borders</mat-option>
+</mat-select>
 
-  <mat-select [(ngModel)]='filterBoundary' (selectionChange)='filteringChanged()'>
-    <mat-option [value]='0'>Include Borders</mat-option>
-    <mat-option [value]='1'>Exclude Borders</mat-option>
-  </mat-select>
-
-  <button (click)='clickClear()'>Clear</button>
-
-</div>
+<button (click)='clickClear()'>Clear</button>
