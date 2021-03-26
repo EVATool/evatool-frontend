@@ -1,3 +1,4 @@
+import { ImpactTableFilterEvent } from './../components/impact-table-filter-bar/ImpactTableFilterEvent';
 import { ImpactTableComponent } from './../components/impact-table/impact-table.component';
 import { MatTable } from '@angular/material/table';
 import { SliderFilterSettings } from './../../shared/components/impact-slider/SliderFilterSettings';
@@ -54,7 +55,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     this.logger.info(this, `Search Bar Text Changed: ${searchValue}`);
   }
 
-  filterBarChanged(event: SliderFilterSettings) {
+  filterBarChanged(event: ImpactTableFilterEvent) {
     this.logger.info(this, 'Filter Bar Changed');
     this.table.filterChange(event);
   }

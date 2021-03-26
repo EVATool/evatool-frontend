@@ -1,3 +1,4 @@
+import { ImpactTableFilterEvent } from './ImpactTableFilterEvent';
 import { LogService } from './../../../shared/services/log.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/SliderFilterSettings';
@@ -8,9 +9,13 @@ import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/Sl
   styleUrls: ['./impact-table-filter-bar.component.sass']
 })
 export class ImpactTableFilterBarComponent implements OnInit {
-  @Output() filterChanged = new EventEmitter<SliderFilterSettings>();
+  @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
-  constructor(private logger: LogService) { }
+  impactTableFilterEvent: ImpactTableFilterEvent;
+
+  constructor(private logger: LogService) {
+    this.impactTableFilterEvent = ImpactTableFilterEvent.getDefault();
+  }
 
   ngOnInit(): void {
 
@@ -18,6 +23,9 @@ export class ImpactTableFilterBarComponent implements OnInit {
 
   valueFilterChanged(event: SliderFilterSettings) {
     this.logger.info(this, 'Slider Filter Changed');
-    this.filterChanged.emit(event);
+    this.impactTableFilterEvent.valueFilter = event;
+    this.filterChanged.emit(this.impactTableFilterEvent);
   }
+
+
 }
