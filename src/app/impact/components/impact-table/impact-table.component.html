@@ -1,13 +1,12 @@
-<div innerHTML="{{ 'search me pls omg daddy pls' | highlight : filterValues.highlight}}"></div>
-
 <table mat-table [dataSource]='tableDataSource' matSort>
   <caption class=" screen-reader-only">List of impacts</caption>
 
   <!-- TODO: ToolTips when tabbing through headers -->
   <ng-container matColumnDef='uniqueString'>
-    <th scope="col" mat-header-cell *matHeaderCellDef>
-      <div mat-sort-header matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
+    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+      <div matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
     </th>
+
     <td mat-cell *matCellDef='let impact'> {{impact.uniqueString}} </td>
   </ng-container>
 
