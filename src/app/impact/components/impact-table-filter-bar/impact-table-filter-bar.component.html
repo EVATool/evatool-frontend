@@ -1,13 +1,17 @@
 <mat-list class="list-horizontal">
-
   <mat-list-item>
-    <app-search-bar (searchTextChanged)="searchTextChange($event)"></app-search-bar>
+    <app-search-bar (searchTextChanged)="highlightTextChange($event)"></app-search-bar>
   </mat-list-item>
-
-  <mat-list-item>Stakeholder-Filter</mat-list-item>
-
-  <mat-list-item>Value-Systems-Filter</mat-list-item>
-
+  <mat-list-item>
+    <app-column-category-filter [categories]="stakeholderNames"
+                                (filterChanged)="stakeholderFilterChanged($event)">
+    </app-column-category-filter>
+  </mat-list-item>
+  <mat-list-item>
+    <app-column-category-filter [categories]="dimensionNames"
+                                (filterChanged)="dimensionFilterChanged($event)">
+    </app-column-category-filter>
+  </mat-list-item>
   <mat-list-item>
     <app-column-slider-filter class="filter-slider" (filterChanged)="valueFilterChanged($event)">
     </app-column-slider-filter>

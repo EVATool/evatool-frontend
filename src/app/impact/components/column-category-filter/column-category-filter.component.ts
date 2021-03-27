@@ -9,24 +9,15 @@ import {LogService} from '../../../shared/services/log.service';
 })
 export class ColumnCategoryFilterComponent implements OnInit {
   @Input() categories: string[] = [];
-  @Input() name = '';
-
   @Output() filterChanged = new EventEmitter<string[]>();
 
   public filterValues: string[] = [];
   public isVisible = false;
 
-  constructor(private logger: LogService) { }
+  constructor(private logger: LogService) {
+  }
 
   ngOnInit(): void {
-  }
-
-  toggleVisibility(): void {
-    this.isVisible = !this.isVisible;
-  }
-
-  setInvisible(): void {
-    this.isVisible = false;
   }
 
   updateFilterValues(event: MatCheckboxChange): void {
