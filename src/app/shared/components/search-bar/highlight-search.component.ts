@@ -24,5 +24,6 @@ export class HighlightSearchComponent implements OnInit {
 
   clearFilter() {
     this.textfield.value = '';
+    this.searchTextChanged.emit(this.textfield.value);
   }
 }

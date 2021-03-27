@@ -1,5 +1,7 @@
+<div innerHTML="{{ 'search me pls omg daddy pls' | highlight : filterValues.highlight}}"></div>
+
 <table mat-table [dataSource]='tableDataSource' matSort>
-  <caption class="screen-reader-only">List of impacts</caption>
+  <caption class=" screen-reader-only">List of impacts</caption>
 
   <!-- TODO: ToolTips when tabbing through headers -->
   <ng-container matColumnDef='uniqueString'>
@@ -17,7 +19,9 @@
     <td mat-cell *matCellDef='let impact'>
       <mat-form-field>
         <mat-select [(ngModel)]="impact.stakeholder" (selectionChange)="stakeholderChange(impact, $event)">
-          <mat-option *ngFor="let stk of impactDataService.stakeholders" [value]="stk">{{stk.name}}</mat-option>
+          <mat-option *ngFor="let stk of impactDataService.stakeholders" [value]="stk">
+            {{stk.name}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </td>
@@ -62,6 +66,9 @@
         <div class="description-container">
           <textarea matInput cdkTextareaAutosize [(ngModel)]="impact.description" placeholder="Describe the impact..."
             (change)="descriptionChange(impact, $event)"></textarea>
+
+          <div innerHTML="{{impact.description | highlight : filterValues.highlight}}"></div>
+
         </div>
         <div class="delete-button-container">
           <button mat-fab (click)="deleteImpact(impact)" matTooltip="Delete Impact" matTooltipHideDelay="100"
