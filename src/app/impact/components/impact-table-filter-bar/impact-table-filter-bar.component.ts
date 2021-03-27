@@ -32,7 +32,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stakeholderDataService.loadedStakeholders.subscribe( (stakeholders) => {
+    this.stakeholderDataService.loadedStakeholders.subscribe((stakeholders) => {
       this.stakeholderNames = stakeholders.map(value => value.name);
     });
 
@@ -65,7 +65,12 @@ export class ImpactTableFilterBarComponent implements OnInit {
     }
   }
 
-  highlightTextChange($event: string): void {
+  highlightTextChange(event: string): void {
+    this.logger.info(this, 'Highlight Text Changed');
+    this.impactTableFilterEvent.highlightFilter = event;
+    if (!this.suppressChildEvent) {
+      this.filterChanged.emit(this.impactTableFilterEvent);
+    }
   }
 
   clickClear(): void {

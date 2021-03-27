@@ -21,6 +21,9 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   windowScrolled = false;
 
+  text = 'text highlight me pls';
+  search = 'me p';
+
   constructor(
     private logger: LogService,
     private impactDataService: ImpactDataService) { }
@@ -56,10 +59,12 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   searchTextChange(searchValue: string): void {
     this.logger.info(this, `Search Bar Text Changed: ${searchValue}`);
+    this.search = searchValue;
   }
 
   filterBarChanged(event: ImpactTableFilterEvent) {
     this.logger.info(this, 'Filter Bar Changed');
+    this.search = event.highlightFilter;
     this.table.filterChange(event);
   }
 }

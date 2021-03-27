@@ -5,6 +5,10 @@
     </app-impact-table-filter-bar>
   </div>
 
+  <div innerHTML="{{ text | highlight : search }}">
+
+  </div>
+
   <div class="impact-table-container">
     <ng-scrollbar>
       <app-impact-table #table></app-impact-table>
