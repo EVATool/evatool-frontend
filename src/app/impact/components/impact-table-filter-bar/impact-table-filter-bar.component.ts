@@ -1,4 +1,4 @@
-import { HighlightSearchComponent } from './../../../shared/components/search-bar/highlight-search.component';
+import { HighlightSearchComponent } from '../../../shared/components/search-bar/highlight-search.component';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
 import { ColumnSliderFilterComponent } from '../../../shared/components/column-slider-filter/column-slider-filter.component';
@@ -15,8 +15,8 @@ import { ColumnCategoryFilterComponent } from '../../../shared/components/column
 })
 export class ImpactTableFilterBarComponent implements OnInit {
   @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
-  @ViewChild(ColumnCategoryFilterComponent) stakeholderFilter!: ColumnCategoryFilterComponent;
-  @ViewChild(ColumnCategoryFilterComponent) dimensionsFilter!: ColumnCategoryFilterComponent;
+  @ViewChild('stakeholderFiler') stakeholderFilter!: ColumnCategoryFilterComponent;
+  @ViewChild('dimensionFilter') dimensionsFilter!: ColumnCategoryFilterComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 

@@ -25,6 +25,7 @@ export class ColumnCategoryFilterComponent implements OnInit {
   }
 
   clearFilter(): void {
+    this.logger.debug(this, 'Clear ' + this.name + '-filter');
     this.filterValues = [];
     this.filterChanged.emit(this.filterValues);
   }
