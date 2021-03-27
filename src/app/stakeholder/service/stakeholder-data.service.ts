@@ -65,4 +65,38 @@ export class StakeholderDataService {
     return stakeholder;
   }
 
+  filterTest(): void {
+
+    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
+      return data.name.indexOf(filter) > -1;
+    };
+
+    this.matDataSource.filter = 'string';
+  }
+
+  filterPrio(prio: number): void {
+
+    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
+      return data.priority === prio;
+    };
+
+    this.matDataSource.filter = String(prio);
+  }
+
+  filterLevel(level: string): void {
+
+    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
+      return data.level === level;
+    };
+
+    this.matDataSource.filter = String(level);
+  }
+
+  resetFilter(): void{
+    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
+      return true;
+    };
+    this.matDataSource.filter = '';
+  }
+
 }
