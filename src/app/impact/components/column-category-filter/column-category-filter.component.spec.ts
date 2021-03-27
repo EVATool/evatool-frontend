@@ -22,12 +22,4 @@ describe('ColumnCategoryFilterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  // visibility-wrapper
-  it('should find <mat-list-item> with provided categories', () => {
-    component.categories = ['A', 'B'];
-    fixture.detectChanges();
-    const listElement = fixture.debugElement.nativeElement.querySelector('mat-list-item');
-    expect(listElement).toBeTruthy();
-  });
 });
