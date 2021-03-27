@@ -1,10 +1,16 @@
-<ng-multiselect-dropdown
-  [placeholder]="name"
-  [data]="categories"
-  [settings]="settings"
-  [(ngModel)]="filterValues"
-  (onSelect)="updateFilter()"
-  (onDeSelect)="updateFilter()"
-  (onSelectAll)="updateFilter()"
-  (onDeSelectAll)="updateFilter()">
-</ng-multiselect-dropdown>
+<div>
+  <p>{{name}}</p>
+</div>
+<div class="category-filter-container">
+  <mat-list-item role="listitem">
+    <mat-select
+      placeholder="Select..."
+      name="filter"
+      [(ngModel)]="filterValues"
+      multiple>
+      <mat-option *ngFor="let category of categories" [value]="category" (click)="updateFilter()">
+        {{category}}
+      </mat-option>
+    </mat-select>
+  </mat-list-item>
+</div>
