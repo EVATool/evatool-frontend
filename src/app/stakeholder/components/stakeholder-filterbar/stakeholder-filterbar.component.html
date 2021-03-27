@@ -5,9 +5,10 @@
     <span class="spacing"></span>
   <mat-select class="filter"></mat-select>
     <span class="spacing"></span>
-  <mat-select class="filter" id="level">
-    <mat-option *ngFor="let level of levels" [value]="level">
-      {{level}}
+  <mat-select class="filter" id="level" [value]="preselect">
+    <mat-option *ngFor="let level of levels" [value]="level" (select)="levelChange(level)">
+
+      {{level.value}}
     </mat-option>
   </mat-select>
     <span class="spacing"></span>

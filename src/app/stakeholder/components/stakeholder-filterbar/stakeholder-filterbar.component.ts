@@ -8,7 +8,8 @@ import {StakeholderDataService} from '../../service/stakeholder-data.service';
 })
 export class StakeholderFilterbarComponent implements OnInit {
 
-  public levels = ['NATURAL_PERSON', 'ORGANIZATION', 'SOCIETY', ''];
+  public levels = [{key: 'NATURAL_PERSON' , value: 'Individuell'}, {key: 'ORGANIZATION', value: 'Organisation'}, {key: 'SOCIETY', value: 'Gesellschaft'}, {key: '', value: 'Alle'}];
+  public preselect = this.levels[4];
   constructor(public stakeholderDataService: StakeholderDataService) { }
 
   ngOnInit(): void {
