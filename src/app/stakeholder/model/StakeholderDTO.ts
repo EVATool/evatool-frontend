@@ -1,9 +1,9 @@
 
 export class StakeholderDTO{
-  name: any = '';
-  level: any = '';
-  prio: any = '';
+  stakeholderName: any = '';
+  stakeholderLevel: any = '';
+  priority: any = '';
   impact: any = '';
   guiId: any = '';
-  id: any = '';
+  rootEntityID: any = '';
 }
