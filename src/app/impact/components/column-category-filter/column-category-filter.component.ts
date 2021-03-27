@@ -17,10 +17,9 @@ export class ColumnCategoryFilterComponent implements OnInit {
   public isVisible = false;
   public defaultSettings: IDropdownSettings = {
     singleSelection: false,
-    selectAllText: 'Select All',
-    unSelectAllText: 'UnSelect All',
+    selectAllText: 'Alle auswählen',
+    unSelectAllText: 'Alle abwählen',
     itemsShowLimit: 2,
-    allowSearchFilter: true
   };
 
   constructor(private logger: LogService) {
@@ -39,5 +38,13 @@ export class ColumnCategoryFilterComponent implements OnInit {
 
   clearFilter(): void {
     this.filterValues = [];
+    this.filterChanged.emit(this.filterValues);
+  }
+
+  equals(objOne: any, objTwo: any): boolean {
+    if (typeof objOne !== 'undefined' && typeof objTwo !== 'undefined') {
+      return objOne.id === objTwo.id;
+    }
+    return false;
   }
 }
