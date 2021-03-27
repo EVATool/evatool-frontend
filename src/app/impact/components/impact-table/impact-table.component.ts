@@ -153,6 +153,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   filterChange(event: ImpactTableFilterEvent): void {
     this.logger.info(this, 'Value Filter Changed');
     this.filterValues.value = event.valueFilter;
+    this.filterValues.stakeholder = event.stakeholderFilter;
+    this.filterValues.dimension = event.dimensionFilter;
     this.updateFilter();
   }
 

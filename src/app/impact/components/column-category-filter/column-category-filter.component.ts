@@ -15,7 +15,7 @@ export class ColumnCategoryFilterComponent implements OnInit {
 
   public filterValues: string[] = [];
   public isVisible = false;
-  public defaultSettings: IDropdownSettings  = {
+  public defaultSettings: IDropdownSettings = {
     singleSelection: false,
     selectAllText: 'Select All',
     unSelectAllText: 'UnSelect All',
