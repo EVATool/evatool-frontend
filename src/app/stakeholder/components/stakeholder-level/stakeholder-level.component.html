@@ -1,7 +1,7 @@
-<div class="stakeholder-level">
-  <div class="level-gesellschaft" [ngClass]="{'selected-level' : level === ''}" (click)="onLevelChange(0, $event)">
-    <div class="level-organisation" [ngClass]="{'selected-level' : level === ''}" (click)="onLevelChange(1, $event)">
-      <div class="level-individual" [ngClass]="{'selected-level' : level === ''}"  (click)="onLevelChange(2, $event)">
+<div class="stakeholder-level" (click)="onLevelChange( )">
+  <div class="level-gesellschaft" [ngClass]="{'selected-level' : level === 'society'}" >
+    <div class="level-organisation" [ngClass]="{'selected-level' : level === 'organization'}" >
+      <div class="level-individual" [ngClass]="{'selected-level' : level === 'natural person'}" >
 
       </div>
     </div>

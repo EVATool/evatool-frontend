@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StakeholderFilterbarComponent implements OnInit {
 
+  public levels = ['natural person', 'organization', 'society', ''];
   constructor() { }
 
   ngOnInit(): void {

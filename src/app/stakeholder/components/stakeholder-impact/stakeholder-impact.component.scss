@@ -17,10 +17,27 @@
 
   .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper{
     border-radius: 0px;
-    background-color: red;
+    background-color: green;
+  }
+  .editable_false{
+      .mat-slider-thumb{
+        display: none;
+      }
+  }
+  .editable_true{
+      .mat-slider-thumb{
+        height: 30px;
+        width: 1px;
+        background-color: white;
+        border: solid 2px black;
+        bottom: -20px;
+        right: 0px;
+        border-radius: 0px;
+      }
   }
 
-  .mat-slider-thumb{
-    display: none;
-  }
+
 }
+
+
+

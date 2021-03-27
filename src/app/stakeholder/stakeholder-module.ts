@@ -12,20 +12,22 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [StakeholderMainComponent, StakeholderTableComponent,  StakeholderPrioComponent,
     StakeholderLevelComponent, StakeholderImpactComponent,  StakeholderFilterbarComponent],
-    imports: [
-        CommonModule,
-        MatTableModule,
-        NgScrollbarModule,
-        MatInputModule,
-        MatSliderModule,
-        MatSelectModule,
-        MatToolbarModule
-    ],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    NgScrollbarModule,
+    MatInputModule,
+    MatSliderModule,
+    MatSelectModule,
+    MatToolbarModule,
+    FormsModule
+  ],
   exports: [
     StakeholderMainComponent,
   ]
