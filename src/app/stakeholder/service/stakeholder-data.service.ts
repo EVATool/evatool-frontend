@@ -21,7 +21,6 @@ export class StakeholderDataService {
   loadStakeholder(): void{
     this.stakeholderRestService.getStakeholders().subscribe((result: any) => {
       this.stakeholders = [];
-      console.log(result);
       result.forEach((stakeholderDTO: StakeholderDTO) => {
         const stakeholder: Stakeholder = {
           id: stakeholderDTO.rootEntityID,
