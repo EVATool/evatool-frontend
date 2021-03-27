@@ -1,53 +1,69 @@
 
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Stakeholder} from '../model/Stakeholder';
-import {Observable} from 'rxjs';
 import {StakeholderRestService} from './stakeholder-rest.service';
 import {StakeholderDTO} from '../model/StakeholderDTO';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StakeholderDataService {
- onCreateStakeholder: EventEmitter<Stakeholder> = new EventEmitter();
-
 
   stakeholders: Stakeholder[] = [];
+  matDataSource = new MatTableDataSource<Stakeholder>();
 
   constructor( private stakeholderRestService: StakeholderRestService){
-    this.getStakeholdersFromServer();
+    this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
+    this.loadStakeholder();
   }
 
-  getStakeholders(): Stakeholder[]{
-    return this.stakeholders;
+  loadStakeholder(): void{
+    this.stakeholderRestService.getStakeholders().subscribe((result: any) => {
+      this.stakeholders = [];
+      console.log(result);
+      result.forEach((stakeholderDTO: StakeholderDTO) => {
+        const stakeholder: Stakeholder = {
+          id: stakeholderDTO.rootEntityID,
+          guiId: stakeholderDTO.guiId,
+          level: stakeholderDTO.stakeholderLevel,
+          priority: stakeholderDTO.priority,
+          name: stakeholderDTO.stakeholderName,
+          impact: stakeholderDTO.impact,
+        };
+        this.stakeholders.push(stakeholder);
+      });
+      this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
+    });
   }
 
-  getStakeholdersFromServer(): Observable<any> {
-    console.log('methode getStakeholder');
-    return this.stakeholderRestService.getStakeholders();
-  }
 
-  private createDefaultstakeholder(): Stakeholder {
-    const stakeholder = new Stakeholder();
-    stakeholder.editable = true;
-    return stakeholder;
-  }
-
-  createStakeholder(): Stakeholder {
-    const stakeholder = this.createDefaultstakeholder();
+  createStakeholder(): void{
+    const stakeholder = this.createDefaultStakeholder();
     this.stakeholders.push(stakeholder);
-    this.onCreateStakeholder.emit(stakeholder);
-    return stakeholder;
+    this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
   }
 
   save(stakeholder: Stakeholder): void{
     console.log(stakeholder.name);
-    stakeholder.editable = false;
-    const stakeholderDto = new StakeholderDTO();
-    stakeholderDto.guiId = '';
-    stakeholderDto.id = '';
+    this.stakeholderRestService.createStakeholder({
+      rootEntityID: '',
+      guiId: '',
+      stakeholderName: stakeholder.name,
+      priority: stakeholder.priority,
+      impact: [],
+      stakeholderLevel: stakeholder.level
+    }).subscribe(() => {
+      this.loadStakeholder();
+    });
+  }
 
-    // this.stakeholderRestService.save(stakeholder);
+  createDefaultStakeholder(): Stakeholder{
+    const stakeholder = new Stakeholder();
+    stakeholder.editable = true;
+    stakeholder.priority = 0;
+    stakeholder.level = '';
+    return stakeholder;
   }
 
 }
