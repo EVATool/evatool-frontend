@@ -1,5 +1,5 @@
 import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
-import { ImpactTableFilterEvent } from './../impact-table-filter-bar/ImpactTableFilterEvent';
+import { ImpactTableFilterEvent } from '../impact-table-filter-bar/ImpactTableFilterEvent';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -24,10 +24,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   // Used by table.
   displayedColumns: string[] = ['uniqueString', 'stakeholder', 'dimension', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
-
-  // Filter components in UI.
-  stakeholderNames: string[] = [];
-  dimensionNames: string[] = [];
 
   // TODO: Extend these for more complex queries.
   filterValues: any = {
@@ -96,8 +92,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   private initFiltering(): void {
     this.logger.info(this, 'Init Filtering');
-    this.stakeholderNames = this.impactDataService.stakeholders.map(value => value.name);
-    this.dimensionNames = this.impactDataService.dimensions.map(value => value.name);
 
     this.tableDataSource.filterPredicate = this.createFilter();
   }

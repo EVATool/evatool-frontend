@@ -1,5 +1,10 @@
-<mat-list *ngFor="let category of categories">
-  <mat-list-item>
-    <mat-checkbox (change)="updateFilterValues($event)" value="{{category}}">{{category}}</mat-checkbox>
-  </mat-list-item>
-</mat-list>
+<ng-multiselect-dropdown
+  [placeholder]="name"
+  [data]="categories"
+  [settings]="settings"
+  [(ngModel)]="filterValues"
+  (onSelect)="updateFilter()"
+  (onDeSelect)="updateFilter()"
+  (onSelectAll)="updateFilter()"
+  (onDeSelectAll)="updateFilter()">
+</ng-multiselect-dropdown>

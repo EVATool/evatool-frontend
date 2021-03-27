@@ -1,10 +1,11 @@
-import { DimensionDataService } from './../../services/dimension/dimension-data.service';
-import { StakeholderDataService } from './../../services/stakeholder/stakeholder-data.service';
-import { ColumnSliderFilterComponent } from './../column-slider-filter/column-slider-filter.component';
+import { DimensionDataService } from '../../services/dimension/dimension-data.service';
+import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
+import { ColumnSliderFilterComponent } from '../column-slider-filter/column-slider-filter.component';
 import { ImpactTableFilterEvent } from './ImpactTableFilterEvent';
 import { LogService } from '../../../shared/services/log.service';
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/SliderFilterSettings';
+import { ColumnCategoryFilterComponent } from '../column-category-filter/column-category-filter.component';
 
 @Component({
   selector: 'app-impact-table-filter-bar',
@@ -13,13 +14,15 @@ import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/Sl
 })
 export class ImpactTableFilterBarComponent implements OnInit {
   @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
+  @ViewChild(ColumnCategoryFilterComponent) stakeholderFilter!: ColumnCategoryFilterComponent;
+  @ViewChild(ColumnCategoryFilterComponent) dimensionsFilter!: ColumnCategoryFilterComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
   stakeholderNames: string[] = [];
   dimensionNames: string[] = [];
 
   impactTableFilterEvent: ImpactTableFilterEvent;
-  suppressChildEvent: boolean = false;
+  suppressChildEvent = false;
 
   constructor(
     private logger: LogService,
@@ -49,24 +52,30 @@ export class ImpactTableFilterBarComponent implements OnInit {
   stakeholderFilterChanged(event: string[]): void {
     this.logger.info(this, 'Slider Filter Changed (Stakeholder)');
     this.impactTableFilterEvent.stakeholderFilter = event;
-    this.filterChanged.emit(this.impactTableFilterEvent);
+    if (!this.suppressChildEvent) {
+      this.filterChanged.emit(this.impactTableFilterEvent);
+    }
   }
 
   dimensionFilterChanged(event: string[]): void {
     this.logger.info(this, 'Slider Filter Changed (Dimension)');
     this.impactTableFilterEvent.dimensionFilter = event;
-    this.filterChanged.emit(this.impactTableFilterEvent);
+    if (!this.suppressChildEvent) {
+      this.filterChanged.emit(this.impactTableFilterEvent);
+    }
   }
 
   highlightTextChange($event: string): void {
   }
 
-  clickClear() {
+  clickClear(): void {
     this.logger.info(this, 'Clearing Filtering');
     this.suppressChildEvent = true;
 
-    // Clear all children and suspent event firing in method above.
+    // Clear all children and suspend event firing in method above.
     this.sliderFilter.clearFilter();
+    this.stakeholderFilter.clearFilter();
+    this.dimensionsFilter.clearFilter();
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.impactTableFilterEvent);
