@@ -1,3 +1,4 @@
+import { HighlightSearch } from './../../pipes/HighlightSearch';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormBuilder } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +15,7 @@ describe('ImpactTableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, MatDialogModule, BrowserAnimationsModule, RouterTestingModule],
-      declarations: [ImpactTableComponent],
+      declarations: [ImpactTableComponent, HighlightSearch],
       providers: [FormBuilder,
         { provide: MatDialogRef, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} }]

@@ -3,13 +3,13 @@
     <app-search-bar (searchTextChanged)="highlightTextChange($event)"></app-search-bar>
   </mat-list-item>
   <mat-list-item>
-    <app-column-category-filter [categories]="stakeholderNames"
-                                (filterChanged)="stakeholderFilterChanged($event)">
+    <app-column-category-filter #stakeholderFiler [categories]="stakeholderNames" [name]="'Stakeholder'"
+      (filterChanged)="stakeholderFilterChanged($event)">
     </app-column-category-filter>
   </mat-list-item>
   <mat-list-item>
-    <app-column-category-filter [categories]="dimensionNames"
-                                (filterChanged)="dimensionFilterChanged($event)">
+    <app-column-category-filter #dimensionFilter [categories]="dimensionNames" [name]="'Dimensions'"
+      (filterChanged)="dimensionFilterChanged($event)">
     </app-column-category-filter>
   </mat-list-item>
   <mat-list-item>
@@ -18,7 +18,7 @@
   </mat-list-item>
 
   <mat-list-item>
-    <button mat-raised-button color="accent" (click)='clickClear()' matTooltip="Clear all filters"
+    <button mat-raised-button color="accent" (click)='clearFilter();clearHighlight();' matTooltip="Clear all filters"
       matTooltipHideDelay="100" matTooltipPosition="above">Clear
       <mat-icon>filter_alt</mat-icon>
     </button>

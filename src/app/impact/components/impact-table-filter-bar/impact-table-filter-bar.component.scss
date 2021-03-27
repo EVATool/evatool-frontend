@@ -1,16 +1,16 @@
 mat-list.list-horizontal {
-  padding: 25px;
-  padding-left: 60px;
+  margin: 2%;
+  margin-left: 3%;
 
   .mat-list-item {
-    vertical-align: middle;
+    vertical-align: bottom;
     display: inline-block;
     height: auto;
     width: auto;
 
     button {
       margin-left: -20px;
-      margin-bottom: -20px;
+      margin-bottom: 8px;
     }
   }
 }

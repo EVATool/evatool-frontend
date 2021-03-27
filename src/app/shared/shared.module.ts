@@ -9,12 +9,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImpactSliderComponent } from './components/impact-slider/impact-slider.component';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { HighlightSearchComponent } from './components/search-bar/highlight-search.component';
+import { MatInputModule } from '@angular/material/input';
+import { ColumnCategoryFilterComponent } from './components/column-category-filter/column-category-filter.component';
+import { ColumnSliderFilterComponent } from './components/column-slider-filter/column-slider-filter.component';
 
 @NgModule({
   declarations: [
+    ColumnCategoryFilterComponent,
+    ColumnSliderFilterComponent,
     ImpactSliderComponent,
-    SearchBarComponent
+    HighlightSearchComponent
   ],
   imports: [
     CommonModule,
@@ -25,11 +30,14 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     MatIconModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatListModule
+    MatListModule,
+    MatInputModule
   ],
   exports: [
     ImpactSliderComponent,
-    SearchBarComponent
+    HighlightSearchComponent,
+    ColumnCategoryFilterComponent,
+    ColumnSliderFilterComponent
   ]
 })
 export class SharedModule { }

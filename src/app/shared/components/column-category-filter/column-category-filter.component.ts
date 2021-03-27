@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MatCheckboxChange} from '@angular/material/checkbox';
-import {LogService} from '../../../shared/services/log.service';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-column-category-filter',
@@ -9,10 +8,10 @@ import {LogService} from '../../../shared/services/log.service';
 })
 export class ColumnCategoryFilterComponent implements OnInit {
   @Input() categories: string[] = [];
+  @Input() name = 'Filter';
   @Output() filterChanged = new EventEmitter<string[]>();
 
   public filterValues: string[] = [];
-  public isVisible = false;
 
   constructor(private logger: LogService) {
   }
@@ -20,18 +19,14 @@ export class ColumnCategoryFilterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  updateFilterValues(event: MatCheckboxChange): void {
-    if (event.checked) {
-      this.filterValues.push(event.source.value);
-    } else {
-      const index = this.filterValues.indexOf(event.source.value);
-      if (index < 0) {
-        return;
-      }
-      this.filterValues.splice(index, 1);
-    }
+  updateFilter(): void {
+    this.logger.debug(this, 'New Filter for ' + this.name + ': ' + this.filterValues);
+    this.filterChanged.emit(this.filterValues);
+  }
 
-    this.logger.info(this, 'emit new filterValues: ' + this.filterValues);
+  clearFilter(): void {
+    this.logger.debug(this, 'Clear ' + this.name + '-filter');
+    this.filterValues = [];
     this.filterChanged.emit(this.filterValues);
   }
 }

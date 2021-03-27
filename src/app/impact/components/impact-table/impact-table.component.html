@@ -1,11 +1,12 @@
 <table mat-table [dataSource]='tableDataSource' matSort>
-  <caption class="screen-reader-only">List of impacts</caption>
+  <caption class=" screen-reader-only">List of impacts</caption>
 
   <!-- TODO: ToolTips when tabbing through headers -->
   <ng-container matColumnDef='uniqueString'>
-    <th scope="col" mat-header-cell *matHeaderCellDef>
-      <div mat-sort-header matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
+    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+      <div matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
     </th>
+
     <td mat-cell *matCellDef='let impact'> {{impact.uniqueString}} </td>
   </ng-container>
 
@@ -15,9 +16,13 @@
     </th>
 
     <td mat-cell *matCellDef='let impact'>
-      <mat-select [(ngModel)]="impact.stakeholder" (selectionChange)="stakeholderChange(impact, $event)">
-        <mat-option *ngFor="let stk of impactDataService.stakeholders" [value]="stk">{{stk.name}}</mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select [(ngModel)]="impact.stakeholder" (selectionChange)="stakeholderChange(impact, $event)">
+          <mat-option *ngFor="let stk of impactDataService.stakeholders" [value]="stk">
+            {{stk.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </td>
   </ng-container>
 
@@ -30,21 +35,17 @@
     </th>
 
     <td mat-cell *matCellDef='let impact'>
-      <mat-select [(ngModel)]="impact.dimension" (selectionChange)="dimensionChange(impact, $event)">
-        <mat-option *ngFor="let dim of impactDataService.dimensions" [value]="dim">{{dim.name}}</mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select [(ngModel)]="impact.dimension" (selectionChange)="dimensionChange(impact, $event)">
+          <mat-option *ngFor="let dim of impactDataService.dimensions" [value]="dim">{{dim.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </td>
   </ng-container>
 
   <ng-container matColumnDef='value'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The impact (Goal or Risk)" matTooltipHideDelay="100" matTooltipPosition="above">Impact</div>
-
-      <!-- TODO why does removing this change the style of the complete site -->
-      <mat-form-field style="display: none">
-        <input matInput placeholder="Dimension">
-      </mat-form-field>
-
     </th>
 
     <td mat-cell *matCellDef='let impact'>
@@ -52,13 +53,6 @@
         <app-impact-slider [deadzone]='0.3' [value]="impact.value" (sliderValueChange)="valueChange(impact, $event)">
         </app-impact-slider>
       </div>
-      <!--
-      <p class="value-percentage">
-        <b>
-          {{impact.value | percent}}
-        </b>
-      </p>
-      -->
     </td>
   </ng-container>
 

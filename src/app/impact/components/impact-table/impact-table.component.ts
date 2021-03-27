@@ -1,5 +1,5 @@
 import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
-import { ImpactTableFilterEvent } from './../impact-table-filter-bar/ImpactTableFilterEvent';
+import { ImpactTableFilterEvent } from '../impact-table-filter-bar/ImpactTableFilterEvent';
 import { MatSliderChange } from '@angular/material/slider';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,17 +25,14 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['uniqueString', 'stakeholder', 'dimension', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
-  // Filter components in UI.
-  stakeholderNames: string[] = [];
-  dimensionNames: string[] = [];
-
   // TODO: Extend these for more complex queries.
   filterValues: any = {
     id: '',
     stakeholder: [],
     dimension: [],
     value: '',
-    description: ''
+    description: '',
+    highlight: ''
   };
 
   constructor(
@@ -96,8 +93,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   private initFiltering(): void {
     this.logger.info(this, 'Init Filtering');
-    this.stakeholderNames = this.impactDataService.stakeholders.map(value => value.name);
-    this.dimensionNames = this.impactDataService.dimensions.map(value => value.name);
 
     this.tableDataSource.filterPredicate = this.createFilter();
   }
@@ -156,9 +151,16 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     };
   }
 
+  clearSort(): void {
+    this.sort.sort({ id: '', start: 'desc', disableClear: false });
+  }
+
   filterChange(event: ImpactTableFilterEvent): void {
-    this.logger.info(this, 'Value Filter Changed');
+    this.logger.info(this, 'Filter Changed');
     this.filterValues.value = event.valueFilter;
+    this.filterValues.stakeholder = event.stakeholderFilter;
+    this.filterValues.dimension = event.dimensionFilter;
+    this.filterValues.highlight = event.highlightFilter;
     this.updateFilter();
   }
 
