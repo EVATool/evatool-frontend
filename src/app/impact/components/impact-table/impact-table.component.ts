@@ -151,6 +151,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     };
   }
 
+  clearSort(): void {
+    this.sort.sort({ id: '', start: 'desc', disableClear: false });
+  }
+
   filterChange(event: ImpactTableFilterEvent): void {
     this.logger.info(this, 'Filter Changed');
     this.filterValues.value = event.valueFilter;
