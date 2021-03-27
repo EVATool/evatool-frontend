@@ -8,9 +8,11 @@ import {StakeholderLevelComponent} from './components/stakeholder-level/stakehol
 import {StakeholderImpactComponent} from './components/stakeholder-impact/stakeholder-impact.component';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {StakeholderFilterbarComponent} from './components/stakeholder-filterbar/stakeholder-filterbar.component';
-import {MatInputModule} from "@angular/material/input";
-import {MatSliderModule} from "@angular/material/slider";
-import {MatSelectModule} from "@angular/material/select";
+import {MatInputModule} from '@angular/material/input';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSelectModule} from '@angular/material/select';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 @NgModule({
   declarations: [StakeholderMainComponent, StakeholderTableComponent,  StakeholderPrioComponent,
@@ -21,7 +23,8 @@ import {MatSelectModule} from "@angular/material/select";
         NgScrollbarModule,
         MatInputModule,
         MatSliderModule,
-        MatSelectModule
+        MatSelectModule,
+        MatToolbarModule
     ],
   exports: [
     StakeholderMainComponent,

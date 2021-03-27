@@ -1,7 +1,16 @@
-<div class="filterbar row">
-  <input matInput type="Text" placeholder="Search..." class="col-sm-1">
-  <mat-select class="col-sm-1"></mat-select>
-  <mat-select class="col-sm-1"></mat-select>
-  <app-stakeholder-prio class="col-sm-1"></app-stakeholder-prio>
-  <app-stakeholder-impact class="col-sm-1"></app-stakeholder-impact>
-</div>
+<mat-toolbar class="filter-wrapper">
+  <mat-toolbar-row style="width: 60%; float: left">
+  <span></span>
+  <input matInput type="Text" placeholder="Search..." class="filter">
+    <span class="spacing"></span>
+  <mat-select class="filter"></mat-select>
+    <span class="spacing"></span>
+  <mat-select class="filter"></mat-select>
+    <span class="spacing"></span>
+  <app-stakeholder-prio class="filter"></app-stakeholder-prio>
+    <span class="spacing"></span>
+  <app-stakeholder-impact class="filter"></app-stakeholder-impact>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+

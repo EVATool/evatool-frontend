@@ -9,9 +9,9 @@ import {Stakeholder} from '../../model/Stakeholder';
 })
 export class StakeholderLevelComponent implements OnInit {
 
-  @Input() public level!: number;
+  @Input() public level!: string;
   @Input() public editable = true;
-  @Output() levelChange = new EventEmitter<number | null>();
+  @Output() levelChange = new EventEmitter<string | null>();
 
   constructor() { }
 
