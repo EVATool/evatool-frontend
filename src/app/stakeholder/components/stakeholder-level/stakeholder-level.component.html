@@ -1,14 +1,11 @@
-<div class="stakeholder-level">
-  <div class="level-gesellschaft">
-    <div class="level-organisation">
-      <div class="level-individual">
+<div class="stakeholder-level" (click)="onLevelChange( )">
+  <div class="level-gesellschaft" [ngClass]="{'selected-level' : level === 'SOCIETY'}" >
+    <div class="level-organisation" [ngClass]="{'selected-level' : level === 'ORGANIZATION'}" >
+      <div class="level-individual" [ngClass]="{'selected-level' : level === 'NATURAL_PERSON'}" >
 
       </div>
     </div>
   </div>
-
-
-
 
 </div>
 <div class="stakeholder-level-name">

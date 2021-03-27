@@ -1,0 +1,21 @@
+<mat-toolbar class="filter-wrapper">
+  <mat-toolbar-row style="width: 60%; float: left">
+  <span></span>
+  <input matInput type="Text" placeholder="Search..." class="filter">
+    <span class="spacing"></span>
+  <mat-select class="filter"></mat-select>
+    <span class="spacing"></span>
+  <mat-select class="filter" id="level">
+    <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">
+      {{level.value}}
+    </mat-option>
+  </mat-select>
+    <span class="spacing"></span>
+  <app-stakeholder-prio class="filter" [editable]="true" (prioChange)="prioChange($event)"> </app-stakeholder-prio>
+    <span class="spacing"></span>
+  <app-stakeholder-impact class="filter" [editable]="true" (impactChange)="impactChange($event)"></app-stakeholder-impact>
+    <button class="resetFilter" (click)="resetFilter()" > Reset filter</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+

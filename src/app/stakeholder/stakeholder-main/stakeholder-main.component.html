@@ -1,11 +1,14 @@
 
 <div class="container">
   <div class="above-table-container">
-    <div class="search-description-div">
-      <input matInput placeholder="Search...">
-    </div>
-    <div>
-      <app-stakeholder-table></app-stakeholder-table>
+    <app-stakeholder-filterbar></app-stakeholder-filterbar>
+
+  </div>
+
+  <div class="stakeholder-table">
+    <app-stakeholder-table></app-stakeholder-table>
+    <div class="stakeholder-impact-overview" >
+
     </div>
   </div>
 </div>

@@ -1,10 +1,7 @@
-<div class="container">
-  <div class="green">
 
-  </div>
-  <div class="red">
+<div>
+<mat-slider min="0.0" max="{{impactvaluetotal}}" step="0.1"   [value]="negativimpactvalue"
+             [disabled]="!editable" class="editable_{{editable}}  created_{{created}}" (change)="onImpactChange($event)">
 
-  </div>
-
+</mat-slider>
 </div>
-

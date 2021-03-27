@@ -1,5 +1,60 @@
-.container{
-  background: lightgrey;
-  height: 40%;
-  width: 80%;
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.stakeholder-impact-slider {
+  border-radius: 0;
+  width: 100%;
+  display: table-cell;
+
 }
+:host ::ng-deep {
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+    background-color: grey;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-background {
+    background-color: grey;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
+    border-radius: 0px;
+    background-color: grey;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+    background-color: red;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-background{
+    background-color: green;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper{
+    border-radius: 0px;
+    background-color: green;
+  }
+
+
+  .editable_false{
+      .mat-slider-thumb{
+        display: none;
+      }
+  }
+  .editable_true{
+      .mat-slider-thumb{
+        height: 30px;
+        width: 1px;
+        background-color: white;
+        border: solid 2px black;
+        bottom: -20px;
+        right: 0px;
+        border-radius: 0px;
+      }
+  }
+
+
+
+}
+
+
+

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Stakeholder} from '../../model/Stakeholder';
 
 @Component({
   selector: 'app-stakeholder-prio',
@@ -6,11 +7,22 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./stakeholder-prio.component.scss']
 })
 export class StakeholderPrioComponent implements OnInit {
-  @Input() priority!: number;
-  @Output() valueChange = new EventEmitter<number | null>();
-  constructor() { }
+
+  @Input() prio!: number;
+  @Input() public editable = false;
+  @Output() prioChange = new EventEmitter<number | null>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  updatePrio(prio: any, event: any): void{
+    if (!this.editable) {return; }
+    this.prio = prio;
+    event.stopPropagation();
+    this.prioChange.emit(this.prio);
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
+import {StakeholderDataService} from '../../service/stakeholder-data.service';
+import {Stakeholder} from '../../model/Stakeholder';
 
 @Component({
   selector: 'app-stakeholder-table',
@@ -9,11 +10,19 @@ import {MatTableDataSource} from '@angular/material/table';
 export class StakeholderTableComponent implements OnInit {
 
   public displayedColumns = ['guiId', 'Stakeholder', 'Ebene', 'Prio', 'Impact'];
-  matDataSource: any = new MatTableDataSource<any>([{guiId: '1', Stakeholder: 'TEST'}, {guiId: '2', Stakeholder: 'TEST'}]);
 
-  constructor() { }
+  constructor(public stakeholderDataService: StakeholderDataService) { }
 
   ngOnInit(): void {
+  }
+
+  addStakeholder(): void {
+    this.stakeholderDataService.createStakeholder();
+  }
+
+  save(stakeholder: Stakeholder): void{
+      stakeholder.editable = false;
+      this.stakeholderDataService.save(stakeholder);
   }
 
 }

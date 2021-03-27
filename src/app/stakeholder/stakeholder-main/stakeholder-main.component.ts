@@ -5,7 +5,7 @@ import {Stakeholder} from '../model/Stakeholder';
 @Component({
   selector: 'app-stakeholder-main',
   templateUrl: './stakeholder-main.component.html',
-  styleUrls: ['./stakeholder-main.component.css']
+  styleUrls: ['./stakeholder-main.component.scss']
 })
 export class StakeholderMainComponent implements OnInit{
   constructor(){
