@@ -63,6 +63,7 @@ export class StakeholderDataService {
     stakeholder.editable = true;
     stakeholder.priority = 0;
     stakeholder.level = '';
+    stakeholder.created = true;
     return stakeholder;
   }
 

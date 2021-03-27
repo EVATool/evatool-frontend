@@ -10,6 +10,7 @@ export class StakeholderImpactComponent implements OnInit {
   @Input() negativimpactvalue =  5.0;
   @Input() impactvaluetotal = 10.0;
   @Input() editable = false;
+  @Input() public created = false;
   @Output() impactChange = new EventEmitter<number | null>();
   constructor() { }
 

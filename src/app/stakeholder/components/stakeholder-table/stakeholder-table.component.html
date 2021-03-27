@@ -42,7 +42,7 @@
   <ng-container matColumnDef="Impact">
     <mat-header-cell *matHeaderCellDef>Impact</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
-      <app-stakeholder-impact></app-stakeholder-impact>
+      <app-stakeholder-impact [created]="stakeholder.created"></app-stakeholder-impact>
       <div class="options" *ngIf="!stakeholder.archived">
         <button mat-icon-button *ngIf="stakeholder.editable" name="save" (click)="save(stakeholder);">
           <mat-icon>save</mat-icon>

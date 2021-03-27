@@ -7,6 +7,20 @@
 
 }
 :host ::ng-deep {
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+    background-color: grey;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-background {
+    background-color: grey;
+  }
+
+  .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
+    border-radius: 0px;
+    background-color: grey;
+  }
+
   .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
     background-color: red;
   }
@@ -19,6 +33,8 @@
     border-radius: 0px;
     background-color: green;
   }
+
+
   .editable_false{
       .mat-slider-thumb{
         display: none;
@@ -35,6 +51,7 @@
         border-radius: 0px;
       }
   }
+
 
 
 }
