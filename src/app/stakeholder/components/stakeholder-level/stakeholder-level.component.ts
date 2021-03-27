@@ -12,7 +12,7 @@ export class StakeholderLevelComponent implements OnInit {
   @Input() public level = '';
   @Input() public editable = false;
   @Output() levelChange = new EventEmitter<string | null>();
-  public levels = ['natural person', 'organization', 'society', ''];
+  public levels = ['NATURAL_PERSON', 'ORGANIZATION', 'SOCIETY', ''];
   constructor() { }
 
   ngOnInit(): void {
