@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {LogService} from '../../../shared/services/log.service';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-column-category-filter',

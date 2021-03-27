@@ -1,7 +1,7 @@
-import { LogService } from '../../../shared/services/log.service';
-import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../../../shared/components/impact-slider/SliderFilterSettings';
+import { LogService } from '../../services/log.service';
+import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from '../impact-slider/SliderFilterSettings';
 import { MatSliderChange } from '@angular/material/slider';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { ImpactSliderComponent } from 'src/app/shared/components/impact-slider/impact-slider.component';
 
 @Component({
@@ -29,7 +29,7 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
 
   }
 
-  sliderFilterValueChanged(event: MatSliderChange) {
+  sliderFilterValueChanged(event: MatSliderChange): void {
     this.logger.info(this, 'Filter Slider Changed: ' + event.value);
     this.filteringChanged();
   }
@@ -43,7 +43,7 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
     this.filterChanged.emit(this.slider.sliderFilterSettings);
   }
 
-  public clearFilter() {
+  public clearFilter(): void {
     this.logger.info(this, 'Clearing Filtering');
     this.filterType = SliderFilterType.LessThan;
     this.filterBoundary = SliderFilterBoundary.Include;
