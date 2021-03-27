@@ -24,6 +24,7 @@ export class StakeholderLevelComponent implements OnInit {
     const index = this.levels.indexOf(this.level);
     const nextIndex = (index + 1) % this.levels.length;
     this.level = this.levels[nextIndex];
+    this.levelChange.emit(this.level);
   }
 
 }
