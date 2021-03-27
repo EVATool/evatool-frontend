@@ -66,9 +66,6 @@
         <div class="description-container">
           <textarea matInput cdkTextareaAutosize [(ngModel)]="impact.description" placeholder="Describe the impact..."
             (change)="descriptionChange(impact, $event)"></textarea>
-
-          <div innerHTML="{{impact.description | highlight : filterValues.highlight}}"></div>
-
         </div>
         <div class="delete-button-container">
           <button mat-fab (click)="deleteImpact(impact)" matTooltip="Delete Impact" matTooltipHideDelay="100"
