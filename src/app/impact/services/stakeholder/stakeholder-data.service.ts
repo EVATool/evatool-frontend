@@ -20,9 +20,12 @@ export class StakeholderDataService {
   onInit(): void {
     // Load stakeholders.
     this.stakeholderRestService.getStakeholders().subscribe(stks => {
+      let fromDtos: Stakeholder[] = [];
       stks.forEach(stk => {
-        this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
+        fromDtos.push(this.stakeholderMapperService.fromDto(stk));
+        //this.stakeholders.push(this.stakeholderMapperService.fromDto(stk));
       });
+      this.stakeholders = fromDtos;
       this.logger.info(this, 'Stakeholders loaded');
       this.loadedStakeholders.emit(this.stakeholders);
     });

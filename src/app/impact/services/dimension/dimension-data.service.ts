@@ -26,9 +26,11 @@ export class DimensionDataService {
   onInit(): void {
     // Load dimensions.
     this.dimensionRestService.getDimensions().subscribe(dims => {
+      let fromDtos: Dimension[] = [];
       dims.forEach(dim => {
-        this.dimensions.push(this.dimensionMapperService.fromDto(dim));
+        fromDtos.push(this.dimensionMapperService.fromDto(dim));
       });
+      this.dimensions = fromDtos;
       this.logger.info(this, 'Dimensions loaded');
       this.loadedDimensions.emit(this.dimensions);
     });

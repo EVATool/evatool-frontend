@@ -32,6 +32,7 @@ export class AnalysisDataService {
 
     this.router.routerState.root.queryParams.subscribe(params => {
       // TODO Error handling.
+      console.log('Extracted analysisId from Router: ' + params.id);
       this.urlIdExtracted.emit(params.id);
     });
   }

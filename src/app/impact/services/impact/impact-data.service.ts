@@ -67,11 +67,15 @@ export class ImpactDataService {
       // Load impacts.
       this.impactRestService.getImpactsByAnalysisId(this.analysisDataService.getCurrentAnalysis().id).subscribe(imps => {
         imps.sort((a, b) => this.sortImpactsById(a, b));
+        let fromDtos: Impact[] = [];
         imps.forEach(imp => {
-          this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+          //this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+          fromDtos.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
         });
+        this.impacts = fromDtos;
         this.logger.info(this, 'Impacts loaded');
         this.loadedImpacts.emit(this.impacts);
+        this.impactsLoaded = true;
       });
     }
   }
