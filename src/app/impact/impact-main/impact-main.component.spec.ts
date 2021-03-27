@@ -1,3 +1,4 @@
+import { HighlightSearch } from './../pipes/HighlightSearch';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgScrollbar } from 'ngx-scrollbar';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,7 +13,7 @@ describe('ImpactMainComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule],
-      declarations: [ImpactMainComponent],
+      declarations: [ImpactMainComponent, HighlightSearch],
       providers: [NgScrollbar]
     })
       .compileComponents();
