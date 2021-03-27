@@ -1,3 +1,4 @@
+import { HighlightSearchComponent } from './../../../shared/components/search-bar/highlight-search.component';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
 import { ColumnSliderFilterComponent } from '../column-slider-filter/column-slider-filter.component';
@@ -16,6 +17,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
   @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
   @ViewChild(ColumnCategoryFilterComponent) stakeholderFilter!: ColumnCategoryFilterComponent;
   @ViewChild(ColumnCategoryFilterComponent) dimensionsFilter!: ColumnCategoryFilterComponent;
+  @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
   stakeholderNames: string[] = [];
@@ -81,6 +83,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
     this.sliderFilter.clearFilter();
     this.stakeholderFilter.clearFilter();
     this.dimensionsFilter.clearFilter();
+    this.highlightFilter.clearFilter();
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.impactTableFilterEvent);
