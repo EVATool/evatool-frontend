@@ -16,8 +16,8 @@ export class StakeholderImpactComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onImpactChange(): void{
-    console.log(this.negativimpactvalue);
+  onImpactChange(event: any): void{
+    this.negativimpactvalue = event.value;
     this.impactChange.emit(this.negativimpactvalue);
   }
 }

@@ -8,9 +8,9 @@
   <mat-select class="filter" id="level">
   </mat-select>
     <span class="spacing"></span>
-  <app-stakeholder-prio class="filter" [editable]="true"></app-stakeholder-prio>
+  <app-stakeholder-prio class="filter" [editable]="true" (prioChange)="prioChange($event)"> </app-stakeholder-prio>
     <span class="spacing"></span>
-  <app-stakeholder-impact class="filter" [editable]="true"></app-stakeholder-impact>
+  <app-stakeholder-impact class="filter" [editable]="true" (impactChange)="impactChange($event)"></app-stakeholder-impact>
   </mat-toolbar-row>
 </mat-toolbar>
 

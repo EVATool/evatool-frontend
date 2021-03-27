@@ -13,4 +13,11 @@ export class StakeholderFilterbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  impactChange(value: any): void{
+    console.log(value);
+  }
+
+  prioChange(value: any): void{
+    console.log(value);
+  }
 }
