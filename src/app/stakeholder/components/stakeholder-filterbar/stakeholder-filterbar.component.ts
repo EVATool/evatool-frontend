@@ -17,7 +17,6 @@ export class StakeholderFilterbarComponent implements OnInit {
 
   impactChange(value: any): void{
     console.log(value);
-    this.stakeholderDataService.filterTest();
   }
 
   prioChange(value: any): void{
@@ -25,9 +24,11 @@ export class StakeholderFilterbarComponent implements OnInit {
     this.stakeholderDataService.filterPrio(value);
   }
 
-  levelChange(level: any): void{
-    console.log(level);
-    this.stakeholderDataService.filterLevel(level);
+  levelChange(event: any): void{
+    if (event.isUserInput)
+    {
+      this.stakeholderDataService.filterLevel(event.source.value.key);
+    }
   }
 
   resetFilter(): void {

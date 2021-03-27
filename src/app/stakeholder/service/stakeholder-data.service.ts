@@ -66,17 +66,9 @@ export class StakeholderDataService {
     return stakeholder;
   }
 
-  filterTest(): void {
-
-    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
-      return data.name.indexOf(filter) > -1;
-    };
-
-    this.matDataSource.filter = 'string';
-  }
-
   filterPrio(prio: number): void {
 
+    this.resetFilter();
     this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
       return data.priority === prio;
     };
@@ -86,11 +78,12 @@ export class StakeholderDataService {
 
   filterLevel(level: string): void {
 
+    this.resetFilter();
     this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
       return data.level === level;
     };
 
-    this.matDataSource.filter = String(level);
+    this.matDataSource.filter = level;
   }
 
   resetFilter(): void{
