@@ -54,10 +54,6 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     this.impactDataService.createImpact();
   }
 
-  searchTextChange(searchValue: string): void {
-    this.logger.info(this, `Search Bar Text Changed: ${searchValue}`);
-  }
-
   filterBarChanged(event: ImpactTableFilterEvent) {
     this.logger.info(this, 'Filter Bar Changed');
     this.table.filterChange(event);

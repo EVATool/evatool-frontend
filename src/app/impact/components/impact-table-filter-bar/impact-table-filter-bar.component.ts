@@ -1,3 +1,4 @@
+import { HighlightSearchComponent } from './../../../shared/components/search-bar/highlight-search.component';
 import { DimensionDataService } from '../../services/dimension/dimension-data.service';
 import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
 import { ColumnSliderFilterComponent } from '../../../shared/components/column-slider-filter/column-slider-filter.component';
@@ -16,6 +17,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
   @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
   @ViewChild(ColumnCategoryFilterComponent) stakeholderFilter!: ColumnCategoryFilterComponent;
   @ViewChild(ColumnCategoryFilterComponent) dimensionsFilter!: ColumnCategoryFilterComponent;
+  @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
   stakeholderNames: string[] = [];
@@ -32,7 +34,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stakeholderDataService.loadedStakeholders.subscribe( (stakeholders) => {
+    this.stakeholderDataService.loadedStakeholders.subscribe((stakeholders) => {
       this.stakeholderNames = stakeholders.map(value => value.name);
     });
 
@@ -65,7 +67,12 @@ export class ImpactTableFilterBarComponent implements OnInit {
     }
   }
 
-  highlightTextChange($event: string): void {
+  highlightTextChange(event: string): void {
+    this.logger.info(this, 'Highlight Text Changed');
+    this.impactTableFilterEvent.highlightFilter = event;
+    if (!this.suppressChildEvent) {
+      this.filterChanged.emit(this.impactTableFilterEvent);
+    }
   }
 
   clickClear(): void {
@@ -76,6 +83,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
     this.sliderFilter.clearFilter();
     this.stakeholderFilter.clearFilter();
     this.dimensionsFilter.clearFilter();
+    this.highlightFilter.clearFilter();
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.impactTableFilterEvent);
