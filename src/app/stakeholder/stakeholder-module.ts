@@ -17,6 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {FormsModule} from '@angular/forms';
 
 
+
 @NgModule({
   declarations: [StakeholderMainComponent, StakeholderTableComponent,  StakeholderPrioComponent,
     StakeholderLevelComponent, StakeholderImpactComponent,  StakeholderFilterbarComponent],

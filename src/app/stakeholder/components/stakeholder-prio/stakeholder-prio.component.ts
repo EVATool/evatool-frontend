@@ -9,7 +9,7 @@ import {Stakeholder} from '../../model/Stakeholder';
 export class StakeholderPrioComponent implements OnInit {
 
   @Input() prio!: number;
-  @Input() public editable = true;
+  @Input() public editable = false;
   @Output() prioChange = new EventEmitter<number | null>();
 
   constructor() {

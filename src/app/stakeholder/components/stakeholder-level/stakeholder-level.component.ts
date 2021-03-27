@@ -9,21 +9,21 @@ import {Stakeholder} from '../../model/Stakeholder';
 })
 export class StakeholderLevelComponent implements OnInit {
 
-  @Input() public level!: string;
-  @Input() public editable = true;
+  @Input() public level = '';
+  @Input() public editable = false;
   @Output() levelChange = new EventEmitter<string | null>();
-
+  public levels = ['natural person', 'organization', 'society', ''];
   constructor() { }
 
   ngOnInit(): void {
     console.log(this.level);
   }
 
-  onLevelChange(level: any, event: any): void {
+  onLevelChange(): void {
     if (!this.editable) {return; }
-    event.stopPropagation();
-    this.level = level;
-    this.levelChange.emit(this.level);
+    const index = this.levels.indexOf(this.level);
+    const nextIndex = (index + 1) % this.levels.length;
+    this.level = this.levels[nextIndex];
   }
 
 }
