@@ -53,9 +53,10 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-<mat-dialog-actions>
-  <button mat-icon-button aria-label="Add Variant" class="addVariantButton" (click)="addStakeholder()" tabindex="-1">
+<div class="addStakeholderButton">
+  <button mat-icon-button aria-label="Add Variant"  (click)="addStakeholder()" tabindex="-1">
     <mat-icon>add</mat-icon>
-    Variant
   </button>
-</mat-dialog-actions>
+  Stakeholder
+</div>
+

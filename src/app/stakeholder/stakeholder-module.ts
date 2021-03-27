@@ -15,6 +15,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {FormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -31,7 +32,8 @@ import {FormsModule} from '@angular/forms';
     MatToolbarModule,
     MatDialogModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule
   ],
   exports: [
     StakeholderMainComponent,
