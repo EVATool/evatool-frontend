@@ -37,7 +37,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
-      this.filterBar.clickClear();
+      this.filterBar.clearFilter();
       this.table.clearSort();
       const options = { bottom: -100, duration: 250 };
       this.scrollbarRef.scrollTo(options);

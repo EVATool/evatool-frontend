@@ -75,14 +75,22 @@ export class ImpactTableFilterBarComponent implements OnInit {
     }
   }
 
-  clickClear(): void {
+  clearFilter(): void {
     this.logger.info(this, 'Clearing Filtering');
     this.suppressChildEvent = true;
 
-    // Clear all children and suspend event firing in method above.
     this.sliderFilter.clearFilter();
     this.stakeholderFilter.clearFilter();
     this.dimensionsFilter.clearFilter();
+
+    this.suppressChildEvent = false;
+    this.filterChanged.emit(this.impactTableFilterEvent);
+  }
+
+  clearHighlight() {
+    this.logger.info(this, 'Clearing Highlighting');
+    this.suppressChildEvent = true;
+
     this.highlightFilter.clearFilter();
 
     this.suppressChildEvent = false;
