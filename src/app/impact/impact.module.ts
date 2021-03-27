@@ -1,9 +1,7 @@
 import { HighlightSearch } from './pipes/HighlightSearch';
 import { DimensionTableComponent } from './components/impact-table/components/dimension-dialog/components/dimension-table/dimension-table.component';
 import { DimensionDialogComponent } from './components/impact-table/components/dimension-dialog/dimension-dialog.component';
-import { SharedModule } from './../shared/shared.module';
-import { ColumnSliderFilterComponent } from './components/column-slider-filter/column-slider-filter.component';
-import { ColumnCategoryFilterComponent } from './components/column-category-filter/column-category-filter.component';
+import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -39,8 +37,6 @@ import { ImpactTableFilterBarComponent } from './components/impact-table-filter-
     ClickOutsideDirective,
     DimensionDialogComponent,
     DimensionTableComponent,
-    ColumnCategoryFilterComponent,
-    ColumnSliderFilterComponent,
     ImpactTableFilterBarComponent,
     HighlightSearch
   ],
