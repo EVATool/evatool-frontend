@@ -29,7 +29,7 @@
   <div class="headertitle">Alle Analysen</div>
   <hr style="width:50%; margin: auto;">
   <div class="content-wrapper">
-    <div *ngFor="let analysis of analysisArray;" class="news-card">
+    <div *ngFor="let analysis of analysisArray;" class="news-card" (click)="analysisClick()">
       <a href="#" class="news-card__card-link"></a>
       <img src="{{analysis.img}}" alt="" class="news-card__image">
       <div class="news-card__text-wrapper">

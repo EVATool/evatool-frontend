@@ -60,4 +60,8 @@ export class AnalysisMainComponent implements OnInit {
       });
     });
   }
+
+  analysisClick(){
+    console.log('sdbjkfgsdfbhjgksdfgbhjk');
+  }
 }
