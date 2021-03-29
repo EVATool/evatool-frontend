@@ -16,7 +16,7 @@ import {MatSort, Sort} from '@angular/material/sort';
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
-  displayedColumns: string[] = ['ID', 'Requirements', 'Variants', 'Dimension'];
+  displayedColumns: string[] = ['rootEntityId', 'requirementTitle', 'Variants', 'Dimension'];
   requirementsSource: Requirements[] = [];
   impactSoureces: Impact[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
@@ -154,7 +154,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         this.requirementsSource.pop();
         this.requirementsSource.push(value);
         this.tableDatasource.data = this.requirementsSource;
-        this.initSorting();
       });
     }
   }
@@ -172,7 +171,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
       this.requirementsSource.push(value);
       this.tableDatasource.data = this.requirementsSource;
-      this.initSorting();
     });
   }
 }
