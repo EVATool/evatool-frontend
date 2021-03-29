@@ -1,15 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
 
 @Component({
   selector: 'app-variant-main',
   templateUrl: './variant-main.component.html',
-  styleUrls: ['./variant-main.component.css']
+  styleUrls: ['./variant-main.component.scss']
 })
 export class VariantMainComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private dialog: MatDialog) {
 
-  ngOnInit(): void {
   }
 
+  btnClick(): void {
+    this.router.navigate(['/main'], { queryParams: { id: 'analysisUUID' }, queryParamsHandling: 'merge' });
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(VariantDialogComponent,  {});
+  }
+
+  ngOnInit(): void {
+
+  }
 }

@@ -12,10 +12,6 @@
   width: 100%;
 }
 
-::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-wrapper {
-  top: 18px;
-}
-
 ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
   height: 12px;
   border-radius: 10px

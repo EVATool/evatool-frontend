@@ -1,24 +1,21 @@
-#add-impact-button-div {
-  display: inline-block;
+.container {
   vertical-align: middle;
 }
 
-#add-impact-button-div {
+.add-impact-button-container {
+  display: inline-block;
   opacity: 0.8;
-  vertical-align: middle;
   text-align: right;
   transition: 250ms ease-out 100ms;
 }
 
-#add-impact-button-div:focus-within, #add-impact-button-div:hover {
+.add-impact-button-container:focus-within, #add-impact-button-container:hover {
   opacity: 1 !important;
   transition: 250ms ease-out 100ms;
 }
 
-#add-impact-text-div {
-  margin-left: 25px;
-  margin-top: 10px;
+.add-impact-text-container {
+  margin-left: 1.5vw;
   display: inline-block;
-  vertical-align: middle;
-  font-size: 20px;
+  font-size: 150%;
 }

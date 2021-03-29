@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatTabGroup } from '@angular/material/tabs';
 import { Router } from '@angular/router';
+import { isDevMode } from '@angular/core';
 
 @Component({
   selector: 'app-shell-main',
   templateUrl: './shell-main.component.html',
-  styleUrls: ['./shell-main.component.css', '../../layout/style/style.css']
+  styleUrls: ['./shell-main.component.scss', '../../layout/style/style.css']
 })
-export class ShellMainComponent implements OnInit {
+export class ShellMainComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatTabGroup) tab!: MatTabGroup;
 
   analysisId = '';
 
@@ -23,6 +26,13 @@ export class ShellMainComponent implements OnInit {
 
     if (this.analysisId === undefined) {
       console.log('Throw error? How to handle this? This should not be allowed.');
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // @ DevTeams: Change this to your tab index and do not commit it.
+    if (isDevMode() && this.tab !== undefined) {
+      this.tab.selectedIndex = 1;
     }
   }
 }

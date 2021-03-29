@@ -1,6 +1,6 @@
 ::ng-deep .mat-tab-label {
-	min-width: 25px !important;
-	padding: 5px;
+	min-width: 5% !important;
+	padding: 1%;
 	background-color: transparent;
 	color: black;
 	font-weight: 700;
@@ -10,7 +10,7 @@
   position:absolute;
   left:-10000px;
   top:auto;
-  width:1px;
-  height:1px;
+  width:1%;
+  height:1%;
   overflow:hidden;
 }
