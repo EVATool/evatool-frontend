@@ -22,8 +22,8 @@ export class RequirementsRestService {
 
   }
 
-  getRequirements(): Observable<Requirements> {
-    return this.http.get<any>(this.analysisUrl);
+  getRequirements(): Observable<Requirements[]> {
+    return this.http.get<Requirements[]>(this.analysisUrl);
   }
   getImpacts(): Observable<Impact> {
     return this.http.get<any>(this.impactsUrl);

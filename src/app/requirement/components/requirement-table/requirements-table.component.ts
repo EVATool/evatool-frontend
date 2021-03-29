@@ -33,7 +33,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.requirementsRestService.getRequirements().subscribe((result: any) => {
+    this.requirementsRestService.getRequirements().subscribe((result: Requirements[]) => {
       this.requirementsSource = [];
       result.forEach((requirementRest: Requirements) => {
         const requirement: Requirements = {
@@ -49,25 +49,25 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         this.idForProject = requirement.projectID;
         this.requirementsSource.push(requirement);
       });
-      this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+      this.tableDatasource = new MatTableDataSource<Requirements>(result);
       this.initSorting();
     });
-    this.requirementsRestService.getImpacts().subscribe((result: any) => {
-      this.impactSoureces = [];
-      result.forEach((impactRest: Impact) => {
-        const impact: Impact = {
-          id: impactRest.id,
-          description: impactRest.description,
-          value: impactRest.value,
-          dimension: impactRest.dimension
-        };
-        this.impactSoureces.push(impact);
-      });
-      let impactIdList: string[] = [];
-      this.impactSoureces.forEach(value => impactIdList = impactIdList.concat(value.id));
-      this.displayedColumns = ['ID', 'Requirements', 'Variants', 'Dimension'];
-      this.displayedColumns = this.displayedColumns.concat(impactIdList);
-    });
+    // this.requirementsRestService.getImpacts().subscribe((result: any) => {
+    //   this.impactSoureces = [];
+    //   result.forEach((impactRest: Impact) => {
+    //     const impact: Impact = {
+    //       id: impactRest.id,
+    //       description: impactRest.description,
+    //       value: impactRest.value,
+    //       dimension: impactRest.dimension
+    //     };
+    //     this.impactSoureces.push(impact);
+    //   });
+    //   let impactIdList: string[] = [];
+    //   this.impactSoureces.forEach(value => impactIdList = impactIdList.concat(value.id));
+    //   this.displayedColumns = ['ID', 'Requirements', 'Variants', 'Dimension'];
+    //   this.displayedColumns = this.displayedColumns.concat(impactIdList);
+    // });
     // this.requirementsSource = datagenerator.getRequirements();
     // this.impactSoureces = datagenerator.getImpacts();
     // this.tableDatasource.data = this.requirementsSource;
