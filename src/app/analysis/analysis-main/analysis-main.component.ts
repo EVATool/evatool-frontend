@@ -6,6 +6,7 @@ import { Analysis } from "../model/Analysis";
 import { AnalysisRestService } from "../services/analysis/analysis-rest.service";
 import { AnalysisDataService } from "../services/analysis/analysis-data.service";
 import { ValueDialogComponent } from "../value-dialog/value-dialog.component";
+import {AnalysisDTO} from "../model/AnalysisDTO";
 
 @Component({
   selector: 'app-analysis-main',
@@ -53,20 +54,20 @@ export class AnalysisMainComponent implements OnInit {
     this.analysisRestService.getAnalysis().subscribe((result: any) => {
       this.analysisArray = [];
       console.log(result);
-      result.forEach((analysisDTO: any) => {
+      result.forEach((analysisDTO: AnalysisDTO) => {
         const analysis: Analysis = {
           id: analysisDTO.rootEntityID,
           description: analysisDTO.analysisDescription,
-          analysisName: analysisDTO.analysisName,
-          lastUpdate: analysisDTO.lastUpdate,
-          img: analysisDTO.img//this.imgs[Math.floor(Math.random() * this.imgs.length)]
+          title: analysisDTO.analysisName,
+          lastUpdate: '',
+          img: '' //this.imgs[Math.floor(Math.random() * this.imgs.length)]
         };
         this.analysisArray.push(analysis);
       });
     });
   }
 
-  analysisClick(analysis: Analysis) {
+  analysisClick(analysis: Analysis): void {
     this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
   }
 }

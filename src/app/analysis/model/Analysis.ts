@@ -1,7 +1,7 @@
 export class Analysis{
 
   id: any = '';
-  analysisName: any = '';
+  title: any = '';
   description: any = '';
   lastUpdate: any = '';
   img: any = '';

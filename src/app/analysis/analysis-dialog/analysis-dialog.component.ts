@@ -16,11 +16,12 @@ export class AnalysisDialogComponent implements OnInit {
   analysisDescription: any;
 
   onSubmit(): void {
-    let analysis: Analysis = new Analysis();
-    analysis.analysisName = this.analyseName;
+    const analysis: Analysis = new Analysis();
+    analysis.title = this.analyseName;
     analysis.description = this.analysisDescription;
 
     this.analysisDataService.save(analysis);
+    this.GoToStakeholder();
   }
 
   constructor(
@@ -31,6 +32,11 @@ export class AnalysisDialogComponent implements OnInit {
   ngOnInit(): void {
     this.analysisDataService.analysisSaved.subscribe(analysis => {
       this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
-    })
+    });
+  }
+
+  GoToStakeholder(): void {
+    this.router.navigate(['/analysis']);
+    this.analysisDialogComponent.close();
   }
 }
