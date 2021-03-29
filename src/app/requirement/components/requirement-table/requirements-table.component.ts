@@ -7,6 +7,7 @@ import {Impact} from '../../models/Impact';
 import {MatTableDataSource} from '@angular/material/table';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
 import {MatSort, Sort} from '@angular/material/sort';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-requirement-table',
@@ -22,7 +23,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
   idForProject = '';
   constructor(private datagenerator: Datagenerator,
-              private requirementsRestService: RequirementsRestService) {
+              private requirementsRestService: RequirementsRestService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -33,6 +35,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.router.routerState.root.queryParams.subscribe(params => {
+      this.idForProject = params.id;
+    });
     this.requirementsRestService.getRequirements().subscribe((result: Requirements[]) => {
       this.requirementsSource = [];
       result.forEach((requirementRest: Requirements) => {
@@ -42,11 +47,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
           requirementTitle : requirementRest.requirementTitle,
           requirementDescription : requirementRest.requirementDescription,
           dimensions : requirementRest.dimensions,
-          // requirementImpactPoints : new Map(Object.entries(requirementRest.requirementImpactPoints)),
           requirementImpactPoints : requirementRest.requirementImpactPoints,
           variantsTitle : requirementRest.variantsTitle
         };
-        this.idForProject = requirement.projectID;
         this.requirementsSource.push(requirement);
       });
       this.tableDatasource = new MatTableDataSource<Requirements>(result);
@@ -57,7 +60,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       result.forEach((impactRest: Impact) => {
         const impact: Impact = {
           id: impactRest.id,
-          description: impactRest.description,
+          description: impactRest.uniqueString,
           value: impactRest.value,
           dimension: impactRest.dimension
         };

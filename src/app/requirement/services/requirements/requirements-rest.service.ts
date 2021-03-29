@@ -15,8 +15,8 @@ const httpOptions = { // Outsource!
 })
 export class RequirementsRestService {
 
-  analysisUrl = 'http://localhost:8080/requirements'; // Outsource!
-  impactsUrl = 'http://localhost:8080/requirements/impacts'; // Outsource!
+  analysisUrl = 'http://79.171.179.211:443/requirements'; // Outsource!
+  impactsUrl = 'http://79.171.179.211:443/impacts'; // Outsource!
 
   constructor(private http: HttpClient) {
 
