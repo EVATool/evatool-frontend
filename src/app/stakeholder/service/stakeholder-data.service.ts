@@ -28,7 +28,7 @@ export class StakeholderDataService {
           level: stakeholderDTO.stakeholderLevel,
           priority: stakeholderDTO.priority,
           name: stakeholderDTO.stakeholderName,
-          impact: stakeholderDTO.impact,
+          impact: stakeholderDTO.impact
         };
         this.stakeholders.push(stakeholder);
       });
