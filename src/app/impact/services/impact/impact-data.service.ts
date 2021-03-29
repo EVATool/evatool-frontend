@@ -1,91 +1,139 @@
-import { DimensionDataService } from './../dimension/dimension-data.service';
-import { Stakeholder } from './../../models/Stakeholder';
-import { StakeholderDataService } from './../stakeholder/stakeholder-data.service';
-import { Analysis } from './../../models/Analysis';
-import { Impact } from './../../models/Impact';
+import { LogService } from '../../../shared/services/log.service';
+import { ImpactRestService } from './impact-rest.service';
+import { Analysis } from '../../models/Analysis';
+import { Dimension } from '../../models/Dimension';
+import { Stakeholder } from '../../models/Stakeholder';
+import { ImpactMapperService } from './impact-mapper.service';
+import { AnalysisDataService } from '../analysis/analysis-data.service';
+import { DimensionDataService } from '../dimension/dimension-data.service';
+import { StakeholderDataService } from '../stakeholder/stakeholder-data.service';
+import { Impact } from '../../models/Impact';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImpactDataService {
-  @Output() createImpact: EventEmitter<Impact> = new EventEmitter();
-  @Output() updateImpact: EventEmitter<Impact> = new EventEmitter();
-  @Output() deleteImpact: EventEmitter<Impact> = new EventEmitter();
-  @Output() loadedImpacts: EventEmitter<Impact> = new EventEmitter();
+  @Output() loadedImpacts: EventEmitter<Impact[]> = new EventEmitter();
+  @Output() addedImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() changedImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() removedImpact: EventEmitter<Impact> = new EventEmitter();
+  @Output() changedImpacts: EventEmitter<Impact[]> = new EventEmitter();
 
-  dummyImpacts: Impact[] = [
-    {
-      id: '1',
-      value: -0.3,
-      description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
-      dimension: { id: '21', name: 'Feelings', description: 'Feelings of Patient ', type: 'SOCIAL' },
-      stakeholder: { id: '11', name: 'Patient' },
-      analysis: { id: '7' }
-    },
-    {
-      id: '2',
-      value: 0.5,
-      description: 'This is the second read-only impact',
-      dimension: { id: '22', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL' },
-      stakeholder: { id: '12', name: 'Doctor' },
-      analysis: { id: '7' }
-    },
-    {
-      id: '3',
-      value: 0.9,
-      description: 'This is the third read-only impact',
-      dimension: { id: '23', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC' },
-      stakeholder: { id: '13', name: 'Family' },
-      analysis: { id: '7' }
-    },
-    {
-      id: '4',
-      value: 0.2,
-      description: 'This is the fourth read-only impact',
-      dimension: { id: '24', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL' },
-      stakeholder: { id: '14', name: 'Ensurance' },
-      analysis: { id: '7' }
-    }
-  ];
-
-  impacts: Impact[] = this.dummyImpacts;
+  impacts: Impact[] = [];
+  private impactsLoaded = false;
+  stakeholders: Stakeholder[] = [];
+  private stakeholdersLoaded = false;
+  dimensions: Dimension[] = [];
+  private dimensionsLoaded = false;
+  analyses: Analysis[] = [];
+  private analysesLoaded = false;
 
   constructor(
+    private logger: LogService,
+    private impactMapperService: ImpactMapperService,
+    private impactRestService: ImpactRestService,
     private stakeholderDataService: StakeholderDataService,
-    private dimensionDataService: DimensionDataService) {
-    for (const impact of this.impacts) {
-      impact.stakeholder = this.stakeholderDataService.getStakeholders()[Math.floor(Math.random() * Math.floor(4))];
-      impact.dimension = this.dimensionDataService.getDimensions()[Math.floor(Math.random() * Math.floor(4))];
-    }
-    this.loadedImpacts.emit();
+    private dimensionDataService: DimensionDataService,
+    private analysisDataService: AnalysisDataService) {
   }
 
-  getImpacts(): Impact[] {
-    return this.impacts;
+  onInit(): void {
+    this.stakeholderDataService.loadedStakeholders.subscribe(stakeholders => {
+      this.stakeholders = stakeholders;
+      this.stakeholdersLoaded = true;
+      this.loadIfChildrenAreLoaded();
+    });
+
+    this.dimensionDataService.loadedDimensions.subscribe(dimensions => {
+      this.dimensions = dimensions;
+      this.dimensionsLoaded = true;
+      this.loadIfChildrenAreLoaded();
+    });
+
+    this.analysisDataService.loadedAnalyses.subscribe(currentAnalysis => {
+      this.analyses = [currentAnalysis];
+      this.analysesLoaded = true;
+      this.loadIfChildrenAreLoaded();
+    });
+
+    this.stakeholderDataService.onInit();
+    this.dimensionDataService.onInit();
+    this.analysisDataService.onInit();
+  }
+
+  private loadIfChildrenAreLoaded(): void {
+    if (this.getChildrenLoaded() && !this.impactsLoaded) {
+      // Load impacts.
+      this.impactRestService.getImpactsByAnalysisId(this.analysisDataService.getCurrentAnalysis().id).subscribe(imps => {
+        imps.sort((a, b) => this.sortImpactsById(a, b));
+        let fromDtos: Impact[] = [];
+        imps.forEach(imp => {
+          //this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+          fromDtos.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+        });
+        this.impacts = fromDtos;
+        this.logger.info(this, 'Impacts loaded');
+        this.loadedImpacts.emit(this.impacts);
+        this.impactsLoaded = true;
+      });
+    }
+  }
+
+  private sortImpactsById(a: Impact, b: Impact): number {
+    this.logger.debug(this, 'Sorting Impacts By Id');
+    const numberA = + ("" + a.uniqueString?.replace("IMP", ""));
+    const numberB = + ("" + b.uniqueString?.replace("IMP", ""));
+    return numberA > numberB ? 1 : -1;
+  }
+
+  private getChildrenLoaded(): boolean {
+    return this.stakeholdersLoaded && this.dimensionsLoaded && this.analysesLoaded;
   }
 
   private createDefaultImpact(): Impact {
+    this.logger.debug(this, 'Create Default Impact');
     const impact = new Impact();
 
-    impact.id = 'I00' + (this.impacts.length + 1);
     impact.value = 0.0;
     impact.description = '';
     impact.dimension = this.dimensionDataService.getDefaultDimension();
     impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
+    impact.analysis = this.analysisDataService.getCurrentAnalysis();
 
     return impact;
   }
 
-  addImpact(): void {
+  createImpact(): void {
+    this.logger.info(this, 'Create Impact');
     const impact = this.createDefaultImpact();
-    this.impacts.push(impact);
-    this.createImpact.emit(impact);
+    const impactDto = this.impactMapperService.toDto(impact);
+    this.impactRestService.createImpact(impactDto).subscribe(impDto => {
+      impact.id = impDto.id;
+      impact.uniqueString = impDto.uniqueString;
+      this.impacts.push(impact);
+      this.addedImpact.emit(impact);
+      this.changedImpacts.emit(this.impacts);
+    });
   }
 
-  removeImpact(impact: Impact): void {
-    const index: number = this.impacts.indexOf(impact, 0);
-    this.impacts.splice(index, 1);
-    this.deleteImpact.emit();
+  updateImpact(impact: Impact): void {
+    this.logger.info(this, 'Update Impact');
+    const impactDto = this.impactMapperService.toDto(impact);
+    this.impactRestService.updateImpact(impactDto).subscribe((newImpact: Impact) => {
+      this.changedImpact.emit(newImpact);
+      // this.changedImpacts.emit(this.impacts);
+    });
+  }
+
+  deleteImpact(impact: Impact): void {
+    this.logger.info(this, 'Delete Impact');
+    const impactDto = this.impactMapperService.toDto(impact);
+    this.impactRestService.deleteImpact(impactDto).subscribe((impDto) => {
+      const index: number = this.impacts.indexOf(impact, 0);
+      this.impacts.splice(index, 1);
+      this.removedImpact.emit(impact);
+      this.changedImpacts.emit(this.impacts);
+    });
   }
 }

@@ -1,3 +1,8 @@
+import { RestSettings } from './../../settings/RestSettings';
+import { StakeholderDto } from './../../dtos/StakeholderDto';
+import { LogService } from '../../../shared/services/log.service';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,7 +10,18 @@ import { Injectable } from '@angular/core';
 })
 export class StakeholderRestService {
 
-  constructor() {
+  constructor(
+    private logger: LogService,
+    private http: HttpClient) {
 
+  }
+
+  onInit(): void {
+
+  }
+
+  getStakeholders(): Observable<StakeholderDto[]> {
+    this.logger.info(this, 'Get all Stakeholders');
+    return this.http.get<StakeholderDto[]>(RestSettings.stakeholdersUrl);
   }
 }

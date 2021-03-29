@@ -1,0 +1,17 @@
+<div>
+  <p>Highlight Search</p>
+</div>
+
+<div class="highlight-bar-container">
+  <mat-list class="list-horizontal">
+
+    <mat-list-item>
+      <input #textfield class="highlight-text" matInput placeholder="Search..." (input)="searchTextChange($event)">
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon class="search-icon">search</mat-icon>
+    </mat-list-item>
+
+  </mat-list>
+</div>

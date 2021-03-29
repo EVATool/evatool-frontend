@@ -1,0 +1,54 @@
+import { LogService } from '../../../shared/services/log.service';
+import { ImpactStakeholderDto } from '../../dtos/ImpactStakeholderDto';
+import { StakeholderDto } from '../../dtos/StakeholderDto';
+import { Stakeholder } from '../../models/Stakeholder';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StakeholderMapperService {
+
+  constructor(private logger: LogService) { }
+
+  toDto(stakeholder: Stakeholder): StakeholderDto {
+    this.logger.info(this, 'Mapping Stakeholder to StakeholderDto');
+
+    const stakeholderDto = new StakeholderDto();
+
+    stakeholderDto.rootEntityID = stakeholder.id;
+    stakeholderDto.stakeholderName = stakeholder.name;
+
+    return stakeholderDto;
+  }
+
+  fromDto(stakeholderDto: StakeholderDto): Stakeholder {
+    this.logger.info(this, 'Mapping StakeholderDto to Stakeholder');
+    const stakeholder = new Stakeholder();
+
+    stakeholder.id = stakeholderDto.rootEntityID;
+    stakeholder.name = stakeholderDto.stakeholderName;
+
+    return stakeholder;
+  }
+
+  toImpactDto(stakeholder: Stakeholder): ImpactStakeholderDto {
+    this.logger.info(this, 'Mapping Stakeholder to ImpactStakeholderDto');
+    const stakeholderDto = new ImpactStakeholderDto();
+
+    stakeholderDto.id = stakeholder.id;
+    stakeholderDto.name = stakeholder.name;
+
+    return stakeholderDto;
+  }
+
+  fromImpactDto(stakeholderDto: ImpactStakeholderDto): Stakeholder {
+    this.logger.info(this, 'Mapping ImpactStakeholderDto to Stakeholder');
+    const stakeholder = new Stakeholder();
+
+    stakeholder.id = stakeholderDto.id;
+    stakeholder.name = stakeholderDto.name;
+
+    return stakeholder;
+  }
+}

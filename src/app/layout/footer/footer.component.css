@@ -1,0 +1,33 @@
+.header {
+  position: fixed;
+  background-color: #333333;
+  color: white;
+}
+
+.container {
+  float: right;
+  display: inline;
+}
+
+a {
+  display: inline;
+  color: rgb(155, 155, 155);
+  text-decoration: none;
+}
+
+ul {
+  display: inline;
+}
+
+li {
+  display: inline;
+  padding-left: 1.5vw;
+  padding-bottom: 1.5vw;
+  vertical-align: middle;
+}
+
+.mat-icon {
+  color: rgb(155, 155, 155);
+  margin-right: 0.5vw;
+  margin-top: 0.5vh;
+}

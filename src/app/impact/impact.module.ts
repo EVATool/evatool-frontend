@@ -1,3 +1,11 @@
+import { HighlightSearch } from './pipes/HighlightSearch';
+import { DimensionTableComponent } from './components/impact-table/components/dimension-dialog/components/dimension-table/dimension-table.component';
+import { DimensionDialogComponent } from './components/impact-table/components/dimension-dialog/dimension-dialog.component';
+import { SharedModule } from '../shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,11 +23,23 @@ import { AddImpactButtonComponent } from './components/add-impact-button/add-imp
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ClickOutsideDirective } from './directives/ClickOutsideDirective';
 import { NgScrollbarModule } from 'ngx-scrollbar';
-import { ImpactSliderComponent } from './components/impact-slider/impact-slider.component';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ImpactTableFilterBarComponent } from './components/impact-table-filter-bar/impact-table-filter-bar.component';
 
 @NgModule({
-  declarations: [ImpactMainComponent, ImpactTableComponent, AddImpactButtonComponent, ClickOutsideDirective, ImpactSliderComponent],
+  declarations: [
+    ImpactMainComponent,
+    ImpactTableComponent,
+    AddImpactButtonComponent,
+    ClickOutsideDirective,
+    DimensionDialogComponent,
+    DimensionTableComponent,
+    ImpactTableFilterBarComponent,
+    HighlightSearch
+  ],
   imports: [
     CommonModule,
     MatTableModule,
@@ -33,7 +53,17 @@ import { ImpactSliderComponent } from './components/impact-slider/impact-slider.
     MatButtonModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatExpansionModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    RouterModule,
+    SharedModule,
+    RouterModule,
+    MatListModule,
+    NgMultiSelectDropDownModule,
   ],
   exports: [
     ImpactMainComponent

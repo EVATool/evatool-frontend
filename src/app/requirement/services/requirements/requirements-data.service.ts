@@ -15,6 +15,7 @@ export class RequirementsDataService {
   requirements: Requirements[] = [];
 
   constructor(requirementsRestService: RequirementsRestService) {
+    /*
     requirementsRestService.getRequirements().subscribe((result: any) => {
       this.requirements = [];
       result.forEach((requirementRest: Requirements) => {
@@ -32,6 +33,7 @@ export class RequirementsDataService {
         this.requirements.push(requirement);
       });
     });
+    */
   }
 
   getRequirements(): Requirements[] {

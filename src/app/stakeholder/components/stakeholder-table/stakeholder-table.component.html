@@ -1,0 +1,62 @@
+<mat-table mat-table [dataSource]="stakeholderDataService.matDataSource" >
+  <ng-container matColumnDef='guiId'>
+    <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+    <mat-cell *matCellDef='let stakeholder'>
+      <div>
+      {{stakeholder.guiId}}
+      </div>
+      <div>
+      </div>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef='Stakeholder'>
+    <mat-header-cell *matHeaderCellDef>Stakeholder</mat-header-cell>
+    <mat-cell *matCellDef='let stakeholder'>
+      <div>
+        {{stakeholder.name}}
+      </div>
+
+      <input type="text" matInput value="{{stakeholder.name}}"
+             readonly="{{!stakeholder.editable}}" name="stakeholder"
+             [(ngModel)]="stakeholder.name" *ngIf="stakeholder.editable" id="titleinput" id="{{stakeholder.id}}_stakeholder" autofocus tabindex="0">
+      <div *ngIf="!stakeholder.editable">
+        {{stakeholder.name}}
+      </div>
+
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef='Ebene'>
+    <mat-header-cell *matHeaderCellDef>Level</mat-header-cell>
+    <mat-cell *matCellDef='let stakeholder'>
+      <div>
+        <app-stakeholder-level [editable]="stakeholder.editable" [(level)]="stakeholder.level" (levelChange)="stakeholder.level = $event" ></app-stakeholder-level>
+      </div>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef='Prio'>
+    <mat-header-cell *matHeaderCellDef>Prio</mat-header-cell>
+    <mat-cell *matCellDef='let stakeholder' >
+      <app-stakeholder-prio [editable]="stakeholder.editable" [(prio)]="stakeholder.priority" (prioChange)="stakeholder.priority = $event"></app-stakeholder-prio>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="Impact">
+    <mat-header-cell *matHeaderCellDef>Impact</mat-header-cell>
+    <mat-cell *matCellDef='let stakeholder'>
+      <app-stakeholder-impact [created]="stakeholder.created"></app-stakeholder-impact>
+      <div class="options" *ngIf="!stakeholder.archived">
+        <button mat-icon-button *ngIf="stakeholder.editable" name="save" (click)="save(stakeholder);">
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<div class="addStakeholderButton">
+  <button mat-icon-button aria-label="Add Variant"  (click)="addStakeholder()" tabindex="-1">
+    <mat-icon>add</mat-icon>
+  </button>
+  Stakeholder
+</div>
+

@@ -1,0 +1,102 @@
+<div class="value-dialog">
+  <button mat-dialog-close mat-icon-button class="value-modal-close">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="container" mat-dialog-title>
+    <h2>Values bearbeiten</h2>
+  </div>
+  <mat-dialog-content>
+    <div class="card-container">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Social Value</mat-panel-title>
+        </mat-expansion-panel-header>
+          <mat-table mat-table [dataSource]='matDataSourceSocial'>
+            <ng-container matColumnDef='id'>
+              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+              <mat-cell *matCellDef='let value'>
+                <input class="inputField" type="text" value="{{value.id}}"
+                       [(ngModel)]="value.id" *ngIf="value.editable"
+                       id="{{value.id}}_id" autofocus tabindex="0">
+                <div *ngIf="!value.editable">
+                  {{value.id}}
+                </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef='title'>
+              <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
+              <mat-cell *matCellDef='let value'>
+                <input class="inputField" matInput type="text" value="{{value.title}}"
+                       [(ngModel)]="value.title" *ngIf="value.editable"
+                       id="{{value.id}}_title" tabindex="1">
+                <div *ngIf="!value.editable">
+                  {{value.title}}
+                </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef>Beschreibung</mat-header-cell>
+              <mat-cell *matCellDef='let value'>
+                <input class="inputField" matInput type="text" value="{{value.description}}"
+                       [(ngModel)]="value.description" *ngIf="value.editable"
+                       id="{{value.id}}_description" tabindex="2">
+                <div *ngIf="!value.editable">
+                  {{value.description}}
+                </div>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        <button mat-icon-button aria-label="Add Value" class="addSocialValueButton" (click)="addSocialValue()"> <!--tabindex="-1"-->
+          <mat-icon>add</mat-icon> Social Value anlegen
+        </button>
+        </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Economic Value</mat-panel-title>
+        </mat-expansion-panel-header>
+          <mat-table mat-table [dataSource]='matDataSourceEconomic' class="variant-table">
+            <ng-container matColumnDef='id'>
+              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+              <mat-cell *matCellDef='let value'>
+                <input class="inputField" matInput type="text" value="{{value.id}}"
+                       [(ngModel)]="value.id" *ngIf="value.editable"
+                       id="{{value.id}}__id" autofocus tabindex="3">
+                <div *ngIf="!value.editable">
+                  {{value.id}}
+                </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef='title'>
+              <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
+              <mat-cell *matCellDef='let value'>
+                <input class="inputField" matInput type="text" value="{{value.title}}"
+                       [(ngModel)]="value.title" *ngIf="value.editable"
+                       id="{{value.id}}__title" tabindex="4">
+                <div *ngIf="!value.editable">
+                  {{value.title}}
+                </div>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef>Beschreibung</mat-header-cell>
+              <mat-cell *matCellDef='let value'>
+                <input class="inputField" matInput type="text" value="{{value.description}}"
+                       [(ngModel)]="value.description" *ngIf="value.editable"
+                       id="{{value.id}}__description" tabindex="5">
+                <div *ngIf="!value.editable">
+                  {{value.description}}
+                </div>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row mat-row *matRowDef="let value; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        <button mat-icon-button aria-label="Add Value" class="addEconomicValueButton" (click)="addEconomicValue()"> <!--tabindex="-1"-->
+          <mat-icon>add</mat-icon> Economic Value anlegen
+        </button>
+      </mat-expansion-panel>
+    </div>
+  </mat-dialog-content>
+</div>
