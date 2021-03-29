@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {AnalysisDialogComponent} from "../analysis-dialog/analysis-dialog.component";
-import {Analysis} from "../model/Analysis";
-import {AnalysisRestService} from "../services/analysis/analysis-rest.service";
-import {AnalysisDataService} from "../services/analysis/analysis-data.service";
-import {ValueDialogComponent} from "../value-dialog/value-dialog.component";
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from "@angular/material/dialog";
+import { AnalysisDialogComponent } from "../analysis-dialog/analysis-dialog.component";
+import { Analysis } from "../model/Analysis";
+import { AnalysisRestService } from "../services/analysis/analysis-rest.service";
+import { AnalysisDataService } from "../services/analysis/analysis-data.service";
+import { ValueDialogComponent } from "../value-dialog/value-dialog.component";
 
 @Component({
   selector: 'app-analysis-main',
@@ -13,7 +14,7 @@ import {ValueDialogComponent} from "../value-dialog/value-dialog.component";
 })
 export class AnalysisMainComponent implements OnInit {
 
-  analysisArray: Analysis [] = [//{
+  analysisArray: Analysis[] = [//{
     // title: "Analyse 1", description: "[1] Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio&hellip]", lastUpdate: '07.01.2021', id: '1', img: "https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"},
     // {title: "Analyse 2", description: "[2] Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio&hellip", lastUpdate: '08.01.2021', id: '2', img: "https://images.pexels.com/photos/631954/pexels-photo-631954.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"},
     // {title: "Analyse 3", description: "[3] Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio&hellip", lastUpdate: '09.01.2021', id: '3', img: "https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"},
@@ -28,12 +29,16 @@ export class AnalysisMainComponent implements OnInit {
     // {title: "Analyse 12", description: "[12] Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio&hellip", lastUpdate: '18.02.2021', id: '12', img: "https://images.pexels.com/photos/210243/pexels-photo-210243.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"},
   ];
 
-  imgs: any [] = [
+  imgs: any[] = [
     "https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
     "https://images.pexels.com/photos/631954/pexels-photo-631954.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
     "https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"]
 
-  constructor(private dialog: MatDialog, private analysisRestService: AnalysisRestService, private analysisDataService: AnalysisDataService) {}
+  constructor(
+    private dialog: MatDialog,
+    private analysisRestService: AnalysisRestService,
+    private analysisDataService: AnalysisDataService,
+    private router: Router) { }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AnalysisDialogComponent, { data: { p: 'test', b: 'auch test' } });
@@ -59,5 +64,9 @@ export class AnalysisMainComponent implements OnInit {
         this.analysisArray.push(analysis);
       });
     });
+  }
+
+  analysisClick(analysis: Analysis) {
+    this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
   }
 }

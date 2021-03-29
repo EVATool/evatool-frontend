@@ -8,25 +8,25 @@
   color: black;
 }
 
-::ng-deep .mat-slider {
+:host ::ng-deep .mat-slider {
   width: 100%;
 }
 
-::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
+:host ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
   height: 12px;
   border-radius: 10px
 }
 
-::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-background, ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+:host ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-background, ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
   height: 100%;
 }
 
-::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+:host ::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
   background-color: blue;
   color: black;
 }
 
-::ng-deep .mat-accent .mat-slider-thumb {
+:host ::ng-deep .mat-accent .mat-slider-thumb {
   height: 30px;
   width: 30px;
   background-color: white;

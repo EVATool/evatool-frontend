@@ -1,47 +1,44 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+@include mat-core();
 
-.stakeholder-impact-slider {
-  border-radius: 0;
-  width: 100%;
-  display: table-cell;
+@mixin stakeholder-impact-slider-theme(){
+  .stakeholder-impact-slider {
+    .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
+      border-radius: 0;
+      min-height: 12px;
+      height: 100%;
+    }
+    .created_false {
+      .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+        background-color: red;
+        height: 100%;
+      }
 
-}
-:host ::ng-deep {
-
-  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
-    background-color: grey;
-  }
-
-  .mat-slider.mat-slider-horizontal .mat-slider-track-background {
-    background-color: grey;
-  }
-
-  .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
-    border-radius: 0px;
-    background-color: grey;
-  }
-
-  .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
-    background-color: red;
-  }
-
-  .mat-slider.mat-slider-horizontal .mat-slider-track-background{
-    background-color: green;
-  }
-
-  .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper{
-    border-radius: 0px;
-    background-color: green;
-  }
-
-
-  .editable_false{
-      .mat-slider-thumb{
+      .mat-slider.mat-slider-horizontal .mat-slider-track-background {
+        background-color: green;
+        height: 100%;
+      }
+    }
+    .created_true {
+      .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
         display: none;
       }
-  }
-  .editable_true{
-      .mat-slider-thumb{
+
+      .mat-slider.mat-slider-horizontal .mat-slider-track-background {
+        display: none;
+      }
+
+      .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
+        background-color: lightgrey;
+      }
+    }
+    .editable_false {
+      .mat-slider-thumb {
+        display: none;
+      }
+    }
+    .editable_true {
+      .mat-slider-thumb {
         height: 30px;
         width: 1px;
         background-color: white;
@@ -50,11 +47,15 @@
         right: 0px;
         border-radius: 0px;
       }
+    }
   }
-
-
-
 }
+
+
+
+
+
+
 
 
 
