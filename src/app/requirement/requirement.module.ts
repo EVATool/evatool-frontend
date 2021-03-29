@@ -14,22 +14,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [RequirementMainComponent, RequirementsTableComponent],
     imports: [
-      CommonModule,
-      MatTableModule,
-      MatSelectModule,
-      FormsModule,
-      MatSliderModule,
-      HttpClientModule,
-      MatSortModule,
-      MatInputModule,
-      MatIconModule,
-      MatButtonModule,
-      KeyboardShortcutsModule.forRoot(),
-      NgScrollbarModule
+        CommonModule,
+        MatTableModule,
+        MatSelectModule,
+        FormsModule,
+        MatSliderModule,
+        HttpClientModule,
+        MatSortModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        KeyboardShortcutsModule.forRoot(),
+        NgScrollbarModule,
+        MatTooltipModule,
+        BrowserModule
     ],
   exports: [
     RequirementMainComponent

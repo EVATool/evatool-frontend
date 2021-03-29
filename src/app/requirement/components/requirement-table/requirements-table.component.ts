@@ -6,6 +6,7 @@ import {Dimension} from '../../models/Dimension';
 import {Impact} from '../../models/Impact';
 import {MatTableDataSource} from '@angular/material/table';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
+import {MatSort, Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-requirement-table',
@@ -13,14 +14,25 @@ import {RequirementsRestService} from '../../services/requirements/requirements-
   styleUrls: ['./requirements-table.component.css', '../../../layout/style/style.css']
 })
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
 
-  displayedColumns: string[] = [];
+  displayedColumns: string[] = ['ID', 'Requirements', 'Variants', 'Dimension'];
   requirementsSource: Requirements[] = [];
   impactSoureces: Impact[] = [];
-  tableDatasource: MatTableDataSource<Requirements>;
+  tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
   idForProject = '';
   constructor(private datagenerator: Datagenerator,
               private requirementsRestService: RequirementsRestService) {
+  }
+
+  ngOnInit(): void {
+    this.datagenerator.onCreateImpact.subscribe(value => {
+      // this.tableDatasource.data = this.requirementsSource;
+      // this.initSorting();
+    });
+  }
+
+  ngAfterViewInit(): void {
     this.requirementsRestService.getRequirements().subscribe((result: any) => {
       this.requirementsSource = [];
       result.forEach((requirementRest: Requirements) => {
@@ -38,6 +50,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         this.requirementsSource.push(requirement);
       });
       this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+      this.initSorting();
     });
     this.requirementsRestService.getImpacts().subscribe((result: any) => {
       this.impactSoureces = [];
@@ -57,18 +70,16 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     });
     // this.requirementsSource = datagenerator.getRequirements();
     // this.impactSoureces = datagenerator.getImpacts();
-    this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+    // this.tableDatasource.data = this.requirementsSource;
+    // this.initSorting();
   }
-
-  ngOnInit(): void {
-    this.datagenerator.onCreateImpact.subscribe(value => {
-      this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
-    });
+  private initSorting(): void {
+    this.tableDatasource.sort = this.sort;
+    // const sortState: Sort = {active: 'Requirements', direction: 'asc'};
+    // this.sort.active = sortState.active;
+    // this.sort.direction = sortState.direction;
+    // this.sort.sortChange.emit(sortState);
   }
-
-  ngAfterViewInit(): void {
-  }
-
   concatDimension(parameter: any): string {
     let value = '';
     const dimension: Dimension[] = parameter.dimensions;
@@ -142,7 +153,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       this.requirementsRestService.createRequirements(element).subscribe(value => {
         this.requirementsSource.pop();
         this.requirementsSource.push(value);
-        this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+        this.tableDatasource.data = this.requirementsSource;
+        this.initSorting();
       });
     }
   }
@@ -159,7 +171,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     requirementNew.requirementDescription = 'generated requirement';
     this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
       this.requirementsSource.push(value);
-      this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+      this.tableDatasource.data = this.requirementsSource;
+      this.initSorting();
     });
   }
 }
