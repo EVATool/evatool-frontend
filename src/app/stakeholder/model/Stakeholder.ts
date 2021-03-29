@@ -4,9 +4,8 @@ export class Stakeholder{
   name: any = '';
   level: any = '';
   priority: any = '';
-  impact: any = '';
-  negativeImpact = 0;
-  positiveImpact = 0;
+  negativeImpact = 3;
+  positiveImpact = 17;
   editable?: boolean;
   created?: boolean;
 }

@@ -25,6 +25,7 @@ export class StakeholderFilterbarComponent implements OnInit {
 
   impactChange(value: any): void{
     console.log(value);
+    this.stakeholderDataService.filterImpact(value);
   }
 
   prioChange(value: any): void{

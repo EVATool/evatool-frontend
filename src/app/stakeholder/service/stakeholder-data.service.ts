@@ -4,6 +4,7 @@ import {Stakeholder} from '../model/Stakeholder';
 import {StakeholderRestService} from './stakeholder-rest.service';
 import {StakeholderDTO} from '../model/StakeholderDTO';
 import {MatTableDataSource} from '@angular/material/table';
+import {StakeholderImpact} from "../model/StakeholderImpact";
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +23,24 @@ export class StakeholderDataService {
     this.stakeholderRestService.getStakeholders().subscribe((result: any) => {
       this.stakeholders = [];
       result.forEach((stakeholderDTO: StakeholderDTO) => {
+        let negativeImpact = 0;
+        let postiveImpact = 0;
+        stakeholderDTO.impact.forEach((impact: StakeholderImpact) => {
+          if (impact.value > 0){
+            postiveImpact += impact.value;
+          }else{
+            negativeImpact += Math.abs(impact.value);
+          }
+        });
+
         const stakeholder: Stakeholder = {
           id: stakeholderDTO.rootEntityID,
           guiId: stakeholderDTO.guiId,
           level: stakeholderDTO.stakeholderLevel,
           priority: stakeholderDTO.priority,
           name: stakeholderDTO.stakeholderName,
-          impact: stakeholderDTO.impact
+          positiveImpact: postiveImpact,
+          negativeImpact
         };
         this.stakeholders.push(stakeholder);
       });
@@ -93,4 +105,15 @@ export class StakeholderDataService {
     this.matDataSource.filter = '';
   }
 
+  filterImpact(value: any): void{
+    this.resetFilter();
+    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
+      const totalimpact = data.negativeImpact + data.positiveImpact;
+      if (totalimpact === 0) { return true; }
+      console.log((data.negativeImpact / totalimpact));
+      return (data.negativeImpact / totalimpact) < value;
+    };
+
+    this.matDataSource.filter = value;
+  }
 }
