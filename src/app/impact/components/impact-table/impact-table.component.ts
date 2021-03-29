@@ -47,6 +47,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    // TODO: Show added impact when working with new analysis
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
       this.logger.info(this, 'Event \'loadedImpacts\' received from ImpactDataService');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
@@ -56,7 +57,14 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
       this.logger.info(this, 'Event \'changedImpacts\' received from ImpactDataService');
-      this.tableDataSource.data = impacts;
+      if (this.tableDataSource.data.length == 0) {
+        this.tableDataSource = new MatTableDataSource<Impact>(impacts);
+        this.initSorting();
+        this.initFiltering();
+      }
+      else {
+        this.tableDataSource.data = impacts;
+      }
     });
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
