@@ -27,6 +27,4 @@ export class AnalysisRestService {
   createAnalysis(analysisDTO: AnalysisDTO): Observable<any> {
     return this.http.post(this.analysisUrl, analysisDTO, httpOptions);
   }
-
-
 }
