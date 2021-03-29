@@ -19,12 +19,10 @@ export class AnalysisDialogComponent implements OnInit {
     console.log(this.analyseName);
     console.log(this.analysisDescription);
     let analysis: Analysis = new Analysis();
-    analysis.title = this.analyseName;
+    analysis.analysisName = this.analyseName;
     analysis.description = this.analysisDescription;
 
     this.analysisDataService.save(analysis);
-    // TODO: Close input dialog
-    // TODO: Reload Analysis Panel
   }
 
   constructor(private analysisDataService: AnalysisDataService, private router: Router, private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>) { }

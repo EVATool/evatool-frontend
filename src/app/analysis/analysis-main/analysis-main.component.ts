@@ -45,16 +45,16 @@ export class AnalysisMainComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.analysisRestService.getVariants().subscribe((result: any) => {
+    this.analysisRestService.getAnalysis().subscribe((result: any) => {
       this.analysisArray = [];
       console.log(result);
       result.forEach((analysisDTO: any) => {
         const analysis: Analysis = {
           id: analysisDTO.rootEntityID,
           description: analysisDTO.analysisDescription,
-          title: analysisDTO.analysisName,
-          lastUpdate: '01.01.2021', // TODO: Datum anpassen
-          img: this.imgs[Math.floor(Math.random() * this.imgs.length)]
+          analysisName: analysisDTO.analysisName,
+          lastUpdate: analysisDTO.lastUpdate,
+          img: analysisDTO.img//this.imgs[Math.floor(Math.random() * this.imgs.length)]
         };
         this.analysisArray.push(analysis);
       });

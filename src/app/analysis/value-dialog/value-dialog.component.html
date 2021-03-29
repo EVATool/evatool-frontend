@@ -11,37 +11,45 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Social Value</mat-panel-title>
         </mat-expansion-panel-header>
-          <mat-table mat-table [dataSource]='matDataSourceSocial'>
+          <mat-table mat-table [dataSource]='valueDataService.matDataSourceSocial'>
             <ng-container matColumnDef='id'>
               <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
               <mat-cell *matCellDef='let value'>
-                <input class="inputField" type="text" value="{{value.id}}"
+                <textarea class="inputField" type="text" value="{{value.id}}"
                        [(ngModel)]="value.id" *ngIf="value.editable"
-                       id="{{value.id}}_id" autofocus tabindex="0">
+                       id="{{value.id}}_id" autofocus tabindex="0"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.id}}
                 </div>
               </mat-cell>
             </ng-container>
-            <ng-container matColumnDef='title'>
+            <ng-container matColumnDef='name'>
               <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
               <mat-cell *matCellDef='let value'>
-                <input class="inputField" matInput type="text" value="{{value.title}}"
-                       [(ngModel)]="value.title" *ngIf="value.editable"
-                       id="{{value.id}}_title" tabindex="1">
+                <textarea class="inputField" matInput type="text" value="{{value.name}}"
+                       [(ngModel)]="value.name" *ngIf="value.editable"
+                       id="{{value.id}}_name" tabindex="1" placeholder="Titel"></textarea>
                 <div *ngIf="!value.editable">
-                  {{value.title}}
+                  {{value.name}}
                 </div>
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description">
               <mat-header-cell *matHeaderCellDef>Beschreibung</mat-header-cell>
               <mat-cell *matCellDef='let value'>
-                <input class="inputField" matInput type="text" value="{{value.description}}"
+                <textarea class="inputField" matInput type="text" value="{{value.description}}"
                        [(ngModel)]="value.description" *ngIf="value.editable"
-                       id="{{value.id}}_description" tabindex="2">
+                       id="{{value.id}}_description" tabindex="2" placeholder="Beschreibung"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.description}}
+                </div>
+                <div class="options" *ngIf="!value.socialValuearchived">
+                  <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveSocialValue(value);">
+                    <mat-icon>save</mat-icon>
+                  </button>
+                  <button mat-icon-button *ngIf="!value.editable" name="archive">
+                    <mat-icon>archive</mat-icon>
+                  </button>
                 </div>
               </mat-cell>
             </ng-container>
@@ -56,37 +64,45 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Economic Value</mat-panel-title>
         </mat-expansion-panel-header>
-          <mat-table mat-table [dataSource]='matDataSourceEconomic' class="variant-table">
+          <mat-table mat-table [dataSource]='valueDataService.matDataSourceEconomic' class="variant-table">
             <ng-container matColumnDef='id'>
               <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
               <mat-cell *matCellDef='let value'>
-                <input class="inputField" matInput type="text" value="{{value.id}}"
+                <textarea class="inputField" matInput type="text" value="{{value.id}}"
                        [(ngModel)]="value.id" *ngIf="value.editable"
-                       id="{{value.id}}__id" autofocus tabindex="3">
+                          id="{{value.id}}__id" autofocus tabindex="3"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.id}}
                 </div>
               </mat-cell>
             </ng-container>
-            <ng-container matColumnDef='title'>
+            <ng-container matColumnDef='name'>
               <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
               <mat-cell *matCellDef='let value'>
-                <input class="inputField" matInput type="text" value="{{value.title}}"
-                       [(ngModel)]="value.title" *ngIf="value.editable"
-                       id="{{value.id}}__title" tabindex="4">
+                <textarea class="inputField" matInput type="text" value="{{value.name}}"
+                       [(ngModel)]="value.name" *ngIf="value.editable"
+                       id="{{value.id}}__name" tabindex="4" placeholder="Titel"></textarea>
                 <div *ngIf="!value.editable">
-                  {{value.title}}
+                  {{value.name}}
                 </div>
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description">
               <mat-header-cell *matHeaderCellDef>Beschreibung</mat-header-cell>
               <mat-cell *matCellDef='let value'>
-                <input class="inputField" matInput type="text" value="{{value.description}}"
+                <textarea class="inputField" matInput type="text" value="{{value.description}}"
                        [(ngModel)]="value.description" *ngIf="value.editable"
-                       id="{{value.id}}__description" tabindex="5">
+                       id="{{value.id}}__description" tabindex="5" placeholder="Beschreibung"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.description}}
+                </div>
+                <div class="options" *ngIf="!value.archived">
+                  <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveEconomicValue(value);">
+                    <mat-icon>save</mat-icon>
+                  </button>
+                  <button mat-icon-button *ngIf="!value.editable" name="archive">
+                    <mat-icon>archive</mat-icon>
+                  </button>
                 </div>
               </mat-cell>
             </ng-container>
