@@ -1,0 +1,35 @@
+p {
+  font-size: 80%;
+  margin-bottom: 0;
+}
+
+.highlight-bar-container {
+  background-color: rgb(240, 240, 240);
+  border-bottom: 1px solid black;
+}
+
+mat-list.list-horizontal {
+  padding: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  .mat-list-item {
+    vertical-align: middle;
+    display: inline-block;
+    height: auto;
+    width: auto;
+  }
+
+  .highlight-text {
+    margin-right: -30px;
+    width: 300px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 100%;
+  }
+
+  .search-icon {
+    margin-right: -10px;
+  }
+}

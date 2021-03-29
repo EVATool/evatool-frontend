@@ -1,23 +1,18 @@
-import { Dimension } from './../../models/Dimension';
+import { RestSettings } from './../../settings/RestSettings';
+import { DimensionDto } from './../../dtos/DimensionDto';
+import { LogService } from '../../../shared/services/log.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const httpOptions = { // Outsource!
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
 
 @Injectable({
   providedIn: 'root'
 })
 export class DimensionRestService {
 
-  dimensionsUrl = '/api/dimensions'; // Outsource!
-
-  constructor(private http: HttpClient) {
+  constructor(
+    private logger: LogService,
+    private http: HttpClient) {
 
   }
 
@@ -25,23 +20,13 @@ export class DimensionRestService {
 
   }
 
-  getDimensions(): Observable<Dimension[]> {
-    return this.http.get<Dimension[]>(this.dimensionsUrl);
+  getDimensions(): Observable<DimensionDto[]> {
+    this.logger.info(this, 'Get all Dimensions');
+    return this.http.get<DimensionDto[]>(RestSettings.dimensionsUrl);
   }
 
   getDimensionTypes(): Observable<string[]> {
-    return this.http.get<string[]>(this.dimensionsUrl + '/types');
-  }
-
-  createDimension(dimension: Dimension): Observable<any> {
-    return this.http.post(this.dimensionsUrl, dimension, httpOptions);
-  }
-
-  updateDimension(dimension: Dimension): Observable<any> {
-    return this.http.put(this.dimensionsUrl, dimension, httpOptions);
-  }
-
-  deleteDimension(dimension: Dimension): Observable<any> {
-    return this.http.delete(this.dimensionsUrl + '/' + dimension.id);
+    this.logger.info(this, 'Get all DimensionsTypes');
+    return this.http.get<string[]>(RestSettings.dimensionTypesUrl);
   }
 }

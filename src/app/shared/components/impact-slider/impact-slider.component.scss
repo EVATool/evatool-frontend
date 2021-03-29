@@ -1,0 +1,48 @@
+::ng-deep .mat-slider {
+  width: 100%;
+}
+
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-background,
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+  color: transparent;
+  background-color: transparent;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+  height: 30px;
+  width: 30px;
+  color: transparent;
+  background-color: black;
+  opacity: 0.0;
+}
+
+::ng-deep .mat-slider-thumb {
+  color: transparent;
+  background-color: transparent;
+  transition: none;
+  transform: none;
+}
+
+.container {
+  position: relative;
+  height: 20px;
+  background-color: rgb(220, 220, 220);
+}
+
+#slider-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -9px;
+  bottom: 0;
+}
+
+#slider-middle {
+  position: absolute;
+  background-color: gray;
+  margin-top: -10px;
+  height: 40px;
+  width: 1px;
+  float: left;
+  left: 50%;
+}

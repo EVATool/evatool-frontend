@@ -1,35 +1,28 @@
 <table mat-table [dataSource]='tableDataSource' matSort>
-  <caption class="screen-reader-only">List of impacts</caption>
+  <caption class=" screen-reader-only">List of impacts</caption>
 
   <!-- TODO: ToolTips when tabbing through headers -->
-  <ng-container matColumnDef='id'>
-    <th scope="col" mat-header-cell *matHeaderCellDef>
-      <div mat-sort-header matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
+  <ng-container matColumnDef='uniqueString'>
+    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+      <div matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
     </th>
-    <td mat-cell *matCellDef='let impact'> {{impact.id}} </td>
+
+    <td mat-cell *matCellDef='let impact'> {{impact.uniqueString}} </td>
   </ng-container>
 
   <ng-container matColumnDef='stakeholder'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The affected stakeholder" matTooltipHideDelay="100" matTooltipPosition="above">Stakeholder</div>
-      <button mat-icon-button color="accent" (click)="$event.stopPropagation();toggleFilterVisibility('stakeholder')"
-        aria-label="Stakeholder-Filter">
-        <mat-icon>filter_alt</mat-icon>
-      </button>
-<!--filter -->
-      <div class="floating" appClickOutside (clickOutside)="searchToggles.set('stakeholder', false)">
-        <mat-form-field (click)="$event.stopPropagation()"
-          [ngClass]="searchToggles.get('stakeholder') ? 'show' : 'hide'">
-          <mat-label>Stakeholder-Filter</mat-label>
-          <input matInput [formControl]="stakeholderFilter" placeholder="Stakeholder">
-        </mat-form-field>
-      </div>
     </th>
 
     <td mat-cell *matCellDef='let impact'>
-      <mat-select [(ngModel)]="impact.stakeholder">
-        <mat-option *ngFor="let stk of stakeholders" [value]="stk">{{stk.name}}</mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select [(ngModel)]="impact.stakeholder" (selectionChange)="stakeholderChange(impact, $event)">
+          <mat-option *ngFor="let stk of impactDataService.stakeholders" [value]="stk">
+            {{stk.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </td>
   </ng-container>
 
@@ -37,45 +30,29 @@
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The dimension affecting the stakeholder" matTooltipHideDelay="100" matTooltipPosition="above">
         Dimension</div>
-      <mat-icon>info</mat-icon>
-      <button mat-icon-button color="accent" (click)="$event.stopPropagation();toggleFilterVisibility('dimension')"
-        aria-label="Stakeholder-Filter">
-        <mat-icon>filter_alt</mat-icon>
-      </button>
 
-      <div class="floating" appClickOutside (clickOutside)="searchToggles.set('dimension', false)">
-        <mat-form-field (click)="$event.stopPropagation()" [ngClass]="searchToggles.get('dimension') ? 'show' : 'hide'">
-          <mat-label>Dimension-Filter</mat-label>
-          <input matInput [formControl]="dimensionFilter" placeholder="Dimension">
-        </mat-form-field>
-      </div>
+      <mat-icon id="dimension-modal" (click)="$event.stopPropagation(); openDimensionModal();">info</mat-icon>
     </th>
 
     <td mat-cell *matCellDef='let impact'>
-      <mat-select [(ngModel)]="impact.dimension">
-        <mat-option *ngFor="let dim of dimensions" [value]="dim">{{dim.name}}</mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select [(ngModel)]="impact.dimension" (selectionChange)="dimensionChange(impact, $event)">
+          <mat-option *ngFor="let dim of impactDataService.dimensions" [value]="dim">{{dim.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </td>
   </ng-container>
 
   <ng-container matColumnDef='value'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The impact (Goal or Risk)" matTooltipHideDelay="100" matTooltipPosition="above">Impact</div>
-      <button mat-icon-button color="accent" (click)="$event.stopPropagation();toggleFilterVisibility('value')"
-        aria-label="Stakeholder-Filter">
-        <mat-icon>filter_alt</mat-icon>
-      </button>
-
-      <div class="floating" appClickOutside (clickOutside)="searchToggles.set('value', false)">
-        <mat-form-field (click)="$event.stopPropagation()" [ngClass]="searchToggles.get('value') ? 'show' : 'hide'">
-          <mat-label>Dimension-Filter</mat-label>
-          <input matInput [formControl]="valueFilter" placeholder="Dimension">
-        </mat-form-field>
-      </div>
     </th>
 
     <td mat-cell *matCellDef='let impact'>
-      <app-impact-slider [(value)]="impact.value"></app-impact-slider>
+      <div class="impact-slider-container">
+        <app-impact-slider [deadzone]='0.3' [value]="impact.value" (sliderValueChange)="valueChange(impact, $event)">
+        </app-impact-slider>
+      </div>
     </td>
   </ng-container>
 
@@ -86,8 +63,8 @@
     <td mat-cell *matCellDef='let impact'>
       <div class="description-wrapper">
         <div class="description-container">
-          <textarea matInput cdkTextareaAutosize [(ngModel)]="impact.description"
-            placeholder="Describe the impact..."></textarea>
+          <textarea matInput cdkTextareaAutosize [(ngModel)]="impact.description" placeholder="Describe the impact..."
+            (change)="descriptionChange(impact, $event)"></textarea>
         </div>
         <div class="delete-button-container">
           <button mat-fab (click)="deleteImpact(impact)" matTooltip="Delete Impact" matTooltipHideDelay="100"
