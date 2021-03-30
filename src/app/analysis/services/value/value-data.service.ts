@@ -40,6 +40,10 @@ export class ValueDataService {
     this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
   }
 
+  deleteValue(value: Value): void {
+    this.valueRestService.deleteValue(value).subscribe(() => {this.loadValues(); });
+  }
+
   save(value: Value): void {
     this.valueRestService.createValue({
       id: '',
@@ -82,7 +86,5 @@ export class ValueDataService {
       this.matDataSourceSocial = new MatTableDataSource<Value>(this.socialValue);
       console.log(this.matDataSourceEconomic);
     });
-
-
   }
 }

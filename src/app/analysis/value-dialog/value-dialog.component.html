@@ -15,7 +15,7 @@
             <ng-container matColumnDef='id'>
               <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
               <mat-cell *matCellDef='let value'>
-                <textarea class="inputField" type="text" value="{{value.id}}"
+                <textarea class="inputField" type="text" value="{{value.guiId}}"
                        [(ngModel)]="value.id" *ngIf="value.editable"
                        id="{{value.id}}_id" autofocus tabindex="0"></textarea>
                 <div *ngIf="!value.editable">
@@ -47,8 +47,8 @@
                   <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveSocialValue(value);">
                     <mat-icon>save</mat-icon>
                   </button>
-                  <button mat-icon-button *ngIf="!value.editable" name="archive">
-                    <mat-icon>archive</mat-icon>
+                  <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="deleteValue(value)">
+                    <mat-icon>delete</mat-icon>
                   </button>
                 </div>
               </mat-cell>
@@ -68,7 +68,7 @@
             <ng-container matColumnDef='id'>
               <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
               <mat-cell *matCellDef='let value'>
-                <textarea class="inputField" matInput type="text" value="{{value.id}}"
+                <textarea class="inputField" matInput type="text" value="{{value.guiId}}"
                        [(ngModel)]="value.id" *ngIf="value.editable"
                           id="{{value.id}}__id" autofocus tabindex="3"></textarea>
                 <div *ngIf="!value.editable">
@@ -100,8 +100,8 @@
                   <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveEconomicValue(value);">
                     <mat-icon>save</mat-icon>
                   </button>
-                  <button mat-icon-button *ngIf="!value.editable" name="archive">
-                    <mat-icon>archive</mat-icon>
+                  <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="deleteValue(value)">
+                    <mat-icon>delete</mat-icon>
                   </button>
                 </div>
               </mat-cell>

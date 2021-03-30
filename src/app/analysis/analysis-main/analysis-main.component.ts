@@ -7,6 +7,7 @@ import { AnalysisRestService } from "../services/analysis/analysis-rest.service"
 import { AnalysisDataService } from "../services/analysis/analysis-data.service";
 import { ValueDialogComponent } from "../value-dialog/value-dialog.component";
 import {AnalysisDTO} from "../model/AnalysisDTO";
+import {MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
   selector: 'app-analysis-main',
@@ -70,4 +71,5 @@ export class AnalysisMainComponent implements OnInit {
   analysisClick(analysis: Analysis): void {
     this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
   }
+
 }

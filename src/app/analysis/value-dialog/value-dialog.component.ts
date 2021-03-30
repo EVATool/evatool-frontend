@@ -64,4 +64,8 @@ export class ValueDialogComponent implements OnInit {
     value.editable = false;
     this.valueDataService.save(value);
   }
+
+  deleteValue(value: Value): void {
+      this.valueDataService.deleteValue(value);
+  }
 }
