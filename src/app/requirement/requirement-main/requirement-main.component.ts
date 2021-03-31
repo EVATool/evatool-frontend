@@ -1,5 +1,5 @@
 import {Requirements} from '../models/Requirements';
-import {MatTable} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {ImpactDataService} from '../services/impact/impact-data.service';
 import {Datagenerator} from '../services/datagenerator';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -34,4 +34,20 @@ export class RequirementMainComponent implements OnInit  {
     if(event.ctrlKey && event.keyCode == 10){
     }
   }
+
+  // addRequirements(): void {
+  //   const requirementNew: Requirements = new Requirements();
+  //   requirementNew.projectID = this.idForProject;
+  //   const size: number = this.requirementsSource.length;
+  //   if (size < 10){
+  //     requirementNew.requirementTitle = 'RE0' + (size + 1);
+  //   }else{
+  //     requirementNew.requirementTitle = 'RE' + (size + 1);
+  //   }
+  //   requirementNew.requirementDescription = 'generated requirement';
+  //   this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
+  //     this.requirementsSource.push(value);
+  //     this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
+  //   });
+  // }
 }

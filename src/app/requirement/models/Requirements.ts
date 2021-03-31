@@ -7,7 +7,6 @@ export class Requirements{
   requirementTitle = '';
   requirementDescription = '';
   dimensions!: Dimension[];
-  impactDescription!: [];
   requirementImpactPoints!: any;
   variantsTitle!: [];
 }

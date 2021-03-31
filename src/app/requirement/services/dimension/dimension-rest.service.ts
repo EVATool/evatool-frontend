@@ -42,6 +42,6 @@ export class DimensionRestService {
   }
 
   deleteDimension(dimension: Dimension): Observable<any> {
-    return this.http.delete(this.dimensionsUrl + '/' + dimension.id);
+    return this.http.delete(this.dimensionsUrl + '/' + dimension.entityId);
   }
 }

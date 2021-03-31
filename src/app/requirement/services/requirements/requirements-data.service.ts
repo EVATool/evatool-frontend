@@ -27,7 +27,7 @@ export class RequirementsDataService {
           dimensions : requirementRest.dimensions,
           impactDescription : requirementRest.impactDescription,
           // requirementImpactPoints : new Map(Object.entries(requirementRest.requirementImpactPoints)),
-          requirementImpactPoints : requirementRest.requirementImpactPoints,
+          requirementPointDTOMap : requirementRest.requirementPointDTOMap,
           variantsTitle : requirementRest.variantsTitle
         };
         this.requirements.push(requirement);
