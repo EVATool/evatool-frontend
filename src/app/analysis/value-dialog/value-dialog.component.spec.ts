@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValueDialogComponent } from './value-dialog.component';
@@ -8,9 +9,10 @@ describe('ValueDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValueDialogComponent ]
+      imports: [HttpClientModule],
+      declarations: [ValueDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
