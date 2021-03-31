@@ -1,34 +1,37 @@
 
-import { Injectable } from '@angular/core';
-import {Stakeholder} from '../model/Stakeholder';
-import {StakeholderRestService} from './stakeholder-rest.service';
-import {StakeholderDTO} from '../model/StakeholderDTO';
-import {MatTableDataSource} from '@angular/material/table';
-import {StakeholderImpact} from "../model/StakeholderImpact";
+import { Injectable, AfterViewInit } from '@angular/core';
+import { Stakeholder } from '../model/Stakeholder';
+import { StakeholderRestService } from './stakeholder-rest.service';
+import { StakeholderDTO } from '../model/StakeholderDTO';
+import { MatTableDataSource } from '@angular/material/table';
+import { StakeholderImpact } from "../model/StakeholderImpact";
 
 @Injectable({
   providedIn: 'root'
 })
-export class StakeholderDataService {
+export class StakeholderDataService implements AfterViewInit {
 
   stakeholders: Stakeholder[] = [];
   matDataSource = new MatTableDataSource<Stakeholder>();
 
-  constructor( private stakeholderRestService: StakeholderRestService){
+  constructor(private stakeholderRestService: StakeholderRestService) {
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
+  }
+
+  ngAfterViewInit(): void {
     this.loadStakeholder();
   }
 
-  loadStakeholder(): void{
+  loadStakeholder(): void {
     this.stakeholderRestService.getStakeholders().subscribe((result: any) => {
       this.stakeholders = [];
       result.forEach((stakeholderDTO: StakeholderDTO) => {
         let negativeImpact = 0;
         let postiveImpact = 0;
         stakeholderDTO.impact.forEach((impact: StakeholderImpact) => {
-          if (impact.value > 0){
+          if (impact.value > 0) {
             postiveImpact += impact.value;
-          }else{
+          } else {
             negativeImpact += Math.abs(impact.value);
           }
         });
@@ -49,13 +52,13 @@ export class StakeholderDataService {
   }
 
 
-  createStakeholder(): void{
+  createStakeholder(): void {
     const stakeholder = this.createDefaultStakeholder();
     this.stakeholders.push(stakeholder);
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
   }
 
-  save(stakeholder: Stakeholder): void{
+  save(stakeholder: Stakeholder): void {
     console.log(stakeholder.name);
     this.stakeholderRestService.createStakeholder({
       rootEntityID: '',
@@ -69,7 +72,7 @@ export class StakeholderDataService {
     });
   }
 
-  createDefaultStakeholder(): Stakeholder{
+  createDefaultStakeholder(): Stakeholder {
     const stakeholder = new Stakeholder();
     stakeholder.editable = true;
     stakeholder.priority = 0;
@@ -98,14 +101,14 @@ export class StakeholderDataService {
     this.matDataSource.filter = level;
   }
 
-  resetFilter(): void{
+  resetFilter(): void {
     this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
       return true;
     };
     this.matDataSource.filter = '';
   }
 
-  filterImpact(value: any): void{
+  filterImpact(value: any): void {
     this.resetFilter();
     this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
       const totalimpact = data.negativeImpact + data.positiveImpact;
