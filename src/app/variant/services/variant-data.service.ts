@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
 import {VariantDTO} from '../models/VariantDTO';
 import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
+import {ActivatedRoute, convertToParamMap} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,13 @@ import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component
 export class VariantDataService{
   variants: Variant[] = [];
   matDataSource = new MatTableDataSource<Variant>();
+  analysisid: string | null = '';
 
-  constructor( private variantRestService: VariantRestService){
+  constructor( private variantRestService: VariantRestService,
+               private router: ActivatedRoute){
     this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     this.loadVariants();
+    this.loadAnalysisIDFromRouter();
   }
 
   loadVariants(): void{
@@ -64,10 +68,16 @@ export class VariantDataService{
         title: variant.title,
         description: variant.description,
         subVariant: {},
-        analysisId: '43344c13-f0d2-4a08-bfd5-60f30f847c56'
+        analysisId: this.analysisid
       }).subscribe(() => {
         this.loadVariants();
     });
+  }
+
+  loadAnalysisIDFromRouter(): void{
+     this.router.paramMap.subscribe((paramMap) => {
+      this.analysisid = paramMap.get('id');
+     });
   }
 
   archive(variant: Variant): void {
