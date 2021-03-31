@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,7 +14,7 @@ describe('AnalysisMainComponent', () => {
   // @ts-ignore
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatDialogModule, HttpClientModule],
+      imports: [MatDialogModule, HttpClientModule, RouterTestingModule],
       declarations: [AnalysisMainComponent]
     })
       .compileComponents();
