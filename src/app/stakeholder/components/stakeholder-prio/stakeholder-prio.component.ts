@@ -10,7 +10,7 @@ export class StakeholderPrioComponent implements OnInit {
 
   @Input() prio!: number;
   @Input() public editable = false;
-  @Output() prioChange = new EventEmitter<number | null>();
+  @Output() prioChange = new EventEmitter<number>();
 
   constructor() {
   }

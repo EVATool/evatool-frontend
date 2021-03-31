@@ -1,7 +1,7 @@
-
-<div>
-<mat-slider min="0.0" max="{{impactvaluetotal}}" step="0.1"   [value]="negativimpactvalue"
-             [disabled]="!editable" class="editable_{{editable}}  created_{{created}}" (change)="onImpactChange($event)">
-
+<div class="stakeholder-impact-slider">
+<div class="created_{{created}}">
+<mat-slider min="0.0" max="{{impactvaluetotal}}" step="0.1"   [value]="negativeimpactvalue"
+             [disabled]="!editable" class="editable_{{editable}}" (change)="onImpactChange($event)">
 </mat-slider>
+</div>
 </div>

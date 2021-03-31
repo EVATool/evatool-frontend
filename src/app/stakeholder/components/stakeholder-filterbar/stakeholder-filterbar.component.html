@@ -5,13 +5,13 @@
     <span class="spacing"></span>
   <mat-select class="filter"></mat-select>
     <span class="spacing"></span>
-  <mat-select class="filter" id="level">
+  <mat-select [(value)]="preselect" class="filter" id="level">
     <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">
       {{level.value}}
     </mat-option>
   </mat-select>
     <span class="spacing"></span>
-  <app-stakeholder-prio class="filter" [editable]="true" (prioChange)="prioChange($event)"> </app-stakeholder-prio>
+  <app-stakeholder-prio [(prio)]="prio" class="filter" [editable]="true" (prioChange)="prioChange($event)"> </app-stakeholder-prio>
     <span class="spacing"></span>
   <app-stakeholder-impact class="filter" [editable]="true" (impactChange)="impactChange($event)"></app-stakeholder-impact>
     <button class="resetFilter" (click)="resetFilter()" > Reset filter</button>
