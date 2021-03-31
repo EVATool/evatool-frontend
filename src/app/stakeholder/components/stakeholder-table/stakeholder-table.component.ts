@@ -22,6 +22,7 @@ export class StakeholderTableComponent implements OnInit {
 
   save(stakeholder: Stakeholder): void{
       stakeholder.editable = false;
+      stakeholder.created = false;
       this.stakeholderDataService.save(stakeholder);
   }
 
