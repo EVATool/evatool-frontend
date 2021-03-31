@@ -3,6 +3,5 @@ export class ValueDTO {
   name: any = '';
   type: any = '';
   description: any = '';
-  guiId: any = '';
   archived?: boolean;
 }

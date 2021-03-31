@@ -12,23 +12,12 @@
           <mat-panel-title>Social Value</mat-panel-title>
         </mat-expansion-panel-header>
           <mat-table mat-table [dataSource]='valueDataService.matDataSourceSocial'>
-            <ng-container matColumnDef='id'>
-              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-              <mat-cell *matCellDef='let value'>
-                <textarea class="inputField" type="text" value="{{value.guiId}}"
-                       [(ngModel)]="value.id" *ngIf="value.editable"
-                       id="{{value.id}}_id" autofocus tabindex="0"></textarea>
-                <div *ngIf="!value.editable">
-                  {{value.id}}
-                </div>
-              </mat-cell>
-            </ng-container>
             <ng-container matColumnDef='name'>
               <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
               <mat-cell *matCellDef='let value'>
                 <textarea class="inputField" matInput type="text" value="{{value.name}}"
                        [(ngModel)]="value.name" *ngIf="value.editable"
-                       id="{{value.id}}_name" tabindex="1" placeholder="Titel"></textarea>
+                       id="{{value.id}}_name" tabindex="0" placeholder="Titel"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.name}}
                 </div>
@@ -39,7 +28,7 @@
               <mat-cell *matCellDef='let value'>
                 <textarea class="inputField" matInput type="text" value="{{value.description}}"
                        [(ngModel)]="value.description" *ngIf="value.editable"
-                       id="{{value.id}}_description" tabindex="2" placeholder="Beschreibung"></textarea>
+                       id="{{value.id}}_description" tabindex="1" placeholder="Beschreibung"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.description}}
                 </div>
@@ -65,23 +54,12 @@
           <mat-panel-title>Economic Value</mat-panel-title>
         </mat-expansion-panel-header>
           <mat-table mat-table [dataSource]='valueDataService.matDataSourceEconomic' class="variant-table">
-            <ng-container matColumnDef='id'>
-              <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
-              <mat-cell *matCellDef='let value'>
-                <textarea class="inputField" matInput type="text" value="{{value.guiId}}"
-                       [(ngModel)]="value.id" *ngIf="value.editable"
-                          id="{{value.id}}__id" autofocus tabindex="3"></textarea>
-                <div *ngIf="!value.editable">
-                  {{value.id}}
-                </div>
-              </mat-cell>
-            </ng-container>
             <ng-container matColumnDef='name'>
               <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
               <mat-cell *matCellDef='let value'>
                 <textarea class="inputField" matInput type="text" value="{{value.name}}"
                        [(ngModel)]="value.name" *ngIf="value.editable"
-                       id="{{value.id}}__name" tabindex="4" placeholder="Titel"></textarea>
+                       id="{{value.id}}__name" tabindex="2" placeholder="Titel"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.name}}
                 </div>
@@ -92,7 +70,7 @@
               <mat-cell *matCellDef='let value'>
                 <textarea class="inputField" matInput type="text" value="{{value.description}}"
                        [(ngModel)]="value.description" *ngIf="value.editable"
-                       id="{{value.id}}__description" tabindex="5" placeholder="Beschreibung"></textarea>
+                       id="{{value.id}}__description" tabindex="3" placeholder="Beschreibung"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.description}}
                 </div>

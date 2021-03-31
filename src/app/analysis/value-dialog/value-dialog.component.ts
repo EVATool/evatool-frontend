@@ -11,7 +11,7 @@ import {Value} from "../model/Value";
 })
 export class ValueDialogComponent implements OnInit {
 
-  public displayedColumns = ['id', 'name', 'description'];
+  public displayedColumns = ['name', 'description'];
 
 
   socialValue: Value[] = [];

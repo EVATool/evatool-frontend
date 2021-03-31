@@ -47,7 +47,6 @@ export class ValueDataService {
   save(value: Value): void {
     this.valueRestService.createValue({
       id: '',
-      guiId: '',
       name: value.name,
       description: value.description,
       type: value.type
@@ -67,7 +66,6 @@ export class ValueDataService {
             name: valueDTO.name,
             description: valueDTO.description,
             type: valueDTO.type,
-            guiId: valueDTO.guiId
           };
           this.socialValue.push(value);
         }
@@ -77,7 +75,6 @@ export class ValueDataService {
             name: valueDTO.name,
             description: valueDTO.description,
             type: valueDTO.type,
-            guiId: valueDTO.guiId
           };
           this.economicValue.push(value);
         }
