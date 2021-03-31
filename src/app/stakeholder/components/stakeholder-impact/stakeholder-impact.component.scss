@@ -18,6 +18,9 @@
         background-color: green;
         height: 100%;
       }
+      .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
+        background-color: green;
+      }
     }
     .created_true {
       .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
