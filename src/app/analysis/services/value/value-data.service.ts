@@ -1,8 +1,8 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Value} from "../../model/Value";
-import {ValueRestService} from "./value-rest.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {Stakeholder} from "../../../stakeholder/model/Stakeholder";
+import { EventEmitter, Injectable } from '@angular/core';
+import { Value } from "../../model/Value";
+import { ValueRestService } from "./value-rest.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { Stakeholder } from "../../../stakeholder/model/Stakeholder";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,9 @@ export class ValueDataService {
   constructor(private valueRestService: ValueRestService) {
     this.matDataSourceEconomic = new MatTableDataSource<Value>(this.socialValue);
     this.matDataSourceSocial = new MatTableDataSource<Value>(this.economicValue);
+  }
+
+  onInit() {
     this.loadValues();
   }
 
@@ -41,7 +44,7 @@ export class ValueDataService {
   }
 
   deleteValue(value: Value): void {
-    this.valueRestService.deleteValue(value).subscribe(() => {this.loadValues(); });
+    this.valueRestService.deleteValue(value).subscribe(() => { this.loadValues(); });
   }
 
   save(value: Value): void {
@@ -69,7 +72,7 @@ export class ValueDataService {
           };
           this.socialValue.push(value);
         }
-        else if (valueDTO.type === 'ECONOMIC'){
+        else if (valueDTO.type === 'ECONOMIC') {
           const value: Value = {
             id: valueDTO.id,
             name: valueDTO.name,
