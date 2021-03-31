@@ -7,7 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
 import {VariantDTO} from '../models/VariantDTO';
 import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
-import {ActivatedRoute, convertToParamMap} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class VariantDataService{
   analysisid: string | null = '';
 
   constructor( private variantRestService: VariantRestService,
-               private router: ActivatedRoute){
+               private router: Router){
     this.matDataSource = new MatTableDataSource<Variant>(this.variants);
     this.loadVariants();
     this.loadAnalysisIDFromRouter();
@@ -75,8 +75,8 @@ export class VariantDataService{
   }
 
   loadAnalysisIDFromRouter(): void{
-     this.router.paramMap.subscribe((paramMap) => {
-      this.analysisid = paramMap.get('id');
+    this.router.routerState.root.queryParams.subscribe((paramMap) => {
+      this.analysisid = paramMap.id;
      });
   }
 
