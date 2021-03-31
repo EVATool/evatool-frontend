@@ -66,7 +66,8 @@ import { ImpactTableFilterBarComponent } from './components/impact-table-filter-
     NgMultiSelectDropDownModule,
   ],
   exports: [
-    ImpactMainComponent
+    ImpactMainComponent,
+    ImpactTableFilterBarComponent
   ]
 })
 export class ImpactModule { }
