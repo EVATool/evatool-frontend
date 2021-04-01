@@ -113,6 +113,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
       thumb.nativeElement.style.float = 'left';
       if (this.isFilter)
         thumb.nativeElement.style.opacity = '1';
+      else
+        thumb.nativeElement.style.transition = 'none';
     });
 
     if (this.isFilter) {
@@ -256,8 +258,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   mouseLeave() {
     this.logger.info(this, 'Mouse Leave Event')
     if (!this.isFilter) {
+      this.thumb.nativeElement.style.transition = '250ms ease-out 100ms';
       this.thumb.nativeElement.style.opacity = 0.0;
-      this.thumb.nativeElement.style.transition = 'none';
     }
   }
 }
