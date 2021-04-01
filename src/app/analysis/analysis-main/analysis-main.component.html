@@ -34,13 +34,13 @@
       <div class="news-card__text-wrapper">
         <h2 class="news-card__title">{{analysis.title}}</h2>
 
-        <i class="material-icons delete">delete</i>
-        <i class="material-icons settings">settings</i>
+        <i class="material-icons settings" tabindex="-1">settings</i>
+
 
         <div class="news-card__post-date">{{"Letzte Änderung "}} {{analysis.lastUpdate}}</div>
         <div class="news-card__details-wrapper">
           <p class="news-card__excerpt">{{analysis.description}}</p>
-          <a href="#" class="news-card__read-more">Einsehen <i class="fas fa-long-arrow-alt-right"></i></a>
+          <a class="news-card__read-more" >Einsehen <i class="fas fa-long-arrow-alt-right" ></i></a>
         </div>
       </div>
     </div>

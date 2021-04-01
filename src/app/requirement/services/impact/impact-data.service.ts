@@ -13,28 +13,28 @@ export class ImpactDataService {
       id: '1',
       value: -0.3,
       description: 'This is the first read-only impact',
-      dimension: { id: '21', name: 'Feelings'},
+      dimension: { entityId: '21', dimensionTitle: 'Feelings'},
       analysis: { id: '7' }
     },
     {
       id: '2',
       value: 0.5,
       description: 'This is the second read-only impact',
-      dimension: { id: '22', name: 'Control' },
+      dimension: { entityId: '22', dimensionTitle: 'Control' },
       analysis: { id: '7' }
     },
     {
       id: '3',
       value: 0.9,
       description: 'This is the third read-only impact',
-      dimension: { id: '23', name: 'Finances'},
+      dimension: { entityId: '23', dimensionTitle: 'Finances'},
       analysis: { id: '7' }
     },
     {
       id: '4',
       value: 0.2,
       description: 'This is the fourth read-only impact',
-      dimension: { id: '24', name: 'Safety'},
+      dimension: { entityId: '24', dimensionTitle: 'Safety'},
       analysis: { id: '7' }
     }
   ];

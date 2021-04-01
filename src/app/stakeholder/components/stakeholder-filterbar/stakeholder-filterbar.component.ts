@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StakeholderDataService} from '../../service/stakeholder-data.service';
+import {StakeholderPrioComponent} from '../stakeholder-prio/stakeholder-prio.component';
 
 @Component({
   selector: 'app-stakeholder-filterbar',
@@ -8,8 +9,15 @@ import {StakeholderDataService} from '../../service/stakeholder-data.service';
 })
 export class StakeholderFilterbarComponent implements OnInit {
 
-  public levels = [{key: 'NATURAL_PERSON' , value: 'Individuell'}, {key: 'ORGANIZATION', value: 'Organisation'}, {key: 'SOCIETY', value: 'Gesellschaft'}, {key: '', value: 'Alle'}];
-  public preselect = this.levels[4];
+  public levels = [
+      {key: '', value: 'Alle'},
+      {key: 'NATURAL_PERSON' , value: 'Individuell'},
+      {key: 'ORGANIZATION', value: 'Organisation'},
+      {key: 'SOCIETY', value: 'Gesellschaft'}
+    ];
+
+  public preselect = this.levels[0];
+  public prio = 0;
   constructor(public stakeholderDataService: StakeholderDataService) { }
 
   ngOnInit(): void {
@@ -17,6 +25,7 @@ export class StakeholderFilterbarComponent implements OnInit {
 
   impactChange(value: any): void{
     console.log(value);
+    this.stakeholderDataService.filterImpact(value);
   }
 
   prioChange(value: any): void{
@@ -32,6 +41,8 @@ export class StakeholderFilterbarComponent implements OnInit {
   }
 
   resetFilter(): void {
+    this.prio = 0;
+    this.preselect = this.levels[0];
     this.stakeholderDataService.resetFilter();
   }
 }

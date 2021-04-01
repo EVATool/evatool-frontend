@@ -12,16 +12,16 @@ export class DimensionDataService {
 
   dummyDimensions: Dimension[] = [
     {
-      id: '21', name: 'Feelings'
+      entityId: '21', dimensionTitle: 'Feelings'
     },
     {
-      id: '22', name: 'Control'
+      entityId: '22', dimensionTitle: 'Control'
     },
     {
-      id: '23', name: 'Finances'
+      entityId: '23', dimensionTitle: 'Finances'
     },
     {
-      id: '24', name: 'Safety'
+      entityId: '24', dimensionTitle: 'Safety'
     }
   ];
 

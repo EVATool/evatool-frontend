@@ -8,7 +8,7 @@
 </div>
 <mat-dialog-content>
   <div class="variant-dialog">
-    <mat-table mat-table [dataSource]='matDataSource'>
+    <mat-table mat-table [dataSource]='variantDataService.matDataSource'>
       <ng-container matColumnDef='guiId'>
 
         <mat-cell *matCellDef='let variant' id="guiId">
@@ -53,8 +53,11 @@
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-icon-button aria-label="Add Variant" class="addVariantButton" (click)="addVariant()" tabindex="-1">
-    <mat-icon>add</mat-icon>
+  <div class="addVariantButton">
+    <button mat-icon-button aria-label="Add Variant"  (click)="addVariant()" tabindex="-1">
+      <mat-icon>add</mat-icon>
+    </button>
     Variant
-  </button>
+  </div>
+
 </mat-dialog-actions>

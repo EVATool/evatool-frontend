@@ -6,6 +6,8 @@ import { Analysis } from "../model/Analysis";
 import { AnalysisRestService } from "../services/analysis/analysis-rest.service";
 import { AnalysisDataService } from "../services/analysis/analysis-data.service";
 import { ValueDialogComponent } from "../value-dialog/value-dialog.component";
+import {AnalysisDTO} from "../model/AnalysisDTO";
+import {MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
   selector: 'app-analysis-main',
@@ -50,23 +52,24 @@ export class AnalysisMainComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.analysisRestService.getVariants().subscribe((result: any) => {
+    this.analysisRestService.getAnalysis().subscribe((result: any) => {
       this.analysisArray = [];
       console.log(result);
-      result.forEach((analysisDTO: any) => {
+      result.forEach((analysisDTO: AnalysisDTO) => {
         const analysis: Analysis = {
           id: analysisDTO.rootEntityID,
           description: analysisDTO.analysisDescription,
           title: analysisDTO.analysisName,
-          lastUpdate: '01.01.2021', // TODO: Datum anpassen
-          img: this.imgs[Math.floor(Math.random() * this.imgs.length)]
+          lastUpdate: '',
+          img: '' //this.imgs[Math.floor(Math.random() * this.imgs.length)]
         };
         this.analysisArray.push(analysis);
       });
     });
   }
 
-  analysisClick(analysis: Analysis) {
+  analysisClick(analysis: Analysis): void {
     this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
   }
+
 }
