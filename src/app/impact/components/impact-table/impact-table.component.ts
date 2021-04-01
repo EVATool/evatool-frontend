@@ -140,7 +140,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
           valueFilter = data.value === searchTerms.value.sliderFilterValues[0];
           break;
 
-        case SliderFilterType.Bewtween:
+        case SliderFilterType.Between:
           const minValue = Math.min(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
           const maxValue = Math.max(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
           if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {

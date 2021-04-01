@@ -148,7 +148,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
           this.drawThumb(this.value, this.thumb);
           break;
 
-        case SliderFilterType.Bewtween:
+        case SliderFilterType.Between:
           const smallerValue = Math.min(this.value, this.valueSecond);
           const biggerValue = Math.max(this.value, this.valueSecond);
           this.riskBar.nativeElement.style.width = '0%';
