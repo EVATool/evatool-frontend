@@ -12,10 +12,6 @@
   <ng-container matColumnDef='Stakeholder'>
     <mat-header-cell *matHeaderCellDef>Stakeholder</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
-      <div>
-        {{stakeholder.name}}
-      </div>
-
       <input type="text" matInput value="{{stakeholder.name}}"
              readonly="{{!stakeholder.editable}}" name="stakeholder"
              [(ngModel)]="stakeholder.name" *ngIf="stakeholder.editable" id="titleinput" id="{{stakeholder.id}}_stakeholder" autofocus tabindex="0">
