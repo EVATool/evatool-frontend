@@ -1,7 +1,7 @@
-import { SliderFilterSettings, SliderFilterType, SliderFilterBoundary } from './SliderFilterSettings';
-import { MatSlider, MatSliderChange } from '@angular/material/slider';
-import { Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { LogService } from '../../services/log.service';
+import {SliderFilterSettings, SliderFilterType, SliderFilterBoundary} from './SliderFilterSettings';
+import {MatSlider, MatSliderChange} from '@angular/material/slider';
+import {Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef} from '@angular/core';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-impact-slider',
@@ -111,7 +111,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
       thumb.nativeElement.style.height = '20px';
       thumb.nativeElement.style.width = '11px';
       thumb.nativeElement.style.float = 'left';
-      thumb.nativeElement.style.opacity = '1';
+      if (this.isFilter)
+        thumb.nativeElement.style.opacity = '1';
     });
 
     if (this.isFilter) {
@@ -242,5 +243,21 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
     const map = (mapValue: number, x1: number, y1: number, x2: number, y2: number) => (mapValue - x1) * (y2 - x2) / (y1 - x1) + x2;
     const val = map(value, -1, 1, 1, 99);
     thumb.nativeElement.style.left = 'calc(' + val + '% - 5px)';
+  }
+
+  mouseEnter() {
+    this.logger.info(this, 'Mouse Enter Event')
+    if (!this.isFilter) {
+      this.thumb.nativeElement.style.transition = '250ms ease-out 100ms';
+      this.thumb.nativeElement.style.opacity = 1.0;
+    }
+  }
+
+  mouseLeave() {
+    this.logger.info(this, 'Mouse Leave Event')
+    if (!this.isFilter) {
+      this.thumb.nativeElement.style.opacity = 0.0;
+      this.thumb.nativeElement.style.transition = 'none';
+    }
   }
 }
