@@ -1,4 +1,4 @@
-import { HighlightSearch } from './../../pipes/HighlightSearch';
+import { HighlightSearch } from '../../pipes/HighlightSearch';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormBuilder } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
