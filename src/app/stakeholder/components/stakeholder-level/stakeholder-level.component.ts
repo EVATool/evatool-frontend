@@ -9,10 +9,11 @@ import {Stakeholder} from '../../model/Stakeholder';
 })
 export class StakeholderLevelComponent implements OnInit {
 
-  @Input() public level = '';
-  @Input() public editable = false;
+  @Input() public level = 'NATURAL_PERSON';
+  @Input() public editable = true;
+  @Input() private filter = false;
   @Output() levelChange = new EventEmitter<string | null>();
-  public levels = ['NATURAL_PERSON', 'ORGANIZATION', 'SOCIETY', ''];
+  public levels = ['NATURAL_PERSON', 'ORGANIZATION', 'SOCIETY'];
   constructor() { }
 
   ngOnInit(): void {

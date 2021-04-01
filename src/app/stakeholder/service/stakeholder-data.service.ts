@@ -75,8 +75,8 @@ export class StakeholderDataService implements AfterViewInit {
   createDefaultStakeholder(): Stakeholder {
     const stakeholder = new Stakeholder();
     stakeholder.editable = true;
-    stakeholder.priority = 0;
-    stakeholder.level = '';
+    stakeholder.priority = 1;
+    stakeholder.level = 'NATURAL_PERSON';
     stakeholder.created = true;
     return stakeholder;
   }

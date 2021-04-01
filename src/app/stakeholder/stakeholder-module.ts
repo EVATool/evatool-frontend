@@ -20,19 +20,19 @@ import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [StakeholderMainComponent, StakeholderTableComponent, StakeholderPrioComponent,
     StakeholderLevelComponent, StakeholderImpactComponent, StakeholderFilterbarComponent],
-  imports: [
-    CommonModule,
-    MatTableModule,
-    NgScrollbarModule,
-    MatInputModule,
-    MatSliderModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatDialogModule,
-    MatIconModule,
-    FormsModule,
-    MatButtonModule
-  ],
+    imports: [
+        CommonModule,
+        MatTableModule,
+        NgScrollbarModule,
+        MatInputModule,
+        MatSliderModule,
+        MatSelectModule,
+        MatToolbarModule,
+        MatDialogModule,
+        MatIconModule,
+        FormsModule,
+        MatButtonModule,
+    ],
   exports: [
     StakeholderMainComponent
   ]

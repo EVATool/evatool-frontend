@@ -3,8 +3,6 @@
   <span></span>
   <input matInput type="Text" placeholder="Search..." class="filter">
     <span class="spacing"></span>
-  <mat-select class="filter"></mat-select>
-    <span class="spacing"></span>
   <mat-select [(value)]="preselect" class="filter" id="level">
     <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">
       {{level.value}}

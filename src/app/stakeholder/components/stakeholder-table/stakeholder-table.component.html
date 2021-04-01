@@ -9,7 +9,7 @@
       </div>
     </mat-cell>
   </ng-container>
-  <ng-container matColumnDef='Stakeholder'>
+  <ng-container matColumnDef='Stakeholder' >
     <mat-header-cell *matHeaderCellDef>Stakeholder</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
       <input type="text" matInput value="{{stakeholder.name}}"
@@ -25,14 +25,14 @@
     <mat-header-cell *matHeaderCellDef>Level</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
       <div>
-        <app-stakeholder-level [editable]="stakeholder.editable" [(level)]="stakeholder.level" (levelChange)="stakeholder.level = $event" ></app-stakeholder-level>
+        <app-stakeholder-level [(level)]="stakeholder.level" (levelChange)="stakeholder.level = $event" ></app-stakeholder-level>
       </div>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef='Prio'>
     <mat-header-cell *matHeaderCellDef>Prio</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder' >
-      <app-stakeholder-prio [editable]="stakeholder.editable" [(prio)]="stakeholder.priority" (prioChange)="stakeholder.priority = $event"></app-stakeholder-prio>
+      <app-stakeholder-prio [(prio)]="stakeholder.priority" (prioChange)="stakeholder.priority = $event"></app-stakeholder-prio>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="Impact">
