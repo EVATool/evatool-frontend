@@ -4,10 +4,11 @@ import {TestBed} from '@angular/core/testing';
 
 import {DimensionDataService} from './dimension-data.service';
 import {HttpClientModule} from "@angular/common/http";
+import {DimensionRestService} from "./dimension-rest.service";
 
 describe('DimensionDataService', () => {
   let sampleData: SampleDataService;
-  let restService: MockValueRestService;
+  let restService: DimensionRestService;
   let service: DimensionDataService;
 
   beforeEach(() => {
@@ -32,7 +33,9 @@ describe('DimensionDataService', () => {
       service.onInit();
 
       // Assert
-      expect(service.dimensions.length).toEqual(sampleData.dummyDimensionDtos.length);
+      service.loadedDimensions.subscribe(dimensions => {
+        expect(service.dimensions).toEqual(sampleData.dummyDimensionDtos);
+      });
     });
 
     it('should load dimensions types', () => {
@@ -42,29 +45,9 @@ describe('DimensionDataService', () => {
       service.onInit();
 
       // Assert
-      expect(service.dimensionTypes.length).toEqual(sampleData.dummyDimensionTypes.length);
-    });
-
-    it('should fire \'loadedDimensions\' event', () => {
-      // Arrange
-      spyOn(service.loadedDimensions, 'emit');
-
-      // Act
-      service.onInit();
-
-      // Assert
-      expect(service.loadedDimensions.emit).toHaveBeenCalled();
-    });
-
-    it('should fire \'loadedDimensionTypes\' event', () => {
-      // Arrange
-      spyOn(service.loadedDimensionTypes, 'emit');
-
-      // Act
-      service.onInit();
-
-      // Assert
-      expect(service.loadedDimensionTypes.emit).toHaveBeenCalled();
+      service.loadedDimensionTypes.subscribe(dimensionTypes => {
+        expect(service.dimensionTypes).toEqual(sampleData.dummyDimensionTypes);
+      });
     });
   });
 });

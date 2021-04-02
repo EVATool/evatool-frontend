@@ -10,7 +10,9 @@ import {Observable, of} from "rxjs";
 import {DimensionDto} from "../../dtos/DimensionDto";
 import {Injectable} from "@angular/core";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MockValueRestService extends DimensionRestService {
   constructor(
     logger: LogService,
