@@ -4,7 +4,7 @@ export class Requirements{
   [k: string]: any;
   rootEntityId!: any;
   projectID = '';
-  requirementTitle = '';
+  uniqueString = '';
   requirementDescription = '';
   dimensions!: Dimension[];
   requirementImpactPoints!: any;

@@ -17,7 +17,7 @@ import {Router} from '@angular/router';
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
-  displayedColumns: string[] = ['rootEntityId', 'requirementTitle', 'variantsTitle', 'dimensions'];
+  displayedColumns: string[] = ['requirementTitle', 'requirementDescription', 'variantsTitle', 'dimensions'];
   requirementsSource: Requirements[] = [];
   impactSoureces: Impact[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
@@ -44,7 +44,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         const requirement: Requirements = {
           rootEntityId : requirementRest.rootEntityId,
           projectID : requirementRest.projectID,
-          requirementTitle : requirementRest.requirementTitle,
+          uniqueString : requirementRest.uniqueString,
           requirementDescription : requirementRest.requirementDescription,
           dimensions : requirementRest.dimensions,
           requirementImpactPoints : requirementRest.requirementImpactPoints,
@@ -60,7 +60,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       result.forEach((impactRest: Impact) => {
         const impact: Impact = {
           id: impactRest.id,
-          description: impactRest.uniqueString,
+          description: impactRest.description,
           value: impactRest.value,
           dimension: impactRest.dimension
         };
@@ -163,12 +163,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   addRequirements(): void {
     const requirementNew: Requirements = new Requirements();
     requirementNew.projectID = this.idForProject;
-    const size: number = this.requirementsSource.length;
-    if (size < 10){
-      requirementNew.requirementTitle = 'RE0' + (size + 1);
-    }else{
-      requirementNew.requirementTitle = 'RE' + (size + 1);
-    }
     requirementNew.requirementDescription = 'generated requirement';
     this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
       this.requirementsSource.push(value);

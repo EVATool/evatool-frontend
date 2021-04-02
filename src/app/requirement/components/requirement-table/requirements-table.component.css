@@ -14,26 +14,27 @@ input{
   text-align: center;
 }
 
-.mat-column-ID{
+.mat-column-requirementTitle{
   text-align: left;
   width:50px;
   min-width:50px;
   left: 0px !important;
 }
 
-.mat-column-Requirements{
+.mat-column-requirementDescription{
   text-align: left;
   min-width:500px;
   left: 75px !important;
+  text-overflow: ellipsis;
 }
-.mat-column-Variants{
+.mat-column-variantsTitle{
   text-align: left;
   white-space: break-spaces;
   width:100px;
   min-width:100px;
   left: 575px !important;
 }
-.mat-column-Dimension{
+.mat-column-dimensions{
   text-align: left;
   white-space: break-spaces;
   width:100px;
@@ -57,25 +58,42 @@ input{
   bottom: 500px;
   height: 30px;
 }
+
+.table-row {
+  height: 30px !important;
+}
+
+textarea{
+  max-height: 60px !important;
+  height: 60px !important;
+  width: 95%;
+  border: 0;
+  margin-left: 10px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 /* Delete row button */
 
 .description-wrapper {
   display: table;
   width: 100%;
+  padding: 0;
 }
 
 .description-container {
   display: table-cell;
   text-align: left;
   width: 99%;
+  padding: 0;
 }
 
 .delete-button-container {
   display: table-cell;
   opacity: 0;
   vertical-align: middle;
-  text-align: right;
+  /*text-align: right;*/
   transition: 250ms ease-out 100ms;
+  padding: 0;
+  padding-right: 10px;
 }
 
 .delete-button-container:focus-within,
