@@ -16,8 +16,7 @@ describe('ImpactMainComponent', () => {
       imports: [HttpClientModule, RouterTestingModule],
       declarations: [ImpactMainComponent, HighlightSearch],
       providers: [NgScrollbar].concat(RestMockProviders.providers)
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -20,8 +20,7 @@ describe('ImpactTableComponent', () => {
       providers: [FormBuilder,
         {provide: MatDialogRef, useValue: {}},
         {provide: MAT_DIALOG_DATA, useValue: {}}].concat(RestMockProviders.providers)
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
