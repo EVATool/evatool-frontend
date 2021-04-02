@@ -53,7 +53,6 @@ describe('DimensionDataService', () => {
 
     it('should load dimensions', () => {
       // Arrange
-      spyOn(service.loadedDimensions, 'emit');
 
       // Act
       service.onInit();
@@ -64,7 +63,6 @@ describe('DimensionDataService', () => {
 
     it('should load dimensions types', () => {
       // Arrange
-      spyOn(service.loadedDimensionTypes, 'emit');
 
       // Act
       service.onInit();
