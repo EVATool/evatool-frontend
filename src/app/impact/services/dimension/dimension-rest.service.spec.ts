@@ -1,13 +1,33 @@
-import { SampleDataService } from './../../spec/sample-data.service';
-import { RestSettings } from './../../settings/RestSettings';
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {SampleDataService} from '../../spec/sample-data.service';
+import {RestSettings} from '../../settings/RestSettings';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
-import { DimensionRestService } from './dimension-rest.service';
+import {DimensionRestService} from './dimension-rest.service';
+import {LogService} from "../../../shared/services/log.service";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {Observable, of} from "rxjs";
+import {DimensionDto} from "../../dtos/DimensionDto";
+
+class MockValueRestService extends DimensionRestService {
+  constructor(
+    logger: LogService,
+    http: HttpClient,
+    private sampleData: SampleDataService) {
+    super(logger, http);
+  }
+
+  getDimensions(): Observable<DimensionDto[]> {
+    return of(this.sampleData.dummyDimensionDtos)
+  }
+
+  getDimensionTypes(): Observable<string[]> {
+    return of(this.sampleData.dummyDimensionTypes)
+  }
+}
 
 describe('DimensionRestService', () => {
-  describe('Mocked', () => {
+  describe('DimensionRestServiceMockHttp', () => {
     let sampleData: SampleDataService;
     let httpMock: HttpTestingController;
     let service: DimensionRestService;
@@ -31,7 +51,7 @@ describe('DimensionRestService', () => {
 
     describe('#getDimensions', () => {
       it('should return an Observable<DimensionDto[]>', () => {
-        // Arrage
+        // Arrange
         const dummyDtos = sampleData.dummyDimensionDtos;
 
         // Act
@@ -49,7 +69,7 @@ describe('DimensionRestService', () => {
 
     describe('#getDimensionTypes', () => {
       it('should return an Observable<string[]>', () => {
-        // Arrage
+        // Arrange
         const dummyDtos = sampleData.dummyDimensionTypes;
 
         // Act
@@ -66,41 +86,22 @@ describe('DimensionRestService', () => {
     });
   });
 
-  // TODO: Before writing these tests: Decide whether to add HttpResponse to ALL Rest service calls and check response here.
-  describe('Backend', () => {
+  describe('MockValueRestService', () => {
+    let sampleData: SampleDataService;
     let service: DimensionRestService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientModule]
       });
+      sampleData = TestBed.inject(SampleDataService);
       service = TestBed.inject(DimensionRestService);
     });
 
     it('should be created', () => {
       expect(service).toBeTruthy();
     });
-
-    describe('#getDimensions', () => {
-      it('should return an Observable<DimensionDto[]>', () => {
-        // Arrage
-
-        // Act
-
-        // Assert
-
-      });
-    });
-
-    describe('#getDimensionTypes', () => {
-      it('should return an Observable<string[]>', () => {
-        // Arrage
-
-        // Act
-
-        // Assert
-
-      });
-    });
   });
 });
+
+

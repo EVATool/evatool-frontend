@@ -1,4 +1,4 @@
-import { SampleDataService } from './../../spec/sample-data.service';
+import { SampleDataService } from '../../spec/sample-data.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,7 +29,7 @@ describe('AnalysisDataService', () => {
 
   describe('#onInit', () => {
     it('should extract analysisId from router URL', () => {
-      // TODO set url and get router.routerState.root.queryParams to fire correctly...      
+      // TODO set url and get router.routerState.root.queryParams to fire correctly...
     });
 
     it('should load current analysis', () => {

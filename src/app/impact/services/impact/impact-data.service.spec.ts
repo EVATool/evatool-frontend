@@ -10,7 +10,6 @@ import { AnalysisRestService } from '../analysis/analysis-rest.service';
 import { DimensionRestService } from '../dimension/dimension-rest.service';
 
 describe('ImpactDataService', () => {
-  // TODO: Current service design does not allow for DataServices to be mocked. It that ok?
   let sampleData: SampleDataService;
   let stakeholderRestService: StakeholderRestService;
   let analysisRestService: AnalysisRestService;

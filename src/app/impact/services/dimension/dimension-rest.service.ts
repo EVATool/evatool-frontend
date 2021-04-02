@@ -1,5 +1,5 @@
-import { RestSettings } from './../../settings/RestSettings';
-import { DimensionDto } from './../../dtos/DimensionDto';
+import { RestSettings } from '../../settings/RestSettings';
+import { DimensionDto } from '../../dtos/DimensionDto';
 import { LogService } from '../../../shared/services/log.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';

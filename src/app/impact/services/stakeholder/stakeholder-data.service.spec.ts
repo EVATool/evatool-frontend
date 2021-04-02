@@ -1,4 +1,4 @@
-import { SampleDataService } from './../../spec/sample-data.service';
+import { SampleDataService } from '../../spec/sample-data.service';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 

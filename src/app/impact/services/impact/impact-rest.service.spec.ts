@@ -1,5 +1,5 @@
-import { SampleDataService } from './../../spec/sample-data.service';
-import { RestSettings } from './../../settings/RestSettings';
+import { SampleDataService } from '../../spec/sample-data.service';
+import { RestSettings } from '../../settings/RestSettings';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
