@@ -13,7 +13,7 @@ import {Injectable} from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-export class MockValueRestService extends DimensionRestService {
+export class MockedValueRestService extends DimensionRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
@@ -86,7 +86,7 @@ describe('ValueRestServices', () => {
     });
   });
 
-  describe('MockValueRestService', () => {
+  describe('MockedValueRestService', () => {
     let sampleData: SampleDataService;
     let service: DimensionRestService;
 
@@ -95,10 +95,15 @@ describe('ValueRestServices', () => {
         imports: [HttpClientTestingModule]
       });
       sampleData = TestBed.inject(SampleDataService);
-      service = TestBed.inject(MockValueRestService);
+      service = TestBed.inject(MockedValueRestService);
     });
 
     it('should return synchronously', () => {
+      // Arrange
+
+      // Act
+
+      // Assert
       service.getDimensions().subscribe(dimensions => {
         expect(dimensions).toEqual(sampleData.dummyDimensionDtos);
       })

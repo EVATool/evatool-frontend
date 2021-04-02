@@ -9,6 +9,7 @@ import { DimensionDataService } from '../dimension/dimension-data.service';
 import { StakeholderDataService } from '../stakeholder/stakeholder-data.service';
 import { Impact } from '../../models/Impact';
 import { Injectable, Output, EventEmitter } from '@angular/core';
+import {ImpactDto} from "../../dtos/ImpactDto";
 
 @Injectable({
   providedIn: 'root'
@@ -69,7 +70,6 @@ export class ImpactDataService {
         imps.sort((a, b) => this.sortImpactsById(a, b));
         let fromDtos: Impact[] = [];
         imps.forEach(imp => {
-          //this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
           fromDtos.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
         });
         this.impacts = fromDtos;
@@ -80,7 +80,7 @@ export class ImpactDataService {
     }
   }
 
-  private sortImpactsById(a: Impact, b: Impact): number {
+  private sortImpactsById(a: ImpactDto, b: ImpactDto): number {
     this.logger.debug(this, 'Sorting Impacts By Id');
     const numberA = + ("" + a.uniqueString?.replace("IMP", ""));
     const numberB = + ("" + b.uniqueString?.replace("IMP", ""));

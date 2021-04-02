@@ -1,5 +1,5 @@
 import {SampleDataService} from '../../spec/sample-data.service';
-import {MockValueRestService} from './dimension-rest.service.spec';
+import {MockedValueRestService} from './dimension-rest.service.spec';
 import {TestBed} from '@angular/core/testing';
 
 import {DimensionDataService} from './dimension-data.service';
@@ -16,7 +16,7 @@ describe('DimensionDataService', () => {
       providers: [
         {
           provide: DimensionRestService,
-          useClass: MockValueRestService
+          useClass: MockedValueRestService
         }]
     });
 
