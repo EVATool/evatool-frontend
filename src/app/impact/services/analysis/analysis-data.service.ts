@@ -25,7 +25,7 @@ export class AnalysisDataService {
     this.urlIdExtracted.subscribe(id => {
       this.analysisRestService.getAnalysisById(id).subscribe(currentAnalysis => {
         this.currentAnalysis = this.analysisMapperService.fromDto(currentAnalysis);
-        this.logger.info(this, 'Analysis loaded (from router parameter)');
+        this.logger.info(this, 'Current analysis loaded (from router parameter)');
         this.loadedAnalyses.emit(this.currentAnalysis);
       });
     });

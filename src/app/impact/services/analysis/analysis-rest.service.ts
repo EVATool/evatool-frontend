@@ -12,7 +12,7 @@ export class AnalysisRestService {
 
   constructor(
     private logger: LogService,
-    private http: HttpClient,) {
+    private http: HttpClient) {
 
   }
 

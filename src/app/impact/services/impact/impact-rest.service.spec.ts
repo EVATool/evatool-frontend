@@ -4,6 +4,24 @@ import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 import {ImpactRestService} from './impact-rest.service';
+import {Injectable} from "@angular/core";
+import {LogService} from "../../../shared/services/log.service";
+import {HttpClient} from "@angular/common/http";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MockedImpactRestService extends ImpactRestService {
+  constructor(
+    logger: LogService,
+    http: HttpClient,
+    private sampleData: SampleDataService) {
+    super(logger, http)
+  }
+
+  // TODO add methods...
+
+}
 
 describe('ImpactRestService', () => {
   let sampleData: SampleDataService;

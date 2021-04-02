@@ -8,7 +8,11 @@ import {AnalysisRestService} from './analysis-rest.service';
 import {Observable, of} from "rxjs";
 import {AnalysisDto} from "../../dtos/AnalysisDto";
 import {LogService} from "../../../shared/services/log.service";
+import {Injectable} from "@angular/core";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class MockedAnalysisRestService extends AnalysisRestService {
   constructor(
     logger: LogService,
