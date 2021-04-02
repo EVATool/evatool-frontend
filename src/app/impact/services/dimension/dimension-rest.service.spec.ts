@@ -8,8 +8,10 @@ import {LogService} from "../../../shared/services/log.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {DimensionDto} from "../../dtos/DimensionDto";
+import {Injectable} from "@angular/core";
 
-class MockValueRestService extends DimensionRestService {
+@Injectable()
+export class MockValueRestService extends DimensionRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
