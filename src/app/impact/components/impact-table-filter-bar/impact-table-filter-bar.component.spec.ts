@@ -1,8 +1,9 @@
-import { HighlightSearch } from './../../pipes/HighlightSearch';
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {HighlightSearch} from '../../pipes/HighlightSearch';
+import {HttpClientModule} from '@angular/common/http';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ImpactTableFilterBarComponent } from './impact-table-filter-bar.component';
+import {ImpactTableFilterBarComponent} from './impact-table-filter-bar.component';
+import {RestMockProviders} from "../../spec/RestMockProviders";
 
 describe('ImpactTableFilterBarComponent', () => {
   let component: ImpactTableFilterBarComponent;
@@ -11,7 +12,8 @@ describe('ImpactTableFilterBarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ImpactTableFilterBarComponent, HighlightSearch],
-      imports: [HttpClientModule]
+      imports: [HttpClientModule],
+      providers: RestMockProviders.providers
     })
       .compileComponents();
   });

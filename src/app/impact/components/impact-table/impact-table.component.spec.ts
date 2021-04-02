@@ -1,12 +1,13 @@
-import { HighlightSearch } from '../../pipes/HighlightSearch';
-import { RouterTestingModule } from '@angular/router/testing';
-import { FormBuilder } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {HighlightSearch} from '../../pipes/HighlightSearch';
+import {RouterTestingModule} from '@angular/router/testing';
+import {FormBuilder} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
 
-import { ImpactTableComponent } from './impact-table.component';
+import {ImpactTableComponent} from './impact-table.component';
+import {RestMockProviders} from "../../spec/RestMockProviders";
 
 describe('ImpactTableComponent', () => {
   let component: ImpactTableComponent;
@@ -17,8 +18,8 @@ describe('ImpactTableComponent', () => {
       imports: [HttpClientModule, MatDialogModule, BrowserAnimationsModule, RouterTestingModule],
       declarations: [ImpactTableComponent, HighlightSearch],
       providers: [FormBuilder,
-        { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: {} }]
+        {provide: MatDialogRef, useValue: {}},
+        {provide: MAT_DIALOG_DATA, useValue: {}}].concat(RestMockProviders.providers)
     })
       .compileComponents();
   });

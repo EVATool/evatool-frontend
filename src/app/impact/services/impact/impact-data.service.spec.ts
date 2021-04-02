@@ -8,10 +8,6 @@ import {StakeholderRestService} from '../stakeholder/stakeholder-rest.service';
 import {AnalysisRestService} from '../analysis/analysis-rest.service';
 import {DimensionRestService} from '../dimension/dimension-rest.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {MockedValueRestService} from "../dimension/dimension-rest.service.spec";
-import {MockedImpactRestService} from "./impact-rest.service.spec";
-import {MockedAnalysisRestService} from "../analysis/analysis-rest.service.spec";
-import {MockedStakeholderRestService} from "../stakeholder/stakeholder-rest.service.spec";
 import {RestMockProviders} from "../../spec/RestMockProviders";
 
 describe('ImpactDataService', () => {

@@ -8,7 +8,7 @@ import {ImpactRestService} from "../services/impact/impact-rest.service";
 import {MockedImpactRestService} from "../services/impact/impact-rest.service.spec";
 
 export class RestMockProviders {
-  public static readonly providers = [
+  public static readonly providers: any[] = [
     {
       provide: DimensionRestService,
       useClass: MockedValueRestService
