@@ -67,6 +67,42 @@ describe('ImpactDataService', () => {
       expect(service.loadedImpacts.emit).toHaveBeenCalled();
     });
 
+    it('should fire \'addedImpact\' event', () => {
+      // Arrange
+      spyOn(service.addedImpact, 'emit');
+      service.onInit();
+
+      // Act
+      service.createImpact();
+
+      // Assert
+      expect(service.addedImpact.emit).toHaveBeenCalled();
+    });
+
+    it('should fire \'changedImpact\' event', () => {
+      // Arrange
+      spyOn(service.changedImpact, 'emit');
+      service.onInit();
+
+      // Act
+      service.updateImpact(service.impacts[0]);
+
+      // Assert
+      expect(service.changedImpact.emit).toHaveBeenCalled();
+    });
+
+    it('should fire \'removedImpact\' event', () => {
+      // Arrange
+      spyOn(service.removedImpact, 'emit');
+      service.onInit();
+
+      // Act
+      service.deleteImpact(service.impacts[0]);
+
+      // Assert
+      expect(service.removedImpact.emit).toHaveBeenCalled();
+    });
+
     it('should load impacts', () => {
       // Arrange
 
