@@ -14,11 +14,11 @@
 <!--left-->
 <div id="left"><!--linker Bereich-->
   <div>
-    <button mat-raised-button (click)="openValueDialog()" class="valueButton">+ Values bearbeiten</button>
+    <button mat-raised-button (click)="openValueDialog()" class="valueButton">+ Edit values </button>
   </div>
   <br>
   <div>
-    <button mat-raised-button (click)="openDialog()" class="createAnalysisButton">+ Neue Analyse</button>
+    <button mat-raised-button (click)="openDialog()" class="createAnalysisButton">+ New Analysis</button>
   </div>
 </div>
 
@@ -26,7 +26,7 @@
 <!--right-->
 <div id="right"><!--rechter Bereich-->
 
-  <div class="headertitle">Alle Analysen</div>
+  <div class="headertitle">All analysis</div>
   <hr style="width:50%; margin: auto;">
   <div class="content-wrapper">
     <div *ngFor="let analysis of analysisArray;" class="news-card" (click)="analysisClick(analysis)">
@@ -37,10 +37,11 @@
         <i class="material-icons settings" tabindex="-1">settings</i>
 
 
-        <div class="news-card__post-date">{{"Letzte Änderung "}} {{analysis.lastUpdate}}</div>
+        <div class="news-card__post-date">{{"last edit "}} {{analysis.lastUpdate}}</div>
         <div class="news-card__details-wrapper">
           <p class="news-card__excerpt">{{analysis.description}}</p>
-          <a class="news-card__read-more" >Einsehen <i class="fas fa-long-arrow-alt-right" ></i></a>
+          <a class="news-card__read-more" >spectate <i class="fas fa-long-arrow-alt-right" ></i></a>
+          <button class="editButton" type="submit" id="edit-button">Edit</button>
         </div>
       </div>
     </div>
