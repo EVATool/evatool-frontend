@@ -1,7 +1,6 @@
 import {Requirements} from '../models/Requirements';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {ImpactDataService} from '../services/impact/impact-data.service';
-import {Datagenerator} from '../services/datagenerator';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HostListener } from '@angular/core';
 import {RequirementsTableComponent} from '../components/requirement-table/requirements-table.component';
@@ -16,7 +15,7 @@ export class RequirementMainComponent implements OnInit  {
   editField: string;
   data: Requirements[] = [];
   private key = '';
-  constructor(private datagenerator: Datagenerator,
+  constructor(
               ) {
     this.editField = '';
   }

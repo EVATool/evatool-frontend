@@ -1,6 +1,5 @@
 
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {Datagenerator} from '../../services/datagenerator';
 import {Requirements} from '../../models/Requirements';
 import {Dimension} from '../../models/Dimension';
 import {Impact} from '../../models/Impact';
@@ -17,21 +16,16 @@ import {Router} from '@angular/router';
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
-  displayedColumns: string[] = ['requirementTitle', 'requirementDescription', 'variantsTitle', 'dimensions'];
+  displayedColumns: string[] = ['requirementTitle', 'requirementDescription', 'variantsTitle', 'values'];
   requirementsSource: Requirements[] = [];
   impactSoureces: Impact[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
   idForProject = '';
-  constructor(private datagenerator: Datagenerator,
-              private requirementsRestService: RequirementsRestService,
+  constructor(private requirementsRestService: RequirementsRestService,
               private router: Router) {
   }
 
   ngOnInit(): void {
-    this.datagenerator.onCreateImpact.subscribe(value => {
-      // this.tableDatasource.data = this.requirementsSource;
-      // this.initSorting();
-    });
   }
 
   ngAfterViewInit(): void {
@@ -46,7 +40,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
           projectID : requirementRest.projectID,
           uniqueString : requirementRest.uniqueString,
           requirementDescription : requirementRest.requirementDescription,
-          dimensions : requirementRest.dimensions,
+          values : requirementRest.values,
           requirementImpactPoints : requirementRest.requirementImpactPoints,
           variantsTitle : requirementRest.variantsTitle
         };
@@ -70,8 +64,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       this.impactSoureces.forEach(value => impactIdList = impactIdList.concat(value.id));
       this.displayedColumns = this.displayedColumns.concat(impactIdList);
     });
-    this.requirementsSource = this.datagenerator.getRequirements();
-    this.impactSoureces = this.datagenerator.getImpacts();
     this.tableDatasource.data = this.requirementsSource;
 
   }
@@ -84,9 +76,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
   concatDimension(parameter: any): string {
     let value = '';
-    const dimension: Dimension[] = parameter.dimensions;
+    const dimension: Dimension[] = parameter.values;
     if (dimension == null){ return value; }
-    dimension.forEach(value1 => value = value.concat(value1.dimensionTitle, '\n'));
+    dimension.forEach(value1 => value = value.concat(value1.valueTitle, '\n'));
     return value;
   }
 

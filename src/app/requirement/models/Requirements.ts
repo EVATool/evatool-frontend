@@ -6,7 +6,7 @@ export class Requirements{
   projectID = '';
   uniqueString = '';
   requirementDescription = '';
-  dimensions!: Dimension[];
+  values!: Dimension[];
   requirementImpactPoints!: any;
   variantsTitle!: [];
 }
