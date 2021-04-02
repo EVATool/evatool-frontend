@@ -34,26 +34,23 @@ describe('DimensionDataService', () => {
       spyOn(service.loadedDimensions, 'emit');
 
       // Act
-      service.loadedDimensions.subscribe(dimensions => {
-        expect(1).toEqual(2); // not called...
-        expect(service.dimensions).toEqual(sampleData.dummyDimensionDtos);
-      });
+      service.onInit();
 
       // Assert
-      service.onInit();
       expect(service.loadedDimensions.emit).toHaveBeenCalled();
+      expect(service.dimensions).toEqual(sampleData.dummyValues);
     });
 
     it('should load dimensions types', () => {
       // Arrange
+      spyOn(service.loadedDimensionTypes, 'emit');
 
       // Act
       service.onInit();
 
       // Assert
-      service.loadedDimensionTypes.subscribe(dimensionTypes => {
-        expect(service.dimensionTypes).toEqual(sampleData.dummyDimensionTypes);
-      });
+      expect(service.loadedDimensionTypes.emit).toHaveBeenCalled();
+      expect(service.dimensionTypes).toEqual(sampleData.dummyDimensionTypes);
     });
   });
 });

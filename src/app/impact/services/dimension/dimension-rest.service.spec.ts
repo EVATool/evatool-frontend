@@ -5,7 +5,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 
 import {DimensionRestService} from './dimension-rest.service';
 import {LogService} from "../../../shared/services/log.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {DimensionDto} from "../../dtos/DimensionDto";
 import {Injectable} from "@angular/core";
