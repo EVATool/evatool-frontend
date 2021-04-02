@@ -12,9 +12,9 @@
 
 <!--container-->
 <!--left-->
-<div id="left"><!--linker Bereich-->
+<div id="left"><!--left section-->
   <div>
-    <button mat-raised-button (click)="openValueDialog()" class="valueButton">+ Edit values </button>
+    <button mat-raised-button (click)="openValueDialog()" class="valueButton">Value System </button>
   </div>
   <br>
   <div>
@@ -24,29 +24,33 @@
 
 <!--cards-->
 <!--right-->
-<div id="right"><!--rechter Bereich-->
+<div id="right"><!--right section-->
 
   <div class="headertitle">All analysis</div>
   <hr style="width:50%; margin: auto;">
   <div class="content-wrapper">
-    <div *ngFor="let analysis of analysisArray;" class="news-card" (click)="analysisClick(analysis)">
+    <div *ngFor="let analysis of analysisArray;" class="news-card">
       <img src="{{analysis.img}}" alt="" class="news-card__image">
       <div class="news-card__text-wrapper">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <i class="material-icons settings" tabindex="-1">settings</i>
+          </button>
+          <div class="dropdown-content">
+            <a mat-raised-button class="editTitle" (click)="editAnalysisTitle()">Edit title</a>
+            <a mat-raised-button class="editDescription" (click)="editDescription()">Edit description</a>
+            <a mat-raised-button class="changeBackgroundImage" (click)="changeBackgroundImage()">Change Background-Image</a>
+            <a mat-raised-button class="deleteAnalysis" (click)="deleteAnalysis(analysis)">Delete Analysis</a>
+          </div>
+        </div>
         <h2 class="news-card__title">{{analysis.title}}</h2>
-
-        <i class="material-icons settings" tabindex="-1">settings</i>
-
-
-        <div class="news-card__post-date">{{"last edit "}} {{analysis.lastUpdate}}</div>
+        <div class="news-card__post-date">{{"Last edit: "}} {{analysis.lastUpdate}}</div>
         <div class="news-card__details-wrapper">
           <p class="news-card__excerpt">{{analysis.description}}</p>
-          <a class="news-card__read-more" >spectate <i class="fas fa-long-arrow-alt-right" ></i></a>
-          <button class="editButton" type="submit" id="edit-button">Edit</button>
+          <button mat-raised-button class="news-card__read-more" (click)="analysisClick(analysis)">Spectate <i class="fas fa-long-arrow-alt-right"></i></button>
         </div>
       </div>
     </div>
-
   </div>
-
 </div>
 
