@@ -1,5 +1,5 @@
-import { RestSettings } from './../../settings/RestSettings';
-import { StakeholderDto } from './../../dtos/StakeholderDto';
+import { RestSettings } from '../../settings/RestSettings';
+import { StakeholderDto } from '../../dtos/StakeholderDto';
 import { LogService } from '../../../shared/services/log.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
