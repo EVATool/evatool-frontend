@@ -1,3 +1,3 @@
 export class AnalysisDto {
-  public rootEntityID = '';
+  rootEntityID = '';
 }
