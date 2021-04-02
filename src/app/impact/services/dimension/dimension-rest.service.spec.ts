@@ -98,10 +98,9 @@ describe('ValueRestServices', () => {
       service = TestBed.inject(MockValueRestService);
     });
 
-
     it('should return synchronously', () => {
-      service.getDimensions().subscribe(lol => {
-        expect(1).toEqual(2);
+      service.getDimensions().subscribe(dimensions => {
+        expect(dimensions).toEqual(sampleData.dummyDimensionDtos);
       })
     });
   });

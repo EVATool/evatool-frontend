@@ -3,22 +3,24 @@ import {MockValueRestService} from './dimension-rest.service.spec';
 import {TestBed} from '@angular/core/testing';
 
 import {DimensionDataService} from './dimension-data.service';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {DimensionRestService} from "./dimension-rest.service";
-import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 
 describe('DimensionDataService', () => {
   let sampleData: SampleDataService;
-  let restService: DimensionRestService;
   let service: DimensionDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      providers: [MockValueRestService]
+      imports: [HttpClientTestingModule],
+      providers: [
+        {
+          provide: DimensionRestService,
+          useClass: MockValueRestService
+        }]
     });
+
     sampleData = TestBed.inject(SampleDataService);
-    restService = TestBed.inject(MockValueRestService);
     service = TestBed.inject(DimensionDataService);
   });
 
@@ -29,15 +31,17 @@ describe('DimensionDataService', () => {
   describe('#onInit', () => {
     it('should load dimensions', () => {
       // Arrange
+      spyOn(service.loadedDimensions, 'emit');
 
       // Act
-      service.onInit();
+      service.loadedDimensions.subscribe(dimensions => {
+        expect(1).toEqual(2); // not called...
+        expect(service.dimensions).toEqual(sampleData.dummyDimensionDtos);
+      });
 
       // Assert
-      service.loadedDimensions.subscribe(dimensions => {
-        expect(service.dimensions).toEqual(sampleData.dummyDimensionDtos);
-        expect(1).toEqual(2); // not called...
-      });
+      service.onInit();
+      expect(service.loadedDimensions.emit).toHaveBeenCalled();
     });
 
     it('should load dimensions types', () => {

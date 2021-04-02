@@ -1,8 +1,8 @@
-import { DimensionMapperService } from './dimension-mapper.service';
-import { LogService } from '../../../shared/services/log.service';
-import { Dimension } from '../../models/Dimension';
-import { DimensionRestService } from './dimension-rest.service';
-import { Injectable, EventEmitter, Output } from '@angular/core';
+import {DimensionMapperService} from './dimension-mapper.service';
+import {LogService} from '../../../shared/services/log.service';
+import {Dimension} from '../../models/Dimension';
+import {DimensionRestService} from './dimension-rest.service';
+import {Injectable, EventEmitter, Output, Inject} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
