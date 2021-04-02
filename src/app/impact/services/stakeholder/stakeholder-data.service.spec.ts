@@ -1,21 +1,26 @@
-import { SampleDataService } from '../../spec/sample-data.service';
-import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {SampleDataService} from '../../spec/sample-data.service';
+import {TestBed} from '@angular/core/testing';
 
-import { StakeholderDataService } from './stakeholder-data.service';
-import { StakeholderRestService } from './stakeholder-rest.service';
+import {StakeholderDataService} from './stakeholder-data.service';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {StakeholderRestService} from "./stakeholder-rest.service";
+import {MockedStakeholderRestService} from "./stakeholder-rest.service.spec";
 
 describe('StakeholderDataService', () => {
   let sampleData: SampleDataService;
-  let restService: StakeholderRestService;
   let service: StakeholderDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      imports: [HttpClientTestingModule],
+      providers: [
+        {
+          provide: StakeholderRestService,
+          useClass: MockedStakeholderRestService
+        }]
     });
+
     sampleData = TestBed.inject(SampleDataService);
-    restService = TestBed.inject(StakeholderRestService);
     service = TestBed.inject(StakeholderDataService);
   });
 
@@ -24,28 +29,25 @@ describe('StakeholderDataService', () => {
   });
 
   describe('#onInit', () => {
-    it('should load stakeholders', () => {
-      // Arrange
-      spyOn(restService, 'getStakeholders').and.returnValue(sampleData.getObservable(sampleData.dummyStakeholderDtos));
-
-      // Act
-      service.onInit();
-
-      // Assert
-      expect(service.stakeholders.length).toEqual(sampleData.dummyStakeholderDtos.length);
-    });
-
-
     it('should fire \'loadedStakeholders\' event', () => {
       // Arrange
       spyOn(service.loadedStakeholders, 'emit');
-      spyOn(restService, 'getStakeholders').and.returnValue(sampleData.getObservable(sampleData.dummyStakeholderDtos));
 
       // Act
       service.onInit();
 
       // Assert
       expect(service.loadedStakeholders.emit).toHaveBeenCalled();
+    });
+
+    it('should load stakeholders', () => {
+      // Arrange
+
+      // Act
+      service.onInit();
+
+      // Assert
+      expect(service.stakeholders).toEqual(sampleData.dummyStakeholders);
     });
   })
 });
