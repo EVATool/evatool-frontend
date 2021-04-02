@@ -30,59 +30,79 @@ export class MockValueRestService extends DimensionRestService {
   }
 }
 
-describe('DimensionRestService', () => {
-  let sampleData: SampleDataService;
-  let httpMock: HttpTestingController;
-  let service: DimensionRestService;
+describe('ValueRestServices', () => {
+  describe('DimensionRestService', () => {
+    let sampleData: SampleDataService;
+    let httpMock: HttpTestingController;
+    let service: DimensionRestService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
-    sampleData = TestBed.inject(SampleDataService);
-    httpMock = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(DimensionRestService);
-  });
-
-  afterEach(() => {
-    httpMock.verify();
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should return an Observable<DimensionDto[]>', () => {
-    // Arrange
-    const dummyDtos = sampleData.dummyDimensionDtos;
-
-    // Act
-    service.getDimensions().subscribe(dimensions => {
-      expect(dimensions.length).toBe(dummyDtos.length);
-      expect(dimensions).toEqual(dummyDtos);
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule]
+      });
+      sampleData = TestBed.inject(SampleDataService);
+      httpMock = TestBed.inject(HttpTestingController);
+      service = TestBed.inject(DimensionRestService);
     });
 
-    // Assert
-    const req = httpMock.expectOne(RestSettings.dimensionsUrl);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyDtos);
-  });
-
-  it('should return an Observable<string[]>', () => {
-    // Arrange
-    const dummyDtos = sampleData.dummyDimensionTypes;
-
-    // Act
-    service.getDimensionTypes().subscribe(dimensionTypes => {
-      expect(dimensionTypes.length).toBe(dummyDtos.length);
-      expect(dimensionTypes).toEqual(dummyDtos);
+    afterEach(() => {
+      httpMock.verify();
     });
 
-    // Assert
-    const req = httpMock.expectOne(RestSettings.dimensionTypesUrl);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyDtos);
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
+
+    it('should return an Observable<DimensionDto[]>', () => {
+      // Arrange
+      const dummyDtos = sampleData.dummyDimensionDtos;
+
+      // Act
+      service.getDimensions().subscribe(dimensions => {
+        expect(dimensions.length).toBe(dummyDtos.length);
+        expect(dimensions).toEqual(dummyDtos);
+      });
+
+      // Assert
+      const req = httpMock.expectOne(RestSettings.dimensionsUrl);
+      expect(req.request.method).toBe('GET');
+      req.flush(dummyDtos);
+    });
+
+    it('should return an Observable<string[]>', () => {
+      // Arrange
+      const dummyDtos = sampleData.dummyDimensionTypes;
+
+      // Act
+      service.getDimensionTypes().subscribe(dimensionTypes => {
+        expect(dimensionTypes.length).toBe(dummyDtos.length);
+        expect(dimensionTypes).toEqual(dummyDtos);
+      });
+
+      // Assert
+      const req = httpMock.expectOne(RestSettings.dimensionTypesUrl);
+      expect(req.request.method).toBe('GET');
+      req.flush(dummyDtos);
+    });
+  });
+
+  describe('MockValueRestService', () => {
+    let sampleData: SampleDataService;
+    let service: DimensionRestService;
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule]
+      });
+      sampleData = TestBed.inject(SampleDataService);
+      service = TestBed.inject(MockValueRestService);
+    });
+
+
+    it('should return synchronously', () => {
+      service.getDimensions().subscribe(lol => {
+        expect(1).toEqual(2);
+      })
+    });
   });
 });
-
-

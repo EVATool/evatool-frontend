@@ -5,6 +5,7 @@ import {TestBed} from '@angular/core/testing';
 import {DimensionDataService} from './dimension-data.service';
 import {HttpClientModule} from "@angular/common/http";
 import {DimensionRestService} from "./dimension-rest.service";
+import {applySourceSpanToExpressionIfNeeded} from "@angular/compiler/src/output/output_ast";
 
 describe('DimensionDataService', () => {
   let sampleData: SampleDataService;
@@ -35,6 +36,7 @@ describe('DimensionDataService', () => {
       // Assert
       service.loadedDimensions.subscribe(dimensions => {
         expect(service.dimensions).toEqual(sampleData.dummyDimensionDtos);
+        expect(1).toEqual(2); // not called...
       });
     });
 
