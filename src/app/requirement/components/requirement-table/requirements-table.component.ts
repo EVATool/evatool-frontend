@@ -175,4 +175,22 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       this.tableDatasource.data = this.requirementsSource;
     });
   }
+
+  descriptionChange(requirements: Requirements, event: Event): void {
+    this.updateImpact(requirements);
+  }
+
+  deleteImpact(requirements: Requirements): void {
+    this.requirementsRestService.deleteRequirements(requirements).subscribe((impDto) => {
+      const index = this.requirementsSource.indexOf(requirements, 0);
+      if (index > -1) {
+        this.requirementsSource.splice(index, 1);
+      }
+      this.tableDatasource.data = this.requirementsSource;
+    });
+  }
+
+  updateImpact(requirements: Requirements): void {
+    this.requirementsRestService.updateRequirements(requirements).subscribe();
+  }
 }

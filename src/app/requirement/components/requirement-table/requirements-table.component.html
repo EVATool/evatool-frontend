@@ -14,7 +14,21 @@
 
     <ng-container matColumnDef="requirementTitle" sticky>
       <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Requirements</th>
-      <td mat-cell *matCellDef="let element"> {{element.requirementDescription}} </td>
+<!--      <td mat-cell *matCellDef="let element"> {{element.requirementDescription}} </td>-->
+      <td mat-cell *matCellDef='let element'>
+        <div class="description-wrapper">
+          <div class="description-container">
+          <textarea matInput cdkTextareaAutosize [(ngModel)]="element.requirementDescription" placeholder="Describe the Requirement..."
+                    (change)="descriptionChange(element, $event)"></textarea>
+          </div>
+          <div class="delete-button-container">
+            <button mat-fab (click)="deleteImpact(element)" matTooltip="Delete Impact" matTooltipHideDelay="100"
+                    matTooltipPosition="above">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="variantsTitle" sticky>

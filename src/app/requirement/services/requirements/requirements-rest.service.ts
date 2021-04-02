@@ -34,4 +34,8 @@ export class RequirementsRestService {
   updateRequirements(requirement: Requirements): Observable<any> {
     return this.http.put(this.analysisUrl, requirement, httpOptions);
   }
+
+  deleteRequirements(requirements: Requirements): Observable<any> {
+    return this.http.delete(this.analysisUrl + '/' + requirements.rootEntityId);
+  }
 }
