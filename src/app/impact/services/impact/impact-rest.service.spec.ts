@@ -7,6 +7,8 @@ import {ImpactRestService} from './impact-rest.service';
 import {Injectable} from "@angular/core";
 import {LogService} from "../../../shared/services/log.service";
 import {HttpClient} from "@angular/common/http";
+import {Observable, of} from "rxjs";
+import {ImpactDto} from "../../dtos/ImpactDto";
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,21 @@ export class MockedImpactRestService extends ImpactRestService {
     super(logger, http)
   }
 
-  // TODO add methods...
+  getImpactsByAnalysisId(analysisId: string): Observable<ImpactDto[]> {
+    return of(this.sampleData.dummyImpactDtos);
+  }
 
+  createImpact(impactDto: ImpactDto): Observable<any> {
+    return of(this.sampleData.getDummyImpactDto());
+  }
+
+  updateImpact(impactDto: ImpactDto): Observable<any> {
+    return of(this.sampleData.getDummyImpactDto());
+  }
+
+  deleteImpact(impactDto: ImpactDto): Observable<any> {
+    return of(this.sampleData.getDummyImpactDto());
+  }
 }
 
 describe('ImpactRestService', () => {

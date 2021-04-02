@@ -13,6 +13,7 @@ import {DimensionDto} from '../dtos/DimensionDto';
 import {Dimension} from '../models/Dimension';
 import {ImpactStakeholderDto} from '../dtos/ImpactStakeholderDto';
 import {ImpactAnalysisDto} from '../dtos/ImpactAnalysisDto';
+import {ImpactMapperService} from "../services/impact/impact-mapper.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class SampleDataService {
   constructor(
     private dimensionMapperService: DimensionMapperService,
     private stakeholderMapperService: StakeholderMapperService,
-    private analysisMapperService: AnalysisMapperService) {
+    private analysisMapperService: AnalysisMapperService,
+    private impactMapperService: ImpactMapperService) {
 
     this.dummyAnalysisDtos.forEach(dto => {
       this.dummyAnalyses.push(this.analysisMapperService.fromDto(dto));
@@ -36,7 +38,9 @@ export class SampleDataService {
       this.dummyValues.push(this.dimensionMapperService.fromDto(dto));
     });
 
-    // TODO for impact Dtos
+    this.dummyImpactDtos.forEach(dto => {
+      this.dummyImpacts.push(this.impactMapperService.fromDto(dto, this.dummyValues, this.dummyStakeholders, this.dummyAnalyses));
+    });
 
     // TODO for requirements Dtos when they are in backend...
   }
@@ -245,4 +249,6 @@ export class SampleDataService {
       analysis: {id: '1'}
     }
   ];
+
+  readonly dummyImpacts: Impact[] = [];
 }
