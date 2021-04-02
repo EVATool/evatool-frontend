@@ -7,9 +7,7 @@ describe('ImpactMapperService', () => {
   let data: SampleDataService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [SampleDataService]
-    });
+    TestBed.configureTestingModule({});
     service = TestBed.inject(ImpactMapperService);
     data = TestBed.inject(SampleDataService);
   });
@@ -26,10 +24,7 @@ describe('ImpactMapperService', () => {
     const impactDto = service.toDto(impact);
 
     // Assert
-    expect(impact.id === impactDto.id).toBeTruthy();
-    expect(impact.uniqueString === impactDto.uniqueString).toBeTruthy();
-    expect(impact.value === impactDto.value).toBeTruthy();
-    expect(impact.description === impactDto.description).toBeTruthy();
+    expect(impact.equalsDto(impactDto)).toBeTruthy();
   });
 
   it('should convert from dto', () => {
@@ -43,13 +38,6 @@ describe('ImpactMapperService', () => {
     const impact = service.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
 
     // Assert
-    expect(impact.id === impactDto.id).toBeTruthy();
-    expect(impact.uniqueString === impactDto.uniqueString).toBeTruthy();
-    expect(impact.value === impactDto.value).toBeTruthy();
-    expect(impact.description === impactDto.description).toBeTruthy();
-
-    expect(impact.dimension.id === impactDto.dimension.id).toBeTruthy();
-    expect(impact.stakeholder.id === impactDto.stakeholder.id).toBeTruthy();
-    expect(impact.analysis.id === impactDto.analysis.id).toBeTruthy();
+    expect(impact.equalsDto(impactDto)).toBeTruthy();
   });
 });

@@ -19,8 +19,8 @@ export class Impact {
       && this.uniqueString === that.uniqueString
       && this.value === that.value
       && this.description === that.description
-      && this.dimension === that.dimension
-      && this.stakeholder === that.stakeholder
-      && this.analysis === that.analysis;
+      && this.dimension.equalsDto(that.dimension)
+      && this.stakeholder.equalsImpactDto(that.stakeholder)
+      && this.analysis.equalsImpactDto(that.analysis);
   }
 }
