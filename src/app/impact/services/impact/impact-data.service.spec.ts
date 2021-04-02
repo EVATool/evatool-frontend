@@ -12,6 +12,7 @@ import {MockedValueRestService} from "../dimension/dimension-rest.service.spec";
 import {MockedImpactRestService} from "./impact-rest.service.spec";
 import {MockedAnalysisRestService} from "../analysis/analysis-rest.service.spec";
 import {MockedStakeholderRestService} from "../stakeholder/stakeholder-rest.service.spec";
+import {RestMockProviders} from "../../spec/RestMockProviders";
 
 describe('ImpactDataService', () => {
   let sampleData: SampleDataService;
@@ -24,24 +25,7 @@ describe('ImpactDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [
-        {
-          provide: DimensionRestService,
-          useClass: MockedValueRestService
-        },
-        {
-          provide: StakeholderRestService,
-          useClass: MockedStakeholderRestService
-        },
-        {
-          provide: AnalysisRestService,
-          useClass: MockedAnalysisRestService
-        },
-        {
-          provide: ImpactRestService,
-          useClass: MockedImpactRestService
-        }
-      ]
+      providers: RestMockProviders.providers
     });
     sampleData = TestBed.inject(SampleDataService);
     stakeholderRestService = TestBed.inject(StakeholderRestService);
