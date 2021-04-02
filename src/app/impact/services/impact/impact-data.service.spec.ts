@@ -8,6 +8,10 @@ import {StakeholderRestService} from '../stakeholder/stakeholder-rest.service';
 import {AnalysisRestService} from '../analysis/analysis-rest.service';
 import {DimensionRestService} from '../dimension/dimension-rest.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {MockedValueRestService} from "../dimension/dimension-rest.service.spec";
+import {MockedImpactRestService} from "./impact-rest.service.spec";
+import {MockedAnalysisRestService} from "../analysis/analysis-rest.service.spec";
+import {MockedStakeholderRestService} from "../stakeholder/stakeholder-rest.service.spec";
 
 describe('ImpactDataService', () => {
   let sampleData: SampleDataService;
@@ -19,7 +23,25 @@ describe('ImpactDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      providers: [
+        {
+          provide: DimensionRestService,
+          useClass: MockedValueRestService
+        },
+        {
+          provide: StakeholderRestService,
+          useClass: MockedStakeholderRestService
+        },
+        {
+          provide: AnalysisRestService,
+          useClass: MockedAnalysisRestService
+        },
+        {
+          provide: ImpactRestService,
+          useClass: MockedImpactRestService
+        }
+      ]
     });
     sampleData = TestBed.inject(SampleDataService);
     stakeholderRestService = TestBed.inject(StakeholderRestService);
@@ -37,10 +59,6 @@ describe('ImpactDataService', () => {
     it('should fire \'loadedImpacts\' event', () => {
       // Arrange
       spyOn(service.loadedImpacts, 'emit');
-      spyOn(stakeholderRestService, 'getStakeholders').and.returnValue(sampleData.getObservable(sampleData.dummyStakeholderDtos));
-      spyOn(analysisRestService, 'getAnalysisById').and.returnValue(sampleData.getObservable(sampleData.dummyAnalysisDtos[0]));
-      spyOn(dimensionRestService, 'getDimensions').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionDtos));
-      spyOn(restService, 'getImpactsByAnalysisId').and.returnValue(sampleData.getObservable(sampleData.dummyImpactDtos));
 
       // Act
       service.onInit();
@@ -51,10 +69,6 @@ describe('ImpactDataService', () => {
 
     it('should load impacts', () => {
       // Arrange
-      spyOn(stakeholderRestService, 'getStakeholders').and.returnValue(sampleData.getObservable(sampleData.dummyStakeholderDtos));
-      spyOn(analysisRestService, 'getAnalysisById').and.returnValue(sampleData.getObservable(sampleData.dummyAnalysisDtos[0]));
-      spyOn(dimensionRestService, 'getDimensions').and.returnValue(sampleData.getObservable(sampleData.dummyDimensionDtos));
-      spyOn(restService, 'getImpactsByAnalysisId').and.returnValue(sampleData.getObservable(sampleData.dummyImpactDtos));
 
       // Act
       service.onInit();
@@ -67,33 +81,44 @@ describe('ImpactDataService', () => {
   describe('#createImpact', () => {
     it('should create a new Impact', () => {
       // Arrange
+      service.onInit();
 
       // Act
+      const existingImpacts = service.impacts.length;
+      service.createImpact();
 
       // Assert
-
+      expect(service.impacts.length).toBe(existingImpacts + 1);
     });
   });
 
   describe('#updateImpact', () => {
     it('should update an Impact', () => {
       // Arrange
+      service.onInit();
 
       // Act
+      const updateImpact = service.impacts[0];
+      updateImpact.description = "New Description";
+      service.updateImpact(updateImpact);
 
       // Assert
-
+      expect(service.impacts).toContain(updateImpact);
     });
   });
 
   describe('#deleteImpact', () => {
     it('should delete an Impact', () => {
       // Arrange
+      service.onInit();
 
       // Act
+      const existingImpacts = service.impacts.length;
+      const deleteImpact = service.impacts[0];
+      service.deleteImpact(deleteImpact);
 
       // Assert
-
+      expect(service.impacts.length).toBe(existingImpacts - 1);
     });
   });
 });
