@@ -13,7 +13,6 @@ export class StakeholderRestService {
   constructor(
     private logger: LogService,
     private http: HttpClient) {
-
   }
 
   onInit(): void {

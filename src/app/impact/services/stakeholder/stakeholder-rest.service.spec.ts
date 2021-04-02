@@ -1,9 +1,27 @@
-import { SampleDataService } from '../../spec/sample-data.service';
-import { RestSettings } from '../../settings/RestSettings';
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {SampleDataService} from '../../spec/sample-data.service';
+import {RestSettings} from '../../settings/RestSettings';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
-import { StakeholderRestService } from './stakeholder-rest.service';
+import {StakeholderRestService} from './stakeholder-rest.service';
+import {LogService} from "../../../shared/services/log.service";
+import {HttpClient} from "@angular/common/http";
+import {Observable, of} from "rxjs";
+import {StakeholderDto} from "../../dtos/StakeholderDto";
+
+
+export class MockedStakeholderRestService extends StakeholderRestService {
+  constructor(
+    logger: LogService,
+    http: HttpClient,
+    private sampleData: SampleDataService) {
+    super(logger, http)
+  }
+
+  getStakeholders(): Observable<StakeholderDto[]> {
+    return of(this.sampleData.dummyStakeholderDtos);
+  }
+}
 
 describe('StakeholderRestService', () => {
   let sampleData: SampleDataService;
@@ -27,21 +45,19 @@ describe('StakeholderRestService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#getStakeholders', () => {
-    it('should return an Observable<StakeholderDto[]>', () => {
-      // Arrage
-      const dummyDtos = sampleData.dummyStakeholderDtos;
+  it('should return an Observable<StakeholderDto[]>', () => {
+    // Arrange
+    const dummyDtos = sampleData.dummyStakeholderDtos;
 
-      // Act
-      service.getStakeholders().subscribe(stakeholders => {
-        expect(stakeholders.length).toBe(dummyDtos.length);
-        expect(stakeholders).toEqual(dummyDtos);
-      });
-
-      // Assert
-      const req = httpMock.expectOne(RestSettings.stakeholdersUrl);
-      expect(req.request.method).toBe('GET');
-      req.flush(dummyDtos);
+    // Act
+    service.getStakeholders().subscribe(stakeholders => {
+      expect(stakeholders.length).toBe(dummyDtos.length);
+      expect(stakeholders).toEqual(dummyDtos);
     });
+
+    // Assert
+    const req = httpMock.expectOne(RestSettings.stakeholdersUrl);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyDtos);
   });
 });
