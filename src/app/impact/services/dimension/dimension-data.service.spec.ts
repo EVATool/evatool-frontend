@@ -29,7 +29,7 @@ describe('DimensionDataService', () => {
   });
 
   describe('#onInit', () => {
-    it('should load dimensions', () => {
+    it('should fire \'loadedDimensions\' event', () => {
       // Arrange
       spyOn(service.loadedDimensions, 'emit');
 
@@ -38,6 +38,27 @@ describe('DimensionDataService', () => {
 
       // Assert
       expect(service.loadedDimensions.emit).toHaveBeenCalled();
+    });
+
+    it('should fire \'loadedDimensionTypes\' event', () => {
+      // Arrange
+      spyOn(service.loadedDimensionTypes, 'emit');
+
+      // Act
+      service.onInit();
+
+      // Assert
+      expect(service.loadedDimensionTypes.emit).toHaveBeenCalled();
+    });
+
+    it('should load dimensions', () => {
+      // Arrange
+      spyOn(service.loadedDimensions, 'emit');
+
+      // Act
+      service.onInit();
+
+      // Assert
       expect(service.dimensions).toEqual(sampleData.dummyValues);
     });
 
@@ -49,7 +70,6 @@ describe('DimensionDataService', () => {
       service.onInit();
 
       // Assert
-      expect(service.loadedDimensionTypes.emit).toHaveBeenCalled();
       expect(service.dimensionTypes).toEqual(sampleData.dummyDimensionTypes);
     });
   });
