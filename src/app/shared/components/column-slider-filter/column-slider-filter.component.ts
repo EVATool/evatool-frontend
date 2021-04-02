@@ -14,7 +14,7 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
   @Input() name = '';
   @Output() filterChanged = new EventEmitter<SliderFilterSettings>();
 
-  filterType: SliderFilterType = 0;
+  filterType: SliderFilterType = 2;
   filterBoundary: SliderFilterBoundary = 0;
 
   public isVisible = false;
@@ -26,8 +26,7 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.filterType = this.slider?.sliderFilterSettings.sliderFilterType;
-    this.filterBoundary = this.slider?.sliderFilterSettings.sliderFilterBoundary;
+
   }
 
   sliderFilterValueChanged(event: MatSliderChange): void {

@@ -9,7 +9,7 @@ import {LogService} from '../../services/log.service';
   styleUrls: ['./impact-slider.component.scss']
 })
 export class ImpactSliderComponent implements OnInit, AfterViewInit {
-  @Input() value: number = 0;
+  @Input() value: number = 1;
   @Input() valueSecond: number = -1;
   @Input() deadzone: number = 0.0;
   @Input() isFilter: boolean = false;
@@ -36,9 +36,6 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (this.isFilter) {
-      this.value = this.sliderFilterSettings.sliderFilterValues[0];
-    }
     this.legalValue = this.value;
     this.drawSlider();
   }
