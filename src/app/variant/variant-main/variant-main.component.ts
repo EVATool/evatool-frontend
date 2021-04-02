@@ -19,7 +19,7 @@ export class VariantMainComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(VariantDialogComponent,  {});
+    const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: ''}});
   }
 
   ngOnInit(): void {
