@@ -44,7 +44,7 @@ describe('AnalysisRestService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an Observable<AnalysisDto>', () => {
+  it('should return an analysis by id', () => {
     // Arrange
     const dummyDto = sampleData.dummyAnalysisDtos[0];
 

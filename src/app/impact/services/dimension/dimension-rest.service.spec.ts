@@ -52,7 +52,7 @@ describe('DimensionRestService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an Observable<DimensionDto[]>', () => {
+  it('should return all dimensions>', () => {
     // Arrange
     const dummyDtos = sampleData.dummyDimensionDtos;
 
@@ -68,7 +68,7 @@ describe('DimensionRestService', () => {
     req.flush(dummyDtos);
   });
 
-  it('should return an Observable<string[]>', () => {
+  it('should return all dimension types', () => {
     // Arrange
     const dummyDtos = sampleData.dummyDimensionTypes;
 

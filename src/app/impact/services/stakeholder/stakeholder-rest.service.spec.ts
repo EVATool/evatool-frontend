@@ -45,7 +45,7 @@ describe('StakeholderRestService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an Observable<StakeholderDto[]>', () => {
+  it('should return all stakeholders>', () => {
     // Arrange
     const dummyDtos = sampleData.dummyStakeholderDtos;
 
