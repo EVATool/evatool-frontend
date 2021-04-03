@@ -1,0 +1,44 @@
+<table mat-table [dataSource]='tableDataSource' matSort>
+  <caption class="screen-reader-only">List of Values</caption>
+
+  <ng-container matColumnDef='include'>
+    <th scope="col" mat-header-cell *matHeaderCellDef>
+      <div mat-sort-header matTooltip="Whether to include the value in the table selection"
+        matTooltipHideDelay="100" matTooltipPosition="above">Include</div>
+    </th>
+    <td mat-cell *matCellDef='let value'>
+      <div class="include-container">
+        <mat-icon *ngIf="value.name==='ghjk'">filter</mat-icon>
+        <mat-icon *ngIf="value.name!=='ghjk'">filter_alt</mat-icon>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef='name'>
+    <th scope="col" mat-header-cell *matHeaderCellDef>
+      <div mat-sort-header matTooltip="The value name" matTooltipHideDelay="100" matTooltipPosition="above">Name
+      </div>
+    </th>
+    <td mat-cell *matCellDef='let value'>
+      <div class="description-container">
+        <textarea matInput cdkTextareaAutosize [(ngModel)]="value.name" placeholder="Name..."></textarea>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef='description'>
+    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+      <div matTooltip="The value description" matTooltipHideDelay="100" matTooltipPosition="above">
+        Description</div>
+    </th>
+    <td mat-cell *matCellDef='let value'>
+      <div class="description-container">
+        <textarea matInput cdkTextareaAutosize [(ngModel)]="value.description"
+          placeholder="Describe the value..."></textarea>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

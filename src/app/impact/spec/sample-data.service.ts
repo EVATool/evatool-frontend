@@ -2,18 +2,19 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {StakeholderMapperService} from '../services/stakeholder/stakeholder-mapper.service';
 import {AnalysisMapperService} from '../services/analysis/analysis-mapper.service';
-import {DimensionMapperService} from '../services/dimension/dimension-mapper.service';
+import {ValueMapperService} from '../services/value/value-mapper.service';
 import {Impact} from '../models/Impact';
 import {ImpactDto} from '../dtos/ImpactDto';
 import {StakeholderDto} from '../dtos/StakeholderDto';
 import {Stakeholder} from '../models/Stakeholder';
 import {Analysis} from '../models/Analysis';
 import {AnalysisDto} from '../dtos/AnalysisDto';
-import {DimensionDto} from '../dtos/DimensionDto';
-import {Dimension} from '../models/Dimension';
+import {ValueDto} from '../dtos/ValueDto';
+import {Value} from '../models/Value';
 import {ImpactStakeholderDto} from '../dtos/ImpactStakeholderDto';
 import {ImpactAnalysisDto} from '../dtos/ImpactAnalysisDto';
 import {ImpactMapperService} from "../services/impact/impact-mapper.service";
+import {ImpactValueDto} from "../dtos/ImpactValueDto";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ import {ImpactMapperService} from "../services/impact/impact-mapper.service";
 export class SampleDataService {
 
   constructor(
-    private dimensionMapperService: DimensionMapperService,
+    private valueMapperService: ValueMapperService,
     private stakeholderMapperService: StakeholderMapperService,
     private analysisMapperService: AnalysisMapperService,
     private impactMapperService: ImpactMapperService) {
@@ -34,8 +35,8 @@ export class SampleDataService {
       this.dummyStakeholders.push(this.stakeholderMapperService.fromDto(dto));
     });
 
-    this.dummyDimensionDtos.forEach(dto => {
-      this.dummyValues.push(this.dimensionMapperService.fromDto(dto));
+    this.dummyValueDtos.forEach(dto => {
+      this.dummyValues.push(this.valueMapperService.fromDto(dto));
     });
 
     this.dummyImpactDtos.forEach(dto => {
@@ -50,7 +51,7 @@ export class SampleDataService {
     impact.id = 'imapctId';
     impact.value = 0.0;
     impact.description = 'imapctDescription';
-    impact.dimension = this.getDummyDimension();
+    impact.valueEntity = this.getDummyValue();
     impact.stakeholder = this.getDummyStakeholder();
     impact.analysis = this.getDummyAnalysis();
     return impact;
@@ -61,39 +62,48 @@ export class SampleDataService {
     impactDto.id = 'imapctId';
     impactDto.value = 0.0;
     impactDto.description = 'imapctDescription';
-    impactDto.dimension = this.getDummyDimensionDto();
+    impactDto.valueEntity = this.getDummyValueDto();
     impactDto.stakeholder = this.getDummyImpactStakeholderDto();
     impactDto.analysis = this.getDummyImpactAnalysisDto();
     return impactDto;
   }
 
-  getDummyImpactDtoWithMyChildren(dimension: Dimension, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
+  getDummyImpactDtoWithMyChildren(value: Value, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
     const impactDto = new ImpactDto();
-    impactDto.id = 'imapctId';
+    impactDto.id = 'impactId';
     impactDto.value = 0.0;
-    impactDto.description = 'imapctDescription';
-    impactDto.dimension = this.dimensionMapperService.toDto(dimension);
+    impactDto.description = 'impactDescription';
+    impactDto.valueEntity = this.valueMapperService.toImpactDto(value);
     impactDto.stakeholder = this.stakeholderMapperService.toImpactDto(stakeholder);
     impactDto.analysis = this.analysisMapperService.toImpactDto(analysis);
     return impactDto;
   }
 
-  getDummyDimension(): Dimension {
-    const dimension = new Dimension();
-    dimension.id = 'dimensionId';
-    dimension.name = 'dimensionName';
-    dimension.type = 'dimensionType';
-    dimension.description = 'dimensionDescription';
-    return dimension;
+  getDummyValue(): Value {
+    const value = new Value();
+    value.id = 'valueId';
+    value.name = 'valueName';
+    value.type = 'valueType';
+    value.description = 'valueDescription';
+    return value;
   }
 
-  getDummyDimensionDto(): DimensionDto {
-    const dimensionDto = new DimensionDto();
-    dimensionDto.id = 'dimensionId';
-    dimensionDto.name = 'dimensionName';
-    dimensionDto.type = 'dimensionType';
-    dimensionDto.description = 'dimensionDescription';
-    return dimensionDto;
+  getDummyValueDto(): ValueDto {
+    const valueDto = new ValueDto();
+    valueDto.id = 'valueId';
+    valueDto.name = 'valueName';
+    valueDto.type = 'valueType';
+    valueDto.description = 'valueDescription';
+    return valueDto;
+  }
+
+  getDummyImpactValueDto(): ImpactValueDto {
+    const impactValueDto = new ImpactValueDto();
+    impactValueDto.id = 'valueId';
+    impactValueDto.name = 'valueName';
+    impactValueDto.type = 'valueType';
+    impactValueDto.description = 'valueDescription';
+    return impactValueDto;
   }
 
   getDummyStakeholder(): Stakeholder {
@@ -174,7 +184,7 @@ export class SampleDataService {
 
   readonly dummyStakeholders: Stakeholder[] = []
 
-  readonly dummyDimensionDtos: DimensionDto[] = [
+  readonly dummyValueDtos: ValueDto[] = [
     {
       id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
     },
@@ -207,9 +217,9 @@ export class SampleDataService {
     }
   ];
 
-  readonly dummyValues: Dimension[] = []
+  readonly dummyValues: Value[] = []
 
-  readonly dummyDimensionTypes: string[] = ['SOCIAL', 'ECONOMIC'];
+  readonly dummyValueTypes: string[] = ['SOCIAL', 'ECONOMIC'];
 
   readonly dummyImpactDtos: any[] = [
     {
@@ -217,7 +227,7 @@ export class SampleDataService {
       uniqueString: 'IMP1',
       value: -0.3,
       description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
-      dimension: {id: '1'},
+      valueEntity: {id: '1'},
       stakeholder: {id: '1'},
       analysis: {id: '1'}
     },
@@ -226,7 +236,7 @@ export class SampleDataService {
       uniqueString: 'IMP2',
       value: 0.5,
       description: 'This is the second read-only impact',
-      dimension: {id: '4'},
+      valueEntity: {id: '4'},
       stakeholder: {id: '1'},
       analysis: {id: '1'}
     },
@@ -235,7 +245,7 @@ export class SampleDataService {
       uniqueString: 'IMP3',
       value: 0.9,
       description: 'This is the third read-only impact',
-      dimension: {id: '2'},
+      valueEntity: {id: '2'},
       stakeholder: {id: '4'},
       analysis: {id: '1'}
     },
@@ -244,7 +254,7 @@ export class SampleDataService {
       uniqueString: 'IMP4',
       value: 0.2,
       description: 'This is the fourth read-only impact',
-      dimension: {id: '2'},
+      valueEntity: {id: '2'},
       stakeholder: {id: '3'},
       analysis: {id: '1'}
     }

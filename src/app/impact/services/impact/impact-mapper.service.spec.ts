@@ -29,13 +29,13 @@ describe('ImpactMapperService', () => {
 
   it('should convert from dto', () => {
     // Arrange
-    const dimension = data.getDummyDimension();
+    const value = data.getDummyValue();
     const stakeholder = data.getDummyStakeholder();
     const analysis = data.getDummyAnalysis();
-    const impactDto = data.getDummyImpactDtoWithMyChildren(dimension, stakeholder, analysis);
+    const impactDto = data.getDummyImpactDtoWithMyChildren(value, stakeholder, analysis);
 
     // Act
-    const impact = service.fromDto(impactDto, [dimension], [stakeholder], [analysis]);
+    const impact = service.fromDto(impactDto, [value], [stakeholder], [analysis]);
 
     // Assert
     expect(impact.equalsDto(impactDto)).toBeTruthy();

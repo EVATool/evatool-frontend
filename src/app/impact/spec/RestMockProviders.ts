@@ -1,5 +1,5 @@
-import {DimensionRestService} from "../services/dimension/dimension-rest.service";
-import {MockedValueRestService} from "../services/dimension/dimension-rest.service.spec";
+import {ValueRestService} from "../services/value/value-rest.service";
+import {MockedValueRestService} from "../services/value/value-rest.service.spec";
 import {StakeholderRestService} from "../services/stakeholder/stakeholder-rest.service";
 import {MockedStakeholderRestService} from "../services/stakeholder/stakeholder-rest.service.spec";
 import {AnalysisRestService} from "../services/analysis/analysis-rest.service";
@@ -10,7 +10,7 @@ import {MockedImpactRestService} from "../services/impact/impact-rest.service.sp
 export class RestMockProviders {
   public static readonly providers: any[] = [
     {
-      provide: DimensionRestService,
+      provide: ValueRestService,
       useClass: MockedValueRestService
     },
     {

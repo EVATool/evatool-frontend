@@ -1,6 +1,6 @@
 import {Analysis} from './Analysis';
 import {Stakeholder} from './Stakeholder';
-import {Dimension} from './Dimension';
+import {Value} from './Value';
 import {ImpactDto} from "../dtos/ImpactDto";
 
 export class Impact {
@@ -10,7 +10,7 @@ export class Impact {
   uniqueString: string | null = null;
   value = 0;
   description = '';
-  dimension!: Dimension;
+  valueEntity!: Value;
   stakeholder!: Stakeholder;
   analysis!: Analysis;
 
@@ -19,7 +19,7 @@ export class Impact {
       && this.uniqueString === that.uniqueString
       && this.value === that.value
       && this.description === that.description
-      && this.dimension.equalsDto(that.dimension)
+      && this.valueEntity.equalsImpactDto(that.valueEntity)
       && this.stakeholder.equalsImpactDto(that.stakeholder)
       && this.analysis.equalsImpactDto(that.analysis);
   }

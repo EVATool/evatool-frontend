@@ -6,7 +6,7 @@ import {SampleDataService} from '../../spec/sample-data.service';
 import {ImpactRestService} from './impact-rest.service';
 import {StakeholderRestService} from '../stakeholder/stakeholder-rest.service';
 import {AnalysisRestService} from '../analysis/analysis-rest.service';
-import {DimensionRestService} from '../dimension/dimension-rest.service';
+import {ValueRestService} from '../value/value-rest.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RestMockProviders} from "../../spec/RestMockProviders";
 
@@ -14,7 +14,7 @@ describe('ImpactDataService', () => {
   let sampleData: SampleDataService;
   let stakeholderRestService: StakeholderRestService;
   let analysisRestService: AnalysisRestService;
-  let dimensionRestService: DimensionRestService;
+  let valueRestService: ValueRestService;
   let restService: ImpactRestService;
   let service: ImpactDataService;
 
@@ -26,7 +26,7 @@ describe('ImpactDataService', () => {
     sampleData = TestBed.inject(SampleDataService);
     stakeholderRestService = TestBed.inject(StakeholderRestService);
     analysisRestService = TestBed.inject(AnalysisRestService);
-    dimensionRestService = TestBed.inject(DimensionRestService);
+    valueRestService = TestBed.inject(ValueRestService);
     restService = TestBed.inject(ImpactRestService);
     service = TestBed.inject(ImpactDataService);
   });

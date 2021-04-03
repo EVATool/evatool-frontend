@@ -3,13 +3,13 @@
     <app-search-bar (searchTextChanged)="highlightTextChange($event)"></app-search-bar>
   </mat-list-item>
   <mat-list-item>
-    <app-column-category-filter #stakeholderFiler [categories]="stakeholderNames" [name]="'Stakeholder'"
+    <app-column-category-filter #stakeholderFiler [categories]="stakeholderNames" [name]="'Stakeholders'"
       (filterChanged)="stakeholderFilterChanged($event)">
     </app-column-category-filter>
   </mat-list-item>
   <mat-list-item>
-    <app-column-category-filter #dimensionFilter [categories]="dimensionNames" [name]="'Dimensions'"
-      (filterChanged)="dimensionFilterChanged($event)">
+    <app-column-category-filter #valuesFilter [categories]="valueNames" [name]="'Values'"
+                                (filterChanged)="valuesFilterChanged($event)">
     </app-column-category-filter>
   </mat-list-item>
   <mat-list-item>

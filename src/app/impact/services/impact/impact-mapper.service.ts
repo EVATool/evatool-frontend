@@ -2,9 +2,9 @@ import { LogService } from '../../../shared/services/log.service';
 import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
 import { Analysis } from '../../models/Analysis';
 import { Stakeholder } from '../../models/Stakeholder';
-import { Dimension } from '../../models/Dimension';
+import { Value } from '../../models/Value';
 import { StakeholderMapperService } from '../stakeholder/stakeholder-mapper.service';
-import { DimensionMapperService } from '../dimension/dimension-mapper.service';
+import { ValueMapperService } from '../value/value-mapper.service';
 import { ImpactDto } from '../../dtos/ImpactDto';
 import { Impact } from '../../models/Impact';
 import { Injectable } from '@angular/core';
@@ -16,7 +16,7 @@ export class ImpactMapperService {
 
   constructor(
     private logger: LogService,
-    private dimensionMapperService: DimensionMapperService,
+    private valueMapperService: ValueMapperService,
     private stakeholderMapperService: StakeholderMapperService,
     private analysisMapperService: AnalysisMapperService
   ) { }
@@ -31,14 +31,14 @@ export class ImpactMapperService {
     impactDto.value = impact.value;
     impactDto.description = impact.description;
 
-    impactDto.dimension = this.dimensionMapperService.toDto(impact.dimension);
+    impactDto.valueEntity = this.valueMapperService.toImpactDto(impact.valueEntity);
     impactDto.stakeholder = this.stakeholderMapperService.toImpactDto(impact.stakeholder);
     impactDto.analysis = this.analysisMapperService.toImpactDto(impact.analysis);
 
     return impactDto;
   }
 
-  fromDto(impactDto: ImpactDto, dimensions: Dimension[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
+  fromDto(impactDto: ImpactDto, values: Value[], stakeholders: Stakeholder[], analyses: Analysis[]): Impact {
     this.logger.info(this, 'Mapping ImpactDto to Impact');
 
     const impact = new Impact();
@@ -48,9 +48,9 @@ export class ImpactMapperService {
     impact.value = impactDto.value;
     impact.description = impactDto.description;
 
-    dimensions.forEach(dimension => {
-      if (dimension.id === impactDto.dimension.id) {
-        impact.dimension = dimension;
+    values.forEach(value => {
+      if (value.id === impactDto.valueEntity.id) {
+        impact.valueEntity = value;
         return;
       }
     });

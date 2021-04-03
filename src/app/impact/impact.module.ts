@@ -1,6 +1,6 @@
 import { HighlightSearch } from './pipes/HighlightSearch';
-import { DimensionTableComponent } from './components/impact-table/components/dimension-dialog/components/dimension-table/dimension-table.component';
-import { DimensionDialogComponent } from './components/impact-table/components/dimension-dialog/dimension-dialog.component';
+import { ValueTableComponent } from './components/impact-table/components/value-dialog/components/value-table/value-table.component';
+import { ValueDialogComponent } from './components/impact-table/components/value-dialog/value-dialog.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -35,8 +35,8 @@ import { ImpactTableFilterBarComponent } from './components/impact-table-filter-
     ImpactTableComponent,
     AddImpactButtonComponent,
     ClickOutsideDirective,
-    DimensionDialogComponent,
-    DimensionTableComponent,
+    ValueDialogComponent,
+    ValueTableComponent,
     ImpactTableFilterBarComponent,
     HighlightSearch
   ],

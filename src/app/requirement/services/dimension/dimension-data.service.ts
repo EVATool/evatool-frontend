@@ -38,7 +38,7 @@ export class DimensionDataService {
       this.dimensionsLoaded.emit();
     });
 
-    // Load dimension types.
+    // Load value types.
     this.restService.getDimensionTypes().subscribe(dimTypes => {
       this.dimensionTypesLoaded.emit();
     });
