@@ -22,7 +22,6 @@ export class VariantDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<VariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { id: string },
     public variantDataService: VariantDataService) {
-
   }
 
   ngOnInit(): void {
