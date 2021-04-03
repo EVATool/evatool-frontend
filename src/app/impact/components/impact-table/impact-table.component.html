@@ -22,7 +22,7 @@
         <mat-list-item>
           <mat-form-field>
             <mat-select [(ngModel)]="impact.stakeholder" (selectionChange)="stakeholderChange(impact, $event)">
-              <mat-option *ngFor="let stk of impactDataService.stakeholders" [value]="stk">
+              <mat-option *ngFor="let stk of impactDataService.stakeholderDataService.stakeholders" [value]="stk">
                 {{stk.name}}
               </mat-option>
             </mat-select>
@@ -44,7 +44,7 @@
     <td mat-cell *matCellDef='let impact'>
       <mat-form-field>
         <mat-select [(ngModel)]="impact.valueEntity" (selectionChange)="valueEntityChange(impact, $event)">
-          <mat-option *ngFor="let val of impactDataService.values" [value]="val">{{val.name}}</mat-option>
+          <mat-option *ngFor="let val of impactDataService.valueDataService.values" [value]="val">{{val.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </td>

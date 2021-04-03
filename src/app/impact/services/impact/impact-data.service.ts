@@ -31,9 +31,9 @@ export class ImpactDataService {
     private logger: LogService,
     private impactMapperService: ImpactMapperService,
     private impactRestService: ImpactRestService,
-    private stakeholderDataService: StakeholderDataService,
-    private valueDataService: ValueDataService,
-    private analysisDataService: AnalysisDataService) {
+    public stakeholderDataService: StakeholderDataService,
+    public valueDataService: ValueDataService,
+    public analysisDataService: AnalysisDataService) {
   }
 
   onInit(): void {
