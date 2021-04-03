@@ -9,7 +9,16 @@ table {
 }
 
 .mat-column-stakeholder {
-  width: 10% !important;
+  width: 20% !important;
+}
+
+.mat-list.list-horizontal {
+  .mat-list-item {
+    vertical-align: middle;
+    display: inline-block;
+    height: auto;
+    width: auto;
+  }
 }
 
 .mat-column-valueEntity {
