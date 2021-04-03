@@ -28,7 +28,8 @@
   <ng-container matColumnDef='valueEntity'>
     <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
       <div matTooltip="The value affecting the stakeholder" matTooltipHideDelay="100" matTooltipPosition="above">
-        Value</div>
+        Value
+      </div>
 
       <mat-icon id="valueEntity-modal" (click)="$event.stopPropagation(); openValueModal();">info</mat-icon>
     </th>
@@ -63,11 +64,11 @@
       <div class="description-wrapper">
         <div class="description-container">
           <textarea matInput cdkTextareaAutosize [(ngModel)]="impact.description" placeholder="Describe the impact..."
-            (change)="descriptionChange(impact, $event)"></textarea>
+                    (change)="descriptionChange(impact, $event)"></textarea>
         </div>
         <div class="delete-button-container">
           <button mat-fab (click)="deleteImpact(impact)" matTooltip="Delete Impact" matTooltipHideDelay="100"
-            matTooltipPosition="above">
+                  matTooltipPosition="above">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
