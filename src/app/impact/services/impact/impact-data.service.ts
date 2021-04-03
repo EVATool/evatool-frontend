@@ -74,8 +74,8 @@ export class ImpactDataService {
         });
         this.impacts = fromDtos;
         this.logger.info(this, 'Impacts loaded');
-        this.loadedImpacts.emit(this.impacts);
         this.loaded = true;
+        this.loadedImpacts.emit(this.impacts);
       });
     }
   }
