@@ -14,7 +14,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   @Input() type!: string;
 
   tableDataSource: MatTableDataSource<Value> = new MatTableDataSource<Value>();
-  displayedColumns = ['include', 'name', 'description'];
+  displayedColumns = ['disable', 'name', 'description'];
 
   constructor(private valueDataService: ValueDataService) {
   }
