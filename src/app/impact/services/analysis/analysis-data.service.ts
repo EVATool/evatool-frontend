@@ -1,9 +1,9 @@
-import { Router } from '@angular/router';
-import { LogService } from '../../../shared/services/log.service';
-import { AnalysisRestService } from './analysis-rest.service';
-import { AnalysisMapperService } from './analysis-mapper.service';
-import { Analysis } from '../../models/Analysis';
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import {Router} from '@angular/router';
+import {LogService} from '../../../shared/services/log.service';
+import {AnalysisRestService} from './analysis-rest.service';
+import {AnalysisMapperService} from './analysis-mapper.service';
+import {Analysis} from '../../models/Analysis';
+import {Injectable, Output, EventEmitter} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,8 @@ export class AnalysisDataService {
     private logger: LogService,
     private analysisMapperService: AnalysisMapperService,
     private analysisRestService: AnalysisRestService,
-    private router: Router) { }
+    private router: Router) {
+  }
 
   onInit(): void {
     // Load current analysis.
@@ -32,7 +33,7 @@ export class AnalysisDataService {
 
     this.router.routerState.root.queryParams.subscribe(params => {
       // TODO Error handling.
-      console.log('Extracted analysisId from Router: ' + params.id);
+      this.logger.info(this, 'Extracted analysisId from Router: ' + params.id)
       this.urlIdExtracted.emit(params.id);
     });
   }

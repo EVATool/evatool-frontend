@@ -3,6 +3,7 @@ import {LogService} from '../../../shared/services/log.service';
 import {Value} from '../../models/Value';
 import {ValueRestService} from './value-rest.service';
 import {Injectable, EventEmitter, Output, Inject} from '@angular/core';
+import {AnalysisDataService} from "../analysis/analysis-data.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,27 +21,47 @@ export class ValueDataService {
   constructor(
     private logger: LogService,
     private valueMapperService: ValueMapperService,
-    private valuesRestService: ValueRestService) {
+    private valuesRestService: ValueRestService,
+    private analysisDataService: AnalysisDataService) {
   }
 
   onInit(): void {
     // Load values.
-    this.valuesRestService.getValues().subscribe(vals => {
-      let fromDtos: Value[] = [];
-      vals.forEach(val => {
-        fromDtos.push(this.valueMapperService.fromDto(val));
+    this.analysisDataService.loadedAnalyses.subscribe(analysis => {
+      this.valuesRestService.getValuesByAnalysisId(analysis.id).subscribe(vals => {
+        let fromDtos: Value[] = [];
+        vals.forEach(val => {
+          fromDtos.push(this.valueMapperService.fromDto(val));
+        });
+        this.values = fromDtos;
+        this.logger.info(this, 'Values loaded');
+        this.loadedValues.emit(this.values);
       });
-      this.values = fromDtos;
-      this.logger.info(this, 'Values loaded');
-      this.loadedValues.emit(this.values);
+
+      // Load value types.
+      this.valuesRestService.getValueTypes().subscribe(valTypes => {
+        this.valuesTypes = valTypes;
+        this.logger.info(this, 'Value types loaded');
+        this.loadedValuesTypes.emit(this.valuesTypes);
+      });
     });
 
-    // Load value types.
-    this.valuesRestService.getValueTypes().subscribe(valTypes => {
-      this.valuesTypes = valTypes;
-      this.logger.info(this, 'Value types loaded');
-      this.loadedValuesTypes.emit(this.valuesTypes);
-    });
+    // this.valuesRestService.getValues().subscribe(vals => {
+    //   let fromDtos: Value[] = [];
+    //   vals.forEach(val => {
+    //     fromDtos.push(this.valueMapperService.fromDto(val));
+    //   });
+    //   this.values = fromDtos;
+    //   this.logger.info(this, 'Values loaded');
+    //   this.loadedValues.emit(this.values);
+    // });
+    //
+    // // Load value types.
+    // this.valuesRestService.getValueTypes().subscribe(valTypes => {
+    //   this.valuesTypes = valTypes;
+    //   this.logger.info(this, 'Value types loaded');
+    //   this.loadedValuesTypes.emit(this.valuesTypes);
+    // });
   }
 
   getDefaultValue(): Value {

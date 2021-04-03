@@ -22,7 +22,7 @@ export class ImpactDataService {
   @Output() changedImpacts: EventEmitter<Impact[]> = new EventEmitter();
 
   impacts: Impact[] = [];
-  private impactsLoaded = false;
+  private loaded = false;
   stakeholders: Stakeholder[] = [];
   private stakeholdersLoaded = false;
   values: Value[] = [];
@@ -64,7 +64,7 @@ export class ImpactDataService {
   }
 
   private loadIfChildrenAreLoaded(): void {
-    if (this.getChildrenLoaded() && !this.impactsLoaded) {
+    if (this.getChildrenLoaded() && !this.loaded) {
       // Load impacts.
       this.impactRestService.getImpactsByAnalysisId(this.analysisDataService.getCurrentAnalysis().id).subscribe(imps => {
         imps.sort((a, b) => this.sortImpactsById(a, b));
@@ -75,7 +75,7 @@ export class ImpactDataService {
         this.impacts = fromDtos;
         this.logger.info(this, 'Impacts loaded');
         this.loadedImpacts.emit(this.impacts);
-        this.impactsLoaded = true;
+        this.loaded = true;
       });
     }
   }
