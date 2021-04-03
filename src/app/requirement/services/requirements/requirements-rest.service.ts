@@ -15,27 +15,29 @@ const httpOptions = { // Outsource!
 })
 export class RequirementsRestService {
 
-  analysisUrl = 'http://79.171.179.211:443/requirements'; // Outsource!
-  impactsUrl = 'http://79.171.179.211:443/impacts'; // Outsource!
+  // analysisUrl = 'http://79.171.179.211:443/requirements'; // Outsource!
+  requirmentUrl = 'http://localhost:8080/requirements'; // Outsource!
+  // impactsUrl = 'http://79.171.179.211:443/impacts'; // Outsource!
+  impactsUrl = 'http://localhost:8080/requirements/impacts'; // Outsource!
 
   constructor(private http: HttpClient) {
 
   }
 
-  getRequirements(): Observable<Requirements[]> {
-    return this.http.get<Requirements[]>(this.analysisUrl);
+  getRequirements(id: string): Observable<Requirements[]> {
+    return this.http.get<Requirements[]>(this.requirmentUrl + '?analysisId=' + id);
   }
   getImpacts(): Observable<Impact> {
     return this.http.get<any>(this.impactsUrl);
   }
   createRequirements(requirement: Requirements): Observable<any> {
-    return this.http.post(this.analysisUrl, requirement, httpOptions);
+    return this.http.post(this.requirmentUrl, requirement, httpOptions);
   }
   updateRequirements(requirement: Requirements): Observable<any> {
-    return this.http.put(this.analysisUrl, requirement, httpOptions);
+    return this.http.put(this.requirmentUrl, requirement, httpOptions);
   }
 
   deleteRequirements(requirements: Requirements): Observable<any> {
-    return this.http.delete(this.analysisUrl + '/' + requirements.rootEntityId);
+    return this.http.delete(this.requirmentUrl + '/' + requirements.rootEntityId);
   }
 }

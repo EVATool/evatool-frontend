@@ -4,23 +4,35 @@ import {ImpactDataService} from '../services/impact/impact-data.service';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HostListener } from '@angular/core';
 import {RequirementsTableComponent} from '../components/requirement-table/requirements-table.component';
+import {RequirementsRestService} from "../services/requirements/requirements-rest.service";
+import {Router} from "@angular/router";
+import {RequirementsDataService} from "../services/requirements/requirements-data.service";
 
 @Component({
   selector: 'app-requirement-main',
   templateUrl: './requirement-main.component.html',
   styleUrls: ['./requirement-main.component.css']
 })
-export class RequirementMainComponent implements OnInit  {
+export class RequirementMainComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatTable) table!: MatTable<any>;
   editField: string;
   data: Requirements[] = [];
+  idForProject = '';
   private key = '';
   constructor(
-              ) {
+    private service: RequirementsRestService,
+    private dataService: RequirementsDataService,
+    private router: Router) {
     this.editField = '';
   }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    this.router.routerState.root.queryParams.subscribe(params => {
+      this.idForProject = params.id;
+    });
   }
 
   changeValue(id: number, property: string, event: any): any {
@@ -29,24 +41,12 @@ export class RequirementMainComponent implements OnInit  {
 
 
   @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    if(event.ctrlKey && event.keyCode == 10){
+  handleKeyboardEvent(event: KeyboardEvent): void {
+    if (event.ctrlKey && event.keyCode === 10){
     }
   }
 
-  // addRequirements(): void {
-  //   const requirementNew: Requirements = new Requirements();
-  //   requirementNew.projectID = this.idForProject;
-  //   const size: number = this.requirementsSource.length;
-  //   if (size < 10){
-  //     requirementNew.requirementTitle = 'RE0' + (size + 1);
-  //   }else{
-  //     requirementNew.requirementTitle = 'RE' + (size + 1);
-  //   }
-  //   requirementNew.requirementDescription = 'generated requirement';
-  //   this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
-  //     this.requirementsSource.push(value);
-  //     this.tableDatasource = new MatTableDataSource<Requirements>(this.requirementsSource);
-  //   });
-  // }
+  addRequirements(): void {
+    this.dataService.createRequirement(this.idForProject);
+  }
 }

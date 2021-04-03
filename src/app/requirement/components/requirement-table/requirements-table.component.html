@@ -1,13 +1,13 @@
-<div id="add-impact-button-div">
-  <button id="add-requirement-button" (click)="addRequirements()">
-    <p style="font-size:180%;">+</p>
-  </button>
-</div>
+<!--<div id="add-impact-button-div">-->
+<!--  <button id="add-requirement-button" (click)="addRequirements()">-->
+<!--    <p style="font-size:180%;">+</p>-->
+<!--  </button>-->
+<!--</div>-->
 
 <div class="example-table-container">
   <table mat-table [dataSource]="tableDatasource" matSort class="example-table ">
 
-    <ng-container matColumnDef="requirementTitle" sticky>
+    <ng-container matColumnDef="uniqueString" sticky>
       <th mat-header-cell scope="col" *matHeaderCellDef mat-sort-header>ID</th>
       <td mat-cell *matCellDef="let element"> {{element.uniqueString}} </td>
     </ng-container>

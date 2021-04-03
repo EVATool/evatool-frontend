@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
 import {MatSort, Sort} from '@angular/material/sort';
 import {Router} from '@angular/router';
+import {RequirementsDataService} from "../../services/requirements/requirements-data.service";
 
 @Component({
   selector: 'app-requirement-table',
@@ -16,12 +17,19 @@ import {Router} from '@angular/router';
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
-  displayedColumns: string[] = ['requirementTitle', 'requirementDescription', 'variantsTitle', 'values'];
+  displayedColumns: string[] = ['uniqueString', 'requirementDescription', 'variantsTitle', 'values'];
   requirementsSource: Requirements[] = [];
   impactSoureces: Impact[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
   idForProject = '';
+  columnDefinitions = [
+    { def: 'uniqueString', hide: true},
+    { def: 'requirementDescription', hide: true},
+    { def: 'variantsTitle', hide: true},
+    { def: 'values', hide: true}
+  ];
   constructor(private requirementsRestService: RequirementsRestService,
+              private requirementsDataService: RequirementsDataService,
               private router: Router) {
   }
 
@@ -29,25 +37,32 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.router.routerState.root.queryParams.subscribe(params => {
-      this.idForProject = params.id;
-    });
-    this.requirementsRestService.getRequirements().subscribe((result: Requirements[]) => {
-      this.requirementsSource = [];
-      result.forEach((requirementRest: Requirements) => {
-        const requirement: Requirements = {
-          rootEntityId : requirementRest.rootEntityId,
-          projectID : requirementRest.projectID,
-          uniqueString : requirementRest.uniqueString,
-          requirementDescription : requirementRest.requirementDescription,
-          values : requirementRest.values,
-          requirementImpactPoints : requirementRest.requirementImpactPoints,
-          variantsTitle : requirementRest.variantsTitle
-        };
-        this.requirementsSource.push(requirement);
-      });
-      this.tableDatasource = new MatTableDataSource<Requirements>(result);
+  //   this.router.routerState.root.queryParams.subscribe(params => {
+  //     this.idForProject = params.id;
+  //     this.requirementsRestService.getRequirements(this.idForProject).subscribe((result: Requirements[]) => {
+  //     this.requirementsSource = [];
+  //     result.forEach((requirementRest: Requirements) => {
+  //       const requirement: Requirements = {
+  //         rootEntityId : requirementRest.rootEntityId,
+  //         projectID : requirementRest.projectID,
+  //         uniqueString : requirementRest.uniqueString,
+  //         requirementDescription : requirementRest.requirementDescription,
+  //         values : requirementRest.values,
+  //         requirementImpactPoints : requirementRest.requirementImpactPoints,
+  //         variantsTitle : requirementRest.variantsTitle
+  //       };
+  //       this.requirementsSource.push(requirement);
+  //     });
+  //     this.tableDatasource = new MatTableDataSource<Requirements>(result);
+  //     this.initSorting();
+  //   });
+  // });
+    this.requirementsDataService.loadedRequirements.subscribe((requirements: Requirements[]) => {
+      this.tableDatasource = new MatTableDataSource<Requirements>(requirements);
       this.initSorting();
+    });
+    this.requirementsDataService.changedRequirements.subscribe((requirements: Requirements[]) => {
+      this.tableDatasource.data = requirements;
     });
     this.requirementsRestService.getImpacts().subscribe((result: any) => {
       this.impactSoureces = [];
@@ -61,11 +76,14 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         this.impactSoureces.push(impact);
       });
       let impactIdList: string[] = [];
-      this.impactSoureces.forEach(value => impactIdList = impactIdList.concat(value.id));
+      this.impactSoureces.forEach(value => {
+        impactIdList = impactIdList.concat(value.id);
+        this.columnDefinitions.push({def: value.id, hide: true });
+      });
       this.displayedColumns = this.displayedColumns.concat(impactIdList);
     });
     this.tableDatasource.data = this.requirementsSource;
-
+    this.requirementsDataService.onInit();
   }
   private initSorting(): void {
     this.tableDatasource.sort = this.sort;
@@ -167,13 +185,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteImpact(requirements: Requirements): void {
-    this.requirementsRestService.deleteRequirements(requirements).subscribe((impDto) => {
-      const index = this.requirementsSource.indexOf(requirements, 0);
-      if (index > -1) {
-        this.requirementsSource.splice(index, 1);
-      }
-      this.tableDatasource.data = this.requirementsSource;
-    });
+    this.requirementsDataService.deleteRequirement(requirements);
   }
 
   updateImpact(requirements: Requirements): void {

@@ -2,38 +2,47 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import {Requirements} from '../../models/Requirements';
 import {Dimension} from '../../models/Dimension';
 import {RequirementsRestService} from './requirements-rest.service';
-import {MatTableDataSource} from "@angular/material/table";
+import {MatTableDataSource} from '@angular/material/table';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequirementsDataService {
-  @Output() onCreateRequirement: EventEmitter<Requirements> = new EventEmitter();
+  @Output() loadedRequirements: EventEmitter<Requirements[]> = new EventEmitter();
+  @Output() addedRequirement: EventEmitter<Requirements> = new EventEmitter();
+  @Output() changedRequirement: EventEmitter<Requirements> = new EventEmitter();
+  @Output() removedRequirement: EventEmitter<Requirements> = new EventEmitter();
+  @Output() changedRequirements: EventEmitter<Requirements[]> = new EventEmitter();
 
 
 
   requirements: Requirements[] = [];
+  requirementsSource: Requirements[] = [];
 
-  constructor(requirementsRestService: RequirementsRestService) {
-    /*
-    requirementsRestService.getRequirements().subscribe((result: any) => {
-      this.requirements = [];
-      result.forEach((requirementRest: Requirements) => {
-        const requirement: Requirements = {
-          rootEntityId : requirementRest.rootEntityId,
-          projectID : requirementRest.projectID,
-          requirementTitle : requirementRest.requirementTitle,
-          requirementDescription : requirementRest.requirementDescription,
-          dimensions : requirementRest.dimensions,
-          impactDescription : requirementRest.impactDescription,
-          // requirementImpactPoints : new Map(Object.entries(requirementRest.requirementImpactPoints)),
-          requirementPointDTOMap : requirementRest.requirementPointDTOMap,
-          variantsTitle : requirementRest.variantsTitle
-        };
-        this.requirements.push(requirement);
+  constructor(private requirementsRestService: RequirementsRestService,
+              private router: Router) {
+  }
+  onInit(): void {
+    this.router.routerState.root.queryParams.subscribe(params => {
+      this.requirementsRestService.getRequirements(params.id).subscribe(result => {
+        this.requirementsSource = [];
+        result.forEach((requirementRest: Requirements) => {
+          const requirement: Requirements = {
+            rootEntityId : requirementRest.rootEntityId,
+            projectID : requirementRest.projectID,
+            uniqueString : requirementRest.uniqueString,
+            requirementDescription : requirementRest.requirementDescription,
+            values : requirementRest.values,
+            requirementImpactPoints : requirementRest.requirementImpactPoints,
+            variantsTitle : requirementRest.variantsTitle
+          };
+          this.requirementsSource.push(requirement);
+        });
+        this.requirements = this.requirementsSource;
+        this.loadedRequirements.emit(this.requirements);
       });
     });
-    */
   }
 
   getRequirements(): Requirements[] {
@@ -52,11 +61,23 @@ export class RequirementsDataService {
     return new Requirements();
   }
 
-  createImpact(): Requirements {
-    const requirement = this.createDefaultRequirement();
-    this.requirements.push(requirement);
-    this.onCreateRequirement.emit(requirement);
-    return requirement;
+  createRequirement(idForProject: string): void {
+    const requirementNew: Requirements = new Requirements();
+    requirementNew.projectID = idForProject;
+    requirementNew.requirementDescription = 'generated requirement';
+    this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
+      this.requirements.push(value);
+      this.addedRequirement.emit(value);
+      this.changedRequirements.emit(this.requirements);
+    });
+  }
+  deleteRequirement(requirements: Requirements): void {
+    this.requirementsRestService.deleteRequirements(requirements).subscribe(value => {
+      const index = this.requirements.indexOf(requirements, 0);
+      this.requirements.splice(index, 1);
+      this.removedRequirement.emit(value);
+      this.changedRequirements.emit(this.requirements);
+    });
   }
 
 }
