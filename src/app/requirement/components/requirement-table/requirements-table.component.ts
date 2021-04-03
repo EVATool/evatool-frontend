@@ -23,10 +23,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
   idForProject = '';
   columnDefinitions = [
-    { def: 'uniqueString', hide: true},
-    { def: 'requirementDescription', hide: true},
-    { def: 'variantsTitle', hide: true},
-    { def: 'values', hide: true}
+    { def: 'uniqueString', hide: true },
+    { def: 'requirementDescription', hide: true },
+    { def: 'variantsTitle', hide: true },
+    { def: 'values', hide: true }
   ];
   constructor(private requirementsRestService: RequirementsRestService,
               private requirementsDataService: RequirementsDataService,
@@ -37,26 +37,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-  //   this.router.routerState.root.queryParams.subscribe(params => {
-  //     this.idForProject = params.id;
-  //     this.requirementsRestService.getRequirements(this.idForProject).subscribe((result: Requirements[]) => {
-  //     this.requirementsSource = [];
-  //     result.forEach((requirementRest: Requirements) => {
-  //       const requirement: Requirements = {
-  //         rootEntityId : requirementRest.rootEntityId,
-  //         projectID : requirementRest.projectID,
-  //         uniqueString : requirementRest.uniqueString,
-  //         requirementDescription : requirementRest.requirementDescription,
-  //         values : requirementRest.values,
-  //         requirementImpactPoints : requirementRest.requirementImpactPoints,
-  //         variantsTitle : requirementRest.variantsTitle
-  //       };
-  //       this.requirementsSource.push(requirement);
-  //     });
-  //     this.tableDatasource = new MatTableDataSource<Requirements>(result);
-  //     this.initSorting();
-  //   });
-  // });
     this.requirementsDataService.loadedRequirements.subscribe((requirements: Requirements[]) => {
       this.tableDatasource = new MatTableDataSource<Requirements>(requirements);
       this.initSorting();
@@ -84,6 +64,13 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     });
     this.tableDatasource.data = this.requirementsSource;
     this.requirementsDataService.onInit();
+  }
+
+  getDisplayedColumns(): string[] {
+    this.randomFilter();
+    return this.columnDefinitions
+      .filter(cd => cd.hide)
+      .map(cd => cd.def);
   }
   private initSorting(): void {
     this.tableDatasource.sort = this.sort;
@@ -190,5 +177,18 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   updateImpact(requirements: Requirements): void {
     this.requirementsRestService.updateRequirements(requirements).subscribe();
+  }
+
+  private randomFilter(): void{
+    const end = this.getRandomInt(10);
+    this.columnDefinitions.forEach(cd => {
+      if (cd.def.endsWith('' + end)){
+        cd.hide = false;
+      }
+    });
+  }
+
+  private getRandomInt(max: number): number {
+    return Math.floor(Math.random() * max);
   }
 }
