@@ -11,6 +11,7 @@ import {VariantDataService} from '../../services/variant-data.service';
 export class VariantTableComponent implements OnInit {
 
   @Input() matDataSource!: MatTableDataSource<Variant>;
+  @Input() id = '';
   displayedColumns = ['guiId', 'title', 'description'];
   constructor(public variantDataService: VariantDataService) { }
 

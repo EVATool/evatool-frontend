@@ -38,5 +38,6 @@
       </div>
     </mat-cell>
   </ng-container>
-  <mat-row mat-row *matRowDef="let variant; columns: displayedColumns;" class="archieved-{{variant.archived}}"></mat-row>
+  <mat-row mat-row *matRowDef="let variant; columns: displayedColumns;" class="archieved-{{variant.archived}}"
+           [ngClass]="{'selected': (variant.id == id) && variant.guiId != ''}"></mat-row>
 </mat-table>
