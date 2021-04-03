@@ -114,6 +114,8 @@ export class VariantDataService{
   }
 
   delete(variant: Variant): void {
-    console.log('delete' + variant.id);
+    this.variantRestService.deleteVariants(variant.id).subscribe(() => {
+      this.loadVariants();
+    });
   }
 }
