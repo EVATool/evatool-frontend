@@ -19,7 +19,7 @@ export class StakeholderRestService {
 
   }
 
-  getStakeholders(): Observable<StakeholderDto[]> {
+  getStakeholders(): Observable<StakeholderDto[]> { // TODO get by id when analysis rest call is available.
     this.logger.info(this, 'Get all Stakeholders');
     return this.http.get<StakeholderDto[]>(RestSettings.stakeholdersUrl);
   }

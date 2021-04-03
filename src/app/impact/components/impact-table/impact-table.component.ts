@@ -25,7 +25,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['uniqueString', 'stakeholder', 'valueEntity', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
-  // TODO: Extend these for more complex queries.
   filterValues: any = {
     id: '',
     stakeholder: [],
@@ -47,7 +46,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // TODO: Show added impact when working with new analysis
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
       this.logger.info(this, 'Event \'loadedImpacts\' received from ImpactDataService');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
