@@ -1,16 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 
-import { ValueDataService } from './value-data.service';
+import { ValueRestService } from './value-rest.service';
 
-describe('ValueDataService', () => {
-  let service: ValueDataService;
+describe('ValueRestService', () => {
+  let service: ValueRestService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule]
     });
-    service = TestBed.inject(ValueDataService);
+    service = TestBed.inject(ValueRestService);
   });
 
   it('should be created', () => {

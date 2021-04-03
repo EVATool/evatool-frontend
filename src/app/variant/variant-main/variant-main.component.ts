@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
+import {VariantDialogComponent} from '../components/variant-dialog/variant-dialog.component';
 
 @Component({
   selector: 'app-variant-main',
@@ -19,7 +19,7 @@ export class VariantMainComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(VariantDialogComponent,  {});
+    const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: ''}});
   }
 
   ngOnInit(): void {
