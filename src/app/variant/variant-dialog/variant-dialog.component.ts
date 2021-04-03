@@ -20,15 +20,17 @@ export class VariantDialogComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<VariantDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { id: string },
     public variantDataService: VariantDataService) {
-
   }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       id: new FormControl(null)
     });
+    if (this.data.id !== undefined){
+      // todo
+    }
   }
 
   addVariant(): void {

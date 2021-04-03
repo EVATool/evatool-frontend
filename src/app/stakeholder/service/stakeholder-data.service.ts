@@ -4,7 +4,7 @@ import { Stakeholder } from '../model/Stakeholder';
 import { StakeholderRestService } from './stakeholder-rest.service';
 import { StakeholderDTO } from '../model/StakeholderDTO';
 import { MatTableDataSource } from '@angular/material/table';
-import { StakeholderImpact } from "../model/StakeholderImpact";
+import { StakeholderImpact } from '../model/StakeholderImpact';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +25,11 @@ export class StakeholderDataService implements AfterViewInit {
   loadStakeholder(): void {
     this.stakeholderRestService.getStakeholders().subscribe((result: any) => {
       this.stakeholders = [];
+      console.log(result);
       result.forEach((stakeholderDTO: StakeholderDTO) => {
         let negativeImpact = 0;
         let postiveImpact = 0;
-        stakeholderDTO.impact.forEach((impact: StakeholderImpact) => {
+        stakeholderDTO.impactList.forEach((impact: StakeholderImpact) => {
           if (impact.value > 0) {
             postiveImpact += impact.value;
           } else {
@@ -65,7 +66,7 @@ export class StakeholderDataService implements AfterViewInit {
       guiId: '',
       stakeholderName: stakeholder.name,
       priority: stakeholder.priority,
-      impact: [],
+      impactList: [],
       stakeholderLevel: stakeholder.level
     }).subscribe(() => {
       this.loadStakeholder();
