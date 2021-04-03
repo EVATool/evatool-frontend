@@ -98,4 +98,22 @@ export class VariantDataService{
       this.loadVariants();
     });
   }
+
+  unarchive(variant: Variant): void {
+    this.variantRestService.updateVariants({
+      id: variant.id,
+      archived: false,
+      guiId: variant.guiId ,
+      title: variant.title,
+      description: variant.description,
+      subVariant: {},
+      analysisId: variant.analysisId
+    }).subscribe(() => {
+      this.loadVariants();
+    });
+  }
+
+  delete(variant: Variant): void {
+    console.log('delete' + variant.id);
+  }
 }

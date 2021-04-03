@@ -36,8 +36,16 @@
           <mat-icon>archive</mat-icon>
         </button>
       </div>
+      <div class="options" *ngIf="variant.archived">
+        <button mat-icon-button *ngIf="!variant.editable" name="archive" (click)="unarchive(variant)">
+          <mat-icon>unarchive</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="!variant.editable" name="archive" (click)="delete(variant)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </mat-cell>
   </ng-container>
   <mat-row mat-row *matRowDef="let variant; columns: displayedColumns;" class="archieved-{{variant.archived}}"
-           [ngClass]="{'selected': (variant.id == id) && variant.guiId != ''}"></mat-row>
+           [ngClass]="{'selected': (variant.id == id) && variant.guiId != '' && variant.archived == true}"></mat-row>
 </mat-table>

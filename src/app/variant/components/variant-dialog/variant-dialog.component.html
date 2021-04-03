@@ -14,15 +14,14 @@
         <mat-expansion-panel-header>
           <mat-panel-title>Selection</mat-panel-title>
         </mat-expansion-panel-header>
-        <app-variant-table [matDataSource]="variantDataService.matDataSource"></app-variant-table>
+        <app-variant-table [matDataSource]="variantDataService.matDataSource" [id]="data.id"></app-variant-table>
       </mat-expansion-panel>
-
       <!-- CARD 2-->
       <mat-expansion-panel class="variant-expansion-panel">
         <mat-expansion-panel-header>
           <mat-panel-title>Archive</mat-panel-title>
         </mat-expansion-panel-header>
-          <app-variant-table [matDataSource]="variantDataService.matDataSourceArchive"></app-variant-table>
+          <app-variant-table [matDataSource]="variantDataService.matDataSourceArchive" [id]="data.id"></app-variant-table>
       </mat-expansion-panel>
     </div>
   </div>

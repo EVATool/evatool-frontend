@@ -32,4 +32,11 @@ export class VariantTableComponent implements OnInit {
     this.variantDataService.archive(variant);
   }
 
+  unarchive(variant: Variant): void {
+    this.variantDataService.unarchive(variant);
+  }
+
+  delete(variant: Variant): void {
+    this.variantDataService.delete(variant);
+  }
 }
