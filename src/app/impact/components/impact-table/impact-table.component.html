@@ -37,14 +37,14 @@
       <div matTooltip="The value affecting the stakeholder" matTooltipHideDelay="100" matTooltipPosition="above">
         Value
       </div>
-
-      <mat-icon id="valueEntity-modal" (click)="$event.stopPropagation(); openValueModal();">info</mat-icon>
+      <mat-icon *ngIf="impactDataService.impactsLoaded" id="valueEntity-modal" (click)="$event.stopPropagation(); openValueModal();">info</mat-icon>
     </th>
 
     <td mat-cell *matCellDef='let impact'>
       <mat-form-field>
         <mat-select [(ngModel)]="impact.valueEntity" (selectionChange)="valueEntityChange(impact, $event)">
-          <mat-option *ngFor="let val of impactDataService.valueDataService.values" [value]="val">{{val.name}}</mat-option>
+          <mat-option *ngFor="let val of impactDataService.valueDataService.values"
+                      [value]="val">{{val.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </td>

@@ -22,7 +22,7 @@ export class ImpactDataService {
   @Output() changedImpacts: EventEmitter<Impact[]> = new EventEmitter();
 
   impacts: Impact[] = [];
-  private impactsLoaded = false;
+  public impactsLoaded = false;
   private stakeholdersLoaded = false;
   private valuesLoaded = false;
   private analysesLoaded = false;

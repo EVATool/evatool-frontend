@@ -21,7 +21,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   constructor(
     private logger: LogService,
-    private impactDataService: ImpactDataService) { }
+    public impactDataService: ImpactDataService) { }
 
   ngOnInit(): void {
 
