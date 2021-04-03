@@ -19,13 +19,8 @@ export class MockedAnalysisRestService extends AnalysisRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
-    router: Router,
     private sampleData: SampleDataService) {
-    super(logger, http, router);
-  }
-
-  onInit() {
-    this.urlIdExtracted.emit(this.sampleData.dummyAnalysisDtos[0].rootEntityID);
+    super(logger, http);
   }
 
   getAnalysisById(id: string): Observable<AnalysisDto> {
@@ -53,17 +48,6 @@ describe('AnalysisRestService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('should fire \'urlIdExtracted\' event', () => {
-    // Arrange
-    spyOn(service.urlIdExtracted, 'emit');
-
-    // Act
-    service.onInit();
-
-    // Assert
-    expect(service.urlIdExtracted.emit).toHaveBeenCalled();
   });
 
   it('should return an analysis by id', () => {

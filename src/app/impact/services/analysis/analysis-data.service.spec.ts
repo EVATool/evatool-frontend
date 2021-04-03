@@ -25,6 +25,17 @@ describe('AnalysisDataService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should fire \'urlIdExtracted\' event', () => {
+    // Arrange
+    spyOn(service.urlIdExtracted, 'emit');
+
+    // Act
+    service.onInit();
+
+    // Assert
+    expect(service.urlIdExtracted.emit).toHaveBeenCalled();
+  });
+
   describe('#onInit', () => {
     it('should fire \'loadedAnalyses\' event', () => {
       // Arrange

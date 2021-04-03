@@ -60,7 +60,7 @@ export class ImpactDataService {
 
     this.stakeholderDataService.onInit();
     this.valueDataService.onInit();
-    //this.analysisDataService.onInit();
+    this.analysisDataService.onInit();
   }
 
   private loadIfChildrenAreLoaded(): void {
