@@ -22,7 +22,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   // Used by table.
-  displayedColumns: string[] = ['uniqueString', 'stakeholder', 'value', 'value', 'description'];
+  displayedColumns: string[] = ['uniqueString', 'stakeholder', 'valueEntity', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
   // TODO: Extend these for more complex queries.

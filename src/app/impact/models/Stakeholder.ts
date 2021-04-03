@@ -6,14 +6,17 @@ export class Stakeholder {
 
   id = '';
   name = '';
+  level = '';
 
   equalsDto(that: StakeholderDto): boolean {
     return this.id === that.rootEntityID
-      && this.name === that.stakeholderName;
+      && this.name === that.stakeholderName
+      && this.level === that.stakeholderLevel;
   }
 
   equalsImpactDto(that: ImpactStakeholderDto): boolean {
     return this.id === that.id
-      && this.name === that.name;
+      && this.name === that.name
+      && this.level === that.level;
   }
 }
