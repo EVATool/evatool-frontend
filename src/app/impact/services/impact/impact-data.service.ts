@@ -1,14 +1,14 @@
-import { LogService } from '../../../shared/services/log.service';
-import { ImpactRestService } from './impact-rest.service';
-import { Analysis } from '../../models/Analysis';
-import { Value } from '../../models/Value';
-import { Stakeholder } from '../../models/Stakeholder';
-import { ImpactMapperService } from './impact-mapper.service';
-import { AnalysisDataService } from '../analysis/analysis-data.service';
-import { ValueDataService } from '../value/value-data.service';
-import { StakeholderDataService } from '../stakeholder/stakeholder-data.service';
-import { Impact } from '../../models/Impact';
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import {LogService} from '../../../shared/services/log.service';
+import {ImpactRestService} from './impact-rest.service';
+import {Analysis} from '../../models/Analysis';
+import {Value} from '../../models/Value';
+import {Stakeholder} from '../../models/Stakeholder';
+import {ImpactMapperService} from './impact-mapper.service';
+import {AnalysisDataService} from '../analysis/analysis-data.service';
+import {ValueDataService} from '../value/value-data.service';
+import {StakeholderDataService} from '../stakeholder/stakeholder-data.service';
+import {Impact} from '../../models/Impact';
+import {Injectable, Output, EventEmitter} from '@angular/core';
 import {ImpactDto} from "../../dtos/ImpactDto";
 
 @Injectable({
@@ -22,12 +22,9 @@ export class ImpactDataService {
   @Output() changedImpacts: EventEmitter<Impact[]> = new EventEmitter();
 
   impacts: Impact[] = [];
-  private loaded = false;
-  stakeholders: Stakeholder[] = [];
+  private impactsLoaded = false;
   private stakeholdersLoaded = false;
-  values: Value[] = [];
   private valuesLoaded = false;
-  analyses: Analysis[] = [];
   private analysesLoaded = false;
 
   constructor(
@@ -41,19 +38,16 @@ export class ImpactDataService {
 
   onInit(): void {
     this.stakeholderDataService.loadedStakeholders.subscribe(stakeholders => {
-      this.stakeholders = stakeholders;
       this.stakeholdersLoaded = true;
       this.loadIfChildrenAreLoaded();
     });
 
     this.valueDataService.loadedValues.subscribe(values => {
-      this.values = values;
       this.valuesLoaded = true;
       this.loadIfChildrenAreLoaded();
     });
 
     this.analysisDataService.loadedAnalyses.subscribe(currentAnalysis => {
-      this.analyses = [currentAnalysis];
       this.analysesLoaded = true;
       this.loadIfChildrenAreLoaded();
     });
@@ -64,17 +58,20 @@ export class ImpactDataService {
   }
 
   private loadIfChildrenAreLoaded(): void {
-    if (this.getChildrenLoaded() && !this.loaded) {
+    if (this.getChildrenLoaded() && !this.impactsLoaded) {
       // Load impacts.
       this.impactRestService.getImpactsByAnalysisId(this.analysisDataService.getCurrentAnalysis().id).subscribe(imps => {
         imps.sort((a, b) => this.sortImpactsById(a, b));
         let fromDtos: Impact[] = [];
         imps.forEach(imp => {
-          fromDtos.push(this.impactMapperService.fromDto(imp, this.values, this.stakeholders, this.analyses));
+          fromDtos.push(this.impactMapperService.fromDto(imp,
+            this.valueDataService.values,
+            this.stakeholderDataService.stakeholders,
+            [this.analysisDataService.getCurrentAnalysis()]));
         });
         this.impacts = fromDtos;
         this.logger.info(this, 'Impacts loaded');
-        this.loaded = true;
+        this.impactsLoaded = true;
         this.loadedImpacts.emit(this.impacts);
       });
     }
@@ -82,8 +79,8 @@ export class ImpactDataService {
 
   private sortImpactsById(a: ImpactDto, b: ImpactDto): number {
     this.logger.debug(this, 'Sorting Impacts By Id');
-    const numberA = + ("" + a.uniqueString?.replace("IMP", ""));
-    const numberB = + ("" + b.uniqueString?.replace("IMP", ""));
+    const numberA = +("" + a.uniqueString?.replace("IMP", ""));
+    const numberB = +("" + b.uniqueString?.replace("IMP", ""));
     return numberA > numberB ? 1 : -1;
   }
 

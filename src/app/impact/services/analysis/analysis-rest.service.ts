@@ -3,8 +3,7 @@ import {RestSettings} from '../../settings/RestSettings';
 import {Observable} from 'rxjs';
 import {AnalysisDto} from '../../dtos/AnalysisDto';
 import {HttpClient} from '@angular/common/http';
-import {EventEmitter, Injectable, Output} from '@angular/core';
-import {Router} from "@angular/router";
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,6 @@ export class AnalysisRestService {
   constructor(
     private logger: LogService,
     private http: HttpClient) {
-
   }
 
   getAnalysisById(id: string): Observable<AnalysisDto> {
