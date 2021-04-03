@@ -16,7 +16,7 @@ export class StakeholderLevelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.level);
+    //console.log(this.level);
   }
 
   onLevelChange(): void {

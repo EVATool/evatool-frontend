@@ -9,6 +9,8 @@ export class Value {
   type = '';
   description = '';
 
+  disable = false;
+
   equalsDto(that: ValueDto): boolean {
     return this.id === that.id
       && this.name === that.name

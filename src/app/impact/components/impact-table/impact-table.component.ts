@@ -1,16 +1,16 @@
-import { ValueDialogComponent } from './components/value-dialog/value-dialog.component';
-import { ImpactTableFilterEvent } from '../impact-table-filter-bar/ImpactTableFilterEvent';
-import { MatSliderChange } from '@angular/material/slider';
-import { ValueDataService } from '../../services/value/value-data.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ImpactDataService } from '../../services/impact/impact-data.service';
-import { Impact } from '../../models/Impact';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatSelectChange } from '@angular/material/select';
-import { LogService } from '../../../shared/services/log.service';
-import { SliderFilterBoundary, SliderFilterType } from '../../../shared/components/impact-slider/SliderFilterSettings';
+import {ValueDialogComponent} from './components/value-dialog/value-dialog.component';
+import {ImpactTableFilterEvent} from '../impact-table-filter-bar/ImpactTableFilterEvent';
+import {MatSliderChange} from '@angular/material/slider';
+import {ValueDataService} from '../../services/value/value-data.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ImpactDataService} from '../../services/impact/impact-data.service';
+import {Impact} from '../../models/Impact';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatSelectChange} from '@angular/material/select';
+import {LogService} from '../../../shared/services/log.service';
+import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-impact-table',
@@ -59,8 +59,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         this.tableDataSource = new MatTableDataSource<Impact>(impacts);
         this.initSorting();
         this.initFiltering();
-      }
-      else {
+      } else {
         this.tableDataSource.data = impacts;
       }
     });
@@ -85,9 +84,12 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
-        case 'stakeholder': return impact.stakeholder.name;
-        case 'valueEntity': return impact.valueEntity.name;
-        default: return impact[property];
+        case 'stakeholder':
+          return impact.stakeholder.name;
+        case 'valueEntity':
+          return impact.valueEntity.name;
+        default:
+          return impact[property];
       }
     };
   }
@@ -158,7 +160,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   clearSort(): void {
-    this.sort.sort({ id: '', start: 'desc', disableClear: false });
+    this.sort.sort({id: '', start: 'desc', disableClear: false});
   }
 
   filterChange(event: ImpactTableFilterEvent): void {
@@ -212,7 +214,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ValueDialogComponent, {
       height: '80%',
       width: '50%',
-      data: { parameter: 'I left this here because maybe we will need it c:' }
+      data: {parameter: 'I left this here because maybe we will need it c:'}
     });
     dialogRef.afterClosed().subscribe(() => {
       this.logger.info(this, 'Closing Value Modal Dialog');

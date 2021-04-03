@@ -3,9 +3,14 @@ table {
 }
 
 .mat-column-include {
-  width: 5% !important;
+  width: 20% !important;
+  justify-content: center;
 }
 
 .mat-column-name {
   width: 25% !important;
+}
+
+.disable-value-button {
+  width: 10% !important;
 }

@@ -1,8 +1,8 @@
-import { ValueDataService } from '../../../../../../services/value/value-data.service';
-import { Value } from '../../../../../../models/Value';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import {ValueDataService} from '../../../../../../services/value/value-data.service';
+import {Value} from '../../../../../../models/Value';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {Component, Input, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-value-table',
@@ -16,7 +16,8 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   tableDataSource: MatTableDataSource<Value> = new MatTableDataSource<Value>();
   displayedColumns = ['include', 'name', 'description'];
 
-  constructor(private valueDataService: ValueDataService) { }
+  constructor(private valueDataService: ValueDataService) {
+  }
 
   ngOnInit(): void {
 
@@ -32,10 +33,17 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
-        case 'stakeholder': return impact.stakeholder.name;
-        case 'valueEntity': return impact.value.name;
-        default: return impact[property];
+        case 'stakeholder':
+          return impact.stakeholder.name;
+        case 'valueEntity':
+          return impact.value.name;
+        default:
+          return impact[property];
       }
     };
+  }
+
+  toggleValueDisable(value: Value) {
+    value.disable = !value.disable;
   }
 }

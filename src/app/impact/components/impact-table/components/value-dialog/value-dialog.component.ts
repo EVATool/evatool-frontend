@@ -10,7 +10,7 @@ import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 })
 export class ValueDialogComponent implements OnInit, AfterViewInit {
 
-  socialValueState = true; // TODO Do foreach valueType
+  socialValueState = true; // TODO Do foreach valueType, even necessary?
   economicValueState = true;
 
   form!: FormGroup;
