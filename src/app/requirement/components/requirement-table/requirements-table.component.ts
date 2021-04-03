@@ -7,7 +7,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
 import {MatSort, Sort} from '@angular/material/sort';
 import {Router} from '@angular/router';
-import {RequirementsDataService} from "../../services/requirements/requirements-data.service";
+import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
+import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-requirement-table',
@@ -30,7 +32,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   ];
   constructor(private requirementsRestService: RequirementsRestService,
               private requirementsDataService: RequirementsDataService,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog){
   }
 
   ngOnInit(): void {
@@ -190,5 +193,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   private getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: ''}});
   }
 }
