@@ -25,6 +25,10 @@ export class MockedValueRestService extends ValueRestService {
     return of(this.sampleData.dummyValueDtos)
   }
 
+  getValuesByAnalysisId(analysisId: string): Observable<ValueDto[]> {
+    return of(this.sampleData.dummyValueDtos)
+  }
+
   getValueTypes(): Observable<string[]> {
     return of(this.sampleData.dummyValueTypes)
   }

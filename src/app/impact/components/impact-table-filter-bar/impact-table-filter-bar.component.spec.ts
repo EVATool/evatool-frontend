@@ -12,7 +12,7 @@ describe('ImpactTableFilterBarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ImpactTableFilterBarComponent, HighlightSearch],
-      imports: [HttpClientModule],
+      imports: RestMockProviders.imports,
       providers: RestMockProviders.providers
     })
       .compileComponents();

@@ -1,10 +1,8 @@
 import {SampleDataService} from '../../spec/sample-data.service';
-import {MockedValueRestService} from './value-rest.service.spec';
 import {TestBed} from '@angular/core/testing';
 
 import {ValueDataService} from './value-data.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {ValueRestService} from "./value-rest.service";
+import {RestMockProviders} from "../../spec/RestMockProviders";
 
 describe('ValueDataService', () => {
   let sampleData: SampleDataService;
@@ -12,12 +10,8 @@ describe('ValueDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
-        {
-          provide: ValueRestService,
-          useClass: MockedValueRestService
-        }]
+      imports: RestMockProviders.imports,
+      providers: RestMockProviders.providers
     });
 
     sampleData = TestBed.inject(SampleDataService);

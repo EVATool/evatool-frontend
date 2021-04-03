@@ -1,12 +1,9 @@
 import {SampleDataService} from '../../spec/sample-data.service';
-import {RouterTestingModule} from '@angular/router/testing';
 import {Router} from '@angular/router';
 import {TestBed} from '@angular/core/testing';
 
 import {AnalysisDataService} from './analysis-data.service';
-import {AnalysisRestService} from './analysis-rest.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {MockedAnalysisRestService} from "./analysis-rest.service.spec";
+import {RestMockProviders} from "../../spec/RestMockProviders";
 
 describe('AnalysisDataService', () => {
   let sampleData: SampleDataService;
@@ -15,12 +12,8 @@ describe('AnalysisDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [
-        {
-          provide: AnalysisRestService,
-          useClass: MockedAnalysisRestService
-        }]
+      imports: RestMockProviders.imports,
+      providers: RestMockProviders.providers
     });
 
     sampleData = TestBed.inject(SampleDataService);
@@ -42,17 +35,6 @@ describe('AnalysisDataService', () => {
 
       // Assert
       expect(service.loadedAnalyses.emit).toHaveBeenCalled();
-    });
-
-    it('should fire \'urlIdExtracted\' event', () => {
-      // Arrange
-      spyOn(service.urlIdExtracted, 'emit');
-
-      // Act
-      service.onInit();
-
-      // Assert
-      expect(service.urlIdExtracted.emit).toHaveBeenCalled();
     });
 
     it('should load current analysis', () => {

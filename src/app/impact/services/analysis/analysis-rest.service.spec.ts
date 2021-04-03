@@ -1,14 +1,16 @@
 import {SampleDataService} from '../../spec/sample-data.service';
 import {RestSettings} from '../../settings/RestSettings';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 import {AnalysisRestService} from './analysis-rest.service';
 import {Observable, of} from "rxjs";
 import {AnalysisDto} from "../../dtos/AnalysisDto";
 import {LogService} from "../../../shared/services/log.service";
 import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
+import {RestMockProviders} from "../../spec/RestMockProviders";
+import {HttpTestingController} from "@angular/common/http/testing";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,13 @@ export class MockedAnalysisRestService extends AnalysisRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
+    router: Router,
     private sampleData: SampleDataService) {
-    super(logger, http);
+    super(logger, http, router);
+  }
+
+  onInit() {
+    this.urlIdExtracted.emit(this.sampleData.dummyAnalysisDtos[0].rootEntityID);
   }
 
   getAnalysisById(id: string): Observable<AnalysisDto> {
@@ -33,7 +40,7 @@ describe('AnalysisRestService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: RestMockProviders.imports
     });
     sampleData = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -46,6 +53,17 @@ describe('AnalysisRestService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should fire \'urlIdExtracted\' event', () => {
+    // Arrange
+    spyOn(service.urlIdExtracted, 'emit');
+
+    // Act
+    service.onInit();
+
+    // Assert
+    expect(service.urlIdExtracted.emit).toHaveBeenCalled();
   });
 
   it('should return an analysis by id', () => {

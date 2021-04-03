@@ -15,7 +15,7 @@ describe('ImpactTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, MatDialogModule, BrowserAnimationsModule, RouterTestingModule],
+      imports: RestMockProviders.imports.concat([HttpClientModule, MatDialogModule, BrowserAnimationsModule]),
       declarations: [ImpactTableComponent, HighlightSearch],
       providers: [FormBuilder,
         {provide: MatDialogRef, useValue: {}},

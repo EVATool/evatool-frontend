@@ -1,33 +1,20 @@
-import {RouterTestingModule} from '@angular/router/testing';
 import {TestBed} from '@angular/core/testing';
 
 import {ImpactDataService} from './impact-data.service';
 import {SampleDataService} from '../../spec/sample-data.service';
-import {ImpactRestService} from './impact-rest.service';
-import {StakeholderRestService} from '../stakeholder/stakeholder-rest.service';
-import {AnalysisRestService} from '../analysis/analysis-rest.service';
-import {ValueRestService} from '../value/value-rest.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {RestMockProviders} from "../../spec/RestMockProviders";
 
 describe('ImpactDataService', () => {
   let sampleData: SampleDataService;
-  let stakeholderRestService: StakeholderRestService;
-  let analysisRestService: AnalysisRestService;
-  let valueRestService: ValueRestService;
-  let restService: ImpactRestService;
   let service: ImpactDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: RestMockProviders.imports,
       providers: RestMockProviders.providers
     });
+
     sampleData = TestBed.inject(SampleDataService);
-    stakeholderRestService = TestBed.inject(StakeholderRestService);
-    analysisRestService = TestBed.inject(AnalysisRestService);
-    valueRestService = TestBed.inject(ValueRestService);
-    restService = TestBed.inject(ImpactRestService);
     service = TestBed.inject(ImpactDataService);
   });
 

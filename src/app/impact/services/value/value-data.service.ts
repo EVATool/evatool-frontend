@@ -46,22 +46,7 @@ export class ValueDataService {
       });
     });
 
-    // this.valuesRestService.getValues().subscribe(vals => {
-    //   let fromDtos: Value[] = [];
-    //   vals.forEach(val => {
-    //     fromDtos.push(this.valueMapperService.fromDto(val));
-    //   });
-    //   this.values = fromDtos;
-    //   this.logger.info(this, 'Values loaded');
-    //   this.loadedValues.emit(this.values);
-    // });
-    //
-    // // Load value types.
-    // this.valuesRestService.getValueTypes().subscribe(valTypes => {
-    //   this.valuesTypes = valTypes;
-    //   this.logger.info(this, 'Value types loaded');
-    //   this.loadedValuesTypes.emit(this.valuesTypes);
-    // });
+    this.analysisDataService.onInit();
   }
 
   getDefaultValue(): Value {

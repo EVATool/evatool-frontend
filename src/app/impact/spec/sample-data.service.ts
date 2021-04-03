@@ -169,16 +169,16 @@ export class SampleDataService {
 
   readonly dummyStakeholderDtos: StakeholderDto[] = [
     {
-      rootEntityID: '1', stakeholderName: 'Patient'
+      rootEntityID: '1', stakeholderName: 'Patient', stakeholderLevel: 'SOCIETY'
     },
     {
-      rootEntityID: '2', stakeholderName: 'Doctor'
+      rootEntityID: '2', stakeholderName: 'Doctor', stakeholderLevel: 'SOCIETY'
     },
     {
-      rootEntityID: '3', stakeholderName: 'Family'
+      rootEntityID: '3', stakeholderName: 'Family', stakeholderLevel: 'SOCIETY'
     },
     {
-      rootEntityID: '4', stakeholderName: 'Ensurance'
+      rootEntityID: '4', stakeholderName: 'Ensurance', stakeholderLevel: 'SOCIETY'
     }
   ];
 
