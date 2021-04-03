@@ -29,6 +29,7 @@ import {MatListModule} from '@angular/material/list';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {ImpactTableFilterBarComponent} from './components/impact-table-filter-bar/impact-table-filter-bar.component';
 import {StakeholderModule} from "../stakeholder/stakeholder-module";
+import {ResizeColumnDirective} from "./directives/ResizeColumnDirective";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {StakeholderModule} from "../stakeholder/stakeholder-module";
     ValueDialogComponent,
     ValueTableComponent,
     ImpactTableFilterBarComponent,
-    HighlightSearch
+    HighlightSearch,
+    ResizeColumnDirective
   ],
   imports: [
     CommonModule,
