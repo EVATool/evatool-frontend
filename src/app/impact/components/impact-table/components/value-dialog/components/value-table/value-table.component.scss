@@ -2,6 +2,21 @@ table {
   width: 100%;
 }
 
+.mat-table {
+  margin-top: -50px;
+
+  .mat-cell {
+    border-style: none;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+    padding: 5px;
+  }
+
+  .mat-header-cell{
+    background-color: transparent;
+    pointer-events: none;
+  }
+}
+
 .mat-column-disable {
   width: 15% !important;
 }

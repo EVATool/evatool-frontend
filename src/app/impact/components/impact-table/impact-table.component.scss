@@ -19,8 +19,22 @@ table {
     text-overflow: ellipsis;
   }
 
+  .mat-cell:last-child, .mat-header-cell:last-child {
+    border-right: 0 solid rgba(0, 0, 0, 0.12);
+  }
+
+  .mat-cell, .mat-header-cell {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+
+    &:not(:nth-child(1)) {
+      padding: 0 10px;
+    }
+  }
+
   .mat-header-cell {
     position: relative;
+    border-right: 0 solid rgba(0, 0, 0, 0.12);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
 
     &:not(:last-child) {
       .resize-holder {
@@ -33,21 +47,6 @@ table {
         z-index: 100;
       }
     }
-  }
-
-  .mat-cell, .mat-header-cell {
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
-
-    &:not(:nth-child(1)) {
-      padding: 0 10px;
-    }
-  }
-
-  .mat-cell:last-child, .mat-header-cell:last-child {
-    border-right: 0 solid rgba(0, 0, 0, 0.12);
-  }
-
-  .mat-row:last-child {
   }
 }
 

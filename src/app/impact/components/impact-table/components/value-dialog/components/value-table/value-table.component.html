@@ -1,9 +1,8 @@
 <table mat-table [dataSource]='tableDataSource' matSort>
   <caption class="screen-reader-only">List of Values</caption>
-
   <ng-container matColumnDef='disable'>
     <th scope="col" mat-header-cell *matHeaderCellDef>
-      <div mat-sort-header matTooltip="Whether to include the value in the table selection"
+      <div [hidden]="true" mat-sort-header matTooltip="Whether to include the value in the table selection"
            matTooltipHideDelay="100" matTooltipPosition="above">Include
       </div>
     </th>
@@ -21,7 +20,8 @@
 
   <ng-container matColumnDef='name'>
     <th scope="col" mat-header-cell *matHeaderCellDef>
-      <div mat-sort-header matTooltip="The value name" matTooltipHideDelay="100" matTooltipPosition="above">Name
+      <div [hidden]="true" mat-sort-header matTooltip="The value name" matTooltipHideDelay="100"
+           matTooltipPosition="above">Name
       </div>
     </th>
     <td mat-cell *matCellDef='let value'>
@@ -32,8 +32,9 @@
   </ng-container>
 
   <ng-container matColumnDef='description'>
-    <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-      <div matTooltip="The value description" matTooltipHideDelay="100" matTooltipPosition="above">
+    <th scope="col" mat-header-cell *matHeaderCellDef>
+      <div [hidden]="true" mat-sort-header matTooltip="The value description" matTooltipHideDelay="100"
+           matTooltipPosition="above">
         Description
       </div>
     </th>
