@@ -8,12 +8,12 @@
       </div>
     </th>
     <td mat-cell *matCellDef='let value'>
-      <button mat-button class="disable-value-button" (click)="toggleValueDisable(value)">
+      <button mat-icon-button class="disable-value-button" (click)="toggleValueDisable(value)">
         <mat-icon *ngIf="value.disable" matTooltip="This value is not available for selection"
-                  matTooltipHideDelay="100" matTooltipPosition="above">filter
+                  matTooltipHideDelay="100" matTooltipPosition="above">add
         </mat-icon>
         <mat-icon *ngIf="!value.disable" matTooltip="This value is available for selection"
-                  matTooltipHideDelay="100" matTooltipPosition="above">filter_alt
+                  matTooltipHideDelay="100" matTooltipPosition="above">done
         </mat-icon>
       </button>
     </td>
