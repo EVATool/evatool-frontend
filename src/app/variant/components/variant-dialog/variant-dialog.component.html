@@ -1,0 +1,38 @@
+<div mat-dialog-title>
+  <button mat-dialog-close mat-icon-button class="variant-modal-close" tabindex="-1">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="container" mat-dialog-title>
+    <h2>Variant(s)</h2>
+  </div>
+</div>
+<mat-dialog-content>
+  <div class="variant-dialog">
+    <div class="card-container">
+      <!-- CARD 1-->
+      <mat-expansion-panel class="variant-expansion-panel" [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Selection</mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-variant-table [matDataSource]="variantDataService.matDataSource"></app-variant-table>
+      </mat-expansion-panel>
+
+      <!-- CARD 2-->
+      <mat-expansion-panel class="variant-expansion-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>Archive</mat-panel-title>
+        </mat-expansion-panel-header>
+          <app-variant-table [matDataSource]="variantDataService.matDataSourceArchive"></app-variant-table>
+      </mat-expansion-panel>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="addVariantButton">
+    <button mat-icon-button aria-label="Add Variant"  (click)="addVariant()" tabindex="-1">
+      <mat-icon>add</mat-icon>
+    </button>
+    Variant
+  </div>
+
+</mat-dialog-actions>

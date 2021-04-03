@@ -1,12 +1,9 @@
 
 import {Injectable, Output, EventEmitter, OnInit} from '@angular/core';
 import {Variant} from '../models/Variant';
-import {Observable, Subscribable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
 import {VariantDTO} from '../models/VariantDTO';
-import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
@@ -14,7 +11,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class VariantDataService{
   variants: Variant[] = [];
+  variantsArchive: Variant[] = [];
   matDataSource = new MatTableDataSource<Variant>();
+  matDataSourceArchive = new MatTableDataSource<Variant>();
   analysisid: string | null = '';
 
   constructor( private variantRestService: VariantRestService,
@@ -27,6 +26,7 @@ export class VariantDataService{
   loadVariants(): void{
     this.variantRestService.getVariants().subscribe((result: any) => {
       this.variants = [];
+      this.variantsArchive = [];
       console.log(result);
       result.forEach((variantDTO: VariantDTO) => {
         const variant: Variant = {
@@ -37,9 +37,14 @@ export class VariantDataService{
           analysisId: variantDTO.analysisId,
           archived: variantDTO.archived
         };
-        this.variants.push(variant);
+        if (variant.archived){
+          this.variantsArchive.push(variant);
+        }else{
+          this.variants.push(variant);
+        }
       });
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+      this.matDataSourceArchive = new MatTableDataSource<Variant>(this.variantsArchive);
     });
   }
 
