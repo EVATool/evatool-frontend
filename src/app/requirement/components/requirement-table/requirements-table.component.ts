@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Requirements} from '../../models/Requirements';
 import {Dimension} from '../../models/Dimension';
 import {Impact} from '../../models/Impact';
@@ -30,6 +30,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     { def: 'variantsTitle', hide: true },
     { def: 'values', hide: true }
   ];
+  private selectedRequirements: Requirements = new Requirements();
   constructor(private requirementsRestService: RequirementsRestService,
               private requirementsDataService: RequirementsDataService,
               private router: Router,
@@ -195,7 +196,16 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     return Math.floor(Math.random() * max);
   }
 
+  testKeyPress(event: any): void{
+    if (event.ctrlKey && event.keyCode === 10){
+      this.requirementsDataService.copyRequirement(this.selectedRequirements);
+    }
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: ''}});
+  }
+  public getSelectedRequirment(requirements: Requirements): void{
+    this.selectedRequirements = requirements;
   }
 }

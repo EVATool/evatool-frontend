@@ -39,13 +39,6 @@ export class RequirementMainComponent implements OnInit, AfterViewInit  {
     this.editField = event.target.textContent;
   }
 
-
-  @HostListener('document:keypress', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent): void {
-    if (event.ctrlKey && event.keyCode === 10){
-    }
-  }
-
   addRequirements(): void {
     this.dataService.createRequirement(this.idForProject);
   }

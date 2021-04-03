@@ -50,6 +50,6 @@
 
 
     <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="getDisplayedColumns(); sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();" (keypress)="testKeyPress($event)" (click)="getSelectedRequirment(row)" [ngClass]="{ 'selected-row' : row.selected }"></tr>
   </table>
 </div>

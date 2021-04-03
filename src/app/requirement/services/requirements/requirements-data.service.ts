@@ -80,4 +80,19 @@ export class RequirementsDataService {
     });
   }
 
+  copyRequirement(selectedQuestion: Requirements): void {
+    if (selectedQuestion.projectID != null) {
+      const requirementNew: Requirements = new Requirements();
+      requirementNew.requirementImpactPoints = selectedQuestion.requirementImpactPoints;
+      requirementNew.variantsTitle = selectedQuestion.variantsTitle;
+      requirementNew.projectID = selectedQuestion.projectID;
+      requirementNew.requirementDescription = selectedQuestion.requirementDescription;
+      requirementNew.values = selectedQuestion.values;
+      this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
+        this.requirements.push(value);
+        this.addedRequirement.emit(value);
+        this.changedRequirements.emit(this.requirements);
+      });
+    }
+  }
 }
