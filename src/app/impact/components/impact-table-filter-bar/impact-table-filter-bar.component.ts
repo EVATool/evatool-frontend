@@ -1,5 +1,5 @@
 import { HighlightSearchComponent } from '../../../shared/components/search-bar/highlight-search.component';
-import { DimensionDataService } from '../../services/dimension/dimension-data.service';
+import { ValueDataService } from '../../services/value/value-data.service';
 import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
 import { ColumnSliderFilterComponent } from '../../../shared/components/column-slider-filter/column-slider-filter.component';
 import { ImpactTableFilterEvent } from './ImpactTableFilterEvent';
@@ -16,12 +16,12 @@ import { ColumnCategoryFilterComponent } from '../../../shared/components/column
 export class ImpactTableFilterBarComponent implements OnInit {
   @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
   @ViewChild('stakeholderFiler') stakeholderFilter!: ColumnCategoryFilterComponent;
-  @ViewChild('dimensionFilter') dimensionsFilter!: ColumnCategoryFilterComponent;
+  @ViewChild('valuesFilter') valuesFilter!: ColumnCategoryFilterComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
   stakeholderNames: string[] = [];
-  dimensionNames: string[] = [];
+  valueNames: string[] = [];
 
   impactTableFilterEvent: ImpactTableFilterEvent;
   suppressChildEvent = false;
@@ -29,7 +29,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
   constructor(
     private logger: LogService,
     private stakeholderDataService: StakeholderDataService,
-    private dimensionDataService: DimensionDataService) {
+    private valueDataService: ValueDataService) {
     this.impactTableFilterEvent = ImpactTableFilterEvent.getDefault();
   }
 
@@ -38,8 +38,8 @@ export class ImpactTableFilterBarComponent implements OnInit {
       this.stakeholderNames = stakeholders.map(value => value.name);
     });
 
-    this.dimensionDataService.loadedDimensions.subscribe((dimensions) => {
-      this.dimensionNames = dimensions.map(value => value.name);
+    this.valueDataService.loadedValues.subscribe((values) => {
+      this.valueNames = values.map(value => value.name);
     });
   }
 
@@ -59,9 +59,9 @@ export class ImpactTableFilterBarComponent implements OnInit {
     }
   }
 
-  dimensionFilterChanged(event: string[]): void {
-    this.logger.info(this, 'Slider Filter Changed (Dimension)');
-    this.impactTableFilterEvent.dimensionFilter = event;
+  valuesFilterChanged(event: string[]): void {
+    this.logger.info(this, 'Slider Filter Changed (Value)');
+    this.impactTableFilterEvent.valuesFilter = event;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.impactTableFilterEvent);
     }
@@ -81,7 +81,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
 
     this.sliderFilter.clearFilter();
     this.stakeholderFilter.clearFilter();
-    this.dimensionsFilter.clearFilter();
+    this.valuesFilter.clearFilter();
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.impactTableFilterEvent);

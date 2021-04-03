@@ -3,15 +3,15 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DimensionDialogComponent } from './dimension-dialog.component';
+import { ValueDialogComponent } from './value-dialog.component';
 
-describe('DimensionDialogComponent', () => {
-  let component: DimensionDialogComponent;
-  let fixture: ComponentFixture<DimensionDialogComponent>;
+describe('ValueDialogComponent', () => {
+  let component: ValueDialogComponent;
+  let fixture: ComponentFixture<ValueDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DimensionDialogComponent],
+      declarations: [ValueDialogComponent],
       imports: [MatDialogModule, HttpClientModule],
       providers: [FormBuilder,
         { provide: MatDialogRef, useValue: {} },
@@ -21,7 +21,7 @@ describe('DimensionDialogComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DimensionDialogComponent);
+    fixture = TestBed.createComponent(ValueDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

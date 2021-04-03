@@ -1,10 +1,8 @@
-import { ImpactTableFilterBarComponent } from './../components/impact-table-filter-bar/impact-table-filter-bar.component';
-import { ImpactTableFilterEvent } from './../components/impact-table-filter-bar/ImpactTableFilterEvent';
-import { ImpactTableComponent } from './../components/impact-table/impact-table.component';
-import { MatTable } from '@angular/material/table';
-import { SliderFilterSettings } from './../../shared/components/impact-slider/SliderFilterSettings';
+import { ImpactTableFilterBarComponent } from '../components/impact-table-filter-bar/impact-table-filter-bar.component';
+import { ImpactTableFilterEvent } from '../components/impact-table-filter-bar/ImpactTableFilterEvent';
+import { ImpactTableComponent } from '../components/impact-table/impact-table.component';
 import { LogService } from '../../shared/services/log.service';
-import { Impact } from './../models/Impact';
+import { Impact } from '../models/Impact';
 import { ImpactDataService } from '../services/impact/impact-data.service';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { NgScrollbar } from 'ngx-scrollbar';

@@ -1,6 +1,4 @@
-export class Dimension {
-  [k: string]: any;
-
+export class ValueDto {
   id = '';
   name = '';
   description = '';

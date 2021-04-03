@@ -1,7 +1,7 @@
-import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
+import { ValueDialogComponent } from './components/value-dialog/value-dialog.component';
 import { ImpactTableFilterEvent } from '../impact-table-filter-bar/ImpactTableFilterEvent';
 import { MatSliderChange } from '@angular/material/slider';
-import { DimensionDataService } from '../../services/dimension/dimension-data.service';
+import { ValueDataService } from '../../services/value/value-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ImpactDataService } from '../../services/impact/impact-data.service';
 import { Impact } from '../../models/Impact';
@@ -22,14 +22,14 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   // Used by table.
-  displayedColumns: string[] = ['uniqueString', 'stakeholder', 'dimension', 'value', 'description'];
+  displayedColumns: string[] = ['uniqueString', 'stakeholder', 'value', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
 
   // TODO: Extend these for more complex queries.
   filterValues: any = {
     id: '',
     stakeholder: [],
-    dimension: [],
+    values: [],
     value: '',
     description: '',
     highlight: ''
@@ -38,7 +38,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   constructor(
     private logger: LogService,
     public impactDataService: ImpactDataService,
-    public dimensionDataService: DimensionDataService,
+    public valueDataService: ValueDataService,
     private dialog: MatDialog) {
   }
 
@@ -88,7 +88,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
         case 'stakeholder': return impact.stakeholder.name;
-        case 'dimension': return impact.dimension.name;
+        case 'valueEntity': return impact.valueEntity.name;
         default: return impact[property];
       }
     };
@@ -112,7 +112,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
       const stakeholderFilter = searchTerms.stakeholder.length === 0 || searchTerms.stakeholder.indexOf(data.stakeholder.name) !== -1;
 
-      const dimensionFilter = searchTerms.dimension.length === 0 || searchTerms.dimension.indexOf(data.dimension.name) !== -1;
+      const valuesFilter = searchTerms.values.length === 0 || searchTerms.values.indexOf(data.valueEntity.name) !== -1;
 
       let valueFilter = false;
       switch (searchTerms.value.sliderFilterType) {
@@ -140,7 +140,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
           valueFilter = data.value === searchTerms.value.sliderFilterValues[0];
           break;
 
-        case SliderFilterType.Bewtween:
+        case SliderFilterType.Between:
           const minValue = Math.min(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
           const maxValue = Math.max(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
           if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
@@ -155,7 +155,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
           break;
       }
 
-      return stakeholderFilter && dimensionFilter && valueFilter;
+      return stakeholderFilter && valuesFilter && valueFilter;
     };
   }
 
@@ -167,7 +167,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.logger.info(this, 'Filter Changed');
     this.filterValues.value = event.valueFilter;
     this.filterValues.stakeholder = event.stakeholderFilter;
-    this.filterValues.dimension = event.dimensionFilter;
+    this.filterValues.values = event.valuesFilter;
     this.filterValues.highlight = event.highlightFilter;
     this.updateFilter();
   }
@@ -187,8 +187,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.updateImpact(impact);
   }
 
-  dimensionChange(impact: Impact, event: MatSelectChange): void {
-    this.logger.info(this, 'Dimension changed');
+  valueEntityChange(impact: Impact, event: MatSelectChange): void {
+    this.logger.info(this, 'Value changed');
     this.updateImpact(impact);
   }
 
@@ -205,19 +205,19 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.updateImpact(impact);
   }
 
-  openDimensionModal(): void {
+  openValueModal(): void {
     // if (!this.dimensionDataService.loaded) {
     //  this.logger.info(this, 'Dimensions not yet loaded');
     //  return;
     // }
-    this.logger.info(this, 'Opening Dimension Modal Dialog');
-    const dialogRef = this.dialog.open(DimensionDialogComponent, {
+    this.logger.info(this, 'Opening Value Modal Dialog');
+    const dialogRef = this.dialog.open(ValueDialogComponent, {
       height: '80%',
       width: '50%',
       data: { parameter: 'I left this here because maybe we will need it c:' }
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.logger.info(this, 'Closing Dimension Modal Dialog');
+      this.logger.info(this, 'Closing Value Modal Dialog');
     });
   }
 }

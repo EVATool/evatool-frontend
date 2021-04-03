@@ -1,14 +1,15 @@
 import { LogService } from '../../../shared/services/log.service';
 import { ImpactRestService } from './impact-rest.service';
 import { Analysis } from '../../models/Analysis';
-import { Dimension } from '../../models/Dimension';
+import { Value } from '../../models/Value';
 import { Stakeholder } from '../../models/Stakeholder';
 import { ImpactMapperService } from './impact-mapper.service';
 import { AnalysisDataService } from '../analysis/analysis-data.service';
-import { DimensionDataService } from '../dimension/dimension-data.service';
+import { ValueDataService } from '../value/value-data.service';
 import { StakeholderDataService } from '../stakeholder/stakeholder-data.service';
 import { Impact } from '../../models/Impact';
 import { Injectable, Output, EventEmitter } from '@angular/core';
+import {ImpactDto} from "../../dtos/ImpactDto";
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class ImpactDataService {
   private impactsLoaded = false;
   stakeholders: Stakeholder[] = [];
   private stakeholdersLoaded = false;
-  dimensions: Dimension[] = [];
-  private dimensionsLoaded = false;
+  values: Value[] = [];
+  private valuesLoaded = false;
   analyses: Analysis[] = [];
   private analysesLoaded = false;
 
@@ -34,7 +35,7 @@ export class ImpactDataService {
     private impactMapperService: ImpactMapperService,
     private impactRestService: ImpactRestService,
     private stakeholderDataService: StakeholderDataService,
-    private dimensionDataService: DimensionDataService,
+    private valueDataService: ValueDataService,
     private analysisDataService: AnalysisDataService) {
   }
 
@@ -45,9 +46,9 @@ export class ImpactDataService {
       this.loadIfChildrenAreLoaded();
     });
 
-    this.dimensionDataService.loadedDimensions.subscribe(dimensions => {
-      this.dimensions = dimensions;
-      this.dimensionsLoaded = true;
+    this.valueDataService.loadedValues.subscribe(values => {
+      this.values = values;
+      this.valuesLoaded = true;
       this.loadIfChildrenAreLoaded();
     });
 
@@ -58,7 +59,7 @@ export class ImpactDataService {
     });
 
     this.stakeholderDataService.onInit();
-    this.dimensionDataService.onInit();
+    this.valueDataService.onInit();
     this.analysisDataService.onInit();
   }
 
@@ -69,8 +70,7 @@ export class ImpactDataService {
         imps.sort((a, b) => this.sortImpactsById(a, b));
         let fromDtos: Impact[] = [];
         imps.forEach(imp => {
-          //this.impacts.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
-          fromDtos.push(this.impactMapperService.fromDto(imp, this.dimensions, this.stakeholders, this.analyses));
+          fromDtos.push(this.impactMapperService.fromDto(imp, this.values, this.stakeholders, this.analyses));
         });
         this.impacts = fromDtos;
         this.logger.info(this, 'Impacts loaded');
@@ -80,7 +80,7 @@ export class ImpactDataService {
     }
   }
 
-  private sortImpactsById(a: Impact, b: Impact): number {
+  private sortImpactsById(a: ImpactDto, b: ImpactDto): number {
     this.logger.debug(this, 'Sorting Impacts By Id');
     const numberA = + ("" + a.uniqueString?.replace("IMP", ""));
     const numberB = + ("" + b.uniqueString?.replace("IMP", ""));
@@ -88,7 +88,7 @@ export class ImpactDataService {
   }
 
   private getChildrenLoaded(): boolean {
-    return this.stakeholdersLoaded && this.dimensionsLoaded && this.analysesLoaded;
+    return this.stakeholdersLoaded && this.valuesLoaded && this.analysesLoaded;
   }
 
   private createDefaultImpact(): Impact {
@@ -97,7 +97,7 @@ export class ImpactDataService {
 
     impact.value = 0.0;
     impact.description = '';
-    impact.dimension = this.dimensionDataService.getDefaultDimension();
+    impact.valueEntity = this.valueDataService.getDefaultValue();
     impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
     impact.analysis = this.analysisDataService.getCurrentAnalysis();
 

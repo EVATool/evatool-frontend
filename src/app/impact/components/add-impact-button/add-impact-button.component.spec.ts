@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 
-import { AddImpactButtonComponent } from './add-impact-button.component';
+import {AddImpactButtonComponent} from './add-impact-button.component';
 
 describe('AddImpactButtonComponent', () => {
   let component: AddImpactButtonComponent;
@@ -10,8 +10,7 @@ describe('AddImpactButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AddImpactButtonComponent]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
