@@ -1,6 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { AnalysisRestService } from "./analysis-rest.service";
 import { Analysis } from "../../model/Analysis";
+import {AnalysisDTO} from "../../model/AnalysisDTO";
 
 @Injectable({
   providedIn: 'root'

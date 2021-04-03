@@ -21,6 +21,17 @@
   font-family: Arial;
   position: fixed;
 }
+.editButton{
+  width: 80px;
+  padding: 5px;
+  margin: 0 3px;
+  background-color: #ff7e00;
+  outline: none;
+  border: 1px solid #ff7e00;
+  box-shadow: 2px 2px 2px #3f3f3f;
+}
+
+
 .valueButton {
   border: none;
   background: #404040;
@@ -65,6 +76,53 @@ body {
   margin-right: 15px;
 }
 
+/*-------------------dropdown--------------------*/
+/* The dropdown container */
+.dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: relative; /*absolute*/
+  float: right;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 1.5px 2px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 /*-------------card options_end-------------------------*/
 .content-wrapper {
   margin: 0 auto;
@@ -181,7 +239,7 @@ body {
   background: black;
   color: #bbb;
   display: block;
-  padding: 0.4rem 0.6rem;
+  /*padding: 0.4rem 0.6rem;*/
   border-radius: 0.3rem;
   margin-top: 1rem;
   border: 1px solid #444;
@@ -189,7 +247,7 @@ body {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   text-decoration: none;
-  width: 7rem;
+  /*width: 2rem;*/
   margin-left: auto;
   position: relative;
   z-index: 5;

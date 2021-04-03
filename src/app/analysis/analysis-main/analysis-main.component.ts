@@ -72,4 +72,26 @@ export class AnalysisMainComponent implements OnInit {
     this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
   }
 
+  editAnalysisTitle(): void {
+
+  }
+
+  editDescription(): void {
+
+  }
+
+  changeBackgroundImage(): void {
+
+  }
+
+  deleteAnalysis(analysis: Analysis): void {
+    this.analysisRestService.deleteAnalysis(analysis).subscribe((anal) => {
+      const index = this.analysisArray.indexOf(anal, 0);
+      if (index > -1) {
+        this.analysisArray.splice(index, 1);
+      }
+      window.location.reload();
+    });
+  }
+
 }
