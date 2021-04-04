@@ -64,7 +64,6 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
       const action = 'show me'
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
       snackBarRef.onAction().subscribe(() => {
-        // TODO highlight in table.
         this.logger.info(this, 'User wants to see the impacts referencing the value');
         this.userWantsToSeeReferencedImpacts.emit(value);
       });

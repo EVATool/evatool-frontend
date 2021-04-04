@@ -12,11 +12,6 @@ import {LogService} from "../../../../../shared/services/log.service";
 })
 export class ValueDialogComponent implements OnInit, AfterViewInit {
 
-  socialValueState = true; // TODO Do foreach valueType, even necessary?
-  economicValueState = true;
-
-  form!: FormGroup;
-
   constructor(
     private logger: LogService,
     private formBuilder: FormBuilder,
@@ -26,9 +21,7 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      id: new FormControl(null),
-    });
+
   }
 
   ngAfterViewInit(): void {
@@ -36,7 +29,7 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
   }
 
   closeClick(): void {
-    this.dialogRef.close({accept: false});
+    this.dialogRef.close();
   }
 
   propagateSeeReferences(value: Value) {

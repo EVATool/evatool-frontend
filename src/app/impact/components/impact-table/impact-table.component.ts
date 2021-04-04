@@ -214,12 +214,17 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       this.logger.info(this, 'Closing Value Modal Dialog');
-      if (data.showReferencedImpacts) {
+
+      // Highlighting of impacts referencing value.
+      if (data?.showReferencedImpacts) {
         // TODO add clear highlighting method (and clear when references value is no longer selected)
         this.impactDataService.impacts.forEach(impact => {
           impact.highlight = impact.valueEntity === data.value;
         });
       }
+
+      // Change valueEntity filter to available values.
+      // TODO
     });
   }
 }
