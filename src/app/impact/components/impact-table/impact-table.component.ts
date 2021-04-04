@@ -206,18 +206,20 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   openValueModal(): void {
-    // if (!this.dimensionDataService.loaded) {
-    //  this.logger.info(this, 'Dimensions not yet loaded');
-    //  return;
-    // }
     this.logger.info(this, 'Opening Value Modal Dialog');
     const dialogRef = this.dialog.open(ValueDialogComponent, {
       height: '80%',
       width: '50%',
       data: {parameter: 'I left this here because maybe we will need it c:'}
     });
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((data) => {
       this.logger.info(this, 'Closing Value Modal Dialog');
+      if (data.showReferencedImpacts) {
+        // TODO add clear highlighting method (and clear when references value is no longer selected)
+        this.impactDataService.impacts.forEach(impact => {
+          impact.highlight = impact.valueEntity === data.value;
+        });
+      }
     });
   }
 }
