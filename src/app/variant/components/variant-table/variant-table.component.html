@@ -7,9 +7,9 @@
       </div>
     </mat-cell>
   </ng-container>
-  <ng-container matColumnDef='title'>
+  <ng-container matColumnDef='title' >
 
-    <mat-cell *matCellDef='let variant'>
+    <mat-cell *matCellDef='let variant' >
           <textarea type="text" matInput value="{{variant.title}}"
                     readonly="{{!variant.editable}}" name="title"
                     [(ngModel)]="variant.title" *ngIf="variant.editable" placeholder="Title"></textarea>
@@ -19,7 +19,7 @@
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef='description'>
-    <mat-cell *matCellDef='let variant'>
+    <mat-cell *matCellDef='let variant' >
       <div class="description-wrapper">
             <textarea matInput type="text" value="{{variant.description}}"
                       readonly="{{!variant.editable}}" [(ngModel)]="variant.description" *ngIf="variant.editable"
@@ -29,9 +29,6 @@
         </div>
       </div>
       <div class="options" *ngIf="!variant.archived">
-        <button mat-icon-button *ngIf="variant.editable" name="save" (click)="save(variant);">
-          <mat-icon>save</mat-icon>
-        </button>
         <button mat-icon-button *ngIf="!variant.editable" name="archive" (click)="archive(variant)">
           <mat-icon>archive</mat-icon>
         </button>
@@ -47,5 +44,6 @@
     </mat-cell>
   </ng-container>
   <mat-row mat-row *matRowDef="let variant; columns: displayedColumns;" class="archieved-{{variant.archived}}"
-           [ngClass]="{'selected': (variant.id == id) && variant.guiId != '' && variant.archived == true}"></mat-row>
+           [ngClass]="{'selected': (variant.id == id) && variant.guiId != '' && variant.archived == true}"
+          (click)="edit(variant)" (mouseleave)="save(variant)"></mat-row>
 </mat-table>

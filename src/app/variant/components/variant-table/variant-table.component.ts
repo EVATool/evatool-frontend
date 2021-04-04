@@ -25,7 +25,12 @@ export class VariantTableComponent implements OnInit {
 
   save(variant: Variant): void {
     variant.editable = false;
-    this.variantDataService.save(variant);
+    if ( variant.id !== ''){
+      this.variantDataService.update(variant);
+    }else{
+      this.variantDataService.save(variant);
+    }
+
   }
 
   archive(variant: Variant): void {
@@ -38,5 +43,11 @@ export class VariantTableComponent implements OnInit {
 
   delete(variant: Variant): void {
     this.variantDataService.delete(variant);
+  }
+
+  edit(variant: Variant): void{
+    if (! variant.archived) {
+      variant.editable = true;
+    }
   }
 }

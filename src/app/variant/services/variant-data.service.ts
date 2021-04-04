@@ -19,15 +19,14 @@ export class VariantDataService{
   constructor( private variantRestService: VariantRestService,
                private router: Router){
     this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-    this.loadVariants();
     this.loadAnalysisIDFromRouter();
+    this.loadVariants();
   }
 
   loadVariants(): void{
     this.variantRestService.getVariants().subscribe((result: any) => {
       this.variants = [];
       this.variantsArchive = [];
-      console.log(result);
       result.forEach((variantDTO: VariantDTO) => {
         const variant: Variant = {
           id: variantDTO.id,
@@ -65,6 +64,7 @@ export class VariantDataService{
   }
 
   save(variant: Variant): void {
+    console.log(this.analysisid);
     this.variantRestService.createVariants(
       {
         id: '',
@@ -117,5 +117,9 @@ export class VariantDataService{
     this.variantRestService.deleteVariants(variant.id).subscribe(() => {
       this.loadVariants();
     });
+  }
+
+  update(variant: Variant): void {
+
   }
 }
