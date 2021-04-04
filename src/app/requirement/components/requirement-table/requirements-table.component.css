@@ -51,6 +51,9 @@ input{
   background: red;
   text-align: center;
 }
+.archived{
+  border: 2px solid red;
+}
 
 #add-impact-button-div {
   position: fixed;
