@@ -227,4 +227,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     element.variantsTitle = variantArray;
     this.updateRequirement(element);
   }
+
+  checkAchrived(variantsTitleElement: Variants[]): void {
+    if (variantsTitleElement.length > 0 && variantsTitleElement[0].archived){
+      this.openDialog();
+    }
+  }
 }
