@@ -2,5 +2,25 @@
   <mat-list-item>
     <app-search-bar></app-search-bar>
   </mat-list-item>
+  <mat-list-item>
+    <app-column-category-filter #variantsFilter [categories]="variantsNames" [name]="'Variants'"
+                                (filterChanged)="variantsFilterChanged($event)">
+    </app-column-category-filter>
+  </mat-list-item>
+  <mat-list-item>
+    <app-column-category-filter #valueSystemFilter [categories]="variantsNames" [name]="'Value'"
+                                (filterChanged)="valueSystemFilterChanged($event)">
+    </app-column-category-filter>
+  </mat-list-item>
 
+<mat-list-item>
+  <app-column-slider-filter class="filter-slider" (filterChanged)="valueFilterChanged($event)">
+  </app-column-slider-filter>
+</mat-list-item>
+<mat-list-item>
+  <button mat-raised-button color="accent" (click)='clearFilter();clearHighlight();' matTooltip="Clear all filters"
+          matTooltipHideDelay="100" matTooltipPosition="above">Clear
+    <mat-icon>filter_alt</mat-icon>
+  </button>
+</mat-list-item>
 </mat-list>
