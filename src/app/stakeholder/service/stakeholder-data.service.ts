@@ -9,16 +9,14 @@ import { StakeholderImpact } from '../model/StakeholderImpact';
 @Injectable({
   providedIn: 'root'
 })
-export class StakeholderDataService implements AfterViewInit {
+export class StakeholderDataService {
 
   stakeholders: Stakeholder[] = [];
   matDataSource = new MatTableDataSource<Stakeholder>();
+  public searchtext = '';
 
   constructor(private stakeholderRestService: StakeholderRestService) {
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
-  }
-
-  ngAfterViewInit(): void {
     this.loadStakeholder();
   }
 
@@ -119,5 +117,9 @@ export class StakeholderDataService implements AfterViewInit {
     };
 
     this.matDataSource.filter = value;
+  }
+
+  setSearchText(event: string): void {
+    this.searchtext = event;
   }
 }

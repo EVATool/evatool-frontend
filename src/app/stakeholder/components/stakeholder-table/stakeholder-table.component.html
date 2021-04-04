@@ -2,8 +2,7 @@
   <ng-container matColumnDef='guiId'>
     <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
-      <div>
-      {{stakeholder.guiId}}
+      <div [innerHTML]="stakeholder.guiId | highlightSearch: stakeholderDataService.searchtext">
       </div>
       <div>
       </div>
@@ -15,8 +14,7 @@
       <input type="text" matInput value="{{stakeholder.name}}"
              readonly="{{!stakeholder.editable}}" name="stakeholder"
              [(ngModel)]="stakeholder.name" *ngIf="stakeholder.editable" id="titleinput" id="{{stakeholder.id}}_stakeholder" autofocus tabindex="0">
-      <div *ngIf="!stakeholder.editable">
-        {{stakeholder.name}}
+      <div *ngIf="!stakeholder.editable" [innerHTML]="stakeholder.name | highlightSearch: stakeholderDataService.searchtext" >
       </div>
 
     </mat-cell>

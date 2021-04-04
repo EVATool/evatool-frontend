@@ -1,6 +1,6 @@
 <mat-list class="list-horizontal">
   <mat-list-item>
-    <app-search-bar></app-search-bar>
+    <app-search-bar (searchTextChanged)="highlightTextChange($event)"></app-search-bar>
   </mat-list-item>
   <mat-list-item class="filter-wrapper">
     <div>

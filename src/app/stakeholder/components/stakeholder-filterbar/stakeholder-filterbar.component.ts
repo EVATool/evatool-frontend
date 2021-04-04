@@ -45,4 +45,8 @@ export class StakeholderFilterbarComponent implements OnInit {
     this.preselect = this.levels[0];
     this.stakeholderDataService.resetFilter();
   }
+
+  highlightTextChange(event: string): void {
+    this.stakeholderDataService.setSearchText(event);
+  }
 }
