@@ -30,6 +30,7 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {ImpactTableFilterBarComponent} from './components/impact-table-filter-bar/impact-table-filter-bar.component';
 import {StakeholderModule} from "../stakeholder/stakeholder-module";
 import {ResizeColumnDirective} from "./directives/ResizeColumnDirective";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {ResizeColumnDirective} from "./directives/ResizeColumnDirective";
     RouterModule,
     MatListModule,
     NgMultiSelectDropDownModule,
-    StakeholderModule
+    StakeholderModule,
+    MatSnackBarModule
   ],
   exports: [
     ImpactMainComponent
