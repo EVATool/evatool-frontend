@@ -224,7 +224,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       }
 
       // Change valueEntity filter to available values.
-      // TODO
+      // TODO change available filter and dropdown valueEntities
     });
   }
 }

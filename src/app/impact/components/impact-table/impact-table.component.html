@@ -47,7 +47,7 @@
       <mat-form-field>
         <mat-select [(ngModel)]="impact.valueEntity" (selectionChange)="valueEntityChange(impact, $event)">
           <mat-option *ngFor="let val of impactDataService.valueDataService.values"
-                      [value]="val">{{val.name}}</mat-option>
+                      [value]="val" [disabled]="val.disable">{{val.name}} </mat-option>
         </mat-select>
       </mat-form-field>
     </td>
