@@ -16,23 +16,27 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import {SharedModule} from '../shared/shared.module';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [StakeholderMainComponent, StakeholderTableComponent, StakeholderPrioComponent,
     StakeholderLevelComponent, StakeholderImpactComponent, StakeholderFilterbarComponent],
-    imports: [
-        CommonModule,
-        MatTableModule,
-        NgScrollbarModule,
-        MatInputModule,
-        MatSliderModule,
-        MatSelectModule,
-        MatToolbarModule,
-        MatDialogModule,
-        MatIconModule,
-        FormsModule,
-        MatButtonModule,
-    ],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    NgScrollbarModule,
+    MatInputModule,
+    MatSliderModule,
+    MatSelectModule,
+    MatToolbarModule,
+    MatDialogModule,
+    MatIconModule,
+    FormsModule,
+    MatButtonModule,
+    SharedModule,
+    MatListModule
+  ],
   exports: [
     StakeholderMainComponent
   ]
