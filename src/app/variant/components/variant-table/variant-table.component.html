@@ -1,0 +1,49 @@
+<mat-table mat-table [dataSource]='matDataSource'>
+  <ng-container matColumnDef='guiId'>
+
+    <mat-cell *matCellDef='let variant' id="guiId">
+      <div>
+        {{variant.guiId}}
+      </div>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef='title' >
+
+    <mat-cell *matCellDef='let variant' >
+          <textarea type="text" matInput value="{{variant.title}}"
+                    readonly="{{!variant.editable}}" name="title"
+                    [(ngModel)]="variant.title" *ngIf="variant.editable" placeholder="Title"></textarea>
+      <div *ngIf="!variant.editable">
+        {{variant.title}}
+      </div>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef='description'>
+    <mat-cell *matCellDef='let variant' >
+      <div class="description-wrapper">
+            <textarea matInput type="text" value="{{variant.description}}"
+                      readonly="{{!variant.editable}}" [(ngModel)]="variant.description" *ngIf="variant.editable"
+                      placeholder="Description"></textarea>
+        <div *ngIf="!variant.editable">
+          {{variant.description}}
+        </div>
+      </div>
+      <div class="options" *ngIf="!variant.archived">
+        <button mat-icon-button *ngIf="!variant.editable" name="archive" (click)="archive(variant)">
+          <mat-icon>archive</mat-icon>
+        </button>
+      </div>
+      <div class="options" *ngIf="variant.archived">
+        <button mat-icon-button *ngIf="!variant.editable" name="archive" (click)="unarchive(variant)">
+          <mat-icon>unarchive</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="!variant.editable" name="archive" (click)="delete(variant)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-cell>
+  </ng-container>
+  <mat-row mat-row *matRowDef="let variant; columns: displayedColumns;" class="archieved-{{variant.archived}}"
+           [ngClass]="{'selected': (variant.id == id) && variant.guiId != '' && variant.archived == true}"
+          (click)="edit(variant)" (mouseleave)="save(variant)"></mat-row>
+</mat-table>
