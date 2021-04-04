@@ -95,4 +95,15 @@ export class RequirementsDataService {
       });
     }
   }
+
+  updateRequirements(element: Requirements): void {
+    this.requirementsRestService.updateRequirements(element).subscribe(value => {
+      element.values = value.values;
+      element.requirementDescription = value.requirementDescription;
+      element.variantsTitle = value.variantsTitle;
+      element.requirementImpactPoints = value.requirementImpactPoints;
+      this.changedRequirement.emit(element);
+      this.changedRequirements.emit(this.requirements);
+    });
+  }
 }

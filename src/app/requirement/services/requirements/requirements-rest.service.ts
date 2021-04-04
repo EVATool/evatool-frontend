@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Requirements} from '../../models/Requirements';
 import {Impact} from "../../models/Impact";
+import {Variants} from "../../models/Variants";
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({
@@ -19,6 +20,8 @@ export class RequirementsRestService {
   requirmentUrl = 'http://localhost:8080/requirements'; // Outsource!
   // impactsUrl = 'http://79.171.179.211:443/impacts'; // Outsource!
   impactsUrl = 'http://localhost:8080/requirements/impacts'; // Outsource!
+  // impactsUrl = 'http://79.171.179.211:443/impacts'; // Outsource!
+  variantsUrl = 'http://localhost:8080/requirements/variants'; // Outsource!
 
   constructor(private http: HttpClient) {
 
@@ -29,6 +32,9 @@ export class RequirementsRestService {
   }
   getImpacts(): Observable<Impact> {
     return this.http.get<any>(this.impactsUrl);
+  }
+  getVariants(): Observable<Variants> {
+    return this.http.get<any>(this.variantsUrl);
   }
   createRequirements(requirement: Requirements): Observable<any> {
     return this.http.post(this.requirmentUrl, requirement, httpOptions);

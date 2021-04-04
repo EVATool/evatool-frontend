@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
 import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {Variants} from '../../models/Variants';
 
 @Component({
   selector: 'app-requirement-table',
@@ -22,6 +23,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['uniqueString', 'requirementDescription', 'variantsTitle', 'values'];
   requirementsSource: Requirements[] = [];
   impactSoureces: Impact[] = [];
+  variantsSoureces: Variants[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
   idForProject = '';
   columnDefinitions = [
@@ -66,12 +68,24 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       });
       this.displayedColumns = this.displayedColumns.concat(impactIdList);
     });
+    this.requirementsRestService.getVariants().subscribe((result: any) => {
+      this.variantsSoureces = [];
+      result.forEach((variantsRest: Variants) => {
+        const variants: Variants = {
+          entityId: variantsRest.id,
+          description: variantsRest.description,
+          variantsTitle: variantsRest.title,
+          archived: variantsRest.archived
+        };
+        this.variantsSoureces.push(variants);
+      });
+    });
     this.tableDatasource.data = this.requirementsSource;
     this.requirementsDataService.onInit();
   }
 
   getDisplayedColumns(): string[] {
-    this.randomFilter();
+    // this.randomFilter();
     return this.columnDefinitions
       .filter(cd => cd.hide)
       .map(cd => cd.def);
@@ -150,14 +164,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       delete element.requirementImpactPoints[impact.id];
     }
     if (element.rootEntityId != null) {
-      this.requirementsRestService.updateRequirements(element).subscribe(value => {
-      });
+      this.requirementsDataService.updateRequirements(element);
     } else {
-      this.requirementsRestService.createRequirements(element).subscribe(value => {
-        this.requirementsSource.pop();
-        this.requirementsSource.push(value);
-        this.tableDatasource.data = this.requirementsSource;
-      });
     }
   }
 
@@ -172,14 +180,14 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   descriptionChange(requirements: Requirements, event: Event): void {
-    this.updateImpact(requirements);
+    this.updateRequirement(requirements);
   }
 
   deleteImpact(requirements: Requirements): void {
     this.requirementsDataService.deleteRequirement(requirements);
   }
 
-  updateImpact(requirements: Requirements): void {
+  updateRequirement(requirements: Requirements): void {
     this.requirementsRestService.updateRequirements(requirements).subscribe();
   }
 
@@ -207,5 +215,16 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
   public getSelectedRequirment(requirements: Requirements): void{
     this.selectedRequirements = requirements;
+  }
+
+  variantsChange(element: Requirements, $event: any): void {
+    console.log($event);
+    const variantId: string = $event.value;
+    const variantArray: Variants[] = [];
+    const variant: Variants = new Variants();
+    variant.entityId = variantId;
+    variantArray.push(variant);
+    element.variantsTitle = variantArray;
+    this.updateRequirement(element);
   }
 }
