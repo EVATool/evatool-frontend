@@ -43,9 +43,7 @@ export class SampleDataService {
     });
 
     this.dummyImpactDtos.forEach(dto => {
-      console.log(dto)
       this.dummyImpacts.push(this.impactMapperService.fromDto(dto, this.dummyValues, this.dummyStakeholders, this.dummyAnalyses));
-      console.log(this.impactMapperService.fromDto(dto, this.dummyValues, this.dummyStakeholders, this.dummyAnalyses))
     });
 
     // TODO for requirements Dtos when they are in backend...
