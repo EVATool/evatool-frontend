@@ -37,7 +37,7 @@
   <ng-container matColumnDef="Impact">
     <mat-header-cell *matHeaderCellDef>Impact</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
-      <app-stakeholder-impact [created]="stakeholder.created" [negativeimpactvalue]="stakeholder.negativeImpact" [positiveimpactvalue]="stakeholder.positiveImpact"></app-stakeholder-impact>
+      <app-stakeholder-impact [created]="stakeholder.created" [negativeimpactvalue]= "stakeholder.negativeImpact" [positiveimpactvalue]= "stakeholder.positiveImpact" ></app-stakeholder-impact>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

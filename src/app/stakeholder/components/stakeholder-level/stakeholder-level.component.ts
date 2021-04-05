@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Stakeholder} from '../../model/Stakeholder';
+import {StakeholderDataService} from '../../service/stakeholder-data.service';
 
 
 @Component({
@@ -9,15 +10,20 @@ import {Stakeholder} from '../../model/Stakeholder';
 })
 export class StakeholderLevelComponent implements OnInit {
 
+
   @Input() public level = 'NATURAL_PERSON';
   @Input() public editable = true;
   @Input() private filter = false;
   @Output() levelChange = new EventEmitter<string | null>();
   public levels = ['NATURAL_PERSON', 'ORGANIZATION', 'SOCIETY'];
-  constructor() { }
+  public shownlevels = [
+    {key: 'NATURAL_PERSON' , value: 'Individuell'},
+    {key: 'ORGANIZATION', value: 'Organisation'},
+    {key: 'SOCIETY', value: 'Gesellschaft'}
+  ];
+  constructor(public stakeholderDataService: StakeholderDataService) { }
 
   ngOnInit(): void {
-    console.log(this.level);
   }
 
   onLevelChange(): void {
