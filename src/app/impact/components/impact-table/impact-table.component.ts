@@ -11,6 +11,7 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatSelectChange} from '@angular/material/select';
 import {LogService} from '../../../shared/services/log.service';
 import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
+import {Value} from "../../models/Value";
 
 @Component({
   selector: 'app-impact-table',
@@ -189,6 +190,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   valueEntityChange(impact: Impact, event: MatSelectChange): void {
     this.logger.info(this, 'Value changed');
+    impact.highlight = false;
     this.updateImpact(impact);
   }
 
@@ -217,14 +219,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
       // Highlighting of impacts referencing value.
       if (data?.showReferencedImpacts) {
-        // TODO add clear highlighting method (and clear when references value is no longer selected)
         this.impactDataService.impacts.forEach(impact => {
           impact.highlight = impact.valueEntity === data.value;
         });
       }
-
-      // Change valueEntity filter to available values.
-      // TODO change available filter and dropdown valueEntities
     });
   }
 }
