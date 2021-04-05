@@ -21,12 +21,21 @@ export class StakeholderRestService {
 
   }
 
-  getStakeholders(): Observable<StakeholderDto[]> { // TODO get by id when analysis rest call is available.
+  getStakeholders(): Observable<StakeholderDto[]> {
     this.logger.info(this, 'Get all Stakeholders');
     if (this.data.offline) {
       return of(this.data.dummyStakeholderDtos);
     } else {
       return this.http.get<StakeholderDto[]>(RestSettings.stakeholdersUrl);
+    }
+  }
+
+  getStakeholdersByAnalysisId(analysisId: string): Observable<StakeholderDto[]> {
+    this.logger.info(this, 'Get all Stakeholders');
+    if (this.data.offline) {
+      return of(this.data.dummyStakeholderDtos);
+    } else {
+      return this.http.get<StakeholderDto[]>(RestSettings.stakeholdersUrl + "?analysisId=" + analysisId);
     }
   }
 }

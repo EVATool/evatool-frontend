@@ -1,5 +1,4 @@
-import {Observable} from 'rxjs';
-import {Injectable} from '@angular/core';
+import {Injectable, isDevMode} from '@angular/core';
 import {StakeholderMapperService} from '../services/stakeholder/stakeholder-mapper.service';
 import {AnalysisMapperService} from '../services/analysis/analysis-mapper.service';
 import {ValueMapperService} from '../services/value/value-mapper.service';
@@ -21,13 +20,15 @@ import {ImpactValueDto} from "../dtos/ImpactValueDto";
 })
 export class SampleDataService {
 
-  public offline: boolean = false; // NO NOT TEST, COMMIT OR PUSH WHEN THIS IS SET TO TRUE!
+  public offline: boolean = false; // NO NOT TEST (ng test) WHEN THIS IS SET TO TRUE!
 
   constructor(
     private valueMapperService: ValueMapperService,
     private stakeholderMapperService: StakeholderMapperService,
     private analysisMapperService: AnalysisMapperService,
     private impactMapperService: ImpactMapperService) {
+
+    this.offline &&= isDevMode();
 
     this.dummyAnalysisDtos.forEach(dto => {
       this.dummyAnalyses.push(this.analysisMapperService.fromDto(dto));
@@ -119,18 +120,22 @@ export class SampleDataService {
 
   readonly dummyAnalyses: Analysis[] = []
 
-  readonly dummyStakeholderDtos: StakeholderDto[] = [
+  readonly dummyStakeholderDtos: any[] = [
     {
-      rootEntityID: '1', stakeholderName: 'Patient', stakeholderLevel: 'NATURAL_PERSON'
+      rootEntityID: '1', stakeholderName: 'Patient', stakeholderLevel: 'NATURAL_PERSON',
+      analysis: {rootEntityID: 1}
     },
     {
-      rootEntityID: '2', stakeholderName: 'Doctor', stakeholderLevel: 'NATURAL_PERSON'
+      rootEntityID: '2', stakeholderName: 'Doctor', stakeholderLevel: 'NATURAL_PERSON',
+      analysis: {rootEntityID: 1}
     },
     {
-      rootEntityID: '3', stakeholderName: 'Family', stakeholderLevel: 'NATURAL_PERSON'
+      rootEntityID: '3', stakeholderName: 'Family', stakeholderLevel: 'NATURAL_PERSON',
+      analysis: {rootEntityID: 1}
     },
     {
-      rootEntityID: '4', stakeholderName: 'Insurance', stakeholderLevel: 'NATURAL_PERSON'
+      rootEntityID: '4', stakeholderName: 'Insurance', stakeholderLevel: 'NATURAL_PERSON',
+      analysis: {rootEntityID: 1}
     }
   ];
 
@@ -188,7 +193,7 @@ export class SampleDataService {
       id: '11111',
       uniqueString: 'IMP1',
       value: -0.3,
-      description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
+      description: 'This is the first read-only impact',
       valueEntity: {id: '1'},
       stakeholder: {id: '1'},
       analysis: {id: '1'}
