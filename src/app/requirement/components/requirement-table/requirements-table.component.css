@@ -10,6 +10,14 @@ table {
 input{
 
 }
+/*mat-icon{*/
+/*  display: none;*/
+/*}*/
+
+/*mat-list-item:hover mat-icon{*/
+/*  display: block;*/
+/*}*/
+
 .mat-header-cell{
   text-align: center;
 }
