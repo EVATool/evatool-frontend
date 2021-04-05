@@ -21,7 +21,7 @@ import {ImpactValueDto} from "../dtos/ImpactValueDto";
 })
 export class SampleDataService {
 
-  public offline: boolean = true;
+  public offline: boolean = false; // NO NOT TEST, COMMIT OR PUSH WHEN THIS IS SET TO TRUE!
 
   constructor(
     private valueMapperService: ValueMapperService,
