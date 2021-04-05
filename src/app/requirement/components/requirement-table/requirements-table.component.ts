@@ -15,7 +15,7 @@ import {Variants} from '../../models/Variants';
 @Component({
   selector: 'app-requirement-table',
   templateUrl: './requirements-table.component.html',
-  styleUrls: ['./requirements-table.component.css', '../../../layout/style/style.css']
+  styleUrls: ['./requirements-table.component.scss', '../../../layout/style/style.css']
 })
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -230,7 +230,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   checkAchrived(variantsTitleElement: Variants[]): void {
     if (variantsTitleElement.length > 0 && variantsTitleElement[0].archived){
-      this.openDialog();
+      const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: '' + variantsTitleElement[0].entityId}});
     }
   }
 }
