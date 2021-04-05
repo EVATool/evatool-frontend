@@ -4,7 +4,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {MockedVariantRestService} from '../variant-rest.service.spec';
 
 
-export class RestMockProviders {
+export class RestMockProvidersVariants {
   public static readonly imports: any[] = [
     HttpClientTestingModule,
     RouterTestingModule

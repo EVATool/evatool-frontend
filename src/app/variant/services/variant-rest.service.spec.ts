@@ -20,7 +20,7 @@ export class MockedVariantRestService extends VariantRestService {
   }
 
   getVariants(): Observable<any> {
-    return of(this.sampleData.getDummyVariantDTO());
+    return of(this.sampleData.getDummyVariantDTOs());
   }
 
   deleteVariants(id: string): Observable<any> {
