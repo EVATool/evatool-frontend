@@ -9,7 +9,7 @@ import {AnalysisDto} from "../../dtos/AnalysisDto";
 import {LogService} from "../../../shared/services/log.service";
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
-import {RestMockProviders} from "../../spec/RestMockProviders";
+import {RestMock} from "../../spec/RestMock";
 import {HttpTestingController} from "@angular/common/http/testing";
 
 @Injectable({
@@ -35,7 +35,7 @@ describe('AnalysisRestService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: RestMockProviders.imports
+      imports: RestMock.imports
     });
     sampleData = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);

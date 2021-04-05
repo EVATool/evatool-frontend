@@ -5,7 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ImpactMainComponent} from './impact-main.component';
-import {RestMockProviders} from "../spec/RestMockProviders";
+import {RestMock} from "../spec/RestMock";
 
 describe('ImpactMainComponent', () => {
   let component: ImpactMainComponent;
@@ -15,7 +15,7 @@ describe('ImpactMainComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, RouterTestingModule],
       declarations: [ImpactMainComponent, HighlightSearch],
-      providers: [NgScrollbar].concat(RestMockProviders.providers)
+      providers: [NgScrollbar].concat(RestMock.providers)
     }).compileComponents();
   });
 

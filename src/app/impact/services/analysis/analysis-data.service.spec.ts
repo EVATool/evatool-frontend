@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {TestBed} from '@angular/core/testing';
 
 import {AnalysisDataService} from './analysis-data.service';
-import {RestMockProviders} from "../../spec/RestMockProviders";
+import {RestMock} from "../../spec/RestMock";
 
 describe('AnalysisDataService', () => {
   let sampleData: SampleDataService;
@@ -12,8 +12,8 @@ describe('AnalysisDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: RestMockProviders.imports,
-      providers: RestMockProviders.providers
+      imports: RestMock.imports,
+      providers: RestMock.providers
     });
 
     sampleData = TestBed.inject(SampleDataService);
