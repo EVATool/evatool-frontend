@@ -3,36 +3,52 @@
     <app-search-bar (searchTextChanged)="highlightTextChange($event)"></app-search-bar>
   </mat-list-item>
   <mat-list-item class="filter-wrapper">
-    <div>
-      <p>Ebene</p>
-    </div>
-    <div class="category-filter-container">
-      <mat-list-item role="listitem">
-        <mat-select [(value)]="preselect" id="level">
-          <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">
-            {{level.value}}
-          </mat-option>
-        </mat-select>
+    <mat-list class="list-vertical">
+      <mat-list-item>
+        <div>
+          <p>Ebene</p>
+        </div>
       </mat-list-item>
-    </div>
+      <mat-list-item>
+        <div class="category-filter-container">
+          <mat-select [(value)]="preselect" id="level">
+            <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">
+              {{level.value}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </mat-list-item>
+    </mat-list>
   </mat-list-item>
-  <mat-list-item>
-    <div>
-      <p>Priorität</p>
-    </div>
-    <div>
-      <app-stakeholder-prio [(prio)]="prio" class="filter" [editable]="true"
-                            (prioChange)="prioChange($event)"></app-stakeholder-prio>
-    </div>
+  <mat-list-item class="filter-wrapper">
+    <mat-list class="list-vertical">
+      <mat-list-item>
+        <div>
+          <p>Priorität</p>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div>
+          <app-stakeholder-prio [(prio)]="prio" class="filter" [editable]="true"
+                                (prioChange)="prioChange($event)"></app-stakeholder-prio>
+        </div>
+      </mat-list-item>
+    </mat-list>
   </mat-list-item>
-  <mat-list-item>
-    <div>
-      <p>Impact</p>
-    </div>
-    <div>
-      <app-stakeholder-impact [editable]="true"
-                              (impactChange)="impactChange($event)"></app-stakeholder-impact>
-    </div>
+  <mat-list-item class="filter-wrapper">
+    <mat-list class="list-vertical">
+      <mat-list-item>
+        <div>
+          <p>Impact</p>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div>
+          <app-stakeholder-impact [editable]="true"
+                                  (impactChange)="impactChange($event)"></app-stakeholder-impact>
+        </div>
+      </mat-list-item>
+    </mat-list>
   </mat-list-item>
   <mat-list-item>
     <div>
