@@ -4,6 +4,7 @@ import {Value} from '../../models/Value';
 import {ValueRestService} from './value-rest.service';
 import {Injectable, EventEmitter, Output, Inject} from '@angular/core';
 import {AnalysisDataService} from "../analysis/analysis-data.service";
+import {Impact} from "../../models/Impact";
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +22,14 @@ export class ValueDataService {
   constructor(
     private logger: LogService,
     private valueMapperService: ValueMapperService,
-    private valuesRestService: ValueRestService,
+    private valueRestService: ValueRestService,
     private analysisDataService: AnalysisDataService) {
   }
 
   onInit(): void {
     // Load values.
     this.analysisDataService.loadedAnalyses.subscribe(analysis => {
-      this.valuesRestService.getValuesByAnalysisId(analysis.id).subscribe(vals => {
+      this.valueRestService.getValuesByAnalysisId(analysis.id).subscribe(vals => {
         let fromDtos: Value[] = [];
         vals.forEach(val => {
           fromDtos.push(this.valueMapperService.fromDto(val));
@@ -39,7 +40,7 @@ export class ValueDataService {
       });
 
       // Load value types.
-      this.valuesRestService.getValueTypes().subscribe(valTypes => {
+      this.valueRestService.getValueTypes().subscribe(valTypes => {
         this.valuesTypes = valTypes;
         this.logger.info(this, 'Value types loaded');
         this.loadedValuesTypes.emit(this.valuesTypes);
@@ -47,6 +48,27 @@ export class ValueDataService {
     });
 
     this.analysisDataService.onInit();
+  }
+
+  private createDefaultValue() {
+
+  }
+
+  createValue() { // TODO tests
+
+  }
+
+  updateValue(value: Value) { // TODO tests
+    this.logger.info(this, 'Update Value');
+    const valueDto = this.valueMapperService.toDto(value);
+    this.valueRestService.updateValue(valueDto).subscribe((newValue: Value) => {
+      this.changedValue.emit(newValue);
+      // this.changedImpacts.emit(this.impacts); // The change originated from the UI.
+    });
+  }
+
+  deleteValue(value: Value) { // TODO tests
+
   }
 
   getDefaultValue(): Value {

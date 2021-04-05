@@ -41,21 +41,11 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
 
   private initSorting(): void {
     this.tableDataSource.sort = this.sort;
-    this.tableDataSource.sortingDataAccessor = (impact, property) => {
-      switch (property) {
-        case 'stakeholder':
-          return impact.stakeholder.name;
-        case 'valueEntity':
-          return impact.value.name;
-        default:
-          return impact[property];
-      }
-    };
   }
 
   updateValue(value: Value) {
     this.logger.info(this, 'Update Value');
-    //this.valueDataService.updateValue();
+    this.valueDataService.updateValue(value);
   }
 
   deleteValue(value: Value) { // TODO is this even allowed?
