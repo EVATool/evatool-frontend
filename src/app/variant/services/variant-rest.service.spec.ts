@@ -1,19 +1,40 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {VariantRestService} from './variant-rest.service';
+import {Injectable} from '@angular/core';
+import {LogService} from '../../shared/services/log.service';
+import {Observable, of} from 'rxjs';
+import {VariantDTO} from '../models/VariantDTO';
+import {VariantSampleDataService} from './spec/sample-data.service';
 
+@Injectable({
+  providedIn: 'root'
+})
+export class MockedVariantRestService extends VariantRestService {
 
-describe('VariantRestService', () => {
-  let service: VariantRestService;
+  constructor(
+    logger: LogService,
+    http: HttpClient,
+    private sampleData: VariantSampleDataService) {
+    super( http);
+  }
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientModule]
-    });
-    service = TestBed.inject(VariantRestService);
-  });
+  getVariants(): Observable<any> {
+    return of(this.sampleData.getDummyVariantDTO());
+  }
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+  deleteVariants(id: string): Observable<any> {
+    return of(this.sampleData.getDummyVariantDTO());
+  }
+
+  updateVariants(variantDTO: VariantDTO): Observable<any> {
+    return of(this.sampleData.getDummyVariantDTO());
+  }
+
+  getVariantsById(id: any): Observable<any> {
+    return of(this.sampleData.getDummyVariantDTO());
+  }
+  createVariants(variantDTO: VariantDTO): Observable<any> {
+    return of(this.sampleData.getDummyVariantDTO());
+  }
+}
