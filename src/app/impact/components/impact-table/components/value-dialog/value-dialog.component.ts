@@ -1,25 +1,25 @@
-import { DimensionDataService } from './../../../../services/dimension/dimension-data.service';
+import { ValueDataService } from '../../../../services/value/value-data.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 
 @Component({
-  selector: 'app-dimension-dialog',
-  templateUrl: './dimension-dialog.component.html',
-  styleUrls: ['./dimension-dialog.component.scss']
+  selector: 'app-value-dialog',
+  templateUrl: './value-dialog.component.html',
+  styleUrls: ['./value-dialog.component.scss']
 })
-export class DimensionDialogComponent implements OnInit, AfterViewInit {
+export class ValueDialogComponent implements OnInit, AfterViewInit {
 
-  socialDimensionState = true;
-  economicDimensionState = true;
+  socialValueState = true; // TODO Do foreach valueType, even necessary?
+  economicValueState = true;
 
   form!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<DimensionDialogComponent>,
+    private dialogRef: MatDialogRef<ValueDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dimensionDataService: DimensionDataService) { }
+    public valuesDataService: ValueDataService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({

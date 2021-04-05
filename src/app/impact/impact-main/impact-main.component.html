@@ -11,7 +11,7 @@
     </ng-scrollbar>
   </div>
 
-  <div class="add-impact-button-container">
+  <div *ngIf="impactDataService.impactsLoaded" class="add-impact-button-container">
     <app-add-impact-button (addButtonClick)="addImpact()"> </app-add-impact-button>
   </div>
 

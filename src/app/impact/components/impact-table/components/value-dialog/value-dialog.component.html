@@ -1,21 +1,21 @@
 <div class="container">
   <div class="title-container">
-    <h2 mat-dialog-title>Dimensions</h2>
+    <h2 mat-dialog-title>Values</h2>
   </div>
 
   <div class="expansion-panel-container">
     <ng-scrollbar>
       <mat-accordion multi>
-        <div *ngFor="let dimType of dimensionDataService.dimensionTypes">
+        <div *ngFor="let valType of valuesDataService.valuesTypes">
           <mat-expansion-panel expanded="true">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                {{dimType | titlecase}} Dimensions
+                {{valType | titlecase}} Values
               </mat-panel-title>
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <app-dimension-table [type]='dimType'></app-dimension-table>
+            <app-value-table [type]='valType'></app-value-table>
           </mat-expansion-panel>
         </div>
       </mat-accordion>
@@ -24,7 +24,7 @@
 
   <div class="action-container">
     <mat-dialog-actions>
-      <button mat-button mat-dialog-close (click)="closeClick()">Schließen</button>
+      <button mat-button mat-dialog-close (click)="closeClick()">Close</button>
     </mat-dialog-actions>
   </div>
 </div>

@@ -1,4 +1,4 @@
-export class DimensionDto {
+export class ImpactValueDto {
   id = '';
   name = '';
   description = '';

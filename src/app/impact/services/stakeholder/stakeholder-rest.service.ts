@@ -1,5 +1,5 @@
-import { RestSettings } from './../../settings/RestSettings';
-import { StakeholderDto } from './../../dtos/StakeholderDto';
+import { RestSettings } from '../../settings/RestSettings';
+import { StakeholderDto } from '../../dtos/StakeholderDto';
 import { LogService } from '../../../shared/services/log.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -13,14 +13,13 @@ export class StakeholderRestService {
   constructor(
     private logger: LogService,
     private http: HttpClient) {
-
   }
 
   onInit(): void {
 
   }
 
-  getStakeholders(): Observable<StakeholderDto[]> {
+  getStakeholders(): Observable<StakeholderDto[]> { // TODO get by id when analysis rest call is available.
     this.logger.info(this, 'Get all Stakeholders');
     return this.http.get<StakeholderDto[]>(RestSettings.stakeholdersUrl);
   }
