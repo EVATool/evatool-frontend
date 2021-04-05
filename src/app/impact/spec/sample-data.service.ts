@@ -42,39 +42,24 @@ export class SampleDataService {
     });
 
     this.dummyImpactDtos.forEach(dto => {
+      console.log(dto)
       this.dummyImpacts.push(this.impactMapperService.fromDto(dto, this.dummyValues, this.dummyStakeholders, this.dummyAnalyses));
+      console.log(this.impactMapperService.fromDto(dto, this.dummyValues, this.dummyStakeholders, this.dummyAnalyses))
     });
 
     // TODO for requirements Dtos when they are in backend...
   }
 
   getDummyImpact(): Impact {
-    const impact = new Impact();
-    impact.id = 'imapctId';
-    impact.value = 0.0;
-    impact.description = 'imapctDescription';
-    impact.valueEntity = this.getDummyValue();
-    impact.stakeholder = this.getDummyStakeholder();
-    impact.analysis = this.getDummyAnalysis();
-    return impact;
+    return this.dummyImpacts[0];
   }
 
   getDummyImpactDto(): ImpactDto {
-    const impactDto = new ImpactDto();
-    impactDto.id = 'imapctId';
-    impactDto.value = 0.0;
-    impactDto.description = 'imapctDescription';
-    impactDto.valueEntity = this.getDummyImpactValueDto();
-    impactDto.stakeholder = this.getDummyImpactStakeholderDto();
-    impactDto.analysis = this.getDummyImpactAnalysisDto();
-    return impactDto;
+    return this.impactMapperService.toDto(this.getDummyImpact());
   }
 
   getDummyImpactDtoWithMyChildren(value: Value, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
-    const impactDto = new ImpactDto();
-    impactDto.id = 'impactId';
-    impactDto.value = 0.0;
-    impactDto.description = 'impactDescription';
+    const impactDto = this.getDummyImpactDto();
     impactDto.valueEntity = this.valueMapperService.toImpactDto(value);
     impactDto.stakeholder = this.stakeholderMapperService.toImpactDto(stakeholder);
     impactDto.analysis = this.analysisMapperService.toImpactDto(analysis);
@@ -82,77 +67,39 @@ export class SampleDataService {
   }
 
   getDummyValue(): Value {
-    const value = new Value();
-    value.id = 'valueId';
-    value.name = 'valueName';
-    value.type = 'valueType';
-    value.description = 'valueDescription';
-    value.analysis = this.getDummyAnalysis();
-    return value;
+    return this.dummyValues[0];
   }
 
   getDummyValueDto(): ValueDto {
-    const valueDto = new ValueDto();
-    valueDto.id = 'valueId';
-    valueDto.name = 'valueName';
-    valueDto.type = 'valueType';
-    valueDto.description = 'valueDescription';
-    valueDto.analysis = this.getDummyAnalysisDto();
-    return valueDto;
+    return this.valueMapperService.toDto(this.getDummyValue());
   }
 
   getDummyImpactValueDto(): ImpactValueDto {
-    const impactValueDto = new ImpactValueDto();
-    impactValueDto.id = 'valueId';
-    impactValueDto.name = 'valueName';
-    impactValueDto.type = 'valueType';
-    impactValueDto.description = 'valueDescription';
-    impactValueDto.analysis = this.getDummyImpactAnalysisDto();
-    return impactValueDto;
+    return this.valueMapperService.toImpactDto(this.getDummyValue());
   }
 
   getDummyStakeholder(): Stakeholder {
-    const stakeholder = new Stakeholder();
-    stakeholder.id = 'stakeholderId';
-    stakeholder.name = 'stakeholderName';
-    return stakeholder;
+    return this.dummyStakeholders[0];
   }
 
   getDummyStakeholderDto(): StakeholderDto {
-    const stakeholderDto = new StakeholderDto();
-    stakeholderDto.rootEntityID = 'stakeholderId';
-    return stakeholderDto;
+    return this.stakeholderMapperService.toDto(this.getDummyStakeholder());
   }
 
   getDummyImpactStakeholderDto(): ImpactStakeholderDto {
-    const stakeholderDto = new ImpactStakeholderDto();
-    stakeholderDto.id = 'stakeholderId';
-    return stakeholderDto;
+    return this.stakeholderMapperService.toImpactDto(this.getDummyStakeholder());
   }
 
   getDummyAnalysis(): Analysis {
-    const analysis = new Analysis();
-    analysis.id = 'analysisId';
-    return analysis;
+    return this.dummyAnalyses[0];
   }
 
   getDummyAnalysisDto(): AnalysisDto {
-    const analysisDto = new AnalysisDto();
-    analysisDto.rootEntityID = 'analysisId';
-    return analysisDto;
+    return this.analysisMapperService.toDto(this.getDummyStakeholder());
   }
 
   getDummyImpactAnalysisDto(): ImpactAnalysisDto {
-    const analysisDto = new ImpactAnalysisDto();
-    analysisDto.id = 'analysisId';
-    return analysisDto;
-  }
-
-  getObservable<T>(content: T): Observable<T> {
-    return new Observable((observer) => {
-      observer.next(content);
-      observer.complete();
-    });
+    return this.analysisMapperService.toImpactDto(this.getDummyStakeholder());
   }
 
   readonly dummyAnalysisDtos: AnalysisDto[] = [
@@ -174,16 +121,16 @@ export class SampleDataService {
 
   readonly dummyStakeholderDtos: StakeholderDto[] = [
     {
-      rootEntityID: '1', stakeholderName: 'Patient', stakeholderLevel: 'SOCIETY'
+      rootEntityID: '1', stakeholderName: 'Patient', stakeholderLevel: 'NATURAL_PERSON'
     },
     {
-      rootEntityID: '2', stakeholderName: 'Doctor', stakeholderLevel: 'SOCIETY'
+      rootEntityID: '2', stakeholderName: 'Doctor', stakeholderLevel: 'NATURAL_PERSON'
     },
     {
-      rootEntityID: '3', stakeholderName: 'Family', stakeholderLevel: 'SOCIETY'
+      rootEntityID: '3', stakeholderName: 'Family', stakeholderLevel: 'NATURAL_PERSON'
     },
     {
-      rootEntityID: '4', stakeholderName: 'Insurance', stakeholderLevel: 'SOCIETY'
+      rootEntityID: '4', stakeholderName: 'Insurance', stakeholderLevel: 'NATURAL_PERSON'
     }
   ];
 
