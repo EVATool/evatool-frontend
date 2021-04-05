@@ -17,24 +17,9 @@ export class MockedImpactRestService extends ImpactRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
-    private sampleData: SampleDataService) {
-    super(logger, http)
-  }
-
-  getImpactsByAnalysisId(analysisId: string): Observable<ImpactDto[]> {
-    return of(this.sampleData.dummyImpactDtos);
-  }
-
-  createImpact(impactDto: ImpactDto): Observable<any> {
-    return of(this.sampleData.getDummyImpactDto());
-  }
-
-  updateImpact(impactDto: ImpactDto): Observable<any> {
-    return of(this.sampleData.getDummyImpactDto());
-  }
-
-  deleteImpact(impactDto: ImpactDto): Observable<any> {
-    return of(this.sampleData.getDummyImpactDto());
+    data: SampleDataService) {
+    super(logger, http, data)
+    this.data.offline = true;
   }
 }
 

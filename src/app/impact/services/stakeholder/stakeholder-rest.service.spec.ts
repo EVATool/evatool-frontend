@@ -17,12 +17,9 @@ export class MockedStakeholderRestService extends StakeholderRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
-    private sampleData: SampleDataService) {
-    super(logger, http)
-  }
-
-  getStakeholders(): Observable<StakeholderDto[]> {
-    return of(this.sampleData.dummyStakeholderDtos);
+    data: SampleDataService) {
+    super(logger, http, data)
+    this.data.offline = true;
   }
 }
 

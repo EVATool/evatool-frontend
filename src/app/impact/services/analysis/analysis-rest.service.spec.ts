@@ -19,12 +19,9 @@ export class MockedAnalysisRestService extends AnalysisRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
-    private sampleData: SampleDataService) {
-    super(logger, http);
-  }
-
-  getAnalysisById(id: string): Observable<AnalysisDto> {
-    return of(this.sampleData.dummyAnalysisDtos[0]);
+    data: SampleDataService) {
+    super(logger, http, data);
+    this.data.offline = true;
   }
 }
 

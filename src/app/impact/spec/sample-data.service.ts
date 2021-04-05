@@ -21,6 +21,8 @@ import {ImpactValueDto} from "../dtos/ImpactValueDto";
 })
 export class SampleDataService {
 
+  public offline: boolean = true;
+
   constructor(
     private valueMapperService: ValueMapperService,
     private stakeholderMapperService: StakeholderMapperService,
@@ -181,7 +183,7 @@ export class SampleDataService {
       rootEntityID: '3', stakeholderName: 'Family', stakeholderLevel: 'SOCIETY'
     },
     {
-      rootEntityID: '4', stakeholderName: 'Ensurance', stakeholderLevel: 'SOCIETY'
+      rootEntityID: '4', stakeholderName: 'Insurance', stakeholderLevel: 'SOCIETY'
     }
   ];
 

@@ -6,9 +6,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {ValueRestService} from './value-rest.service';
 import {LogService} from "../../../shared/services/log.service";
 import {HttpClient} from "@angular/common/http";
-import {Observable, of} from "rxjs";
 import {Injectable} from "@angular/core";
-import {ValueDto} from "../../dtos/ValueDto";
 
 @Injectable({
   providedIn: 'root'
@@ -17,32 +15,9 @@ export class MockedValueRestService extends ValueRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
-    private sampleData: SampleDataService) {
-    super(logger, http);
-  }
-
-  getValues(): Observable<ValueDto[]> {
-    return of(this.sampleData.dummyValueDtos)
-  }
-
-  getValuesByAnalysisId(analysisId: string): Observable<ValueDto[]> {
-    return of(this.sampleData.dummyValueDtos)
-  }
-
-  createValue(valueDto: ValueDto): Observable<any> {
-    return of(this.sampleData.getDummyValueDto());
-  }
-
-  updateValue(valueDto: ValueDto): Observable<any> {
-    return of(this.sampleData.getDummyValueDto());
-  }
-
-  deleteValue(valueDto: ValueDto): Observable<any> {
-    return of(this.sampleData.getDummyValueDto());
-  }
-
-  getValueTypes(): Observable<string[]> {
-    return of(this.sampleData.dummyValueTypes)
+    data: SampleDataService) {
+    super(logger, http, data);
+    this.data.offline = true;
   }
 }
 
