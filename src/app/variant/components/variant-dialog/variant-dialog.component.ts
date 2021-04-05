@@ -28,9 +28,6 @@ export class VariantDialogComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: new FormControl(null)
     });
-    if (this.data.id !== undefined){
-      // todo
-    }
   }
 
   addVariant(): void {

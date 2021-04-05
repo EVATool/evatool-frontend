@@ -42,8 +42,8 @@ export class VariantRestService {
     return this.http.put(this.variantUrl, variantDTO, httpOptions);
   }
 
-  deleteVariants(variant: Variant): Observable<any> {
-    return this.http.delete(this.variantUrl + '/' + variant.id);
+  deleteVariants(id: string): Observable<any> {
+    return this.http.delete(this.variantUrl + '/' + id);
   }
 
 }

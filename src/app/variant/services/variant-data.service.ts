@@ -19,15 +19,14 @@ export class VariantDataService{
   constructor( private variantRestService: VariantRestService,
                private router: Router){
     this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-    this.loadVariants();
     this.loadAnalysisIDFromRouter();
+    this.loadVariants();
   }
 
   loadVariants(): void{
     this.variantRestService.getVariants().subscribe((result: any) => {
       this.variants = [];
       this.variantsArchive = [];
-      console.log(result);
       result.forEach((variantDTO: VariantDTO) => {
         const variant: Variant = {
           id: variantDTO.id,
@@ -65,6 +64,7 @@ export class VariantDataService{
   }
 
   save(variant: Variant): void {
+    console.log(this.analysisid);
     this.variantRestService.createVariants(
       {
         id: '',
@@ -97,5 +97,29 @@ export class VariantDataService{
     }).subscribe(() => {
       this.loadVariants();
     });
+  }
+
+  unarchive(variant: Variant): void {
+    this.variantRestService.updateVariants({
+      id: variant.id,
+      archived: false,
+      guiId: variant.guiId ,
+      title: variant.title,
+      description: variant.description,
+      subVariant: {},
+      analysisId: variant.analysisId
+    }).subscribe(() => {
+      this.loadVariants();
+    });
+  }
+
+  delete(variant: Variant): void {
+    this.variantRestService.deleteVariants(variant.id).subscribe(() => {
+      this.loadVariants();
+    });
+  }
+
+  update(variant: Variant): void {
+
   }
 }

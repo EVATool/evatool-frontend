@@ -14,7 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import { VariantTableComponent } from './components/variant-table/variant-table.component';
-import {MatExpansionModule} from "@angular/material/expansion";
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [VariantMainComponent, VariantDialogComponent, VariantTableComponent],
