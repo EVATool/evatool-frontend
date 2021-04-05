@@ -2,10 +2,11 @@ import {ValueDataService} from '../../../../../../services/value/value-data.serv
 import {Value} from '../../../../../../models/Value';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {Component, Input, OnInit, AfterViewInit, ViewChild, Output, EventEmitter} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ImpactDataService} from "../../../../../../services/impact/impact-data.service";
 import {LogService} from "../../../../../../../shared/services/log.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AnalysisDataService} from "../../../../../../services/analysis/analysis-data.service";
 
 @Component({
   selector: 'app-value-table',
@@ -24,6 +25,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
     private logger: LogService,
     private valueDataService: ValueDataService,
     private impactDataService: ImpactDataService,
+    private analysisDataService: AnalysisDataService,
     private snackBar: MatSnackBar) {
   }
 
@@ -32,17 +34,37 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const values: Value[] = this.valueDataService.values.filter(dim => dim.type === this.type);
+    const values: Value[] = this.valueDataService.values.filter(val => val.type === this.type);
     this.tableDataSource = new MatTableDataSource<Value>(values);
     this.initSorting();
+
+    this.valueDataService.changedValues.subscribe(vals => { // TODO find a better way to ensure events are caught when data is at length 0 after it has been loaded.
+      if (this.tableDataSource.data.length == 0) {
+        this.tableDataSource = new MatTableDataSource<Value>(vals);
+        this.initSorting();
+      } else {
+        this.tableDataSource.data = vals.filter(val => val.type === this.type);
+      }
+    });
   }
 
   private initSorting(): void {
     this.tableDataSource.sort = this.sort;
   }
 
-  createValue(){
-    console.log("sdfasdfgasdfasdf");
+  createDefaultValue() {
+    const value = new Value();
+
+    value.type = this.type
+    value.description = ''
+    value.analysis = this.analysisDataService.getCurrentAnalysis();
+
+    return value;
+  }
+
+  createValue() {
+    this.logger.info(this, 'Create Value');
+    this.valueDataService.createValue(this.createDefaultValue());
   }
 
   updateValue(value: Value) {
@@ -51,6 +73,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteValue(value: Value) { // TODO is this even allowed?
+    this.logger.info(this, 'Delete Value');
 
   }
 

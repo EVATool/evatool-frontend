@@ -4,7 +4,6 @@ import {Value} from '../../models/Value';
 import {ValueRestService} from './value-rest.service';
 import {Injectable, EventEmitter, Output, Inject} from '@angular/core';
 import {AnalysisDataService} from "../analysis/analysis-data.service";
-import {Impact} from "../../models/Impact";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +11,10 @@ import {Impact} from "../../models/Impact";
 export class ValueDataService {
   @Output() loadedValues: EventEmitter<Value[]> = new EventEmitter();
   @Output() loadedValuesTypes: EventEmitter<string[]> = new EventEmitter();
-  @Output() addedValues: EventEmitter<Value> = new EventEmitter();
+  @Output() addedValue: EventEmitter<Value> = new EventEmitter();
   @Output() changedValue: EventEmitter<Value> = new EventEmitter();
   @Output() removedValue: EventEmitter<Value> = new EventEmitter();
+  @Output() changedValues: EventEmitter<Value[]> = new EventEmitter();
 
   public values: Value[] = [];
   public valuesTypes: string[] = [];
@@ -54,8 +54,15 @@ export class ValueDataService {
 
   }
 
-  createValue() { // TODO tests
-
+  createValue(value: Value) { // TODO tests
+    this.logger.info(this, 'Create Value');
+    const valueDto = this.valueMapperService.toDto(value);
+    this.valueRestService.createValue(valueDto).subscribe((valDto: Value) => {
+      value.id = valDto.id;
+      this.values.push(value);
+      this.addedValue.emit(value);
+      this.changedValues.emit(this.values);
+    });
   }
 
   updateValue(value: Value) { // TODO tests
