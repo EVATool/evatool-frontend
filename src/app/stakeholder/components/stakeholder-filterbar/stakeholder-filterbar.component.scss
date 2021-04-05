@@ -11,9 +11,7 @@ p {
   min-width: 200px;
 }
 
-.filter-wrapper{
-  display: block;
-  mat-list.list-horizontal {
+  .mat-list.list-horizontal {
     padding: 0;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -39,21 +37,21 @@ p {
     }
   }
 
-}
+.filter-wrapper {
+  mat-list.list-vertical {
+    padding: 0;
 
-mat-list.list-horizontal {
-  margin: 2%;
-  margin-left: 3%;
+    .mat-list-item {
+      margin-right: -10px;
+      vertical-align: middle;
+      display: inline;
 
-  .mat-list-item {
-    vertical-align: bottom;
-    display: inline-block;
-    height: auto;
-    width: auto;
-
-    button {
-      margin-left: -20px;
-      margin-bottom: 8px;
+      .dropdown {
+        width: 150px;
+        margin-bottom: -20px;
+        margin-top: 5px;
+        margin-right: -10px;
+      }
     }
   }
 }
