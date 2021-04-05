@@ -12,8 +12,14 @@ export class AnalysisDataService {
   constructor(private analysisRestService: AnalysisRestService) { }
 
   save(analysis: Analysis): void{
-    this.analysisRestService.createAnalysis(
-      {analysisName: analysis.title, analysisDescription: analysis.description, rootEntityID: analysis.id}
+    this.analysisRestService.createAnalysis({
+        analysisName: analysis.title,
+        analysisDescription: analysis.description,
+        rootEntityID: analysis.id,
+      analysisDate: null,
+      isTemplate: false,
+      img: '',
+      uniqueString: ''}
       ).subscribe();
   }
 }

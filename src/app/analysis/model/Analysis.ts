@@ -1,8 +1,9 @@
-export class Analysis{
-
+export class Analysis {
   id: any = '';
   title: any = '';
   description: any = '';
-  lastUpdate: any = '';
+  analysisDate: any = '';
   img: any = '';
+  isTemplate: any = '';
+  uniqueString: any = '';
 }
