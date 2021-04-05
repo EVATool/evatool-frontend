@@ -6,6 +6,8 @@ import {Component, Input, OnInit, AfterViewInit, ViewChild, Output, EventEmitter
 import {ImpactDataService} from "../../../../../../services/impact/impact-data.service";
 import {LogService} from "../../../../../../../shared/services/log.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Impact} from "../../../../../../models/Impact";
+import {MatSelectChange} from "@angular/material/select";
 
 @Component({
   selector: 'app-value-table',
@@ -51,6 +53,25 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
     };
   }
 
+  updateValue(value: Value) {
+    this.logger.info(this, 'Update Value');
+    //this.valueDataService.updateValue();
+  }
+
+  deleteValue(value: Value) { // TODO is this even allowed?
+
+  }
+
+  nameChange(value: Value): void {
+    this.logger.info(this, 'Name changed');
+    this.updateValue(value);
+  }
+
+  descriptionChange(value: Value): void {
+    this.logger.info(this, 'Description changed');
+    this.updateValue(value);
+  }
+
   toggleValueDisable(event: Event, value: Value) {
     let numImpactsUseValue = 0;
     this.impactDataService.impacts.forEach(impact => {
@@ -61,7 +82,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
     if (numImpactsUseValue > 0) {
       this.logger.warn(this, 'This value is still being used by ' + numImpactsUseValue + ' impacts');
       const message = 'This value cannot be excluded from the available selection. It is still being used by ' + numImpactsUseValue + ' impacts.';
-      const action = 'show me'
+      const action = 'show'
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
       snackBarRef.onAction().subscribe(() => {
         this.logger.info(this, 'User wants to see the impacts referencing the value');

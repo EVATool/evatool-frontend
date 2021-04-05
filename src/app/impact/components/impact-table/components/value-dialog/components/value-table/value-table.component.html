@@ -26,7 +26,8 @@
     </th>
     <td mat-cell *matCellDef='let value'>
       <div class="description-container">
-        <textarea matInput cdkTextareaAutosize [(ngModel)]="value.name" placeholder="Name..."></textarea>
+        <textarea matInput cdkTextareaAutosize [(ngModel)]="value.name" placeholder="Name..."
+                  (change)="nameChange(value)"></textarea>
       </div>
     </td>
   </ng-container>
@@ -41,7 +42,7 @@
     <td mat-cell *matCellDef='let value'>
       <div class="description-container">
         <textarea matInput cdkTextareaAutosize [(ngModel)]="value.description"
-                  placeholder="Describe the value..."></textarea>
+                  placeholder="Describe the value..." (change)="descriptionChange(value)"></textarea>
       </div>
     </td>
   </ng-container>
