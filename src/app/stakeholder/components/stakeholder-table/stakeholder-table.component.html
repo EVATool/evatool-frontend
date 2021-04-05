@@ -24,14 +24,14 @@
     <mat-header-cell *matHeaderCellDef>Level</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
       <div>
-        <app-stakeholder-level [(level)]="stakeholder.level" (levelChange)="stakeholder.level = $event; save(stakeholder)" ></app-stakeholder-level>
+        <app-stakeholder-level [(level)]="stakeholder.level" (levelChange)="stakeholder.level = $event; saveNotEdit(stakeholder)" ></app-stakeholder-level>
       </div>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef='Prio'>
     <mat-header-cell *matHeaderCellDef>Prio</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder' >
-      <app-stakeholder-prio [(prio)]="stakeholder.priority" (prioChange)="stakeholder.priority = $event; save(stakeholder)"></app-stakeholder-prio>
+      <app-stakeholder-prio [(prio)]="stakeholder.priority" (prioChange)="stakeholder.priority = $event; saveNotEdit(stakeholder)"></app-stakeholder-prio>
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef="Impact">
@@ -41,7 +41,8 @@
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+  <mat-row mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="row.editable =true;"
+           (mouseleave)="save(row)"></mat-row>
 </mat-table>
 <div class="addStakeholderButton">
   <button mat-icon-button aria-label="Add Variant"  (click)="addStakeholder()" tabindex="-1">

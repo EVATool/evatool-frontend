@@ -1,10 +1,9 @@
-
-import { Injectable, AfterViewInit } from '@angular/core';
-import { Stakeholder } from '../model/Stakeholder';
-import { StakeholderRestService } from './stakeholder-rest.service';
-import { StakeholderDTO } from '../model/StakeholderDTO';
-import { MatTableDataSource } from '@angular/material/table';
-import { StakeholderImpact } from '../model/StakeholderImpact';
+import {Injectable, AfterViewInit} from '@angular/core';
+import {Stakeholder} from '../model/Stakeholder';
+import {StakeholderRestService} from './stakeholder-rest.service';
+import {StakeholderDTO} from '../model/StakeholderDTO';
+import {MatTableDataSource} from '@angular/material/table';
+import {StakeholderImpact} from '../model/StakeholderImpact';
 
 @Injectable({
   providedIn: 'root'
@@ -111,7 +110,9 @@ export class StakeholderDataService {
     this.resetFilter();
     this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
       const totalimpact = data.negativeImpact + data.positiveImpact;
-      if (totalimpact === 0) { return true; }
+      if (totalimpact === 0) {
+        return true;
+      }
       console.log((data.negativeImpact / totalimpact));
       return (data.negativeImpact / totalimpact) < value;
     };
@@ -121,5 +122,17 @@ export class StakeholderDataService {
 
   setSearchText(event: string): void {
     this.searchtext = event;
+  }
+
+  update(stakeholder: Stakeholder): void {
+    this.stakeholderRestService.updateStakeholder({
+      rootEntityID: stakeholder.id,
+      guiId: stakeholder.guiId,
+      stakeholderName: stakeholder.name,
+      priority: stakeholder.priority,
+      stakeholderLevel: stakeholder.level
+    }).subscribe(() => {
+      this.loadStakeholder();
+    });
   }
 }
