@@ -102,7 +102,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   private initFiltering(): void {
     this.logger.info(this, 'Init Filtering');
-
     this.tableDataSource.filterPredicate = this.createFilter();
   }
 
