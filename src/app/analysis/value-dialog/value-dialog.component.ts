@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { MatDialog } from "@angular/material/dialog";
+import {Component, OnInit, AfterViewInit, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import { MatTableDataSource } from "@angular/material/table";
 import { ValueDataService } from "../services/value/value-data.service";
 import { Value } from "../model/Value";
@@ -30,9 +30,8 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
   // {economicValueId: '2', economicValueTitle: 'Profitabilität', economicValueDescription: 'Bezieht sich auf die Fähigkeit einer Organisation, seine operativen Prozesse und strategische Entwicklung aus den eigenen Einnahmen zu bestreiten.', socialValueId: null, socialValueTitle: null, socialValueDescription: null},
   // {economicValueId: '3', economicValueTitle: 'Strategische Gelegenheit', economicValueDescription: 'Umfasst alle nicht-monetären Aspekte einer Organisation (Innovationen vorantreiben, strategische Position oder Marktanteil ausbauen, etc.).', socialValueId: null, socialValueTitle: null, socialValueDescription: null}];
 
-  constructor(public valueDataService: ValueDataService) {
-
-  }
+  constructor(public valueDataService: ValueDataService, @Inject(MAT_DIALOG_DATA) public data: { id: string }
+  ) {}
 
   ngOnInit(): void {
 
@@ -48,7 +47,7 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.valueDataService.onInit()
+    this.valueDataService.onInit();
   }
 
   addSocialValue(): void {
@@ -61,12 +60,12 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
 
   saveSocialValue(value: Value): void {
     value.editable = false;
-    this.valueDataService.save(value);
+    this.valueDataService.save(value, this.data.id);
   }
 
   saveEconomicValue(value: Value): void {
     value.editable = false;
-    this.valueDataService.save(value);
+    this.valueDataService.save(value, this.data.id);
   }
 
   deleteValue(value: Value): void {

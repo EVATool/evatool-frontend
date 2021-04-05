@@ -13,9 +13,6 @@
 <!--container-->
 <!--left-->
 <div id="left"><!--left section-->
-  <div>
-    <button mat-raised-button (click)="openValueDialog()" class="valueButton">Value System </button>
-  </div>
   <br>
   <div>
     <button mat-raised-button (click)="openDialog()" class="createAnalysisButton">+ New Analysis</button>
@@ -37,17 +34,16 @@
             <i class="material-icons settings" tabindex="-1">settings</i>
           </button>
           <div class="dropdown-content">
-            <a mat-raised-button class="editTitle" (click)="editAnalysisTitle()">Edit title</a>
-            <a mat-raised-button class="editDescription" (click)="editDescription()">Edit description</a>
             <a mat-raised-button class="changeBackgroundImage" (click)="changeBackgroundImage()">Change Background-Image</a>
             <a mat-raised-button class="deleteAnalysis" (click)="deleteAnalysis(analysis)">Delete Analysis</a>
           </div>
         </div>
         <h2 class="news-card__title">{{analysis.title}}</h2>
-        <div class="news-card__post-date">{{"Last edit: "}} {{analysis.lastUpdate}}</div>
+        <div class="news-card__post-date">{{"Last edit: "}} {{analysis.analysisDate}}</div>
         <div class="news-card__details-wrapper">
           <p class="news-card__excerpt">{{analysis.description}}</p>
           <button mat-raised-button class="news-card__read-more" (click)="analysisClick(analysis)">Spectate <i class="fas fa-long-arrow-alt-right"></i></button>
+          <button mat-raised-button class="news-card__read-more" (click)="openValueDialog(analysis)">Edit Values <i class="fas fa-long-arrow-alt-right"></i></button>
         </div>
       </div>
     </div>

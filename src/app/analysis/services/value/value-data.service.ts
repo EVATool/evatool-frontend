@@ -3,6 +3,9 @@ import { Value } from "../../model/Value";
 import { ValueRestService } from "./value-rest.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { Stakeholder } from "../../../stakeholder/model/Stakeholder";
+import {Analysis} from '../../model/Analysis';
+import {AnalysisDTO} from '../../model/AnalysisDTO';
+import {AnalysisRestService} from '../analysis/analysis-rest.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +17,13 @@ export class ValueDataService {
   matDataSourceEconomic = new MatTableDataSource<Value>();
   matDataSourceSocial = new MatTableDataSource<Value>();
 
-  constructor(private valueRestService: ValueRestService) {
+  constructor(private valueRestService: ValueRestService, private analysisRestService: AnalysisRestService) {
     this.matDataSourceEconomic = new MatTableDataSource<Value>(this.socialValue);
     this.matDataSourceSocial = new MatTableDataSource<Value>(this.economicValue);
   }
 
   onInit() {
-    this.loadValues();
+    // this.loadValues();
   }
 
   private createDefaultValue(): Value {
@@ -44,22 +47,32 @@ export class ValueDataService {
   }
 
   deleteValue(value: Value): void {
-    this.valueRestService.deleteValue(value).subscribe(() => { this.loadValues(); });
+    this.valueRestService.deleteValue(value)/*.subscribe(() => { this.loadValues(); })*/;
   }
 
-  save(value: Value): void {
+  save(value: Value, id: string): void {
+    // const analysis1 = new AnalysisDTO();
+    // analysis1.analysisName = '';
+    // analysis1.rootEntityID = '';
+    // analysis1.analysisDescription = '';
+    // analysis1.uniqueString = 'ANA1';
+    // analysis1.img = '';
+    // analysis1.isTemplate = false;
+    // analysis1.analysisDate = new Date('2021-01-01');
     this.valueRestService.createValue({
       id: '',
       name: value.name,
       description: value.description,
-      type: value.type
+      type: value.type,
+      // analysis: analysis1
+      analysis: this.analysisRestService.getAnalysisById(id)
     }).subscribe(() => {
-      this.loadValues();
+      this.loadValues(id);
     });
   }
 
-  loadValues(): void {
-    this.valueRestService.getValues().subscribe((result: any) => {
+  loadValues(id: string): void {
+    this.valueRestService.getValueById(id).subscribe((result: any) => {
       this.socialValue = [];
       this.economicValue = [];
       result.forEach((valueDTO: any) => {
