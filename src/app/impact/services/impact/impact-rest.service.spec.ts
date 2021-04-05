@@ -60,7 +60,7 @@ describe('ImpactRestService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return all impacts by analysis id>', () => {
+  it('should return all impacts by analysis id', () => {
     // Arrange
     const analysisId = sampleData.dummyImpactDtos[0].analysis.id
     const dummyDtos = sampleData.dummyImpactDtos.filter(impact => impact.analysis.id == analysisId);

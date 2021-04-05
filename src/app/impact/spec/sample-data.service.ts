@@ -62,7 +62,7 @@ export class SampleDataService {
     impactDto.id = 'imapctId';
     impactDto.value = 0.0;
     impactDto.description = 'imapctDescription';
-    impactDto.valueEntity = this.getDummyValueDto();
+    impactDto.valueEntity = this.getDummyImpactValueDto();
     impactDto.stakeholder = this.getDummyImpactStakeholderDto();
     impactDto.analysis = this.getDummyImpactAnalysisDto();
     return impactDto;
@@ -85,6 +85,7 @@ export class SampleDataService {
     value.name = 'valueName';
     value.type = 'valueType';
     value.description = 'valueDescription';
+    value.analysis = this.getDummyAnalysis();
     return value;
   }
 
@@ -94,6 +95,7 @@ export class SampleDataService {
     valueDto.name = 'valueName';
     valueDto.type = 'valueType';
     valueDto.description = 'valueDescription';
+    valueDto.analysis = this.getDummyAnalysisDto();
     return valueDto;
   }
 
@@ -103,6 +105,7 @@ export class SampleDataService {
     impactValueDto.name = 'valueName';
     impactValueDto.type = 'valueType';
     impactValueDto.description = 'valueDescription';
+    impactValueDto.analysis = this.getDummyImpactAnalysisDto();
     return impactValueDto;
   }
 
@@ -186,34 +189,44 @@ export class SampleDataService {
 
   readonly dummyValueDtos: ValueDto[] = [
     {
-      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
+      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL'
+      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
+      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '5', name: 'Care', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '5', name: 'Care', description: 'Economics of Family', type: 'ECONOMIC',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '6', name: 'Privacy', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '6', name: 'Privacy', description: 'Economics of Family', type: 'ECONOMIC',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '7', name: 'Self-Conception', description: 'Economics of Family', type: 'SOCIAL'
+      id: '7', name: 'Self-Conception', description: 'Economics of Family', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '8', name: 'Participation', description: 'Economics of Family', type: 'SOCIAL'
+      id: '8', name: 'Participation', description: 'Economics of Family', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '9', name: 'Autonomy', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '9', name: 'Autonomy', description: 'Economics of Family', type: 'ECONOMIC',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '10', name: 'Irgendwas', description: 'Economics of Family', type: 'SOCIAL'
+      id: '10', name: 'Irgendwas', description: 'Economics of Family', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     }
   ];
 

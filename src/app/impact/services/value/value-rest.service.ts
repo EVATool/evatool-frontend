@@ -31,17 +31,17 @@ export class ValueRestService {
     return this.http.get<ValueDto[]>(RestSettings.valuesUrl + "?analysisId=" + analysisId);
   }
 
-  createValue(valueDto: ValueDto): Observable<any> { // TODO tests
+  createValue(valueDto: ValueDto): Observable<any> {
     this.logger.info(this, 'Create Value');
     return this.http.post(RestSettings.valuesUrl, valueDto, RestSettings.httpOptions);
   }
 
-  updateValue(valueDto: ValueDto): Observable<any> { // TODO tests
+  updateValue(valueDto: ValueDto): Observable<any> {
     this.logger.info(this, 'Update Value');
     return this.http.put(RestSettings.valuesUrl, valueDto, RestSettings.httpOptions);
   }
 
-  deleteValue(valueDto: ValueDto): Observable<any> { // TODO tests
+  deleteValue(valueDto: ValueDto): Observable<any> {
     this.logger.info(this, 'Delete Value');
     return this.http.delete(RestSettings.valuesUrl + '/' + valueDto.id);
   }

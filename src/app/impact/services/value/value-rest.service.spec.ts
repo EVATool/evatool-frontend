@@ -7,8 +7,8 @@ import {ValueRestService} from './value-rest.service';
 import {LogService} from "../../../shared/services/log.service";
 import {HttpClient} from "@angular/common/http";
 import {Observable, of} from "rxjs";
-import {ValueDto} from "../../dtos/ValueDto";
 import {Injectable} from "@angular/core";
+import {ValueDto} from "../../dtos/ValueDto";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,18 @@ export class MockedValueRestService extends ValueRestService {
 
   getValuesByAnalysisId(analysisId: string): Observable<ValueDto[]> {
     return of(this.sampleData.dummyValueDtos)
+  }
+
+  createValue(valueDto: ValueDto): Observable<any> {
+    return of(this.sampleData.getDummyValueDto());
+  }
+
+  updateValue(valueDto: ValueDto): Observable<any> {
+    return of(this.sampleData.getDummyValueDto());
+  }
+
+  deleteValue(valueDto: ValueDto): Observable<any> {
+    return of(this.sampleData.getDummyValueDto());
   }
 
   getValueTypes(): Observable<string[]> {
@@ -70,6 +82,68 @@ describe('ValueRestService', () => {
     const req = httpMock.expectOne(RestSettings.valuesUrl);
     expect(req.request.method).toBe('GET');
     req.flush(dummyDtos);
+  });
+
+  it('should return all values by analysis id', () => {
+    // Arrange
+    const analysisId = sampleData.dummyValueDtos[0].analysis.rootEntityID
+    const dummyDtos = sampleData.dummyValueDtos.filter(value => value.analysis.rootEntityID == analysisId);
+
+    // Act
+    service.getValuesByAnalysisId(analysisId).subscribe(values => {
+      expect(values.length).toBe(dummyDtos.length);
+      expect(values).toEqual(dummyDtos);
+    });
+
+    // Assert
+    const req = httpMock.expectOne(RestSettings.valuesUrl + '?analysisId=' + analysisId);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyDtos);
+  });
+
+  it('should create a value', () => {
+    // Arrange
+    const dummyDto = sampleData.dummyValueDtos[0];
+
+    // Act
+    service.createValue(dummyDto).subscribe(value => {
+      expect(value).toEqual(dummyDto);
+    });
+
+    // Assert
+    const req = httpMock.expectOne(RestSettings.valuesUrl);
+    expect(req.request.method).toBe('POST');
+    req.flush(dummyDto);
+  });
+
+  it('should update a value', () => {
+    // Arrange
+    const dummyDto = sampleData.dummyValueDtos[0];
+
+    // Act
+    service.updateValue(dummyDto).subscribe(value => {
+      expect(value).toEqual(dummyDto);
+    });
+
+    // Assert
+    const req = httpMock.expectOne(RestSettings.valuesUrl);
+    expect(req.request.method).toBe('PUT');
+    req.flush(dummyDto);
+  });
+
+  it('should delete a value', () => {
+    // Arrange
+    const dummyDto = sampleData.dummyValueDtos[0];
+
+    // Act
+    service.deleteValue(dummyDto).subscribe(value => {
+      expect(value).toEqual(dummyDto);
+    });
+
+    // Assert
+    const req = httpMock.expectOne(RestSettings.valuesUrl + '/' + dummyDto.id);
+    expect(req.request.method).toBe('DELETE');
+    req.flush(dummyDto);
   });
 
   it('should return all value types', () => {
