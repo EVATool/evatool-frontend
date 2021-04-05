@@ -6,8 +6,6 @@ import {Component, Input, OnInit, AfterViewInit, ViewChild, Output, EventEmitter
 import {ImpactDataService} from "../../../../../../services/impact/impact-data.service";
 import {LogService} from "../../../../../../../shared/services/log.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Impact} from "../../../../../../models/Impact";
-import {MatSelectChange} from "@angular/material/select";
 
 @Component({
   selector: 'app-value-table',
@@ -41,6 +39,10 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
 
   private initSorting(): void {
     this.tableDataSource.sort = this.sort;
+  }
+
+  createValue(){
+    console.log("sdfasdfgasdfasdf");
   }
 
   updateValue(value: Value) {

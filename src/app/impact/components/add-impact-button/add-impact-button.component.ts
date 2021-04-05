@@ -6,7 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   templateUrl: './add-impact-button.component.html',
   styleUrls: ['./add-impact-button.component.scss']
 })
-export class AddImpactButtonComponent implements OnInit {
+export class AddImpactButtonComponent implements OnInit { // TODO move this into the impact table component!
   @Output() addButtonClick = new EventEmitter<void>();
 
   constructor(private logger: LogService) {

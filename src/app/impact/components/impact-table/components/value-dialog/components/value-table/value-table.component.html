@@ -50,3 +50,8 @@
   <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<button mat-raised-button class="add-value-button">
+  <mat-icon>add</mat-icon>
+  {{type | titlecase}} Value
+</button>
