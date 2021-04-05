@@ -29,25 +29,25 @@ export class StakeholderDataService {
       this.stakeholders = [];
       console.log(result);
       result.forEach((stakeholderDTO: StakeholderDTO) => {
-        let negativeImpact = 0;
-        let postiveImpact = 0;
+        let negativeImpacts = 0;
+        let postiveImpacts = 0;
         stakeholderDTO.impactList.forEach((impact: StakeholderImpact) => {
           if (impact.value > 0) {
-            postiveImpact += impact.value;
+            postiveImpacts += impact.value;
           } else {
-            negativeImpact += Math.abs(impact.value);
+            negativeImpacts += Math.abs(impact.value);
           }
         });
-
         const stakeholder: Stakeholder = {
           id: stakeholderDTO.rootEntityID,
           guiId: stakeholderDTO.guiId,
           level: stakeholderDTO.stakeholderLevel,
           priority: stakeholderDTO.priority,
           name: stakeholderDTO.stakeholderName,
-          positiveImpact: postiveImpact,
-          negativeImpact,
+          positiveImpact: postiveImpacts,
+          negativeImpact: negativeImpacts,
           analysisId: stakeholderDTO.analysisId
+
         };
         this.stakeholders.push(stakeholder);
       });
