@@ -8,6 +8,7 @@ import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core'
 import {SliderFilterSettings} from 'src/app/shared/components/impact-slider/SliderFilterSettings';
 import {ColumnCategoryFilterComponent} from '../../../shared/components/column-category-filter/column-category-filter.component';
 import {Value} from "../../models/Value";
+import {Stakeholder} from "../../models/Stakeholder";
 
 @Component({
   selector: 'app-impact-table-filter-bar',
@@ -36,7 +37,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.stakeholderDataService.loadedStakeholders.subscribe((stakeholders) => {
-      this.stakeholderNames = stakeholders.map(value => value.name);
+      this.stakeholdersChanged(stakeholders);
     });
 
     this.valueDataService.loadedValues.subscribe((values) => {
@@ -47,8 +48,18 @@ export class ImpactTableFilterBarComponent implements OnInit {
     });
   }
 
+  stakeholdersChanged(stakeholders: Stakeholder[]) {
+    const names = stakeholders.map(value => value.name);
+    names.forEach(name => {
+      this.stakeholderNames.push(name);
+    });
+  }
+
   valuesChanged(values: Value[]) {
-    this.valueNames = values.map(value => value.name);
+    const names = values.map(value => value.name);
+    names.forEach(name => {
+      this.valueNames.push(name);
+    });
   }
 
   valueFilterChanged(event: SliderFilterSettings): void {
