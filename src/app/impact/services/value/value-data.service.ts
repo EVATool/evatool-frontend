@@ -75,7 +75,14 @@ export class ValueDataService {
   }
 
   deleteValue(value: Value) { // TODO tests
-
+    this.logger.info(this, 'Delete Value');
+    const valueDto = this.valueMapperService.toDto(value);
+    this.valueRestService.deleteValue(valueDto).subscribe((valDto) => {
+      const index: number = this.values.indexOf(value, 0);
+      this.values.splice(index, 1);
+      this.removedValue.emit(value);
+      this.changedValues.emit(this.values);
+    });
   }
 
   getDefaultValue(): Value {

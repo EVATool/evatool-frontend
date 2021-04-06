@@ -72,9 +72,14 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
     this.valueDataService.updateValue(value);
   }
 
-  deleteValue(value: Value) { // TODO is this even allowed?
+  deleteValue(value: Value) {
     this.logger.info(this, 'Delete Value');
-
+    const numImpactsUseValue = this.getReferencesImpacts(value);
+    if (numImpactsUseValue > 0) {
+      this.thwartValueOperation(value, numImpactsUseValue);
+    } else {
+      this.valueDataService.deleteValue(value);
+    }
   }
 
   nameChange(value: Value): void {
@@ -87,22 +92,32 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
     this.updateValue(value);
   }
 
-  toggleValueDisable(event: Event, value: Value) {
+  getReferencesImpacts(value: Value): number {
     let numImpactsUseValue = 0;
     this.impactDataService.impacts.forEach(impact => {
       if (impact.valueEntity === value) {
         numImpactsUseValue++;
       }
     });
+    return numImpactsUseValue;
+  }
+
+  thwartValueOperation(value: Value, numImpactsUseValue: number) {
+    this.logger.warn(this, 'This value is still being used by ' + numImpactsUseValue + ' impacts');
+    const message = 'This value cannot be excluded from the available selection. It is still being used by '
+      + numImpactsUseValue + ' impact' + (numImpactsUseValue === 1 ? '' : 's') + '.';
+    const action = 'show'
+    const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+    snackBarRef.onAction().subscribe(() => {
+      this.logger.info(this, 'User wants to see the impacts referencing the value');
+      this.userWantsToSeeReferencedImpacts.emit(value);
+    });
+  }
+
+  toggleValueDisable(event: Event, value: Value) {
+    const numImpactsUseValue = this.getReferencesImpacts(value);
     if (numImpactsUseValue > 0) {
-      this.logger.warn(this, 'This value is still being used by ' + numImpactsUseValue + ' impacts');
-      const message = 'This value cannot be excluded from the available selection. It is still being used by ' + numImpactsUseValue + ' impacts.';
-      const action = 'show'
-      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction().subscribe(() => {
-        this.logger.info(this, 'User wants to see the impacts referencing the value');
-        this.userWantsToSeeReferencedImpacts.emit(value);
-      });
+      this.thwartValueOperation(value, numImpactsUseValue);
     } else {
       value.disable = !value.disable;
     }
