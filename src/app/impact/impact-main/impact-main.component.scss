@@ -3,31 +3,27 @@
   overflow: hidden;
 }
 
-table{
-  height: 80%;
-}
-
 .search-bar-container {
-  margin-top: 3%;
-  margin-left: 5%;
+
 }
 
 .impact-table-container {
-  margin: 1%;
-  margin-left: 5%;
-  height: calc(80vh - 150px); // TODO This has to be flex...
+
 }
 
 .container {
   display: flex;
   flex-flow: column;
   height: 100%;
+  overflow: hidden;
 
   .impact-table-filter-bar-container {
     flex: 0 1 auto;
   }
 
   .impact-table-container {
+    margin-left: 5%;
+    height: calc(80vh - 150px); // TODO This has to be flex...
     flex: 1 1 auto;
   }
 }
