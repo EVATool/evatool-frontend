@@ -1,13 +1,13 @@
 .container {
-  overflow: hidden;
   display: flex;
   flex-flow: column;
-  height: 60vh;
+  overflow: hidden;
+  height: 85vh; // Setting the height to 100% makes the mat-table vanish. Using flex with a mat-table seems impossible.
 
   .impact-table-filter-bar-container {
     margin: 2%;
     margin-left: 3%;
-    flex: 0 1 auto;
+    flex: 0 0 auto;
   }
 
   .impact-table-container {
