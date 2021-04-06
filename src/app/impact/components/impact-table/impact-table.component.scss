@@ -1,11 +1,8 @@
 /* Table */
 
-table {
-  width: 100%;
-}
-
 .mat-table {
   width: 100%;
+  height: 80px;
 
   &.resizing {
     -moz-user-select: none;
@@ -141,11 +138,13 @@ table {
 /* Add row button */
 
 .container {
-  vertical-align: middle;
+  height: 85%;
 }
 
 .add-impact-button-container {
   display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 5px;
   opacity: 0.8;
   text-align: right;
   transition: 250ms ease-out 100ms;
@@ -175,5 +174,4 @@ table {
 /* Flex */
 
 .container {
-  height: 100%;
 }

@@ -3,6 +3,10 @@
   overflow: hidden;
 }
 
+table{
+  height: 80%;
+}
+
 .search-bar-container {
   margin-top: 3%;
   margin-left: 5%;
@@ -11,7 +15,7 @@
 .impact-table-container {
   margin: 1%;
   margin-left: 5%;
-  height: calc(80vh - 150px);
+  height: calc(80vh - 150px); // TODO This has to be flex...
 }
 
 .container {

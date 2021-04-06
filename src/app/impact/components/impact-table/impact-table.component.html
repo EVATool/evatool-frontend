@@ -95,18 +95,18 @@
       <tr mat-row [ngClass]="{'highlight': row.highlight}" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </ng-scrollbar>
-</div>
 
-<div *ngIf="impactDataService.impactsLoaded" class="add-impact-button-container">
-  <div class="add-impact-button-container">
-    <button type="button" mat-fab matTooltip="Add a new impact" matTooltipHideDelay="100" matTooltipPosition="above"
-            (click)="addButtonClicked()">
-      <p id='plus' style="font-size:180%;">+</p>
-    </button>
-  </div>
+  <div *ngIf="impactDataService.impactsLoaded" class="add-impact-button-container">
+    <div class="add-impact-button-container">
+      <button type="button" mat-fab matTooltip="Add a new impact" matTooltipHideDelay="100" matTooltipPosition="above"
+              (click)="addButtonClicked()">
+        <p id='plus' style="font-size:180%;">+</p>
+      </button>
+    </div>
 
-  <div class="add-impact-text-container">
-    <p id='text'>Impact</p>
+    <div class="add-impact-text-container">
+      <p id='text'>Impact</p>
+    </div>
   </div>
 </div>
 
