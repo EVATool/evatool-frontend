@@ -138,28 +138,35 @@
 /* Add row button */
 
 .container {
-  height: 85%;
-}
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 
-.add-impact-button-container {
-  display: inline-block;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  opacity: 0.8;
-  text-align: right;
-  transition: 250ms ease-out 100ms;
-  z-index: 10;
+  mat-table {
+    flex: 1 1 auto;
+  }
+
+  .add-impact-button-container {
+    margin-bottom: 5px;
+    margin-left: 5px;
+    display: inline-block;
+    opacity: 0.8;
+    transition: 250ms ease-out 100ms;
+    z-index: 10;
+    flex: 0 1 auto;
+
+    .add-impact-text-container {
+      margin-left: 1.5vw;
+      display: inline-block;
+      font-size: 150%;
+    }
+  }
 }
 
 .add-impact-button-container:focus-within, .add-impact-button-container:hover {
   opacity: 1 !important;
   transition: 250ms ease-out 100ms;
-}
-
-.add-impact-text-container {
-  margin-left: 1.5vw;
-  display: inline-block;
-  font-size: 150%;
 }
 
 /* Scroll to top button */

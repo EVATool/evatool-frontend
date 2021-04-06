@@ -1,29 +1,18 @@
 .container {
-  height: 100%;
   overflow: hidden;
-}
-
-.search-bar-container {
-
-}
-
-.impact-table-container {
-
-}
-
-.container {
   display: flex;
   flex-flow: column;
-  height: 100%;
-  overflow: hidden;
+  height: 60vh;
 
   .impact-table-filter-bar-container {
+    margin: 2%;
+    margin-left: 3%;
     flex: 0 1 auto;
   }
 
   .impact-table-container {
     margin-left: 5%;
-    height: calc(80vh - 150px); // TODO This has to be flex...
+    margin-right: 3%;
     flex: 1 1 auto;
   }
 }
