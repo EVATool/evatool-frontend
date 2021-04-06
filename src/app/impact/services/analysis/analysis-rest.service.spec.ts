@@ -26,7 +26,7 @@ export class MockedAnalysisRestService extends AnalysisRestService {
 }
 
 describe('AnalysisRestService', () => {
-  let sampleData: SampleDataService;
+  let data: SampleDataService;
   let httpMock: HttpTestingController;
   let service: AnalysisRestService;
 
@@ -34,7 +34,7 @@ describe('AnalysisRestService', () => {
     TestBed.configureTestingModule({
       imports: RestMock.imports
     });
-    sampleData = TestBed.inject(SampleDataService);
+    data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AnalysisRestService);
   });
@@ -49,7 +49,7 @@ describe('AnalysisRestService', () => {
 
   it('should return an analysis by id', () => {
     // Arrange
-    const dummyDto = sampleData.dummyAnalysisDtos[0];
+    const dummyDto = data.dummyAnalysisDtos[0];
 
     // Act
     service.getAnalysisById(dummyDto.rootEntityID).subscribe(analysis => {

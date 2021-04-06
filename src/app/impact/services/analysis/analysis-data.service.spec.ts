@@ -6,7 +6,7 @@ import {AnalysisDataService} from './analysis-data.service';
 import {RestMock} from "../../spec/RestMock";
 
 describe('AnalysisDataService', () => {
-  let sampleData: SampleDataService;
+  let data: SampleDataService;
   let router: Router;
   let service: AnalysisDataService;
 
@@ -16,7 +16,7 @@ describe('AnalysisDataService', () => {
       providers: RestMock.providers
     });
 
-    sampleData = TestBed.inject(SampleDataService);
+    data = TestBed.inject(SampleDataService);
     router = TestBed.inject(Router);
     service = TestBed.inject(AnalysisDataService);
   });

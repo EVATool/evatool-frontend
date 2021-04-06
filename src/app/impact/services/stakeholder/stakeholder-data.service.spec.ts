@@ -7,7 +7,7 @@ import {StakeholderRestService} from "./stakeholder-rest.service";
 import {MockedStakeholderRestService} from "./stakeholder-rest.service.spec";
 
 describe('StakeholderDataService', () => {
-  let sampleData: SampleDataService;
+  let data: SampleDataService;
   let service: StakeholderDataService;
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('StakeholderDataService', () => {
         }]
     });
 
-    sampleData = TestBed.inject(SampleDataService);
+    data = TestBed.inject(SampleDataService);
     service = TestBed.inject(StakeholderDataService);
   });
 
@@ -47,7 +47,7 @@ describe('StakeholderDataService', () => {
       service.onInit();
 
       // Assert
-      expect(service.stakeholders).toEqual(sampleData.dummyStakeholders);
+      expect(service.stakeholders).toEqual(data.dummyStakeholders);
     });
   })
 });

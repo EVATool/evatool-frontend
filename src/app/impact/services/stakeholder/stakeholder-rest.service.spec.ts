@@ -24,7 +24,7 @@ export class MockedStakeholderRestService extends StakeholderRestService {
 }
 
 describe('StakeholderRestService', () => {
-  let sampleData: SampleDataService;
+  let data: SampleDataService;
   let httpMock: HttpTestingController;
   let service: StakeholderRestService;
 
@@ -32,7 +32,7 @@ describe('StakeholderRestService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    sampleData = TestBed.inject(SampleDataService);
+    data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(StakeholderRestService);
   });
@@ -47,7 +47,7 @@ describe('StakeholderRestService', () => {
 
   it('should return all stakeholders>', () => {
     // Arrange
-    const dummyDtos = sampleData.dummyStakeholderDtos;
+    const dummyDtos = data.dummyStakeholderDtos;
 
     // Act
     service.getStakeholders().subscribe(stakeholders => {

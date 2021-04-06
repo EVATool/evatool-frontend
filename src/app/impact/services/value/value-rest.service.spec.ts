@@ -22,7 +22,7 @@ export class MockedValueRestService extends ValueRestService {
 }
 
 describe('ValueRestService', () => {
-  let sampleData: SampleDataService;
+  let data: SampleDataService;
   let httpMock: HttpTestingController;
   let service: ValueRestService;
 
@@ -30,7 +30,7 @@ describe('ValueRestService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    sampleData = TestBed.inject(SampleDataService);
+    data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ValueRestService);
   });
@@ -45,7 +45,7 @@ describe('ValueRestService', () => {
 
   it('should return all values>', () => {
     // Arrange
-    const dummyDtos = sampleData.dummyValueDtos;
+    const dummyDtos = data.dummyValueDtos;
 
     // Act
     service.getValues().subscribe(values => {
@@ -61,8 +61,8 @@ describe('ValueRestService', () => {
 
   it('should return all values by analysis id', () => {
     // Arrange
-    const analysisId = sampleData.dummyValueDtos[0].analysis.rootEntityID
-    const dummyDtos = sampleData.dummyValueDtos.filter(value => value.analysis.rootEntityID == analysisId);
+    const analysisId = data.dummyValueDtos[0].analysis.rootEntityID
+    const dummyDtos = data.dummyValueDtos.filter(value => value.analysis.rootEntityID == analysisId);
 
     // Act
     service.getValuesByAnalysisId(analysisId).subscribe(values => {
@@ -78,7 +78,7 @@ describe('ValueRestService', () => {
 
   it('should create a value', () => {
     // Arrange
-    const dummyDto = sampleData.dummyValueDtos[0];
+    const dummyDto = data.dummyValueDtos[0];
 
     // Act
     service.createValue(dummyDto).subscribe(value => {
@@ -93,7 +93,7 @@ describe('ValueRestService', () => {
 
   it('should update a value', () => {
     // Arrange
-    const dummyDto = sampleData.dummyValueDtos[0];
+    const dummyDto = data.dummyValueDtos[0];
 
     // Act
     service.updateValue(dummyDto).subscribe(value => {
@@ -108,7 +108,7 @@ describe('ValueRestService', () => {
 
   it('should delete a value', () => {
     // Arrange
-    const dummyDto = sampleData.dummyValueDtos[0];
+    const dummyDto = data.dummyValueDtos[0];
 
     // Act
     service.deleteValue(dummyDto).subscribe(value => {
@@ -123,7 +123,7 @@ describe('ValueRestService', () => {
 
   it('should return all value types', () => {
     // Arrange
-    const dummyDtos = sampleData.dummyValueTypes;
+    const dummyDtos = data.dummyValueTypes;
 
     // Act
     service.getValueTypes().subscribe(valuesTypes => {

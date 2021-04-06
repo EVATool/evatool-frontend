@@ -24,7 +24,7 @@ export class MockedImpactRestService extends ImpactRestService {
 }
 
 describe('ImpactRestService', () => {
-  let sampleData: SampleDataService;
+  let data: SampleDataService;
   let httpMock: HttpTestingController;
   let service: ImpactRestService;
 
@@ -32,7 +32,7 @@ describe('ImpactRestService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    sampleData = TestBed.inject(SampleDataService);
+    data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ImpactRestService);
   });
@@ -47,8 +47,8 @@ describe('ImpactRestService', () => {
 
   it('should return all impacts by analysis id', () => {
     // Arrange
-    const analysisId = sampleData.dummyImpactDtos[0].analysis.id
-    const dummyDtos = sampleData.dummyImpactDtos.filter(impact => impact.analysis.id == analysisId);
+    const analysisId = data.dummyImpactDtos[0].analysis.id
+    const dummyDtos = data.dummyImpactDtos.filter(impact => impact.analysis.id == analysisId);
 
     // Act
     service.getImpactsByAnalysisId(analysisId).subscribe(impacts => {
@@ -64,7 +64,7 @@ describe('ImpactRestService', () => {
 
   it('should create an impact', () => {
     // Arrange
-    const dummyDto = sampleData.dummyImpactDtos[0];
+    const dummyDto = data.dummyImpactDtos[0];
 
     // Act
     service.createImpact(dummyDto).subscribe(impact => {
@@ -79,7 +79,7 @@ describe('ImpactRestService', () => {
 
   it('should update an impact', () => {
     // Arrange
-    const dummyDto = sampleData.dummyImpactDtos[0];
+    const dummyDto = data.dummyImpactDtos[0];
 
     // Act
     service.updateImpact(dummyDto).subscribe(impact => {
@@ -94,7 +94,7 @@ describe('ImpactRestService', () => {
 
   it('should delete an impact', () => {
     // Arrange
-    const dummyDto = sampleData.dummyImpactDtos[0];
+    const dummyDto = data.dummyImpactDtos[0];
 
     // Act
     service.deleteImpact(dummyDto).subscribe(impact => {
