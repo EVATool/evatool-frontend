@@ -30,10 +30,6 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(): void {
     const values: Value[] = this.valueDataService.values.filter(val => val.type === this.type);
     this.tableDataSource = new MatTableDataSource<Value>(values);
     this.initSorting();
@@ -46,6 +42,10 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
         this.tableDataSource.data = vals.filter(val => val.type === this.type);
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   private initSorting(): void {

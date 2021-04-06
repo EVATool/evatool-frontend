@@ -29,15 +29,15 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(): void {
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
       this.filterBar.clearFilter();
       this.table.clearSort();
     });
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   filterBarChanged(event: ImpactTableFilterEvent) {

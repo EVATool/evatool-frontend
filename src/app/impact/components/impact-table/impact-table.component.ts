@@ -50,10 +50,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(): void {
     this.scrollbarRef?.scrolled.subscribe(e => {
       this.logger.info(this, 'Event \'scrolled\' received from Scrollbar');
       this.windowScrolled = e.target.scrollTop !== 0;
@@ -92,6 +88,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     });
 
     this.impactDataService.onInit();
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   scrollToTop(): void {
