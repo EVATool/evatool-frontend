@@ -36,14 +36,14 @@
                   <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveSocialValue(value);">
                     <mat-icon>save</mat-icon>
                   </button>
-                  <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="deleteValue(value)">
+                  <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="archiveValue(value)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
               </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-row mat-row *matRowDef="let row; columns: displayedColumns;" class="archivedField-{{row.archived}}"></mat-row>
           </mat-table>
         <button mat-icon-button aria-label="Add Value" class="addSocialValueButton" (click)="addSocialValue()"> <!--tabindex="-1"-->
           <mat-icon>add</mat-icon> Social Value anlegen
@@ -78,7 +78,7 @@
                   <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveEconomicValue(value);">
                     <mat-icon>save</mat-icon>
                   </button>
-                  <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="deleteValue(value)">
+                  <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="archiveValue(value)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>

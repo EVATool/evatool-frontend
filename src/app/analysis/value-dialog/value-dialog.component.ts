@@ -30,8 +30,9 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
   // {economicValueId: '2', economicValueTitle: 'Profitabilität', economicValueDescription: 'Bezieht sich auf die Fähigkeit einer Organisation, seine operativen Prozesse und strategische Entwicklung aus den eigenen Einnahmen zu bestreiten.', socialValueId: null, socialValueTitle: null, socialValueDescription: null},
   // {economicValueId: '3', economicValueTitle: 'Strategische Gelegenheit', economicValueDescription: 'Umfasst alle nicht-monetären Aspekte einer Organisation (Innovationen vorantreiben, strategische Position oder Marktanteil ausbauen, etc.).', socialValueId: null, socialValueTitle: null, socialValueDescription: null}];
 
-  constructor(public valueDataService: ValueDataService, @Inject(MAT_DIALOG_DATA) public data: { id: string }
-  ) {}
+  constructor(public valueDataService: ValueDataService, @Inject(MAT_DIALOG_DATA) public data: { id: string }) {
+    valueDataService.loadValuesByAnalysisId(this.data.id);
+  }
 
   ngOnInit(): void {
 
@@ -70,5 +71,10 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
 
   deleteValue(value: Value): void {
     this.valueDataService.deleteValue(value);
+  }
+
+  archiveValue(value: Value): void {
+    value.archived = true;
+    this.valueDataService.archiveValue(value);
   }
 }

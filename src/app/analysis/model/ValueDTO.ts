@@ -1,3 +1,5 @@
+import {AnalysisDTO} from './AnalysisDTO';
+
 export class ValueDTO {
   id: any = '';
   name: any = '';
