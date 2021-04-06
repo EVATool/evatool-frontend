@@ -40,7 +40,7 @@ describe('ImpactDataService', () => {
       service.onInit();
 
       // Act
-      service.createImpact();
+      service.createImpact(data.dummyImpacts[0]);
 
       // Assert
       expect(service.addedImpact.emit).toHaveBeenCalled();
@@ -87,7 +87,7 @@ describe('ImpactDataService', () => {
 
     // Act
     const existingImpacts = service.impacts.length;
-    service.createImpact();
+    service.createImpact(data.dummyImpacts[0]);
 
     // Assert
     expect(service.impacts.length).toBe(existingImpacts + 1);

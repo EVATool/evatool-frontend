@@ -54,7 +54,7 @@ export class ValueDataService {
 
   }
 
-  createValue(value: Value) { // TODO tests
+  createValue(value: Value) {
     this.logger.info(this, 'Create Value');
     const valueDto = this.valueMapperService.toDto(value);
     this.valueRestService.createValue(valueDto).subscribe((valDto: Value) => {
@@ -65,7 +65,7 @@ export class ValueDataService {
     });
   }
 
-  updateValue(value: Value) { // TODO tests
+  updateValue(value: Value) {
     this.logger.info(this, 'Update Value');
     const valueDto = this.valueMapperService.toDto(value);
     this.valueRestService.updateValue(valueDto).subscribe((newValue: Value) => {
@@ -74,7 +74,7 @@ export class ValueDataService {
     });
   }
 
-  deleteValue(value: Value) { // TODO tests
+  deleteValue(value: Value) {
     this.logger.info(this, 'Delete Value');
     const valueDto = this.valueMapperService.toDto(value);
     this.valueRestService.deleteValue(valueDto).subscribe((valDto) => {

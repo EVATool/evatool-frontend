@@ -1,11 +1,14 @@
-import { ImpactTableFilterBarComponent } from '../components/impact-table-filter-bar/impact-table-filter-bar.component';
-import { ImpactTableFilterEvent } from '../components/impact-table-filter-bar/ImpactTableFilterEvent';
-import { ImpactTableComponent } from '../components/impact-table/impact-table.component';
-import { LogService } from '../../shared/services/log.service';
-import { Impact } from '../models/Impact';
-import { ImpactDataService } from '../services/impact/impact-data.service';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { NgScrollbar } from 'ngx-scrollbar';
+import {ImpactTableFilterBarComponent} from '../components/impact-table-filter-bar/impact-table-filter-bar.component';
+import {ImpactTableFilterEvent} from '../components/impact-table-filter-bar/ImpactTableFilterEvent';
+import {ImpactTableComponent} from '../components/impact-table/impact-table.component';
+import {LogService} from '../../shared/services/log.service';
+import {Impact} from '../models/Impact';
+import {ImpactDataService} from '../services/impact/impact-data.service';
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {NgScrollbar} from 'ngx-scrollbar';
+import {ValueDataService} from "../services/value/value-data.service";
+import {StakeholderDataService} from "../services/stakeholder/stakeholder-data.service";
+import {AnalysisDataService} from "../services/analysis/analysis-data.service";
 
 @Component({
   selector: 'app-impact-main',
@@ -21,7 +24,12 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   constructor(
     private logger: LogService,
-    public impactDataService: ImpactDataService) { }
+    public impactDataService: ImpactDataService,
+    private valueDataService: ValueDataService,
+    private stakeholderDataService: StakeholderDataService,
+    private analysisDataService: AnalysisDataService
+  ) {
+  }
 
   ngOnInit(): void {
 
@@ -37,20 +45,34 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
       this.filterBar.clearFilter();
       this.table.clearSort();
-      const options = { bottom: -100, duration: 250 };
+      const options = {bottom: -100, duration: 250};
       this.scrollbarRef.scrollTo(options);
     });
   }
 
   scrollToTop(): void {
     this.logger.info(this, 'Scroll To Top');
-    const options = { top: 0, duration: 250 };
+    const options = {top: 0, duration: 250};
     this.scrollbarRef.scrollTo(options);
+  }
+
+  private createDefaultImpact(): Impact {
+    this.logger.debug(this, 'Create Default Impact');
+    const impact = new Impact();
+
+    impact.value = 0.0;
+    impact.description = '';
+    impact.valueEntity = this.valueDataService.getDefaultValue();
+    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
+    impact.analysis = this.analysisDataService.getCurrentAnalysis();
+
+    return impact;
   }
 
   addImpact(): void {
     this.logger.info(this, 'Add Impact');
-    this.impactDataService.createImpact();
+    const impact = this.createDefaultImpact();
+    this.impactDataService.createImpact(impact);
   }
 
   filterBarChanged(event: ImpactTableFilterEvent) {

@@ -88,22 +88,8 @@ export class ImpactDataService {
     return this.stakeholdersLoaded && this.valuesLoaded && this.analysesLoaded;
   }
 
-  private createDefaultImpact(): Impact {
-    this.logger.debug(this, 'Create Default Impact');
-    const impact = new Impact();
-
-    impact.value = 0.0;
-    impact.description = '';
-    impact.valueEntity = this.valueDataService.getDefaultValue();
-    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
-    impact.analysis = this.analysisDataService.getCurrentAnalysis();
-
-    return impact;
-  }
-
-  createImpact(): void {
+  createImpact(impact: Impact): void {
     this.logger.info(this, 'Create Impact');
-    const impact = this.createDefaultImpact();
     const impactDto = this.impactMapperService.toDto(impact);
     this.impactRestService.createImpact(impactDto).subscribe(impDto => {
       impact.id = impDto.id;
