@@ -12,6 +12,9 @@ import {MatSelectChange} from '@angular/material/select';
 import {LogService} from '../../../shared/services/log.service';
 import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
 import {Value} from "../../models/Value";
+import {StakeholderDataService} from "../../services/stakeholder/stakeholder-data.service";
+import {AnalysisDataService} from "../../services/analysis/analysis-data.service";
+import {NgScrollbar} from "ngx-scrollbar";
 
 @Component({
   selector: 'app-impact-table',
@@ -19,12 +22,17 @@ import {Value} from "../../models/Value";
   styleUrls: ['./impact-table.component.scss', '../../../layout/style/style.css']
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
+
+  // TODO Fix add button draw
+  // Fix Tests afterwards...
 
   // Used by table.
   displayedColumns: string[] = ['uniqueString', 'stakeholder', 'valueEntity', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
+  windowScrolled = false;
 
   filterValues: any = {
     id: '',
@@ -39,6 +47,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     private logger: LogService,
     public impactDataService: ImpactDataService,
     public valueDataService: ValueDataService,
+    public stakeholderDataService: StakeholderDataService,
+    public analysisDataService: AnalysisDataService,
     private dialog: MatDialog) {
   }
 
@@ -47,6 +57,11 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.scrollbarRef?.scrolled.subscribe(e => {
+      this.logger.info(this, 'Event \'scrolled\' received from Scrollbar');
+      this.windowScrolled = e.target.scrollTop !== 0;
+    });
+
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
       this.logger.info(this, 'Event \'loadedImpacts\' received from ImpactDataService');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
@@ -67,6 +82,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
+      const options = {bottom: -100, duration: 250};
+      this.scrollbarRef.scrollTo(options);
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
@@ -78,6 +95,12 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     });
 
     this.impactDataService.onInit();
+  }
+
+  scrollToTop(): void {
+    this.logger.info(this, 'Scroll To Top');
+    const options = {top: 0, duration: 250};
+    this.scrollbarRef.scrollTo(options);
   }
 
   private initSorting(): void {
@@ -223,5 +246,24 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         });
       }
     });
+  }
+
+  private createDefaultImpact(): Impact {
+    this.logger.debug(this, 'Create Default Impact');
+    const impact = new Impact();
+
+    impact.value = 0.0;
+    impact.description = '';
+    impact.valueEntity = this.valueDataService.getDefaultValue();
+    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
+    impact.analysis = this.analysisDataService.getCurrentAnalysis();
+
+    return impact;
+  }
+
+  addButtonClicked(): void {
+    this.logger.info(this, 'Add Button Clicked');
+    const impact = this.createDefaultImpact();
+    this.impactDataService.createImpact(impact);
   }
 }

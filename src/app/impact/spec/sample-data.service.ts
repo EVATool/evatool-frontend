@@ -28,7 +28,7 @@ export class SampleDataService {
     private analysisMapperService: AnalysisMapperService,
     private impactMapperService: ImpactMapperService) {
 
-    this.offline &&= isDevMode();
+    this.offline &&= isDevMode(); // Production mode always makes real rest calls.
 
     this.dummyAnalysisDtos.forEach(dto => {
       this.dummyAnalyses.push(this.analysisMapperService.fromDto(dto));

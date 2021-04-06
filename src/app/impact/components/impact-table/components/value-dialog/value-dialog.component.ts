@@ -34,7 +34,6 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
 
   propagateSeeReferences(value: Value) {
     this.logger.info(this, 'User wants to see the impacts referencing the value');
-    this.data = {lel: 'haha'}
     this.dialogRef.close({showReferencedImpacts: true, value: value});
   }
 }

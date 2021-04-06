@@ -1,20 +1,6 @@
 .container {
-  display: flex;
-  flex-flow: column;
   height: 100%;
-}
-
-.container .search-bar-container {
-  flex: 0 1 auto;
-}
-
-.container .impact-table-container {
-  flex: 1 1 auto;
-}
-
-.container .add-impact-button-container {
-  flex: 0 1 auto;
-  margin-left: auto;
+  overflow: hidden;
 }
 
 .search-bar-container {
@@ -28,16 +14,16 @@
   height: calc(80vh - 150px);
 }
 
-.add-impact-button-container {
-  position: fixed;
-  left: 1.5%;
-  bottom: 2.5%;
-  width: 50%;
-}
+.container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 
-.scroll-to-top {
-  position: fixed;
-  top: 125px;
-  right: 30px;
-  z-index: 10;
+  .impact-table-filter-bar-container {
+    flex: 0 1 auto;
+  }
+
+  .impact-table-container {
+    flex: 1 1 auto;
+  }
 }

@@ -16,11 +16,8 @@ import {AnalysisDataService} from "../services/analysis/analysis-data.service";
   styleUrls: ['./impact-main.component.scss']
 })
 export class ImpactMainComponent implements OnInit, AfterViewInit {
-  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(ImpactTableComponent) table!: ImpactTableComponent;
   @ViewChild(ImpactTableFilterBarComponent) filterBar!: ImpactTableFilterBarComponent;
-
-  windowScrolled = false;
 
   constructor(
     private logger: LogService,
@@ -36,43 +33,11 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled.subscribe(e => {
-      this.logger.info(this, 'Event \'scrolled\' received from Scrollbar');
-      this.windowScrolled = e.target.scrollTop !== 0;
-    });
-
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
       this.filterBar.clearFilter();
       this.table.clearSort();
-      const options = {bottom: -100, duration: 250};
-      this.scrollbarRef.scrollTo(options);
     });
-  }
-
-  scrollToTop(): void {
-    this.logger.info(this, 'Scroll To Top');
-    const options = {top: 0, duration: 250};
-    this.scrollbarRef.scrollTo(options);
-  }
-
-  private createDefaultImpact(): Impact {
-    this.logger.debug(this, 'Create Default Impact');
-    const impact = new Impact();
-
-    impact.value = 0.0;
-    impact.description = '';
-    impact.valueEntity = this.valueDataService.getDefaultValue();
-    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
-    impact.analysis = this.analysisDataService.getCurrentAnalysis();
-
-    return impact;
-  }
-
-  addImpact(): void {
-    this.logger.info(this, 'Add Impact');
-    const impact = this.createDefaultImpact();
-    this.impactDataService.createImpact(impact);
   }
 
   filterBarChanged(event: ImpactTableFilterEvent) {

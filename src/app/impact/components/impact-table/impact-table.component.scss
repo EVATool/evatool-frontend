@@ -137,3 +137,43 @@ table {
   opacity: 0.5;
   transition: 250ms ease-out 100ms;
 }
+
+/* Add row button */
+
+.container {
+  vertical-align: middle;
+}
+
+.add-impact-button-container {
+  display: inline-block;
+  opacity: 0.8;
+  text-align: right;
+  transition: 250ms ease-out 100ms;
+  z-index: 10;
+}
+
+.add-impact-button-container:focus-within, .add-impact-button-container:hover {
+  opacity: 1 !important;
+  transition: 250ms ease-out 100ms;
+}
+
+.add-impact-text-container {
+  margin-left: 1.5vw;
+  display: inline-block;
+  font-size: 150%;
+}
+
+/* Scroll to top button */
+
+.scroll-to-top {
+  position: fixed;
+  top: 125px;
+  right: 30px;
+  z-index: 10;
+}
+
+/* Flex */
+
+.container {
+  height: 100%;
+}
