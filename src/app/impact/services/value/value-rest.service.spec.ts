@@ -17,7 +17,7 @@ export class MockedValueRestService extends ValueRestService {
     http: HttpClient,
     data: SampleDataService) {
     super(logger, http, data);
-    this.data.offline = true;
+    this.mocked = true;
   }
 }
 
@@ -33,6 +33,7 @@ describe('ValueRestService', () => {
     data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ValueRestService);
+    service.testing = true;
   });
 
   afterEach(() => {

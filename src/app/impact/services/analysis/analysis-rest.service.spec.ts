@@ -21,7 +21,7 @@ export class MockedAnalysisRestService extends AnalysisRestService {
     http: HttpClient,
     data: SampleDataService) {
     super(logger, http, data);
-    this.data.offline = true;
+    this.mocked = true;
   }
 }
 
@@ -37,6 +37,7 @@ describe('AnalysisRestService', () => {
     data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AnalysisRestService);
+    service.testing = true;
   });
 
   afterEach(() => {

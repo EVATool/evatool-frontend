@@ -6,17 +6,18 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {ImpactDto} from "../../dtos/ImpactDto";
 import {SampleDataService} from "../../spec/sample-data.service";
+import {MockableServiceService} from "../mockable-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ValueRestService {
+export class ValueRestService extends MockableServiceService {
 
   constructor(
     private logger: LogService,
     private http: HttpClient,
     protected data: SampleDataService) {
-
+    super();
   }
 
   onInit(): void {
@@ -25,7 +26,7 @@ export class ValueRestService {
 
   getValues(): Observable<ValueDto[]> {
     this.logger.info(this, 'Get all Values');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyValueDtos)
     } else {
       return this.http.get<ValueDto[]>(RestSettings.valuesUrl);
@@ -34,7 +35,7 @@ export class ValueRestService {
 
   getValuesByAnalysisId(analysisId: string): Observable<ValueDto[]> {
     this.logger.info(this, 'Get all Values');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyValueDtos)
     } else {
       return this.http.get<ValueDto[]>(RestSettings.valuesUrl + "?analysisId=" + analysisId);
@@ -43,7 +44,7 @@ export class ValueRestService {
 
   createValue(valueDto: ValueDto): Observable<any> {
     this.logger.info(this, 'Create Value');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(valueDto);
     } else {
       return this.http.post(RestSettings.valuesUrl, valueDto, RestSettings.httpOptions);
@@ -52,7 +53,7 @@ export class ValueRestService {
 
   updateValue(valueDto: ValueDto): Observable<any> {
     this.logger.info(this, 'Update Value');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(valueDto);
     } else {
       return this.http.put(RestSettings.valuesUrl, valueDto, RestSettings.httpOptions);
@@ -61,7 +62,7 @@ export class ValueRestService {
 
   deleteValue(valueDto: ValueDto): Observable<any> {
     this.logger.info(this, 'Delete Value');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(valueDto);
     } else {
       return this.http.delete(RestSettings.valuesUrl + '/' + valueDto.id);
@@ -70,7 +71,7 @@ export class ValueRestService {
 
   getValueTypes(): Observable<string[]> {
     this.logger.info(this, 'Get all ValueTypes');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyValueTypes)
     } else {
       return this.http.get<string[]>(RestSettings.valueTypesUrl);

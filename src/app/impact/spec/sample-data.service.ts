@@ -20,7 +20,7 @@ import {ImpactValueDto} from "../dtos/ImpactValueDto";
 })
 export class SampleDataService {
 
-  public offline: boolean = false; // NO NOT TEST (ng test) WHEN THIS IS SET TO TRUE!
+  public offline: boolean = true;
 
   constructor(
     private valueMapperService: ValueMapperService,

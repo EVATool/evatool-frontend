@@ -5,17 +5,18 @@ import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {SampleDataService} from "../../spec/sample-data.service";
+import {MockableServiceService} from "../mockable-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ImpactRestService {
+export class ImpactRestService  extends MockableServiceService {
 
   constructor(
     private logger: LogService,
     private http: HttpClient,
     protected data: SampleDataService) {
-
+    super();
   }
 
   onInit(): void {
@@ -24,7 +25,7 @@ export class ImpactRestService {
 
   getImpactsByAnalysisId(analysisId: string): Observable<ImpactDto[]> {
     this.logger.info(this, 'Get Impact by AnalysisId');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyImpactDtos);
     } else {
       return this.http.get<ImpactDto[]>(RestSettings.impactsUrl + "?analysisId=" + analysisId);
@@ -33,7 +34,7 @@ export class ImpactRestService {
 
   createImpact(impactDto: ImpactDto): Observable<any> {
     this.logger.info(this, 'Create Impact');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(impactDto);
     } else {
       return this.http.post(RestSettings.impactsUrl, impactDto, RestSettings.httpOptions);
@@ -42,7 +43,7 @@ export class ImpactRestService {
 
   updateImpact(impactDto: ImpactDto): Observable<any> {
     this.logger.info(this, 'Update Impact');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(impactDto);
     } else {
       return this.http.put(RestSettings.impactsUrl, impactDto, RestSettings.httpOptions);
@@ -51,7 +52,7 @@ export class ImpactRestService {
 
   deleteImpact(impactDto: ImpactDto): Observable<any> {
     this.logger.info(this, 'Delete Impact');
-    if (this.data.offline) {
+    if (this.useDummyData(this.data.offline)) {
       return of(impactDto);
     } else {
       return this.http.delete(RestSettings.impactsUrl + '/' + impactDto.id);

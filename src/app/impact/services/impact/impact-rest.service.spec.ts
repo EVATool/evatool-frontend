@@ -19,7 +19,7 @@ export class MockedImpactRestService extends ImpactRestService {
     http: HttpClient,
     data: SampleDataService) {
     super(logger, http, data)
-    this.data.offline = true;
+    this.mocked = true;
   }
 }
 
@@ -35,6 +35,7 @@ describe('ImpactRestService', () => {
     data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ImpactRestService);
+    service.testing = true;
   });
 
   afterEach(() => {

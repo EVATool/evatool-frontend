@@ -19,7 +19,7 @@ export class MockedStakeholderRestService extends StakeholderRestService {
     http: HttpClient,
     data: SampleDataService) {
     super(logger, http, data)
-    this.data.offline = true;
+    this.mocked = true;
   }
 }
 
@@ -35,6 +35,7 @@ describe('StakeholderRestService', () => {
     data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(StakeholderRestService);
+    service.testing = true;
   });
 
   afterEach(() => {
