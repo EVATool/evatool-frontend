@@ -7,7 +7,7 @@ import {MockedVariantRestService} from '../variant-rest.service.spec';
 export class RestMockProvidersVariants {
   public static readonly imports: any[] = [
     HttpClientTestingModule,
-    RouterTestingModule
+    RouterTestingModule,
   ];
 
   public static readonly providers: any[] = [

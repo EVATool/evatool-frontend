@@ -5,6 +5,7 @@ import {VariantSampleDataService} from './spec/sample-data.service';
 
 describe('VariantDataService', () => {
   let service: VariantDataService;
+  let dataService: VariantSampleDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -12,6 +13,8 @@ describe('VariantDataService', () => {
       providers: RestMockProvidersVariants.providers
     });
     service = TestBed.inject(VariantDataService);
+    dataService = TestBed.inject(VariantSampleDataService);
+    dataService.setup();
   });
 
   it('should be created', () => {
@@ -20,25 +23,27 @@ describe('VariantDataService', () => {
 
   it('load Variants', () => {
     service.loadVariants();
-    expect(service.variants.length).toBeGreaterThanOrEqual(1);
+    expect(service.variants.length).toBeGreaterThanOrEqual(3);
   });
 
   it('create default Variant', () => {
-    // todo
+    const oldsize = service.matDataSource.data.length;
+    service.createVariant();
+    expect(service.matDataSource.data.length).toBeGreaterThan(oldsize);
   });
 
-  it('update default Variant', () => {
-    // todo
+  it('update Variant', () => {
+   service.archive(dataService.getDummyVariant());
+   expect(service.matDataSource.data.length).toBe(2);
+   expect(service.matDataSourceArchive.data.length).toBe(1);
   });
 
-  it('delete default Variant', () => {
-    // todo
-  });
+  it('delete Variant', () => {
+    const oldsize = service.matDataSource.data.length;
+    service.delete(dataService.getDummyVariant());
+    expect(oldsize).toBeGreaterThan(service.matDataSource.data.length);
 
-  it('load analysisId from Router', () => {
-    // todo
   });
-
 
 
 });

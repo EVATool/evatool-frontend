@@ -24,11 +24,13 @@ export class MockedVariantRestService extends VariantRestService {
   }
 
   deleteVariants(id: string): Observable<any> {
+    this.sampleData.delete();
     return of(this.sampleData.getDummyVariantDTO());
   }
 
   updateVariants(variantDTO: VariantDTO): Observable<any> {
-    return of(this.sampleData.getDummyVariantDTO());
+    this.sampleData.update();
+    return of(this.sampleData.getDummyVariantDTOs());
   }
 
   getVariantsById(id: any): Observable<any> {
