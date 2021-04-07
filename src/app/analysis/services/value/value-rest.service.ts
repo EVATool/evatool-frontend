@@ -40,4 +40,8 @@ export class ValueRestService {
   deleteValue(value: Value): Observable<any> {
     return this.http.delete(this.valueUrl + '/' + value.id);
   }
+
+  getValuesByAnalysisId(id: any): Observable<any> {
+    return this.http.get<any>(this.valueUrl + '?analysisId=' + id);
+  }
 }

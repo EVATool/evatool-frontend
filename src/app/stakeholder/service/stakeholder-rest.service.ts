@@ -17,7 +17,7 @@ const httpOptions = { // Outsource!
 })
 export class StakeholderRestService {
 
-  stakeholderUrl = 'http://79.171.179.211:443/stakeholders'; // Outsource!
+  stakeholderUrl = 'http://localhost:8080/stakeholders'; // Outsource!
 
   constructor(private http: HttpClient) {
 
@@ -29,6 +29,10 @@ export class StakeholderRestService {
 
   getStakeholders(): Observable<any> {
     return this.http.get<any>(this.stakeholderUrl);
+  }
+
+  getStakeholdersByAnalysisId(analysisId: any): Observable<any> {
+    return this.http.get<any>(this.stakeholderUrl + '?analysisId=' + analysisId);
   }
 
   getStakeholdersById(id: any): Observable<any> {

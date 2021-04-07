@@ -6,4 +6,6 @@ export class StakeholderDTO{
   impactList?: any = [];
   guiId: any = '';
   rootEntityID: any = '';
+  analysisId: any = '';
+
 }

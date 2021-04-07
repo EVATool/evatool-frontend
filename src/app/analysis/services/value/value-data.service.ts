@@ -23,7 +23,7 @@ export class ValueDataService {
   }
 
   onInit() {
-    // this.loadValues();
+    //this.loadValuesByAnalysisId();
   }
 
   private createDefaultValue(): Value {
@@ -50,28 +50,42 @@ export class ValueDataService {
     this.valueRestService.deleteValue(value)/*.subscribe(() => { this.loadValues(); })*/;
   }
 
+  archiveValue(value: Value): void {
+    console.log(value);
+    this.analysisRestService.getAnalysisById(value.analysis.rootEntityID).subscribe((result: any) => {
+      console.log(result);
+      console.log(value);
+      this.valueRestService.updateValue({
+        id: value.id,
+        name: value.name,
+        type: value.type,
+        description: value.description,
+        archived: true,
+        analysis: result
+      }).subscribe(() => {
+        this.loadValuesByAnalysisId(value.analysis.rootEntityID);
+      });
+    });
+  }
+
   save(value: Value, id: string): void {
-    // const analysis1 = new AnalysisDTO();
-    // analysis1.analysisName = '';
-    // analysis1.rootEntityID = '';
-    // analysis1.analysisDescription = '';
-    // analysis1.uniqueString = 'ANA1';
-    // analysis1.img = '';
-    // analysis1.isTemplate = false;
-    // analysis1.analysisDate = new Date('2021-01-01');
-    this.valueRestService.createValue({
-      id: '',
-      name: value.name,
-      description: value.description,
-      type: value.type,
-      // analysis: analysis1
-      analysis: this.analysisRestService.getAnalysisById(id)
-    }).subscribe(() => {
-      this.loadValues(id);
+    this.analysisRestService.getAnalysisById(id).subscribe((result: any) => {
+      console.log(result);
+      this.valueRestService.createValue({
+        id: '',
+        name: value.name,
+        description: value.description,
+        type: value.type,
+        // analysis: analysis1
+        analysis: result
+      }).subscribe(() => {
+        this.loadValuesByAnalysisId(id);
+      });
     });
   }
 
   loadValues(id: string): void {
+    console.log(id);
     this.valueRestService.getValueById(id).subscribe((result: any) => {
       this.socialValue = [];
       this.economicValue = [];
@@ -82,6 +96,7 @@ export class ValueDataService {
             name: valueDTO.name,
             description: valueDTO.description,
             type: valueDTO.type,
+            analysis: valueDTO.analysis
           };
           this.socialValue.push(value);
         }
@@ -91,6 +106,40 @@ export class ValueDataService {
             name: valueDTO.name,
             description: valueDTO.description,
             type: valueDTO.type,
+            analysis: valueDTO.analysis
+          };
+          this.economicValue.push(value);
+        }
+      });
+      this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
+      this.matDataSourceSocial = new MatTableDataSource<Value>(this.socialValue);
+      console.log(this.matDataSourceEconomic);
+    });
+  }
+
+  loadValuesByAnalysisId(id: string): void {
+    console.log(id);
+    this.valueRestService.getValuesByAnalysisId(id).subscribe((result: any) => {
+      this.socialValue = [];
+      this.economicValue = [];
+      result.forEach((valueDTO: any) => {
+        if (valueDTO.type === 'SOCIAL') {
+          const value: Value = {
+            id: valueDTO.id,
+            name: valueDTO.name,
+            description: valueDTO.description,
+            type: valueDTO.type,
+            analysis: valueDTO.analysis
+          };
+          this.socialValue.push(value);
+        }
+        else if (valueDTO.type === 'ECONOMIC') {
+          const value: Value = {
+            id: valueDTO.id,
+            name: valueDTO.name,
+            description: valueDTO.description,
+            type: valueDTO.type,
+            analysis: valueDTO.analysis
           };
           this.economicValue.push(value);
         }

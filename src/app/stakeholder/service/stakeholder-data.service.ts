@@ -4,6 +4,7 @@ import {StakeholderRestService} from './stakeholder-rest.service';
 import {StakeholderDTO} from '../model/StakeholderDTO';
 import {MatTableDataSource} from '@angular/material/table';
 import {StakeholderImpact} from '../model/StakeholderImpact';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,18 @@ export class StakeholderDataService {
   stakeholders: Stakeholder[] = [];
   matDataSource = new MatTableDataSource<Stakeholder>();
   public searchtext = '';
+  private analysisid: string | null = '';
 
-  constructor(private stakeholderRestService: StakeholderRestService) {
+  constructor(private stakeholderRestService: StakeholderRestService,
+              private router: Router) {
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
+    this.loadAnalysisIDFromRouter();
     this.loadStakeholder();
+
   }
 
   loadStakeholder(): void {
-    this.stakeholderRestService.getStakeholders().subscribe((result: any) => {
+    this.stakeholderRestService.getStakeholdersByAnalysisId(this.analysisid).subscribe((result: any) => {
       this.stakeholders = [];
       console.log(result);
       result.forEach((stakeholderDTO: StakeholderDTO) => {
@@ -40,7 +45,9 @@ export class StakeholderDataService {
           priority: stakeholderDTO.priority,
           name: stakeholderDTO.stakeholderName,
           positiveImpact: postiveImpacts,
-          negativeImpact: negativeImpacts
+          negativeImpact: negativeImpacts,
+          analysisId: stakeholderDTO.analysisId
+
         };
         this.stakeholders.push(stakeholder);
       });
@@ -56,14 +63,15 @@ export class StakeholderDataService {
   }
 
   save(stakeholder: Stakeholder): void {
-    console.log(stakeholder.name);
+    console.log(this.analysisid);
     this.stakeholderRestService.createStakeholder({
       rootEntityID: '',
       guiId: '',
       stakeholderName: stakeholder.name,
       priority: stakeholder.priority,
       impactList: [],
-      stakeholderLevel: stakeholder.level
+      stakeholderLevel: stakeholder.level,
+      analysisId: this.analysisid
     }).subscribe(() => {
       this.loadStakeholder();
     });
@@ -129,9 +137,16 @@ export class StakeholderDataService {
       guiId: stakeholder.guiId,
       stakeholderName: stakeholder.name,
       priority: stakeholder.priority,
-      stakeholderLevel: stakeholder.level
+      stakeholderLevel: stakeholder.level,
+      analysisId: this.analysisid
     }).subscribe(() => {
       this.loadStakeholder();
+    });
+  }
+
+  loadAnalysisIDFromRouter(): void{
+    this.router.routerState.root.queryParams.subscribe((paramMap) => {
+      this.analysisid = paramMap.id;
     });
   }
 }

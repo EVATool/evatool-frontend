@@ -8,4 +8,5 @@ export class Stakeholder{
   positiveImpact = 0;
   editable?: boolean;
   created?: boolean;
+  analysisId: any = '';
 }
