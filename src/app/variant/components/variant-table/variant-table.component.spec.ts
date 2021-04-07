@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VariantTableComponent } from './variant-table.component';
+import {RestMockProvidersVariants} from '../../services/spec/RestMockProviders';
 
 describe('VariantTableComponent', () => {
   let component: VariantTableComponent;
@@ -8,6 +9,8 @@ describe('VariantTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: RestMockProvidersVariants.imports,
+      providers: RestMockProvidersVariants.providers,
       declarations: [ VariantTableComponent ]
     })
     .compileComponents();

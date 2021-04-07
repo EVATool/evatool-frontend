@@ -10,14 +10,14 @@
   <div class="variant-dialog">
     <div class="card-container">
       <!-- CARD 1-->
-      <mat-expansion-panel class="variant-expansion-panel" [expanded]="true" >
+      <mat-expansion-panel class="variant-expansion-panel" [expanded]="!variantDataService.variants.toString().includes(data.id)" >
         <mat-expansion-panel-header>
           <mat-panel-title>Selection</mat-panel-title>
         </mat-expansion-panel-header>
         <app-variant-table [matDataSource]="variantDataService.matDataSource" [id]="data.id"></app-variant-table>
       </mat-expansion-panel>
       <!-- CARD 2-->
-      <mat-expansion-panel class="variant-expansion-panel">
+      <mat-expansion-panel class="variant-expansion-panel" [expanded]="variantDataService.variantsArchive.toString().includes(data.id)">
         <mat-expansion-panel-header>
           <mat-panel-title>Archive</mat-panel-title>
         </mat-expansion-panel-header>
