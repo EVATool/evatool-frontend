@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {SharedModule} from '../shared/shared.module';
 import {MatListModule} from '@angular/material/list';
-import {HighlightSearchPipe} from './highlight-search.pipe';
+import {HighlightSearchPipe} from '../shared/pipes/highlightSearch/highlight-search.pipe';
 
 @NgModule({
   declarations: [StakeholderMainComponent, StakeholderTableComponent, StakeholderPrioComponent,
