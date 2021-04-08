@@ -87,11 +87,16 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       this.logger.info(this, 'Event \'removedImpact\' received from ImpactDataService');
     });
 
-    this.impactDataService.onInit();
+    //this.impactDataService.onInit();
   }
 
   ngAfterViewInit(): void {
 
+  }
+
+  reload() {
+    this.logger.info(this, 'Reload');
+    this.impactDataService.reload();
   }
 
   scrollToTop(): void {
