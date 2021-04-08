@@ -14,21 +14,25 @@ import {ImpactStakeholderDto} from '../dtos/ImpactStakeholderDto';
 import {ImpactAnalysisDto} from '../dtos/ImpactAnalysisDto';
 import {ImpactMapperService} from "../services/impact/impact-mapper.service";
 import {ImpactValueDto} from "../dtos/ImpactValueDto";
+import {LogService} from "../../shared/services/log.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SampleDataService {
 
-  public offline: boolean = true;
+  public offline: boolean = false;
 
   constructor(
+    private logger: LogService,
     private valueMapperService: ValueMapperService,
     private stakeholderMapperService: StakeholderMapperService,
     private analysisMapperService: AnalysisMapperService,
     private impactMapperService: ImpactMapperService) {
 
     this.offline &&= isDevMode(); // Production mode always makes real rest calls.
+
+    this.logger.warn(this, 'THE FOLLOWING CONVERSIONS ARE ALWAYS DONE! THEY DO NOT COME FROM THE BACKEND!');
 
     this.dummyAnalysisDtos.forEach(dto => {
       this.dummyAnalyses.push(this.analysisMapperService.fromDto(dto));
@@ -47,6 +51,8 @@ export class SampleDataService {
     });
 
     // TODO for requirements Dtos when they are in backend...
+
+    this.logger.warn(this, 'THE ABOVE CONVERSIONS ARE ALWAYS DONE! THEY DO NOT COME FROM THE BACKEND!');
   }
 
   getDummyImpact(): Impact {

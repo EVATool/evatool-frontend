@@ -1,13 +1,13 @@
-import { LogService } from '../../../shared/services/log.service';
-import { AnalysisMapperService } from './../analysis/analysis-mapper.service';
-import { Analysis } from '../../models/Analysis';
-import { Stakeholder } from '../../models/Stakeholder';
-import { Value } from '../../models/Value';
-import { StakeholderMapperService } from '../stakeholder/stakeholder-mapper.service';
-import { ValueMapperService } from '../value/value-mapper.service';
-import { ImpactDto } from '../../dtos/ImpactDto';
-import { Impact } from '../../models/Impact';
-import { Injectable } from '@angular/core';
+import {LogService} from '../../../shared/services/log.service';
+import {AnalysisMapperService} from './../analysis/analysis-mapper.service';
+import {Analysis} from '../../models/Analysis';
+import {Stakeholder} from '../../models/Stakeholder';
+import {Value} from '../../models/Value';
+import {StakeholderMapperService} from '../stakeholder/stakeholder-mapper.service';
+import {ValueMapperService} from '../value/value-mapper.service';
+import {ImpactDto} from '../../dtos/ImpactDto';
+import {Impact} from '../../models/Impact';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,8 @@ export class ImpactMapperService {
     private valueMapperService: ValueMapperService,
     private stakeholderMapperService: StakeholderMapperService,
     private analysisMapperService: AnalysisMapperService
-  ) { }
+  ) {
+  }
 
   toDto(impact: Impact): ImpactDto {
     this.logger.info(this, 'Mapping Impact to ImpactDto');
@@ -68,7 +69,7 @@ export class ImpactMapperService {
         return;
       }
     });
-
+    
     return impact;
   }
 }
