@@ -69,7 +69,7 @@ export class ImpactMapperService {
         return;
       }
     });
-    
+
     return impact;
   }
 }

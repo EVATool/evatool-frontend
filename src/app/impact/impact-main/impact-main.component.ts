@@ -44,4 +44,8 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
     this.logger.info(this, 'Filter Bar Changed');
     this.table.filterChange(event);
   }
+
+  tabActivated() {
+    this.logger.info(this, 'Tab activated')
+  }
 }
