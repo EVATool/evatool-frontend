@@ -11,10 +11,11 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatSelectChange} from '@angular/material/select';
 import {LogService} from '../../../shared/services/log.service';
 import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
-import {Value} from "../../models/Value";
 import {StakeholderDataService} from "../../services/stakeholder/stakeholder-data.service";
 import {AnalysisDataService} from "../../services/analysis/analysis-data.service";
 import {NgScrollbar} from "ngx-scrollbar";
+import {RequirementRestService} from "../../services/requirement/requirement-rest.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-impact-table',
@@ -46,7 +47,9 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     public valueDataService: ValueDataService,
     public stakeholderDataService: StakeholderDataService,
     public analysisDataService: AnalysisDataService,
-    private dialog: MatDialog) {
+    private requirementRestService: RequirementRestService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -204,7 +207,13 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   deleteImpact(impact: Impact): void {
     this.logger.info(this, 'Delete Impact');
-    this.impactDataService.deleteImpact(impact);
+    this.requirementRestService.getRequirementsReferencedByImpactId("" + impact.id).subscribe(referenced => {
+      if (!referenced) {
+        this.impactDataService.deleteImpact(impact);
+      } else {
+        this.snackBar.open('This impact is still being referenced by one or more impacts.', '', {duration: 5000})
+      }
+    });
   }
 
   stakeholderChange(impact: Impact, event: MatSelectChange): void {

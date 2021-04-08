@@ -6,12 +6,12 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {ImpactDto} from "../../dtos/ImpactDto";
 import {SampleDataService} from "../../spec/sample-data.service";
-import {MockableServiceService} from "../mockable-service.service";
+import {MockableService} from "../mockable.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ValueRestService extends MockableServiceService {
+export class ValueRestService extends MockableService {
 
   constructor(
     private logger: LogService,

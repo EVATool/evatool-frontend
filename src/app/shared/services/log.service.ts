@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 export enum LogLevel {
   Trace = 0,
@@ -14,7 +14,7 @@ export enum LogLevel {
   providedIn: 'root'
 })
 export class LogService {
-
+  // TODO add level to print
   public static readonly logLevel: LogLevel = LogLevel.Info;
 
   public static shouldLog(logLevel: LogLevel): boolean {
