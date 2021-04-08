@@ -6,8 +6,15 @@ import {AnalysisRestService} from "../services/analysis/analysis-rest.service";
 import {MockedAnalysisRestService} from "../services/analysis/analysis-rest.service.spec";
 import {ImpactRestService} from "../services/impact/impact-rest.service";
 import {MockedImpactRestService} from "../services/impact/impact-rest.service.spec";
+import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
-export class RestMockProviders {
+export class RestMock {
+  public static readonly imports: any[] = [
+    HttpClientTestingModule,
+    RouterTestingModule
+  ]
+
   public static readonly providers: any[] = [
     {
       provide: ValueRestService,

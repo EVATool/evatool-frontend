@@ -1,33 +1,20 @@
-import {RouterTestingModule} from '@angular/router/testing';
 import {TestBed} from '@angular/core/testing';
 
 import {ImpactDataService} from './impact-data.service';
 import {SampleDataService} from '../../spec/sample-data.service';
-import {ImpactRestService} from './impact-rest.service';
-import {StakeholderRestService} from '../stakeholder/stakeholder-rest.service';
-import {AnalysisRestService} from '../analysis/analysis-rest.service';
-import {ValueRestService} from '../value/value-rest.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {RestMockProviders} from "../../spec/RestMockProviders";
+import {RestMock} from "../../spec/RestMock";
 
 describe('ImpactDataService', () => {
-  let sampleData: SampleDataService;
-  let stakeholderRestService: StakeholderRestService;
-  let analysisRestService: AnalysisRestService;
-  let valueRestService: ValueRestService;
-  let restService: ImpactRestService;
+  let data: SampleDataService;
   let service: ImpactDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: RestMockProviders.providers
+      imports: RestMock.imports,
+      providers: RestMock.providers
     });
-    sampleData = TestBed.inject(SampleDataService);
-    stakeholderRestService = TestBed.inject(StakeholderRestService);
-    analysisRestService = TestBed.inject(AnalysisRestService);
-    valueRestService = TestBed.inject(ValueRestService);
-    restService = TestBed.inject(ImpactRestService);
+
+    data = TestBed.inject(SampleDataService);
     service = TestBed.inject(ImpactDataService);
   });
 
@@ -53,7 +40,7 @@ describe('ImpactDataService', () => {
       service.onInit();
 
       // Act
-      service.createImpact();
+      service.createImpact(data.dummyImpacts[0]);
 
       // Assert
       expect(service.addedImpact.emit).toHaveBeenCalled();
@@ -90,51 +77,45 @@ describe('ImpactDataService', () => {
       service.onInit();
 
       // Assert
-      expect(service.impacts).toEqual(sampleData.dummyImpacts);
+      expect(service.impacts).toEqual(data.dummyImpacts);
     });
   });
 
-  describe('#createImpact', () => {
-    it('should create a new Impact', () => {
-      // Arrange
-      service.onInit();
+  it('should create a new Impact', () => {
+    // Arrange
+    service.onInit();
 
-      // Act
-      const existingImpacts = service.impacts.length;
-      service.createImpact();
+    // Act
+    const existingImpacts = service.impacts.length;
+    service.createImpact(data.dummyImpacts[0]);
 
-      // Assert
-      expect(service.impacts.length).toBe(existingImpacts + 1);
-    });
+    // Assert
+    expect(service.impacts.length).toBe(existingImpacts + 1);
   });
 
-  describe('#updateImpact', () => {
-    it('should update an Impact', () => {
-      // Arrange
-      service.onInit();
+  it('should update an Impact', () => {
+    // Arrange
+    service.onInit();
 
-      // Act
-      const updateImpact = service.impacts[0];
-      updateImpact.description = "New Description";
-      service.updateImpact(updateImpact);
+    // Act
+    const updateImpact = service.impacts[0];
+    updateImpact.description = "New Description";
+    service.updateImpact(updateImpact);
 
-      // Assert
-      expect(service.impacts).toContain(updateImpact);
-    });
+    // Assert
+    expect(service.impacts).toContain(updateImpact);
   });
 
-  describe('#deleteImpact', () => {
-    it('should delete an Impact', () => {
-      // Arrange
-      service.onInit();
+  it('should delete an Impact', () => {
+    // Arrange
+    service.onInit();
 
-      // Act
-      const existingImpacts = service.impacts.length;
-      const deleteImpact = service.impacts[0];
-      service.deleteImpact(deleteImpact);
+    // Act
+    const existingImpacts = service.impacts.length;
+    const deleteImpact = service.impacts[0];
+    service.deleteImpact(deleteImpact);
 
-      // Assert
-      expect(service.impacts.length).toBe(existingImpacts - 1);
-    });
+    // Assert
+    expect(service.impacts.length).toBe(existingImpacts - 1);
   });
 });

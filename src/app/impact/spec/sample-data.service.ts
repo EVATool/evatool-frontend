@@ -1,5 +1,4 @@
-import {Observable} from 'rxjs';
-import {Injectable} from '@angular/core';
+import {Injectable, isDevMode} from '@angular/core';
 import {StakeholderMapperService} from '../services/stakeholder/stakeholder-mapper.service';
 import {AnalysisMapperService} from '../services/analysis/analysis-mapper.service';
 import {ValueMapperService} from '../services/value/value-mapper.service';
@@ -21,11 +20,15 @@ import {ImpactValueDto} from "../dtos/ImpactValueDto";
 })
 export class SampleDataService {
 
+  public offline: boolean = true;
+
   constructor(
     private valueMapperService: ValueMapperService,
     private stakeholderMapperService: StakeholderMapperService,
     private analysisMapperService: AnalysisMapperService,
     private impactMapperService: ImpactMapperService) {
+
+    this.offline &&= isDevMode(); // Production mode always makes real rest calls.
 
     this.dummyAnalysisDtos.forEach(dto => {
       this.dummyAnalyses.push(this.analysisMapperService.fromDto(dto));
@@ -47,32 +50,15 @@ export class SampleDataService {
   }
 
   getDummyImpact(): Impact {
-    const impact = new Impact();
-    impact.id = 'imapctId';
-    impact.value = 0.0;
-    impact.description = 'imapctDescription';
-    impact.valueEntity = this.getDummyValue();
-    impact.stakeholder = this.getDummyStakeholder();
-    impact.analysis = this.getDummyAnalysis();
-    return impact;
+    return this.dummyImpacts[0];
   }
 
   getDummyImpactDto(): ImpactDto {
-    const impactDto = new ImpactDto();
-    impactDto.id = 'imapctId';
-    impactDto.value = 0.0;
-    impactDto.description = 'imapctDescription';
-    impactDto.valueEntity = this.getDummyValueDto();
-    impactDto.stakeholder = this.getDummyImpactStakeholderDto();
-    impactDto.analysis = this.getDummyImpactAnalysisDto();
-    return impactDto;
+    return this.impactMapperService.toDto(this.getDummyImpact());
   }
 
   getDummyImpactDtoWithMyChildren(value: Value, stakeholder: Stakeholder, analysis: Analysis): ImpactDto {
-    const impactDto = new ImpactDto();
-    impactDto.id = 'impactId';
-    impactDto.value = 0.0;
-    impactDto.description = 'impactDescription';
+    const impactDto = this.getDummyImpactDto();
     impactDto.valueEntity = this.valueMapperService.toImpactDto(value);
     impactDto.stakeholder = this.stakeholderMapperService.toImpactDto(stakeholder);
     impactDto.analysis = this.analysisMapperService.toImpactDto(analysis);
@@ -80,74 +66,39 @@ export class SampleDataService {
   }
 
   getDummyValue(): Value {
-    const value = new Value();
-    value.id = 'valueId';
-    value.name = 'valueName';
-    value.type = 'valueType';
-    value.description = 'valueDescription';
-    return value;
+    return this.dummyValues[0];
   }
 
   getDummyValueDto(): ValueDto {
-    const valueDto = new ValueDto();
-    valueDto.id = 'valueId';
-    valueDto.name = 'valueName';
-    valueDto.type = 'valueType';
-    valueDto.description = 'valueDescription';
-    return valueDto;
+    return this.valueMapperService.toDto(this.getDummyValue());
   }
 
   getDummyImpactValueDto(): ImpactValueDto {
-    const impactValueDto = new ImpactValueDto();
-    impactValueDto.id = 'valueId';
-    impactValueDto.name = 'valueName';
-    impactValueDto.type = 'valueType';
-    impactValueDto.description = 'valueDescription';
-    return impactValueDto;
+    return this.valueMapperService.toImpactDto(this.getDummyValue());
   }
 
   getDummyStakeholder(): Stakeholder {
-    const stakeholder = new Stakeholder();
-    stakeholder.id = 'stakeholderId';
-    stakeholder.name = 'stakeholderName';
-    return stakeholder;
+    return this.dummyStakeholders[0];
   }
 
   getDummyStakeholderDto(): StakeholderDto {
-    const stakeholderDto = new StakeholderDto();
-    stakeholderDto.rootEntityID = 'stakeholderId';
-    return stakeholderDto;
+    return this.stakeholderMapperService.toDto(this.getDummyStakeholder());
   }
 
   getDummyImpactStakeholderDto(): ImpactStakeholderDto {
-    const stakeholderDto = new ImpactStakeholderDto();
-    stakeholderDto.id = 'stakeholderId';
-    return stakeholderDto;
+    return this.stakeholderMapperService.toImpactDto(this.getDummyStakeholder());
   }
 
   getDummyAnalysis(): Analysis {
-    const analysis = new Analysis();
-    analysis.id = 'analysisId';
-    return analysis;
+    return this.dummyAnalyses[0];
   }
 
   getDummyAnalysisDto(): AnalysisDto {
-    const analysisDto = new AnalysisDto();
-    analysisDto.rootEntityID = 'analysisId';
-    return analysisDto;
+    return this.analysisMapperService.toDto(this.getDummyStakeholder());
   }
 
   getDummyImpactAnalysisDto(): ImpactAnalysisDto {
-    const analysisDto = new ImpactAnalysisDto();
-    analysisDto.id = 'analysisId';
-    return analysisDto;
-  }
-
-  getObservable<T>(content: T): Observable<T> {
-    return new Observable((observer) => {
-      observer.next(content);
-      observer.complete();
-    });
+    return this.analysisMapperService.toImpactDto(this.getDummyStakeholder());
   }
 
   readonly dummyAnalysisDtos: AnalysisDto[] = [
@@ -167,18 +118,22 @@ export class SampleDataService {
 
   readonly dummyAnalyses: Analysis[] = []
 
-  readonly dummyStakeholderDtos: StakeholderDto[] = [
+  readonly dummyStakeholderDtos: any[] = [
     {
-      rootEntityID: '1', stakeholderName: 'Patient'
+      rootEntityID: '1', stakeholderName: 'Patient', stakeholderLevel: 'NATURAL_PERSON',
+      analysis: {rootEntityID: 1}
     },
     {
-      rootEntityID: '2', stakeholderName: 'Doctor'
+      rootEntityID: '2', stakeholderName: 'Doctor', stakeholderLevel: 'NATURAL_PERSON',
+      analysis: {rootEntityID: 1}
     },
     {
-      rootEntityID: '3', stakeholderName: 'Family'
+      rootEntityID: '3', stakeholderName: 'Family', stakeholderLevel: 'NATURAL_PERSON',
+      analysis: {rootEntityID: 1}
     },
     {
-      rootEntityID: '4', stakeholderName: 'Ensurance'
+      rootEntityID: '4', stakeholderName: 'Insurance', stakeholderLevel: 'NATURAL_PERSON',
+      analysis: {rootEntityID: 1}
     }
   ];
 
@@ -186,34 +141,44 @@ export class SampleDataService {
 
   readonly dummyValueDtos: ValueDto[] = [
     {
-      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL'
+      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL'
+      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL'
+      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '5', name: 'Care', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '5', name: 'Care', description: 'Economics of Family', type: 'ECONOMIC',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '6', name: 'Privacy', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '6', name: 'Privacy', description: 'Economics of Family', type: 'ECONOMIC',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '7', name: 'Self-Conception', description: 'Economics of Family', type: 'SOCIAL'
+      id: '7', name: 'Self-Conception', description: 'Economics of Family', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '8', name: 'Participation', description: 'Economics of Family', type: 'SOCIAL'
+      id: '8', name: 'Participation', description: 'Economics of Family', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '9', name: 'Autonomy', description: 'Economics of Family', type: 'ECONOMIC'
+      id: '9', name: 'Autonomy', description: 'Economics of Family', type: 'ECONOMIC',
+      analysis: {rootEntityID: '1'}
     },
     {
-      id: '10', name: 'Irgendwas', description: 'Economics of Family', type: 'SOCIAL'
+      id: '10', name: 'Irgendwas', description: 'Economics of Family', type: 'SOCIAL',
+      analysis: {rootEntityID: '1'}
     }
   ];
 
@@ -226,7 +191,7 @@ export class SampleDataService {
       id: '11111',
       uniqueString: 'IMP1',
       value: -0.3,
-      description: 'This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact This is the first read-only impact ',
+      description: 'This is the first read-only impact',
       valueEntity: {id: '1'},
       stakeholder: {id: '1'},
       analysis: {id: '1'}

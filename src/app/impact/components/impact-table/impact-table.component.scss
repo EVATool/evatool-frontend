@@ -1,27 +1,78 @@
 /* Table */
 
-table {
+.mat-table {
   width: 100%;
+  height: 80px;
+
+  &.resizing {
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: col-resize;
+  }
+
+  .mat-cell {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mat-cell:last-child, .mat-header-cell:last-child {
+    border-right: 0 solid rgba(0, 0, 0, 0.12);
+  }
+
+  .mat-cell, .mat-header-cell {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+
+    &:not(:nth-child(1)) {
+      padding: 0 10px;
+    }
+  }
+
+  .mat-header-cell {
+    position: relative;
+    border-right: 0 solid rgba(0, 0, 0, 0.12);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+
+    &:not(:last-child) {
+      .resize-holder {
+        cursor: col-resize;
+        width: 20px;
+        height: 100%;
+        position: absolute;
+        right: -10px;
+        top: 0;
+        z-index: 100;
+      }
+    }
+  }
+}
+
+.mat-list.list-horizontal {
+  .mat-list-item {
+    vertical-align: middle;
+    display: inline-block;
+    height: auto;
+    width: auto;
+  }
 }
 
 .mat-column-uniqueString {
-  width: 8% !important;
+  width: 80px;
 }
 
 .mat-column-stakeholder {
-  width: 10% !important;
+  width: 300px;
 }
 
 .mat-column-valueEntity {
-  width: 10% !important;
+  width: 200px;
 }
 
 .mat-column-value {
-  width: 15% !important;
+  width: 150px;
 }
 
 .mat-column-description {
-  width: 60% !important;
   text-overflow: ellipsis;
 }
 
@@ -29,23 +80,12 @@ table {
   height: auto;
 }
 
-.mat-header-cell {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.12);
-  padding: 5px;
-}
-
 .mat-cell {
   padding: 8px;
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.mat-cell:first-child {
-  border-left: 0 solid rgba(0, 0, 0, 0);
-}
-
-#value-modal {
-  margin-left: 10px;
+#valueEntity-modal {
+  margin-left: 5%;
 }
 
 .impact-slider-container {
@@ -93,4 +133,48 @@ table {
 .mat-row:focus-within .delete-button-container {
   opacity: 0.5;
   transition: 250ms ease-out 100ms;
+}
+
+/* Add row button */
+
+.container {
+  overflow: hidden;
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  mat-table {
+    flex: 1 1 auto;
+  }
+
+  .add-impact-button-container {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
+    display: inline-block;
+    opacity: 0.8;
+    transition: 250ms ease-out 100ms;
+    z-index: 10;
+    flex: 0 1 auto;
+
+    .add-impact-text-container {
+      margin-left: 1.5vw;
+      display: inline-block;
+      font-size: 150%;
+    }
+  }
+}
+
+.add-impact-button-container:focus-within, .add-impact-button-container:hover {
+  opacity: 1 !important;
+  transition: 250ms ease-out 100ms;
+}
+
+/* Scroll to top button */
+
+.scroll-to-top {
+  position: fixed;
+  top: 125px;
+  right: 30px;
+  z-index: 10;
 }

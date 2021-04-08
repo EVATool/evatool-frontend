@@ -1,14 +1,14 @@
-import { LogService } from '../../../shared/services/log.service';
-import { ImpactRestService } from './impact-rest.service';
-import { Analysis } from '../../models/Analysis';
-import { Value } from '../../models/Value';
-import { Stakeholder } from '../../models/Stakeholder';
-import { ImpactMapperService } from './impact-mapper.service';
-import { AnalysisDataService } from '../analysis/analysis-data.service';
-import { ValueDataService } from '../value/value-data.service';
-import { StakeholderDataService } from '../stakeholder/stakeholder-data.service';
-import { Impact } from '../../models/Impact';
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import {LogService} from '../../../shared/services/log.service';
+import {ImpactRestService} from './impact-rest.service';
+import {Analysis} from '../../models/Analysis';
+import {Value} from '../../models/Value';
+import {Stakeholder} from '../../models/Stakeholder';
+import {ImpactMapperService} from './impact-mapper.service';
+import {AnalysisDataService} from '../analysis/analysis-data.service';
+import {ValueDataService} from '../value/value-data.service';
+import {StakeholderDataService} from '../stakeholder/stakeholder-data.service';
+import {Impact} from '../../models/Impact';
+import {Injectable, Output, EventEmitter} from '@angular/core';
 import {ImpactDto} from "../../dtos/ImpactDto";
 
 @Injectable({
@@ -22,45 +22,39 @@ export class ImpactDataService {
   @Output() changedImpacts: EventEmitter<Impact[]> = new EventEmitter();
 
   impacts: Impact[] = [];
-  private impactsLoaded = false;
-  stakeholders: Stakeholder[] = [];
+  public impactsLoaded = false;
   private stakeholdersLoaded = false;
-  values: Value[] = [];
   private valuesLoaded = false;
-  analyses: Analysis[] = [];
   private analysesLoaded = false;
 
   constructor(
     private logger: LogService,
     private impactMapperService: ImpactMapperService,
     private impactRestService: ImpactRestService,
-    private stakeholderDataService: StakeholderDataService,
-    private valueDataService: ValueDataService,
-    private analysisDataService: AnalysisDataService) {
+    public stakeholderDataService: StakeholderDataService,
+    public valueDataService: ValueDataService,
+    public analysisDataService: AnalysisDataService) {
   }
 
   onInit(): void {
     this.stakeholderDataService.loadedStakeholders.subscribe(stakeholders => {
-      this.stakeholders = stakeholders;
       this.stakeholdersLoaded = true;
       this.loadIfChildrenAreLoaded();
     });
 
     this.valueDataService.loadedValues.subscribe(values => {
-      this.values = values;
       this.valuesLoaded = true;
       this.loadIfChildrenAreLoaded();
     });
 
     this.analysisDataService.loadedAnalyses.subscribe(currentAnalysis => {
-      this.analyses = [currentAnalysis];
       this.analysesLoaded = true;
       this.loadIfChildrenAreLoaded();
     });
 
     this.stakeholderDataService.onInit();
     this.valueDataService.onInit();
-    this.analysisDataService.onInit();
+    //this.analysisDataService.onInit();
   }
 
   private loadIfChildrenAreLoaded(): void {
@@ -70,20 +64,23 @@ export class ImpactDataService {
         imps.sort((a, b) => this.sortImpactsById(a, b));
         let fromDtos: Impact[] = [];
         imps.forEach(imp => {
-          fromDtos.push(this.impactMapperService.fromDto(imp, this.values, this.stakeholders, this.analyses));
+          fromDtos.push(this.impactMapperService.fromDto(imp,
+            this.valueDataService.values,
+            this.stakeholderDataService.stakeholders,
+            [this.analysisDataService.getCurrentAnalysis()]));
         });
         this.impacts = fromDtos;
         this.logger.info(this, 'Impacts loaded');
-        this.loadedImpacts.emit(this.impacts);
         this.impactsLoaded = true;
+        this.loadedImpacts.emit(this.impacts);
       });
     }
   }
 
   private sortImpactsById(a: ImpactDto, b: ImpactDto): number {
     this.logger.debug(this, 'Sorting Impacts By Id');
-    const numberA = + ("" + a.uniqueString?.replace("IMP", ""));
-    const numberB = + ("" + b.uniqueString?.replace("IMP", ""));
+    const numberA = +("" + a.uniqueString?.replace("IMP", ""));
+    const numberB = +("" + b.uniqueString?.replace("IMP", ""));
     return numberA > numberB ? 1 : -1;
   }
 
@@ -91,22 +88,8 @@ export class ImpactDataService {
     return this.stakeholdersLoaded && this.valuesLoaded && this.analysesLoaded;
   }
 
-  private createDefaultImpact(): Impact {
-    this.logger.debug(this, 'Create Default Impact');
-    const impact = new Impact();
-
-    impact.value = 0.0;
-    impact.description = '';
-    impact.valueEntity = this.valueDataService.getDefaultValue();
-    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
-    impact.analysis = this.analysisDataService.getCurrentAnalysis();
-
-    return impact;
-  }
-
-  createImpact(): void {
+  createImpact(impact: Impact): void {
     this.logger.info(this, 'Create Impact');
-    const impact = this.createDefaultImpact();
     const impactDto = this.impactMapperService.toDto(impact);
     this.impactRestService.createImpact(impactDto).subscribe(impDto => {
       impact.id = impDto.id;
@@ -122,7 +105,7 @@ export class ImpactDataService {
     const impactDto = this.impactMapperService.toDto(impact);
     this.impactRestService.updateImpact(impactDto).subscribe((newImpact: Impact) => {
       this.changedImpact.emit(newImpact);
-      // this.changedImpacts.emit(this.impacts);
+      // this.changedImpacts.emit(this.impacts); // The change originated from the UI.
     });
   }
 

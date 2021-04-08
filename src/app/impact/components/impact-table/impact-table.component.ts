@@ -1,16 +1,20 @@
-import { ValueDialogComponent } from './components/value-dialog/value-dialog.component';
-import { ImpactTableFilterEvent } from '../impact-table-filter-bar/ImpactTableFilterEvent';
-import { MatSliderChange } from '@angular/material/slider';
-import { ValueDataService } from '../../services/value/value-data.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ImpactDataService } from '../../services/impact/impact-data.service';
-import { Impact } from '../../models/Impact';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatSelectChange } from '@angular/material/select';
-import { LogService } from '../../../shared/services/log.service';
-import { SliderFilterBoundary, SliderFilterType } from '../../../shared/components/impact-slider/SliderFilterSettings';
+import {ValueDialogComponent} from './components/value-dialog/value-dialog.component';
+import {ImpactTableFilterEvent} from '../impact-table-filter-bar/ImpactTableFilterEvent';
+import {MatSliderChange} from '@angular/material/slider';
+import {ValueDataService} from '../../services/value/value-data.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ImpactDataService} from '../../services/impact/impact-data.service';
+import {Impact} from '../../models/Impact';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatSelectChange} from '@angular/material/select';
+import {LogService} from '../../../shared/services/log.service';
+import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
+import {Value} from "../../models/Value";
+import {StakeholderDataService} from "../../services/stakeholder/stakeholder-data.service";
+import {AnalysisDataService} from "../../services/analysis/analysis-data.service";
+import {NgScrollbar} from "ngx-scrollbar";
 
 @Component({
   selector: 'app-impact-table',
@@ -18,14 +22,15 @@ import { SliderFilterBoundary, SliderFilterType } from '../../../shared/componen
   styleUrls: ['./impact-table.component.scss', '../../../layout/style/style.css']
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   // Used by table.
   displayedColumns: string[] = ['uniqueString', 'stakeholder', 'valueEntity', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
+  windowScrolled = false;
 
-  // TODO: Extend these for more complex queries.
   filterValues: any = {
     id: '',
     stakeholder: [],
@@ -39,15 +44,17 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     private logger: LogService,
     public impactDataService: ImpactDataService,
     public valueDataService: ValueDataService,
+    public stakeholderDataService: StakeholderDataService,
+    public analysisDataService: AnalysisDataService,
     private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.scrollbarRef?.scrolled.subscribe(e => {
+      this.logger.info(this, 'Event \'scrolled\' received from Scrollbar');
+      this.windowScrolled = e.target.scrollTop !== 0;
+    });
 
-  }
-
-  ngAfterViewInit(): void {
-    // TODO: Show added impact when working with new analysis
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
       this.logger.info(this, 'Event \'loadedImpacts\' received from ImpactDataService');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
@@ -61,14 +68,15 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         this.tableDataSource = new MatTableDataSource<Impact>(impacts);
         this.initSorting();
         this.initFiltering();
-      }
-      else {
+      } else {
         this.tableDataSource.data = impacts;
       }
     });
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
+      const options = {bottom: -100, duration: 250};
+      this.scrollbarRef.scrollTo(options);
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
@@ -82,14 +90,27 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.impactDataService.onInit();
   }
 
+  ngAfterViewInit(): void {
+
+  }
+
+  scrollToTop(): void {
+    this.logger.info(this, 'Scroll To Top');
+    const options = {top: 0, duration: 250};
+    this.scrollbarRef.scrollTo(options);
+  }
+
   private initSorting(): void {
     this.logger.info(this, 'Init Sorting');
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
-        case 'stakeholder': return impact.stakeholder.name;
-        case 'valueEntity': return impact.valueEntity.name;
-        default: return impact[property];
+        case 'stakeholder':
+          return impact.stakeholder.name;
+        case 'valueEntity':
+          return impact.valueEntity.name;
+        default:
+          return impact[property];
       }
     };
   }
@@ -101,7 +122,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   private initFiltering(): void {
     this.logger.info(this, 'Init Filtering');
-
     this.tableDataSource.filterPredicate = this.createFilter();
   }
 
@@ -160,7 +180,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   clearSort(): void {
-    this.sort.sort({ id: '', start: 'desc', disableClear: false });
+    this.sort.sort({id: '', start: 'desc', disableClear: false});
   }
 
   filterChange(event: ImpactTableFilterEvent): void {
@@ -189,6 +209,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   valueEntityChange(impact: Impact, event: MatSelectChange): void {
     this.logger.info(this, 'Value changed');
+    impact.highlight = false;
     this.updateImpact(impact);
   }
 
@@ -206,18 +227,40 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   openValueModal(): void {
-    // if (!this.dimensionDataService.loaded) {
-    //  this.logger.info(this, 'Dimensions not yet loaded');
-    //  return;
-    // }
     this.logger.info(this, 'Opening Value Modal Dialog');
     const dialogRef = this.dialog.open(ValueDialogComponent, {
       height: '80%',
       width: '50%',
-      data: { parameter: 'I left this here because maybe we will need it c:' }
+      data: {parameter: 'I left this here because maybe we will need it c:'}
     });
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((data) => {
       this.logger.info(this, 'Closing Value Modal Dialog');
+
+      // Highlighting of impacts referencing value.
+      if (data?.showReferencedImpacts) {
+        this.impactDataService.impacts.forEach(impact => {
+          impact.highlight = impact.valueEntity === data.value;
+        });
+      }
     });
+  }
+
+  private createDefaultImpact(): Impact {
+    this.logger.debug(this, 'Create Default Impact');
+    const impact = new Impact();
+
+    impact.value = 0.0;
+    impact.description = '';
+    impact.valueEntity = this.valueDataService.getDefaultValue();
+    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
+    impact.analysis = this.analysisDataService.getCurrentAnalysis();
+
+    return impact;
+  }
+
+  addButtonClicked(): void {
+    this.logger.info(this, 'Add Button Clicked');
+    const impact = this.createDefaultImpact();
+    this.impactDataService.createImpact(impact);
   }
 }

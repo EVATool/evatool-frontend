@@ -1,17 +1,21 @@
-import { LogService } from '../../../shared/services/log.service';
-import { ValueDto } from '../../dtos/ValueDto';
-import { Value } from '../../models/Value';
-import { Injectable } from '@angular/core';
+import {LogService} from '../../../shared/services/log.service';
+import {ValueDto} from '../../dtos/ValueDto';
+import {Value} from '../../models/Value';
+import {Injectable} from '@angular/core';
 import {Stakeholder} from "../../models/Stakeholder";
 import {ImpactStakeholderDto} from "../../dtos/ImpactStakeholderDto";
 import {ImpactValueDto} from "../../dtos/ImpactValueDto";
+import {AnalysisMapperService} from "../analysis/analysis-mapper.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValueMapperService {
 
-  constructor(private logger: LogService) { }
+  constructor(
+    private logger: LogService,
+    private analysisMapperServive: AnalysisMapperService) {
+  }
 
   toDto(value: Value): ValueDto {
     this.logger.info(this, 'Mapping Value to ValueDto');
@@ -21,6 +25,7 @@ export class ValueMapperService {
     valueDto.name = value.name;
     valueDto.type = value.type;
     valueDto.description = value.description;
+    valueDto.analysis = this.analysisMapperServive.toDto(value.analysis);
 
     return valueDto;
   }
@@ -33,6 +38,7 @@ export class ValueMapperService {
     value.name = valueDto.name;
     value.type = valueDto.type;
     value.description = valueDto.description;
+    value.analysis = this.analysisMapperServive.fromDto(valueDto.analysis);
 
     return value;
   }
@@ -45,6 +51,7 @@ export class ValueMapperService {
     impactValueDto.name = value.name;
     impactValueDto.type = value.type;
     impactValueDto.description = value.description;
+    impactValueDto.analysis = this.analysisMapperServive.toImpactDto(value.analysis);
 
     return impactValueDto;
   }
@@ -57,6 +64,7 @@ export class ValueMapperService {
     value.name = impactValueDto.name;
     value.type = impactValueDto.type;
     value.description = impactValueDto.description;
+    value.analysis = this.analysisMapperServive.fromImpactDto(impactValueDto.analysis);
 
     return value;
   }

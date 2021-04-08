@@ -1,9 +1,10 @@
-import { HttpClientModule } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {FormBuilder} from '@angular/forms';
+import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ValueDialogComponent } from './value-dialog.component';
+import {ValueDialogComponent} from './value-dialog.component';
+import {RestMock} from "../../../../spec/RestMock";
 
 describe('ValueDialogComponent', () => {
   let component: ValueDialogComponent;
@@ -12,10 +13,10 @@ describe('ValueDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ValueDialogComponent],
-      imports: [MatDialogModule, HttpClientModule],
+      imports: RestMock.imports.concat([MatDialogModule, HttpClientModule]),
       providers: [FormBuilder,
-        { provide: MatDialogRef, useValue: {} },
-        { provide: MAT_DIALOG_DATA, useValue: {} }]
+        {provide: MatDialogRef, useValue: {}},
+        {provide: MAT_DIALOG_DATA, useValue: {}}]
     })
       .compileComponents();
   });

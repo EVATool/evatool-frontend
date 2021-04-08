@@ -1,7 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ValueTableComponent } from './value-table.component';
+import {ValueTableComponent} from './value-table.component';
+import {RestMock} from "../../../../../../spec/RestMock";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('ValueTableComponent', () => {
   let component: ValueTableComponent;
@@ -9,10 +10,9 @@ describe('ValueTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      declarations: [ ValueTableComponent ]
-    })
-    .compileComponents();
+      imports: RestMock.imports.concat([MatSnackBarModule]),
+      declarations: [ValueTableComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

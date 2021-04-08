@@ -1,12 +1,14 @@
-import { HighlightSearchComponent } from '../../../shared/components/search-bar/highlight-search.component';
-import { ValueDataService } from '../../services/value/value-data.service';
-import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
-import { ColumnSliderFilterComponent } from '../../../shared/components/column-slider-filter/column-slider-filter.component';
-import { ImpactTableFilterEvent } from './ImpactTableFilterEvent';
-import { LogService } from '../../../shared/services/log.service';
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/SliderFilterSettings';
-import { ColumnCategoryFilterComponent } from '../../../shared/components/column-category-filter/column-category-filter.component';
+import {HighlightSearchComponent} from '../../../shared/components/search-bar/highlight-search.component';
+import {ValueDataService} from '../../services/value/value-data.service';
+import {StakeholderDataService} from '../../services/stakeholder/stakeholder-data.service';
+import {ColumnSliderFilterComponent} from '../../../shared/components/column-slider-filter/column-slider-filter.component';
+import {ImpactTableFilterEvent} from './ImpactTableFilterEvent';
+import {LogService} from '../../../shared/services/log.service';
+import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {SliderFilterSettings} from 'src/app/shared/components/impact-slider/SliderFilterSettings';
+import {ColumnCategoryFilterComponent} from '../../../shared/components/column-category-filter/column-category-filter.component';
+import {Value} from "../../models/Value";
+import {Stakeholder} from "../../models/Stakeholder";
 
 @Component({
   selector: 'app-impact-table-filter-bar',
@@ -35,11 +37,28 @@ export class ImpactTableFilterBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.stakeholderDataService.loadedStakeholders.subscribe((stakeholders) => {
-      this.stakeholderNames = stakeholders.map(value => value.name);
+      this.stakeholdersChanged(stakeholders);
     });
 
     this.valueDataService.loadedValues.subscribe((values) => {
-      this.valueNames = values.map(value => value.name);
+      this.valuesChanged(values);
+    });
+    this.valueDataService.changedValues.subscribe((values) => {
+      this.valuesChanged(values);
+    });
+  }
+
+  stakeholdersChanged(stakeholders: Stakeholder[]) {
+    const names = stakeholders.map(value => value.name);
+    names.forEach(name => {
+      this.stakeholderNames.push(name);
+    });
+  }
+
+  valuesChanged(values: Value[]) {
+    const names = values.map(value => value.name);
+    names.forEach(name => {
+      this.valueNames.push(name);
     });
   }
 

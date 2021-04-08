@@ -14,6 +14,8 @@ export class Impact {
   stakeholder!: Stakeholder;
   analysis!: Analysis;
 
+  highlight = false;
+
   equalsDto(that: ImpactDto): boolean {
     return this.id === that.id
       && this.uniqueString === that.uniqueString
