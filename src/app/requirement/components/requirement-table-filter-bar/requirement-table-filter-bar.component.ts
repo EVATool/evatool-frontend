@@ -1,10 +1,11 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ColumnCategoryFilterComponent} from '../../../shared/components/column-category-filter/column-category-filter.component';
-import {ImpactTableFilterEvent} from '../../../impact/components/impact-table-filter-bar/ImpactTableFilterEvent';
 import{RequirementTableFilterEvent} from '../../../requirement/components/requirement-table-filter-bar/RequirementTableFilterEvent';
 import {SliderFilterSettings} from '../../../shared/components/impact-slider/SliderFilterSettings';
 import {ColumnSliderFilterComponent} from '../../../shared/components/column-slider-filter/column-slider-filter.component';
 import {HighlightSearchComponent} from '../../../shared/components/search-bar/highlight-search.component';
+import {DimensionDataService} from '../../../impact/services/dimension/dimension-data.service';
+import {VariantsDataService} from '../../services/variants/variants-data.service';
 
 @Component({
   selector: 'app-requirement-table-filter-bar',
@@ -18,12 +19,20 @@ export class RequirementTableFilterBarComponent implements OnInit {
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<RequirementTableFilterEvent>();
   variantsNames: string[] = [];
+  valueSystemNames: string[] = [];
 
   requirementTableFilterEvent!: RequirementTableFilterEvent;
   suppressChildEvent = false;
-  constructor() { }
+  constructor(
+    private variantsDataService: VariantsDataService,
+    private dimensionDataService: DimensionDataService) {
+    this.requirementTableFilterEvent = RequirementTableFilterEvent.getDefault();
+  }
 
   ngOnInit(): void {
+    // this.dimensionDataService.loadedDimensions.subscribe((dimensions)=>){
+    //   this.valueSystemNames = dimensions.map(value => value.name);
+    // }
   }
 
   variantsFilterChanged(event: string[]): void {
