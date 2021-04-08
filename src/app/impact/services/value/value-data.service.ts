@@ -74,7 +74,7 @@ export class ValueDataService {
     const valueDto = this.valueMapperService.toDto(value);
     this.valueRestService.updateValue(valueDto).subscribe((newValue: Value) => {
       this.changedValue.emit(newValue);
-      // this.changedImpacts.emit(this.impacts); // The change originated from the UI.
+      this.changedValues.emit(this.values);
     });
   }
 
