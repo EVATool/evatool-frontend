@@ -49,17 +49,11 @@ export class ImpactTableFilterBarComponent implements OnInit {
   }
 
   stakeholdersChanged(stakeholders: Stakeholder[]) {
-    const names = stakeholders.map(value => value.name);
-    names.forEach(name => {
-      this.stakeholderNames.push(name);
-    });
+    this.stakeholderNames = stakeholders.map(value => value.name);
   }
 
   valuesChanged(values: Value[]) {
-    const names = values.map(value => value.name);
-    names.forEach(name => {
-      this.valueNames.push(name);
-    });
+    this.valueNames = values.filter(value => !value.disable).map(value => value.name);
   }
 
   valueFilterChanged(event: SliderFilterSettings): void {

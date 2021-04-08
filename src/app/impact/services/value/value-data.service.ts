@@ -57,6 +57,10 @@ export class ValueDataService {
   createValue(value: Value) {
     this.logger.info(this, 'Create Value');
     const valueDto = this.valueMapperService.toDto(value);
+
+    valueDto.analysis.analysisName = "";
+    valueDto.analysis.analysisDescription = "";
+
     this.valueRestService.createValue(valueDto).subscribe((valDto: Value) => {
       value.id = valDto.id;
       this.values.push(value);
@@ -70,7 +74,7 @@ export class ValueDataService {
     const valueDto = this.valueMapperService.toDto(value);
     this.valueRestService.updateValue(valueDto).subscribe((newValue: Value) => {
       this.changedValue.emit(newValue);
-      // this.changedImpacts.emit(this.impacts); // The change originated from the UI.
+      this.changedValues.emit(this.values);
     });
   }
 

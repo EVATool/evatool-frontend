@@ -8,6 +8,8 @@ export class RestSettings {
     })
   };
 
+  private static readonly useLocalhost = false;
+
   private static readonly serverIp = '79.171.179.211';
   private static readonly serverPort = '443';
   private static readonly baseUrl = `http://${RestSettings.serverIp}:${RestSettings.serverPort}`;

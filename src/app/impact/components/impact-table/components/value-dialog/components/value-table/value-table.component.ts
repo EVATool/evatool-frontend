@@ -7,6 +7,7 @@ import {ImpactDataService} from "../../../../../../services/impact/impact-data.s
 import {LogService} from "../../../../../../../shared/services/log.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AnalysisDataService} from "../../../../../../services/analysis/analysis-data.service";
+import {Impact} from "../../../../../../models/Impact";
 
 @Component({
   selector: 'app-value-table',
@@ -30,18 +31,28 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    const values: Value[] = this.valueDataService.values.filter(val => val.type === this.type);
-    this.tableDataSource = new MatTableDataSource<Value>(values);
+    this.logger.info(this, 'Manually initializing ValueTalbe (type=' + this.type + ')');
+    const filteredValues: Value[] = this.filterValues();
+    this.tableDataSource = new MatTableDataSource<Value>(filteredValues);
     this.initSorting();
 
-    this.valueDataService.changedValues.subscribe(vals => { // TODO find a better way to ensure events are caught when data is at length 0 after it has been loaded.
-      if (this.tableDataSource.data.length == 0) {
-        this.tableDataSource = new MatTableDataSource<Value>(vals);
-        this.initSorting();
-      } else {
-        this.tableDataSource.data = vals.filter(val => val.type === this.type);
-      }
+    this.valueDataService.loadedValues.subscribe(vals => {
+      this.logger.info(this, 'Event \'loadedValues\' received from ValueTableComponent');
+      const filteredValues: Value[] = this.filterValues();
+      this.tableDataSource = new MatTableDataSource<Value>(filteredValues);
+      this.initSorting();
     });
+
+    this.valueDataService.changedValues.subscribe(vals => {
+      this.logger.info(this, 'Event \'changedValues\' received from ValueTableComponent');
+      const filteredValues: Value[] = this.filterValues();
+      this.tableDataSource = new MatTableDataSource<Value>(filteredValues); // Why does this not work like in impact table?
+      this.initSorting();
+    });
+  }
+
+  filterValues(): Value[] {
+    return this.valueDataService.values.filter(val => val.type === this.type);
   }
 
   ngAfterViewInit(): void {
@@ -65,6 +76,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   createValue() {
     this.logger.info(this, 'Create Value');
     this.valueDataService.createValue(this.createDefaultValue());
+
   }
 
   updateValue(value: Value) {
@@ -120,6 +132,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
       this.thwartValueOperation(value, numImpactsUseValue);
     } else {
       value.disable = !value.disable;
+      //this.valueDataService.updateValue(value); // This will remove the disabled value from the filter bar dropdown.
     }
   }
 }

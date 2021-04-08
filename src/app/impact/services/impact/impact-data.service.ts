@@ -57,6 +57,15 @@ export class ImpactDataService {
     //this.analysisDataService.onInit();
   }
 
+  reload() {
+    this.logger.info(this, 'Reload');
+    this.impactsLoaded = false;
+    this.stakeholdersLoaded = false;
+    this.valuesLoaded = false;
+    this.analysesLoaded = false;
+    this.onInit();
+  }
+
   private loadIfChildrenAreLoaded(): void {
     if (this.getChildrenLoaded() && !this.impactsLoaded) {
       // Load impacts.
@@ -105,7 +114,7 @@ export class ImpactDataService {
     const impactDto = this.impactMapperService.toDto(impact);
     this.impactRestService.updateImpact(impactDto).subscribe((newImpact: Impact) => {
       this.changedImpact.emit(newImpact);
-      // this.changedImpacts.emit(this.impacts); // The change originated from the UI.
+      this.changedImpacts.emit(this.impacts);
     });
   }
 
