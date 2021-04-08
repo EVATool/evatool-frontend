@@ -58,11 +58,6 @@ export class ValueDataService {
     this.logger.info(this, 'Create Value');
     const valueDto = this.valueMapperService.toDto(value);
 
-
-    console.log("----------------------------------------------------------------");
-    console.log(valueDto);
-    console.log(value);
-
     valueDto.analysis.analysisName = "";
     valueDto.analysis.analysisDescription = "";
 
