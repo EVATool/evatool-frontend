@@ -17,7 +17,7 @@ const httpOptions = { // Outsource!
 })
 export class StakeholderRestService {
 
-  stakeholderUrl = 'http://localhost:8080/stakeholders'; // Outsource!
+  stakeholderUrl = 'http://79.171.179.211:443/stakeholders'; // Outsource!
 
   constructor(private http: HttpClient) {
 
