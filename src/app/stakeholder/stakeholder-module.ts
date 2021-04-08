@@ -16,10 +16,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import {SharedModule} from '../shared/shared.module';
+import {MatListModule} from '@angular/material/list';
+import {HighlightSearchPipe} from '../shared/pipes/highlightSearch/highlight-search.pipe';
 
 @NgModule({
   declarations: [StakeholderMainComponent, StakeholderTableComponent, StakeholderPrioComponent,
-    StakeholderLevelComponent, StakeholderImpactComponent, StakeholderFilterbarComponent],
+    StakeholderLevelComponent, StakeholderImpactComponent, StakeholderFilterbarComponent, HighlightSearchPipe],
   imports: [
     CommonModule,
     MatTableModule,
@@ -31,7 +34,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogModule,
     MatIconModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    SharedModule,
+    MatListModule
   ],
     exports: [
         StakeholderMainComponent,

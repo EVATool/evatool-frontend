@@ -46,8 +46,9 @@ export class AnalysisMainComponent implements OnInit {
     const dialogRef = this.dialog.open(AnalysisDialogComponent, { data: { p: 'test', b: 'auch test' } });
   }
 
-  openValueDialog(): void {
-    const valueDialogRef = this.dialog.open(ValueDialogComponent, { data: { p: 'test', b: 'auch test' } });
+  openValueDialog(analysis: Analysis): void {
+    const valueDialogRef = this.dialog.open(ValueDialogComponent, { data: { id: analysis.id} });
+    console.log(analysis);
   }
 
   ngOnInit(): void {
@@ -60,8 +61,10 @@ export class AnalysisMainComponent implements OnInit {
           id: analysisDTO.rootEntityID,
           description: analysisDTO.analysisDescription,
           title: analysisDTO.analysisName,
-          lastUpdate: '',
-          img: '' //this.imgs[Math.floor(Math.random() * this.imgs.length)]
+          analysisDate: '',
+          img: '',
+          isTemplate: false,
+          uniqueString: '',
         };
         this.analysisArray.push(analysis);
       });
@@ -70,6 +73,20 @@ export class AnalysisMainComponent implements OnInit {
 
   analysisClick(analysis: Analysis): void {
     this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
+  }
+
+  changeBackgroundImage(): void {
+
+  }
+
+  deleteAnalysis(analysis: Analysis): void {
+    this.analysisRestService.deleteAnalysis(analysis).subscribe((anal) => {
+      const index = this.analysisArray.indexOf(anal, 0);
+      if (index > -1) {
+        this.analysisArray.splice(index, 1);
+      }
+      window.location.reload();
+    });
   }
 
 }

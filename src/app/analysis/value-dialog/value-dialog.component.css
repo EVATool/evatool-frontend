@@ -16,3 +16,7 @@
 .inputField {
   border: none;
 }
+
+.archivedField-true{
+  background: gray;
+}
