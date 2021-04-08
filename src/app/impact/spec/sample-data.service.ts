@@ -100,25 +100,25 @@ export class SampleDataService {
   }
 
   getDummyAnalysisDto(): AnalysisDto {
-    return this.analysisMapperService.toDto(this.getDummyStakeholder());
+    return this.analysisMapperService.toDto(this.getDummyAnalysis());
   }
 
   getDummyImpactAnalysisDto(): ImpactAnalysisDto {
-    return this.analysisMapperService.toImpactDto(this.getDummyStakeholder());
+    return this.analysisMapperService.toImpactDto(this.getDummyAnalysis());
   }
 
   readonly dummyAnalysisDtos: AnalysisDto[] = [
     {
-      rootEntityID: '1'
+      rootEntityID: '1', analysisName: '', analysisDescription: ''
     },
     {
-      rootEntityID: '2'
+      rootEntityID: '2', analysisName: '', analysisDescription: ''
     },
     {
-      rootEntityID: '3'
+      rootEntityID: '3', analysisName: '', analysisDescription: ''
     },
     {
-      rootEntityID: '4'
+      rootEntityID: '4', analysisName: '', analysisDescription: ''
     }
   ];
 
@@ -148,43 +148,43 @@ export class SampleDataService {
   readonly dummyValueDtos: ValueDto[] = [
     {
       id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '5', name: 'Care', description: 'Economics of Family', type: 'ECONOMIC',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '6', name: 'Privacy', description: 'Economics of Family', type: 'ECONOMIC',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '7', name: 'Self-Conception', description: 'Economics of Family', type: 'SOCIAL',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '8', name: 'Participation', description: 'Economics of Family', type: 'SOCIAL',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '9', name: 'Autonomy', description: 'Economics of Family', type: 'ECONOMIC',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
       id: '10', name: 'Irgendwas', description: 'Economics of Family', type: 'SOCIAL',
-      analysis: {rootEntityID: '1'}
+      analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     }
   ];
 
