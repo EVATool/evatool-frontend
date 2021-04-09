@@ -38,6 +38,7 @@ export class ValueRestService {
   }
 
   deleteValue(value: Value): Observable<any> {
+    console.log(value.id);
     return this.http.delete(this.valueUrl + '/' + value.id);
   }
 

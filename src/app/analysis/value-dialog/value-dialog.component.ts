@@ -74,7 +74,7 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
   }
 
   archiveValue(value: Value): void {
-    value.archived = true;
+    value.archived = !value.archived;
     this.valueDataService.archiveValue(value);
   }
 }

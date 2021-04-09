@@ -8,6 +8,12 @@ import {AnalysisDTO} from "../../model/AnalysisDTO";
 })
 export class AnalysisDataService {
   @Output() analysisSaved: EventEmitter<Analysis> = new EventEmitter<Analysis>();
+  public analysisArray: Analysis[] = [];
+
+  imgs: any[] = [
+    "https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    "https://images.pexels.com/photos/631954/pexels-photo-631954.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+    "https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"]
 
   constructor(private analysisRestService: AnalysisRestService) { }
 
@@ -21,5 +27,40 @@ export class AnalysisDataService {
       img: '',
       uniqueString: ''}
       ).subscribe();
+  }
+
+  update(analysis: Analysis): void {
+    this.analysisRestService.updateAnalysis({
+      analysisName: analysis.title,
+      analysisDescription: analysis.description,
+      analysisDate: analysis.analysisDate,
+      isTemplate: analysis.isTemplate,
+      rootEntityID: analysis.id,
+      uniqueString: analysis.uniqueString,
+      img: analysis.img
+    }).subscribe(() => {
+      this.loadAllAnalysis();
+    });
+  }
+
+  loadAllAnalysis(): void {
+    this.analysisRestService.getAnalysis().subscribe((result: any) => {
+      this.analysisArray = [];
+      console.log(result);
+      result.forEach((analysisDTO: AnalysisDTO) => {
+        const analysis: Analysis = {
+          id: analysisDTO.rootEntityID,
+          description: analysisDTO.analysisDescription,
+          title: analysisDTO.analysisName,
+          analysisDate: '',
+          img: '',
+          isTemplate: false,
+          uniqueString: '',
+          editable: false,
+          lastUpdate: analysisDTO.analysisDate
+        };
+        this.analysisArray.push(analysis);
+      });
+    });
   }
 }

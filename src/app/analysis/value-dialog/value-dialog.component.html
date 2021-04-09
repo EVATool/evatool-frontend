@@ -32,11 +32,14 @@
                 <div *ngIf="!value.editable">
                   {{value.description}}
                 </div>
-                <div class="options" *ngIf="!value.socialValuearchived">
+                <div class="options">
                   <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveSocialValue(value);">
                     <mat-icon>save</mat-icon>
                   </button>
                   <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="archiveValue(value)">
+                    <mat-icon>archive</mat-icon>
+                  </button>
+                  <button mat-icon-button *ngIf="value.archived" name="delete" (click)="deleteValue(value)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
@@ -74,18 +77,21 @@
                 <div *ngIf="!value.editable">
                   {{value.description}}
                 </div>
-                <div class="options" *ngIf="!value.archived">
+                <div class="options" >
                   <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveEconomicValue(value);">
                     <mat-icon>save</mat-icon>
                   </button>
                   <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="archiveValue(value)">
+                    <mat-icon>archive</mat-icon>
+                  </button>
+                  <button mat-icon-button *ngIf="value.archived" name="delete" (click)="deleteValue(value)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
               </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row mat-row *matRowDef="let value; columns: displayedColumns;"></mat-row>
+            <mat-row mat-row *matRowDef="let value; columns: displayedColumns;" class="archivedField-{{value.archived}}"></mat-row>
           </mat-table>
         <button mat-icon-button aria-label="Add Value" class="addEconomicValueButton" (click)="addEconomicValue()"> <!--tabindex="-1"-->
           <mat-icon>add</mat-icon> Economic Value anlegen

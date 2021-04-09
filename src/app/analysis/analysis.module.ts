@@ -11,22 +11,24 @@ import {MatButtonModule} from "@angular/material/button";
 import { ValueDialogComponent } from './value-dialog/value-dialog.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [AnalysisMainComponent, AnalysisDialogComponent, ValueDialogComponent],
-  imports: [
-    CommonModule,
-    MatCardModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatIconModule,
-    FormsModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatExpansionModule,
-    MatDialogModule
-  ],
+    imports: [
+        CommonModule,
+        MatCardModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatIconModule,
+        FormsModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatExpansionModule,
+        MatDialogModule,
+        MatInputModule
+    ],
   exports: [
     AnalysisMainComponent
   ]

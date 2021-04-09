@@ -11,16 +11,16 @@ import {AnalysisRestService} from '../analysis/analysis-rest.service';
   providedIn: 'root'
 })
 export class ValueDataService {
-  socialValue: Value[] = [];
-  economicValue: Value[] = [];
-
-  matDataSourceEconomic = new MatTableDataSource<Value>();
-  matDataSourceSocial = new MatTableDataSource<Value>();
 
   constructor(private valueRestService: ValueRestService, private analysisRestService: AnalysisRestService) {
     this.matDataSourceEconomic = new MatTableDataSource<Value>(this.socialValue);
     this.matDataSourceSocial = new MatTableDataSource<Value>(this.economicValue);
   }
+  socialValue: Value[] = [];
+  economicValue: Value[] = [];
+
+  matDataSourceEconomic = new MatTableDataSource<Value>();
+  matDataSourceSocial = new MatTableDataSource<Value>();
 
   onInit() {
     //this.loadValuesByAnalysisId();
@@ -45,9 +45,10 @@ export class ValueDataService {
     this.economicValue.push(value);
     this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
   }
-
   deleteValue(value: Value): void {
-    this.valueRestService.deleteValue(value)/*.subscribe(() => { this.loadValues(); })*/;
+    this.valueRestService.deleteValue(value).subscribe(() => {
+      this.loadValuesByAnalysisId(value.analysis.rootEntityID);
+    });/*.subscribe(() => { this.loadValues(); })*/;
   }
 
   archiveValue(value: Value): void {
@@ -60,7 +61,7 @@ export class ValueDataService {
         name: value.name,
         type: value.type,
         description: value.description,
-        archived: true,
+        archived: value.archived,
         analysis: result
       }).subscribe(() => {
         this.loadValuesByAnalysisId(value.analysis.rootEntityID);
@@ -129,7 +130,8 @@ export class ValueDataService {
             name: valueDTO.name,
             description: valueDTO.description,
             type: valueDTO.type,
-            analysis: valueDTO.analysis
+            analysis: valueDTO.analysis,
+            archived: valueDTO.archived
           };
           this.socialValue.push(value);
         }
@@ -139,7 +141,8 @@ export class ValueDataService {
             name: valueDTO.name,
             description: valueDTO.description,
             type: valueDTO.type,
-            analysis: valueDTO.analysis
+            analysis: valueDTO.analysis,
+            archived: valueDTO.archived
           };
           this.economicValue.push(value);
         }
