@@ -13,7 +13,8 @@ export class StakeholderLevelComponent implements OnInit {
 
   @Input() public level = 'NATURAL_PERSON';
   @Input() public editable = true;
-  @Input() private filter = false;
+  @Input() public showDescription = true;
+  @Input() public  filtertext = '';
   @Output() levelChange = new EventEmitter<string | null>();
   public levels = ['NATURAL_PERSON', 'ORGANIZATION', 'SOCIETY'];
   public shownlevels = [
@@ -21,7 +22,7 @@ export class StakeholderLevelComponent implements OnInit {
     {key: 'ORGANIZATION', value: 'Organisation'},
     {key: 'SOCIETY', value: 'Gesellschaft'}
   ];
-  constructor(public stakeholderDataService: StakeholderDataService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
