@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Stakeholder} from '../../model/Stakeholder';
+import {StakeholderDataService} from "../../service/stakeholder-data.service";
 
 
 @Component({

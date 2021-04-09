@@ -9,7 +9,11 @@
           <div matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
         </th>
 
-        <td mat-cell *matCellDef='let impact'> {{impact.uniqueString}} </td>
+        <td mat-cell *matCellDef='let impact'>
+          <div [innerHTML]="impact.uniqueString | highlightSearch: 'Imp'">
+
+          </div>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef='stakeholder'>
@@ -26,8 +30,14 @@
             <mat-list-item>
               <mat-form-field>
                 <mat-select [(ngModel)]="impact.stakeholder" (selectionChange)="stakeholderChange(impact, $event)">
+                  <mat-select-trigger>
+                    <div [innerHTML]="impact.stakeholder.name | highlightSearch: 'Patient'">
+
+                    </div>
+                  </mat-select-trigger>
                   <mat-option *ngFor="let stk of impactDataService.stakeholderDataService.stakeholders" [value]="stk">
-                    {{stk.name}}
+                    <div [innerHTML]="stk.name | highlightSearch: 'Patient'">
+                    </div>
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -49,8 +59,15 @@
         <td mat-cell *matCellDef='let impact'>
           <mat-form-field>
             <mat-select [(ngModel)]="impact.valueEntity" (selectionChange)="valueEntityChange(impact, $event)">
+              <mat-select-trigger>
+                <div [innerHTML]="impact.valueEntity.name | highlightSearch: 'Feelings'">
+
+                </div>
+              </mat-select-trigger>
               <mat-option *ngFor="let val of impactDataService.valueDataService.values"
-                          [value]="val" [disabled]="val.disable">{{val.name}} </mat-option>
+                          [value]="val" [disabled]="val.disable">
+                <div [innerHTML]="val.name | highlightSearch: 'Feelings'">
+                </div> </mat-option>
             </mat-select>
           </mat-form-field>
         </td>
