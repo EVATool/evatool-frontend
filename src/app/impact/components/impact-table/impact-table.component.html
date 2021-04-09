@@ -25,7 +25,7 @@
         <td mat-cell *matCellDef='let impact'>
           <mat-list class="list-horizontal">
             <mat-list-item>
-              <app-stakeholder-level [editable]="false" [level]="impact.stakeholder.level"></app-stakeholder-level>
+              <app-stakeholder-level [showDescription]="false" [editable]="false" [level]="impact.stakeholder.level"></app-stakeholder-level>
             </mat-list-item>
             <mat-list-item>
               <mat-form-field>
