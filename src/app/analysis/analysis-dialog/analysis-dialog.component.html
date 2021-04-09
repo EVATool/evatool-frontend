@@ -5,7 +5,7 @@
   </button>
   <div class="container">
 
-    <h2>Neue Analyse anlegen</h2>
+    <h2>Create new Analysis</h2>
 
     <form (ngSubmit)="onSubmit()">
 
@@ -13,24 +13,19 @@
         <input type="text" name="analyseName" [(ngModel)]="analyseName" required />
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label>Name der Analyse</label>
+        <label>Name of Analysis</label>
       </div>
 
       <div class="group">
         <input type="text" name="analysisDescription" [(ngModel)]="analysisDescription" required />
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label>Beschreibung</label>
+        <label>description</label>
       </div>
 
       <button mat-raised-button class="createButton button_cont b1" type="submit">
-        Analyse erstellen
+        Add analysis
       </button>
-
-
     </form>
-
   </div>
-
-
 </div>

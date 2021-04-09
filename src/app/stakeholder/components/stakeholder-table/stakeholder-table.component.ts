@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {StakeholderDataService} from '../../service/stakeholder-data.service';
 import {Stakeholder} from '../../model/Stakeholder';
 
@@ -10,8 +10,10 @@ import {Stakeholder} from '../../model/Stakeholder';
 export class StakeholderTableComponent implements OnInit {
 
   public displayedColumns = ['guiId', 'Stakeholder', 'Ebene', 'Prio', 'Impact'];
+  @Input() searchText: string | undefined;
 
-  constructor(public stakeholderDataService: StakeholderDataService) { }
+  constructor(public stakeholderDataService: StakeholderDataService) {
+  }
 
   ngOnInit(): void {
   }
@@ -20,10 +22,27 @@ export class StakeholderTableComponent implements OnInit {
     this.stakeholderDataService.createStakeholder();
   }
 
-  save(stakeholder: Stakeholder): void{
-      stakeholder.editable = false;
-      stakeholder.created = false;
+  save(stakeholder: Stakeholder): void {
+    if (stakeholder.editable !== true) {
+      return;
+    }
+    stakeholder.editable = false;
+    stakeholder.created = false;
+    if (stakeholder.id === '') {
       this.stakeholderDataService.save(stakeholder);
+    } else {
+      this.stakeholderDataService.update(stakeholder);
+    }
+
   }
 
+  saveNotEdit(stakeholder: Stakeholder): void {
+    stakeholder.editable = false;
+    stakeholder.created = false;
+    if (stakeholder.id === '') {
+      this.stakeholderDataService.save(stakeholder);
+    } else {
+      this.stakeholderDataService.update(stakeholder);
+    }
+  }
 }

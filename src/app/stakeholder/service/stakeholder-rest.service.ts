@@ -31,6 +31,10 @@ export class StakeholderRestService {
     return this.http.get<any>(this.stakeholderUrl);
   }
 
+  getStakeholdersByAnalysisId(analysisId: any): Observable<any> {
+    return this.http.get<any>(this.stakeholderUrl + '?analysisId=' + analysisId);
+  }
+
   getStakeholdersById(id: any): Observable<any> {
     return this.http.get<any>(this.stakeholderUrl + '/' + id);
   }

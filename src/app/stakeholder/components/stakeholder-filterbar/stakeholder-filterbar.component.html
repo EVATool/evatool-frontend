@@ -1,21 +1,60 @@
-<mat-toolbar class="filter-wrapper">
-  <mat-toolbar-row style="width: 60%; float: left">
-  <span></span>
-  <input matInput type="Text" placeholder="Search..." class="filter">
-    <span class="spacing"></span>
-  <mat-select class="filter"></mat-select>
-    <span class="spacing"></span>
-  <mat-select [(value)]="preselect" class="filter" id="level">
-    <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">
-      {{level.value}}
-    </mat-option>
-  </mat-select>
-    <span class="spacing"></span>
-  <app-stakeholder-prio [(prio)]="prio" class="filter" [editable]="true" (prioChange)="prioChange($event)"> </app-stakeholder-prio>
-    <span class="spacing"></span>
-  <app-stakeholder-impact class="filter" [editable]="true" (impactChange)="impactChange($event)"></app-stakeholder-impact>
-    <button class="resetFilter" (click)="resetFilter()" > Reset filter</button>
-  </mat-toolbar-row>
-</mat-toolbar>
+<mat-list class="list-horizontal">
+  <mat-list-item>
+    <app-search-bar (searchTextChanged)="highlightTextChange($event)"></app-search-bar>
+  </mat-list-item>
+  <mat-list-item class="filter-wrapper">
+    <mat-list class="list-vertical">
+      <mat-list-item>
+        <div>
+          <p>Ebene</p>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div class="category-filter-container">
+          <mat-select [(value)]="preselect" id="level">
+            <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">
+              {{level.value}}
+            </mat-option>
+          </mat-select>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-list-item>
+  <mat-list-item class="filter-wrapper">
+    <mat-list class="list-vertical">
+      <mat-list-item>
+        <div>
+          <p>Priorität</p>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div>
+          <app-stakeholder-prio [(prio)]="prio" class="filter" [editable]="true"
+                                (prioChange)="prioChange($event)"></app-stakeholder-prio>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-list-item>
+  <mat-list-item class="filter-wrapper">
+    <mat-list class="list-vertical">
+      <mat-list-item>
+        <div>
+          <p>Impact</p>
+        </div>
+      </mat-list-item>
+      <mat-list-item>
+        <div>
+          <app-stakeholder-impact [editable]="true"
+                                  (impactChange)="impactChange($event)"></app-stakeholder-impact>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-list-item>
+  <mat-list-item>
+    <div>
+      <button class="resetFilter" (click)="resetFilter()"> Reset filter</button>
+    </div>
+  </mat-list-item>
+</mat-list>
 
 

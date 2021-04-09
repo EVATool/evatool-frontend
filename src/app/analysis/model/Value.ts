@@ -5,4 +5,5 @@ export class Value {
   description: any = '';
   editable?: boolean;
   archived?: boolean;
+  analysis: any = '';
 }

@@ -17,7 +17,7 @@ const httpOptions = { // Outsource!
 })
 export class ValueRestService {
 
-  valueUrl = 'http://79.171.179.211:443/values';//'http://localhost:8080/values';
+  valueUrl = 'http://localhost:8080/values';//'http://79.171.179.211:443/values';
 
   constructor(private http: HttpClient) { }
 
@@ -39,5 +39,9 @@ export class ValueRestService {
 
   deleteValue(value: Value): Observable<any> {
     return this.http.delete(this.valueUrl + '/' + value.id);
+  }
+
+  getValuesByAnalysisId(id: any): Observable<any> {
+    return this.http.get<any>(this.valueUrl + '?analysisId=' + id);
   }
 }

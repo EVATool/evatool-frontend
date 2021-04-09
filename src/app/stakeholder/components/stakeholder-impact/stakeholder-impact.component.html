@@ -1,5 +1,5 @@
 <div class="stakeholder-impact-slider">
-<div class="created_{{created}}">
+<div  [ngClass]="{'stakeholder-impact-null' : impactIsNull || created, 'stakeholder-impact-not-null': !impactIsNull && !created }">
 <mat-slider min="0.0" max="{{impactvaluetotal}}" step="0.1"   [value]="negativeimpactvalue"
              [disabled]="!editable" class="editable_{{editable}}" (change)="onImpactChange($event)">
 </mat-slider>
