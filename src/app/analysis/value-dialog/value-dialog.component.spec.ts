@@ -1,7 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValueDialogComponent } from './value-dialog.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 
 describe('ValueDialogComponent', () => {
   let component: ValueDialogComponent;
@@ -9,8 +11,11 @@ describe('ValueDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-      declarations: [ValueDialogComponent]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [ValueDialogComponent],
+      providers: [
+        { provide: MAT_DIALOG_DATA, useValue: {} }
+      ]
     })
       .compileComponents();
   });
