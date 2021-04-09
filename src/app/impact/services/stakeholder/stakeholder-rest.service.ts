@@ -5,12 +5,12 @@ import {Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {SampleDataService} from "../../spec/sample-data.service";
-import {MockableServiceService} from "../mockable-service.service";
+import {MockableService} from "../mockable.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class StakeholderRestService extends MockableServiceService  {
+export class StakeholderRestService extends MockableService  {
 
   constructor(
     private logger: LogService,

@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class MockableServiceService {
+export class MockableService {
 
   public testing = false;
   public mocked = false;

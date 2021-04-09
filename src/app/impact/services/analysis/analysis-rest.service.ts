@@ -5,12 +5,12 @@ import {AnalysisDto} from '../../dtos/AnalysisDto';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {SampleDataService} from "../../spec/sample-data.service";
-import {MockableServiceService} from "../mockable-service.service";
+import {MockableService} from "../mockable.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AnalysisRestService  extends MockableServiceService {
+export class AnalysisRestService  extends MockableService {
 
   constructor(
     private logger: LogService,

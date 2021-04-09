@@ -8,6 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {ImpactTableComponent} from './impact-table.component';
 import {RestMock} from "../../spec/RestMock";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('ImpactTableComponent', () => {
   let component: ImpactTableComponent;
@@ -15,7 +16,7 @@ describe('ImpactTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: RestMock.imports.concat([HttpClientModule, MatDialogModule, BrowserAnimationsModule]),
+      imports: RestMock.imports.concat([HttpClientModule, MatDialogModule, BrowserAnimationsModule, MatSnackBarModule]),
       declarations: [ImpactTableComponent, HighlightSearch],
       providers: [FormBuilder,
         {provide: MatDialogRef, useValue: {}},
