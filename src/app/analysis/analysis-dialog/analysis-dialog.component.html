@@ -20,11 +20,18 @@
         <input type="text" name="analysisDescription" [(ngModel)]="analysisDescription" required />
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label>description</label>
+        <label>Description</label>
+      </div>
+
+      <div class="group">
+        <input type="text" name="analysisImageLink" [(ngModel)]="analysisImage" required />
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Image (optional & direct-link)</label>
       </div>
 
       <button mat-raised-button class="createButton button_cont b1" type="submit">
-        Add analysis
+        Create analysis
       </button>
     </form>
   </div>

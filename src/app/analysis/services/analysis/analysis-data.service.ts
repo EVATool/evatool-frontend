@@ -10,22 +10,26 @@ export class AnalysisDataService {
   @Output() analysisSaved: EventEmitter<Analysis> = new EventEmitter<Analysis>();
   public analysisArray: Analysis[] = [];
 
-  imgs: any[] = [
-    "https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    "https://images.pexels.com/photos/631954/pexels-photo-631954.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    "https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"]
+  // imgs: any[] = [
+  //   "https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+  //   "https://images.pexels.com/photos/631954/pexels-photo-631954.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
+  //   "https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"]
 
   constructor(private analysisRestService: AnalysisRestService) { }
 
   save(analysis: Analysis): void{
+    console.log(analysis.image);
     this.analysisRestService.createAnalysis({
         analysisName: analysis.title,
         analysisDescription: analysis.description,
         rootEntityID: analysis.id,
-      analysisDate: null,
-      isTemplate: false,
-      img: '',
-      uniqueString: ''}
+        analysisDate: null,
+        isTemplate: false,
+        image: analysis.image,
+        uniqueString: '',
+        date: ''
+
+      }
       ).subscribe();
   }
 
@@ -37,7 +41,8 @@ export class AnalysisDataService {
       isTemplate: analysis.isTemplate,
       rootEntityID: analysis.id,
       uniqueString: analysis.uniqueString,
-      img: analysis.img
+      image: analysis.image,
+      date: analysis.date
     }).subscribe(() => {
       this.loadAllAnalysis();
     });
@@ -53,11 +58,11 @@ export class AnalysisDataService {
           description: analysisDTO.analysisDescription,
           title: analysisDTO.analysisName,
           analysisDate: '',
-          img: '',
+          image: analysisDTO.image,
           isTemplate: false,
           uniqueString: '',
           editable: false,
-          lastUpdate: analysisDTO.analysisDate
+          date: analysisDTO.date
         };
         this.analysisArray.push(analysis);
       });

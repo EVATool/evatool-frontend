@@ -21,11 +21,11 @@ export class AnalysisRestService {
 
   }
 
-  getAnalysis(): Observable<any> {
-    return this.http.get<any>(this.analysisUrl);
+  getAnalysis(): Observable<AnalysisDTO> {
+    return this.http.get<AnalysisDTO>(this.analysisUrl);
   }
 
-  getAnalysisById(id: any): Observable<any> {
+  getAnalysisById(id: any): Observable<AnalysisDTO> {
     return this.http.get<any>(this.analysisUrl + '/' + id);
   }
 

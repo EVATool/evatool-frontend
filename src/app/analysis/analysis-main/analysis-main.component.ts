@@ -47,13 +47,13 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   deleteAnalysis(analysis: Analysis): void {
-    this.analysisRestService.deleteAnalysis(analysis).subscribe((anal) => {
-      const index = this.analysisDataService.analysisArray.indexOf(anal, 0);
+    this.analysisRestService.deleteAnalysis(analysis).subscribe((an) => {
+      const index = this.analysisDataService.analysisArray.indexOf(an, 0);
       if (index > -1) {
         this.analysisDataService.analysisArray.splice(index, 1);
       }
-      window.location.reload();
     });
+    window.location.reload();
   }
 
   save(analysis: Analysis): void {

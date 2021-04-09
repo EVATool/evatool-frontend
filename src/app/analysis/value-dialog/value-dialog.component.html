@@ -28,14 +28,11 @@
               <mat-cell *matCellDef='let value'>
                 <textarea class="inputField" matInput type="text" value="{{value.description}}"
                        [(ngModel)]="value.description" *ngIf="value.editable"
-                       id="{{value.id}}_description" tabindex="1" placeholder="Beschreibung"></textarea>
+                       id="{{value.id}}_description" tabindex="1" placeholder="Beschreibung" (mouseleave)="saveSocialValue(value)"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.description}}
                 </div>
                 <div class="options">
-                  <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveSocialValue(value);">
-                    <mat-icon>save</mat-icon>
-                  </button>
                   <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="archiveValue(value)">
                     <mat-icon>archive</mat-icon>
                   </button>
@@ -73,14 +70,11 @@
               <mat-cell *matCellDef='let value'>
                 <textarea class="inputField" matInput type="text" value="{{value.description}}"
                        [(ngModel)]="value.description" *ngIf="value.editable"
-                       id="{{value.id}}__description" tabindex="3" placeholder="Beschreibung"></textarea>
+                       id="{{value.id}}__description" tabindex="3" placeholder="Beschreibung" (mouseleave)="saveEconomicValue(value)"></textarea>
                 <div *ngIf="!value.editable">
                   {{value.description}}
                 </div>
                 <div class="options" >
-                  <button mat-icon-button *ngIf="value.editable" name="save" (click)="saveEconomicValue(value);">
-                    <mat-icon>save</mat-icon>
-                  </button>
                   <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="archiveValue(value)">
                     <mat-icon>archive</mat-icon>
                   </button>

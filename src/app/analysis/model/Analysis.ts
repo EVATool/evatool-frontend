@@ -3,9 +3,9 @@ export class Analysis {
   title: any = '';
   description: any = '';
   analysisDate: any = '';
-  img: any = '';
+  image: any = '';
   isTemplate: any = '';
   uniqueString: any = '';
   editable = false;
-  lastUpdate: any = '';
+  date: any = '';
 }

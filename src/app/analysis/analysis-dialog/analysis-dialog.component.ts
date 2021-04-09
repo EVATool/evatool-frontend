@@ -14,11 +14,13 @@ import { MatDialogRef } from "@angular/material/dialog";
 export class AnalysisDialogComponent implements OnInit {
   analyseName: any;
   analysisDescription: any;
+  analysisImage: any;
 
   onSubmit(): void {
     const analysis: Analysis = new Analysis();
     analysis.title = this.analyseName;
     analysis.description = this.analysisDescription;
+    analysis.image = this.analysisImage;
 
     this.analysisDataService.save(analysis);
     this.GoToStakeholder();

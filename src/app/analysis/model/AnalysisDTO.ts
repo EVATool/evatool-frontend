@@ -3,7 +3,8 @@ export class AnalysisDTO {
   analysisName: string = '';
   analysisDescription: string = '';
   analysisDate: any = '';
-  img: any = '';
+  image: any = '';
   isTemplate: any = '';
   uniqueString: any = '';
+  date: any = '';
 }
