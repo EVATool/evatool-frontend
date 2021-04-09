@@ -43,5 +43,5 @@ describe('StakeholderDataService', () => {
       // Assert
       expect(service.stakeholders).toEqual(data.dummyStakeholders);
     });
-  })
+  });
 });
