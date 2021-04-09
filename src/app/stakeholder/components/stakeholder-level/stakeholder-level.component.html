@@ -9,8 +9,8 @@
     </div>
 
   </div>
-  <div class="stakeholder-level-name">
+  <div class="stakeholder-level-name" *ngIf="showDescription">
     <div
-      [innerHTML]="shownlevels[levels.indexOf(level)].value | highlightSearch: stakeholderDataService.searchtext"></div>
+      [innerHTML]="shownlevels[levels.indexOf(level)].value | highlightSearch: filtertext"></div>
   </div>
 </div>
