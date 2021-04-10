@@ -14,18 +14,19 @@ import {ValueDialogComponent} from "../value-dialog/value-dialog.component";
 })
 export class AnalysisMainComponent implements OnInit {
 
+  analysesTemplates!: Analysis[];
+
   constructor(
     private dialog: MatDialog,
     private analysisRestService: AnalysisRestService,
     public analysisDataService: AnalysisDataService,
     private router: Router) {
-    analysisDataService.loadAllAnalysis();
+    this.analysisDataService.loadAllAnalysis()
   }
 
   createAnalysis(): void {
     const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: false}});
   }
-
 
   editTemplates() {
     const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: true}});
