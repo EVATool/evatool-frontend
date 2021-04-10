@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AnalysisDataService } from "../services/analysis/analysis-data.service";
-import { AnalysisDTO } from "../model/AnalysisDTO";
-import { Analysis } from "../model/Analysis";
-import { analyticsPackageSafelist } from "@angular/cli/models/analytics";
-import { Router } from "@angular/router";
-import { MatDialogRef } from "@angular/material/dialog";
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {AnalysisDataService} from "../services/analysis/analysis-data.service";
+import {Analysis} from "../model/Analysis";
+import {Router} from "@angular/router";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-analysis-dialog',
@@ -12,6 +10,8 @@ import { MatDialogRef } from "@angular/material/dialog";
   styleUrls: ['./analysis-dialog.component.css']
 })
 export class AnalysisDialogComponent implements OnInit {
+
+  isTemplate = false;
   analyseName: any;
   analysisDescription: any;
   analysisImage: any;
@@ -29,11 +29,14 @@ export class AnalysisDialogComponent implements OnInit {
   constructor(
     private analysisDataService: AnalysisDataService,
     private router: Router,
-    private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>) { }
+    private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log(data)
+  }
 
   ngOnInit(): void {
     this.analysisDataService.analysisSaved.subscribe(analysis => {
-      this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
+      this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
     });
   }
 

@@ -22,15 +22,13 @@ export class AnalysisMainComponent implements OnInit {
     analysisDataService.loadAllAnalysis();
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {p: 'test', b: 'auch test'}});
+  createAnalysis(): void {
+    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: false}});
   }
 
 
   editTemplates() {
-    console.log('Edit Templates');
-
-
+    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: true}});
   }
 
   openValueDialog(analysis: Analysis): void {
