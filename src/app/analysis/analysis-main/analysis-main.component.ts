@@ -19,13 +19,12 @@ export class AnalysisMainComponent implements OnInit {
     private analysisRestService: AnalysisRestService,
     public analysisDataService: AnalysisDataService,
     private router: Router) {
-    analysisDataService.loadAllAnalysis();
+    this.analysisDataService.loadAllAnalysis();
   }
 
   createAnalysis(): void {
     const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: false}});
   }
-
 
   editTemplates(): void {
     const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: true}});

@@ -29,7 +29,7 @@ export class AnalysisDialogComponent implements OnInit {
   }
 
   constructor(
-    private analysisDataService: AnalysisDataService,
+    public analysisDataService: AnalysisDataService,
     private router: Router,
     private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
