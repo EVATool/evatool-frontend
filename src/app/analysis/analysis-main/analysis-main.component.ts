@@ -1,11 +1,11 @@
 import {Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {AnalysisDialogComponent} from "../analysis-dialog/analysis-dialog.component";
-import {Analysis} from "../model/Analysis";
-import {AnalysisRestService} from "../services/analysis/analysis-rest.service";
-import {AnalysisDataService} from "../services/analysis/analysis-data.service";
-import {ValueDialogComponent} from "../value-dialog/value-dialog.component";
+import {MatDialog} from '@angular/material/dialog';
+import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.component';
+import {Analysis} from '../model/Analysis';
+import {AnalysisRestService} from '../services/analysis/analysis-rest.service';
+import {AnalysisDataService} from '../services/analysis/analysis-data.service';
+import {ValueTemplateComponent} from '../value-template/value-template.component';
 
 @Component({
   selector: 'app-analysis-main',
@@ -27,12 +27,12 @@ export class AnalysisMainComponent implements OnInit {
   }
 
 
-  editTemplates() {
+  editTemplates(): void {
     const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: true}});
   }
 
   openValueDialog(analysis: Analysis): void {
-    const valueDialogRef = this.dialog.open(ValueDialogComponent, {data: {id: analysis.id}});
+    const valueDialogRef = this.dialog.open(ValueTemplateComponent, {data: {id: analysis.id}});
     console.log(analysis);
   }
 

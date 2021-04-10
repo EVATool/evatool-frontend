@@ -1,22 +1,22 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ValueDialogComponent } from './value-dialog.component';
+import { ValueTemplateComponent } from './value-template.component';
 
 describe('ValueDialogComponent', () => {
-  let component: ValueDialogComponent;
-  let fixture: ComponentFixture<ValueDialogComponent>;
+  let component: ValueTemplateComponent;
+  let fixture: ComponentFixture<ValueTemplateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      declarations: [ValueDialogComponent]
+      declarations: [ValueTemplateComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ValueDialogComponent);
+    fixture = TestBed.createComponent(ValueTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
