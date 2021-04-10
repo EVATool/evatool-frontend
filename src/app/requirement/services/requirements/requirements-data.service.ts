@@ -55,7 +55,7 @@ export class RequirementsDataService {
     impact.id = 'TEST';
     impact.value = -0.9;
     impact.description = "Dieser Impact wurde erstellt";
-    impact.dimension = this.dimensionDataService.getDefaultDimension();
+    impact.value = this.dimensionDataService.getDefaultDimension();
 
     return impact;*/
     return new Requirements();

@@ -1,12 +1,14 @@
-import { HighlightSearchComponent } from '../../../shared/components/search-bar/highlight-search.component';
-import { DimensionDataService } from '../../services/dimension/dimension-data.service';
-import { StakeholderDataService } from '../../services/stakeholder/stakeholder-data.service';
-import { ColumnSliderFilterComponent } from '../../../shared/components/column-slider-filter/column-slider-filter.component';
-import { ImpactTableFilterEvent } from './ImpactTableFilterEvent';
-import { LogService } from '../../../shared/services/log.service';
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { SliderFilterSettings } from 'src/app/shared/components/impact-slider/SliderFilterSettings';
-import { ColumnCategoryFilterComponent } from '../../../shared/components/column-category-filter/column-category-filter.component';
+import {HighlightSearchComponent} from '../../../shared/components/search-bar/highlight-search.component';
+import {ValueDataService} from '../../services/value/value-data.service';
+import {StakeholderDataService} from '../../services/stakeholder/stakeholder-data.service';
+import {ColumnSliderFilterComponent} from '../../../shared/components/column-slider-filter/column-slider-filter.component';
+import {ImpactTableFilterEvent} from './ImpactTableFilterEvent';
+import {LogService} from '../../../shared/services/log.service';
+import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {SliderFilterSettings} from 'src/app/shared/components/impact-slider/SliderFilterSettings';
+import {ColumnCategoryFilterComponent} from '../../../shared/components/column-category-filter/column-category-filter.component';
+import {Value} from "../../models/Value";
+import {Stakeholder} from "../../models/Stakeholder";
 
 @Component({
   selector: 'app-impact-table-filter-bar',
@@ -16,12 +18,12 @@ import { ColumnCategoryFilterComponent } from '../../../shared/components/column
 export class ImpactTableFilterBarComponent implements OnInit {
   @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
   @ViewChild('stakeholderFiler') stakeholderFilter!: ColumnCategoryFilterComponent;
-  @ViewChild('dimensionFilter') dimensionsFilter!: ColumnCategoryFilterComponent;
+  @ViewChild('valuesFilter') valuesFilter!: ColumnCategoryFilterComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
   stakeholderNames: string[] = [];
-  dimensionNames: string[] = [];
+  valueNames: string[] = [];
 
   impactTableFilterEvent: ImpactTableFilterEvent;
   suppressChildEvent = false;
@@ -29,18 +31,29 @@ export class ImpactTableFilterBarComponent implements OnInit {
   constructor(
     private logger: LogService,
     private stakeholderDataService: StakeholderDataService,
-    private dimensionDataService: DimensionDataService) {
+    private valueDataService: ValueDataService) {
     this.impactTableFilterEvent = ImpactTableFilterEvent.getDefault();
   }
 
   ngOnInit(): void {
     this.stakeholderDataService.loadedStakeholders.subscribe((stakeholders) => {
-      this.stakeholderNames = stakeholders.map(value => value.name);
+      this.stakeholdersChanged(stakeholders);
     });
 
-    this.dimensionDataService.loadedDimensions.subscribe((dimensions) => {
-      this.dimensionNames = dimensions.map(value => value.name);
+    this.valueDataService.loadedValues.subscribe((values) => {
+      this.valuesChanged(values);
     });
+    this.valueDataService.changedValues.subscribe((values) => {
+      this.valuesChanged(values);
+    });
+  }
+
+  stakeholdersChanged(stakeholders: Stakeholder[]) {
+    this.stakeholderNames = stakeholders.map(value => value.name);
+  }
+
+  valuesChanged(values: Value[]) {
+    this.valueNames = values.filter(value => !value.disable).map(value => value.name);
   }
 
   valueFilterChanged(event: SliderFilterSettings): void {
@@ -59,9 +72,9 @@ export class ImpactTableFilterBarComponent implements OnInit {
     }
   }
 
-  dimensionFilterChanged(event: string[]): void {
-    this.logger.info(this, 'Slider Filter Changed (Dimension)');
-    this.impactTableFilterEvent.dimensionFilter = event;
+  valuesFilterChanged(event: string[]): void {
+    this.logger.info(this, 'Slider Filter Changed (Value)');
+    this.impactTableFilterEvent.valuesFilter = event;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.impactTableFilterEvent);
     }
@@ -81,7 +94,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
 
     this.sliderFilter.clearFilter();
     this.stakeholderFilter.clearFilter();
-    this.dimensionsFilter.clearFilter();
+    this.valuesFilter.clearFilter();
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.impactTableFilterEvent);
