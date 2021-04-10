@@ -45,22 +45,6 @@ export class RequirementsDataService {
     });
   }
 
-  getRequirements(): Requirements[] {
-    return this.requirements;
-  }
-
-  private createDefaultRequirement(): Requirements {
-    /*let impact = new Requirements();
-
-    impact.id = 'TEST';
-    impact.value = -0.9;
-    impact.description = "Dieser Impact wurde erstellt";
-    impact.value = this.dimensionDataService.getDefaultDimension();
-
-    return impact;*/
-    return new Requirements();
-  }
-
   createRequirement(idForProject: string): void {
     const requirementNew: Requirements = new Requirements();
     requirementNew.projectID = idForProject;

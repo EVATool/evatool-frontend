@@ -11,8 +11,8 @@ import {RequirementsDataService} from '../../services/requirements/requirements-
 import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Variants} from '../../models/Variants';
-import {MatSliderChange} from "@angular/material/slider";
-import {RequirementImpactPoints} from "../../models/RequirementImpactPoints";
+import {MatSliderChange} from '@angular/material/slider';
+import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
 
 @Component({
   selector: 'app-requirement-table',
@@ -28,6 +28,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   variantsSoureces: Variants[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
   idForProject = '';
+  showElement = [
+    {req: '', imp: ''}
+  ];
   columnDefinitions = [
     { def: 'uniqueString', hide: true },
     { def: 'requirementDescription', hide: true },
@@ -51,6 +54,12 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     });
     this.requirementsDataService.changedRequirements.subscribe((requirements: Requirements[]) => {
       this.tableDatasource.data = requirements;
+    });
+    this.requirementsDataService.addedRequirement.subscribe((requirements: Requirements) => {
+      this.showElement = [];
+      this.impactSoureces.forEach(imp => {
+        this.showElement.push({req: requirements.rootEntityId, imp: imp.id});
+      });
     });
     this.requirementsRestService.getImpacts().subscribe((result: any) => {
       this.impactSoureces = [];
@@ -136,6 +145,22 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   clickFunction(element: Requirements, impact: Impact): void {
+    let exist = false;
+    let toDelete;
+    this.showElement.forEach(se => {
+      if (se.req === element.rootEntityId && se.imp === impact.id){
+        exist =  true;
+        toDelete = se;
+      }
+    });
+    if (exist && toDelete != null){
+      const index = this.showElement.indexOf(toDelete, 0);
+      if (index > -1) {
+        this.showElement.splice(index, 1);
+      }
+    }else{
+      this.showElement.push({req: element.rootEntityId, imp: impact.id});
+    }
   }
 
   valueChange(element: Requirements, impact: Impact, event: MatSliderChange): void {
@@ -184,7 +209,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   updateRequirement(requirements: Requirements): void {
-    this.requirementsRestService.updateRequirements(requirements).subscribe();
+    this.requirementsDataService.updateRequirements(requirements);
   }
 
   private randomFilter(): void{
@@ -209,7 +234,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: ''}});
   }
-  public getSelectedRequirment(requirements: Requirements): void{
+  getSelectedRequirment(requirements: Requirements): void{
     this.selectedRequirements = requirements;
   }
 
@@ -235,6 +260,16 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     element.requirementImpactPoints.forEach(value => {
       if (value.entityId === impact.id) {
         retValue = value.points;
+      }
+    });
+    return retValue;
+  }
+
+  show(element: Requirements, impact: Impact): boolean {
+    let retValue = false;
+    this.showElement.forEach(se => {
+      if (se.req === element.rootEntityId && se.imp === impact.id){
+        retValue =  true;
       }
     });
     return retValue;
