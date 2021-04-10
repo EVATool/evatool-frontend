@@ -27,7 +27,7 @@ export class AnalysisDataService {
         analysisDescription: analysis.description,
         rootEntityID: analysis.id,
         analysisDate: null,
-        isTemplate: false,
+        isTemplate: analysis.isTemplate,
         image: analysis.image,
         uniqueString: '',
         date: ''
@@ -62,7 +62,7 @@ export class AnalysisDataService {
           title: analysisDTO.analysisName,
           analysisDate: '',
           image: analysisDTO.image,
-          isTemplate: false,
+          isTemplate: analysisDTO.isTemplate,
           uniqueString: '',
           editable: false,
           date: analysisDTO.date
