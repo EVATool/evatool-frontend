@@ -23,7 +23,7 @@ export class ValueDataService {
   matDataSourceSocial = new MatTableDataSource<Value>();
 
   onInit() {
-    //this.loadValuesByAnalysisId();
+    // this.loadValuesByAnalysisId();
   }
 
   private createDefaultValue(): Value {
