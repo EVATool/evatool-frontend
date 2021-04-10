@@ -105,78 +105,35 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     return value;
   }
 
-  concatVariants(element: any): string {
-    let value = '';
-    const variants: any = element.variantsTitle;
-    if (variants == null) { return value; }
-    Object.keys(variants).forEach(value1 => value = value.concat(variants[value1].variantsTitle, '\n'));
-    return value;
-  }
-
-  checkValue(element: Requirements, impact: Impact): string {
-    let value = '';
-    if (element.requirementImpactPoints == null) { return value; }
-    if (element.requirementImpactPoints[impact.id] != null) {
-      const points: number | undefined = element.requirementImpactPoints[impact.id].points;
-      if (points && 0 < points) {
-        value = '' + points;
-      } else {
-        value = '' + points;
-      }
-    }
-    return value;
-  }
-
   isPositiv(element: Requirements, impact: Impact): boolean {
-    if (element.requirementImpactPoints == null) { return false; }
-    if (element.requirementImpactPoints[impact.id] != null) {
-      const points: number | undefined = element.requirementImpactPoints[impact.id].points;
-      if (points && 0 < points) {
-        return true;
+    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) { return false; }
+    let retValue = false;
+    element.requirementImpactPoints.forEach(value => {
+      if (value.entityId === impact.id){
+        const points: number | undefined = value.points;
+        if (points && 0 < points) {
+          retValue = true;
+        }
       }
-    }
-    return false;
+    });
+    return retValue;
   }
 
   isNegativ(element: Requirements, impact: Impact): boolean {
-    if (element.requirementImpactPoints == null) { return false; }
-    if (element.requirementImpactPoints[impact.id] != null) {
-      const points: number | undefined = element.requirementImpactPoints[impact.id].points;
-      if (points && 0 > points) {
-        return true;
+    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) { return false; }
+    let retValue = false;
+    element.requirementImpactPoints.forEach(value => {
+      if (value.entityId === impact.id){
+        const points: number | undefined = value.points;
+        if (points && 0 > points) {
+          retValue = true;
+        }
       }
-    }
-    return false;
+    });
+    return retValue;
   }
 
   clickFunction(element: Requirements, impact: Impact): void {
-    if (element.requirementImpactPoints == null) { element.requirementImpactPoints = {}; }
-    if (element.requirementImpactPoints[impact.id] == null) {
-      element.requirementImpactPoints[impact.id] = {
-        entityId: impact.id,
-        impactDescription: impact.description,
-        points: 1
-      };
-      element.requirementImpactPoints[impact.id].points = 1;
-    } else if (element.requirementImpactPoints[impact.id].points === 1) {
-      element.requirementImpactPoints[impact.id].points = -1;
-    } else {
-      delete element.requirementImpactPoints[impact.id];
-    }
-    if (element.rootEntityId != null) {
-      this.requirementsDataService.updateRequirements(element);
-    } else {
-    }
-  }
-
-  addRequirements(): void {
-    const requirementNew: Requirements = new Requirements();
-    requirementNew.projectID = this.idForProject;
-    requirementNew.requirementDescription = 'generated requirement';
-    this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
-      this.requirementsSource.push(value);
-      this.tableDatasource.data = this.requirementsSource;
-    });
   }
 
   descriptionChange(requirements: Requirements, event: Event): void {

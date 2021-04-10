@@ -1,5 +1,6 @@
 import { Dimension } from './Dimension';
 import {Variants} from "./Variants";
+import {RequirementImpactPoints} from "./RequirementImpactPoints";
 
 export class Requirements{
   [k: string]: any;
@@ -8,6 +9,6 @@ export class Requirements{
   uniqueString = '';
   requirementDescription = '';
   values!: Dimension[];
-  requirementImpactPoints!: any;
+  requirementImpactPoints!: RequirementImpactPoints[];
   variantsTitle!: Variants[];
 }
