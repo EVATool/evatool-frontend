@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {AnalysisRestService} from "../services/analysis/analysis-rest.service";
 import {AnalysisDTO} from "../model/AnalysisDTO";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-analysis-dialog',
@@ -22,6 +23,11 @@ export class AnalysisDialogComponent implements OnInit {
 
   onSubmit(): void {
     if (!this.isTemplate) {
+      if (this.selectedTemplate === undefined) {
+        this.snackbar.open('Please select a template', '', {duration: 5000});
+        return
+      }
+
       const analysis: Analysis = new Analysis();
       analysis.title = this.analyseName;
       analysis.description = this.analysisDescription;
@@ -42,6 +48,7 @@ export class AnalysisDialogComponent implements OnInit {
     private analysisRestService: AnalysisRestService,
     private router: Router,
     private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>,
+    private snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.isTemplate = data.isTemplate;
   }
