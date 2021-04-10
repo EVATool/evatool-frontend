@@ -14,8 +14,6 @@ import {ValueDialogComponent} from "../value-dialog/value-dialog.component";
 })
 export class AnalysisMainComponent implements OnInit {
 
-  analysesTemplates!: Analysis[];
-
   constructor(
     private dialog: MatDialog,
     private analysisRestService: AnalysisRestService,
