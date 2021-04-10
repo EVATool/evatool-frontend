@@ -1,13 +1,11 @@
-import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from "@angular/material/dialog";
-import { AnalysisDialogComponent } from "../analysis-dialog/analysis-dialog.component";
-import { Analysis } from "../model/Analysis";
-import { AnalysisRestService } from "../services/analysis/analysis-rest.service";
-import { AnalysisDataService } from "../services/analysis/analysis-data.service";
-import { ValueDialogComponent } from "../value-dialog/value-dialog.component";
-import {AnalysisDTO} from "../model/AnalysisDTO";
-import {MatMenuTrigger} from "@angular/material/menu";
+import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
+import {AnalysisDialogComponent} from "../analysis-dialog/analysis-dialog.component";
+import {Analysis} from "../model/Analysis";
+import {AnalysisRestService} from "../services/analysis/analysis-rest.service";
+import {AnalysisDataService} from "../services/analysis/analysis-data.service";
+import {ValueDialogComponent} from "../value-dialog/value-dialog.component";
 
 @Component({
   selector: 'app-analysis-main',
@@ -25,21 +23,27 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(AnalysisDialogComponent, { data: { p: 'test', b: 'auch test' } });
+    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {p: 'test', b: 'auch test'}});
+  }
+
+
+  editTemplates() {
+    console.log('Edit Templates');
+
+
   }
 
   openValueDialog(analysis: Analysis): void {
-    const valueDialogRef = this.dialog.open(ValueDialogComponent, { data: { id: analysis.id} });
+    const valueDialogRef = this.dialog.open(ValueDialogComponent, {data: {id: analysis.id}});
     console.log(analysis);
   }
 
   ngOnInit(): void {
 
-
   }
 
   analysisClick(analysis: Analysis): void {
-    this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
+    this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
   }
 
   changeBackgroundImage(): void {
