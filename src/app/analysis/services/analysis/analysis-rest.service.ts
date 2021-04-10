@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AnalysisDTO} from "../../model/AnalysisDTO";
@@ -15,7 +15,7 @@ const httpOptions = { // Outsource!
 })
 export class AnalysisRestService {
 
-  analysisUrl = 'http://localhost:8080/analysis';//'http://79.171.179.211:443/analysis';//'http://localhost:8080/analysis';
+  analysisUrl = 'http://79.171.179.211:443/analysis';
 
   constructor(private http: HttpClient) {
 
