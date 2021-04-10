@@ -28,7 +28,9 @@ export class StakeholderLevelComponent implements OnInit {
   }
 
   onLevelChange(): void {
-    if (!this.editable) {return; }
+    if (!this.editable) {
+      return;
+    }
     const index = this.levels.indexOf(this.level);
     const nextIndex = (index + 1) % this.levels.length;
     this.level = this.levels[nextIndex];

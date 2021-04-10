@@ -2,17 +2,17 @@ import { SliderFilterSettings } from '../../../shared/components/impact-slider/S
 export class ImpactTableFilterEvent {
 
   stakeholderFilter: string[];
-  dimensionFilter: string[];
+  valuesFilter: string[];
   valueFilter: SliderFilterSettings;
   highlightFilter: string;
 
   constructor(
     stakeholderFilter: string[],
-    dimensionFilter: string[],
+    valuesFilter: string[],
     valueFilter: SliderFilterSettings,
     highlightFilter: string) {
     this.stakeholderFilter = stakeholderFilter;
-    this.dimensionFilter = dimensionFilter;
+    this.valuesFilter = valuesFilter;
     this.valueFilter = valueFilter;
     this.highlightFilter = highlightFilter;
   }
