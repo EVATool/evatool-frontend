@@ -213,6 +213,7 @@ body {
 @media (min-width: 900px) {
   .news-card:hover .news-card__details-wrapper {
     max-height: 20rem;
+    height: 4rem;
     opacity: 1;
   }
   .news-card:hover .news-card__text-wrapper {
