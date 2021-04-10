@@ -128,7 +128,7 @@ body {
   padding: 0.5rem;
 }
 .news-card {
-  border: 0px solid aqua;
+  border: 0 solid aqua;
   margin: 0.5rem;
   position: relative;
   height: 12rem;
