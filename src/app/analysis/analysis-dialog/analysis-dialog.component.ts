@@ -12,6 +12,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 export class AnalysisDialogComponent implements OnInit {
 
   isTemplate = false;
+  templateAnalyses: Analysis[] = [];
+  selectedTemplate!: Analysis;
   analyseName: any;
   analysisDescription: any;
   analysisImage: any;
@@ -31,7 +33,7 @@ export class AnalysisDialogComponent implements OnInit {
     private router: Router,
     private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log(data)
+    this.isTemplate = data.isTemplate;
   }
 
   ngOnInit(): void {
