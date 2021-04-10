@@ -26,7 +26,9 @@ export class AnalysisRestService {
   }
 
   deepCopy(analysisId: string, analysisDto: AnalysisDTO): Observable<AnalysisDTO> {
-    return this.http.post<AnalysisDTO>("/analysis/deep-copy/" + analysisId, analysisDto, httpOptions);
+    console.log(analysisId);
+    console.log(analysisDto);
+    return this.http.post<AnalysisDTO>(this.analysisUrl + "/deep-copy/" + analysisId, analysisDto, httpOptions);
   }
 
   getAnalysisById(id: any): Observable<AnalysisDTO> {
