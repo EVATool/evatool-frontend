@@ -11,6 +11,8 @@ import {RequirementsDataService} from '../../services/requirements/requirements-
 import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Variants} from '../../models/Variants';
+import {MatSliderChange} from "@angular/material/slider";
+import {RequirementImpactPoints} from "../../models/RequirementImpactPoints";
 
 @Component({
   selector: 'app-requirement-table',
@@ -110,7 +112,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     let retValue = false;
     element.requirementImpactPoints.forEach(value => {
       if (value.entityId === impact.id){
-        const points: number | undefined = value.points;
+        const points: number | null = value.points;
         if (points && 0 < points) {
           retValue = true;
         }
@@ -124,7 +126,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     let retValue = false;
     element.requirementImpactPoints.forEach(value => {
       if (value.entityId === impact.id){
-        const points: number | undefined = value.points;
+        const points: number | null = value.points;
         if (points && 0 > points) {
           retValue = true;
         }
@@ -134,6 +136,43 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   clickFunction(element: Requirements, impact: Impact): void {
+  }
+
+  valueChange(element: Requirements, impact: Impact, event: MatSliderChange): void {
+    console.log(event.value);
+    if (event.value !== null) {
+      if (event.value === 0.0) {
+        let toDelete: null | RequirementImpactPoints = null;
+        element.requirementImpactPoints.forEach(value => {
+          if (value.entityId === impact.id) {
+            toDelete = value;
+          }
+        });
+        if (toDelete != null){
+          const index = element.requirementImpactPoints.indexOf(toDelete, 0);
+          if (index > -1) {
+            element.requirementImpactPoints.splice(index, 1);
+          }
+        }
+      } else {
+        let found = false;
+        element.requirementImpactPoints.forEach(value => {
+          if (value.entityId === impact.id) {
+            value.points = event.value;
+            found = true;
+          }
+        });
+        if (!found) {
+          const newPoint: RequirementImpactPoints = {
+            points: event.value,
+            entityId: impact.id,
+            impactDescription: impact.description,
+          };
+          element.requirementImpactPoints.push(newPoint);
+        }
+      }
+    }
+    this.updateRequirement(element);
   }
 
   descriptionChange(requirements: Requirements, event: Event): void {
@@ -189,5 +228,15 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     if (variantsTitleElement.length > 0 && variantsTitleElement[0].archived){
       const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: '' + variantsTitleElement[0].entityId}});
     }
+  }
+
+  valueForCell(element: Requirements, impact: Impact): number {
+    let retValue: number | null = 0;
+    element.requirementImpactPoints.forEach(value => {
+      if (value.entityId === impact.id) {
+        retValue = value.points;
+      }
+    });
+    return retValue;
   }
 }

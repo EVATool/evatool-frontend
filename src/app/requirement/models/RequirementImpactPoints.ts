@@ -3,7 +3,7 @@ import {Variants} from "./Variants";
 
 export class RequirementImpactPoints{
   [k: string]: any;
-  rootEntityId!: any;
+  entityId!: any;
   impactDescription = '';
-  points!: number;
+  points!: number | null;
 }
