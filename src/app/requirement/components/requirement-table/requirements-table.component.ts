@@ -48,47 +48,50 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.requirementsDataService.loadedRequirements.subscribe((requirements: Requirements[]) => {
-      this.tableDatasource = new MatTableDataSource<Requirements>(requirements);
-      this.initSorting();
-    });
-    this.requirementsDataService.changedRequirements.subscribe((requirements: Requirements[]) => {
-      this.tableDatasource.data = requirements;
-    });
-    this.requirementsDataService.addedRequirement.subscribe((requirements: Requirements) => {
-      this.showElement = [];
-      this.impactSoureces.forEach(imp => {
-        this.showElement.push({req: requirements.rootEntityId, imp: imp.id});
+    this.router.routerState.root.queryParams.subscribe(params => {
+      this.requirementsDataService.loadedRequirements.subscribe((requirements: Requirements[]) => {
+        this.tableDatasource = new MatTableDataSource<Requirements>(requirements);
+        this.initSorting();
       });
-    });
-    this.requirementsRestService.getImpacts().subscribe((result: any) => {
-      this.impactSoureces = [];
-      result.forEach((impactRest: Impact) => {
-        const impact: Impact = {
-          id: impactRest.id,
-          description: impactRest.description,
-          value: impactRest.value,
-          dimension: impactRest.dimension
-        };
-        this.impactSoureces.push(impact);
+      this.requirementsDataService.changedRequirements.subscribe((requirements: Requirements[]) => {
+        this.tableDatasource.data = requirements;
       });
-      let impactIdList: string[] = [];
-      this.impactSoureces.forEach(value => {
-        impactIdList = impactIdList.concat(value.id);
-        this.columnDefinitions.push({def: value.id, hide: true });
+      this.requirementsDataService.addedRequirement.subscribe((requirements: Requirements) => {
+        this.showElement = [];
+        this.impactSoureces.forEach(imp => {
+          this.showElement.push({req: requirements.rootEntityId, imp: imp.id});
+        });
       });
-      this.displayedColumns = this.displayedColumns.concat(impactIdList);
-    });
-    this.requirementsRestService.getVariants().subscribe((result: any) => {
-      this.variantsSoureces = [];
-      result.forEach((variantsRest: Variants) => {
-        const variants: Variants = {
-          entityId: variantsRest.id,
-          description: variantsRest.description,
-          variantsTitle: variantsRest.title,
-          archived: variantsRest.archived
-        };
-        this.variantsSoureces.push(variants);
+      this.requirementsRestService.getImpacts(params.id).subscribe((result: any) => {
+        this.impactSoureces = [];
+        result.forEach((impactRest: Impact) => {
+          const impact: Impact = {
+            id: impactRest.id,
+            uniqueString: impactRest.uniqueString,
+            description: impactRest.description,
+            value: impactRest.value,
+            dimension: impactRest.dimension
+          };
+          this.impactSoureces.push(impact);
+        });
+        let impactIdList: string[] = [];
+        this.impactSoureces.forEach(value => {
+          impactIdList = impactIdList.concat(value.id);
+          this.columnDefinitions.push({def: value.id, hide: true});
+        });
+        this.displayedColumns = this.displayedColumns.concat(impactIdList);
+      });
+      this.requirementsRestService.getVariants().subscribe((result: any) => {
+        this.variantsSoureces = [];
+        result.forEach((variantsRest: Variants) => {
+          const variants: Variants = {
+            entityId: variantsRest.id,
+            description: variantsRest.description,
+            variantsTitle: variantsRest.title,
+            archived: variantsRest.archived
+          };
+          this.variantsSoureces.push(variants);
+        });
       });
     });
     this.tableDatasource.data = this.requirementsSource;
