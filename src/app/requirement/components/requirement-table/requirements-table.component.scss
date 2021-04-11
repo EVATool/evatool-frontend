@@ -87,6 +87,10 @@ textarea{
   padding: 7px;
 }
 
+::ng-deep .mat-slider-horizontal{
+  min-width: 0;
+}
+
 /* Delete row button */
 
 .description-wrapper {
