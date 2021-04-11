@@ -45,5 +45,5 @@
   </ng-container>
   <mat-row mat-row *matRowDef="let variant; columns: displayedColumns;" class="archieved-{{variant.archived}}"
            [ngClass]="{'selected': (variant.id == id) && variant.guiId != '' && variant.archived == true}"
-          (click)="edit(variant)" (mouseleave)="save(variant)"></mat-row>
+          (dblclick)="edit(variant)" (mouseleave)="save(variant)"></mat-row>
 </mat-table>
