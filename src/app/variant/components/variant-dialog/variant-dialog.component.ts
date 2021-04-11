@@ -16,6 +16,7 @@ export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
   displayedColumns = ['guiId', 'title', 'description'];
+  expandArchived = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,6 +26,9 @@ export class VariantDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.variantDataService.variantsArchive.toString().includes(this.data.id)) {
+      this.expandArchived = true;
+    }
     this.form = this.formBuilder.group({
       id: new FormControl(null)
     });
