@@ -16,19 +16,16 @@ export class VariantDialogComponent implements OnInit {
 
   form!: FormGroup;
   displayedColumns = ['guiId', 'title', 'description'];
-  expandArchived = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<VariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { id: string },
     public variantDataService: VariantDataService) {
+
   }
 
   ngOnInit(): void {
-    if (this.variantDataService.variantsArchive.toString().includes(this.data.id)) {
-      this.expandArchived = true;
-    }
     this.form = this.formBuilder.group({
       id: new FormControl(null)
     });
@@ -45,5 +42,15 @@ export class VariantDialogComponent implements OnInit {
 
   archive(variant: Variant): void {
     this.variantDataService.archive(variant);
+  }
+
+  expand(): boolean {
+    let expandArchived = false;
+    this.variantDataService.variantsArchive.forEach((varient) => {
+      if (varient.id === this.data.id) {
+        expandArchived = true;
+      }
+    });
+    return  expandArchived;
   }
 }
