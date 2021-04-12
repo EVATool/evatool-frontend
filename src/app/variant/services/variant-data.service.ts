@@ -24,7 +24,7 @@ export class VariantDataService{
   }
 
   loadVariants(): void{
-    this.variantRestService.getVariants().subscribe((result: any) => {
+    this.variantRestService.getVariantsByAnalysisId(this.analysisid).subscribe((result: any) => {
       this.variants = [];
       this.variantsArchive = [];
       result.forEach((variantDTO: VariantDTO) => {
