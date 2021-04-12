@@ -5,8 +5,9 @@
   </button>
   <div class="container">
 
-    <h2 *ngIf="!isTemplate">Create New Analysis</h2>
-    <h2 *ngIf="isTemplate">Edit Analysis Template</h2>
+    <h2 *ngIf="!isTemplate && !editImage">Create New Analysis</h2>
+    <h2 *ngIf="isTemplate && !editImage">Edit Analysis Template</h2>
+    <h2 *ngIf="editImage">Edit Background Image</h2>
 
     <form (ngSubmit)="onSubmit()">
 
@@ -22,27 +23,34 @@
         </mat-form-field>
       </div>
 
-      <div *ngIf="!isTemplate" class="group">
+      <div *ngIf="!isTemplate && !editImage" class="group">
         <input type="text" name="analyseName" [(ngModel)]="analyseName" required/>
         <span class="bar"></span>
         <label>Name of Analysis</label>
       </div>
 
-      <div *ngIf="!isTemplate" class="group">
+      <div *ngIf="editImage" class="group">
+        <input type="text" name="analysisImage" [(ngModel)]="analyseName" required/>
+        <span class="bar"></span>
+        <label>Edit Background-Image</label>
+      </div>
+
+      <div *ngIf="!isTemplate && !editImage" class="group">
         <input type="text" name="analysisDescription" [(ngModel)]="analysisDescription" required/>
         <span class="bar"></span>
         <label>Description</label>
       </div>
 
-      <div *ngIf="!isTemplate" class="group">
+      <div *ngIf="!isTemplate && !editImage" class="group">
         <input type="text" name="analysisImageLink" [(ngModel)]="analysisImage" required/>
         <span class="bar"></span>
-        <label>Image (optional & direct-link)</label>
+        <label>Background-Image (optional & direct-link)</label>
       </div>
 
       <button mat-raised-button class="createButton button_cont b1" type="submit">
-        <div *ngIf="!isTemplate">Create analysis</div>
-        <div *ngIf="isTemplate">Done</div>
+        <div *ngIf="!isTemplate && !editImage">Create Analysis</div>
+        <div *ngIf="isTemplate && !editImage">Done</div>
+        <div *ngIf="editImage">Update Background-Image</div>
       </button>
     </form>
   </div>

@@ -9,8 +9,8 @@ import {AnalysisDTO} from "../../model/AnalysisDTO";
 export class AnalysisDataService {
   @Output() analysisSaved: EventEmitter<Analysis> = new EventEmitter<Analysis>();
   public analysisArray: Analysis[] = [];
-  public templateAnalyses: Analysis[] = []
-  public analyses: Analysis[] = []
+  public templateAnalyses: Analysis[] = [];
+  public analyses: Analysis[] = [];
 
   // imgs: any[] = [
   //   "https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
@@ -62,9 +62,11 @@ export class AnalysisDataService {
           title: analysisDTO.analysisName,
           analysisDate: '',
           image: analysisDTO.image,
+          editImage: false,
           isTemplate: analysisDTO.isTemplate,
           uniqueString: '',
-          editable: false,
+          TitleIsEditable: false,
+          DescriptionIsEditable: false,
           date: analysisDTO.date
         };
         this.analysisArray.push(analysis);

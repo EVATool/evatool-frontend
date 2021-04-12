@@ -4,8 +4,10 @@ export class Analysis {
   description: any = '';
   analysisDate: any = '';
   image: any = '';
+  editImage: any = '';
   isTemplate: any = '';
   uniqueString: any = '';
-  editable = false;
+  TitleIsEditable = false;
+  DescriptionIsEditable = false;
   date: any = '';
 }

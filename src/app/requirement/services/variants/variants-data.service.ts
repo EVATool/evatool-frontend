@@ -9,14 +9,16 @@ export class VariantsDataService {
 
   variantsImpacts: Variants[] = [
     {
-      id: '1',
-      title: 'Variants1',
+      entityId: '1',
+      variantsTitle: 'Variants1',
       description: 'This is the first read-only variants',
+      archived: false
     },
     {
-      id: '2',
-      title: 'Variants2',
+      entityId: '2',
+      variantsTitle: 'Variants2',
       description: 'This is the second read-only variants',
+      archived: false
     }
   ];
 
@@ -32,8 +34,8 @@ export class VariantsDataService {
   private createDefaultVariants(): Variants {
     let variant = new Variants();
 
-    variant.id = 'TEST';
-    variant.title = 'VariantsTest';
+    variant.entityId = 'TEST';
+    variant.variantsTitle = 'VariantsTest';
     variant.description = "Dieser Variants wurde erstellt";
 
     return variant;

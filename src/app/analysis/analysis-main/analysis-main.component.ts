@@ -19,7 +19,7 @@ export class AnalysisMainComponent implements OnInit {
     private analysisRestService: AnalysisRestService,
     public analysisDataService: AnalysisDataService,
     private router: Router) {
-    this.analysisDataService.loadAllAnalysis()
+    this.analysisDataService.loadAllAnalysis();
   }
 
   createAnalysis(): void {
@@ -44,11 +44,11 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   changeBackgroundImage(analysis: Analysis): void {
-
+    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {editImage: true}});
   }
 
   deleteAnalysis(analysis: Analysis): void {
-    console.log(analysis)
+    console.log(analysis);
     this.analysisRestService.deleteAnalysis(analysis).subscribe((an) => {
       const index = this.analysisDataService.analysisArray.indexOf(an, 0);
       if (index > -1) {
@@ -61,8 +61,13 @@ export class AnalysisMainComponent implements OnInit {
     });
   }
 
-  save(analysis: Analysis): void {
-    analysis.editable = !analysis.editable;
+  saveTitle(analysis: Analysis): void {
+    analysis.TitleIsEditable = !analysis.TitleIsEditable;
+    this.analysisDataService.update(analysis);
+  }
+
+  saveDescription(analysis: Analysis): void {
+    analysis.DescriptionIsEditable = !analysis.DescriptionIsEditable;
     this.analysisDataService.update(analysis);
   }
 }
