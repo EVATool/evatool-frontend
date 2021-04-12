@@ -15,7 +15,7 @@ const httpOptions = { // Outsource!
 })
 export class AnalysisRestService {
 
-  analysisUrl = 'http://79.171.179.211:443/analysis';
+  analysisUrl = 'http://79.171.179.211:443/analysis';//'http://localhost:8080/analysis';
 
   constructor(private http: HttpClient) {
 

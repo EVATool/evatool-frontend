@@ -17,7 +17,7 @@ const httpOptions = { // Outsource!
 })
 export class ValueRestService {
 
-  valueUrl = 'http://79.171.179.211:443/values';
+  valueUrl = 'http://79.171.179.211:443/values'; //'http://localhost:8080/values';
 
   constructor(private http: HttpClient) {
   }

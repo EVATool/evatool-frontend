@@ -57,8 +57,13 @@ export class AnalysisMainComponent implements OnInit {
     window.location.reload();
   }
 
-  save(analysis: Analysis): void {
-    analysis.editable = !analysis.editable;
+  saveTitle(analysis: Analysis): void {
+    analysis.titleIsEditable = !analysis.titleIsEditable;
+    this.analysisDataService.update(analysis);
+  }
+
+  saveDescription(analysis: Analysis): void {
+    analysis.descriptionIsEditable = !analysis.descriptionIsEditable;
     this.analysisDataService.update(analysis);
   }
 }

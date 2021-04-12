@@ -64,7 +64,8 @@ export class AnalysisDataService {
           image: analysisDTO.image,
           isTemplate: analysisDTO.isTemplate,
           uniqueString: '',
-          editable: false,
+          titleIsEditable: false,
+          descriptionIsEditable: false,
           date: analysisDTO.date
         };
         this.analysisArray.push(analysis);
