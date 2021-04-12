@@ -14,7 +14,7 @@
         <mat-form-field>
           <mat-label>Template</mat-label>
           <mat-select [(ngModel)]="selectedTemplate" name="selectedTemplate">
-            <mat-option *ngFor="let ana of analysisDataService.templateAnalyses" [value]="ana">
+            <mat-option *ngFor="let ana of analysisDataService.templateAnalyses" [value]="ana" (onSelectionChange)="selectedTemplateChanged(ana)">
               {{ana.title}}
             </mat-option>
           </mat-select>

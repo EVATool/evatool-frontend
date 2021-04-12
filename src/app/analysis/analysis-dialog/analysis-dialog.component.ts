@@ -63,4 +63,9 @@ export class AnalysisDialogComponent implements OnInit {
     this.router.navigate(['/analysis'], {queryParams: {id: analysisId}, queryParamsHandling: 'merge'});
     this.analysisDialogComponent.close();
   }
+
+  selectedTemplateChanged(analysis: Analysis){
+    console.log(analysis);
+
+  }
 }
