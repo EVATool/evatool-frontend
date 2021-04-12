@@ -15,19 +15,25 @@
   padding-top: 20px;
   padding-bottom: 20px;
   margin-left: 50px;
-  margin-top: 130px;
+  margin-top: 230px;
   text-transform: uppercase;
   border-radius: 20px;
   position: fixed;
 }
 .editButton{
-  width: 80px;
-  padding: 5px;
-  margin: 0 3px;
-  background-color: #ff7e00;
-  outline: none;
-  border: 1px solid #ff7e00;
-  box-shadow: 2px 2px 2px #3f3f3f;
+  border: none;
+  background: #404040;
+  color: #ffffff !important;
+  font-weight: 100;
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 50px;
+  margin-top: 130px;
+  text-transform: uppercase;
+  border-radius: 20px;
+  position: fixed;
 }
 .valueButton {
   border: none;
