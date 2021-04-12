@@ -54,11 +54,11 @@ export class AnalysisMainComponent implements OnInit {
       if (index > -1) {
         this.analysisDataService.analysisArray.splice(index, 1);
         this.analysisDataService.analyses.splice(index, 1);
+
+        // TODO Deletion works, but the UI is reloading as a whole.
+        window.location.reload();
       }
     });
-    // TODO Deletion works but the UI is not updating.
-    //  Calling window.location.reload causes the rest call to fail.
-    //  The UI has to be reloaded in some other way.
   }
 
   save(analysis: Analysis): void {
