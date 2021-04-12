@@ -34,6 +34,10 @@ export class VariantRestService {
     return this.http.get<any>(this.variantUrl + '/' + id);
   }
 
+  getVariantsByAnalysisId(id: any): Observable<any> {
+    return this.http.get<any>(this.variantUrl + '?analysisId=' + id);
+  }
+
   createVariants(variantDTO: VariantDTO): Observable<any> {
     return this.http.post(this.variantUrl, variantDTO, httpOptions);
   }
