@@ -12,6 +12,7 @@ import { ValueDialogComponent } from './value-dialog/value-dialog.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatInputModule} from '@angular/material/input';
+import {NgScrollbarModule} from "ngx-scrollbar";
 
 @NgModule({
   declarations: [AnalysisMainComponent, AnalysisDialogComponent, ValueDialogComponent],
@@ -27,7 +28,8 @@ import {MatInputModule} from '@angular/material/input';
         MatButtonModule,
         MatExpansionModule,
         MatDialogModule,
-        MatInputModule
+        MatInputModule,
+        NgScrollbarModule
     ],
   exports: [
     AnalysisMainComponent

@@ -1,15 +1,3 @@
-<head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style type="text/css">
-    .material-icons.md-48 { font-size: 48px; }
-  </style>
-</head>
-
-<head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style type="text/css">
-    .material-icons.md-48 { font-size: 48px; }
-  </style>
-</head>
-
 <!--container-->
 <!--left-->
 <div id="left"><!--left section-->
@@ -37,18 +25,25 @@
             <em class="material-icons settings" tabindex="-1">settings</em>
           </button>
           <div class="dropdown-content">
-            <a mat-raised-button class="changeBackgroundImage" (click)="changeBackgroundImage()">Change Background-Image</a>
+            <a mat-raised-button class="changeBackgroundImage" (click)="changeBackgroundImage()">Change
+              Background-Image</a>
             <a mat-raised-button class="deleteAnalysis" (click)="deleteAnalysis(analysis)">Delete Analysis</a>
           </div>
         </div>
-        <h2 (click)="analysis.editable=!analysis.editable" *ngIf="!analysis.editable" class="news-card__title">{{analysis.title}}</h2>
-        <textarea (mouseleave)="save(analysis); " *ngIf="analysis.editable" [(ngModel)]="analysis.title" type ="text" matInput value="{{analysis.title}}" cols="30" rows="10"></textarea>
+        <h2 (click)="analysis.editable=!analysis.editable" *ngIf="!analysis.editable"
+            class="news-card__title">{{analysis.title}}</h2>
+        <textarea (mouseleave)="save(analysis); " *ngIf="analysis.editable" [(ngModel)]="analysis.title" type="text"
+                  matInput value="{{analysis.title}}" cols="30" rows="10"></textarea>
         <div class="news-card__post-date">Last edit: {{analysis.date|date:"dd.MM.yyyy - hh:mm U'h'r"}}</div>
         <div class="news-card__details-wrapper">
-          <p (click)="analysis.editable=!analysis.editable" *ngIf="!analysis.editable" class="news-card__excerpt">{{analysis.description}}</p>
-          <textarea (mouseleave)="save(analysis); " *ngIf="analysis.editable" [(ngModel)]="analysis.description" type ="text" matInput value="{{analysis.description}}" cols="30" rows="10"></textarea>
-          <button mat-raised-button class="news-card__read-more" (click)="analysisClick(analysis)">Spectate <em class="fas fa-long-arrow-alt-right"></em></button>
-          <button mat-raised-button class="news-card__read-more" (click)="openValueDialog(analysis)">Edit Values <em class="fas fa-long-arrow-alt-right"></em></button>
+          <p (click)="analysis.editable=!analysis.editable" *ngIf="!analysis.editable"
+             class="news-card__excerpt">{{analysis.description}}</p>
+          <textarea (mouseleave)="save(analysis); " *ngIf="analysis.editable" [(ngModel)]="analysis.description"
+                    type="text" matInput value="{{analysis.description}}" cols="30" rows="10"></textarea>
+          <button mat-raised-button class="news-card__read-more" (click)="analysisClick(analysis)">Spectate <em
+            class="fas fa-long-arrow-alt-right"></em></button>
+          <button mat-raised-button class="news-card__read-more" (click)="openValueDialog(analysis)">Edit Values <em
+            class="fas fa-long-arrow-alt-right"></em></button>
         </div>
       </div>
     </div>
