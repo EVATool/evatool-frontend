@@ -66,7 +66,6 @@ export class AnalysisDialogComponent implements OnInit {
 
   selectedTemplateChanged(analysis: Analysis) {
     if (this.isTemplate) {
-      this.analyseName = analysis.title;
     } else {
 
     }

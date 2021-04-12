@@ -14,18 +14,18 @@
         <mat-form-field>
           <mat-label>Template</mat-label>
           <mat-select [(ngModel)]="selectedTemplate" name="selectedTemplate">
-            <mat-option *ngFor="let ana of analysisDataService.templateAnalyses" [value]="ana" (onSelectionChange)="selectedTemplateChanged(ana)">
+            <mat-option *ngFor="let ana of analysisDataService.templateAnalyses" [value]="ana"
+                        (onSelectionChange)="selectedTemplateChanged(ana)">
               {{ana.title}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
-      <div class="group">
+      <div *ngIf="!isTemplate" class="group">
         <input type="text" name="analyseName" [(ngModel)]="analyseName" required/>
         <span class="bar"></span>
-        <label *ngIf="!isTemplate">Name of Analysis</label>
-        <label *ngIf="isTemplate">Name of Template</label>
+        <label>Name of Analysis</label>
       </div>
 
       <div *ngIf="!isTemplate" class="group">
