@@ -44,17 +44,21 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   changeBackgroundImage(analysis: Analysis): void {
-    
+
   }
 
   deleteAnalysis(analysis: Analysis): void {
+    console.log(analysis)
     this.analysisRestService.deleteAnalysis(analysis).subscribe((an) => {
       const index = this.analysisDataService.analysisArray.indexOf(an, 0);
       if (index > -1) {
         this.analysisDataService.analysisArray.splice(index, 1);
+        this.analysisDataService.analyses.splice(index, 1);
       }
     });
-    window.location.reload();
+    // TODO Deletion works but the UI is not updating.
+    //  Calling window.location.reload causes the rest call to fail.
+    //  The UI has to be reloaded in some other way.
   }
 
   save(analysis: Analysis): void {
