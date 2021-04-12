@@ -43,6 +43,8 @@ export class AnalysisDialogComponent implements OnInit {
           this.GoToStakeholder(ana.rootEntityID);
         });
       }
+    } else {
+      this.analysisDialogComponent.close();
     }
   }
 

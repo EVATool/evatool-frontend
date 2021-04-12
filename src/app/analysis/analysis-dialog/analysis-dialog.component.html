@@ -41,7 +41,8 @@
       </div>
 
       <button mat-raised-button class="createButton button_cont b1" type="submit">
-        Create analysis
+        <div *ngIf="!isTemplate">Create analysis</div>
+        <div *ngIf="isTemplate">Done</div>
       </button>
     </form>
   </div>
