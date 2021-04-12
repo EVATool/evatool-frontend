@@ -15,20 +15,26 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class AnalysisDialogComponent implements OnInit {
 
   isTemplate = false;
+  editImage = false;
   templateAnalyses: Analysis[] = [];
   selectedTemplate!: Analysis;
   analyseName: string = "";
+  newImage: string = '';
   analysisDescription: string = "";
   analysisImage: string = "";
 
   onSubmit(): void {
     if (!this.isTemplate) {
-      if (this.selectedTemplate === undefined) {
+      if (this.selectedTemplate === undefined && !this.editImage) {
         this.snackbar.open('Please select a template', '', {duration: 5000});
-      } else if (this.analyseName === "") {
+      } else if (this.analyseName === "" && !this.editImage) {
         this.snackbar.open('Please input a name', '', {duration: 5000});
-      } else if (this.analysisDescription === "") {
+      } else if (this.analysisDescription === "" && !this.editImage) {
         this.snackbar.open('Please input a description', '', {duration: 5000});
+      } else if (this.editImage) {
+        const analysisDto = new AnalysisDTO();
+        analysisDto.image = this.newImage;
+        this.analysisRestService.updateAnalysis(analysisDto);
       } else {
         const analysis: Analysis = new Analysis();
         analysis.title = this.analyseName;
@@ -56,6 +62,7 @@ export class AnalysisDialogComponent implements OnInit {
     private snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.isTemplate = data.isTemplate;
+    this.editImage = data.editImage;
   }
 
   ngOnInit(): void {
