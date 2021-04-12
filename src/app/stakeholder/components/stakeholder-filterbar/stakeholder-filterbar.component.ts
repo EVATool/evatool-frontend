@@ -36,7 +36,7 @@ export class StakeholderFilterbarComponent implements OnInit {
   levelChange(event: any): void{
     if (event.isUserInput)
     {
-      this.stakeholderDataService.filterSetFilter();
+      this.stakeholderDataService.filterLevel(event.source.value.key);
     }
   }
 
