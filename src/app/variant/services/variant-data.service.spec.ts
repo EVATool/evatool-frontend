@@ -41,7 +41,7 @@ describe('VariantDataService', () => {
   it('delete Variant', () => {
     const oldsize = service.matDataSource.data.length;
     service.delete(dataService.getDummyVariant());
-    expect(oldsize).toBeGreaterThan(service.matDataSource.data.length);
+    expect(oldsize).toBeLessThan(service.matDataSource.data.length);
 
   });
 

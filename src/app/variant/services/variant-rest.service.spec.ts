@@ -39,4 +39,8 @@ export class MockedVariantRestService extends VariantRestService {
   createVariants(variantDTO: VariantDTO): Observable<any> {
     return of(this.sampleData.getDummyVariantDTO());
   }
+
+  getVariantsByAnalysisId(id: any): Observable<any> {
+    return of(this.sampleData.getDummyVariantDTOs());
+  }
 }

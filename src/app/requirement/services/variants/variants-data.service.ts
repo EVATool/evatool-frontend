@@ -12,11 +12,13 @@ export class VariantsDataService {
       entityId: '1',
       variantsTitle: 'Variants1',
       description: 'This is the first read-only variants',
+      archived: false
     },
     {
       entityId: '2',
       variantsTitle: 'Variants2',
       description: 'This is the second read-only variants',
+      archived: false
     }
   ];
 
