@@ -21,7 +21,6 @@ export class StakeholderFilterbarComponent{
   constructor(public stakeholderDataService: StakeholderDataService) { }
 
   impactChange(value: any): void{
-    console.log(value);
     this.stakeholderDataService.filterImpact(value);
   }
 

@@ -11,17 +11,40 @@ import {Router} from '@angular/router';
 })
 export class StakeholderDataService {
 
-  stakeholders: Stakeholder[] = [];
-  matDataSource = new MatTableDataSource<Stakeholder>();
-  public searchtext = '';
-  private analysisid: string | null = '';
-
   constructor(private stakeholderRestService: StakeholderRestService,
               private router: Router) {
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
     this.loadAnalysisIDFromRouter();
     this.loadStakeholder();
 
+  }
+
+  stakeholders: Stakeholder[] = [];
+  matDataSource = new MatTableDataSource<Stakeholder>();
+  public searchtext = '';
+  private analysisid: string | null = '';
+
+
+  stakeholderFilter: Stakeholder = {
+    id: '',
+    guiId: '',
+    name: '',
+    level: '',
+    priority: 0,
+    negativeImpact: 1,
+    positiveImpact: 0,
+    editable: false,
+    created: false,
+    analysisId: '',
+  };
+
+  static checkImpactFilter(data: Stakeholder, value: any): boolean {
+    const totalimpact = data.negativeImpact + data.positiveImpact;
+    if (totalimpact === 0) {
+      return true;
+    } else {
+      return ((data.negativeImpact / totalimpact) <= value / 100);
+    }
   }
 
   loadStakeholder(): void {
@@ -34,7 +57,6 @@ export class StakeholderDataService {
         stakeholderDTO.impactList.forEach((impact: StakeholderImpact) => {
           if (impact.impactValue > 0) {
             postiveImpacts += impact.impactValue;
-            console.log(postiveImpacts);
           } else {
             negativeImpacts += Math.abs(impact.impactValue);
           }
@@ -48,11 +70,11 @@ export class StakeholderDataService {
           positiveImpact: postiveImpacts,
           negativeImpact: negativeImpacts,
           analysisId: stakeholderDTO.analysisId
-
         };
         this.stakeholders.push(stakeholder);
       });
       this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
+      this.matDataSource.filterPredicate = this.customFilterPredicate;
     });
   }
 
@@ -61,10 +83,10 @@ export class StakeholderDataService {
     const stakeholder = this.createDefaultStakeholder();
     this.stakeholders.push(stakeholder);
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
+    this.matDataSource.filterPredicate = this.customFilterPredicate;
   }
 
   save(stakeholder: Stakeholder): void {
-    console.log(this.analysisid);
     this.stakeholderRestService.createStakeholder({
       rootEntityID: '',
       guiId: '',
@@ -87,45 +109,50 @@ export class StakeholderDataService {
     return stakeholder;
   }
 
+
+  customFilterPredicate(data: Stakeholder, filters: string): boolean {
+    const searchTerms = JSON.parse(filters);
+    if (searchTerms.level !== '' && searchTerms.priority > 0) {
+      return (data.priority === searchTerms.priority && data.level === searchTerms.level
+        && StakeholderDataService.checkImpactFilter(data, searchTerms.negativeImpact));
+    } else if (searchTerms.level !== '' && searchTerms.priority === 0) {
+      return (data.level === searchTerms.level
+        && StakeholderDataService.checkImpactFilter(data, searchTerms.negativeImpact));
+    } else if (searchTerms.level === '' && searchTerms.priority > 0) {
+      return (data.priority === searchTerms.priority && StakeholderDataService.checkImpactFilter(data, searchTerms.negativeImpact));
+    } else {
+      return StakeholderDataService.checkImpactFilter(data, searchTerms.negativeImpact);
+    }
+  }
+
+  filterSetFilter(filter?: Stakeholder): void {
+    if (filter){
+      this.matDataSource.filter = JSON.stringify(filter);
+    }else {
+      this.matDataSource.filter = JSON.stringify(this.stakeholderFilter);
+    }
+  }
+
   filterPrio(prio: number): void {
-
-    this.resetFilter();
-    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
-      return data.priority === prio;
-    };
-
-    this.matDataSource.filter = String(prio);
+    this.stakeholderFilter.priority = prio;
+    this.filterSetFilter();
   }
 
   filterLevel(level: string): void {
-
-    this.resetFilter();
-    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
-      return data.level === level;
-    };
-
-    this.matDataSource.filter = level;
+    this.stakeholderFilter.level = level;
+    this.filterSetFilter();
   }
 
   resetFilter(): void {
-    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
-      return true;
-    };
-    this.matDataSource.filter = '';
+    this.stakeholderFilter.level = '';
+    this.stakeholderFilter.priority = 0;
+    this.stakeholderFilter.negativeImpact = 100;
+    this.filterSetFilter(this.stakeholderFilter);
   }
 
   filterImpact(value: any): void {
-    this.resetFilter();
-    this.matDataSource.filterPredicate = (data: Stakeholder, filter) => {
-      const totalimpact = data.negativeImpact + data.positiveImpact;
-      if (totalimpact === 0) {
-        return true;
-      }
-      console.log((data.negativeImpact / totalimpact));
-      return (data.negativeImpact / totalimpact) < value;
-    };
-
-    this.matDataSource.filter = value;
+    this.stakeholderFilter.negativeImpact = value;
+    this.filterSetFilter();
   }
 
   setSearchText(event: string): void {
@@ -145,7 +172,7 @@ export class StakeholderDataService {
     });
   }
 
-  loadAnalysisIDFromRouter(): void{
+  loadAnalysisIDFromRouter(): void {
     this.router.routerState.root.queryParams.subscribe((paramMap) => {
       this.analysisid = paramMap.id;
     });
