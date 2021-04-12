@@ -44,7 +44,7 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   changeBackgroundImage(analysis: Analysis): void {
-    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {editImage: true}});
+    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {editImage: true, editedAnalysis: analysis}});
   }
 
   deleteAnalysis(analysis: Analysis): void {
