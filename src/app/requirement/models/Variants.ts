@@ -1,7 +1,8 @@
 export class Variants {
   [k: string]: any;
 
-  id = '';
-  title = '';
+  entityId = '';
+  variantsTitle = '';
   description = '';
+  archived!: boolean;
 }

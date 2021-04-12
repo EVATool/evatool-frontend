@@ -1,7 +1,7 @@
 export enum SliderFilterType {
   LessThan = 0,
   GreaterThan = 1,
-  Bewtween = 2,
+  Between = 2,
   Equality = 3,
   Off = 4
 }
@@ -27,6 +27,6 @@ export class SliderFilterSettings {
   }
 
   static getDefault(): SliderFilterSettings {
-    return new SliderFilterSettings(0, 0, [1, -1]);
+    return new SliderFilterSettings(2, 0, [1, -1]);
   }
 }

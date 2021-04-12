@@ -14,7 +14,7 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
   @Input() name = '';
   @Output() filterChanged = new EventEmitter<SliderFilterSettings>();
 
-  filterType: SliderFilterType = 0;
+  filterType: SliderFilterType = 2;
   filterBoundary: SliderFilterBoundary = 0;
 
   public isVisible = false;
@@ -45,9 +45,10 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
 
   public clearFilter(): void {
     this.logger.info(this, 'Clearing Filtering');
-    this.filterType = SliderFilterType.LessThan;
+    this.filterType = SliderFilterType.Between;
     this.filterBoundary = SliderFilterBoundary.Include;
     this.slider.value = 1;
+    this.slider.valueSecond = -1;
     this.filteringChanged();
   }
 }

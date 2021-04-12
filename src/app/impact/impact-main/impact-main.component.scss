@@ -1,43 +1,18 @@
 .container {
   display: flex;
   flex-flow: column;
-  height: 100%;
-}
+  overflow: hidden;
+  height: 85vh; // Setting the height to 100% makes the mat-table vanish. Using flex with a mat-table seems impossible.
 
-.container .search-bar-container {
-  flex: 0 1 auto;
-}
+  .impact-table-filter-bar-container {
+    margin: 2%;
+    margin-left: 3%;
+    flex: 0 0 auto;
+  }
 
-.container .impact-table-container {
-  flex: 1 1 auto;
-}
-
-.container .add-impact-button-container {
-  flex: 0 1 auto;
-  margin-left: auto;
-}
-
-.search-bar-container {
-  margin-top: 3%;
-  margin-left: 5%;
-}
-
-.impact-table-container {
-  margin: 1%;
-  margin-left: 5%;
-  height: calc(80vh - 150px);
-}
-
-.add-impact-button-container {
-  position: fixed;
-  left: 1.5%;
-  bottom: 2.5%;
-  width: 100%;
-}
-
-.scroll-to-top {
-  position: fixed;
-  top: 125px;
-  right: 30px;
-  z-index: 10;
+  .impact-table-container {
+    margin-left: 5%;
+    margin-right: 3%;
+    flex: 1 1 auto;
+  }
 }
