@@ -17,29 +17,32 @@ export class AnalysisDialogComponent implements OnInit {
   isTemplate = false;
   templateAnalyses: Analysis[] = [];
   selectedTemplate!: Analysis;
-  analyseName: any;
-  analysisDescription: any;
-  analysisImage: any;
+  analyseName: string = "";
+  analysisDescription: string = "";
+  analysisImage: string = "";
 
   onSubmit(): void {
     if (!this.isTemplate) {
       if (this.selectedTemplate === undefined) {
         this.snackbar.open('Please select a template', '', {duration: 5000});
-        return
+      } else if (this.analyseName === "") {
+        this.snackbar.open('Please input a name', '', {duration: 5000});
+      } else if (this.analysisDescription === "") {
+        this.snackbar.open('Please input a description', '', {duration: 5000});
+      } else {
+        const analysis: Analysis = new Analysis();
+        analysis.title = this.analyseName;
+        analysis.description = this.analysisDescription;
+        analysis.image = this.analysisImage;
+
+        let analysisDto = new AnalysisDTO();
+        analysisDto.isTemplate = false;
+        analysisDto.analysisName = analysis.title;
+        analysisDto.analysisDescription = analysis.description;
+        this.analysisRestService.deepCopy(this.selectedTemplate.id, analysisDto).subscribe(ana => {
+          this.GoToStakeholder(ana.rootEntityID);
+        });
       }
-
-      const analysis: Analysis = new Analysis();
-      analysis.title = this.analyseName;
-      analysis.description = this.analysisDescription;
-      analysis.image = this.analysisImage;
-
-      let analysisDto = new AnalysisDTO();
-      analysisDto.isTemplate = false;
-      analysisDto.analysisName = analysis.title;
-      analysisDto.analysisDescription = analysis.description;
-      this.analysisRestService.deepCopy(this.selectedTemplate.id, analysisDto).subscribe(ana => {
-        this.GoToStakeholder(ana.rootEntityID);
-      });
     }
   }
 
