@@ -1,15 +1,19 @@
-import { LogService } from '../../../shared/services/log.service';
-import { ImpactStakeholderDto } from '../../dtos/ImpactStakeholderDto';
-import { StakeholderDto } from '../../dtos/StakeholderDto';
-import { Stakeholder } from '../../models/Stakeholder';
-import { Injectable } from '@angular/core';
+import {LogService} from '../../../shared/services/log.service';
+import {ImpactStakeholderDto} from '../../dtos/ImpactStakeholderDto';
+import {StakeholderDto} from '../../dtos/StakeholderDto';
+import {Stakeholder} from '../../models/Stakeholder';
+import {Injectable} from '@angular/core';
+import {AnalysisMapperService} from "../analysis/analysis-mapper.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StakeholderMapperService {
 
-  constructor(private logger: LogService) { }
+  constructor(
+    private logger: LogService,
+    private analysisMapperService: AnalysisMapperService) {
+  }
 
   toDto(stakeholder: Stakeholder): StakeholderDto {
     this.logger.info(this, 'Mapping Stakeholder to StakeholderDto');
@@ -18,6 +22,7 @@ export class StakeholderMapperService {
 
     stakeholderDto.rootEntityID = stakeholder.id;
     stakeholderDto.stakeholderName = stakeholder.name;
+    stakeholderDto.stakeholderLevel = stakeholder.level;
 
     return stakeholderDto;
   }
@@ -28,6 +33,7 @@ export class StakeholderMapperService {
 
     stakeholder.id = stakeholderDto.rootEntityID;
     stakeholder.name = stakeholderDto.stakeholderName;
+    stakeholder.level = stakeholderDto.stakeholderLevel;
 
     return stakeholder;
   }
@@ -38,6 +44,7 @@ export class StakeholderMapperService {
 
     stakeholderDto.id = stakeholder.id;
     stakeholderDto.name = stakeholder.name;
+    stakeholderDto.level = stakeholder.level;
 
     return stakeholderDto;
   }
@@ -48,6 +55,7 @@ export class StakeholderMapperService {
 
     stakeholder.id = stakeholderDto.id;
     stakeholder.name = stakeholderDto.name;
+    stakeholder.level = stakeholderDto.level;
 
     return stakeholder;
   }

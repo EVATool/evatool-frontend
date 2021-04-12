@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {AnalysisDTO} from "../../model/AnalysisDTO";
 import {Analysis} from "../../model/Analysis";
@@ -17,9 +17,10 @@ const httpOptions = { // Outsource!
 })
 export class ValueRestService {
 
-  valueUrl = 'http://localhost:8080/values';//'http://79.171.179.211:443/values';
+  valueUrl = 'http://79.171.179.211:443/values';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getValues(): Observable<any> {
     return this.http.get<any>(this.valueUrl);

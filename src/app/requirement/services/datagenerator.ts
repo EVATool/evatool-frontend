@@ -239,7 +239,7 @@ export class Datagenerator {
     // requirement1.projetid = '1';
     // requirement1.requirementTitle = 'RE01';
     // requirement1.requirementDescription = 'This is the first read-only requirement';
-    // requirement1.dimensions = new Set<Dimension>();
+    // requirement1.dimensions = new Set<Value>();
     // requirement1.dimensions.add({id: '21', name: 'Feelings'});
     // requirement1.impactDescription = new Map<string, string>();
     // requirement1.impactDescription.set('1', 'This is the first read-only impact');
@@ -251,7 +251,7 @@ export class Datagenerator {
     // requirement2.projetid = '1';
     // requirement2.requirementTitle = 'RE02';
     // requirement2.requirementDescription = 'This is the second read-only requirement';
-    // requirement2.dimensions = new Set<Dimension>();
+    // requirement2.dimensions = new Set<Value>();
     // requirement2.dimensions.add({id: '22', name: 'Control'});
     // requirement2.dimensions.add({id: '21', name: 'Feelings'});
     // requirement2.impactDescription = new Map<string, string>();
@@ -267,7 +267,7 @@ export class Datagenerator {
     // requirement3.projetid = '1';
     // requirement3.requirementTitle = 'RE03';
     // requirement3.requirementDescription = 'This is the third read-only requirement';
-    // requirement3.dimensions = new Set<Dimension>();
+    // requirement3.dimensions = new Set<Value>();
     // requirement3.dimensions.add({id: '21', name: 'Feelings'});
     // requirement3.impactDescription = new Map<string, string>();
     // requirement3.impactDescription.set('1', 'This is the first read-only impact');
@@ -279,7 +279,7 @@ export class Datagenerator {
     // requirement4.projetid = '1';
     // requirement4.requirementTitle = 'RE04';
     // requirement4.requirementDescription = 'This is the fourth read-only requirement';
-    // requirement4.dimensions = new Set<Dimension>();
+    // requirement4.dimensions = new Set<Value>();
     // requirement4.dimensions.add({id: '22', name: 'Control'});
     // requirement4.dimensions.add({id: '21', name: 'Feelings'});
     // requirement4.impactDescription = new Map<string, string>();

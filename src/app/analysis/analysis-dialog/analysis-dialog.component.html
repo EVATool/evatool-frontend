@@ -5,26 +5,38 @@
   </button>
   <div class="container">
 
-    <h2>Create new Analysis</h2>
+    <h2 *ngIf="!isTemplate">Create new Analysis</h2>
+    <h2 *ngIf="isTemplate">Edit Analysis Templates</h2>
 
     <form (ngSubmit)="onSubmit()">
 
       <div class="group">
-        <input type="text" name="analyseName" [(ngModel)]="analyseName" required />
+        <label>Name of Analysis</label>
+        <mat-form-field>
+          <mat-select [(ngModel)]="selectedTemplate" name="selectedTemplate">
+            <mat-option *ngFor="let ana of analysisDataService.templateAnalyses" [value]="ana">
+              {{ana.title}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="group">
+        <input type="text" name="analyseName" [(ngModel)]="analyseName" required/>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Name of Analysis</label>
       </div>
 
-      <div class="group">
-        <input type="text" name="analysisDescription" [(ngModel)]="analysisDescription" required />
+      <div *ngIf="!isTemplate" class="group">
+        <input type="text" name="analysisDescription" [(ngModel)]="analysisDescription" required/>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Description</label>
       </div>
 
-      <div class="group">
-        <input type="text" name="analysisImageLink" [(ngModel)]="analysisImage" required />
+      <div *ngIf="!isTemplate" class="group">
+        <input type="text" name="analysisImageLink" [(ngModel)]="analysisImage" required/>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Image (optional & direct-link)</label>

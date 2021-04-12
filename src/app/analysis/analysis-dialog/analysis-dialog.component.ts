@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AnalysisDataService } from "../services/analysis/analysis-data.service";
-import { AnalysisDTO } from "../model/AnalysisDTO";
-import { Analysis } from "../model/Analysis";
-import { analyticsPackageSafelist } from "@angular/cli/models/analytics";
-import { Router } from "@angular/router";
-import { MatDialogRef } from "@angular/material/dialog";
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {AnalysisDataService} from "../services/analysis/analysis-data.service";
+import {Analysis} from "../model/Analysis";
+import {Router} from "@angular/router";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {AnalysisRestService} from "../services/analysis/analysis-rest.service";
+import {AnalysisDTO} from "../model/AnalysisDTO";
 
 @Component({
   selector: 'app-analysis-dialog',
@@ -12,33 +12,48 @@ import { MatDialogRef } from "@angular/material/dialog";
   styleUrls: ['./analysis-dialog.component.css']
 })
 export class AnalysisDialogComponent implements OnInit {
+
+  isTemplate = false;
+  templateAnalyses: Analysis[] = [];
+  selectedTemplate!: Analysis;
   analyseName: any;
   analysisDescription: any;
   analysisImage: any;
 
   onSubmit(): void {
-    const analysis: Analysis = new Analysis();
-    analysis.title = this.analyseName;
-    analysis.description = this.analysisDescription;
-    analysis.image = this.analysisImage;
+    if (!this.isTemplate) {
+      const analysis: Analysis = new Analysis();
+      analysis.title = this.analyseName;
+      analysis.description = this.analysisDescription;
+      analysis.image = this.analysisImage;
 
-    this.analysisDataService.save(analysis);
-    this.GoToStakeholder();
+      let analysisDto = new AnalysisDTO();
+      analysisDto.isTemplate = false;
+      analysisDto.analysisName = analysis.title;
+      analysisDto.analysisDescription = analysis.description;
+      this.analysisRestService.deepCopy(this.selectedTemplate.id, analysisDto).subscribe(ana => {
+        this.GoToStakeholder(ana.rootEntityID);
+      });
+    }
   }
 
   constructor(
-    private analysisDataService: AnalysisDataService,
+    public analysisDataService: AnalysisDataService,
+    private analysisRestService: AnalysisRestService,
     private router: Router,
-    private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>) { }
+    private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.isTemplate = data.isTemplate;
+  }
 
   ngOnInit(): void {
     this.analysisDataService.analysisSaved.subscribe(analysis => {
-      this.router.navigate(['/analysis'], { queryParams: { id: analysis.id }, queryParamsHandling: 'merge' });
+      this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
     });
   }
 
-  GoToStakeholder(): void {
-    this.router.navigate(['/analysis']);
+  GoToStakeholder(analysisId: string): void {
+    this.router.navigate(['/analysis'], {queryParams: {id: analysisId}, queryParamsHandling: 'merge'});
     this.analysisDialogComponent.close();
   }
 }
