@@ -11,11 +11,6 @@ import {Router} from '@angular/router';
 })
 export class StakeholderDataService {
 
-  stakeholders: Stakeholder[] = [];
-  matDataSource = new MatTableDataSource<Stakeholder>();
-  public searchtext = '';
-  private analysisid: string | null = '';
-
   constructor(private stakeholderRestService: StakeholderRestService,
               private router: Router) {
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
@@ -23,6 +18,25 @@ export class StakeholderDataService {
     this.loadStakeholder();
 
   }
+
+  stakeholders: Stakeholder[] = [];
+  matDataSource = new MatTableDataSource<Stakeholder>();
+  public searchtext = '';
+  private analysisid: string | null = '';
+
+
+  stakeholderFilter: Stakeholder = {
+    id: '',
+    guiId: '',
+    name: '',
+    level: '',
+    priority: '',
+    negativeImpact: 0,
+    positiveImpact: 0,
+    editable: false,
+    created: false,
+    analysisId: '',
+  };
 
   loadStakeholder(): void {
     this.stakeholderRestService.getStakeholdersByAnalysisId(this.analysisid).subscribe((result: any) => {
@@ -52,6 +66,7 @@ export class StakeholderDataService {
         this.stakeholders.push(stakeholder);
       });
       this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
+      this.matDataSource.filterPredicate = this.customFilterPredicate;
     });
   }
 
@@ -60,6 +75,7 @@ export class StakeholderDataService {
     const stakeholder = this.createDefaultStakeholder();
     this.stakeholders.push(stakeholder);
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
+    this.matDataSource.filterPredicate = this.customFilterPredicate;
   }
 
   save(stakeholder: Stakeholder): void {
@@ -85,6 +101,49 @@ export class StakeholderDataService {
     stakeholder.created = true;
     return stakeholder;
   }
+
+//////
+
+  customFilterPredicate(data: Stakeholder, filters: string): boolean {
+    const searchTerms = JSON.parse(filters);
+
+    const levelFilter = true;
+
+
+    if (searchTerms.level !== '')
+    {
+
+    }
+
+
+    /*
+    const priorität
+
+    if (searchTerms.level !== '')
+    {
+
+    }
+
+    if(searchTerms.le)
+
+
+
+    isStakeholder:Stakeholder ;
+    if(data.level === searchTerms.level)
+    {
+
+    }
+    */
+
+    return true;
+  }
+
+  filterSetFilter(): void {
+    this.stakeholderFilter.level = 'NATURAL_PERSON';
+    this.matDataSource.filter = JSON.stringify(this.stakeholderFilter);
+  }
+/////
+
 
   filterPrio(prio: number): void {
 
