@@ -18,7 +18,6 @@ export class VariantTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.matDataSource);
   }
 
   addVariant(): void {

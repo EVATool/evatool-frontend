@@ -3,13 +3,16 @@ import {ImpactStakeholderDto} from '../../dtos/ImpactStakeholderDto';
 import {StakeholderDto} from '../../dtos/StakeholderDto';
 import {Stakeholder} from '../../models/Stakeholder';
 import {Injectable} from '@angular/core';
+import {AnalysisMapperService} from "../analysis/analysis-mapper.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StakeholderMapperService {
 
-  constructor(private logger: LogService) {
+  constructor(
+    private logger: LogService,
+    private analysisMapperService: AnalysisMapperService) {
   }
 
   toDto(stakeholder: Stakeholder): StakeholderDto {

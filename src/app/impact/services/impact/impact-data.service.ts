@@ -54,7 +54,16 @@ export class ImpactDataService {
 
     this.stakeholderDataService.onInit();
     this.valueDataService.onInit();
-    this.analysisDataService.onInit();
+    //this.analysisDataService.onInit();
+  }
+
+  reload() {
+    this.logger.info(this, 'Reload');
+    this.impactsLoaded = false;
+    this.stakeholdersLoaded = false;
+    this.valuesLoaded = false;
+    this.analysesLoaded = false;
+    this.onInit();
   }
 
   private loadIfChildrenAreLoaded(): void {
@@ -88,22 +97,8 @@ export class ImpactDataService {
     return this.stakeholdersLoaded && this.valuesLoaded && this.analysesLoaded;
   }
 
-  private createDefaultImpact(): Impact {
-    this.logger.debug(this, 'Create Default Impact');
-    const impact = new Impact();
-
-    impact.value = 0.0;
-    impact.description = '';
-    impact.valueEntity = this.valueDataService.getDefaultValue();
-    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
-    impact.analysis = this.analysisDataService.getCurrentAnalysis();
-
-    return impact;
-  }
-
-  createImpact(): void {
+  createImpact(impact: Impact): void {
     this.logger.info(this, 'Create Impact');
-    const impact = this.createDefaultImpact();
     const impactDto = this.impactMapperService.toDto(impact);
     this.impactRestService.createImpact(impactDto).subscribe(impDto => {
       impact.id = impDto.id;
@@ -119,7 +114,7 @@ export class ImpactDataService {
     const impactDto = this.impactMapperService.toDto(impact);
     this.impactRestService.updateImpact(impactDto).subscribe((newImpact: Impact) => {
       this.changedImpact.emit(newImpact);
-      // this.changedImpacts.emit(this.impacts); // The change originated from the UI.
+      this.changedImpacts.emit(this.impacts);
     });
   }
 

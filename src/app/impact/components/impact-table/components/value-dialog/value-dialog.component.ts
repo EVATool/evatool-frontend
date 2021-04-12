@@ -1,7 +1,9 @@
-import { ValueDataService } from '../../../../services/value/value-data.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
+import {ValueDataService} from '../../../../services/value/value-data.service';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {FormBuilder, FormGroup, FormControl} from '@angular/forms';
+import {Component, OnInit, Inject, AfterViewInit, Output, EventEmitter} from '@angular/core';
+import {Value} from "../../../../models/Value";
+import {LogService} from "../../../../../shared/services/log.service";
 
 @Component({
   selector: 'app-value-dialog',
@@ -10,21 +12,16 @@ import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 })
 export class ValueDialogComponent implements OnInit, AfterViewInit {
 
-  socialValueState = true; // TODO Do foreach valueType, even necessary?
-  economicValueState = true;
-
-  form!: FormGroup;
-
   constructor(
+    private logger: LogService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ValueDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public valuesDataService: ValueDataService) { }
+    public valuesDataService: ValueDataService) {
+  }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      id: new FormControl(null),
-    });
+
   }
 
   ngAfterViewInit(): void {
@@ -32,6 +29,11 @@ export class ValueDialogComponent implements OnInit, AfterViewInit {
   }
 
   closeClick(): void {
-    this.dialogRef.close({ accept: false });
+    this.dialogRef.close();
+  }
+
+  propagateSeeReferences(value: Value) {
+    this.logger.info(this, 'User wants to see the impacts referencing the value');
+    this.dialogRef.close({showReferencedImpacts: true, value: value});
   }
 }

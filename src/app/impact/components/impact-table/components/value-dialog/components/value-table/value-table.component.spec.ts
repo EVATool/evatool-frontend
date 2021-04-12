@@ -1,7 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValueTableComponent} from './value-table.component';
-import {RestMockProviders} from "../../../../../../spec/RestMockProviders";
+import {RestMock} from "../../../../../../spec/RestMock";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('ValueTableComponent', () => {
   let component: ValueTableComponent;
@@ -9,10 +10,9 @@ describe('ValueTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: RestMockProviders.imports,
+      imports: RestMock.imports.concat([MatSnackBarModule]),
       declarations: [ValueTableComponent]
-    })
-      .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

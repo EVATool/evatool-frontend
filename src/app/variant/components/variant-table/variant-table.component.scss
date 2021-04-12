@@ -15,15 +15,11 @@
     margin-right: 0;
   }
 
-  .archieved-true{
-    background-color: lightgrey;
-  }
-
   .mat-row:hover {
     .options {
       vertical-align: middle;
       text-align: right;
-      display: table-cell;
+      display: contents;
     }
   }
 
@@ -48,7 +44,7 @@
   }
 
   .selected{
-    background-color: yellow;
+    background-color: lightyellow;
   }
 
 }

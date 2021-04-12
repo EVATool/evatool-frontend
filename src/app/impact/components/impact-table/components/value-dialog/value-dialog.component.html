@@ -15,7 +15,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <app-value-table [type]='valType'></app-value-table>
+            <app-value-table [type]='valType' (userWantsToSeeReferencedImpacts)="propagateSeeReferences($event)"></app-value-table>
           </mat-expansion-panel>
         </div>
       </mat-accordion>

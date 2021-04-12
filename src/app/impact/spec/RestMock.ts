@@ -9,7 +9,7 @@ import {MockedImpactRestService} from "../services/impact/impact-rest.service.sp
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 
-export class RestMockProviders {
+export class RestMock {
   public static readonly imports: any[] = [
     HttpClientTestingModule,
     RouterTestingModule

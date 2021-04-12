@@ -1,4 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
+import {HttpHeaders} from '@angular/common/http';
 
 export class RestSettings {
 
@@ -7,6 +7,8 @@ export class RestSettings {
       'Content-Type': 'application/json'
     })
   };
+
+  private static readonly useLocalhost = false;
 
   private static readonly serverIp = '79.171.179.211';
   private static readonly serverPort = '443';
@@ -17,4 +19,6 @@ export class RestSettings {
   public static readonly stakeholdersUrl = RestSettings.baseUrl + '/stakeholders';
   public static readonly analysesUrl = RestSettings.baseUrl + '/analysis';
   public static readonly impactsUrl = RestSettings.baseUrl + '/impacts';
+
+  public static readonly impactReferencedUrl = RestSettings.baseUrl + '/requirements/referenced-by-impact';
 }

@@ -19,7 +19,6 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {AddImpactButtonComponent} from './components/add-impact-button/add-impact-button.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ClickOutsideDirective} from './directives/ClickOutsideDirective';
 import {NgScrollbarModule} from 'ngx-scrollbar';
@@ -30,12 +29,12 @@ import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {ImpactTableFilterBarComponent} from './components/impact-table-filter-bar/impact-table-filter-bar.component';
 import {StakeholderModule} from "../stakeholder/stakeholder-module";
 import {ResizeColumnDirective} from "./directives/ResizeColumnDirective";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     ImpactMainComponent,
     ImpactTableComponent,
-    AddImpactButtonComponent,
     ClickOutsideDirective,
     ValueDialogComponent,
     ValueTableComponent,
@@ -67,10 +66,12 @@ import {ResizeColumnDirective} from "./directives/ResizeColumnDirective";
     RouterModule,
     MatListModule,
     NgMultiSelectDropDownModule,
-    StakeholderModule
+    StakeholderModule,
+    MatSnackBarModule
   ],
   exports: [
-    ImpactMainComponent
+    ImpactMainComponent,
+    ImpactTableFilterBarComponent
   ]
 })
 export class ImpactModule {

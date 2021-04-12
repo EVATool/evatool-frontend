@@ -4,7 +4,7 @@ import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValueDialogComponent} from './value-dialog.component';
-import {RestMockProviders} from "../../../../spec/RestMockProviders";
+import {RestMock} from "../../../../spec/RestMock";
 
 describe('ValueDialogComponent', () => {
   let component: ValueDialogComponent;
@@ -13,7 +13,7 @@ describe('ValueDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ValueDialogComponent],
-      imports: RestMockProviders.imports.concat([MatDialogModule, HttpClientModule]),
+      imports: RestMock.imports.concat([MatDialogModule, HttpClientModule]),
       providers: [FormBuilder,
         {provide: MatDialogRef, useValue: {}},
         {provide: MAT_DIALOG_DATA, useValue: {}}]

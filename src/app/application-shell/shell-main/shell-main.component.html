@@ -1,5 +1,5 @@
 <div>
-  <mat-tab-group mat-stretch-tabs mat-align-tabs="center" animationDuration="500ms">
+  <mat-tab-group (selectedIndexChange)="tabChanged($event)" mat-stretch-tabs mat-align-tabs="center" animationDuration="500ms">
     <mat-tab label="Stakeholder">
       <app-stakeholder-main></app-stakeholder-main>
     </mat-tab>

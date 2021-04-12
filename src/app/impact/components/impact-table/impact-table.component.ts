@@ -11,6 +11,11 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatSelectChange} from '@angular/material/select';
 import {LogService} from '../../../shared/services/log.service';
 import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
+import {StakeholderDataService} from "../../services/stakeholder/stakeholder-data.service";
+import {AnalysisDataService} from "../../services/analysis/analysis-data.service";
+import {NgScrollbar} from "ngx-scrollbar";
+import {RequirementRestService} from "../../services/requirement/requirement-rest.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-impact-table',
@@ -18,12 +23,14 @@ import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components
   styleUrls: ['./impact-table.component.scss', '../../../layout/style/style.css']
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   // Used by table.
   displayedColumns: string[] = ['uniqueString', 'stakeholder', 'valueEntity', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
+  windowScrolled = false;
 
   filterValues: any = {
     id: '',
@@ -38,14 +45,19 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     private logger: LogService,
     public impactDataService: ImpactDataService,
     public valueDataService: ValueDataService,
-    private dialog: MatDialog) {
+    public stakeholderDataService: StakeholderDataService,
+    public analysisDataService: AnalysisDataService,
+    private requirementRestService: RequirementRestService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.scrollbarRef?.scrolled.subscribe(e => {
+      this.logger.info(this, 'Event \'scrolled\' received from Scrollbar');
+      this.windowScrolled = e.target.scrollTop !== 0;
+    });
 
-  }
-
-  ngAfterViewInit(): void {
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
       this.logger.info(this, 'Event \'loadedImpacts\' received from ImpactDataService');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
@@ -66,6 +78,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
+      const options = {bottom: -100, duration: 250};
+      this.scrollbarRef.scrollTo(options);
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
@@ -76,7 +90,22 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       this.logger.info(this, 'Event \'removedImpact\' received from ImpactDataService');
     });
 
-    this.impactDataService.onInit();
+    //this.impactDataService.onInit();
+  }
+
+  ngAfterViewInit(): void {
+
+  }
+
+  reload() {
+    this.logger.info(this, 'Reload');
+    this.impactDataService.reload();
+  }
+
+  scrollToTop(): void {
+    this.logger.info(this, 'Scroll To Top');
+    const options = {top: 0, duration: 250};
+    this.scrollbarRef.scrollTo(options);
   }
 
   private initSorting(): void {
@@ -101,7 +130,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   private initFiltering(): void {
     this.logger.info(this, 'Init Filtering');
-
     this.tableDataSource.filterPredicate = this.createFilter();
   }
 
@@ -179,7 +207,13 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   deleteImpact(impact: Impact): void {
     this.logger.info(this, 'Delete Impact');
-    this.impactDataService.deleteImpact(impact);
+    this.requirementRestService.getRequirementsReferencedByImpactId("" + impact.id).subscribe(referenced => {
+      if (!referenced) {
+        this.impactDataService.deleteImpact(impact);
+      } else {
+        this.snackBar.open('This impact is still being referenced by one or more impacts.', '', {duration: 5000})
+      }
+    });
   }
 
   stakeholderChange(impact: Impact, event: MatSelectChange): void {
@@ -189,6 +223,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   valueEntityChange(impact: Impact, event: MatSelectChange): void {
     this.logger.info(this, 'Value changed');
+    impact.highlight = false;
     this.updateImpact(impact);
   }
 
@@ -206,18 +241,40 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   openValueModal(): void {
-    // if (!this.dimensionDataService.loaded) {
-    //  this.logger.info(this, 'Dimensions not yet loaded');
-    //  return;
-    // }
     this.logger.info(this, 'Opening Value Modal Dialog');
     const dialogRef = this.dialog.open(ValueDialogComponent, {
       height: '80%',
       width: '50%',
       data: {parameter: 'I left this here because maybe we will need it c:'}
     });
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((data) => {
       this.logger.info(this, 'Closing Value Modal Dialog');
+
+      // Highlighting of impacts referencing value.
+      if (data?.showReferencedImpacts) {
+        this.impactDataService.impacts.forEach(impact => {
+          impact.highlight = impact.valueEntity === data.value;
+        });
+      }
     });
+  }
+
+  private createDefaultImpact(): Impact {
+    this.logger.debug(this, 'Create Default Impact');
+    const impact = new Impact();
+
+    impact.value = 0.0;
+    impact.description = '';
+    impact.valueEntity = this.valueDataService.getDefaultValue();
+    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
+    impact.analysis = this.analysisDataService.getCurrentAnalysis();
+
+    return impact;
+  }
+
+  addButtonClicked(): void {
+    this.logger.info(this, 'Add Button Clicked');
+    const impact = this.createDefaultImpact();
+    this.impactDataService.createImpact(impact);
   }
 }

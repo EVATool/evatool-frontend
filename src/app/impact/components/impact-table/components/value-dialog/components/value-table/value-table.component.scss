@@ -11,7 +11,7 @@ table {
     padding: 5px;
   }
 
-  .mat-header-cell{
+  .mat-header-cell {
     background-color: transparent;
     pointer-events: none;
   }
@@ -24,3 +24,45 @@ table {
 .mat-column-name {
   width: 20% !important;
 }
+
+.add-value-button {
+  margin-top: 15px;
+}
+
+/* Delete row button */
+
+.description-wrapper {
+  display: table;
+  width: 100%;
+}
+
+.description-container {
+  display: table-cell;
+  text-align: left;
+  width: 99%;
+}
+
+.delete-button-container {
+  display: table-cell;
+  opacity: 0;
+  vertical-align: middle;
+  text-align: right;
+  transition: 250ms ease-out 100ms;
+}
+
+.delete-button-container:focus-within,
+.delete-button-container:hover {
+  opacity: 1 !important;
+  transition: 250ms ease-out 100ms;
+}
+
+.mat-row:hover .delete-button-container {
+  opacity: 0.2;
+  transition: 250ms ease-out 100ms;
+}
+
+.mat-row:focus-within .delete-button-container {
+  opacity: 0.5;
+  transition: 250ms ease-out 100ms;
+}
+

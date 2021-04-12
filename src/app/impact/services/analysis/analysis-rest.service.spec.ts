@@ -9,7 +9,7 @@ import {AnalysisDto} from "../../dtos/AnalysisDto";
 import {LogService} from "../../../shared/services/log.service";
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
-import {RestMockProviders} from "../../spec/RestMockProviders";
+import {RestMock} from "../../spec/RestMock";
 import {HttpTestingController} from "@angular/common/http/testing";
 
 @Injectable({
@@ -19,27 +19,25 @@ export class MockedAnalysisRestService extends AnalysisRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
-    private sampleData: SampleDataService) {
-    super(logger, http);
-  }
-
-  getAnalysisById(id: string): Observable<AnalysisDto> {
-    return of(this.sampleData.dummyAnalysisDtos[0]);
+    data: SampleDataService) {
+    super(logger, http, data);
+    this.mocked = true;
   }
 }
 
 describe('AnalysisRestService', () => {
-  let sampleData: SampleDataService;
+  let data: SampleDataService;
   let httpMock: HttpTestingController;
   let service: AnalysisRestService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: RestMockProviders.imports
+      imports: RestMock.imports
     });
-    sampleData = TestBed.inject(SampleDataService);
+    data = TestBed.inject(SampleDataService);
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AnalysisRestService);
+    service.testing = true;
   });
 
   afterEach(() => {
@@ -52,7 +50,7 @@ describe('AnalysisRestService', () => {
 
   it('should return an analysis by id', () => {
     // Arrange
-    const dummyDto = sampleData.dummyAnalysisDtos[0];
+    const dummyDto = data.dummyAnalysisDtos[0];
 
     // Act
     service.getAnalysisById(dummyDto.rootEntityID).subscribe(analysis => {
