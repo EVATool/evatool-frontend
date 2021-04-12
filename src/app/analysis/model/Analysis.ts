@@ -6,6 +6,7 @@ export class Analysis {
   image: any = '';
   isTemplate: any = '';
   uniqueString: any = '';
-  editable = false;
+  TitleIsEditable = false;
+  DescriptionIsEditable = false;
   date: any = '';
 }

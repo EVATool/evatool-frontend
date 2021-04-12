@@ -61,8 +61,13 @@ export class AnalysisMainComponent implements OnInit {
     //  The UI has to be reloaded in some other way.
   }
 
-  save(analysis: Analysis): void {
-    analysis.editable = !analysis.editable;
+  saveTitle(analysis: Analysis): void {
+    analysis.TitleIsEditable = !analysis.TitleIsEditable;
+    this.analysisDataService.update(analysis);
+  }
+
+  saveDescription(analysis: Analysis): void {
+    analysis.DescriptionIsEditable = !analysis.DescriptionIsEditable;
     this.analysisDataService.update(analysis);
   }
 }
