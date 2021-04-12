@@ -64,8 +64,11 @@ export class AnalysisDialogComponent implements OnInit {
     this.analysisDialogComponent.close();
   }
 
-  selectedTemplateChanged(analysis: Analysis){
-    console.log(analysis);
+  selectedTemplateChanged(analysis: Analysis) {
+    if (this.isTemplate) {
+      this.analyseName = analysis.title;
+    } else {
 
+    }
   }
 }
