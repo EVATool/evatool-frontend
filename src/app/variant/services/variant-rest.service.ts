@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Variant} from '../models/Variant';
 import {VariantDTO} from '../models/VariantDTO';
+import {RestService} from '../../shared/services/rest.service';
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({
@@ -16,8 +17,6 @@ const httpOptions = { // Outsource!
 })
 export class VariantRestService {
 
-  variantUrl = 'http://79.171.179.211:443/variants'; // Outsource!
-
   constructor(private http: HttpClient) {
 
   }
@@ -27,27 +26,27 @@ export class VariantRestService {
   }
 
   getVariants(): Observable<any> {
-    return this.http.get<any>(this.variantUrl);
+    return this.http.get<any>(RestService.getVariantsURL());
   }
 
   getVariantsById(id: any): Observable<any> {
-    return this.http.get<any>(this.variantUrl + '/' + id);
+    return this.http.get<any>(RestService.getVariantsURL() + '/' + id);
   }
 
   getVariantsByAnalysisId(id: any): Observable<any> {
-    return this.http.get<any>(this.variantUrl + '?analysisId=' + id);
+    return this.http.get<any>(RestService.getVariantsURL() + '?analysisId=' + id);
   }
 
   createVariants(variantDTO: VariantDTO): Observable<any> {
-    return this.http.post(this.variantUrl, variantDTO, httpOptions);
+    return this.http.post(RestService.getVariantsURL(), variantDTO, httpOptions);
   }
 
   updateVariants(variantDTO: VariantDTO): Observable<any> {
-    return this.http.put(this.variantUrl, variantDTO, httpOptions);
+    return this.http.put(RestService.getVariantsURL(), variantDTO, httpOptions);
   }
 
   deleteVariants(id: string): Observable<any> {
-    return this.http.delete(this.variantUrl + '/' + id);
+    return this.http.delete(RestService.getVariantsURL() + '/' + id);
   }
 
 }
