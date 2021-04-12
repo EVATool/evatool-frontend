@@ -85,7 +85,7 @@
               </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row mat-row *matRowDef="let value; columns: displayedColumns;" class="archivedField-{{value.archived}}"></mat-row>
+            <mat-row mat-row *matRowDef="let value; columns: displayedColumns;" class="archivedField-{{value.archived}}" [ngClass]="{'highlight': (value.id == data.id) && value.guiId != '' && value.archived == true} "></mat-row>
           </mat-table>
         <button mat-icon-button aria-label="Add Value" class="addEconomicValueButton" (click)="addEconomicValue()"> <!--tabindex="-1"-->
           <mat-icon>add</mat-icon> Economic Value anlegen

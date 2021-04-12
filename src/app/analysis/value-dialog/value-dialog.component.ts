@@ -7,7 +7,7 @@ import { Value } from "../model/Value";
 @Component({
   selector: 'app-value-dialog',
   templateUrl: './value-dialog.component.html',
-  styleUrls: ['./value-dialog.component.css']
+  styleUrls: ['./value-dialog.component.scss']
 })
 export class ValueDialogComponent implements OnInit, AfterViewInit {
 
