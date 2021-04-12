@@ -5,14 +5,14 @@
   </button>
   <div class="container">
 
-    <h2 *ngIf="!isTemplate">Create new Analysis</h2>
-    <h2 *ngIf="isTemplate">Edit Analysis Templates</h2>
+    <h2 *ngIf="!isTemplate">Create New Analysis</h2>
+    <h2 *ngIf="isTemplate">Edit Analysis Template</h2>
 
     <form (ngSubmit)="onSubmit()">
 
       <div class="group">
-        <label>Name of Analysis</label>
         <mat-form-field>
+          <mat-label>Template</mat-label>
           <mat-select [(ngModel)]="selectedTemplate" name="selectedTemplate">
             <mat-option *ngFor="let ana of analysisDataService.templateAnalyses" [value]="ana">
               {{ana.title}}
