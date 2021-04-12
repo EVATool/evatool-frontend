@@ -13,24 +13,26 @@ import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatInputModule} from '@angular/material/input';
 import {NgScrollbarModule} from "ngx-scrollbar";
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [AnalysisMainComponent, AnalysisDialogComponent, ValueDialogComponent],
-    imports: [
-        CommonModule,
-        MatCardModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        MatTableModule,
-        MatIconModule,
-        FormsModule,
-        MatSelectModule,
-        MatButtonModule,
-        MatExpansionModule,
-        MatDialogModule,
-        MatInputModule,
-        NgScrollbarModule
-    ],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatIconModule,
+    FormsModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatDialogModule,
+    MatInputModule,
+    NgScrollbarModule,
+    MatMenuModule
+  ],
   exports: [
     AnalysisMainComponent
   ]

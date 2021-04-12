@@ -44,7 +44,6 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   changeBackgroundImage(): void {
-
   }
 
   deleteAnalysis(analysis: Analysis): void {

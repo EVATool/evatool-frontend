@@ -21,14 +21,13 @@
         <img src="{{analysis.image}}" alt="" class="news-card__image">
         <div class="news-card__text-wrapper">
           <div class="dropdown">
-            <button class="dropbtn">
-              <em class="material-icons settings" tabindex="-1">settings</em>
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>settings</mat-icon>
             </button>
-            <div class="dropdown-content">
-              <a mat-raised-button class="changeBackgroundImage" (click)="changeBackgroundImage()">Change
-                Background-Image</a>
-              <a mat-raised-button class="deleteAnalysis" (click)="deleteAnalysis(analysis)">Delete Analysis</a>
-            </div>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="changeBackgroundImage()">Change Image</button>
+              <button mat-menu-item (click)="deleteAnalysis(analysis)">Delete Analysis</button>
+            </mat-menu>
           </div>
           <h2 (click)="analysis.editable=!analysis.editable" *ngIf="!analysis.editable"
               class="news-card__title">{{analysis.title}}</h2>
