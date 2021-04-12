@@ -18,6 +18,7 @@ export class VariantTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.variantDataService.init();
   }
 
   addVariant(): void {

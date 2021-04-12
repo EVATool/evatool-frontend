@@ -18,7 +18,10 @@ export class VariantDataService{
 
   constructor( private variantRestService: VariantRestService,
                private router: Router){
-    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+
+  }
+
+  init(): void{
     this.loadAnalysisIDFromRouter();
     this.loadVariants();
   }
@@ -120,6 +123,16 @@ export class VariantDataService{
   }
 
   update(variant: Variant): void {
-
+    this.variantRestService.updateVariants({
+      id: variant.id,
+      archived: false,
+      guiId: variant.guiId,
+      title: variant.title,
+      description: variant.description,
+      subVariant: {},
+      analysisId: variant.analysisId
+    }).subscribe(() => {
+      this.loadVariants();
+    });
   }
 }
