@@ -43,7 +43,8 @@ export class AnalysisMainComponent implements OnInit {
     this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
   }
 
-  changeBackgroundImage(): void {
+  changeBackgroundImage(analysis: Analysis): void {
+    
   }
 
   deleteAnalysis(analysis: Analysis): void {
