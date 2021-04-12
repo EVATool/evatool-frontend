@@ -4,14 +4,33 @@
 }
 
 #requirement-table-div {
-  margin: 25px;
+  /*margin: 25px;
   height: calc(100vh - 350px);
-  /*overflow-y: hidden;*/
+  overflow-y: hidden;*/
   /*scroll-behavior: smooth;*/
+  margin-top: 10px;
+  max-height: calc(100vh - 360px);
+  overflow: auto;
 }
 
 .scroll-to-top {
   position: fixed;
   top: 125px;
   right: 50px;
+}
+.add-impact-button-container {
+  position: fixed;
+  left: 1.5%;
+  bottom: 2.5%;
+  width: 100%;
+}
+#add-impact-button-div{
+  position: fixed;
+  left: 1.5%;
+  bottom: 2.5%;
+  width: 100%;
+}
+.container .add-impact-button-container {
+  flex: 0 1 auto;
+  margin-left: auto;
 }

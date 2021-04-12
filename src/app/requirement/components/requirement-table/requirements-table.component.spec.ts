@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientModule } from '@angular/common/http';
 
 import { RequirementsTableComponent } from './requirements-table.component';
+import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 describe('RequirementsTableComponent', () => {
   let component: RequirementsTableComponent;
@@ -10,7 +11,7 @@ describe('RequirementsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule],
+      imports: [HttpClientModule, RouterTestingModule, MatDialogModule],
       declarations: [RequirementsTableComponent]
     })
       .compileComponents();
