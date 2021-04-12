@@ -35,10 +35,10 @@ export class AnalysisDialogComponent implements OnInit {
       } else if (this.editImage) {
         const analysisDto = new AnalysisDTO();
         analysisDto.image = this.newImage;
-        analysisDto.rootEntityID = this.editedAnalysis.id;
+        analysisDto.rootEntityID = this.editedAnalysis.rootEntityID;
         analysisDto.uniqueString = this.editedAnalysis.uniqueString;
-        analysisDto.analysisName = this.editedAnalysis.title;
-        analysisDto.analysisDescription = this.editedAnalysis.description;
+        analysisDto.analysisName = this.editedAnalysis.analysisName;
+        analysisDto.analysisDescription = this.editedAnalysis.analysisDescription;
         console.log(analysisDto);
         this.analysisRestService.updateAnalysis(analysisDto).subscribe(
           res => console.log(res),
@@ -47,15 +47,15 @@ export class AnalysisDialogComponent implements OnInit {
         );
       } else {
         const analysis: Analysis = new Analysis();
-        analysis.title = this.analyseName;
-        analysis.description = this.analysisDescription;
+        analysis.analysisName = this.analyseName;
+        analysis.analysisDescription = this.analysisDescription;
         analysis.image = this.analysisImage;
 
         const analysisDto = new AnalysisDTO();
         analysisDto.isTemplate = false;
-        analysisDto.analysisName = analysis.title;
-        analysisDto.analysisDescription = analysis.description;
-        this.analysisRestService.deepCopy(this.selectedTemplate.id, analysisDto).subscribe(ana => {
+        analysisDto.analysisName = analysis.analysisName;
+        analysisDto.analysisDescription = analysis.analysisDescription;
+        this.analysisRestService.deepCopy(this.selectedTemplate.rootEntityID, analysisDto).subscribe(ana => {
           this.GoToStakeholder(ana.rootEntityID);
         });
       }
@@ -85,7 +85,7 @@ export class AnalysisDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.analysisDataService.analysisSaved.subscribe(analysis => {
-      this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
+      this.router.navigate(['/analysis'], {queryParams: {id: analysis.rootEntityID}, queryParamsHandling: 'merge'});
     });
   }
 

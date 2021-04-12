@@ -31,7 +31,7 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   openValueDialog(analysis: Analysis): void {
-    const valueDialogRef = this.dialog.open(ValueDialogComponent, {data: {id: analysis.id}});
+    const valueDialogRef = this.dialog.open(ValueDialogComponent, {data: {id: analysis.rootEntityID}});
     console.log(analysis);
   }
 
@@ -40,7 +40,7 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   analysisClick(analysis: Analysis): void {
-    this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
+    this.router.navigate(['/analysis'], {queryParams: {id: analysis.rootEntityID}, queryParamsHandling: 'merge'});
   }
 
   changeBackgroundImage(analysis: Analysis): void {
@@ -50,14 +50,15 @@ export class AnalysisMainComponent implements OnInit {
   deleteAnalysis(analysis: Analysis): void {
     console.log(analysis);
     this.analysisRestService.deleteAnalysis(analysis).subscribe((an) => {
-      const index = this.analysisDataService.analysisArray.indexOf(an, 0);
-      if (index > -1) {
-        this.analysisDataService.analysisArray.splice(index, 1);
-        this.analysisDataService.analyses.splice(index, 1);
-
-        // TODO Deletion works, but the UI is reloading as a whole.
-        window.location.reload();
-      }
+      // const index = this.analysisDataService.analysisArray.indexOf(an, 0);
+      // if (index > -1) {
+      //   this.analysisDataService.analysisArray.splice(index, 1);
+      //   this.analysisDataService.analyses.splice(index, 1);
+      //
+      //   // TODO Deletion works, but the UI is reloading as a whole.
+      //   window.location.reload();
+      // }
+      this.analysisDataService.loadAllAnalysis();
     });
   }
 

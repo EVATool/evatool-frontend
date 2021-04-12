@@ -43,6 +43,6 @@ export class AnalysisRestService {
   }
 
   deleteAnalysis(analysis: Analysis): Observable<any> {
-    return this.http.delete(RestService.getAnalysisURL() + '/' + analysis.id);
+    return this.http.delete(RestService.getAnalysisURL() + '/' + analysis.rootEntityID);
   }
 }

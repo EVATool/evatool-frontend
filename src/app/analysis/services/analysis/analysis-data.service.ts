@@ -12,21 +12,16 @@ export class AnalysisDataService {
   public templateAnalyses: Analysis[] = [];
   public analyses: Analysis[] = [];
 
-  // imgs: any[] = [
-  //   "https://images.pexels.com/photos/127513/pexels-photo-127513.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-  //   "https://images.pexels.com/photos/631954/pexels-photo-631954.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-  //   "https://images.pexels.com/photos/247599/pexels-photo-247599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"]
-
   constructor(private analysisRestService: AnalysisRestService) {
   }
 
   save(analysis: Analysis): void {
     console.log(analysis.image);
     this.analysisRestService.createAnalysis({
-        analysisName: analysis.title,
-        analysisDescription: analysis.description,
-        rootEntityID: analysis.id,
-        analysisDate: null,
+        analysisName: analysis.analysisName,
+        analysisDescription: analysis.analysisDescription,
+        rootEntityID: analysis.rootEntityID,
+        lastUpdate: null,
         isTemplate: analysis.isTemplate,
         image: analysis.image,
         uniqueString: '',
@@ -38,11 +33,11 @@ export class AnalysisDataService {
 
   update(analysis: Analysis): void {
     this.analysisRestService.updateAnalysis({
-      analysisName: analysis.title,
-      analysisDescription: analysis.description,
-      analysisDate: analysis.analysisDate,
+      analysisName: analysis.analysisName,
+      analysisDescription: analysis.analysisDescription,
+      lastUpdate: analysis.lastUpdate,
       isTemplate: analysis.isTemplate,
-      rootEntityID: analysis.id,
+      rootEntityID: analysis.rootEntityID,
       uniqueString: analysis.uniqueString,
       image: analysis.image,
       date: analysis.date
@@ -57,10 +52,10 @@ export class AnalysisDataService {
       console.log(result);
       result.forEach((analysisDTO: AnalysisDTO) => {
         const analysis: Analysis = {
-          id: analysisDTO.rootEntityID,
-          description: analysisDTO.analysisDescription,
-          title: analysisDTO.analysisName,
-          analysisDate: '',
+          rootEntityID: analysisDTO.rootEntityID,
+          analysisDescription: analysisDTO.analysisDescription,
+          analysisName: analysisDTO.analysisName,
+          lastUpdate: '',
           image: analysisDTO.image,
           editImage: false,
           isTemplate: analysisDTO.isTemplate,
