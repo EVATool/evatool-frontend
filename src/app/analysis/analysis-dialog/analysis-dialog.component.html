@@ -23,21 +23,19 @@
 
       <div class="group">
         <input type="text" name="analyseName" [(ngModel)]="analyseName" required/>
-        <span class="highlight"></span>
         <span class="bar"></span>
-        <label>Name of Analysis</label>
+        <label *ngIf="!isTemplate">Name of Analysis</label>
+        <label *ngIf="isTemplate">Name of Template</label>
       </div>
 
       <div *ngIf="!isTemplate" class="group">
         <input type="text" name="analysisDescription" [(ngModel)]="analysisDescription" required/>
-        <span class="highlight"></span>
         <span class="bar"></span>
         <label>Description</label>
       </div>
 
       <div *ngIf="!isTemplate" class="group">
         <input type="text" name="analysisImageLink" [(ngModel)]="analysisImage" required/>
-        <span class="highlight"></span>
         <span class="bar"></span>
         <label>Image (optional & direct-link)</label>
       </div>
