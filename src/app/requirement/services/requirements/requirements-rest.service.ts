@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Requirements} from '../../models/Requirements';
 import {Impact} from "../../models/Impact";
 import {Variants} from "../../models/Variants";
+import {RestService} from '../../../shared/services/rest.service';
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({
@@ -27,22 +28,22 @@ export class RequirementsRestService {
   }
 
   getRequirements(id: string): Observable<Requirements[]> {
-    return this.http.get<Requirements[]>(this.requirmentUrl + '?analysisId=' + id);
+    return this.http.get<Requirements[]>(RestService.getRequirementesURL() + '?analysisId=' + id);
   }
   getImpacts(id: string): Observable<Impact> {
-    return this.http.get<any>(this.impactsUrl + '?analysisId=' + id);
+    return this.http.get<any>(RestService.getImpactsURL() + '?analysisId=' + id);
   }
   getVariants(): Observable<Variants> {
-    return this.http.get<any>(this.variantsUrl);
+    return this.http.get<any>(RestService.getVariantsURL());
   }
   createRequirements(requirement: Requirements): Observable<any> {
-    return this.http.post(this.requirmentUrl, requirement, httpOptions);
+    return this.http.post(RestService.getRequirementesURL(), requirement, httpOptions);
   }
   updateRequirements(requirement: Requirements): Observable<any> {
-    return this.http.put(this.requirmentUrl, requirement, httpOptions);
+    return this.http.put(RestService.getRequirementesURL(), requirement, httpOptions);
   }
 
   deleteRequirements(requirements: Requirements): Observable<any> {
-    return this.http.delete(this.requirmentUrl + '/' + requirements.rootEntityId);
+    return this.http.delete(RestService.getRequirementesURL() + '/' + requirements.rootEntityId);
   }
 }

@@ -26,4 +26,8 @@ export class RestService {
   static getValuesURL(): string {
     return this.serverURL + 'values';
   }
+
+  static getRequirementesURL(): string {
+    return this.serverURL + 'requirements';
+  }
 }
