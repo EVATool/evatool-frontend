@@ -18,6 +18,7 @@ export class StakeholderImpactComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.negativeimpactvalue, this.positiveimpactvalue);
     this.impactvaluetotal = this.negativeimpactvalue + this.positiveimpactvalue;
     if (this.impactvaluetotal === 0) {
       this.impactIsNull = true;
