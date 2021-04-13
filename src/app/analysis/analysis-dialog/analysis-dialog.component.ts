@@ -97,7 +97,7 @@ export class AnalysisDialogComponent implements OnInit {
   selectedTemplateChanged(analysis: Analysis) {
     if (this.isTemplate) {
       // Display values of the selected analysis template.
-
+      this.analyseName = analysis.analysisName;
     }
   }
 }

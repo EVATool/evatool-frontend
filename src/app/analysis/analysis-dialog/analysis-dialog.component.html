@@ -23,10 +23,11 @@
         </mat-form-field>
       </div>
 
-      <div *ngIf="!isTemplate && !editImage" class="group">
+      <div *ngIf="!editImage" class="group">
         <input type="text" name="analyseName" [(ngModel)]="analyseName" required/>
         <span class="bar"></span>
-        <label>Name of Analysis</label>
+        <label *ngIf="!isTemplate">Name of Analysis</label>
+        <label *ngIf="isTemplate">Name of Template</label>
       </div>
 
       <div *ngIf="editImage" class="group">
