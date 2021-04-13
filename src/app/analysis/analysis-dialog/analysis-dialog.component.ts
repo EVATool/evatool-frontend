@@ -101,8 +101,21 @@ export class AnalysisDialogComponent implements OnInit {
   }
 
   newTemplate() {
-    //this.analysisRestService.createAnalysis();
-
+    console.log('Create new template');
+    const analysisDto = new AnalysisDTO();
+    //analysisDto.image = this.selectedTemplate.image;
+    //analysisDto.rootEntityID = null;
+    //analysisDto.uniqueString = this.selectedTemplate.uniqueString;
+    analysisDto.analysisName = "Template";
+    analysisDto.analysisDescription = "Template";
+    this.analysisRestService.createAnalysis(analysisDto).subscribe(anaDto => {
+      const ana = new Analysis();
+      ana.analysisName = anaDto.analysisName;
+      ana.analysisDescription = anaDto.analysisDescription;
+      this.analysisDataService.analyses.push(ana);
+      this.analysisDataService.templateAnalyses.push(ana);
+      this.selectedTemplate = ana;
+    });
   }
 
   deleteTemplate() {
@@ -122,8 +135,14 @@ export class AnalysisDialogComponent implements OnInit {
 
   analysisNameChanged() {
     if (this.isTemplate) {
-      //this.analysisRestService.updateAnalysis();
-
+      console.log('Update template name');
+      const analysisDto = new AnalysisDTO();
+      analysisDto.image = this.selectedTemplate.image;
+      analysisDto.rootEntityID = this.selectedTemplate.rootEntityID;
+      analysisDto.uniqueString = this.selectedTemplate.uniqueString;
+      analysisDto.analysisName = this.analyseName;
+      analysisDto.analysisDescription = this.selectedTemplate.analysisDescription;
+      this.analysisRestService.updateAnalysis(analysisDto).subscribe();
     }
   }
 }
