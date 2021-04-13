@@ -16,7 +16,6 @@ export class AnalysisDialogComponent implements OnInit {
 
   isTemplate = false;
   editImage = false;
-  templateAnalyses: Analysis[] = [];
   selectedTemplate!: Analysis;
   analyseName = '';
   editedAnalysis!: Analysis;
@@ -97,7 +96,55 @@ export class AnalysisDialogComponent implements OnInit {
   selectedTemplateChanged(analysis: Analysis) {
     if (this.isTemplate) {
       // Display values of the selected analysis template.
+      this.analyseName = analysis.analysisName;
+    }
+  }
 
+  newTemplate() {
+    console.log('Create new template');
+    const analysisDto = new AnalysisDTO();
+    //analysisDto.image = this.selectedTemplate.image;
+    //analysisDto.rootEntityID = null;
+    //analysisDto.uniqueString = this.selectedTemplate.uniqueString;
+    analysisDto.analysisName = "Template";
+    analysisDto.analysisDescription = "Template";
+    this.analysisRestService.createAnalysis(analysisDto).subscribe(anaDto => {
+      const ana = new Analysis();
+      ana.analysisName = anaDto.analysisName;
+      ana.analysisDescription = anaDto.analysisDescription;
+      this.analysisDataService.analyses.push(ana);
+      this.analysisDataService.templateAnalyses.push(ana);
+      this.selectedTemplate = ana;
+    });
+  }
+
+  deleteTemplate() {
+    console.log(this.analysisDataService.templateAnalyses.length);
+    if (this.selectedTemplate === undefined && !this.editImage) {
+      this.snackbar.open('Please select a template', '', {duration: 5000});
+    } else if (this.analysisDataService.templateAnalyses.length == 1) {
+      this.snackbar.open('You cannot delete the last template', '', {duration: 5000});
+    } else {
+      this.analysisRestService.deleteAnalysis(this.selectedTemplate).subscribe(a => {
+        const index: number = this.analysisDataService.templateAnalyses.indexOf(this.selectedTemplate, 0);
+        this.analysisDataService.templateAnalyses.splice(index, 1);
+        this.selectedTemplate = this.analysisDataService.templateAnalyses[0];
+      });
+    }
+  }
+
+  analysisNameChanged() {
+    if (this.isTemplate) {
+      console.log('Update template name');
+      const analysisDto = new AnalysisDTO();
+      analysisDto.rootEntityID = this.selectedTemplate.rootEntityID;
+      analysisDto.analysisName = this.analyseName;
+      analysisDto.analysisDescription = this.selectedTemplate.analysisDescription;
+      analysisDto.image = null;
+      analysisDto.lastUpdate = null;
+      analysisDto.isTemplate = this.selectedTemplate.isTemplate;
+      analysisDto.uniqueString = null;
+      this.analysisRestService.updateAnalysis(analysisDto).subscribe();
     }
   }
 }

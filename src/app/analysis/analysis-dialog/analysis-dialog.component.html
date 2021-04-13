@@ -9,6 +9,11 @@
     <h2 *ngIf="isTemplate && !editImage">Edit Analysis Template</h2>
     <h2 *ngIf="editImage">Edit Background Image</h2>
 
+    <div *ngIf="isTemplate" class="group">
+      <button mat-raised-button (click)="newTemplate();">New Template</button>
+      <button mat-raised-button (click)="deleteTemplate()">Delete Template</button>
+    </div>
+
     <form (ngSubmit)="onSubmit()">
 
       <div class="group" *ngIf="!editImage">
@@ -23,10 +28,11 @@
         </mat-form-field>
       </div>
 
-      <div *ngIf="!isTemplate && !editImage" class="group">
-        <input type="text" name="analyseName" [(ngModel)]="analyseName" required/>
+      <div *ngIf="!editImage" class="group">
+        <input type="text" name="analyseName" (change)="analysisNameChanged()" [(ngModel)]="analyseName" required/>
         <span class="bar"></span>
-        <label>Name of Analysis</label>
+        <label *ngIf="!isTemplate">Name of Analysis</label>
+        <label *ngIf="isTemplate">Name of Template</label>
       </div>
 
       <div *ngIf="editImage" class="group">
