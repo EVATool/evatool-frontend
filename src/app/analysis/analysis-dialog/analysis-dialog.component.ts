@@ -108,8 +108,9 @@ export class AnalysisDialogComponent implements OnInit {
     //analysisDto.uniqueString = this.selectedTemplate.uniqueString;
     analysisDto.analysisName = "Template";
     analysisDto.analysisDescription = "Template";
-    this.analysisRestService.createAnalysis(analysisDto).subscribe(anaDto => {
+    this.analysisRestService.createAnalysis(analysisDto).subscribe((anaDto: AnalysisDTO) => {
       const ana = new Analysis();
+      ana.rootEntityID = anaDto.rootEntityID;
       ana.analysisName = anaDto.analysisName;
       ana.analysisDescription = anaDto.analysisDescription;
       this.analysisDataService.analyses.push(ana);
