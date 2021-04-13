@@ -29,7 +29,7 @@
       </div>
 
       <div *ngIf="!editImage" class="group">
-        <input type="text" name="analyseName" [(ngModel)]="analyseName" required/>
+        <input type="text" name="analyseName" (change)="analysisNameChanged()" [(ngModel)]="analyseName" required/>
         <span class="bar"></span>
         <label *ngIf="!isTemplate">Name of Analysis</label>
         <label *ngIf="isTemplate">Name of Template</label>

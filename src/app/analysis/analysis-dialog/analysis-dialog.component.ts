@@ -101,8 +101,7 @@ export class AnalysisDialogComponent implements OnInit {
   }
 
   newTemplate() {
-    console.log('sdfsdf');
-
+    //this.analysisRestService.createAnalysis();
 
   }
 
@@ -118,6 +117,13 @@ export class AnalysisDialogComponent implements OnInit {
         this.analysisDataService.templateAnalyses.splice(index, 1);
         this.selectedTemplate = this.analysisDataService.templateAnalyses[0];
       });
+    }
+  }
+
+  analysisNameChanged() {
+    if (this.isTemplate) {
+      //this.analysisRestService.updateAnalysis();
+
     }
   }
 }
