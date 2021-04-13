@@ -33,9 +33,10 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     MatButtonModule
   ],
-  exports: [
-    StakeholderMainComponent
-  ]
+    exports: [
+        StakeholderMainComponent,
+        StakeholderLevelComponent
+    ]
 })
 export class StakeholderModule {
 }

@@ -59,6 +59,9 @@ input{
   background: red;
   text-align: center;
 }
+.archived{
+  border: 2px solid red;
+}
 
 #add-impact-button-div {
   position: fixed;
@@ -79,6 +82,15 @@ textarea{
   margin-left: 10px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.impact-slider-container {
+  padding: 7px;
+}
+
+::ng-deep .mat-slider-horizontal{
+  min-width: 0;
+}
+
 /* Delete row button */
 
 .description-wrapper {

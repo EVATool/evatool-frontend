@@ -7,7 +7,8 @@
   .description-wrapper {
     display: table-cell;
     text-align: left;
-    width: 99%;
+    width: 100%;
+    padding-right: 5%;
   }
 
   .options {
@@ -15,15 +16,11 @@
     margin-right: 0;
   }
 
-  .archieved-true{
-    background-color: lightgrey;
-  }
-
   .mat-row:hover {
     .options {
       vertical-align: middle;
       text-align: right;
-      display: table-cell;
+      display: contents;
     }
   }
 
@@ -45,6 +42,10 @@
   .mat-column-description {
     width: 65%;
 
+  }
+
+  .selected{
+    background-color: lightyellow;
   }
 
 }

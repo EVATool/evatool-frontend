@@ -31,9 +31,22 @@
       </td>
     </ng-container>
 
+<!--    <ng-container matColumnDef="variantsTitle" sticky>-->
+<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> Variant(s) <span style="font-size: 18px;" class="material-icons" (click)="openDialog()">info</span></th>-->
+<!--      <td mat-cell *matCellDef="let element">{{concatVariants(element)}}</td>-->
+<!--    </ng-container>-->
+
     <ng-container matColumnDef="variantsTitle" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Variant(s) <span style="font-size: 18px;" class="material-icons" (click)="openDialog()">info</span></th>
-      <td mat-cell *matCellDef="let element">{{concatVariants(element)}}</td>
+      <td mat-cell (dblclick)="checkAchrived(element.variantsTitle)" [matTooltip]="(element.variantsTitle.length>0 && element.variantsTitle[0].archived) ? 'Verwendete Variante ('+ element.variantsTitle[0].variantsTitle +') ist archiviert' : '' " *matCellDef='let element' [ngClass]="{'archived' : (element.variantsTitle.length>0 && element.variantsTitle[0].archived)}">
+        <mat-form-field>
+          <mat-select matNativeControl [ngModel]="element.variantsTitle[0]?.entityId" (selectionChange)="variantsChange(element, $event)">
+            <mat-option *ngFor="let stk of variantsSoureces" [value]="stk.entityId">
+              {{stk.variantsTitle}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="values" sticky>
@@ -43,10 +56,16 @@
 
     <ng-container *ngFor = "let impact of impactSoureces" matColumnDef="{{impact.id}}">
       <th mat-header-cell matTooltip="{{impact.description}}" *matHeaderCellDef mat-sort-header [width]="50" style="min-width: 50px;">
-        <mat-icon>remove_red_eye</mat-icon>{{impact.description}} </th>
+        <mat-icon>remove_red_eye</mat-icon>{{impact.uniqueString}} </th>
       <td mat-cell  *matCellDef="let element"
           [ngClass]="{'positiv' : isPositiv(element,impact),'negativ' : isNegativ(element,impact)}"
-          (dblclick)="clickFunction(element,impact)">{{checkValue(element,impact)}}</td>
+          (dblclick)="clickFunction(element,impact)">
+        <div *ngIf="show(element, impact)" class="impact-slider-container">
+          <app-impact-slider [value]="valueForCell(element, impact)"
+                             (sliderValueChange)="valueChange(element, impact, $event)">
+          </app-impact-slider>
+        </div>
+      </td>
     </ng-container>
 
 

@@ -4,7 +4,7 @@ import {Variant} from '../models/Variant';
 import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
 import {VariantDTO} from '../models/VariantDTO';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +18,18 @@ export class VariantDataService{
 
   constructor( private variantRestService: VariantRestService,
                private router: Router){
-    this.matDataSource = new MatTableDataSource<Variant>(this.variants);
-    this.loadVariants();
+
+  }
+
+  init(): void{
     this.loadAnalysisIDFromRouter();
+    this.loadVariants();
   }
 
   loadVariants(): void{
-    this.variantRestService.getVariants().subscribe((result: any) => {
+    this.variantRestService.getVariantsByAnalysisId(this.analysisid).subscribe((result: any) => {
       this.variants = [];
       this.variantsArchive = [];
-      console.log(result);
       result.forEach((variantDTO: VariantDTO) => {
         const variant: Variant = {
           id: variantDTO.id,
@@ -65,6 +67,7 @@ export class VariantDataService{
   }
 
   save(variant: Variant): void {
+    console.log(this.analysisid);
     this.variantRestService.createVariants(
       {
         id: '',
@@ -90,6 +93,40 @@ export class VariantDataService{
       id: variant.id,
       archived: true,
       guiId: variant.guiId ,
+      title: variant.title,
+      description: variant.description,
+      subVariant: {},
+      analysisId: variant.analysisId
+    }).subscribe(() => {
+      this.loadVariants();
+    });
+  }
+
+  unarchive(variant: Variant): void {
+    this.variantRestService.updateVariants({
+      id: variant.id,
+      archived: false,
+      guiId: variant.guiId ,
+      title: variant.title,
+      description: variant.description,
+      subVariant: {},
+      analysisId: variant.analysisId
+    }).subscribe(() => {
+      this.loadVariants();
+    });
+  }
+
+  delete(variant: Variant): void {
+    this.variantRestService.deleteVariants(variant.id).subscribe(() => {
+      this.loadVariants();
+    });
+  }
+
+  update(variant: Variant): void {
+    this.variantRestService.updateVariants({
+      id: variant.id,
+      archived: variant.archived,
+      guiId: variant.guiId,
       title: variant.title,
       description: variant.description,
       subVariant: {},

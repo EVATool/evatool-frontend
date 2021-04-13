@@ -1,15 +1,13 @@
-import { SampleDataService } from '../../spec/sample-data.service';
-import { TestBed } from '@angular/core/testing';
-import { StakeholderMapperService } from './stakeholder-mapper.service';
+import {SampleDataService} from '../../spec/sample-data.service';
+import {TestBed} from '@angular/core/testing';
+import {StakeholderMapperService} from './stakeholder-mapper.service';
 
 describe('StakeholderMapperService', () => {
   let service: StakeholderMapperService;
   let data: SampleDataService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [SampleDataService]
-    });
+    TestBed.configureTestingModule({});
     service = TestBed.inject(StakeholderMapperService);
     data = TestBed.inject(SampleDataService);
   });
@@ -26,8 +24,7 @@ describe('StakeholderMapperService', () => {
     const stakeholderDto = service.toDto(stakeholder);
 
     // Assert
-    expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
-    expect(stakeholder.name === stakeholderDto.stakeholderName).toBeTruthy();
+    expect(stakeholder.equalsDto(stakeholderDto)).toBeTruthy();
   });
 
   it('should convert from dto', () => {
@@ -38,8 +35,8 @@ describe('StakeholderMapperService', () => {
     const stakeholder = service.fromDto(stakeholderDto);
 
     // Assert
-    expect(stakeholder.id === stakeholderDto.rootEntityID).toBeTruthy();
-    expect(stakeholder.name === stakeholderDto.stakeholderName).toBeTruthy();
+    expect(stakeholder.equalsDto(stakeholderDto)).toBeTruthy();
+
   });
 
   it('should convert to impact dto', () => {
@@ -50,8 +47,8 @@ describe('StakeholderMapperService', () => {
     const stakeholderDto = service.toImpactDto(stakeholder);
 
     // Assert
-    expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
-    expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
+    expect(stakeholder.equalsImpactDto(stakeholderDto)).toBeTruthy();
+
   });
 
   it('should convert from impact dto', () => {
@@ -62,7 +59,6 @@ describe('StakeholderMapperService', () => {
     const stakeholder = service.fromImpactDto(stakeholderDto);
 
     // Assert
-    expect(stakeholder.id === stakeholderDto.id).toBeTruthy();
-    expect(stakeholder.name === stakeholderDto.name).toBeTruthy();
+    expect(stakeholder.equalsImpactDto(stakeholderDto)).toBeTruthy();
   });
 });

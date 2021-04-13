@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Requirements} from '../../models/Requirements';
 import {Impact} from "../../models/Impact";
+import {Variants} from "../../models/Variants";
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({
@@ -15,10 +16,11 @@ const httpOptions = { // Outsource!
 })
 export class RequirementsRestService {
 
-  // analysisUrl = 'http://79.171.179.211:443/requirements'; // Outsource!
-  requirmentUrl = 'http://localhost:8080/requirements'; // Outsource!
-  // impactsUrl = 'http://79.171.179.211:443/impacts'; // Outsource!
-  impactsUrl = 'http://localhost:8080/requirements/impacts'; // Outsource!
+  requirmentUrl = 'http://79.171.179.211:443/requirements'; // Outsource!
+  // requirmentUrl = 'http://localhost:8080/requirements'; // Outsource!
+  impactsUrl = 'http://79.171.179.211:443/impacts'; // Outsource!
+  // impactsUrl = 'http://localhost:8080/requirements/impacts'; // Outsource!
+  variantsUrl = 'http://79.171.179.211:443/variants'; // Outsource!
 
   constructor(private http: HttpClient) {
 
@@ -27,8 +29,11 @@ export class RequirementsRestService {
   getRequirements(id: string): Observable<Requirements[]> {
     return this.http.get<Requirements[]>(this.requirmentUrl + '?analysisId=' + id);
   }
-  getImpacts(): Observable<Impact> {
-    return this.http.get<any>(this.impactsUrl);
+  getImpacts(id: string): Observable<Impact> {
+    return this.http.get<any>(this.impactsUrl + '?analysisId=' + id);
+  }
+  getVariants(): Observable<Variants> {
+    return this.http.get<any>(this.variantsUrl);
   }
   createRequirements(requirement: Requirements): Observable<any> {
     return this.http.post(this.requirmentUrl, requirement, httpOptions);

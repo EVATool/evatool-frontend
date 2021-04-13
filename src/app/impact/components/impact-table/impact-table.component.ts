@@ -1,16 +1,21 @@
-import { DimensionDialogComponent } from './components/dimension-dialog/dimension-dialog.component';
-import { ImpactTableFilterEvent } from '../impact-table-filter-bar/ImpactTableFilterEvent';
-import { MatSliderChange } from '@angular/material/slider';
-import { DimensionDataService } from '../../services/dimension/dimension-data.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ImpactDataService } from '../../services/impact/impact-data.service';
-import { Impact } from '../../models/Impact';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatSelectChange } from '@angular/material/select';
-import { LogService } from '../../../shared/services/log.service';
-import { SliderFilterBoundary, SliderFilterType } from '../../../shared/components/impact-slider/SliderFilterSettings';
+import {ValueDialogComponent} from './components/value-dialog/value-dialog.component';
+import {ImpactTableFilterEvent} from '../impact-table-filter-bar/ImpactTableFilterEvent';
+import {MatSliderChange} from '@angular/material/slider';
+import {ValueDataService} from '../../services/value/value-data.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ImpactDataService} from '../../services/impact/impact-data.service';
+import {Impact} from '../../models/Impact';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatSelectChange} from '@angular/material/select';
+import {LogService} from '../../../shared/services/log.service';
+import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
+import {StakeholderDataService} from "../../services/stakeholder/stakeholder-data.service";
+import {AnalysisDataService} from "../../services/analysis/analysis-data.service";
+import {NgScrollbar} from "ngx-scrollbar";
+import {RequirementRestService} from "../../services/requirement/requirement-rest.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-impact-table',
@@ -18,18 +23,19 @@ import { SliderFilterBoundary, SliderFilterType } from '../../../shared/componen
   styleUrls: ['./impact-table.component.scss', '../../../layout/style/style.css']
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
+  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   // Used by table.
-  displayedColumns: string[] = ['uniqueString', 'stakeholder', 'dimension', 'value', 'description'];
+  displayedColumns: string[] = ['uniqueString', 'stakeholder', 'valueEntity', 'value', 'description'];
   tableDataSource: MatTableDataSource<Impact> = new MatTableDataSource<Impact>();
+  windowScrolled = false;
 
-  // TODO: Extend these for more complex queries.
   filterValues: any = {
     id: '',
     stakeholder: [],
-    dimension: [],
+    values: [],
     value: '',
     description: '',
     highlight: ''
@@ -38,16 +44,20 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   constructor(
     private logger: LogService,
     public impactDataService: ImpactDataService,
-    public dimensionDataService: DimensionDataService,
-    private dialog: MatDialog) {
+    public valueDataService: ValueDataService,
+    public stakeholderDataService: StakeholderDataService,
+    public analysisDataService: AnalysisDataService,
+    private requirementRestService: RequirementRestService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.scrollbarRef?.scrolled.subscribe(e => {
+      this.logger.info(this, 'Event \'scrolled\' received from Scrollbar');
+      this.windowScrolled = e.target.scrollTop !== 0;
+    });
 
-  }
-
-  ngAfterViewInit(): void {
-    // TODO: Show added impact when working with new analysis
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
       this.logger.info(this, 'Event \'loadedImpacts\' received from ImpactDataService');
       this.tableDataSource = new MatTableDataSource<Impact>(impacts);
@@ -61,14 +71,15 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
         this.tableDataSource = new MatTableDataSource<Impact>(impacts);
         this.initSorting();
         this.initFiltering();
-      }
-      else {
+      } else {
         this.tableDataSource.data = impacts;
       }
     });
 
     this.impactDataService.addedImpact.subscribe((impact: Impact) => {
       this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
+      const options = {bottom: -100, duration: 250};
+      this.scrollbarRef.scrollTo(options);
     });
 
     this.impactDataService.changedImpact.subscribe((impact: Impact) => {
@@ -79,7 +90,22 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       this.logger.info(this, 'Event \'removedImpact\' received from ImpactDataService');
     });
 
-    this.impactDataService.onInit();
+    //this.impactDataService.onInit();
+  }
+
+  ngAfterViewInit(): void {
+
+  }
+
+  reload() {
+    this.logger.info(this, 'Reload');
+    this.impactDataService.reload();
+  }
+
+  scrollToTop(): void {
+    this.logger.info(this, 'Scroll To Top');
+    const options = {top: 0, duration: 250};
+    this.scrollbarRef.scrollTo(options);
   }
 
   private initSorting(): void {
@@ -87,9 +113,12 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
-        case 'stakeholder': return impact.stakeholder.name;
-        case 'dimension': return impact.dimension.name;
-        default: return impact[property];
+        case 'stakeholder':
+          return impact.stakeholder.name;
+        case 'valueEntity':
+          return impact.valueEntity.name;
+        default:
+          return impact[property];
       }
     };
   }
@@ -101,7 +130,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   private initFiltering(): void {
     this.logger.info(this, 'Init Filtering');
-
     this.tableDataSource.filterPredicate = this.createFilter();
   }
 
@@ -112,7 +140,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
       const stakeholderFilter = searchTerms.stakeholder.length === 0 || searchTerms.stakeholder.indexOf(data.stakeholder.name) !== -1;
 
-      const dimensionFilter = searchTerms.dimension.length === 0 || searchTerms.dimension.indexOf(data.dimension.name) !== -1;
+      const valuesFilter = searchTerms.values.length === 0 || searchTerms.values.indexOf(data.valueEntity.name) !== -1;
 
       let valueFilter = false;
       switch (searchTerms.value.sliderFilterType) {
@@ -140,7 +168,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
           valueFilter = data.value === searchTerms.value.sliderFilterValues[0];
           break;
 
-        case SliderFilterType.Bewtween:
+        case SliderFilterType.Between:
           const minValue = Math.min(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
           const maxValue = Math.max(searchTerms.value.sliderFilterValues[0], searchTerms.value.sliderFilterValues[1]);
           if (searchTerms.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
@@ -155,19 +183,19 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
           break;
       }
 
-      return stakeholderFilter && dimensionFilter && valueFilter;
+      return stakeholderFilter && valuesFilter && valueFilter;
     };
   }
 
   clearSort(): void {
-    this.sort.sort({ id: '', start: 'desc', disableClear: false });
+    this.sort.sort({id: '', start: 'desc', disableClear: false});
   }
 
   filterChange(event: ImpactTableFilterEvent): void {
     this.logger.info(this, 'Filter Changed');
     this.filterValues.value = event.valueFilter;
     this.filterValues.stakeholder = event.stakeholderFilter;
-    this.filterValues.dimension = event.dimensionFilter;
+    this.filterValues.values = event.valuesFilter;
     this.filterValues.highlight = event.highlightFilter;
     this.updateFilter();
   }
@@ -179,7 +207,13 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   deleteImpact(impact: Impact): void {
     this.logger.info(this, 'Delete Impact');
-    this.impactDataService.deleteImpact(impact);
+    this.requirementRestService.getRequirementsReferencedByImpactId("" + impact.id).subscribe(referenced => {
+      if (!referenced) {
+        this.impactDataService.deleteImpact(impact);
+      } else {
+        this.snackBar.open('This impact is still being referenced by one or more impacts.', '', {duration: 5000})
+      }
+    });
   }
 
   stakeholderChange(impact: Impact, event: MatSelectChange): void {
@@ -187,8 +221,9 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.updateImpact(impact);
   }
 
-  dimensionChange(impact: Impact, event: MatSelectChange): void {
-    this.logger.info(this, 'Dimension changed');
+  valueEntityChange(impact: Impact, event: MatSelectChange): void {
+    this.logger.info(this, 'Value changed');
+    impact.highlight = false;
     this.updateImpact(impact);
   }
 
@@ -205,19 +240,41 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     this.updateImpact(impact);
   }
 
-  openDimensionModal(): void {
-    // if (!this.dimensionDataService.loaded) {
-    //  this.logger.info(this, 'Dimensions not yet loaded');
-    //  return;
-    // }
-    this.logger.info(this, 'Opening Dimension Modal Dialog');
-    const dialogRef = this.dialog.open(DimensionDialogComponent, {
+  openValueModal(): void {
+    this.logger.info(this, 'Opening Value Modal Dialog');
+    const dialogRef = this.dialog.open(ValueDialogComponent, {
       height: '80%',
       width: '50%',
-      data: { parameter: 'I left this here because maybe we will need it c:' }
+      data: {parameter: 'I left this here because maybe we will need it c:'}
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this.logger.info(this, 'Closing Dimension Modal Dialog');
+    dialogRef.afterClosed().subscribe((data) => {
+      this.logger.info(this, 'Closing Value Modal Dialog');
+
+      // Highlighting of impacts referencing value.
+      if (data?.showReferencedImpacts) {
+        this.impactDataService.impacts.forEach(impact => {
+          impact.highlight = impact.valueEntity === data.value;
+        });
+      }
     });
+  }
+
+  private createDefaultImpact(): Impact {
+    this.logger.debug(this, 'Create Default Impact');
+    const impact = new Impact();
+
+    impact.value = 0.0;
+    impact.description = '';
+    impact.valueEntity = this.valueDataService.getDefaultValue();
+    impact.stakeholder = this.stakeholderDataService.getDefaultStakeholder();
+    impact.analysis = this.analysisDataService.getCurrentAnalysis();
+
+    return impact;
+  }
+
+  addButtonClicked(): void {
+    this.logger.info(this, 'Add Button Clicked');
+    const impact = this.createDefaultImpact();
+    this.impactDataService.createImpact(impact);
   }
 }
