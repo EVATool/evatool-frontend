@@ -31,7 +31,7 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   openValueDialog(analysis: Analysis): void {
-    const valueDialogRef = this.dialog.open(ValueTemplateComponent, {data: {id: analysis.id}});
+    const valueDialogRef = this.dialog.open(ValueTemplateComponent, {data: {id: analysis.rootEntityID}});
     console.log(analysis);
   }
 
@@ -40,25 +40,35 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   analysisClick(analysis: Analysis): void {
-    this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
+    this.router.navigate(['/analysis'], {queryParams: {id: analysis.rootEntityID}, queryParamsHandling: 'merge'});
   }
 
-  changeBackgroundImage(): void {
-
+  changeBackgroundImage(analysis: Analysis): void {
+    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {editImage: true, editedAnalysis: analysis}});
   }
 
   deleteAnalysis(analysis: Analysis): void {
+    console.log(analysis);
     this.analysisRestService.deleteAnalysis(analysis).subscribe((an) => {
-      const index = this.analysisDataService.analysisArray.indexOf(an, 0);
-      if (index > -1) {
-        this.analysisDataService.analysisArray.splice(index, 1);
-      }
+      // const index = this.analysisDataService.analysisArray.indexOf(an, 0);
+      // if (index > -1) {
+      //   this.analysisDataService.analysisArray.splice(index, 1);
+      //   this.analysisDataService.analyses.splice(index, 1);
+      //
+      //   // TODO Deletion works, but the UI is reloading as a whole.
+      //   window.location.reload();
+      // }
+      this.analysisDataService.loadAllAnalysis();
     });
-    window.location.reload();
   }
 
-  save(analysis: Analysis): void {
-    analysis.editable = !analysis.editable;
+  saveTitle(analysis: Analysis): void {
+    analysis.TitleIsEditable = !analysis.TitleIsEditable;
+    this.analysisDataService.update(analysis);
+  }
+
+  saveDescription(analysis: Analysis): void {
+    analysis.DescriptionIsEditable = !analysis.DescriptionIsEditable;
     this.analysisDataService.update(analysis);
   }
 }

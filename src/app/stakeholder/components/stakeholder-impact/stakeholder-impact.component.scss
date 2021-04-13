@@ -3,6 +3,13 @@
 
 @mixin stakeholder-impact-slider-theme(){
   .stakeholder-impact-slider {
+    .mat-slider{
+      min-width: 128px;
+    }
+    .mat-slider.mat-slider-horizontal{
+      width: 100%;
+    }
+
     .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
       border-radius: 0;
       min-height: 12px;

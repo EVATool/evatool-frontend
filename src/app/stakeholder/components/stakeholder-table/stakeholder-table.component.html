@@ -8,10 +8,10 @@
       </div>
     </mat-cell>
   </ng-container>
-  <ng-container matColumnDef='Stakeholder' >
+  <ng-container matColumnDef='Stakeholder'  >
     <mat-header-cell *matHeaderCellDef>Stakeholder</mat-header-cell>
-    <mat-cell *matCellDef='let stakeholder'>
-      <input type="text" matInput value="{{stakeholder.name}}"
+    <mat-cell *matCellDef='let stakeholder' (click)="stakeholder.editable =true;">
+      <input type="text" matInput cdkTextareaAutosize value="{{stakeholder.name}}"
              readonly="{{!stakeholder.editable}}" name="stakeholder"
              [(ngModel)]="stakeholder.name" *ngIf="stakeholder.editable" id="titleinput" id="{{stakeholder.id}}_stakeholder" autofocus tabindex="0">
 
@@ -41,7 +41,7 @@
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="row.editable =true;"
+  <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"
            (mouseleave)="save(row)"></mat-row>
 </mat-table>
 <div class="addStakeholderButton">

@@ -10,20 +10,7 @@ export class DimensionDataService {
   @Output() dimensionsLoaded: EventEmitter<void> = new EventEmitter();
   @Output() dimensionTypesLoaded: EventEmitter<void> = new EventEmitter();
 
-  dummyDimensions: Dimension[] = [
-    {
-      entityId: '21', dimensionTitle: 'Feelings'
-    },
-    {
-      entityId: '22', dimensionTitle: 'Control'
-    },
-    {
-      entityId: '23', dimensionTitle: 'Finances'
-    },
-    {
-      entityId: '24', dimensionTitle: 'Safety'
-    }
-  ];
+  dummyDimensions: Dimension[] = [];
 
   public dimensions: Dimension[] = this.dummyDimensions;
 

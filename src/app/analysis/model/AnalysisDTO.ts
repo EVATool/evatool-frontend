@@ -2,7 +2,7 @@ export class AnalysisDTO {
   rootEntityID: any = '';
   analysisName: string = '';
   analysisDescription: string = '';
-  analysisDate: any = '';
+  lastUpdate: any = '';
   image: any = '';
   isTemplate: any = '';
   uniqueString: any = '';

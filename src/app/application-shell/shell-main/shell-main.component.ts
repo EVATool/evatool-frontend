@@ -34,10 +34,7 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // @ DevTeams: Change this to your tab index and do not commit it.
-    if (isDevMode() && this.tab !== undefined) {
-      this.tab.selectedIndex = 1;
-    }
+
   }
 
   tabChanged(event: number) {

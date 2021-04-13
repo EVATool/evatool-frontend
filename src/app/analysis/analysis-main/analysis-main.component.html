@@ -1,56 +1,57 @@
-<head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style type="text/css">
-    .material-icons.md-48 { font-size: 48px; }
-  </style>
-</head>
-
-<head><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <style type="text/css">
-    .material-icons.md-48 { font-size: 48px; }
-  </style>
-</head>
-
 <!--container-->
-<!--left-->
-<div id="left"><!--left section-->
-  <br>
-  <div>
-    <button mat-raised-button (click)="editTemplates()" class="editButton">Edit Templates</button>
+<div>
+  <!--left-->
+  <div id="left"><!--left section-->
+    <br>
+    <div>
+      <button mat-raised-button (click)="editTemplates()" class="editButton">Edit Templates</button>
+    </div>
+    <div>
+      <button mat-raised-button (click)="createAnalysis()" class="createAnalysisButton">+ New Analysis</button>
+    </div>
   </div>
-  <div>
-    <button mat-raised-button (click)="createAnalysis()" class="createAnalysisButton">+ New Analysis</button>
-  </div>
-</div>
 
-<!--cards-->
-<!--right-->
-<div id="right"><!--right section-->
-
-  <div class="headertitle">All analysis</div>
-  <hr style="width:50%; margin: auto;">
-  <div class="content-wrapper">
-    <div *ngFor="let analysis of analysisDataService.analyses;" class="news-card">
-      <img src="{{analysis.image}}" alt="" class="news-card__image">
-      <div class="news-card__text-wrapper">
-        <div class="dropdown">
-          <button class="dropbtn">
-            <em class="material-icons settings" tabindex="-1">settings</em>
-          </button>
-          <div class="dropdown-content">
-            <a mat-raised-button class="changeBackgroundImage" (click)="changeBackgroundImage()">Change Background-Image</a>
-            <a mat-raised-button class="deleteAnalysis" (click)="deleteAnalysis(analysis)">Delete Analysis</a>
+  <!--cards-->
+  <!--right-->
+  <div id="right"><!--right section-->
+    <div class="headertitle">All Analyses</div>
+    <hr style="width:50%; margin: auto;">
+    <div class="content-wrapper">
+      <div *ngFor="let analysis of analysisDataService.analyses;" class="news-card">
+        <img src="{{analysis.image}}" alt="" class="news-card__image">
+        <div class="news-card__text-wrapper">
+          <div class="dropdown">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>settings</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="changeBackgroundImage(analysis)">
+                <mat-icon>image</mat-icon>
+                Change Image
+              </button>
+              <button mat-menu-item (click)="deleteAnalysis(analysis)">
+                <mat-icon>delete</mat-icon>
+                Delete Analysis
+              </button>
+            </mat-menu>
           </div>
-        </div>
-        <h2 (click)="analysis.editable=!analysis.editable" *ngIf="!analysis.editable" class="news-card__title">{{analysis.title}}</h2>
-        <textarea (mouseleave)="save(analysis); " *ngIf="analysis.editable" [(ngModel)]="analysis.title" type ="text" matInput value="{{analysis.title}}" cols="30" rows="10"></textarea>
-        <div class="news-card__post-date">Last edit: {{analysis.date|date:"dd.MM.yyyy - hh:mm U'h'r"}}</div>
-        <div class="news-card__details-wrapper">
-          <p (click)="analysis.editable=!analysis.editable" *ngIf="!analysis.editable" class="news-card__excerpt">{{analysis.description}}</p>
-          <textarea (mouseleave)="save(analysis); " *ngIf="analysis.editable" [(ngModel)]="analysis.description" type ="text" matInput value="{{analysis.description}}" cols="30" rows="10"></textarea>
-          <button mat-raised-button class="news-card__read-more" (click)="analysisClick(analysis)">Spectate <em class="fas fa-long-arrow-alt-right"></em></button>
+          <h2 (click)="analysis.TitleIsEditable=!analysis.TitleIsEditable" *ngIf="!analysis.TitleIsEditable"
+              class="news-card__title">{{analysis.analysisName}}</h2>
+          <textarea (mouseleave)="saveTitle(analysis); " *ngIf="analysis.TitleIsEditable" [(ngModel)]="analysis.analysisName" type="text"
+                    matInput value="{{analysis.analysisName}}" cols="30" rows="10"></textarea>
+          <div class="news-card__post-date">Last edit: {{analysis.date|date:"dd.MM.yyyy - hh:mm U'h'r"}}</div>
+          <div class="news-card__details-wrapper">
+            <p (click)="analysis.DescriptionIsEditable=!analysis.DescriptionIsEditable" *ngIf="!analysis.DescriptionIsEditable"
+               class="news-card__excerpt">{{analysis.analysisDescription}}</p>
+            <textarea (mouseleave)="saveDescription(analysis); " *ngIf="analysis.DescriptionIsEditable" [(ngModel)]="analysis.analysisDescription"
+                      type="text" matInput value="{{analysis.analysisDescription}}" cols="30" rows="10"></textarea>
+            <button mat-raised-button class="news-card__read-more" (click)="analysisClick(analysis)">Spectate <em
+              class="fas fa-long-arrow-alt-right"></em></button>
+<!--            <button mat-raised-button class="news-card__read-more" (click)="openValueDialog(analysis)">Edit Values <em-->
+<!--              class="fas fa-long-arrow-alt-right"></em></button>-->
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
