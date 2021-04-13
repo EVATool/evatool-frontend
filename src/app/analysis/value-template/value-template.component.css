@@ -1,22 +1,18 @@
-.value-dialog {
-  min-height: 60vh;
-  min-width: 30vw;
-  font-size: 16px;
+.container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
 
-.value-modal-close{
-  float: right;
-  content: 'x';
-  color: #000000;
-  font-weight: 300;
-  background-color: white;
-  border: none;
+.container .title-container {
+  flex: 0 1 auto;
 }
 
-.inputField {
-  border: none;
+.container .expansion-panel-container {
+  flex: 1 1 auto;
 }
 
-.archivedField-true{
-  background: gray;
+.container .action-container {
+  flex: 0 1 auto;
+  margin-left: auto;
 }

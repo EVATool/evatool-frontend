@@ -1,99 +1,24 @@
-<div class="container" mat-dialog-title>
-  <h2>Values bearbeiten</h2>
-</div>
-<mat-dialog-content>
-  <div class="card-container">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Social Value</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-table mat-table [dataSource]='valueDataService.matDataSourceSocial'>
-        <ng-container matColumnDef='name'>
-          <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
-          <mat-cell *matCellDef='let value'>
-                <textarea class="inputField" matInput type="text" value="{{value.name}}"
-                          [(ngModel)]="value.name" *ngIf="value.editable"
-                          id="{{value.id}}_name" tabindex="0" placeholder="Titel"></textarea>
-            <div *ngIf="!value.editable">
-              {{value.name}}
-            </div>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="description">
-          <mat-header-cell *matHeaderCellDef>Beschreibung</mat-header-cell>
-          <mat-cell *matCellDef='let value'>
-                <textarea class="inputField" matInput type="text" value="{{value.description}}"
-                          [(ngModel)]="value.description" *ngIf="value.editable"
-                          id="{{value.id}}_description" tabindex="1" placeholder="Beschreibung"
-                          (mouseleave)="saveSocialValue(value)"></textarea>
-            <div *ngIf="!value.editable">
-              {{value.description}}
-            </div>
-            <div class="options">
-              <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="archiveValue(value)">
-                <mat-icon>archive</mat-icon>
-              </button>
-              <button mat-icon-button *ngIf="value.archived" name="delete" (click)="deleteValue(value)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"
-                 class="archivedField-{{row.archived}}"></mat-row>
-      </mat-table>
-      <button mat-icon-button aria-label="Add Value" class="addSocialValueButton" (click)="addSocialValue()">
-        <!--tabindex="-1"-->
-        <mat-icon>add</mat-icon>
-        Social Value anlegen
-      </button>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>Economic Value</mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-table mat-table [dataSource]='valueDataService.matDataSourceEconomic' class="variant-table">
-        <ng-container matColumnDef='name'>
-          <mat-header-cell *matHeaderCellDef>Titel</mat-header-cell>
-          <mat-cell *matCellDef='let value'>
-                <textarea class="inputField" matInput type="text" value="{{value.name}}"
-                          [(ngModel)]="value.name" *ngIf="value.editable"
-                          id="{{value.id}}__name" tabindex="2" placeholder="Titel"></textarea>
-            <div *ngIf="!value.editable">
-              {{value.name}}
-            </div>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="description">
-          <mat-header-cell *matHeaderCellDef>Beschreibung</mat-header-cell>
-          <mat-cell *matCellDef='let value'>
-                <textarea class="inputField" matInput type="text" value="{{value.description}}"
-                          [(ngModel)]="value.description" *ngIf="value.editable"
-                          id="{{value.id}}__description" tabindex="3" placeholder="Beschreibung"
-                          (mouseleave)="saveEconomicValue(value)"></textarea>
-            <div *ngIf="!value.editable">
-              {{value.description}}
-            </div>
-            <div class="options">
-              <button mat-icon-button *ngIf="!value.editable" name="delete" (click)="archiveValue(value)">
-                <mat-icon>archive</mat-icon>
-              </button>
-              <button mat-icon-button *ngIf="value.archived" name="delete" (click)="deleteValue(value)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row mat-row *matRowDef="let value; columns: displayedColumns;"
-                 class="archivedField-{{value.archived}}"></mat-row>
-      </mat-table>
-      <button mat-icon-button aria-label="Add Value" class="addEconomicValueButton" (click)="addEconomicValue()">
-        <mat-icon>add</mat-icon>
-        Economic Value anlegen
-      </button>
-    </mat-expansion-panel>
+<div class="container">
+  <div class="title-container">
+    <h2 mat-dialog-title>Values</h2>
   </div>
-</mat-dialog-content>
 
+  <div class="expansion-panel-container" style="height: 400px">
+    <ng-scrollbar>
+      <mat-accordion multi>
+        <div *ngFor="let valType of valueDataService.valuesTypes">
+          <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{valType | titlecase}} Values
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-value-template-table [type]='valType' [template]="template"></app-value-template-table>
+          </mat-expansion-panel>
+        </div>
+      </mat-accordion>
+    </ng-scrollbar>
+  </div>
+</div>

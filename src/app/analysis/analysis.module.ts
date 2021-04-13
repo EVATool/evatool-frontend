@@ -12,11 +12,14 @@ import { ValueTemplateComponent } from './value-template/value-template.componen
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
-import {NgScrollbarModule} from "ngx-scrollbar";
-import {MatMenuModule} from "@angular/material/menu";
+import {NgScrollbarModule} from 'ngx-scrollbar';
+import {MatMenuModule} from '@angular/material/menu';
+import { ValueTemplateTableComponent } from './value-template/value-template-table/value-template-table.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
-  declarations: [AnalysisMainComponent, AnalysisDialogComponent, ValueTemplateComponent],
+  declarations: [AnalysisMainComponent, AnalysisDialogComponent, ValueTemplateComponent, ValueTemplateTableComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -31,7 +34,9 @@ import {MatMenuModule} from "@angular/material/menu";
     MatDialogModule,
     MatInputModule,
     NgScrollbarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTooltipModule,
+    MatSortModule
   ],
   exports: [
     AnalysisMainComponent

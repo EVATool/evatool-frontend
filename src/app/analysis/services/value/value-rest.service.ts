@@ -45,4 +45,8 @@ export class ValueRestService {
   getValuesByAnalysisId(id: any): Observable<any> {
     return this.http.get<any>(RestService.getValuesURL() + '?analysisId=' + id);
   }
+
+  getValueTypes(): Observable<string[]> {
+    return this.http.get<string[]>(RestService.getValueTypesURL());
+  }
 }

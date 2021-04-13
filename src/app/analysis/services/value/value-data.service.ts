@@ -1,155 +1,94 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Value } from "../../model/Value";
-import { ValueRestService } from "./value-rest.service";
-import { MatTableDataSource } from "@angular/material/table";
-import { Stakeholder } from "../../../stakeholder/model/Stakeholder";
-import {Analysis} from '../../model/Analysis';
-import {AnalysisDTO} from '../../model/AnalysisDTO';
-import {AnalysisRestService} from '../analysis/analysis-rest.service';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Value} from '../../model/Value';
+import {ValueRestService} from './value-rest.service';
+import {LogService} from '../../../shared/services/log.service';
+import {ValueDTO} from '../../model/ValueDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValueDataService {
 
-  constructor(private valueRestService: ValueRestService, private analysisRestService: AnalysisRestService) {
-    this.matDataSourceEconomic = new MatTableDataSource<Value>(this.socialValue);
-    this.matDataSourceSocial = new MatTableDataSource<Value>(this.economicValue);
-  }
-  socialValue: Value[] = [];
-  economicValue: Value[] = [];
-
-  matDataSourceEconomic = new MatTableDataSource<Value>();
-  matDataSourceSocial = new MatTableDataSource<Value>();
-
-  onInit() {
-    // this.loadValuesByAnalysisId();
+  constructor(
+    private logger: LogService,
+    private valueRestService: ValueRestService,
+  ) {
   }
 
-  private createDefaultValue(): Value {
+  @Output() loadedValues: EventEmitter<Value[]> = new EventEmitter();
+  @Output() loadedValuesTypes: EventEmitter<string[]> = new EventEmitter();
+  // @Output() addedValue: EventEmitter<Value> = new EventEmitter();
+  // @Output() changedValue: EventEmitter<Value> = new EventEmitter();
+  // @Output() removedValue: EventEmitter<Value> = new EventEmitter();
+  // @Output() changedValues: EventEmitter<Value[]> = new EventEmitter();
+
+  public valuesTypes: string[] = [];
+  public values: Value[] = [];
+
+  private static fromDto(valueDto: ValueDTO): Value {
     const value = new Value();
-    value.editable = true;
+    value.id = valueDto.id;
+    value.type = valueDto.type;
+    value.analysis = valueDto.analysis;
+    value.archived = valueDto.archived;
+    value.description = valueDto.description;
+
     return value;
   }
 
-  createSocialValue(): void {
-    const value = this.createDefaultValue();
-    value.type = 'SOCIAL';
-    this.socialValue.push(value);
-    this.matDataSourceSocial = new MatTableDataSource<Value>(this.socialValue);
-  }
-
-  createEconomicValue(): void {
-    const value = this.createDefaultValue();
-    value.type = 'ECONOMIC';
-    this.economicValue.push(value);
-    this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
-  }
-  deleteValue(value: Value): void {
-    this.valueRestService.deleteValue(value).subscribe(() => {
-      this.loadValuesByAnalysisId(value.analysis.rootEntityID);
-    });/*.subscribe(() => { this.loadValues(); })*/;
-  }
-
-  archiveValue(value: Value): void {
-    console.log(value);
-    this.analysisRestService.getAnalysisById(value.analysis.rootEntityID).subscribe((result: any) => {
-      console.log(result);
-      console.log(value);
-      this.valueRestService.updateValue({
-        id: value.id,
-        name: value.name,
-        type: value.type,
-        description: value.description,
-        archived: value.archived,
-        analysis: result
-      }).subscribe(() => {
-        this.loadValuesByAnalysisId(value.analysis.rootEntityID);
-      });
-    });
-  }
-
-  save(value: Value, id: string): void {
-    this.analysisRestService.getAnalysisById(id).subscribe((result: any) => {
-      console.log(result);
-      this.valueRestService.createValue({
-        id: '',
-        name: value.name,
-        description: value.description,
-        type: value.type,
-        // analysis: analysis1
-        analysis: result
-      }).subscribe(() => {
-        this.loadValuesByAnalysisId(id);
-      });
-    });
-  }
-
-  loadValues(id: string): void {
-    console.log(id);
-    this.valueRestService.getValueById(id).subscribe((result: any) => {
-      this.socialValue = [];
-      this.economicValue = [];
-      result.forEach((valueDTO: any) => {
-        if (valueDTO.type === 'SOCIAL') {
-          const value: Value = {
-            id: valueDTO.id,
-            name: valueDTO.name,
-            description: valueDTO.description,
-            type: valueDTO.type,
-            analysis: valueDTO.analysis
-          };
-          this.socialValue.push(value);
-        }
-        else if (valueDTO.type === 'ECONOMIC') {
-          const value: Value = {
-            id: valueDTO.id,
-            name: valueDTO.name,
-            description: valueDTO.description,
-            type: valueDTO.type,
-            analysis: valueDTO.analysis
-          };
-          this.economicValue.push(value);
-        }
-      });
-      this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
-      this.matDataSourceSocial = new MatTableDataSource<Value>(this.socialValue);
-      console.log(this.matDataSourceEconomic);
+  onInit(): void {
+    this.valueRestService.getValueTypes().subscribe(valueTypes => {
+      this.valuesTypes = valueTypes;
+      this.logger.info(this, 'Value types loaded: ' + this.valuesTypes);
+      this.loadedValuesTypes.emit(this.valuesTypes);
     });
   }
 
   loadValuesByAnalysisId(id: string): void {
-    console.log(id);
-    this.valueRestService.getValuesByAnalysisId(id).subscribe((result: any) => {
-      this.socialValue = [];
-      this.economicValue = [];
-      result.forEach((valueDTO: any) => {
-        if (valueDTO.type === 'SOCIAL') {
-          const value: Value = {
-            id: valueDTO.id,
-            name: valueDTO.name,
-            description: valueDTO.description,
-            type: valueDTO.type,
-            analysis: valueDTO.analysis,
-            archived: valueDTO.archived
-          };
-          this.socialValue.push(value);
-        }
-        else if (valueDTO.type === 'ECONOMIC') {
-          const value: Value = {
-            id: valueDTO.id,
-            name: valueDTO.name,
-            description: valueDTO.description,
-            type: valueDTO.type,
-            analysis: valueDTO.analysis,
-            archived: valueDTO.archived
-          };
-          this.economicValue.push(value);
-        }
+    this.valueRestService.getValuesByAnalysisId(id).subscribe(valueDtoList => {
+      const values: Value[] = [];
+      valueDtoList.forEach((dto: ValueDTO) => {
+        values.push(ValueDataService.fromDto(dto));
       });
-      this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
-      this.matDataSourceSocial = new MatTableDataSource<Value>(this.socialValue);
-      console.log(this.matDataSourceEconomic);
+
+      this.values = values;
+      this.logger.info(this, 'Values loaded');
+      this.loadedValues.emit(this.values);
     });
+  }
+
+  createValue(value: Value): void {
+    // this.logger.info(this, 'Create Value');
+    // const valueDto = this.valueMapperService.toDto(value);
+    //
+    // valueDto.analysis.analysisName = "";
+    // valueDto.analysis.analysisDescription = "";
+    //
+    // this.valueRestService.createValue(valueDto).subscribe((valDto: Value) => {
+    //   value.id = valDto.id;
+    //   this.values.push(value);
+    //   this.addedValue.emit(value);
+    //   this.changedValues.emit(this.values);
+    // });
+  }
+
+  updateValue(value: Value): void {
+    // this.logger.info(this, 'Update Value');
+    // const valueDto = this.valueMapperService.toDto(value);
+    // this.valueRestService.updateValue(valueDto).subscribe((newValue: Value) => {
+    //   this.changedValue.emit(newValue);
+    //   this.changedValues.emit(this.values);
+    // });
+  }
+
+  deleteValue(value: Value): void {
+    // this.logger.info(this, 'Delete Value');
+    // const valueDto = this.valueMapperService.toDto(value);
+    // this.valueRestService.deleteValue(valueDto).subscribe((valDto) => {
+    //   const index: number = this.values.indexOf(value, 0);
+    //   this.values.splice(index, 1);
+    //   this.removedValue.emit(value);
+    //   this.changedValues.emit(this.values);
+    // });
   }
 }

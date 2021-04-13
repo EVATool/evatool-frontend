@@ -1,72 +1,34 @@
-import {Component, OnInit, AfterViewInit, Inject, Input} from '@angular/core';
+import {Component, OnInit, AfterViewInit, Inject, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ValueDataService } from '../services/value/value-data.service';
-import { Value } from '../model/Value';
+import {ValueDataService} from '../services/value/value-data.service';
 import {Analysis} from '../model/Analysis';
-import {MatTableDataSource} from '@angular/material/table';
+import {LogService} from '../../shared/services/log.service';
 
 @Component({
   selector: 'app-value-template',
   templateUrl: './value-template.component.html',
   styleUrls: ['./value-template.component.css']
 })
-export class ValueTemplateComponent implements OnInit, AfterViewInit {
+export class ValueTemplateComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() template: Analysis = new Analysis();
 
-  public displayedColumns = ['name', 'description'];
-
-  public matDataSourceEconomic = new MatTableDataSource<Value>();
-  public matDataSourceSocial = new MatTableDataSource<Value>();
-
-
-  socialValue: Value[] = [];
-  economicValue: Value[] = [];
-
-  constructor(public valueDataService: ValueDataService, @Inject(MAT_DIALOG_DATA) public data: { id: string }) {
-    valueDataService.loadValuesByAnalysisId(this.data.id);
+  constructor(
+    public logger: LogService,
+    public valueDataService: ValueDataService,
+    @Inject(MAT_DIALOG_DATA) public data: { id: string }
+    ) {
   }
 
   ngOnInit(): void {
-    // this.matDataSourceEconomic.data = this.template.
-    /*this.valueDataService.onCreateSocialValue.subscribe(value => {
-      this.socialValue.push(value);
-      this.matDataSourceSocial = new MatTableDataSource<Value>(this.socialValue);
-    });
-
-    this.valueDataService.onCreateEconomicValue.subscribe(value => {
-      this.economicValue.push(value);
-      this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
-    });*/
+    this.valueDataService.onInit();
   }
 
   ngAfterViewInit(): void {
-    // this.valueDataService.onInit();
   }
 
-  addSocialValue(): void {
-    // this.valueDataService.createSocialValue();
-  }
-
-  addEconomicValue(): void {
-    // this.valueDataService.createEconomicValue();
-  }
-
-  saveSocialValue(value: Value): void {
-    // value.editable = false;
-    // this.valueDataService.save(value, this.data.id);
-  }
-
-  saveEconomicValue(value: Value): void {
-    // value.editable = false;
-    // this.valueDataService.save(value, this.data.id);
-  }
-
-  deleteValue(value: Value): void {
-    // this.valueDataService.deleteValue(value);
-  }
-
-  archiveValue(value: Value): void {
-    // value.archived = !value.archived;
-    // this.valueDataService.archiveValue(value);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.template === undefined) { return; }
+    this.logger.info(this, 'template available');
+    this.valueDataService.loadValuesByAnalysisId(this.template.rootEntityID);
   }
 }

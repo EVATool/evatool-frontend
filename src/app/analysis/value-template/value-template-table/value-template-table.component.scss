@@ -1,0 +1,68 @@
+table {
+  width: 100%;
+}
+
+.mat-table {
+  margin-top: -50px;
+
+  .mat-cell {
+    border-style: none;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.12);
+    padding: 5px;
+  }
+
+  .mat-header-cell {
+    background-color: transparent;
+    pointer-events: none;
+  }
+}
+
+.mat-column-disable {
+  width: 15% !important;
+}
+
+.mat-column-name {
+  width: 20% !important;
+}
+
+.add-value-button {
+  margin-top: 15px;
+}
+
+/* Delete row button */
+
+.description-wrapper {
+  display: table;
+  width: 100%;
+}
+
+.description-container {
+  display: table-cell;
+  text-align: left;
+  width: 99%;
+}
+
+.delete-button-container {
+  display: table-cell;
+  opacity: 0;
+  vertical-align: middle;
+  text-align: right;
+  transition: 250ms ease-out 100ms;
+}
+
+.delete-button-container:focus-within,
+.delete-button-container:hover {
+  opacity: 1 !important;
+  transition: 250ms ease-out 100ms;
+}
+
+.mat-row:hover .delete-button-container {
+  opacity: 0.2;
+  transition: 250ms ease-out 100ms;
+}
+
+.mat-row:focus-within .delete-button-container {
+  opacity: 0.5;
+  transition: 250ms ease-out 100ms;
+}
+

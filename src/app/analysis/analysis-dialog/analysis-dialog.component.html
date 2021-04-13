@@ -47,7 +47,7 @@
         <label>Background-Image (optional & direct-link)</label>
       </div>
 
-      <div class="group">
+      <div class="group" *ngIf="selectedTemplate?.isTemplate">
         <app-value-template [template]="selectedTemplate"></app-value-template>
       </div>
 
