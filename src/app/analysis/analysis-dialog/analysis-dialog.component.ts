@@ -16,7 +16,6 @@ export class AnalysisDialogComponent implements OnInit {
 
   isTemplate = false;
   editImage = false;
-  templateAnalyses: Analysis[] = [];
   selectedTemplate!: Analysis;
   analyseName = '';
   editedAnalysis!: Analysis;
@@ -102,11 +101,23 @@ export class AnalysisDialogComponent implements OnInit {
   }
 
   newTemplate() {
-    console.log('sdfsdf')
+    console.log('sdfsdf');
+
+
   }
 
   deleteTemplate() {
-    console.log('sdfsdf')
-
+    console.log(this.analysisDataService.templateAnalyses.length);
+    if (this.selectedTemplate === undefined && !this.editImage) {
+      this.snackbar.open('Please select a template', '', {duration: 5000});
+    } else if (this.analysisDataService.templateAnalyses.length == 1) {
+      this.snackbar.open('You cannot delete the last template', '', {duration: 5000});
+    } else {
+      this.analysisRestService.deleteAnalysis(this.selectedTemplate).subscribe(a => {
+        const index: number = this.analysisDataService.templateAnalyses.indexOf(this.selectedTemplate, 0);
+        this.analysisDataService.templateAnalyses.splice(index, 1);
+        this.selectedTemplate = this.analysisDataService.templateAnalyses[0];
+      });
+    }
   }
 }
