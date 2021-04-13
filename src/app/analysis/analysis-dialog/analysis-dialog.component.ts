@@ -136,7 +136,6 @@ export class AnalysisDialogComponent implements OnInit {
   analysisNameChanged() {
     if (this.isTemplate) {
       console.log('Update template name');
-      console.log(this.selectedTemplate);
       const analysisDto = new AnalysisDTO();
       analysisDto.rootEntityID = this.selectedTemplate.rootEntityID;
       analysisDto.analysisName = this.analyseName;
