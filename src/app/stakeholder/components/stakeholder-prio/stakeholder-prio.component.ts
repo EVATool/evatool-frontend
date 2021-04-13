@@ -1,22 +1,17 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Stakeholder} from '../../model/Stakeholder';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-stakeholder-prio',
   templateUrl: './stakeholder-prio.component.html',
   styleUrls: ['./stakeholder-prio.component.scss']
 })
-export class StakeholderPrioComponent implements OnInit {
+export class StakeholderPrioComponent {
 
   @Input() prio!: number;
   @Input() public editable = false;
   @Output() prioChange = new EventEmitter<number>();
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
+  constructor() {}
 
   updatePrio(prio: any, event: any): void{
     if (!this.editable) {return; }

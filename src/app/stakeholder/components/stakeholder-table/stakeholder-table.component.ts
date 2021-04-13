@@ -7,14 +7,12 @@ import {Stakeholder} from '../../model/Stakeholder';
   templateUrl: './stakeholder-table.component.html',
   styleUrls: ['./stakeholder-table.component.scss']
 })
-export class StakeholderTableComponent implements OnInit {
+export class StakeholderTableComponent {
 
   public displayedColumns = ['guiId', 'Stakeholder', 'Ebene', 'Prio', 'Impact'];
 
   constructor(public stakeholderDataService: StakeholderDataService) { }
 
-  ngOnInit(): void {
-  }
 
   addStakeholder(): void {
     this.stakeholderDataService.createStakeholder();

@@ -4,7 +4,7 @@ import {Variant} from '../models/Variant';
 import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
 import {VariantDTO} from '../models/VariantDTO';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -125,7 +125,7 @@ export class VariantDataService{
   update(variant: Variant): void {
     this.variantRestService.updateVariants({
       id: variant.id,
-      archived: false,
+      archived: variant.archived,
       guiId: variant.guiId,
       title: variant.title,
       description: variant.description,
