@@ -136,12 +136,15 @@ export class AnalysisDialogComponent implements OnInit {
   analysisNameChanged() {
     if (this.isTemplate) {
       console.log('Update template name');
+      console.log(this.selectedTemplate);
       const analysisDto = new AnalysisDTO();
-      analysisDto.image = this.selectedTemplate.image;
       analysisDto.rootEntityID = this.selectedTemplate.rootEntityID;
-      analysisDto.uniqueString = this.selectedTemplate.uniqueString;
       analysisDto.analysisName = this.analyseName;
       analysisDto.analysisDescription = this.selectedTemplate.analysisDescription;
+      analysisDto.image = null;
+      analysisDto.lastUpdate = null;
+      analysisDto.isTemplate = this.selectedTemplate.isTemplate;
+      analysisDto.uniqueString = null;
       this.analysisRestService.updateAnalysis(analysisDto).subscribe();
     }
   }
