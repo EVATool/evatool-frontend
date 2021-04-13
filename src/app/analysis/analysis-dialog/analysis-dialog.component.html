@@ -9,6 +9,11 @@
     <h2 *ngIf="isTemplate && !editImage">Edit Analysis Template</h2>
     <h2 *ngIf="editImage">Edit Background Image</h2>
 
+    <div *ngIf="isTemplate" class="group">
+      <button mat-raised-button (click)="newTemplate();">New Template</button>
+      <button mat-raised-button (click)="deleteTemplate()">Delete Template</button>
+    </div>
+
     <form (ngSubmit)="onSubmit()">
 
       <div class="group" *ngIf="!editImage">

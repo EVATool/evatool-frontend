@@ -100,4 +100,13 @@ export class AnalysisDialogComponent implements OnInit {
       this.analyseName = analysis.analysisName;
     }
   }
+
+  newTemplate() {
+    console.log('sdfsdf')
+  }
+
+  deleteTemplate() {
+    console.log('sdfsdf')
+
+  }
 }
