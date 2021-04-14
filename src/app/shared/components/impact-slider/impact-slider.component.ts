@@ -13,6 +13,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @Input() valueSecond: number = -1;
   @Input() deadzone: number = 0.0;
   @Input() isFilter: boolean = false;
+  @Input() minvalue: number = -1.0;
+  @Input() maxvalue: number = 1.0;
 
   @Input() isRisk: boolean = false;
   @Input() isGoal: boolean = false;
