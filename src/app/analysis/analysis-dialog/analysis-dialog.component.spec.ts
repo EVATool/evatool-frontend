@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnalysisDialogComponent } from './analysis-dialog.component';
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('AnalysisDialogComponent', () => {
   let component: AnalysisDialogComponent;
@@ -12,7 +13,7 @@ describe('AnalysisDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule, MatDialogModule],
+      imports: [RouterTestingModule, HttpClientModule, MatDialogModule, MatSnackBarModule],
       declarations: [AnalysisDialogComponent],
       providers: [FormBuilder,
         { provide: MatDialogRef, useValue: {} },

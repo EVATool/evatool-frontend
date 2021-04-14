@@ -4,7 +4,7 @@ import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValueDialogComponent} from './value-dialog.component';
-import {RestMock} from "../../../../spec/RestMock";
+import {RestMock} from '../../../../spec/RestMock';
 
 describe('ValueDialogComponent', () => {
   let component: ValueDialogComponent;
