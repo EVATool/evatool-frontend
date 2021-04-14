@@ -6,4 +6,5 @@ export class ImpactValueDto {
   description = '';
   type = '';
   analysis!: ImpactAnalysisDto;
+  archived! : boolean;
 }

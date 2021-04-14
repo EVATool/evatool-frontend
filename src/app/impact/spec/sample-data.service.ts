@@ -147,43 +147,43 @@ export class SampleDataService {
 
   readonly dummyValueDtos: ValueDto[] = [
     {
-      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL',
+      id: '1', name: 'Feelings', description: 'Feelings of Patient', type: 'SOCIAL', archived: false,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL',
+      id: '2', name: 'Control', description: 'Control of Doctor', type: 'SOCIAL', archived: false,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC',
+      id: '3', name: 'Finances', description: 'Economics of Family', type: 'ECONOMIC', archived: false,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL',
+      id: '4', name: 'Safety', description: 'Lorem Ipsum', type: 'SOCIAL', archived: false,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '5', name: 'Care', description: 'Economics of Family', type: 'ECONOMIC',
+      id: '5', name: 'Care', description: 'Economics of Family', type: 'ECONOMIC', archived: false,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '6', name: 'Privacy', description: 'Economics of Family', type: 'ECONOMIC',
+      id: '6', name: 'Privacy', description: 'Economics of Family', type: 'ECONOMIC', archived: true,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '7', name: 'Self-Conception', description: 'Economics of Family', type: 'SOCIAL',
+      id: '7', name: 'Self-Conception', description: 'Economics of Family', type: 'SOCIAL', archived: false,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '8', name: 'Participation', description: 'Economics of Family', type: 'SOCIAL',
+      id: '8', name: 'Participation', description: 'Economics of Family', type: 'SOCIAL', archived: false,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '9', name: 'Autonomy', description: 'Economics of Family', type: 'ECONOMIC',
+      id: '9', name: 'Autonomy', description: 'Economics of Family', type: 'ECONOMIC', archived: false,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     },
     {
-      id: '10', name: 'Irgendwas', description: 'Economics of Family', type: 'SOCIAL',
+      id: '10', name: 'Irgendwas', description: 'Economics of Family', type: 'SOCIAL', archived: true,
       analysis: {rootEntityID: '1', analysisName: '', analysisDescription: ''}
     }
   ];

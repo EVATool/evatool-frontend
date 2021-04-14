@@ -20,7 +20,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   @Output() userWantsToSeeReferencedImpacts: EventEmitter<Value> = new EventEmitter();
 
   tableDataSource: MatTableDataSource<Value> = new MatTableDataSource<Value>();
-  displayedColumns = ['disable', 'name', 'description'];
+  displayedColumns = ['archived', 'name', 'description'];
 
   constructor(
     private logger: LogService,
@@ -104,6 +104,17 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
     this.updateValue(value);
   }
 
+  toggleValueArchived(event: Event, value: Value) {
+    const numImpactsUseValue = this.getReferencesImpacts(value);
+    if (numImpactsUseValue > 0) {
+      this.thwartValueOperation(value, numImpactsUseValue);
+    } else {
+      value.archived = !value.archived;
+      this.updateValue(value);
+      this.valueDataService.updateValue(value); // This will remove the disabled value from the filter bar dropdown.
+    }
+  }
+
   getReferencesImpacts(value: Value): number {
     let numImpactsUseValue = 0;
     this.impactDataService.impacts.forEach(impact => {
@@ -124,15 +135,5 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
       this.logger.info(this, 'User wants to see the impacts referencing the value');
       this.userWantsToSeeReferencedImpacts.emit(value);
     });
-  }
-
-  toggleValueDisable(event: Event, value: Value) {
-    const numImpactsUseValue = this.getReferencesImpacts(value);
-    if (numImpactsUseValue > 0) {
-      this.thwartValueOperation(value, numImpactsUseValue);
-    } else {
-      value.disable = !value.disable;
-      //this.valueDataService.updateValue(value); // This will remove the disabled value from the filter bar dropdown.
-    }
   }
 }
