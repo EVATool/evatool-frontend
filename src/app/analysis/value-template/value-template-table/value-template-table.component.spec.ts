@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ValueTemplateTableComponent} from './value-template-table.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
-import { ValueTemplateTableComponent } from './value-template-table.component';
 
 describe('ValueTemplateTableComponent', () => {
   let component: ValueTemplateTableComponent;
@@ -8,9 +9,10 @@ describe('ValueTemplateTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValueTemplateTableComponent ]
+      declarations: [ValueTemplateTableComponent],
+      imports: [HttpClientTestingModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
