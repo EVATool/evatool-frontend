@@ -1,8 +1,12 @@
-
-
 p {
   font-size: 80%;
   margin-bottom: 0;
+}
+
+.resetFilter{
+
+  background-color: #ff4081;
+  color: white;
 }
 
 .category-filter-container {
@@ -11,41 +15,39 @@ p {
   min-width: 200px;
 }
 
-  .mat-list.list-horizontal {
-    padding: 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
 
-    .mat-list-item {
-      vertical-align: middle;
-      display: inline-block;
-      height: inherit;
-      width: auto;
-      .mat-list-item-rippel{
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        position: absolute;
-        pointer-events: none;
-      }
-    }
+.mat-list.list-horizontal {
+  padding: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
 
-
-
-    .highlight-text {
-      margin-right: -30px;
-      width: 300px;
-      background-color: transparent;
-      border: none;
-      outline: none;
-      font-size: 100%;
-    }
-
-    .search-icon {
-      margin-right: -10px;
-    }
+  .mat-list-item {
+    vertical-align: middle;
+    display: inline-block;
+    height: inherit;
+    width: auto;
   }
+
+  .mat-list-item-element{
+    margin-left: 15px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid black;
+    min-width: 200px;
+  }
+
+  .highlight-text {
+    margin-right: -30px;
+    width: 300px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 100%;
+  }
+
+  .search-icon {
+    margin-right: -10px;
+  }
+}
 
 .filter-wrapper {
   mat-list.list-vertical {
@@ -54,7 +56,6 @@ p {
     .mat-focus-indicator{
       height: 0px;
     }
-
 
     .mat-list-item {
       margin-right: -10px;
@@ -73,9 +74,6 @@ p {
         margin-right: -10px;
       }
     }
-
-
   }
 }
-
 

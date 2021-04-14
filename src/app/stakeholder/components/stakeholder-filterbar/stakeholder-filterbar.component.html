@@ -2,7 +2,7 @@
   <mat-list-item>
     <app-search-bar (searchTextChanged)="highlightTextChange($event)"></app-search-bar>
   </mat-list-item>
-  <mat-list-item class="filter-wrapper">
+  <mat-list-item class="mat-list-item-element filter-wrapper">
     <mat-list class="list-vertical">
       <mat-list-item>
         <div>
@@ -11,7 +11,7 @@
       </mat-list-item>
       <mat-list-item role="listitem">
         <div class="category-filter-container">
-          <mat-select [(value)]="preselect" id="level">
+          <mat-select class="level"  [(value)]="preselect" id="level">
             <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">
               {{level.value}}
             </mat-option>
@@ -20,7 +20,7 @@
       </mat-list-item>
     </mat-list>
   </mat-list-item>
-  <mat-list-item class="filter-wrapper">
+  <mat-list-item class="mat-list-item-element filter-wrapper">
     <mat-list class="list-vertical">
       <mat-list-item>
         <div>
@@ -35,7 +35,7 @@
       </mat-list-item>
     </mat-list>
   </mat-list-item>
-  <mat-list-item class="filter-wrapper">
+  <mat-list-item class="mat-list-item-element filter-wrapper">
     <mat-list class="list-vertical">
       <mat-list-item>
         <div>
@@ -52,7 +52,7 @@
   </mat-list-item>
   <mat-list-item>
     <div>
-      <button class="resetFilter" (click)="resetFilter()"> Reset filter</button>
+      <button mat-raised-button class="resetFilter" (click)="resetFilter()"> Clear <mat-icon>filter_alt</mat-icon></button>
     </div>
   </mat-list-item>
 </mat-list>
