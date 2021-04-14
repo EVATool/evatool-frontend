@@ -8,7 +8,7 @@ import {ImpactMainComponent} from "../../impact/impact-main/impact-main.componen
 @Component({
   selector: 'app-shell-main',
   templateUrl: './shell-main.component.html',
-  styleUrls: ['./shell-main.component.scss', '../../layout/style/style.css']
+  styleUrls: ['./shell-main.component.scss', '../../layout/style/style.scss']
 })
 export class ShellMainComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTabGroup) tab!: MatTabGroup;

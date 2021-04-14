@@ -6,7 +6,14 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import 'app/stakeholder/components/stakeholder-impact/stakeholder-impact.component';
-@include stakeholder-impact-slider-theme()
+@include stakeholder-impact-slider-theme();
+
+@import "app/layout/style/style";
+@include defaultStyle();
+
+@import "app/layout/style/resets";
+@include resetStyle();
+
 
 
 

@@ -17,7 +17,7 @@ import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
 @Component({
   selector: 'app-requirement-table',
   templateUrl: './requirements-table.component.html',
-  styleUrls: ['./requirements-table.component.scss', '../../../layout/style/style.css']
+  styleUrls: ['./requirements-table.component.scss', '../../../layout/style/style.scss']
 })
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();

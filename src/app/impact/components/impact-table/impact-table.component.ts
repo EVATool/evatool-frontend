@@ -20,7 +20,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
   selector: 'app-impact-table',
   templateUrl: './impact-table.component.html',
-  styleUrls: ['./impact-table.component.scss', '../../../layout/style/style.css']
+  styleUrls: ['./impact-table.component.scss', '../../../layout/style/style.scss']
 })
 export class ImpactTableComponent implements OnInit, AfterViewInit {
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
