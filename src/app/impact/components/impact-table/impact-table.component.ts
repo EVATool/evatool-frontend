@@ -11,11 +11,11 @@ import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatSelectChange} from '@angular/material/select';
 import {LogService} from '../../../shared/services/log.service';
 import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
-import {StakeholderDataService} from "../../services/stakeholder/stakeholder-data.service";
-import {AnalysisDataService} from "../../services/analysis/analysis-data.service";
-import {NgScrollbar} from "ngx-scrollbar";
-import {RequirementRestService} from "../../services/requirement/requirement-rest.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {StakeholderDataService} from '../../services/stakeholder/stakeholder-data.service';
+import {AnalysisDataService} from '../../services/analysis/analysis-data.service';
+import {NgScrollbar} from 'ngx-scrollbar';
+import {RequirementRestService} from '../../services/requirement/requirement-rest.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-impact-table',
@@ -67,7 +67,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.changedImpacts.subscribe((impacts: Impact[]) => {
       this.logger.info(this, 'Event \'changedImpacts\' received from ImpactDataService');
-      if (this.tableDataSource.data.length == 0) {
+      if (this.tableDataSource.data.length === 0) {
         this.tableDataSource = new MatTableDataSource<Impact>(impacts);
         this.initSorting();
         this.initFiltering();
@@ -90,14 +90,14 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       this.logger.info(this, 'Event \'removedImpact\' received from ImpactDataService');
     });
 
-    //this.impactDataService.onInit();
+    // this.impactDataService.onInit();
   }
 
   ngAfterViewInit(): void {
 
   }
 
-  reload() {
+  reload(): void {
     this.logger.info(this, 'Reload');
     this.impactDataService.reload();
   }

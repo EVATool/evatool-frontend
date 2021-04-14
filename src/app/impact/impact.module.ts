@@ -27,8 +27,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatListModule} from '@angular/material/list';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {ImpactTableFilterBarComponent} from './components/impact-table-filter-bar/impact-table-filter-bar.component';
-import {StakeholderModule} from "../stakeholder/stakeholder-module";
-import {ResizeColumnDirective} from "./directives/ResizeColumnDirective";
+import {StakeholderModule} from '../stakeholder/stakeholder-module';
+import {ResizeColumnDirective} from './directives/ResizeColumnDirective';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
@@ -63,7 +63,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatCheckboxModule,
     RouterModule,
     SharedModule,
-    RouterModule,
     MatListModule,
     NgMultiSelectDropDownModule,
     StakeholderModule,
