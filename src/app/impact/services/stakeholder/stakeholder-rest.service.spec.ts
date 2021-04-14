@@ -39,7 +39,7 @@ describe('StakeholderRestService', () => {
   });
 
   afterEach(() => {
-    //httpMock.verify();
+    httpMock.verify();
   });
 
   it('should be created', () => {

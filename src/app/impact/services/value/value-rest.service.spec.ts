@@ -26,6 +26,10 @@ describe('ValueRestService', () => {
   let httpMock: HttpTestingController;
   let service: ValueRestService;
 
+  afterEach(() => {
+    httpMock.verify();
+  });
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
@@ -34,10 +38,6 @@ describe('ValueRestService', () => {
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ValueRestService);
     service.testing = true;
-  });
-
-  afterEach(() => {
-    //httpMock.verify();
   });
 
   it('should be created', () => {
