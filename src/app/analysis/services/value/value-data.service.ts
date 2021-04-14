@@ -20,7 +20,7 @@ export class ValueDataService {
   // @Output() addedValue: EventEmitter<Value> = new EventEmitter();
   // @Output() changedValue: EventEmitter<Value> = new EventEmitter();
   // @Output() removedValue: EventEmitter<Value> = new EventEmitter();
-  // @Output() changedValues: EventEmitter<Value[]> = new EventEmitter();
+  @Output() changedValues: EventEmitter<Value[]> = new EventEmitter();
 
   public valuesTypes: string[] = [];
   public values: Value[] = [];
@@ -28,6 +28,7 @@ export class ValueDataService {
   private static fromDto(valueDto: ValueDTO): Value {
     const value = new Value();
     value.id = valueDto.id;
+    value.name = valueDto.name;
     value.type = valueDto.type;
     value.analysis = valueDto.analysis;
     value.archived = valueDto.archived;

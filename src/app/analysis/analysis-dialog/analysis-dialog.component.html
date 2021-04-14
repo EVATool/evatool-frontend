@@ -53,8 +53,8 @@
         <label>Background-Image (optional & direct-link)</label>
       </div>
 
-      <div class="group" *ngIf="selectedTemplate">
-        <app-value-template [template]="selectedTemplate"></app-value-template>
+      <div class="group" [hidden]="!selectedTemplate">
+        <app-value-template></app-value-template>
       </div>
 
       <button mat-raised-button class="createButton button_cont b1" type="submit">

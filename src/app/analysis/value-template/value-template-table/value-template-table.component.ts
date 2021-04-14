@@ -4,7 +4,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Value} from '../../model/Value';
 import {LogService} from '../../../shared/services/log.service';
 import {ValueDataService} from '../../services/value/value-data.service';
-import {Analysis} from '../../model/Analysis';
 
 
 @Component({
@@ -15,7 +14,6 @@ import {Analysis} from '../../model/Analysis';
 export class ValueTemplateTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @Input() type!: string;
-  @Input() template: Analysis = new Analysis();
 
   tableDataSource: MatTableDataSource<Value> = new MatTableDataSource<Value>();
   displayedColumns = ['disable', 'name', 'description'];
@@ -23,27 +21,43 @@ export class ValueTemplateTableComponent implements OnInit, AfterViewInit {
   constructor(private logger: LogService,
               private valueDataService: ValueDataService,
   ) {
+    this.initSorting();
+  }
+
+  dummyValue(): Value {
+    const value = new Value();
+    value.name = 'valName';
+    value.description = 'description';
+    value.type = 'SOCIAL';
+    value.archived = false;
+    value.editable = true;
+    value.id = 'UUID';
+    return value;
   }
 
   ngOnInit(): void {
     this.logger.info(this, 'Manually initializing ValueTable (type=' + this.type + ')');
-    this.tableDataSource = new MatTableDataSource<Value>(this.filterValues());
+    this.tableDataSource = new MatTableDataSource<Value>(this.filterValues(this.valueDataService.values));
     this.initSorting();
 
-    this.valueDataService.loadedValues.subscribe(() => {
+    this.valueDataService.loadedValues.subscribe((newValues: Value[]) => {
       this.logger.info(this, 'Event \'loadedValues\' received from ValueTableComponent');
-      this.tableDataSource.data = this.filterValues();
+      this.tableDataSource = new MatTableDataSource<Value>(this.filterValues(newValues));
+      this.initSorting();
     });
 
-    // this.valueDataService.changedValues.subscribe(() => { // TODO implement
-    //   this.logger.info(this, 'Event \'changedValues\' received from ValueTableComponent');
-    //   const newFilteredValues: Value[] = this.filterValues();
-    //   this.tableDataSource.data = newFilteredValues;
-    // });
+    this.valueDataService.changedValues.subscribe((newValues: Value[]) => {
+      this.logger.info(this, 'Event \'changedValues\' received from ValueTableComponent');
+      this.tableDataSource.data = this.filterValues(newValues);
+    });
   }
 
-  filterValues(): Value[] {
-    return this.valueDataService.values.filter(val => val.type === this.type);
+  filterValues(values: Value[]): Value[] {
+    values.forEach(it => {
+      this.logger.info(this, 'VALUE: ' + it.name + ', TYPE: ' + it.type);
+      this.logger.info(this, it.description);
+    });
+    return values.filter(val => val.type === this.type);
   }
 
   ngAfterViewInit(): void {
@@ -58,7 +72,7 @@ export class ValueTemplateTableComponent implements OnInit, AfterViewInit {
 
     value.type = this.type;
     value.description = '';
-    value.analysis = this.template; // this.analysisDataService.getCurrentAnalysis(); // TODO get analysis via event
+    // value.analysis = this.analysisDataService.getCurrentAnalysis(); // TODO get analysis via event
 
     return value;
   }
