@@ -19,12 +19,12 @@ export class StakeholderDataService {
   constructor(private stakeholderRestService: StakeholderRestService,
               private router: Router) {
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
-    this.loadAnalysisIDFromRouter();
-    this.loadStakeholder();
+
 
   }
 
   loadStakeholder(): void {
+    this.loadAnalysisIDFromRouter();
     this.stakeholderRestService.getStakeholdersByAnalysisId(this.analysisid).subscribe((result: any) => {
       this.stakeholders = [];
       console.log(result);
