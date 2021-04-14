@@ -4,7 +4,6 @@ import {Variant} from '../models/Variant';
 import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
 import {VariantDTO} from '../models/VariantDTO';
-import {ActivatedRoute, Router} from '@angular/router';
 import {LogService} from '../../shared/services/log.service';
 import {Router} from '@angular/router';
 
