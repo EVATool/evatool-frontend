@@ -48,7 +48,7 @@ export class StakeholderTableComponent implements OnInit {
     }
   }
 
-  delete() {
-
+  delete(stakeholder: Stakeholder): void {
+    this.stakeholderDataService.delete(stakeholder);
   }
 }
