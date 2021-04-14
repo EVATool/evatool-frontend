@@ -3,6 +3,7 @@ import {Value} from '../../model/Value';
 import {ValueRestService} from './value-rest.service';
 import {LogService} from '../../../shared/services/log.service';
 import {ValueDTO} from '../../model/ValueDTO';
+import {AnalysisDataService} from '../analysis/analysis-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,13 @@ export class ValueDataService {
   constructor(
     private logger: LogService,
     private valueRestService: ValueRestService,
+    private analysisDataService: AnalysisDataService
   ) {
   }
 
   @Output() loadedValues: EventEmitter<Value[]> = new EventEmitter();
   @Output() loadedValuesTypes: EventEmitter<string[]> = new EventEmitter();
-  // @Output() addedValue: EventEmitter<Value> = new EventEmitter();
+  @Output() addedValue: EventEmitter<Value> = new EventEmitter();
   // @Output() changedValue: EventEmitter<Value> = new EventEmitter();
   // @Output() removedValue: EventEmitter<Value> = new EventEmitter();
   @Output() changedValues: EventEmitter<Value[]> = new EventEmitter();
@@ -30,26 +32,40 @@ export class ValueDataService {
     value.id = valueDto.id;
     value.name = valueDto.name;
     value.type = valueDto.type;
-    value.analysis = valueDto.analysis;
+    value.analysis = AnalysisDataService.fromDto(valueDto.analysis);
     value.archived = valueDto.archived;
     value.description = valueDto.description;
 
     return value;
   }
 
+  private static toDto(value: Value): ValueDTO {
+    const valueDto = new ValueDTO();
+    valueDto.id = value.id;
+    valueDto.name = value.name;
+    valueDto.type = value.type;
+    valueDto.analysis = AnalysisDataService.toDto(value.analysis);
+    valueDto.archived = value.archived;
+    valueDto.description = value.description;
+
+    return valueDto;
+  }
+
   onInit(): void {
     this.valueRestService.getValueTypes().subscribe(valueTypes => {
       this.valuesTypes = valueTypes;
-      this.logger.info(this, 'Value types loaded: ' + this.valuesTypes);
+      this.logger.info(this, 'Value types loaded');
       this.loadedValuesTypes.emit(this.valuesTypes);
     });
   }
 
   loadValuesByAnalysisId(id: string): void {
+    this.analysisDataService.loadAnalysis(id);
     this.valueRestService.getValuesByAnalysisId(id).subscribe(valueDtoList => {
       const values: Value[] = [];
       valueDtoList.forEach((dto: ValueDTO) => {
         values.push(ValueDataService.fromDto(dto));
+        this.logger.info(this, 'Analysis for Value: ' + dto.analysis.rootEntityID);
       });
 
       this.values = values;
@@ -59,18 +75,15 @@ export class ValueDataService {
   }
 
   createValue(value: Value): void {
-    // this.logger.info(this, 'Create Value');
-    // const valueDto = this.valueMapperService.toDto(value);
-    //
-    // valueDto.analysis.analysisName = "";
-    // valueDto.analysis.analysisDescription = "";
-    //
-    // this.valueRestService.createValue(valueDto).subscribe((valDto: Value) => {
-    //   value.id = valDto.id;
-    //   this.values.push(value);
-    //   this.addedValue.emit(value);
-    //   this.changedValues.emit(this.values);
-    // });
+    this.logger.info(this, 'Create Value');
+    const valueDto = ValueDataService.toDto(value);
+
+    this.valueRestService.createValue(valueDto).subscribe((valDto: Value) => {
+      value.id = valDto.id;
+      this.values.push(value);
+      this.addedValue.emit(value);
+      this.changedValues.emit(this.values);
+    });
   }
 
   updateValue(value: Value): void {

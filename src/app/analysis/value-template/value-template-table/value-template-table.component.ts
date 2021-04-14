@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Value} from '../../model/Value';
 import {LogService} from '../../../shared/services/log.service';
 import {ValueDataService} from '../../services/value/value-data.service';
+import {AnalysisDataService} from '../../services/analysis/analysis-data.service';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ValueTemplateTableComponent implements OnInit, AfterViewInit {
 
   constructor(private logger: LogService,
               private valueDataService: ValueDataService,
+              private analysisDataService: AnalysisDataService
   ) {
     this.initSorting();
   }
@@ -53,10 +55,6 @@ export class ValueTemplateTableComponent implements OnInit, AfterViewInit {
   }
 
   filterValues(values: Value[]): Value[] {
-    values.forEach(it => {
-      this.logger.info(this, 'VALUE: ' + it.name + ', TYPE: ' + it.type);
-      this.logger.info(this, it.description);
-    });
     return values.filter(val => val.type === this.type);
   }
 
@@ -72,7 +70,7 @@ export class ValueTemplateTableComponent implements OnInit, AfterViewInit {
 
     value.type = this.type;
     value.description = '';
-    // value.analysis = this.analysisDataService.getCurrentAnalysis(); // TODO get analysis via event
+    value.analysis = this.analysisDataService.getCurrentAnalysis();
 
     return value;
   }
