@@ -38,6 +38,11 @@
     <mat-header-cell *matHeaderCellDef>Impact</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
       <app-stakeholder-impact [created]="stakeholder.created" [negativeimpactvalue]= "stakeholder.negativeImpact" [positiveimpactvalue]= "stakeholder.positiveImpact" ></app-stakeholder-impact>
+      <div class="options" >
+        <button mat-icon-button name="löschen" (click)="delete()">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

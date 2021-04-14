@@ -43,4 +43,8 @@ export class StakeholderTableComponent {
       this.stakeholderDataService.update(stakeholder);
     }
   }
+
+  delete() {
+
+  }
 }

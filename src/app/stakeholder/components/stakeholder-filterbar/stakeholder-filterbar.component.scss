@@ -19,9 +19,19 @@ p {
     .mat-list-item {
       vertical-align: middle;
       display: inline-block;
-      height: auto;
+      height: inherit;
       width: auto;
+      .mat-list-item-rippel{
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        pointer-events: none;
+      }
     }
+
+
 
     .highlight-text {
       margin-right: -30px;
@@ -40,11 +50,21 @@ p {
 .filter-wrapper {
   mat-list.list-vertical {
     padding: 0;
+    height: 100%;
+    .mat-focus-indicator{
+      height: 0px;
+    }
+
 
     .mat-list-item {
       margin-right: -10px;
-      vertical-align: middle;
+      margin-bottom: auto ;
+      margin-top: auto;
       display: inline;
+      .mat-list-item-content{
+        box-sizing: border-box;
+        height: inherit;
+      }
 
       .dropdown {
         width: 150px;
@@ -53,6 +73,8 @@ p {
         margin-right: -10px;
       }
     }
+
+
   }
 }
 

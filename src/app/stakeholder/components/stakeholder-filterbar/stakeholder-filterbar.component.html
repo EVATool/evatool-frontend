@@ -9,7 +9,7 @@
           <p>Ebene</p>
         </div>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item role="listitem">
         <div class="category-filter-container">
           <mat-select [(value)]="preselect" id="level">
             <mat-option *ngFor="let level of levels" [value]="level" (onSelectionChange)="levelChange($event)">

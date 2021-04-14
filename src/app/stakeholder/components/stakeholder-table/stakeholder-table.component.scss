@@ -9,3 +9,17 @@
   max-width: 90px;
 
 }
+
+
+.options {
+  display: none;
+  margin-right: 0;
+}
+
+.mat-row:hover {
+  .options {
+    vertical-align: middle;
+    text-align: right;
+    display: contents;
+  }
+}
