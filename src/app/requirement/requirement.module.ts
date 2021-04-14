@@ -15,25 +15,32 @@ import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {BrowserModule} from '@angular/platform-browser';
+import { RequirementTableFilterBarComponent } from './components/requirement-table-filter-bar/requirement-table-filter-bar.component';
+import {MatListModule} from '@angular/material/list';
+import {SharedModule} from '../shared/shared.module';
+import {ImpactModule} from '../impact/impact.module';
 
 @NgModule({
-  declarations: [RequirementMainComponent, RequirementsTableComponent],
-    imports: [
-        CommonModule,
-        MatTableModule,
-        MatSelectModule,
-        FormsModule,
-        MatSliderModule,
-        HttpClientModule,
-        MatSortModule,
-        MatInputModule,
-        MatIconModule,
-        MatButtonModule,
-        KeyboardShortcutsModule.forRoot(),
-        NgScrollbarModule,
-        MatTooltipModule,
-        BrowserModule
-    ],
+  declarations: [RequirementMainComponent, RequirementsTableComponent, RequirementTableFilterBarComponent],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatSelectModule,
+    FormsModule,
+    MatSliderModule,
+    HttpClientModule,
+    MatSortModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    KeyboardShortcutsModule.forRoot(),
+    NgScrollbarModule,
+    MatTooltipModule,
+    BrowserModule,
+    MatListModule,
+    SharedModule,
+    ImpactModule
+  ],
   exports: [
     RequirementMainComponent
   ]

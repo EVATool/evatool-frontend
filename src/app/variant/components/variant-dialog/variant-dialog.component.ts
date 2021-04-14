@@ -22,6 +22,7 @@ export class VariantDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<VariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { id: string },
     public variantDataService: VariantDataService) {
+
   }
 
   ngOnInit(): void {
@@ -41,5 +42,15 @@ export class VariantDialogComponent implements OnInit {
 
   archive(variant: Variant): void {
     this.variantDataService.archive(variant);
+  }
+
+  expand(): boolean {
+    let expandArchived = false;
+    this.variantDataService.variantsArchive.forEach((varient) => {
+      if (varient.id === this.data.id) {
+        expandArchived = true;
+      }
+    });
+    return  expandArchived;
   }
 }

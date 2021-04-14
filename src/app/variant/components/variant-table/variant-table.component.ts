@@ -13,10 +13,12 @@ export class VariantTableComponent implements OnInit {
   @Input() matDataSource!: MatTableDataSource<Variant>;
   @Input() id = '';
   displayedColumns = ['guiId', 'title', 'description'];
-  constructor(public variantDataService: VariantDataService) { }
+
+  constructor(public variantDataService: VariantDataService) {
+  }
 
   ngOnInit(): void {
-    console.log(this.matDataSource);
+    this.variantDataService.init();
   }
 
   addVariant(): void {
@@ -24,10 +26,13 @@ export class VariantTableComponent implements OnInit {
   }
 
   save(variant: Variant): void {
+    if (variant.editable !== true) {
+      return;
+    }
     variant.editable = false;
-    if ( variant.id !== ''){
+    if (variant.id !== '') {
       this.variantDataService.update(variant);
-    }else{
+    } else {
       this.variantDataService.save(variant);
     }
 
@@ -45,8 +50,8 @@ export class VariantTableComponent implements OnInit {
     this.variantDataService.delete(variant);
   }
 
-  edit(variant: Variant): void{
-    if (! variant.archived) {
+  edit(variant: Variant): void {
+    if (!variant.archived) {
       variant.editable = true;
     }
   }

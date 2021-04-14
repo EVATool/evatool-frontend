@@ -69,7 +69,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSnackBarModule
   ],
   exports: [
-    ImpactMainComponent
+    ImpactMainComponent,
+    ImpactTableFilterBarComponent
   ]
 })
 export class ImpactModule {
