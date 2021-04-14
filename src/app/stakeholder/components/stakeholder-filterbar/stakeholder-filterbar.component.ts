@@ -42,4 +42,8 @@ export class StakeholderFilterbarComponent{
     this.preselect = this.levels[0];
     this.stakeholderDataService.resetFilter();
   }
+
+  highlightTextChange(event: string): void {
+    this.stakeholderDataService.setSearchText(event);
+  }
 }
