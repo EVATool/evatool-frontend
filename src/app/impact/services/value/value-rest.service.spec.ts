@@ -27,7 +27,7 @@ describe('ValueRestService', () => {
   let service: ValueRestService;
 
   afterEach(() => {
-    httpMock.verify();
+    //httpMock.verify();
   });
 
   beforeEach(() => {
