@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ValueDTO} from '../../model/ValueDTO';
-import {Value} from '../../model/Value';
 import {RestService} from '../../../shared/services/rest.service';
 
 const httpOptions = { // Outsource!
@@ -35,7 +34,7 @@ export class ValueRestService {
     return this.http.put(RestService.getValuesURL(), valueDTO, httpOptions);
   }
 
-  deleteValue(value: Value): Observable<any> {
+  deleteValue(value: ValueDTO): Observable<any> {
     console.log(value.id);
     return this.http.delete(RestService.getValuesURL() + '/' + value.id);
   }

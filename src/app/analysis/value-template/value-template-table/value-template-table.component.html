@@ -1,14 +1,5 @@
 <table mat-table [dataSource]='tableDataSource' matSort>
   <caption class="screen-reader-only">List of Values</caption>
-  <ng-container matColumnDef='disable'>
-    <th scope="col" mat-header-cell *matHeaderCellDef>
-      <div [hidden]="true" mat-sort-header matTooltip="Whether to include the value in the table selection"
-           matTooltipHideDelay="100" matTooltipPosition="above">Include
-      </div>
-    </th>
-    <td *matCellDef="let value"></td>
-  </ng-container>
-
   <ng-container matColumnDef='name'>
     <th scope="col" mat-header-cell *matHeaderCellDef>
       <div [hidden]="true" mat-sort-header matTooltip="The value name" matTooltipHideDelay="100"

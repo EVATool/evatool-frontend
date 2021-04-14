@@ -52,16 +52,10 @@
         <span class="bar"></span>
         <label>Background-Image (optional & direct-link)</label>
       </div>
-
-      <div class="group" [hidden]="!selectedTemplate">
-        <app-value-template></app-value-template>
-      </div>
-
-      <button mat-raised-button class="createButton button_cont b1" type="submit">
-        <div *ngIf="!isTemplate && !editImage">Create Analysis</div>
-        <div *ngIf="isTemplate && !editImage">Done</div>
-        <div *ngIf="editImage">Update Background-Image</div>
-      </button>
     </form>
+
+    <div class="group" [hidden]="!selectedTemplate">
+      <app-value-template></app-value-template>
+    </div>
   </div>
 </div>

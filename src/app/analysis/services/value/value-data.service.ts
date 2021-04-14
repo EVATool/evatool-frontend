@@ -20,8 +20,8 @@ export class ValueDataService {
   @Output() loadedValues: EventEmitter<Value[]> = new EventEmitter();
   @Output() loadedValuesTypes: EventEmitter<string[]> = new EventEmitter();
   @Output() addedValue: EventEmitter<Value> = new EventEmitter();
-  // @Output() changedValue: EventEmitter<Value> = new EventEmitter();
-  // @Output() removedValue: EventEmitter<Value> = new EventEmitter();
+  @Output() changedValue: EventEmitter<Value> = new EventEmitter();
+  @Output() removedValue: EventEmitter<Value> = new EventEmitter();
   @Output() changedValues: EventEmitter<Value[]> = new EventEmitter();
 
   public valuesTypes: string[] = [];
@@ -87,22 +87,22 @@ export class ValueDataService {
   }
 
   updateValue(value: Value): void {
-    // this.logger.info(this, 'Update Value');
-    // const valueDto = this.valueMapperService.toDto(value);
-    // this.valueRestService.updateValue(valueDto).subscribe((newValue: Value) => {
-    //   this.changedValue.emit(newValue);
-    //   this.changedValues.emit(this.values);
-    // });
+    this.logger.info(this, 'Update Value');
+    const valueDto = ValueDataService.toDto(value);
+    this.valueRestService.updateValue(valueDto).subscribe((newValue: Value) => {
+      this.changedValue.emit(newValue);
+      this.changedValues.emit(this.values);
+    });
   }
 
   deleteValue(value: Value): void {
-    // this.logger.info(this, 'Delete Value');
-    // const valueDto = this.valueMapperService.toDto(value);
-    // this.valueRestService.deleteValue(valueDto).subscribe((valDto) => {
-    //   const index: number = this.values.indexOf(value, 0);
-    //   this.values.splice(index, 1);
-    //   this.removedValue.emit(value);
-    //   this.changedValues.emit(this.values);
-    // });
+    this.logger.info(this, 'Delete Value');
+    const valueDto = ValueDataService.toDto(value);
+    this.valueRestService.deleteValue(valueDto).subscribe((valDto) => {
+      const index: number = this.values.indexOf(value, 0);
+      this.values.splice(index, 1);
+      this.removedValue.emit(value);
+      this.changedValues.emit(this.values);
+    });
   }
 }
