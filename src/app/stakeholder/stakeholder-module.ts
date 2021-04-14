@@ -38,10 +38,11 @@ import {HighlightSearchPipe} from '../shared/pipes/highlightSearch/highlight-sea
     SharedModule,
     MatListModule
   ],
-    exports: [
-        StakeholderMainComponent,
-        StakeholderLevelComponent
-    ]
+  exports: [
+    StakeholderMainComponent,
+    StakeholderLevelComponent,
+    HighlightSearchPipe
+  ]
 })
 export class StakeholderModule {
 }

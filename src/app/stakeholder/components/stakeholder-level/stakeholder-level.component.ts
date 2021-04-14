@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Stakeholder} from '../../model/Stakeholder';
-import {StakeholderDataService} from '../../service/stakeholder-data.service';
+import {StakeholderDataService} from "../../service/stakeholder-data.service";
 
 
 @Component({
@@ -28,9 +28,7 @@ export class StakeholderLevelComponent implements OnInit {
   }
 
   onLevelChange(): void {
-    if (!this.editable) {
-      return;
-    }
+    if (!this.editable) {return; }
     const index = this.levels.indexOf(this.level);
     const nextIndex = (index + 1) % this.levels.length;
     this.level = this.levels[nextIndex];
