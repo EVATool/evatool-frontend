@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {AnalysisDTO} from "../../model/AnalysisDTO";
 import {Analysis} from "../../model/Analysis";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ValueDTO} from "../../model/ValueDTO";
 import {Value} from "../../model/Value";
+import {RestService} from '../../../shared/services/rest.service';
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({
@@ -17,31 +18,35 @@ const httpOptions = { // Outsource!
 })
 export class ValueRestService {
 
-  valueUrl = 'http://localhost:8080/values';//'http://79.171.179.211:443/values';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getValues(): Observable<any> {
-    return this.http.get<any>(this.valueUrl);
+    return this.http.get<any>(RestService.getValuesURL());
   }
 
   getValueById(id: any): Observable<any> {
-    return this.http.get<any>(this.valueUrl + '/' + id);
+    return this.http.get<any>(RestService.getValuesURL() + '/' + id);
   }
 
   createValue(valueDTO: ValueDTO): Observable<any> {
-    return this.http.post(this.valueUrl, valueDTO, httpOptions);
+    return this.http.post(RestService.getValuesURL(), valueDTO, httpOptions);
   }
 
   updateValue(valueDTO: ValueDTO): Observable<any> {
-    return this.http.put(this.valueUrl, valueDTO, httpOptions);
+    return this.http.put(RestService.getValuesURL(), valueDTO, httpOptions);
   }
 
   deleteValue(value: Value): Observable<any> {
-    return this.http.delete(this.valueUrl + '/' + value.id);
+    console.log(value.id);
+    return this.http.delete(RestService.getValuesURL() + '/' + value.id);
   }
 
   getValuesByAnalysisId(id: any): Observable<any> {
-    return this.http.get<any>(this.valueUrl + '?analysisId=' + id);
+    return this.http.get<any>(RestService.getValuesURL() + '?analysisId=' + id);
+  }
+
+  getValueTypes(): Observable<string[]> {
+    return this.http.get<string[]>(RestService.getValueTypesURL());
   }
 }

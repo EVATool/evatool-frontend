@@ -1,9 +1,13 @@
 export class Analysis {
-  id: any = '';
-  title: any = '';
-  description: any = '';
-  analysisDate: any = '';
-  img: any = '';
+  rootEntityID: any = '';
+  analysisName: any = '';
+  analysisDescription: any = '';
+  lastUpdate: any = '';
+  image: any = '';
+  editImage: any = '';
   isTemplate: any = '';
   uniqueString: any = '';
+  TitleIsEditable = false;
+  DescriptionIsEditable = false;
+  date: any = '';
 }

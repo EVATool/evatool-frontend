@@ -7,7 +7,7 @@ import {StakeholderPrioComponent} from '../stakeholder-prio/stakeholder-prio.com
   templateUrl: './stakeholder-filterbar.component.html',
   styleUrls: ['./stakeholder-filterbar.component.scss']
 })
-export class StakeholderFilterbarComponent implements OnInit {
+export class StakeholderFilterbarComponent{
 
   public levels = [
       {key: '', value: 'Alle'},
@@ -19,9 +19,6 @@ export class StakeholderFilterbarComponent implements OnInit {
   public preselect = this.levels[0];
   public prio = 0;
   constructor(public stakeholderDataService: StakeholderDataService) { }
-
-  ngOnInit(): void {
-  }
 
   impactChange(value: any): void{
     console.log(value);

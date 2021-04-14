@@ -32,10 +32,11 @@ export class StakeholderDataService {
         let negativeImpacts = 0;
         let postiveImpacts = 0;
         stakeholderDTO.impactList.forEach((impact: StakeholderImpact) => {
-          if (impact.value > 0) {
-            postiveImpacts += impact.value;
+          if (impact.impactValue > 0) {
+            postiveImpacts += impact.impactValue;
+            console.log(postiveImpacts);
           } else {
-            negativeImpacts += Math.abs(impact.value);
+            negativeImpacts += Math.abs(impact.impactValue);
           }
         });
         const stakeholder: Stakeholder = {

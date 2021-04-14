@@ -13,7 +13,7 @@ describe('StakeholderLevelComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [],
-      declarations: [ StakeholderLevelComponent, HighlightSearchPipe ]
+      declarations: [ StakeholderLevelComponent, HighlightSearchPipe ],
     })
     .compileComponents();
   });
