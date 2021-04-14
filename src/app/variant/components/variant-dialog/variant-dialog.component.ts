@@ -1,11 +1,12 @@
-import {Component, Inject, NgModule, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../../models/Variant';
 import {VariantDataService} from '../../services/variant-data.service';
 import {VariantRestService} from '../../services/variant-rest.service';
 import {VariantDTO} from '../../models/VariantDTO';
+import {LogService} from '../../../shared/services/log.service';
+
 
 @Component({
   selector: 'app-variant-dialog',
@@ -21,8 +22,8 @@ export class VariantDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<VariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { id: string },
-    public variantDataService: VariantDataService) {
-
+    public variantDataService: VariantDataService,
+    private logger: LogService) {
   }
 
   ngOnInit(): void {
@@ -32,25 +33,18 @@ export class VariantDialogComponent implements OnInit {
   }
 
   addVariant(): void {
+    this.logger.info(this, 'Add Button Clicked');
     this.variantDataService.createVariant();
   }
 
   save(variant: Variant): void {
+    this.logger.info(this, 'Save Button Clicked');
     variant.editable = false;
     this.variantDataService.save(variant);
   }
 
   archive(variant: Variant): void {
+    this.logger.info(this, 'Archive Button Clicked');
     this.variantDataService.archive(variant);
-  }
-
-  expand(): boolean {
-    let expandArchived = false;
-    this.variantDataService.variantsArchive.forEach((varient) => {
-      if (varient.id === this.data.id) {
-        expandArchived = true;
-      }
-    });
-    return  expandArchived;
   }
 }

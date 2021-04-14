@@ -8,9 +8,7 @@ import {VariantDTO} from '../../models/VariantDTO';
 })
 export class VariantSampleDataService {
 
-  constructor() {
-
-  }
+  constructor() {}
 
   dummyVariantDTOs: VariantDTO[] = [
     {

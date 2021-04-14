@@ -46,3 +46,15 @@ $size: 3em;
   }
 
 }
+
+.stakeholder-level-wrapper{
+  display: flex;
+  .stakeholder-level-name{
+    align-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+  }
+}
+
+

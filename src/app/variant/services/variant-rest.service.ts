@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Variant} from '../models/Variant';
 import {VariantDTO} from '../models/VariantDTO';
 import {RestService} from '../../shared/services/rest.service';
 
-const httpOptions = { // Outsource!
+const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
@@ -17,13 +15,8 @@ const httpOptions = { // Outsource!
 })
 export class VariantRestService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient){}
 
-  }
-
-  onInit(): void {
-
-  }
 
   getVariants(): Observable<any> {
     return this.http.get<any>(RestService.getVariantsURL());

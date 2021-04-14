@@ -12,7 +12,7 @@ import {Impact} from "../../../../../../models/Impact";
 @Component({
   selector: 'app-value-table',
   templateUrl: './value-table.component.html',
-  styleUrls: ['./value-table.component.scss', '../../../../../../../layout/style/style.css']
+  styleUrls: ['./value-table.component.scss', '../../../../../../../layout/style/style.scss']
 })
 export class ValueTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
