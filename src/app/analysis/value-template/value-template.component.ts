@@ -20,10 +20,10 @@ export class ValueTemplateComponent implements OnInit, AfterViewInit, OnChanges 
   }
 
   ngOnInit(): void {
-    //this.valueDataService.onInit();
   }
 
   ngAfterViewInit(): void {
+    this.valueDataService.onInit();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
