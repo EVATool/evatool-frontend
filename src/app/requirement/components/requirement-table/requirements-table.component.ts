@@ -106,10 +106,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
   private initSorting(): void {
     this.tableDatasource.sort = this.sort;
-    // const sortState: Sort = {active: 'Requirements', direction: 'asc'};
-    // this.sort.active = sortState.active;
-    // this.sort.direction = sortState.direction;
-    // this.sort.sortChange.emit(sortState);
   }
   concatDimension(parameter: any): string {
     let value = '';

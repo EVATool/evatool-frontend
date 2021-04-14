@@ -1,15 +1,13 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ColumnCategoryFilterComponent} from '../../../shared/components/column-category-filter/column-category-filter.component';
-import{RequirementTableFilterEvent} from '../../../requirement/components/requirement-table-filter-bar/RequirementTableFilterEvent';
+import {RequirementTableFilterEvent} from '../../../requirement/components/requirement-table-filter-bar/RequirementTableFilterEvent';
 import {SliderFilterSettings} from '../../../shared/components/impact-slider/SliderFilterSettings';
 import {ColumnSliderFilterComponent} from '../../../shared/components/column-slider-filter/column-slider-filter.component';
 import {HighlightSearchComponent} from '../../../shared/components/search-bar/highlight-search.component';
-// import {DimensionDataService} from '../../../impact/services/dimension/dimension-data.service';
-import {VariantsDataService} from '../../services/variants/variants-data.service';
-import {DimensionDataService} from '../../services/dimension/dimension-data.service';
 import {ValueDataService} from '../../../impact/services/value/value-data.service';
 import {Value} from '../../../impact/models/Value';
 import {Variants} from '../../models/Variants';
+import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
 
 @Component({
   selector: 'app-requirement-table-filter-bar',
@@ -28,22 +26,35 @@ export class RequirementTableFilterBarComponent implements OnInit {
   requirementTableFilterEvent!: RequirementTableFilterEvent;
   suppressChildEvent = false;
   constructor(
-    private variantsDataService: VariantsDataService,
-    private dimensionDataService: DimensionDataService,
-    private valueDataService: ValueDataService) {
+    private valueDataService: ValueDataService,
+    private requirementsRestService: RequirementsRestService) {
     this.requirementTableFilterEvent = RequirementTableFilterEvent.getDefault();
   }
 
   ngOnInit(): void {
-    // this.dimensionDataService.loadedDimensions.subscribe((dimensions)=>){
-    //   this.valueSystemNames = dimensions.map(value => value.name);
-    // }
+    // this.variantsDataService.onCreateVariants.subscribe((variants) =>  {
+    //   this.variantsChanged(variants);
+    // });
 
-    // this.variantsDataService.
+    {
+        this.requirementsRestService.getVariants().subscribe((result: any) => {
+          this.variantsNames = [];
+          result.forEach((variantsRest: Variants) => {
+            const variants: Variants = {
+              entityId: variantsRest.id,
+              description: variantsRest.description,
+              variantsTitle: variantsRest.title,
+              archived: variantsRest.archived
+            };
+            this.variantsNames.push(variants.variantsTitle);
+          });
+        });
+    }
+
+    // this.requirementsDataService.loadedRequirements.subscribe((variants) =>  {
+    //   this.variantsChanged(variants);
+    // });
     this.valueDataService.loadedValues.subscribe((values) => {
-      this.valuesChanged(values);
-    });
-    this.valueDataService.changedValues.subscribe((values) => {
       this.valuesChanged(values);
     });
   }
