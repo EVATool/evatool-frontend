@@ -150,4 +150,10 @@ export class StakeholderDataService {
       this.analysisid = paramMap.id;
     });
   }
+
+  delete(stakeholder: Stakeholder): void {
+    this.stakeholderRestService.deleteStakeholder(stakeholder).subscribe(() => {
+      this.loadStakeholder();
+    });
+  }
 }
