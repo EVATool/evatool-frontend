@@ -5,6 +5,6 @@ export class ValueDTO {
   name: any = '';
   type: any = '';
   description: any = '';
-  archived?: boolean;
+  archived = false;
   analysis!: AnalysisDTO;
 }

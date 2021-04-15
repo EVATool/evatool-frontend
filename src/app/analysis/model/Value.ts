@@ -6,6 +6,6 @@ export class Value {
   type: any = '';
   description: any = '';
   editable?: boolean;
-  archived?: boolean;
+  archived = false;
   analysis!: Analysis;
 }
