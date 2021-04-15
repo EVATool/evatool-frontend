@@ -4,7 +4,6 @@
       <caption class=" screen-reader-only">List of impacts</caption>
 
       <ng-container matColumnDef='uniqueString'>
-        <!-- TODO mat-sort-header disables the row resizing. It somehow stops event propagation. -->
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true" [index]="0">
           <div matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
         </th>

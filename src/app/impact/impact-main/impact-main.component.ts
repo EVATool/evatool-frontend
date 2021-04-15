@@ -5,7 +5,6 @@ import {LogService} from '../../shared/services/log.service';
 import {Impact} from '../models/Impact';
 import {ImpactDataService} from '../services/impact/impact-data.service';
 import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
-import {NgScrollbar} from 'ngx-scrollbar';
 import {ValueDataService} from "../services/value/value-data.service";
 import {StakeholderDataService} from "../services/stakeholder/stakeholder-data.service";
 import {AnalysisDataService} from "../services/analysis/analysis-data.service";

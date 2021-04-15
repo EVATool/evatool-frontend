@@ -7,7 +7,6 @@ import {ImpactDataService} from "../../../../../../services/impact/impact-data.s
 import {LogService} from "../../../../../../../shared/services/log.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AnalysisDataService} from "../../../../../../services/analysis/analysis-data.service";
-import {Impact} from "../../../../../../models/Impact";
 
 @Component({
   selector: 'app-value-table',
@@ -38,15 +37,15 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
 
     this.valueDataService.loadedValues.subscribe(vals => {
       this.logger.info(this, 'Event \'loadedValues\' received from ValueTableComponent');
-      const filteredValues: Value[] = this.filterValues();
-      this.tableDataSource = new MatTableDataSource<Value>(filteredValues);
+      const filteredValuesLocal: Value[] = this.filterValues();
+      this.tableDataSource = new MatTableDataSource<Value>(filteredValuesLocal);
       this.initSorting();
     });
 
     this.valueDataService.changedValues.subscribe(vals => {
       this.logger.info(this, 'Event \'changedValues\' received from ValueTableComponent');
-      const filteredValues: Value[] = this.filterValues();
-      this.tableDataSource = new MatTableDataSource<Value>(filteredValues); // Why does this not work like in impact table?
+      const filteredValuesLocal: Value[] = this.filterValues();
+      this.tableDataSource = new MatTableDataSource<Value>(filteredValuesLocal); // Why does this not work like in impact table?
       this.initSorting();
     });
   }

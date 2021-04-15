@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {AnalysisDataService} from '../services/analysis/analysis-data.service';
 import {Analysis} from '../model/Analysis';
 import {Router} from '@angular/router';

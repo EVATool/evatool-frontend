@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {StakeholderDataService} from '../../service/stakeholder-data.service';
-import {StakeholderPrioComponent} from '../stakeholder-prio/stakeholder-prio.component';
 
 @Component({
   selector: 'app-stakeholder-filterbar',

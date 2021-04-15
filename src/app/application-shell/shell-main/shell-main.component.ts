@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {MatTabGroup} from '@angular/material/tabs';
 import {Router} from '@angular/router';
-import {isDevMode} from '@angular/core';
 import {LogService} from "../../shared/services/log.service";
 import {ImpactMainComponent} from "../../impact/impact-main/impact-main.component";
 
@@ -39,14 +38,5 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
 
   tabChanged(event: number) {
     this.logger.info(this, 'Selected Tab Changed to ' + event);
-
-    switch (event) {
-      case 1:
-        this.impactMain.tabActivated();
-        break;
-
-      default:
-        break;
-    }
   }
 }

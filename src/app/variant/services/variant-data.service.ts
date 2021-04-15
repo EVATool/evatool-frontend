@@ -1,5 +1,5 @@
 
-import {Injectable, Output, EventEmitter, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Variant} from '../models/Variant';
 import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';

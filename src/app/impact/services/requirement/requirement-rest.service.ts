@@ -18,12 +18,12 @@ export class RequirementRestService extends MockableService {
     super();
   }
 
-  getRequirementsReferencedByImpactId(impactId: string): Observable<Boolean> {
+  getRequirementsReferencedByImpactId(impactId: string): Observable<boolean> {
     this.logger.info(this, 'Get Requirement referenced by ImpactId');
     if (this.useDummyData(this.data.offline)) {
       return of(false);
     } else {
-      return this.http.get<Boolean>(RestSettings.impactReferencedUrl + "/" + impactId);
+      return this.http.get<boolean>(RestSettings.impactReferencedUrl + "/" + impactId);
     }
   }
 
