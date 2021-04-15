@@ -3,7 +3,7 @@
     <caption></caption>
 
     <ng-container matColumnDef="uniqueString" sticky>
-      <th mat-header-cell scope="col" *matHeaderCellDef mat-sort-header>ID</th>
+      <th mat-header-cell scope="col" *matHeaderCellDef mat-sort-header matSortActive="uniqueString" matSortDirection="desc">ID</th>
       <td mat-cell *matCellDef="let element">
         <div [innerHTML]="element.uniqueString | highlightSearch: this.requirementsDataService.searchtext">
         </div>
@@ -14,12 +14,11 @@
       <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Requirements</th>
       <td mat-cell *matCellDef='let element'>
         <div class="description-wrapper">
-          <div class="description-container" (click)="element.editable = true" (mouseout)="element.editable = false">
+          <div class="description-container" (click)="element.editable = true" (mouseout)="element.editable = false; descriptionChange(element)">
 
             <div *ngIf="element.editable">
              <textarea matInput cdkTextareaAutosize [(ngModel)]="element.requirementDescription"
-                    placeholder="Describe the Requirement..."
-                    (change)="descriptionChange(element, $event)"></textarea>
+                    placeholder="Describe the Requirement..."></textarea>
             </div>
             <div *ngIf="!element.editable" [innerHTML]="element.requirementDescription | highlightSearch: this.requirementsDataService.searchtext">
             </div>
@@ -69,7 +68,6 @@
     <ng-container *ngFor="let impact of impactSoureces" matColumnDef="{{impact.uniqueString}}">
       <th id="sources-col" mat-header-cell matTooltip="{{impact.description}}" *matHeaderCellDef mat-sort-header
           [width]="50" style="min-width: 50px;">
-        <mat-icon>remove_red_eye</mat-icon>
         {{impact.uniqueString}} </th>
       <td mat-cell *matCellDef="let element"
           [ngClass]="{'positiv' : isPositiv(element,impact),'negativ' : isNegativ(element,impact)}"
