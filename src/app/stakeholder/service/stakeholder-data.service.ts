@@ -14,8 +14,7 @@ export class StakeholderDataService {
   constructor(private stakeholderRestService: StakeholderRestService,
               private router: Router) {
     this.matDataSource = new MatTableDataSource<Stakeholder>(this.stakeholders);
-    this.loadAnalysisIDFromRouter();
-    this.loadStakeholder();
+
 
   }
 
@@ -48,6 +47,7 @@ export class StakeholderDataService {
   }
 
   loadStakeholder(): void {
+    this.loadAnalysisIDFromRouter();
     this.stakeholderRestService.getStakeholdersByAnalysisId(this.analysisid).subscribe((result: any) => {
       this.stakeholders = [];
       console.log(result);
@@ -175,6 +175,12 @@ export class StakeholderDataService {
   loadAnalysisIDFromRouter(): void {
     this.router.routerState.root.queryParams.subscribe((paramMap) => {
       this.analysisid = paramMap.id;
+    });
+  }
+
+  delete(stakeholder: Stakeholder): void {
+    this.stakeholderRestService.deleteStakeholder(stakeholder).subscribe(() => {
+      this.loadStakeholder();
     });
   }
 }

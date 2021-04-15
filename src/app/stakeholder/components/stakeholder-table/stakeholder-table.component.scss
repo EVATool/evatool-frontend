@@ -5,7 +5,37 @@
 }
 
 .mat-column-guiId {
-  width: 10%;
-  max-width: 90px;
+ flex: 0.2;
+  min-width: fit-content;
+}
 
+.mat-column-Prio{
+  flex: 0.4;
+  min-width: fit-content;
+}
+
+.mat-column-Impact{
+  flex: 0.3;
+  min-width: (fit-content + 100px);
+}
+
+.mat-column-Ebene{
+  flex: 0.6;
+  min-width: fit-content;
+}
+
+
+
+
+.options {
+  display: none;
+  margin-right: 0;
+}
+
+.mat-row:hover {
+  .options {
+    vertical-align: middle;
+    text-align: right;
+    display: contents;
+  }
 }

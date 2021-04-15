@@ -1,3 +1,5 @@
+import {Analysis} from './Analysis';
+
 export class Value {
   id: any = '';
   name: any = '';
@@ -5,5 +7,5 @@ export class Value {
   description: any = '';
   editable?: boolean;
   archived?: boolean;
-  analysis: any = '';
+  analysis!: Analysis;
 }

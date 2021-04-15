@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
 
-import { StakeholderDataService } from './stakeholder-data.service';
 import {RouterTestingModule} from '@angular/router/testing';
+import {StakeholderDataService} from './stakeholder-data.service';
 
 describe('StakeholderDataService', () => {
   let service: StakeholderDataService;

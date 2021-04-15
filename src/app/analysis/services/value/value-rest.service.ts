@@ -1,10 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {AnalysisDTO} from "../../model/AnalysisDTO";
-import {Analysis} from "../../model/Analysis";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {ValueDTO} from "../../model/ValueDTO";
-import {Value} from "../../model/Value";
+import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ValueDTO} from '../../model/ValueDTO';
 import {RestService} from '../../../shared/services/rest.service';
 
 const httpOptions = { // Outsource!
@@ -37,13 +34,13 @@ export class ValueRestService {
     return this.http.put(RestService.getValuesURL(), valueDTO, httpOptions);
   }
 
-  deleteValue(value: Value): Observable<any> {
+  deleteValue(value: ValueDTO): Observable<any> {
     console.log(value.id);
     return this.http.delete(RestService.getValuesURL() + '/' + value.id);
   }
 
   getValuesByAnalysisId(id: any): Observable<any> {
-    return this.http.get<any>(RestService.getValuesURL() + '?analysisId=' + id);
+    return this.http.get<ValueDTO[]>(RestService.getValuesURL() + '?analysisId=' + id);
   }
 
   getValueTypes(): Observable<string[]> {

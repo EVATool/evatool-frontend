@@ -21,7 +21,7 @@
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef='Ebene'>
-    <mat-header-cell *matHeaderCellDef>Level</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Ebene</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
       <div>
         <app-stakeholder-level [filtertext]="stakeholderDataService.searchtext"  [(level)]="stakeholder.level" (levelChange)="stakeholder.level = $event; saveNotEdit(stakeholder)" ></app-stakeholder-level>
@@ -29,7 +29,7 @@
     </mat-cell>
   </ng-container>
   <ng-container matColumnDef='Prio'>
-    <mat-header-cell *matHeaderCellDef>Prio</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Priorität</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder' >
       <app-stakeholder-prio [(prio)]="stakeholder.priority" (prioChange)="stakeholder.priority = $event; saveNotEdit(stakeholder)"></app-stakeholder-prio>
     </mat-cell>
@@ -38,6 +38,11 @@
     <mat-header-cell *matHeaderCellDef>Impact</mat-header-cell>
     <mat-cell *matCellDef='let stakeholder'>
       <app-stakeholder-impact [created]="stakeholder.created" [negativeimpactvalue]= "stakeholder.negativeImpact" [positiveimpactvalue]= "stakeholder.positiveImpact" ></app-stakeholder-impact>
+      <div class="options" >
+        <button mat-icon-button name="löschen" (click)="delete(stakeholder)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

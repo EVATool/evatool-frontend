@@ -7,12 +7,16 @@ import {Stakeholder} from '../../model/Stakeholder';
   templateUrl: './stakeholder-table.component.html',
   styleUrls: ['./stakeholder-table.component.scss']
 })
-export class StakeholderTableComponent {
+export class StakeholderTableComponent implements OnInit {
 
   public displayedColumns = ['guiId', 'Stakeholder', 'Ebene', 'Prio', 'Impact'];
   @Input() searchText: string | undefined;
 
   constructor(public stakeholderDataService: StakeholderDataService) {
+  }
+
+  ngOnInit(): void {
+    this.stakeholderDataService.loadStakeholder();
   }
 
 
@@ -42,5 +46,9 @@ export class StakeholderTableComponent {
     } else {
       this.stakeholderDataService.update(stakeholder);
     }
+  }
+
+  delete(stakeholder: Stakeholder): void {
+    this.stakeholderDataService.delete(stakeholder);
   }
 }

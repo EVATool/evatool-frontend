@@ -1,18 +1,50 @@
-import {Injectable, Output, EventEmitter} from '@angular/core';
-import {AnalysisRestService} from "./analysis-rest.service";
-import {Analysis} from "../../model/Analysis";
-import {AnalysisDTO} from "../../model/AnalysisDTO";
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {AnalysisRestService} from './analysis-rest.service';
+import {Analysis} from '../../model/Analysis';
+import {AnalysisDTO} from '../../model/AnalysisDTO';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalysisDataService {
+
+  constructor(private analysisRestService: AnalysisRestService) {
+  }
+
   @Output() analysisSaved: EventEmitter<Analysis> = new EventEmitter<Analysis>();
   public analysisArray: Analysis[] = [];
   public templateAnalyses: Analysis[] = [];
   public analyses: Analysis[] = [];
+  private currentAnalysis!: Analysis;
 
-  constructor(private analysisRestService: AnalysisRestService) {
+  static fromDto(analysisDTO: AnalysisDTO): Analysis {
+    const analysis = new Analysis();
+
+    analysis.rootEntityID = analysisDTO.rootEntityID;
+    analysis.analysisName = analysisDTO.analysisName;
+    analysis.analysisDescription = analysisDTO.analysisDescription;
+    analysis.lastUpdate = analysisDTO.lastUpdate;
+    analysis.image = analysisDTO.image;
+    analysis.isTemplate = analysisDTO.isTemplate;
+    analysis.uniqueString = analysisDTO.uniqueString;
+    analysis.date = analysisDTO.date;
+
+    return analysis;
+  }
+
+  static toDto(analysis: Analysis): AnalysisDTO {
+    const analysisDTO = new AnalysisDTO();
+
+    analysisDTO.rootEntityID = analysis.rootEntityID;
+    analysisDTO.analysisName = analysis.analysisName;
+    analysisDTO.analysisDescription = analysis.analysisDescription;
+    analysisDTO.lastUpdate = analysis.lastUpdate;
+    analysisDTO.image = analysis.image;
+    analysisDTO.isTemplate = analysis.isTemplate;
+    analysisDTO.uniqueString = analysis.uniqueString;
+    analysisDTO.date = analysis.date;
+
+    return analysisDTO;
   }
 
   save(analysis: Analysis): void {
@@ -46,6 +78,12 @@ export class AnalysisDataService {
     });
   }
 
+  loadAnalysis(id: string): void {
+    this.analysisRestService.getAnalysisById(id).subscribe((analysisDto: AnalysisDTO) => {
+      this.currentAnalysis = AnalysisDataService.fromDto(analysisDto);
+    });
+  }
+
   loadAllAnalysis(): void {
     this.analysisRestService.getAnalysis().subscribe((result: any) => {
       this.analysisArray = [];
@@ -70,5 +108,9 @@ export class AnalysisDataService {
       this.templateAnalyses = this.analysisArray.filter(ana => ana.isTemplate);
       this.analyses = this.analysisArray.filter(ana => !ana.isTemplate);
     });
+  }
+
+  getCurrentAnalysis(): Analysis {
+    return this.currentAnalysis;
   }
 }

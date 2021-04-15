@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {AnalysisDataService} from '../services/analysis/analysis-data.service';
 import {Analysis} from '../model/Analysis';
 import {Router} from '@angular/router';
@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AnalysisRestService} from '../services/analysis/analysis-rest.service';
 import {AnalysisDTO} from '../model/AnalysisDTO';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ValueTemplateComponent} from '../value-template/value-template.component';
 
 @Component({
   selector: 'app-analysis-dialog',
@@ -13,6 +14,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./analysis-dialog.component.css']
 })
 export class AnalysisDialogComponent implements OnInit {
+  @ViewChild(ValueTemplateComponent) valueTemplateComponent!: ValueTemplateComponent;
 
   isTemplate = false;
   editImage = false;
@@ -97,6 +99,7 @@ export class AnalysisDialogComponent implements OnInit {
     if (this.isTemplate) {
       // Display values of the selected analysis template.
       this.analyseName = analysis.analysisName;
+      this.valueTemplateComponent.updateAnalysis(analysis.rootEntityID);
     }
   }
 
