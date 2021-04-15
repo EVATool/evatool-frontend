@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {AnalysisDataService} from '../services/analysis/analysis-data.service';
 import {Analysis} from '../model/Analysis';
 import {Router} from '@angular/router';
@@ -95,7 +95,7 @@ export class AnalysisDialogComponent implements OnInit {
     this.analysisDialogComponent.close();
   }
 
-  selectedTemplateChanged(analysis: Analysis) {
+  selectedTemplateChanged(analysis: Analysis): void {
     if (this.isTemplate) {
       // Display values of the selected analysis template.
       this.analyseName = analysis.analysisName;
@@ -103,26 +103,24 @@ export class AnalysisDialogComponent implements OnInit {
     }
   }
 
-  newTemplate() {
+  newTemplate(): void {
     console.log('Create new template');
     const analysisDto = new AnalysisDTO();
-    //analysisDto.image = this.selectedTemplate.image;
-    //analysisDto.rootEntityID = null;
-    //analysisDto.uniqueString = this.selectedTemplate.uniqueString;
-    analysisDto.analysisName = "Template";
-    analysisDto.analysisDescription = "Template";
+    // analysisDto.image = this.selectedTemplate.image;
+    // analysisDto.rootEntityID = null;
+    // analysisDto.uniqueString = this.selectedTemplate.uniqueString;
+    analysisDto.analysisName = 'Template';
+    analysisDto.analysisDescription = 'Template';
+    analysisDto.isTemplate = true;
     this.analysisRestService.createAnalysis(analysisDto).subscribe((anaDto: AnalysisDTO) => {
-      const ana = new Analysis();
-      ana.rootEntityID = anaDto.rootEntityID;
-      ana.analysisName = anaDto.analysisName;
-      ana.analysisDescription = anaDto.analysisDescription;
-      this.analysisDataService.analyses.push(ana);
+      const ana = AnalysisDataService.fromDto(anaDto);
+      // this.analysisDataService.analyses.push(ana);
       this.analysisDataService.templateAnalyses.push(ana);
       this.selectedTemplate = ana;
     });
   }
 
-  deleteTemplate() {
+  deleteTemplate(): void {
     console.log(this.analysisDataService.templateAnalyses.length);
     if (this.selectedTemplate === undefined && !this.editImage) {
       this.snackbar.open('Please select a template', '', {duration: 5000});
@@ -137,7 +135,7 @@ export class AnalysisDialogComponent implements OnInit {
     }
   }
 
-  analysisNameChanged() {
+  analysisNameChanged(): void {
     if (this.isTemplate) {
       console.log('Update template name');
       const analysisDto = new AnalysisDTO();

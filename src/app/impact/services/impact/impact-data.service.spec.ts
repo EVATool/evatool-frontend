@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 
 import {ImpactDataService} from './impact-data.service';
 import {SampleDataService} from '../../spec/sample-data.service';
-import {RestMock} from "../../spec/RestMock";
+import {RestMock} from '../../spec/RestMock';
 
 describe('ImpactDataService', () => {
   let data: SampleDataService;
@@ -99,7 +99,7 @@ describe('ImpactDataService', () => {
 
     // Act
     const updateImpact = service.impacts[0];
-    updateImpact.description = "New Description";
+    updateImpact.description = 'New Description';
     service.updateImpact(updateImpact);
 
     // Assert
