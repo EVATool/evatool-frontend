@@ -121,12 +121,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       const search = JSON.parse(filter);
 
       const variantsTitles = data.variantsTitle.map((v: Variants) => v.variantsTitle);
-      const variantsFilter = search.variants.length === 0
-        || variantsTitles.some((s: string) => search.variants.includes(s));
+      const variantsFilter = search.variants.length === 0 || search.variants.every((s: string) => variantsTitles.includes(s));
 
-      const valueTitles = data.values.map((v: Dimension) => v.valueTitle)
-      const valueSystemFilter = search.valueSystem.length === 0
-        || valueTitles.some((s: string) => search.valueSystem.includes(s));
+      const valueTitles = data.values.map((v: Dimension) => v.valueTitle);
+      const valueSystemFilter = search.valueSystem.length === 0 || search.valueSystem.every((s: string) => valueTitles.includes(s));
 
       let valueFilter = true;
       data.requirementImpactPoints.forEach((s: RequirementImpactPoints) => {
