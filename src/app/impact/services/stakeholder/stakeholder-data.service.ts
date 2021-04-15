@@ -9,6 +9,7 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 })
 export class StakeholderDataService {
   @Output() loadedStakeholders: EventEmitter<Stakeholder[]> = new EventEmitter();
+  @Output() changedStakeholders: EventEmitter<Stakeholder[]> = new EventEmitter();
 
   stakeholders: Stakeholder[] = [];
 
@@ -49,9 +50,10 @@ export class StakeholderDataService {
         }
       });
 
+
       //this.stakeholders = fromDtos;
       this.logger.info(this, 'Stakeholders loaded');
-      //this.loadedStakeholders.emit(this.stakeholders);
+      this.changedStakeholders.emit(this.stakeholders);
     });
   }
 
