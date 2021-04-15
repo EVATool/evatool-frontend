@@ -4,7 +4,6 @@ import {LogService} from '../../../shared/services/log.service';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {ImpactDto} from "../../dtos/ImpactDto";
 import {SampleDataService} from "../../spec/sample-data.service";
 import {MockableService} from "../mockable.service";
 import {RestService} from "../../../shared/services/rest.service";

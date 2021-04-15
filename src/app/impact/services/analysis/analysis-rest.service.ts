@@ -1,5 +1,4 @@
 import {LogService} from '../../../shared/services/log.service';
-import {RestSettings} from '../../settings/RestSettings';
 import {Observable, of} from 'rxjs';
 import {AnalysisDto} from '../../dtos/AnalysisDto';
 import {HttpClient} from '@angular/common/http';

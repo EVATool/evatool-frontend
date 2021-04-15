@@ -1,4 +1,3 @@
-import {RestSettings} from '../../settings/RestSettings';
 import {StakeholderDto} from '../../dtos/StakeholderDto';
 import {LogService} from '../../../shared/services/log.service';
 import {Observable, of} from 'rxjs';
