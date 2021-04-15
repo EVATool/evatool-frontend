@@ -5,7 +5,7 @@
     <ng-container matColumnDef="uniqueString" sticky>
       <th mat-header-cell scope="col" *matHeaderCellDef mat-sort-header matSortActive="uniqueString" matSortDirection="desc">ID</th>
       <td mat-cell *matCellDef="let element">
-        <div [innerHTML]="element.uniqueString | highlightSearch: ''">
+        <div [innerHTML]="element.uniqueString | highlightSearch: this.requirementsDataService.searchtext">
         </div>
       </td>
     </ng-container>
@@ -20,7 +20,7 @@
              <textarea matInput cdkTextareaAutosize [(ngModel)]="element.requirementDescription"
                     placeholder="Describe the Requirement..."></textarea>
             </div>
-            <div *ngIf="!element.editable" [innerHTML]="element.requirementDescription | highlightSearch: 'generate'">
+            <div *ngIf="!element.editable" [innerHTML]="element.requirementDescription | highlightSearch: this.requirementsDataService.searchtext">
             </div>
           </div>
           <div class="delete-button-container">
@@ -46,11 +46,11 @@
           <mat-select matNativeControl [ngModel]="element.variantsTitle[0]?.entityId"
                       (selectionChange)="variantsChange(element, $event)">
             <mat-select-trigger>
-              <div [innerHTML]="element.variantsTitle[0]?.variantsTitle | highlightSearch: 'e'">
+              <div [innerHTML]="element.variantsTitle[0]?.variantsTitle | highlightSearch: this.requirementsDataService.searchtext">
               </div>
             </mat-select-trigger>
             <mat-option *ngFor="let stk of variantsSoureces" [value]="stk.entityId">
-              <div [innerHTML]="stk.variantsTitle | highlightSearch: 'e'">
+              <div [innerHTML]="stk.variantsTitle | highlightSearch: this.requirementsDataService.searchtext">
               </div>
             </mat-option>
           </mat-select>
@@ -61,11 +61,11 @@
     <ng-container matColumnDef="values" sticky>
       <th id="values-col" mat-header-cell *matHeaderCellDef mat-sort-header> Value</th>
       <td mat-cell *matCellDef="let element">
-        <div [innerHTML]="concatDimension(element) | highlightSearch: ''">
+        <div [innerHTML]="concatDimension(element) | highlightSearch: this.requirementsDataService.searchtext">
         </div>
     </ng-container>
 
-    <ng-container *ngFor="let impact of impactSoureces" matColumnDef="{{impact.id}}">
+    <ng-container *ngFor="let impact of impactSoureces" matColumnDef="{{impact.uniqueString}}">
       <th id="sources-col" mat-header-cell matTooltip="{{impact.description}}" *matHeaderCellDef mat-sort-header
           [width]="50" style="min-width: 50px;">
         {{impact.uniqueString}} </th>

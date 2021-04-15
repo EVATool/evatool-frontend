@@ -7,12 +7,13 @@ import {RequirementsRestService} from '../../services/requirements/requirements-
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
-import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Variants} from '../../models/Variants';
 import {MatSliderChange} from '@angular/material/slider';
 import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
 import {RequirementTableFilterEvent} from '../requirement-table-filter-bar/RequirementTableFilterEvent';
+import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
+import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-requirement-table',
@@ -27,7 +28,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   impactSoureces: Impact[] = [];
   variantsSoureces: Variants[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
-  idForProject = '';
   showElement = [
     {req: '', imp: ''}
   ];
@@ -41,14 +41,16 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     id: '',
     variants: [],
     valueSystem: [],
+    impacts: [],
     value: '',
     description: '',
     highlight: ''
   };
   private selectedRequirements: Requirements = new Requirements();
+  private impactsToShow: string[] = [];
 
   constructor(private requirementsRestService: RequirementsRestService,
-              private requirementsDataService: RequirementsDataService,
+              public requirementsDataService: RequirementsDataService,
               private router: Router,
               private dialog: MatDialog) {
   }
@@ -86,8 +88,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         });
         let impactIdList: string[] = [];
         this.impactSoureces.forEach(value => {
-          impactIdList = impactIdList.concat(value.id);
-          this.columnDefinitions.push({def: value.id, hide: true});
+          impactIdList = impactIdList.concat(value.uniqueString);
+          this.columnDefinitions.push({def: value.uniqueString, hide: true});
         });
         this.displayedColumns = this.displayedColumns.concat(impactIdList);
       });
@@ -134,23 +136,40 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
           valueFilter = false;
         }
       });
-
       return variantsFilter && valueSystemFilter && valueFilter;
     };
   }
 
   filterChange(event: RequirementTableFilterEvent): void {
+    this.filterValues.highlight = event.highlightFilter;
     this.filterValues.value = event.valueFilter;
     this.filterValues.variants = event.variantsFilter;
     this.filterValues.valueSystem = event.valueSystemFilter;
+    this.filterValues.impacts = event.impactFilter;
     this.updateFilter();
+    this.updateColums();
   }
 
-  getDisplayedColumns(): string[] {
-    // this.randomFilter();
+  updateColums(): void{
+    this.impactsToShow = this.filterValues.impacts;
+    this.displayedColumns = this.getDisplayedColumns();
+  }
+
+  getDisplayedColumns(): string[]{
+    const defaultColums: string[] = ['uniqueString', 'requirementDescription', 'variantsTitle', 'values'];
     return this.columnDefinitions
-      .filter(cd => cd.hide)
-      .map(cd => cd.def);
+      .filter(cd => {
+        if (this.impactsToShow.length === 0){
+          return true;
+        }
+        if (defaultColums.includes(cd.def)) {
+          return true;
+        }
+        if (this.impactsToShow.includes(cd.def)){
+          return true;
+        }
+        return false;
+      }).map(cd => cd.def);
   }
 
   private initSorting(): void {
@@ -265,19 +284,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   updateRequirement(requirements: Requirements): void {
     this.requirementsDataService.updateRequirements(requirements);
-  }
-
-  private randomFilter(): void {
-    const end = this.getRandomInt(10);
-    this.columnDefinitions.forEach(cd => {
-      if (cd.def.endsWith('' + end)) {
-        cd.hide = false;
-      }
-    });
-  }
-
-  private getRandomInt(max: number): number {
-    return Math.floor(Math.random() * max);
   }
 
   testKeyPress(event: any): void {

@@ -1,6 +1,6 @@
 <mat-list class="list-horizontal">
   <mat-list-item>
-    <app-search-bar></app-search-bar>
+    <app-search-bar (searchTextChanged)="setHighlightText($event)"></app-search-bar>
   </mat-list-item>
   <mat-list-item>
     <app-column-category-filter #variantsFilter [categories]="variantsNames" [name]="'Variants'"
@@ -10,6 +10,11 @@
   <mat-list-item>
     <app-column-category-filter #valueSystemFilter [categories]="valueSystemNames" [name]="'Value'"
                                 (filterChanged)="valueSystemFilterChanged($event)">
+    </app-column-category-filter>
+  </mat-list-item>
+  <mat-list-item>
+    <app-column-category-filter #impactFilter [categories]="impacts" [name]="'Impacts'"
+                                (filterChanged)="impactFilterChanged($event)">
     </app-column-category-filter>
   </mat-list-item>
 

@@ -10,6 +10,7 @@ import {Variants} from '../../models/Variants';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
 import {VariantsDataService} from '../../services/variants/variants-data.service';
+import {Impact} from "../../models/Impact";
 
 @Component({
   selector: 'app-requirement-table-filter-bar',
@@ -20,11 +21,13 @@ export class RequirementTableFilterBarComponent implements OnInit {
   @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
   @ViewChild('variantsFilter') variantsFilter!: ColumnCategoryFilterComponent;
   @ViewChild('valueSystemFilter') valueSystemFilter!: ColumnCategoryFilterComponent;
+  @ViewChild('impactFilter') impactFilter!: ColumnCategoryFilterComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<RequirementTableFilterEvent>();
   variantsNames: string[] = [];
   variantsTest: Variants[] = [];
   valueSystemNames: string[] = [];
+  impacts: string[] = [];
 
   requirementTableFilterEvent!: RequirementTableFilterEvent;
   suppressChildEvent = false;
@@ -37,16 +40,7 @@ export class RequirementTableFilterBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.variantsDataService.onCreateVariants.subscribe((variants) =>  {
-    //   this.variantsChanged(variants);
-    // });valueFilterChanged
-
-    // this.variantsDataService.loadedVariants.subscribe((variants) => {
-    //   this.variantsChanged(variants);
-    // });
-
     {
-      // this.requirementsDataService.loadedRequirements.subscribe()
         this.requirementsRestService.getVariants().subscribe((result: any) => {
           this.variantsTest = [];
           result.forEach((variantsRest: Variants) => {
@@ -60,14 +54,14 @@ export class RequirementTableFilterBarComponent implements OnInit {
           });
           this.variantsChanged(this.variantsTest);
         });
+        this.requirementsRestService.getImpactsAll().subscribe((result: any) => {
+        this.impacts = [];
+        result.forEach((impactRest: Impact) => {
+          this.impacts.push(impactRest.uniqueString);
+        });
+      });
 
     }
-
-    // this.variantsChanged(this.getVariants());
-
-    // this.requirementsDataService.loadedRequirements.subscribe((variants) =>  {
-    //   this.variantsChanged(variants);
-    // });
     this.valueDataService.loadedValues.subscribe((values) => {
       this.valuesChanged(values);
     });
@@ -76,23 +70,6 @@ export class RequirementTableFilterBarComponent implements OnInit {
   valuesChanged(values: Value[]) {
     this.valueSystemNames = values.filter(value => !value.disable).map(value => value.name);
   }
-
-  getVariants(): Variants[]{
-
-      this.requirementsRestService.getVariants().subscribe((result: any) => {
-        this.variantsTest = [];
-        result.forEach((variantsRest: Variants) => {
-          const variants: Variants = {
-            entityId: variantsRest.id,
-            description: variantsRest.description,
-            variantsTitle: variantsRest.title,
-            archived: variantsRest.archived
-          };
-          this.variantsTest.push(variants);
-        });
-      });
-      return this.variantsTest;
-    }
 
   variantsChanged(variants: Variants[]){
     this.variantsNames = variants.map(value => value.variantsTitle);
@@ -112,6 +89,13 @@ export class RequirementTableFilterBarComponent implements OnInit {
     }
   }
 
+  impactFilterChanged(event: string[]): void {
+    this.requirementTableFilterEvent.impactFilter = event;
+    if (!this.suppressChildEvent) {
+      this.filterChanged.emit(this.requirementTableFilterEvent);
+    }
+  }
+
   valueFilterChanged(event: SliderFilterSettings): void {
     this.requirementTableFilterEvent.valueFilter = event;
     if (!this.suppressChildEvent) {
@@ -125,6 +109,7 @@ export class RequirementTableFilterBarComponent implements OnInit {
     this.sliderFilter.clearFilter();
     this.variantsFilter.clearFilter();
     this.valueSystemFilter.clearFilter();
+    this.impactFilter.clearFilter();
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.requirementTableFilterEvent);
@@ -136,5 +121,9 @@ export class RequirementTableFilterBarComponent implements OnInit {
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.requirementTableFilterEvent);
+  }
+
+  setHighlightText($event: string): void {
+    this.requirementsDataService.setSearchText($event);
   }
 }

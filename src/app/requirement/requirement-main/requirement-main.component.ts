@@ -30,9 +30,6 @@ export class RequirementMainComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit(): void {
-    // this.dataService.addedRequirement.subscribe((requirements: Requirements) => {
-    //   this.filterBar.clearFilter();
-    // });
   }
 
   ngAfterViewInit(): void {
