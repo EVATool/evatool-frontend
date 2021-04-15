@@ -12,7 +12,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {Variants} from '../../models/Variants';
 import {MatSliderChange} from '@angular/material/slider';
 import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
-import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
 import {RequirementTableFilterEvent} from '../requirement-table-filter-bar/RequirementTableFilterEvent';
 
 @Component({
@@ -122,14 +121,35 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       const search = JSON.parse(filter);
 
       const variantsTitles = data.variantsTitle.map((v: Variants) => v.variantsTitle);
-      console.log(variantsTitles);
-      console.log(search.variants);
-
       const variantsFilter = search.variants.length === 0
         || variantsTitles.some((s: string) => search.variants.includes(s));
+      
+      const valueTitles = data.values.map((v: Dimension) => v.valueTitle)
+      const valueSystemFilter = search.valueSystem.length === 0
+        || valueTitles.some((s: string) => search.valueSystem.includes(s));
 
+      // let valueFilter = false;
+      // switch (search.value.sliderFilterType) {
+      //   case SliderFilterType.Off:
+      //     valueFilter = true;
+      //     break;
+      //
+      //   case SliderFilterType.Between:
+      //     const minValue = Math.min(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
+      //     const maxValue = Math.max(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
+      //     if (search.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
+      //       valueFilter = data.value > minValue && data.value < maxValue;
+      //     } else {
+      //       valueFilter = data.value >= minValue && data.value <= maxValue;
+      //     }
+      //     break;
+      //
+      //   default:
+      //     valueFilter = true;
+      //     break;
+      // }
 
-      return variantsFilter;
+      return variantsFilter && valueSystemFilter; //&& valueFilter;
     };
   }
 
