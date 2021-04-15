@@ -54,8 +54,11 @@
       </div>
     </form>
 
-    <div class="group" [hidden]="!selectedTemplate">
-      <app-value-template></app-value-template>
+    <div [hidden]="!selectedTemplate">
+      <div class="group" [hidden]="!selectedTemplate?.isTemplate">
+        <app-value-template></app-value-template>
+      </div>
     </div>
+
   </div>
 </div>
