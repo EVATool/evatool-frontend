@@ -123,33 +123,21 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       const variantsTitles = data.variantsTitle.map((v: Variants) => v.variantsTitle);
       const variantsFilter = search.variants.length === 0
         || variantsTitles.some((s: string) => search.variants.includes(s));
-      
+
       const valueTitles = data.values.map((v: Dimension) => v.valueTitle)
       const valueSystemFilter = search.valueSystem.length === 0
         || valueTitles.some((s: string) => search.valueSystem.includes(s));
 
-      // let valueFilter = false;
-      // switch (search.value.sliderFilterType) {
-      //   case SliderFilterType.Off:
-      //     valueFilter = true;
-      //     break;
-      //
-      //   case SliderFilterType.Between:
-      //     const minValue = Math.min(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
-      //     const maxValue = Math.max(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
-      //     if (search.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
-      //       valueFilter = data.value > minValue && data.value < maxValue;
-      //     } else {
-      //       valueFilter = data.value >= minValue && data.value <= maxValue;
-      //     }
-      //     break;
-      //
-      //   default:
-      //     valueFilter = true;
-      //     break;
-      // }
+      let valueFilter = true;
+      data.requirementImpactPoints.forEach((s: RequirementImpactPoints) => {
+        const minValue = Math.min(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
+        const maxValue = Math.max(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
+        if (s.points !== null && !(s.points >= minValue && s.points <= maxValue)) {
+          valueFilter = false;
+        }
+      });
 
-      return variantsFilter && valueSystemFilter; //&& valueFilter;
+      return variantsFilter && valueSystemFilter && valueFilter;
     };
   }
 
