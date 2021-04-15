@@ -10,6 +10,10 @@ export class HighlightSearchPipe implements PipeTransform {
       return value;
     }
 
+    if (!value) {
+      return value;
+    }
+
     const regex = new RegExp(args, 'gi');
     const match = value.match(regex);
 
