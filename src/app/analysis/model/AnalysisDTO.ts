@@ -4,7 +4,7 @@ export class AnalysisDTO {
   analysisDescription: string = '';
   lastUpdate: any = '';
   image: any = '';
-  isTemplate: any = '';
+  isTemplate = false;
   uniqueString: any = '';
   date: any = '';
 }

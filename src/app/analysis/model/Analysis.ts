@@ -5,7 +5,7 @@ export class Analysis {
   lastUpdate: any = '';
   image: any = '';
   editImage: any = '';
-  isTemplate: any = '';
+  isTemplate = false;
   uniqueString: any = '';
   TitleIsEditable = false;
   DescriptionIsEditable = false;

@@ -49,10 +49,17 @@
   <mat-row mat-row *matRowDef="let row; columns: displayedColumns;"
            (mouseleave)="save(row)"></mat-row>
 </mat-table>
-<div class="addStakeholderButton">
-  <button mat-icon-button aria-label="Add Variant"  (click)="addStakeholder()" tabindex="-1">
-    <mat-icon>add</mat-icon>
-  </button>
-  Stakeholder
+
+
+<div class="button-container add-stakeholder-button-container">
+  <div class="add-stakeholder-button-container">
+    <button type="button" mat-fab matTooltip="Add Stakeholder" matTooltipHideDelay="100" matTooltipPosition="above" (click)="addStakeholder()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="add-stakeholder-text-container">
+    <p id='text'>Stakeholder</p>
+  </div>
 </div>
 

@@ -2,6 +2,41 @@
   position: fixed;
   margin-bottom: 5%;
   margin-left: 2%;
+
+  button{
+    background-color: #ff4081;
+    color: white;
+  }
+}
+
+.button-container{
+  width: 100%;
+  position: fixed;
+  bottom: 35px;
+  right: -67px;
+}
+
+::ng-deep.stakeholder-table{
+  height: 550px;
+}
+
+.add-stakeholder-button-container {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  display: inline-block;
+  opacity: 0.8;
+  transition: 250ms ease-out 100ms;
+  z-index: 10;
+  flex: 0 1 auto;
+
+
+
+  .add-stakeholder-text-container {
+    margin-left: 1.5vw;
+    display: inline-block;
+    font-size: 150%;
+  }
 }
 
 .mat-column-guiId {
