@@ -10,7 +10,7 @@ import {MockableService} from "../mockable.service";
 @Injectable({
   providedIn: 'root'
 })
-export class StakeholderRestService extends MockableService  {
+export class StakeholderRestService extends MockableService {
 
   constructor(
     private logger: LogService,
@@ -23,12 +23,12 @@ export class StakeholderRestService extends MockableService  {
 
   }
 
-  getStakeholders(): Observable<StakeholderDto[]> {
+  getStakeholders(analysisId: string): Observable<StakeholderDto[]> {
     this.logger.info(this, 'Get all Stakeholders');
     if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyStakeholderDtos);
     } else {
-      return this.http.get<StakeholderDto[]>(RestSettings.stakeholdersUrl);
+      return this.http.get<StakeholderDto[]>(RestSettings.stakeholdersUrl + "?analysisId=" + analysisId);
     }
   }
 
