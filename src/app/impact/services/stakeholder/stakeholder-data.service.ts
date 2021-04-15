@@ -50,6 +50,15 @@ export class StakeholderDataService {
         }
       });
 
+      this.stakeholders.forEach(stakeholder => {
+        var foundOldStakeholder = fromDtos.find(s => s.id === stakeholder.id);
+        if (foundOldStakeholder === undefined) { // Remove
+          var removeStakeholder = this.stakeholders.find(s => s.id === stakeholder.id);
+          // @ts-ignore
+          const index: number = this.stakeholders.indexOf(removeStakeholder, 0);
+          this.stakeholders.splice(index, 1);
+        }
+      });
 
       //this.stakeholders = fromDtos;
       this.logger.info(this, 'Stakeholders loaded');
