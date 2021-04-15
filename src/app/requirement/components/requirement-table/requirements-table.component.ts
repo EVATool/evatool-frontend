@@ -255,7 +255,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     this.updateRequirement(element);
   }
 
-  descriptionChange(requirements: Requirements, event: Event): void {
+  descriptionChange(requirements: Requirements): void {
     this.updateRequirement(requirements);
   }
 

@@ -14,12 +14,11 @@
       <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Requirements</th>
       <td mat-cell *matCellDef='let element'>
         <div class="description-wrapper">
-          <div class="description-container" (click)="element.editable = true" (mouseout)="element.editable = false">
+          <div class="description-container" (click)="element.editable = true" (mouseout)="element.editable = false; descriptionChange(element)">
 
             <div *ngIf="element.editable">
              <textarea matInput cdkTextareaAutosize [(ngModel)]="element.requirementDescription"
-                    placeholder="Describe the Requirement..."
-                    (change)="descriptionChange(element, $event)"></textarea>
+                    placeholder="Describe the Requirement..."></textarea>
             </div>
             <div *ngIf="!element.editable" [innerHTML]="element.requirementDescription | highlightSearch: 'generate'">
             </div>
