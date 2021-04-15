@@ -240,7 +240,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   valueChange(element: Requirements, impact: Impact, event: MatSliderChange): void {
     console.log(event.value);
     if (event.value !== null) {
-      if (event.value === 0.0) {
+      if (event.value === impact.value) {
         let toDelete: null | RequirementImpactPoints = null;
         element.requirementImpactPoints.forEach(value => {
           if (value.entityId === impact.id) {
@@ -319,12 +319,14 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   valueForCell(element: Requirements, impact: Impact): number {
     let retValue: number | null = 0;
+    let found = false ;
     element.requirementImpactPoints.forEach(value => {
       if (value.entityId === impact.id) {
         retValue = value.points;
+        found = true;
       }
     });
-    if (retValue === 0) {
+    if (!found) {
       retValue = impact.value;
     }
     return retValue;
