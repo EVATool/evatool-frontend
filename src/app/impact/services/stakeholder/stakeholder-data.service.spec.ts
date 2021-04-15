@@ -2,9 +2,7 @@ import {SampleDataService} from '../../spec/sample-data.service';
 import {TestBed} from '@angular/core/testing';
 
 import {StakeholderDataService} from './stakeholder-data.service';
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {StakeholderRestService} from "./stakeholder-rest.service";
-import {MockedStakeholderRestService} from "./stakeholder-rest.service.spec";
+import {RestMock} from '../../spec/RestMock';
 
 describe('StakeholderDataService', () => {
   let data: SampleDataService;
@@ -12,12 +10,8 @@ describe('StakeholderDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [
-        {
-          provide: StakeholderRestService,
-          useClass: MockedStakeholderRestService
-        }]
+      imports: RestMock.imports,
+      providers: RestMock.providers
     });
 
     data = TestBed.inject(SampleDataService);
@@ -49,5 +43,5 @@ describe('StakeholderDataService', () => {
       // Assert
       expect(service.stakeholders).toEqual(data.dummyStakeholders);
     });
-  })
+  });
 });

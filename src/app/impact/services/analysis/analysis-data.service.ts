@@ -3,7 +3,7 @@ import {LogService} from '../../../shared/services/log.service';
 import {AnalysisRestService} from './analysis-rest.service';
 import {AnalysisMapperService} from './analysis-mapper.service';
 import {Analysis} from '../../models/Analysis';
-import {Injectable, Output, EventEmitter} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

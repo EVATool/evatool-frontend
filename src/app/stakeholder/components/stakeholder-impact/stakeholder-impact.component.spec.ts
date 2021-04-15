@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StakeholderImpactComponent } from './stakeholder-impact.component';
+import {StakeholderImpactComponent} from './stakeholder-impact.component';
 
 describe('StakeholderImpactComponent', () => {
   let component: StakeholderImpactComponent;

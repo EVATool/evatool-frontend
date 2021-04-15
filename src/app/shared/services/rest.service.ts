@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {LogLevel} from './log.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,5 +29,9 @@ export class RestService {
 
   static getRequirementesURL(): string {
     return this.serverURL + 'requirements';
+  }
+
+  static getValueTypesURL(): string {
+    return this.serverURL + 'values/types';
   }
 }

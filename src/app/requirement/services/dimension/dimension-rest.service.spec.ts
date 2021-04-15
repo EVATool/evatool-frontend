@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
 
-import { DimensionRestService } from './dimension-rest.service';
+import {DimensionRestService} from './dimension-rest.service';
 
 describe('DimensionRestService', () => {
   let service: DimensionRestService;

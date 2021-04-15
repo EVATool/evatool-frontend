@@ -1,7 +1,8 @@
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StakeholderTableComponent } from './stakeholder-table.component';
+import {StakeholderTableComponent} from './stakeholder-table.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('StakeholderTableComponent', () => {
   let component: StakeholderTableComponent;
@@ -9,7 +10,7 @@ describe('StakeholderTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       declarations: [ StakeholderTableComponent ]
     })
     .compileComponents();

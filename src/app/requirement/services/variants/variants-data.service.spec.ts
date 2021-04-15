@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
 
-import { VariantsDataService } from './variants-data.service';
+import {VariantsDataService} from './variants-data.service';
 
 describe('VariantsDataService', () => {
   let service: VariantsDataService;

@@ -1,11 +1,10 @@
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { FormBuilder } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
 // @ts-ignore
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AnalysisMainComponent } from './analysis-main.component';
+import {AnalysisMainComponent} from './analysis-main.component';
 
 describe('AnalysisMainComponent', () => {
   let component: AnalysisMainComponent;

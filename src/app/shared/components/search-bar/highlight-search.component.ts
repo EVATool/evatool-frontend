@@ -1,6 +1,6 @@
-import { LogService } from '../../services/log.service';
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
-import { MatInput } from '@angular/material/input';
+import {LogService} from '../../services/log.service';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {MatInput} from '@angular/material/input';
 
 @Component({
   selector: 'app-search-bar',

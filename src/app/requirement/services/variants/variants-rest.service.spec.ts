@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { VariantsRestService } from './variants-rest.service';
+import {VariantsRestService} from './variants-rest.service';
 
 describe('VariantsRestService', () => {
   let service: VariantsRestService;

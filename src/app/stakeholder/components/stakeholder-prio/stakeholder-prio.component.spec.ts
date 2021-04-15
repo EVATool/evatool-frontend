@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StakeholderPrioComponent } from './stakeholder-prio.component';
+import {StakeholderPrioComponent} from './stakeholder-prio.component';
 
 describe('StakeholderPrioComponent', () => {
   let component: StakeholderPrioComponent;

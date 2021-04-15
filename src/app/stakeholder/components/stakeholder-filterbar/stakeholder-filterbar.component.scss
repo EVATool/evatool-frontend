@@ -1,18 +1,60 @@
-
-.filter-wrapper{
-  display: table;
-  width: 100%;
-  background-color: white;
-  margin-top: 1%;
-  margin-bottom: 1%;
-}
-.filter{
-  float: left;
-  display: table-cell;
+p {
+  font-size: 80%;
+  margin-bottom: 0;
 }
 
-.spacing{
-  flex: 1 1 auto;
+.list-horizontal {
+  padding: 0;
+  .mat-list-item {
+    vertical-align: middle;
+    display: inline-block;
+    height: auto;
+    width: auto;
+    ::ng-deep.mat-list-item-content{
+
+      display: block;
+    }
+  }
+
+  .highlight-text {
+    margin-right: -30px;
+    width: 300px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 100%;
+  }
+
+
+  .category-filter-container {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid black;
+    min-width: 200px;
+    padding: 15px;
+  }
+
+  .category-filter-container-prior {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid black;
+    min-width: 200px;
+    padding: 10px;
+  }
+
+  .category-filter-container-impact {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid black;
+    min-width: 200px;
+    padding: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .resetFilter{
+    background-color: #ff4081;
+    color: white;
+  }
+
+  .prio-filter{
+    margin-left: 25%;
+  }
 }
-
-

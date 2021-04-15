@@ -2,7 +2,7 @@ import {ValueMapperService} from './value-mapper.service';
 import {LogService} from '../../../shared/services/log.service';
 import {Value} from '../../models/Value';
 import {ValueRestService} from './value-rest.service';
-import {Injectable, EventEmitter, Output, Inject} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {AnalysisDataService} from "../analysis/analysis-data.service";
 
 @Injectable({

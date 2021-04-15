@@ -1,10 +1,11 @@
-import { FormBuilder } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {FormBuilder} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AnalysisDialogComponent } from './analysis-dialog.component';
+import {AnalysisDialogComponent} from './analysis-dialog.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('AnalysisDialogComponent', () => {
   let component: AnalysisDialogComponent;
@@ -12,7 +13,7 @@ describe('AnalysisDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, HttpClientModule, MatDialogModule],
+      imports: [RouterTestingModule, HttpClientModule, MatDialogModule, MatSnackBarModule],
       declarations: [AnalysisDialogComponent],
       providers: [FormBuilder,
         { provide: MatDialogRef, useValue: {} },
