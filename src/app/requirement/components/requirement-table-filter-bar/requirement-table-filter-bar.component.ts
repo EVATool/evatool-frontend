@@ -138,6 +138,6 @@ export class RequirementTableFilterBarComponent implements OnInit {
   }
 
   setHighlightText($event: string): void {
-    this.requirementsDataService.setSearchText(event);
+    this.requirementsDataService.setSearchText($event);
   }
 }

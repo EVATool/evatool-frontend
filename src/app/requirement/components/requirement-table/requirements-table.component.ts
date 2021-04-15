@@ -44,17 +44,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     { def: 'variantsTitle', hide: true },
     { def: 'values', hide: true }
   ];
-  filterValues: any = {
-    id: '',
-    variants: [],
-    valueSystem: [],
-    value: '',
-    description: '',
-    highlight: ''
-  };
   private selectedRequirements: Requirements = new Requirements();
   constructor(private requirementsRestService: RequirementsRestService,
-              private requirementsDataService: RequirementsDataService,
+              public requirementsDataService: RequirementsDataService,
               private router: Router,
               private dialog: MatDialog){
   }
@@ -154,12 +146,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     };
   }
 
-  filterChange(event: RequirementTableFilterEvent): void {
-    this.filterValues.value = event.valueFilter;
-    this.filterValues.stakeholder = event.variantsFilter;
-    this.filterValues.values = event.valueSystemFilter;
-    this.updateFilter();
-  }
 
   getDisplayedColumns(): string[] {
     // this.randomFilter();
@@ -284,6 +270,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
   filterChange(event: RequirementTableFilterEvent): void {
     this.filterValues.highlight = event.highlightFilter;
+    this.filterValues.value = event.valueFilter;
+    this.filterValues.stakeholder = event.variantsFilter;
+    this.filterValues.values = event.valueSystemFilter;
+    this.updateFilter();
   }
 
   private getRandomInt(max: number): number {
