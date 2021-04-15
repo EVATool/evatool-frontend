@@ -6,6 +6,7 @@
     .mat-slider{
       min-width: 128px;
     }
+
     .mat-slider.mat-slider-horizontal{
       width: 100%;
     }
@@ -42,6 +43,9 @@
       .mat-slider.mat-slider-horizontal .mat-slider-track-wrapper {
         background-color: lightgrey;
       }
+    }
+    .mat-slider-min-value .mat-slider-track-background {
+      transform: translateX(0px) scale3d(1, 1, 1) !important;
     }
 
     .editable_false {
