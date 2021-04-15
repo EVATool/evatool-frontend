@@ -7,6 +7,9 @@ import {RequirementsTableComponent} from '../components/requirement-table/requir
 import {RequirementsRestService} from "../services/requirements/requirements-rest.service";
 import {Router} from "@angular/router";
 import {RequirementsDataService} from "../services/requirements/requirements-data.service";
+import {RequirementTableFilterEvent} from '../components/requirement-table-filter-bar/RequirementTableFilterEvent';
+import {RequirementTableFilterBarComponent} from '../components/requirement-table-filter-bar/requirement-table-filter-bar.component';
+import {Impact} from '../../impact/models/Impact';
 
 @Component({
   selector: 'app-requirement-main',
@@ -14,7 +17,9 @@ import {RequirementsDataService} from "../services/requirements/requirements-dat
   styleUrls: ['./requirement-main.component.css']
 })
 export class RequirementMainComponent implements OnInit, AfterViewInit  {
-  @ViewChild(MatTable) table!: MatTable<any>;
+   // @ViewChild(MatTable) table!: MatTable<any>;
+  @ViewChild(RequirementTableFilterBarComponent) filterBar!: RequirementTableFilterBarComponent;
+  @ViewChild(RequirementsTableComponent) table!: RequirementsTableComponent;
   editField: string;
   data: Requirements[] = [];
   idForProject = '';
@@ -27,6 +32,9 @@ export class RequirementMainComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit(): void {
+    // this.dataService.addedRequirement.subscribe((requirements: Requirements) => {
+    //   this.filterBar.clearFilter();
+    // });
   }
 
   ngAfterViewInit(): void {
@@ -41,5 +49,8 @@ export class RequirementMainComponent implements OnInit, AfterViewInit  {
 
   addRequirements(): void {
     this.dataService.createRequirement(this.idForProject);
+  }
+  filterBarChanged(event: RequirementTableFilterEvent) {
+    this.table.filterChange(event);
   }
 }

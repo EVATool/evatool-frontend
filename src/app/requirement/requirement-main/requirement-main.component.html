@@ -5,7 +5,7 @@
 <div class="container">
 
   <div class="impact-table-filter-bar-container">
-    <app-requirement-table-filter-bar>
+    <app-requirement-table-filter-bar (filterChanged)="filterBarChanged($event)">
     </app-requirement-table-filter-bar>
   </div>
 
