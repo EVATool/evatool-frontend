@@ -8,6 +8,7 @@ import {ValueDataService} from '../../../impact/services/value/value-data.servic
 import {Value} from '../../../impact/models/Value';
 import {Variants} from '../../models/Variants';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
+import {RequirementsDataService} from "../../services/requirements/requirements-data.service";
 
 @Component({
   selector: 'app-requirement-table-filter-bar',
@@ -27,7 +28,8 @@ export class RequirementTableFilterBarComponent implements OnInit {
   suppressChildEvent = false;
   constructor(
     private valueDataService: ValueDataService,
-    private requirementsRestService: RequirementsRestService) {
+    private requirementsRestService: RequirementsRestService,
+    private requirementsDataService: RequirementsDataService) {
     this.requirementTableFilterEvent = RequirementTableFilterEvent.getDefault();
   }
 
@@ -104,5 +106,9 @@ export class RequirementTableFilterBarComponent implements OnInit {
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.requirementTableFilterEvent);
+  }
+
+  setHighlightText($event: string): void {
+    this.requirementsDataService.setSearchText(event);
   }
 }

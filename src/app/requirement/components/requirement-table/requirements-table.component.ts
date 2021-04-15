@@ -7,11 +7,12 @@ import {RequirementsRestService} from '../../services/requirements/requirements-
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
-import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Variants} from '../../models/Variants';
 import {MatSliderChange} from '@angular/material/slider';
 import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
+import {RequirementTableFilterEvent} from '../requirement-table-filter-bar/RequirementTableFilterEvent';
+import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
 
 @Component({
   selector: 'app-requirement-table',
@@ -26,7 +27,13 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   impactSoureces: Impact[] = [];
   variantsSoureces: Variants[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
-  idForProject = '';
+  filterValues: any = {
+    id: '',
+    variants: [],
+    values: [],
+    description: '',
+    highlight: ''
+  };
   showElement = [
     {req: '', imp: ''}
   ];
@@ -217,6 +224,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         cd.hide = false;
       }
     });
+  }
+  filterChange(event: RequirementTableFilterEvent): void {
+    this.filterValues.highlight = event.highlightFilter;
   }
 
   private getRandomInt(max: number): number {

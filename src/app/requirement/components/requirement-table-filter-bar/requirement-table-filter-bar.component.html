@@ -1,6 +1,6 @@
 <mat-list class="list-horizontal">
   <mat-list-item>
-    <app-search-bar></app-search-bar>
+    <app-search-bar (searchTextChanged)="setHighlightText($event)"></app-search-bar>
   </mat-list-item>
   <mat-list-item>
     <app-column-category-filter #variantsFilter [categories]="variantsNames" [name]="'Variants'"
