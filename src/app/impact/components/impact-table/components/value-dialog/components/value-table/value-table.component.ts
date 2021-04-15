@@ -66,8 +66,10 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   createDefaultValue() {
     const value = new Value();
 
-    value.type = this.type
-    value.description = ''
+    value.type = this.type;
+    value.name = '';
+    value.description = '';
+    value.archived = false;
     value.analysis = this.analysisDataService.getCurrentAnalysis();
 
     return value;
