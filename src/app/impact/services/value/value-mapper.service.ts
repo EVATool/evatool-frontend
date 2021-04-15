@@ -2,8 +2,6 @@ import {LogService} from '../../../shared/services/log.service';
 import {ValueDto} from '../../dtos/ValueDto';
 import {Value} from '../../models/Value';
 import {Injectable} from '@angular/core';
-import {Stakeholder} from "../../models/Stakeholder";
-import {ImpactStakeholderDto} from "../../dtos/ImpactStakeholderDto";
 import {ImpactValueDto} from "../../dtos/ImpactValueDto";
 import {AnalysisMapperService} from "../analysis/analysis-mapper.service";
 

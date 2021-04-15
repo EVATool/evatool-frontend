@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ImpactSliderComponent } from './impact-slider.component';
+import {ImpactSliderComponent} from './impact-slider.component';
 
 describe('ImpactSliderComponent', () => {
   let component: ImpactSliderComponent;

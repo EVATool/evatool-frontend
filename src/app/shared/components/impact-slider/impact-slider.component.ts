@@ -1,6 +1,6 @@
-import {SliderFilterSettings, SliderFilterType, SliderFilterBoundary} from './SliderFilterSettings';
+import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from './SliderFilterSettings';
 import {MatSlider, MatSliderChange} from '@angular/material/slider';
-import {Component, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 
 @Component({

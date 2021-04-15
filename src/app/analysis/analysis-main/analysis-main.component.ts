@@ -23,15 +23,15 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   createAnalysis(): void {
-    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: false}});
+    this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: false}});
   }
 
   editTemplates(): void {
-    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: true}});
+    this.dialog.open(AnalysisDialogComponent, {data: {isTemplate: true}});
   }
 
   openValueDialog(analysis: Analysis): void {
-    const valueDialogRef = this.dialog.open(ValueTemplateComponent, {data: {id: analysis.rootEntityID}});
+    this.dialog.open(ValueTemplateComponent, {data: {id: analysis.rootEntityID}});
     console.log(analysis);
   }
 
@@ -44,7 +44,7 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   changeBackgroundImage(analysis: Analysis): void {
-    const dialogRef = this.dialog.open(AnalysisDialogComponent, {data: {editImage: true, editedAnalysis: analysis}});
+    this.dialog.open(AnalysisDialogComponent, {data: {editImage: true, editedAnalysis: analysis}});
   }
 
   deleteAnalysis(analysis: Analysis): void {

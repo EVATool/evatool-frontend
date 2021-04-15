@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StakeholderLevelComponent } from './stakeholder-level.component';
+import {StakeholderLevelComponent} from './stakeholder-level.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HighlightSearchPipe} from '../../../shared/pipes/highlightSearch/highlight-search.pipe';

@@ -4,7 +4,7 @@ import {StakeholderDataService} from '../../services/stakeholder/stakeholder-dat
 import {ColumnSliderFilterComponent} from '../../../shared/components/column-slider-filter/column-slider-filter.component';
 import {ImpactTableFilterEvent} from './ImpactTableFilterEvent';
 import {LogService} from '../../../shared/services/log.service';
-import {Component, OnInit, Output, EventEmitter, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {SliderFilterSettings} from 'src/app/shared/components/impact-slider/SliderFilterSettings';
 import {ColumnCategoryFilterComponent} from '../../../shared/components/column-category-filter/column-category-filter.component';
 import {Value} from "../../models/Value";

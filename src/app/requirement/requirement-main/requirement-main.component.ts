@@ -1,9 +1,6 @@
 import {Requirements} from '../models/Requirements';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
-import {ImpactDataService} from '../services/impact/impact-data.service';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { HostListener } from '@angular/core';
-import {RequirementsTableComponent} from '../components/requirement-table/requirements-table.component';
+import {MatTable} from '@angular/material/table';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {RequirementsRestService} from "../services/requirements/requirements-rest.service";
 import {Router} from "@angular/router";
 import {RequirementsDataService} from "../services/requirements/requirements-data.service";

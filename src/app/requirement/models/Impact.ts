@@ -1,4 +1,4 @@
-import { Dimension } from './Dimension';
+import {Dimension} from './Dimension';
 
 export class Impact {
   [k: string]: any;

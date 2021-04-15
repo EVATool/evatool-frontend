@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ColumnSliderFilterComponent } from './column-slider-filter.component';
+import {ColumnSliderFilterComponent} from './column-slider-filter.component';
 
 describe('ColumnSliderFilterComponent', () => {
   let component: ColumnSliderFilterComponent;

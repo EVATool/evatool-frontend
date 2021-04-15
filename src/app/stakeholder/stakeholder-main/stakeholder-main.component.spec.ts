@@ -1,6 +1,6 @@
-import { MatDialogModule } from '@angular/material/dialog';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StakeholderMainComponent } from './stakeholder-main.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {StakeholderMainComponent} from './stakeholder-main.component';
 
 
 describe('StakeholderMainComponent', () => {

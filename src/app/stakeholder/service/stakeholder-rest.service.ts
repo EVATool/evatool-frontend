@@ -1,8 +1,6 @@
-
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {Stakeholder} from '../model/Stakeholder';
 import {StakeholderDTO} from '../model/StakeholderDTO';
 import {RestService} from '../../shared/services/rest.service';

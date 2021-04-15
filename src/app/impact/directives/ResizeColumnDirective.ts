@@ -1,4 +1,4 @@
-import {Directive, OnInit, Renderer2, Input, ElementRef} from "@angular/core";
+import {Directive, ElementRef, Input, OnInit, Renderer2} from "@angular/core";
 
 @Directive({
   selector: "[resizeColumn]"
