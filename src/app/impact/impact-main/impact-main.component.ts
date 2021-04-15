@@ -46,5 +46,6 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   tabActivated() {
     this.logger.info(this, 'Tab activated');
+    //this.stakeholderDataService.onInit();
   }
 }
