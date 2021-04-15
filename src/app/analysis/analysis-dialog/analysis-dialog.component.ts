@@ -34,17 +34,21 @@ export class AnalysisDialogComponent implements OnInit {
       } else if (this.analysisDescription === '' && !this.editImage) {
         this.snackbar.open('Please input a description', '', {duration: 5000});
       } else if (this.editImage) {
-        const analysisDto = new AnalysisDTO();
-        analysisDto.image = this.newImage;
-        analysisDto.rootEntityID = this.editedAnalysis.rootEntityID;
-        analysisDto.uniqueString = this.editedAnalysis.uniqueString;
-        analysisDto.analysisName = this.editedAnalysis.analysisName;
-        analysisDto.analysisDescription = this.editedAnalysis.analysisDescription;
-        console.log(analysisDto);
-        this.analysisRestService.updateAnalysis(analysisDto).subscribe(
+
+        this.analysisRestService.updateAnalysis(
+          {
+            date: '',
+            lastUpdate: '',
+            image: this.newImage,
+            rootEntityID: this.editedAnalysis.rootEntityID,
+            uniqueString: this.editedAnalysis.uniqueString,
+            analysisName: this.editedAnalysis.analysisName,
+            analysisDescription: this.editedAnalysis.analysisDescription,
+            isTemplate: false
+          }).subscribe(
           res => console.log(res),
           err => console.log('err: ' + err.response),
-          () => console.log('fertig')
+          () => this.analysisDataService.loadAllAnalysis()
         );
       } else {
         const analysis: Analysis = new Analysis();
@@ -56,6 +60,7 @@ export class AnalysisDialogComponent implements OnInit {
         analysisDto.isTemplate = false;
         analysisDto.analysisName = analysis.analysisName;
         analysisDto.analysisDescription = analysis.analysisDescription;
+        analysisDto.image = analysis.image;
         this.analysisRestService.deepCopy(this.selectedTemplate.rootEntityID, analysisDto).subscribe(ana => {
           this.GoToStakeholder(ana.rootEntityID);
         });

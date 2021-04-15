@@ -48,7 +48,6 @@ export class AnalysisDataService {
   }
 
   save(analysis: Analysis): void {
-    console.log(analysis.image);
     this.analysisRestService.createAnalysis({
         analysisName: analysis.analysisName,
         analysisDescription: analysis.analysisDescription,
@@ -87,7 +86,6 @@ export class AnalysisDataService {
   loadAllAnalysis(): void {
     this.analysisRestService.getAnalysis().subscribe((result: any) => {
       this.analysisArray = [];
-      console.log(result);
       result.forEach((analysisDTO: AnalysisDTO) => {
         const analysis: Analysis = {
           rootEntityID: analysisDTO.rootEntityID,
@@ -97,7 +95,7 @@ export class AnalysisDataService {
           image: analysisDTO.image,
           editImage: false,
           isTemplate: analysisDTO.isTemplate,
-          uniqueString: '',
+          uniqueString: analysisDTO.uniqueString,
           TitleIsEditable: false,
           DescriptionIsEditable: false,
           date: analysisDTO.date
