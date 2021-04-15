@@ -8,6 +8,8 @@ import {ValueDataService} from '../../../impact/services/value/value-data.servic
 import {Value} from '../../../impact/models/Value';
 import {Variants} from '../../models/Variants';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
+import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
+import {VariantsDataService} from '../../services/variants/variants-data.service';
 
 @Component({
   selector: 'app-requirement-table-filter-bar',
@@ -21,13 +23,16 @@ export class RequirementTableFilterBarComponent implements OnInit {
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<RequirementTableFilterEvent>();
   variantsNames: string[] = [];
+  variantsTest: Variants[] = [];
   valueSystemNames: string[] = [];
 
   requirementTableFilterEvent!: RequirementTableFilterEvent;
   suppressChildEvent = false;
   constructor(
     private valueDataService: ValueDataService,
-    private requirementsRestService: RequirementsRestService) {
+    private requirementsRestService: RequirementsRestService,
+    private requirementsDataService: RequirementsDataService,
+    private variantsDataService: VariantsDataService) {
     this.requirementTableFilterEvent = RequirementTableFilterEvent.getDefault();
   }
 
@@ -36,9 +41,14 @@ export class RequirementTableFilterBarComponent implements OnInit {
     //   this.variantsChanged(variants);
     // });
 
+    // this.variantsDataService.loadedVariants.subscribe((variants) => {
+    //   this.variantsChanged(variants);
+    // });
+
     {
+      // this.requirementsDataService.loadedRequirements.subscribe()
         this.requirementsRestService.getVariants().subscribe((result: any) => {
-          this.variantsNames = [];
+          this.variantsTest = [];
           result.forEach((variantsRest: Variants) => {
             const variants: Variants = {
               entityId: variantsRest.id,
@@ -46,10 +56,14 @@ export class RequirementTableFilterBarComponent implements OnInit {
               variantsTitle: variantsRest.title,
               archived: variantsRest.archived
             };
-            this.variantsNames.push(variants.variantsTitle);
+            this.variantsTest.push(variants);
           });
+          this.variantsChanged(this.variantsTest);
         });
+
     }
+
+    // this.variantsChanged(this.getVariants());
 
     // this.requirementsDataService.loadedRequirements.subscribe((variants) =>  {
     //   this.variantsChanged(variants);
@@ -62,6 +76,23 @@ export class RequirementTableFilterBarComponent implements OnInit {
   valuesChanged(values: Value[]) {
     this.valueSystemNames = values.filter(value => !value.disable).map(value => value.name);
   }
+
+  getVariants(): Variants[]{
+
+      this.requirementsRestService.getVariants().subscribe((result: any) => {
+        this.variantsTest = [];
+        result.forEach((variantsRest: Variants) => {
+          const variants: Variants = {
+            entityId: variantsRest.id,
+            description: variantsRest.description,
+            variantsTitle: variantsRest.title,
+            archived: variantsRest.archived
+          };
+          this.variantsTest.push(variants);
+        });
+      });
+      return this.variantsTest;
+    }
 
   variantsChanged(variants: Variants[]){
     this.variantsNames = variants.map(value => value.variantsTitle);

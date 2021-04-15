@@ -12,6 +12,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {Variants} from '../../models/Variants';
 import {MatSliderChange} from '@angular/material/slider';
 import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
+import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
+import {RequirementTableFilterEvent} from '../requirement-table-filter-bar/RequirementTableFilterEvent';
 
 @Component({
   selector: 'app-requirement-table',
@@ -36,6 +38,14 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     { def: 'variantsTitle', hide: true },
     { def: 'values', hide: true }
   ];
+  filterValues: any = {
+    id: '',
+    variants: [],
+    valueSystem: [],
+    value: '',
+    description: '',
+    highlight: ''
+  };
   private selectedRequirements: Requirements = new Requirements();
   constructor(private requirementsRestService: RequirementsRestService,
               private requirementsDataService: RequirementsDataService,
@@ -51,6 +61,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       this.requirementsDataService.loadedRequirements.subscribe((requirements: Requirements[]) => {
         this.tableDatasource = new MatTableDataSource<Requirements>(requirements);
         this.initSorting();
+        this.initFiltering();
       });
       this.requirementsDataService.changedRequirements.subscribe((requirements: Requirements[]) => {
         this.tableDatasource.data = requirements;
@@ -95,6 +106,53 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     });
     this.tableDatasource.data = this.requirementsSource;
     this.requirementsDataService.onInit();
+  }
+
+  private initFiltering(): void {
+    this.tableDatasource.filterPredicate = this.createFilter();
+  }
+  private updateFilter(): void {
+    this.tableDatasource.filter = JSON.stringify(this.filterValues);
+  }
+
+  private createFilter(): (data: any, filter: string) => boolean {
+    return (data: Impact, filter: string): boolean => {
+      const search = JSON.parse(filter);
+
+      const variantsFilter = search.variants.length === 0 || search.variants.indexOf(data.variants.variantsTitle) !== -1;
+
+      const valueSystemFilter = search.valueSystem.length === 0 || search.valueSystem.indexOf(data.valueEntity.name) !== -1;
+
+      let valueFilter = false;
+      switch (search.value.sliderFilterType) {
+        case SliderFilterType.Off:
+          valueFilter = true;
+          break;
+
+        case SliderFilterType.Between:
+          const minValue = Math.min(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
+          const maxValue = Math.max(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
+          if (search.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
+            valueFilter = data.value > minValue && data.value < maxValue;
+          } else {
+            valueFilter = data.value >= minValue && data.value <= maxValue;
+          }
+          break;
+
+        default:
+          valueFilter = true;
+          break;
+      }
+
+      return variantsFilter && valueSystemFilter && valueFilter;
+    };
+  }
+
+  filterChange(event: RequirementTableFilterEvent): void {
+    this.filterValues.value = event.valueFilter;
+    this.filterValues.stakeholder = event.variantsFilter;
+    this.filterValues.values = event.valueSystemFilter;
+    this.updateFilter();
   }
 
   getDisplayedColumns(): string[] {
