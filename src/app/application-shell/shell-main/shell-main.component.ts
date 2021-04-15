@@ -46,6 +46,8 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
       this.stakeholderDataService.loadStakeholder();
     }else if (event === 2){
       this.requirementsDataService.onInit();
+    }else if (event === 1){
+      this.impactMain.tabActivated();
     }
   }
 }
