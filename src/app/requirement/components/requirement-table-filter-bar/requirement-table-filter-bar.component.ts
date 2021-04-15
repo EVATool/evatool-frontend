@@ -39,7 +39,7 @@ export class RequirementTableFilterBarComponent implements OnInit {
   ngOnInit(): void {
     // this.variantsDataService.onCreateVariants.subscribe((variants) =>  {
     //   this.variantsChanged(variants);
-    // });
+    // });valueFilterChanged
 
     // this.variantsDataService.loadedVariants.subscribe((variants) => {
     //   this.variantsChanged(variants);
@@ -111,6 +111,7 @@ export class RequirementTableFilterBarComponent implements OnInit {
       this.filterChanged.emit(this.requirementTableFilterEvent);
     }
   }
+
   valueFilterChanged(event: SliderFilterSettings): void {
     this.requirementTableFilterEvent.valueFilter = event;
     if (!this.suppressChildEvent) {

@@ -150,8 +150,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   filterChange(event: RequirementTableFilterEvent): void {
     this.filterValues.value = event.valueFilter;
-    this.filterValues.stakeholder = event.variantsFilter;
-    this.filterValues.values = event.valueSystemFilter;
+    this.filterValues.variants = event.variantsFilter;
+    this.filterValues.valueSystem = event.valueSystemFilter;
     this.updateFilter();
   }
 
