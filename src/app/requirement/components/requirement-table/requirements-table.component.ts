@@ -1,4 +1,3 @@
-
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Requirements} from '../../models/Requirements';
 import {Dimension} from '../../models/Dimension';

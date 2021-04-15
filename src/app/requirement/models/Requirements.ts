@@ -1,4 +1,4 @@
-import { Dimension } from './Dimension';
+import {Dimension} from './Dimension';
 import {Variants} from "./Variants";
 import {RequirementImpactPoints} from "./RequirementImpactPoints";
 

@@ -1,9 +1,9 @@
-import { RouterTestingModule } from '@angular/router/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {RouterTestingModule} from '@angular/router/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
 
-import { RequirementsTableComponent } from './requirements-table.component';
-import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {RequirementsTableComponent} from './requirements-table.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 describe('RequirementsTableComponent', () => {
   let component: RequirementsTableComponent;

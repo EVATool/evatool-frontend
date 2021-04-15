@@ -1,6 +1,6 @@
 import {Requirements} from '../models/Requirements';
 import {MatTable} from '@angular/material/table';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {RequirementsRestService} from "../services/requirements/requirements-rest.service";
 import {Router} from "@angular/router";
 import {RequirementsDataService} from "../services/requirements/requirements-data.service";

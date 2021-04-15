@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
 
-import { RequirementsDataService } from './requirements-data.service';
+import {RequirementsDataService} from './requirements-data.service';
 import {RouterTestingModule} from "@angular/router/testing";
 
 describe('RequirementsDataService', () => {

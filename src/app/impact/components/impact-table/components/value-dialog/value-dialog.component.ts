@@ -1,7 +1,7 @@
 import {ValueDataService} from '../../../../services/value/value-data.service';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder} from '@angular/forms';
-import {Component, OnInit, Inject, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
 import {Value} from "../../../../models/Value";
 import {LogService} from "../../../../../shared/services/log.service";
 

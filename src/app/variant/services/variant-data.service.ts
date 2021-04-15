@@ -1,4 +1,3 @@
-
 import {Injectable} from '@angular/core';
 import {Variant} from '../models/Variant';
 import {MatTableDataSource} from '@angular/material/table';

@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, Inject, OnChanges, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ValueDataService} from '../services/value/value-data.service';
 import {LogService} from '../../shared/services/log.service';

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {StakeholderDataService} from '../../service/stakeholder-data.service';
 
 @Component({

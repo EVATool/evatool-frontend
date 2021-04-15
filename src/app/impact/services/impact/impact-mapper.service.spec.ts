@@ -1,6 +1,6 @@
-import { SampleDataService } from '../../spec/sample-data.service';
-import { TestBed } from '@angular/core/testing';
-import { ImpactMapperService } from './impact-mapper.service';
+import {SampleDataService} from '../../spec/sample-data.service';
+import {TestBed} from '@angular/core/testing';
+import {ImpactMapperService} from './impact-mapper.service';
 
 describe('ImpactMapperService', () => {
   let service: ImpactMapperService;

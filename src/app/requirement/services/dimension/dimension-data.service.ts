@@ -1,6 +1,6 @@
-import { Dimension } from '../../models/Dimension';
-import { DimensionRestService } from './dimension-rest.service';
-import { Injectable, EventEmitter, Output } from '@angular/core';
+import {Dimension} from '../../models/Dimension';
+import {DimensionRestService} from './dimension-rest.service';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

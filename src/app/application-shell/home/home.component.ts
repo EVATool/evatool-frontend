@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { CreateAnalysisDialogComponent } from './create-analysis-dialog/create-analysis-dialog.component';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {CreateAnalysisDialogComponent} from './create-analysis-dialog/create-analysis-dialog.component';
 
 @Component({
   selector: 'app-home',

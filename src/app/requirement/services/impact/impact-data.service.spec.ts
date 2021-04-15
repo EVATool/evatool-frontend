@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
 
-import { ImpactDataService } from './impact-data.service';
+import {ImpactDataService} from './impact-data.service';
 
 describe('ImpactDataService', () => {
   let service: ImpactDataService;

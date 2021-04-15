@@ -1,6 +1,6 @@
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ValueTemplateComponent } from './value-template.component';
+import {HttpClientModule} from '@angular/common/http';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ValueTemplateComponent} from './value-template.component';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HighlightSearch} from '../../impact/pipes/HighlightSearch';

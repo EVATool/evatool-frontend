@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ImpactRestService } from './impact-rest.service';
+import {ImpactRestService} from './impact-rest.service';
 
 describe('ImpactRestService', () => {
   let service: ImpactRestService;

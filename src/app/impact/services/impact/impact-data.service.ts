@@ -5,7 +5,7 @@ import {AnalysisDataService} from '../analysis/analysis-data.service';
 import {ValueDataService} from '../value/value-data.service';
 import {StakeholderDataService} from '../stakeholder/stakeholder-data.service';
 import {Impact} from '../../models/Impact';
-import {Injectable, Output, EventEmitter} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {ImpactDto} from "../../dtos/ImpactDto";
 
 @Injectable({

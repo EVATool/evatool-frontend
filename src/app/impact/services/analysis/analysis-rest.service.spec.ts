@@ -4,11 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {TestBed} from '@angular/core/testing';
 
 import {AnalysisRestService} from './analysis-rest.service';
-import {Observable, of} from "rxjs";
-import {AnalysisDto} from "../../dtos/AnalysisDto";
 import {LogService} from "../../../shared/services/log.service";
 import {Injectable} from "@angular/core";
-import {Router} from "@angular/router";
 import {RestMock} from "../../spec/RestMock";
 import {HttpTestingController} from "@angular/common/http/testing";
 

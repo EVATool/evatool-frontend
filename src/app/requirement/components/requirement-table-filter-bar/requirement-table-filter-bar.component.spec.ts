@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RequirementTableFilterBarComponent } from './requirement-table-filter-bar.component';
+import {RequirementTableFilterBarComponent} from './requirement-table-filter-bar.component';
 
 describe('RequirementTableFilterBarComponent', () => {
   let component: RequirementTableFilterBarComponent;

@@ -1,8 +1,8 @@
-import { LogService } from '../../../shared/services/log.service';
-import { ImpactAnalysisDto } from '../../dtos/ImpactAnalysisDto';
-import { AnalysisDto } from '../../dtos/AnalysisDto';
-import { Analysis } from '../../models/Analysis';
-import { Injectable } from '@angular/core';
+import {LogService} from '../../../shared/services/log.service';
+import {ImpactAnalysisDto} from '../../dtos/ImpactAnalysisDto';
+import {AnalysisDto} from '../../dtos/AnalysisDto';
+import {Analysis} from '../../models/Analysis';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

@@ -1,11 +1,11 @@
-import { FormBuilder } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {FormBuilder} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AnalysisDialogComponent } from './analysis-dialog.component';
-import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {AnalysisDialogComponent} from './analysis-dialog.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('AnalysisDialogComponent', () => {
   let component: AnalysisDialogComponent;
