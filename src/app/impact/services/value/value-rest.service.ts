@@ -7,6 +7,7 @@ import {Observable, of} from 'rxjs';
 import {ImpactDto} from "../../dtos/ImpactDto";
 import {SampleDataService} from "../../spec/sample-data.service";
 import {MockableService} from "../mockable.service";
+import {RestService} from "../../../shared/services/rest.service";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class ValueRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyValueDtos)
     } else {
-      return this.http.get<ValueDto[]>(RestSettings.valuesUrl);
+      return this.http.get<ValueDto[]>(RestService.getValuesURL());
     }
   }
 
@@ -38,7 +39,7 @@ export class ValueRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyValueDtos)
     } else {
-      return this.http.get<ValueDto[]>(RestSettings.valuesUrl + "?analysisId=" + analysisId);
+      return this.http.get<ValueDto[]>(RestService.getValuesURL() + "?analysisId=" + analysisId);
     }
   }
 
@@ -47,7 +48,7 @@ export class ValueRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(valueDto);
     } else {
-      return this.http.post(RestSettings.valuesUrl, valueDto, RestSettings.httpOptions);
+      return this.http.post(RestService.getValuesURL(), valueDto, RestSettings.httpOptions);
     }
   }
 
@@ -56,7 +57,7 @@ export class ValueRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(valueDto);
     } else {
-      return this.http.put(RestSettings.valuesUrl, valueDto, RestSettings.httpOptions);
+      return this.http.put(RestService.getValuesURL(), valueDto, RestSettings.httpOptions);
     }
   }
 
@@ -65,7 +66,7 @@ export class ValueRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(valueDto);
     } else {
-      return this.http.delete(RestSettings.valuesUrl + '/' + valueDto.id);
+      return this.http.delete(RestService.getValuesURL() + '/' + valueDto.id);
     }
   }
 
@@ -74,7 +75,7 @@ export class ValueRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyValueTypes)
     } else {
-      return this.http.get<string[]>(RestSettings.valueTypesUrl);
+      return this.http.get<string[]>(RestService.getValueTypesURL());
     }
   }
 }
