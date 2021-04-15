@@ -44,13 +44,11 @@ export class StakeholderDataService {
         if (foundStakeholder !== undefined) { // Update
           foundStakeholder.level = stakeholder.level;
           foundStakeholder.name = stakeholder.name;
-        } else {
-          // Remove
-
-          // Add
-
+        } else { // Add
+          this.stakeholders.push(stakeholder);
         }
       });
+
       //this.stakeholders = fromDtos;
       this.logger.info(this, 'Stakeholders loaded');
       //this.loadedStakeholders.emit(this.stakeholders);
