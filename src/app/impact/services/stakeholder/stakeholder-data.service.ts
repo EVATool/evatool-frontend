@@ -15,7 +15,8 @@ export class StakeholderDataService {
   constructor(
     private logger: LogService,
     private stakeholderMapperService: StakeholderMapperService,
-    private stakeholderRestService: StakeholderRestService) { }
+    private stakeholderRestService: StakeholderRestService) {
+  }
 
   onInit(): void {
     // Load stakeholders.
@@ -27,6 +28,32 @@ export class StakeholderDataService {
       this.stakeholders = fromDtos;
       this.logger.info(this, 'Stakeholders loaded');
       this.loadedStakeholders.emit(this.stakeholders);
+    });
+  }
+
+  reload(): void {
+    // Reload stakeholders.
+    this.stakeholderRestService.getStakeholders().subscribe(stks => {
+      const fromDtos: Stakeholder[] = [];
+      stks.forEach(stk => {
+        fromDtos.push(this.stakeholderMapperService.fromDto(stk));
+      });
+
+      fromDtos.forEach(stakeholder => {
+        var foundStakeholder = this.stakeholders.find(s => s.id === stakeholder.id);
+        if (foundStakeholder !== undefined) { // Update
+          foundStakeholder.level = stakeholder.level;
+          foundStakeholder.name = stakeholder.name;
+        } else {
+          // Remove
+
+          // Add
+
+        }
+      });
+      //this.stakeholders = fromDtos;
+      this.logger.info(this, 'Stakeholders loaded');
+      //this.loadedStakeholders.emit(this.stakeholders);
     });
   }
 

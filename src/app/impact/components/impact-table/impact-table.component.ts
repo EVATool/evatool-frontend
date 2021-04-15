@@ -97,6 +97,11 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
 
   }
 
+  load(): void {
+    this.logger.info(this, 'Load');
+    this.impactDataService.load();
+  }
+
   reload(): void {
     this.logger.info(this, 'Reload');
     this.impactDataService.reload();

@@ -36,7 +36,7 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.table?.reload();
+    this.table?.load();
   }
 
   filterBarChanged(event: ImpactTableFilterEvent) {
@@ -46,6 +46,6 @@ export class ImpactMainComponent implements OnInit, AfterViewInit {
 
   tabActivated() {
     this.logger.info(this, 'Tab activated');
-    //this.stakeholderDataService.onInit();
+    this.table?.reload();
   }
 }

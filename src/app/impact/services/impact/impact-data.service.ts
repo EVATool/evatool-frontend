@@ -54,13 +54,18 @@ export class ImpactDataService {
     //this.analysisDataService.onInit();
   }
 
-  reload() {
-    this.logger.info(this, 'Reload');
+  load() {
+    this.logger.info(this, 'Load');
     this.impactsLoaded = false;
     this.stakeholdersLoaded = false;
     this.valuesLoaded = false;
     this.analysesLoaded = false;
     this.onInit();
+  }
+
+  reload() {
+    this.logger.info(this, 'Reload');
+    this.stakeholderDataService.reload();
   }
 
   private loadIfChildrenAreLoaded(): void {
