@@ -25,6 +25,7 @@ export class ValueMapperService {
     valueDto.name = value.name;
     valueDto.type = value.type;
     valueDto.description = value.description;
+    valueDto.archived = value.archived;
     valueDto.analysis = this.analysisMapperServive.toDto(value.analysis);
 
     return valueDto;
@@ -38,6 +39,7 @@ export class ValueMapperService {
     value.name = valueDto.name;
     value.type = valueDto.type;
     value.description = valueDto.description;
+    value.archived = valueDto.archived;
     value.analysis = this.analysisMapperServive.fromDto(valueDto.analysis);
 
     return value;
@@ -51,6 +53,7 @@ export class ValueMapperService {
     impactValueDto.name = value.name;
     impactValueDto.type = value.type;
     impactValueDto.description = value.description;
+    impactValueDto.archived = value.archived;
     impactValueDto.analysis = this.analysisMapperServive.toImpactDto(value.analysis);
 
     return impactValueDto;
@@ -64,6 +67,7 @@ export class ValueMapperService {
     value.name = impactValueDto.name;
     value.type = impactValueDto.type;
     value.description = impactValueDto.description;
+    value.archived = impactValueDto.archived;
     value.analysis = this.analysisMapperServive.fromImpactDto(impactValueDto.analysis);
 
     return value;

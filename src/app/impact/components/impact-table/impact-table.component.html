@@ -65,7 +65,7 @@
                 </div>
               </mat-select-trigger>
               <mat-option *ngFor="let val of impactDataService.valueDataService.values"
-                          [value]="val" [disabled]="val.disable">
+                          [value]="val" [disabled]="val.archived">
                 <div [innerHTML]="val.name | highlightSearch: filterValues.highlight">
                 </div>
               </mat-option>

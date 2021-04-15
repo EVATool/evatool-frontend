@@ -53,7 +53,7 @@ export class ImpactTableFilterBarComponent implements OnInit {
   }
 
   valuesChanged(values: Value[]) {
-    this.valueNames = values.filter(value => !value.disable).map(value => value.name);
+    this.valueNames = values.filter(value => !value.archived).map(value => value.name);
   }
 
   valueFilterChanged(event: SliderFilterSettings): void {

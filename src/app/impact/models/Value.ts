@@ -10,14 +10,14 @@ export class Value {
   type = '';
   description = '';
   analysis!: Analysis;
-
-  disable = false;
+  archived! : boolean;
 
   equalsDto(that: ValueDto): boolean {
     return this.id === that.id
       && this.name === that.name
       && this.type === that.type
       && this.description === that.description
+      && this.archived === that.archived
       && this.analysis.equalsDto(that.analysis);
   }
 
@@ -26,6 +26,7 @@ export class Value {
       && this.name === that.name
       && this.type === that.type
       && this.description === that.description
+      && this.archived === that.archived
       && this.analysis.equalsImpactDto(that.analysis);
   }
 }

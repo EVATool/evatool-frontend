@@ -6,4 +6,5 @@ export class ValueDto {
   description = '';
   type = '';
   analysis!: AnalysisDto;
+  archived! : boolean;
 }
