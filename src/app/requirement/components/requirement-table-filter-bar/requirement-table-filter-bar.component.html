@@ -12,6 +12,11 @@
                                 (filterChanged)="valueSystemFilterChanged($event)">
     </app-column-category-filter>
   </mat-list-item>
+  <mat-list-item>
+    <app-column-category-filter #impactFilter [categories]="impacts" [name]="'Impacts'"
+                                (filterChanged)="impactFilterChanged($event)">
+    </app-column-category-filter>
+  </mat-list-item>
 
 <mat-list-item>
   <app-column-slider-filter class="filter-slider" (filterChanged)="valueFilterChanged($event)">

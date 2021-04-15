@@ -33,6 +33,9 @@ export class RequirementsRestService {
   getImpacts(id: string): Observable<Impact> {
     return this.http.get<any>(RestService.getImpactsURL() + '?analysisId=' + id);
   }
+  getImpactsAll(): Observable<Impact> {
+    return this.http.get<any>(RestService.getImpactsURL());
+  }
   getVariants(): Observable<Variants> {
     return this.http.get<any>(RestService.getVariantsURL());
   }
