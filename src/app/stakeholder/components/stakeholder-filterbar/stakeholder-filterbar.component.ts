@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {StakeholderDataService} from '../../service/stakeholder-data.service';
-import {StakeholderPrioComponent} from '../stakeholder-prio/stakeholder-prio.component';
 
 @Component({
   selector: 'app-stakeholder-filterbar',
@@ -21,7 +20,6 @@ export class StakeholderFilterbarComponent{
   constructor(public stakeholderDataService: StakeholderDataService) { }
 
   impactChange(value: any): void{
-    console.log(value);
     this.stakeholderDataService.filterImpact(value);
   }
 
@@ -41,5 +39,9 @@ export class StakeholderFilterbarComponent{
     this.prio = 0;
     this.preselect = this.levels[0];
     this.stakeholderDataService.resetFilter();
+  }
+
+  highlightTextChange(event: string): void {
+    this.stakeholderDataService.setSearchText(event);
   }
 }

@@ -1,17 +1,17 @@
 <table mat-table [dataSource]='tableDataSource' matSort>
   <caption class="screen-reader-only">List of Values</caption>
-  <ng-container matColumnDef='disable'>
+  <ng-container matColumnDef='archived'>
     <th scope="col" mat-header-cell *matHeaderCellDef>
       <div [hidden]="true" mat-sort-header matTooltip="Whether to include the value in the table selection"
            matTooltipHideDelay="100" matTooltipPosition="above">Include
       </div>
     </th>
     <td mat-cell *matCellDef='let value'>
-      <button mat-icon-button class="disable-value-button" (click)="toggleValueDisable($event, value)">
-        <mat-icon *ngIf="value.disable" matTooltip="This value is not available for selection"
+      <button mat-icon-button class="archived-value-button" (click)="toggleValueArchived($event, value)">
+        <mat-icon *ngIf="value.archived" matTooltip="This value is not available for selection"
                   matTooltipHideDelay="100" matTooltipPosition="above">add
         </mat-icon>
-        <mat-icon *ngIf="!value.disable" matTooltip="This value is available for selection"
+        <mat-icon *ngIf="!value.archived" matTooltip="This value is available for selection"
                   matTooltipHideDelay="100" matTooltipPosition="above">done
         </mat-icon>
       </button>

@@ -1,14 +1,13 @@
-import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTabGroup} from '@angular/material/tabs';
 import {Router} from '@angular/router';
-import {isDevMode} from '@angular/core';
 import {LogService} from "../../shared/services/log.service";
 import {ImpactMainComponent} from "../../impact/impact-main/impact-main.component";
 
 @Component({
   selector: 'app-shell-main',
   templateUrl: './shell-main.component.html',
-  styleUrls: ['./shell-main.component.scss', '../../layout/style/style.css']
+  styleUrls: ['./shell-main.component.scss', '../../layout/style/style.scss']
 })
 export class ShellMainComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTabGroup) tab!: MatTabGroup;
@@ -34,22 +33,10 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // @ DevTeams: Change this to your tab index and do not commit it.
-    if (isDevMode() && this.tab !== undefined) {
-      this.tab.selectedIndex = 1;
-    }
+
   }
 
   tabChanged(event: number) {
     this.logger.info(this, 'Selected Tab Changed to ' + event);
-
-    switch (event) {
-      case 1:
-        this.impactMain.tabActivated();
-        break;
-
-      default:
-        break;
-    }
   }
 }

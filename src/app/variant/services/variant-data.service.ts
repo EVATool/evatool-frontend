@@ -1,9 +1,9 @@
-
-import {Injectable, Output, EventEmitter, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Variant} from '../models/Variant';
 import {MatTableDataSource} from '@angular/material/table';
 import {VariantRestService} from './variant-rest.service';
 import {VariantDTO} from '../models/VariantDTO';
+import {LogService} from '../../shared/services/log.service';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -17,7 +17,8 @@ export class VariantDataService{
   analysisid: string | null = '';
 
   constructor( private variantRestService: VariantRestService,
-               private router: Router){
+               private router: Router,
+               private logger: LogService){
 
   }
 
@@ -47,6 +48,7 @@ export class VariantDataService{
       });
       this.matDataSource = new MatTableDataSource<Variant>(this.variants);
       this.matDataSourceArchive = new MatTableDataSource<Variant>(this.variantsArchive);
+      this.logger.info(this, 'All Variants loaded.');
     });
   }
 
@@ -57,6 +59,7 @@ export class VariantDataService{
   private createDefaultVariant(): Variant {
     const variant = new Variant();
     variant.editable = true;
+    this.logger.info(this, 'Default Variant created.');
     return variant;
   }
 
@@ -64,6 +67,7 @@ export class VariantDataService{
     const variant = this.createDefaultVariant();
     this.variants.push(variant);
     this.matDataSource = new MatTableDataSource<Variant>(this.variants);
+    this.logger.info(this, 'Default Variant added.');
   }
 
   save(variant: Variant): void {
@@ -80,6 +84,7 @@ export class VariantDataService{
       }).subscribe(() => {
         this.loadVariants();
     });
+    this.logger.info(this, 'Variant saved.');
   }
 
   loadAnalysisIDFromRouter(): void{
@@ -98,8 +103,10 @@ export class VariantDataService{
       subVariant: {},
       analysisId: variant.analysisId
     }).subscribe(() => {
+      this.logger.info(this, 'Variant archived.');
       this.loadVariants();
     });
+
   }
 
   unarchive(variant: Variant): void {
@@ -112,12 +119,14 @@ export class VariantDataService{
       subVariant: {},
       analysisId: variant.analysisId
     }).subscribe(() => {
+      this.logger.info(this, 'Variant unarchived.');
       this.loadVariants();
     });
   }
 
   delete(variant: Variant): void {
     this.variantRestService.deleteVariants(variant.id).subscribe(() => {
+      this.logger.info(this, 'Variant archived.');
       this.loadVariants();
     });
   }
@@ -132,6 +141,7 @@ export class VariantDataService{
       subVariant: {},
       analysisId: variant.analysisId
     }).subscribe(() => {
+      this.logger.info(this, 'Variant updated.');
       this.loadVariants();
     });
   }

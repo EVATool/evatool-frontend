@@ -12,11 +12,15 @@ export class StakeholderImpactComponent implements OnInit {
   @Input() editable = false;
   @Input() public created = false;
   @Output() impactChange = new EventEmitter<number | null>();
-  public impactvaluetotal = 100.0;
+  public impactvaluetotal = 100;
+  public impactIsNull = false;
   constructor() {}
 
   ngOnInit(): void {
     this.impactvaluetotal = this.negativeimpactvalue + this.positiveimpactvalue;
+    if (this.impactvaluetotal === 0) {
+      this.impactIsNull = true;
+    }
   }
 
   onImpactChange(event: any): void{

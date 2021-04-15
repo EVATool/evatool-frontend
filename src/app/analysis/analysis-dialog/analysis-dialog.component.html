@@ -5,32 +5,66 @@
   </button>
   <div class="container">
 
-    <h2>Neue Analyse anlegen</h2>
+    <h2 *ngIf="!isTemplate && !editImage">Create New Analysis</h2>
+    <h2 *ngIf="isTemplate && !editImage">Edit Analysis Template</h2>
+    <h2 *ngIf="editImage">Edit Background Image</h2>
+
+    <div *ngIf="isTemplate" class="group">
+      <button mat-raised-button (click)="newTemplate();">New Template</button>
+      <button mat-raised-button (click)="deleteTemplate()">Delete Template</button>
+    </div>
 
     <form (ngSubmit)="onSubmit()">
 
-      <div class="group">
-        <input type="text" name="analyseName" [(ngModel)]="analyseName" required />
-        <span class="highlight"></span>
-        <span class="bar"></span>
-        <label>Name der Analyse</label>
+      <div class="group" *ngIf="!editImage">
+        <mat-form-field>
+          <mat-label>Template</mat-label>
+          <mat-select [(ngModel)]="selectedTemplate" name="selectedTemplate">
+            <mat-option *ngFor="let ana of analysisDataService.templateAnalyses" [value]="ana"
+                        (onSelectionChange)="selectedTemplateChanged(ana)">
+              {{ana.analysisName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
-      <div class="group">
-        <input type="text" name="analysisDescription" [(ngModel)]="analysisDescription" required />
-        <span class="highlight"></span>
+      <div *ngIf="!editImage" class="group">
+        <input type="text" name="analyseName" (change)="analysisNameChanged()" [(ngModel)]="analyseName" required/>
         <span class="bar"></span>
-        <label>Beschreibung</label>
+        <label *ngIf="!isTemplate">Name of Analysis</label>
+        <label *ngIf="isTemplate">Name of Template</label>
+      </div>
+
+      <div *ngIf="editImage" class="group">
+        <input type="text" name="analysisImage" [(ngModel)]="newImage" required/>
+        <span class="bar"></span>
+        <label>Edit Background-Image</label>
+      </div>
+
+      <div *ngIf="!isTemplate && !editImage" class="group">
+        <input type="text" name="analysisDescription" [(ngModel)]="analysisDescription" required/>
+        <span class="bar"></span>
+        <label>Description</label>
+      </div>
+
+      <div *ngIf="!isTemplate && !editImage" class="group">
+        <input type="text" name="analysisImageLink" [(ngModel)]="analysisImage" required/>
+        <span class="bar"></span>
+        <label>Background-Image (optional & direct-link)</label>
       </div>
 
       <button mat-raised-button class="createButton button_cont b1" type="submit">
-        Analyse erstellen
+        <div *ngIf="!isTemplate && !editImage">Create Analysis</div>
+        <div *ngIf="isTemplate && !editImage">Done</div>
+        <div *ngIf="editImage">Update Background-Image</div>
       </button>
-
-
     </form>
 
+    <div [hidden]="!selectedTemplate">
+      <div class="group" [hidden]="!selectedTemplate?.isTemplate">
+        <app-value-template></app-value-template>
+      </div>
+    </div>
+
   </div>
-
-
 </div>

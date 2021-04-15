@@ -1,7 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
-import { TestBed } from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
 
-import { ValueRestService } from './value-rest.service';
+import {ValueRestService} from './value-rest.service';
 
 describe('ValueRestService', () => {
   let service: ValueRestService;

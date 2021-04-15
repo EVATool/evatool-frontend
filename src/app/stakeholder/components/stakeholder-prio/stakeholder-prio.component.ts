@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class StakeholderPrioComponent {
 
   @Input() prio!: number;
-  @Input() public editable = false;
+  @Input() public editable = true;
   @Output() prioChange = new EventEmitter<number>();
 
   constructor() {}

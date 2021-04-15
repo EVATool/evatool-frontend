@@ -1,5 +1,4 @@
-import { TestBed } from '@angular/core/testing';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {VariantRestService} from './variant-rest.service';
 import {Injectable} from '@angular/core';
 import {LogService} from '../../shared/services/log.service';

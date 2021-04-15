@@ -27,6 +27,7 @@
 		"ng-keyboard-shortcuts": "^10.1.17",
 		"ng-multiselect-dropdown": "^0.3.4",
 		"ngx-scrollbar": "^7.5.4",
+		"ngx-text-highlight": "^0.1.6",
 		"rxjs": "~6.6.0",
 		"tslib": "^2.0.0",
 		"uuid": "^8.3.2",

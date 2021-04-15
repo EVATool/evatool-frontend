@@ -1,90 +1,108 @@
-import { EventEmitter, Injectable } from '@angular/core';
-import { Value } from "../../model/Value";
-import { ValueRestService } from "./value-rest.service";
-import { MatTableDataSource } from "@angular/material/table";
-import { Stakeholder } from "../../../stakeholder/model/Stakeholder";
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Value} from '../../model/Value';
+import {ValueRestService} from './value-rest.service';
+import {LogService} from '../../../shared/services/log.service';
+import {ValueDTO} from '../../model/ValueDTO';
+import {AnalysisDataService} from '../analysis/analysis-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValueDataService {
-  socialValue: Value[] = [];
-  economicValue: Value[] = [];
 
-  matDataSourceEconomic = new MatTableDataSource<Value>();
-  matDataSourceSocial = new MatTableDataSource<Value>();
-
-  constructor(private valueRestService: ValueRestService) {
-    this.matDataSourceEconomic = new MatTableDataSource<Value>(this.socialValue);
-    this.matDataSourceSocial = new MatTableDataSource<Value>(this.economicValue);
+  constructor(
+    private logger: LogService,
+    private valueRestService: ValueRestService,
+    private analysisDataService: AnalysisDataService
+  ) {
   }
 
-  onInit() {
-    this.loadValues();
-  }
+  @Output() loadedValues: EventEmitter<Value[]> = new EventEmitter();
+  @Output() loadedValuesTypes: EventEmitter<string[]> = new EventEmitter();
+  @Output() addedValue: EventEmitter<Value> = new EventEmitter();
+  @Output() changedValue: EventEmitter<Value> = new EventEmitter();
+  @Output() removedValue: EventEmitter<Value> = new EventEmitter();
+  @Output() changedValues: EventEmitter<Value[]> = new EventEmitter();
 
-  private createDefaultValue(): Value {
+  public valuesTypes: string[] = [];
+  public values: Value[] = [];
+
+  private static fromDto(valueDto: ValueDTO): Value {
     const value = new Value();
-    value.editable = true;
+    value.id = valueDto.id;
+    value.name = valueDto.name;
+    value.type = valueDto.type;
+    value.analysis = AnalysisDataService.fromDto(valueDto.analysis);
+    value.archived = valueDto.archived;
+    value.description = valueDto.description;
+
     return value;
   }
 
-  createSocialValue(): void {
-    const value = this.createDefaultValue();
-    value.type = 'SOCIAL';
-    this.socialValue.push(value);
-    this.matDataSourceSocial = new MatTableDataSource<Value>(this.socialValue);
+  private static toDto(value: Value): ValueDTO {
+    const valueDto = new ValueDTO();
+    valueDto.id = value.id;
+    valueDto.name = value.name;
+    valueDto.type = value.type;
+    valueDto.analysis = AnalysisDataService.toDto(value.analysis);
+    valueDto.archived = value.archived;
+    valueDto.description = value.description;
+
+    return valueDto;
   }
 
-  createEconomicValue(): void {
-    const value = this.createDefaultValue();
-    value.type = 'ECONOMIC';
-    this.economicValue.push(value);
-    this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
-  }
-
-  deleteValue(value: Value): void {
-    this.valueRestService.deleteValue(value).subscribe(() => { this.loadValues(); });
-  }
-
-  save(value: Value): void {
-    this.valueRestService.createValue({
-      id: '',
-      name: value.name,
-      description: value.description,
-      type: value.type
-    }).subscribe(() => {
-      this.loadValues();
+  onInit(): void {
+    this.valueRestService.getValueTypes().subscribe(valueTypes => {
+      this.valuesTypes = valueTypes;
+      this.logger.info(this, 'Value types loaded');
+      this.loadedValuesTypes.emit(this.valuesTypes);
     });
   }
 
-  loadValues(): void {
-    this.valueRestService.getValues().subscribe((result: any) => {
-      this.socialValue = [];
-      this.economicValue = [];
-      result.forEach((valueDTO: any) => {
-        if (valueDTO.type === 'SOCIAL') {
-          const value: Value = {
-            id: valueDTO.id,
-            name: valueDTO.name,
-            description: valueDTO.description,
-            type: valueDTO.type,
-          };
-          this.socialValue.push(value);
-        }
-        else if (valueDTO.type === 'ECONOMIC') {
-          const value: Value = {
-            id: valueDTO.id,
-            name: valueDTO.name,
-            description: valueDTO.description,
-            type: valueDTO.type,
-          };
-          this.economicValue.push(value);
-        }
+  loadValuesByAnalysisId(id: string): void {
+    this.analysisDataService.loadAnalysis(id);
+    this.valueRestService.getValuesByAnalysisId(id).subscribe(valueDtoList => {
+      const values: Value[] = [];
+      valueDtoList.forEach((dto: ValueDTO) => {
+        values.push(ValueDataService.fromDto(dto));
+        this.logger.info(this, 'Analysis for Value: ' + dto.analysis.rootEntityID);
       });
-      this.matDataSourceEconomic = new MatTableDataSource<Value>(this.economicValue);
-      this.matDataSourceSocial = new MatTableDataSource<Value>(this.socialValue);
-      console.log(this.matDataSourceEconomic);
+
+      this.values = values;
+      this.logger.info(this, 'Values loaded');
+      this.loadedValues.emit(this.values);
+    });
+  }
+
+  createValue(value: Value): void {
+    this.logger.info(this, 'Create Value');
+    const valueDto = ValueDataService.toDto(value);
+
+    this.valueRestService.createValue(valueDto).subscribe((valDto: Value) => {
+      value.id = valDto.id;
+      this.values.push(value);
+      this.addedValue.emit(value);
+      this.changedValues.emit(this.values);
+    });
+  }
+
+  updateValue(value: Value): void {
+    this.logger.info(this, 'Update Value');
+    const valueDto = ValueDataService.toDto(value);
+    this.valueRestService.updateValue(valueDto).subscribe((newValue: Value) => {
+      this.changedValue.emit(newValue);
+      this.changedValues.emit(this.values);
+    });
+  }
+
+  deleteValue(value: Value): void {
+    this.logger.info(this, 'Delete Value');
+    const valueDto = ValueDataService.toDto(value);
+    this.valueRestService.deleteValue(valueDto).subscribe((valDto) => {
+      const index: number = this.values.indexOf(value, 0);
+      this.values.splice(index, 1);
+      this.removedValue.emit(value);
+      this.changedValues.emit(this.values);
     });
   }
 }

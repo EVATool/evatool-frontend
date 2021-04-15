@@ -1,11 +1,10 @@
-
-import {AfterViewInit, Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Requirements} from '../../models/Requirements';
 import {Dimension} from '../../models/Dimension';
 import {Impact} from '../../models/Impact';
 import {MatTableDataSource} from '@angular/material/table';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
-import {MatSort, Sort} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
 import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
@@ -17,7 +16,7 @@ import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
 @Component({
   selector: 'app-requirement-table',
   templateUrl: './requirements-table.component.html',
-  styleUrls: ['./requirements-table.component.scss', '../../../layout/style/style.css']
+  styleUrls: ['./requirements-table.component.scss', '../../../layout/style/style.scss']
 })
 export class RequirementsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -231,7 +230,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: ''}});
+    this.dialog.open(VariantDialogComponent, { data : {id: ''}});
   }
   getSelectedRequirment(requirements: Requirements): void{
     this.selectedRequirements = requirements;
@@ -250,7 +249,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   checkAchrived(variantsTitleElement: Variants[]): void {
     if (variantsTitleElement.length > 0 && variantsTitleElement[0].archived){
-      const dialogRef = this.dialog.open(VariantDialogComponent, { data : {id: '' + variantsTitleElement[0].entityId}});
+      this.dialog.open(VariantDialogComponent, { data : {id: '' + variantsTitleElement[0].entityId}});
     }
   }
 

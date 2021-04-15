@@ -5,7 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ImpactMainComponent} from './impact-main.component';
-import {RestMock} from "../spec/RestMock";
+import {RestMock} from '../spec/RestMock';
 
 describe('ImpactMainComponent', () => {
   let component: ImpactMainComponent;
