@@ -1,14 +1,11 @@
 import {LogService} from '../../../shared/services/log.service';
 import {ImpactRestService} from './impact-rest.service';
-import {Analysis} from '../../models/Analysis';
-import {Value} from '../../models/Value';
-import {Stakeholder} from '../../models/Stakeholder';
 import {ImpactMapperService} from './impact-mapper.service';
 import {AnalysisDataService} from '../analysis/analysis-data.service';
 import {ValueDataService} from '../value/value-data.service';
 import {StakeholderDataService} from '../stakeholder/stakeholder-data.service';
 import {Impact} from '../../models/Impact';
-import {Injectable, Output, EventEmitter} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {ImpactDto} from "../../dtos/ImpactDto";
 
 @Injectable({

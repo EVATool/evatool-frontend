@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { MockableService } from './mockable.service';
+import {MockableService} from './mockable.service';
 
 describe('MockableServiceService', () => {
   let service: MockableService;

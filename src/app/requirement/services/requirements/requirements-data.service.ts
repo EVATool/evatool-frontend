@@ -1,8 +1,6 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Requirements} from '../../models/Requirements';
-import {Dimension} from '../../models/Dimension';
 import {RequirementsRestService} from './requirements-rest.service';
-import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 
 @Injectable({

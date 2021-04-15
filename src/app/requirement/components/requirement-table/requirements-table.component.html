@@ -1,11 +1,6 @@
-<!--<div id="add-impact-button-div">-->
-<!--  <button id="add-requirement-button" (click)="addRequirements()">-->
-<!--    <p style="font-size:180%;">+</p>-->
-<!--  </button>-->
-<!--</div>-->
-
 <div class="example-table-container">
   <table mat-table [dataSource]="tableDatasource" matSort class="example-table ">
+    <caption></caption>
 
     <ng-container matColumnDef="uniqueString" sticky>
       <th mat-header-cell scope="col" *matHeaderCellDef mat-sort-header>ID</th>
@@ -14,11 +9,11 @@
 
     <ng-container matColumnDef="requirementDescription" sticky>
       <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Requirements</th>
-<!--      <td mat-cell *matCellDef="let element"> {{element.requirementDescription}} </td>-->
       <td mat-cell *matCellDef='let element'>
         <div class="description-wrapper">
           <div class="description-container">
-          <textarea matInput cdkTextareaAutosize [(ngModel)]="element.requirementDescription" placeholder="Describe the Requirement..."
+          <textarea matInput cdkTextareaAutosize [(ngModel)]="element.requirementDescription"
+                    placeholder="Describe the Requirement..."
                     (change)="descriptionChange(element, $event)"></textarea>
           </div>
           <div class="delete-button-container">
@@ -31,16 +26,18 @@
       </td>
     </ng-container>
 
-<!--    <ng-container matColumnDef="variantsTitle" sticky>-->
-<!--      <th mat-header-cell *matHeaderCellDef mat-sort-header> Variant(s) <span style="font-size: 18px;" class="material-icons" (click)="openDialog()">info</span></th>-->
-<!--      <td mat-cell *matCellDef="let element">{{concatVariants(element)}}</td>-->
-<!--    </ng-container>-->
-
     <ng-container matColumnDef="variantsTitle" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Variant(s) <span style="font-size: 18px;" class="material-icons" (click)="openDialog()">info</span></th>
-      <td mat-cell (dblclick)="checkAchrived(element.variantsTitle)" [matTooltip]="(element.variantsTitle.length>0 && element.variantsTitle[0].archived) ? 'Verwendete Variante ('+ element.variantsTitle[0].variantsTitle +') ist archiviert' : '' " *matCellDef='let element' [ngClass]="{'archived' : (element.variantsTitle.length>0 && element.variantsTitle[0].archived)}">
+      <th id="title-col" mat-header-cell *matHeaderCellDef mat-sort-header> Variant(s) <span style="font-size: 18px;"
+                                                                                             class="material-icons"
+                                                                                             (click)="openDialog()">info</span>
+      </th>
+      <td mat-cell (dblclick)="checkAchrived(element.variantsTitle)"
+          [matTooltip]="(element.variantsTitle.length>0 && element.variantsTitle[0].archived) ? 'Verwendete Variante ('+ element.variantsTitle[0].variantsTitle +') ist archiviert' : '' "
+          *matCellDef='let element'
+          [ngClass]="{'archived' : (element.variantsTitle.length>0 && element.variantsTitle[0].archived)}">
         <mat-form-field>
-          <mat-select matNativeControl [ngModel]="element.variantsTitle[0]?.entityId" (selectionChange)="variantsChange(element, $event)">
+          <mat-select matNativeControl [ngModel]="element.variantsTitle[0]?.entityId"
+                      (selectionChange)="variantsChange(element, $event)">
             <mat-option *ngFor="let stk of variantsSoureces" [value]="stk.entityId">
               {{stk.variantsTitle}}
             </mat-option>
@@ -50,18 +47,22 @@
     </ng-container>
 
     <ng-container matColumnDef="values" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+      <th id="values-col" mat-header-cell *matHeaderCellDef mat-sort-header> Value</th>
       <td mat-cell *matCellDef="let element">{{concatDimension(element)}}</td>
     </ng-container>
 
-    <ng-container *ngFor = "let impact of impactSoureces" matColumnDef="{{impact.id}}">
-      <th mat-header-cell matTooltip="{{impact.description}}" *matHeaderCellDef mat-sort-header [width]="50" style="min-width: 50px;">
-        <mat-icon>remove_red_eye</mat-icon>{{impact.uniqueString}} </th>
-      <td mat-cell  *matCellDef="let element"
+    <ng-container *ngFor="let impact of impactSoureces" matColumnDef="{{impact.id}}">
+      <th id="sources-col" mat-header-cell matTooltip="{{impact.description}}" *matHeaderCellDef mat-sort-header
+          [width]="50" style="min-width: 50px;">
+        <mat-icon>remove_red_eye</mat-icon>
+        {{impact.uniqueString}} </th>
+      <td mat-cell *matCellDef="let element"
           [ngClass]="{'positiv' : isPositiv(element,impact),'negativ' : isNegativ(element,impact)}"
           (dblclick)="clickFunction(element,impact)">
         <div *ngIf="show(element, impact)" class="impact-slider-container">
-          <app-impact-slider [value]="valueForCell(element, impact)"
+          <app-impact-slider [isRisk]="impact.value<0" [isGoal]="impact.value>0"
+                             [minvalue]="impact.value>0?-1:impact.value" [maxvalue]="impact.value<0?1:impact.value"
+                             [value]="valueForCell(element, impact)"
                              (sliderValueChange)="valueChange(element, impact, $event)">
           </app-impact-slider>
         </div>
@@ -70,6 +71,7 @@
 
 
     <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="getDisplayedColumns(); sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();" (keypress)="testKeyPress($event)" (click)="getSelectedRequirment(row)" [ngClass]="{ 'selected-row' : row.selected }"></tr>
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();" (keypress)="testKeyPress($event)"
+        (click)="getSelectedRequirment(row)" [ngClass]="{ 'selected-row' : row.selected }"></tr>
   </table>
 </div>

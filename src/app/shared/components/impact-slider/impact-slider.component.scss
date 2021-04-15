@@ -16,6 +16,10 @@
   opacity: 0.0;
 }
 
+::ng-deep .mat-slider-horizontal{
+  min-width: 0;
+}
+
 ::ng-deep .mat-slider-thumb {
   color: transparent;
   background-color: transparent;

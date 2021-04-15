@@ -1,7 +1,7 @@
-import { HttpClientModule } from '@angular/common/http';
-import { TestBed } from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
 
-import { AnalysisDataService } from './analysis-data.service';
+import {AnalysisDataService} from './analysis-data.service';
 
 describe('AnalysisDataService', () => {
   let service: AnalysisDataService;

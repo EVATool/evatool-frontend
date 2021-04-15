@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VariantTableComponent } from './variant-table.component';
+import {VariantTableComponent} from './variant-table.component';
 import {RestMockProvidersVariants} from '../../services/spec/RestMockProviders';
 
 describe('VariantTableComponent', () => {

@@ -1,6 +1,6 @@
-import { SampleDataService } from '../../spec/sample-data.service';
-import { TestBed } from '@angular/core/testing';
-import { AnalysisMapperService } from './analysis-mapper.service';
+import {SampleDataService} from '../../spec/sample-data.service';
+import {TestBed} from '@angular/core/testing';
+import {AnalysisMapperService} from './analysis-mapper.service';
 
 describe('AnalysisMapperService', () => {
   let service: AnalysisMapperService;

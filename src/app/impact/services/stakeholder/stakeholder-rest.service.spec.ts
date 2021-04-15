@@ -6,8 +6,6 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {StakeholderRestService} from './stakeholder-rest.service';
 import {LogService} from "../../../shared/services/log.service";
 import {HttpClient} from "@angular/common/http";
-import {Observable, of} from "rxjs";
-import {StakeholderDto} from "../../dtos/StakeholderDto";
 import {Injectable} from "@angular/core";
 
 @Injectable({

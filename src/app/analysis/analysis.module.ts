@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AnalysisMainComponent } from './analysis-main/analysis-main.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AnalysisMainComponent} from './analysis-main/analysis-main.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
-import {AnalysisDialogComponent } from './analysis-dialog/analysis-dialog.component';
+import {AnalysisDialogComponent} from './analysis-dialog/analysis-dialog.component';
 import {MatButtonModule} from '@angular/material/button';
-import { ValueTemplateComponent } from './value-template/value-template.component';
+import {ValueTemplateComponent} from './value-template/value-template.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {MatMenuModule} from '@angular/material/menu';
-import { ValueTemplateTableComponent } from './value-template/value-template-table/value-template-table.component';
+import {ValueTemplateTableComponent} from './value-template/value-template-table/value-template-table.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSortModule} from '@angular/material/sort';
 

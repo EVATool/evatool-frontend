@@ -1,8 +1,7 @@
-import { Dimension } from './../../models/Dimension';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Dimension} from './../../models/Dimension';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 const httpOptions = { // Outsource!
   headers: new HttpHeaders({

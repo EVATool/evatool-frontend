@@ -7,7 +7,6 @@ import {ImpactDataService} from "../../../../../../services/impact/impact-data.s
 import {LogService} from "../../../../../../../shared/services/log.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AnalysisDataService} from "../../../../../../services/analysis/analysis-data.service";
-import {Impact} from "../../../../../../models/Impact";
 
 @Component({
   selector: 'app-value-table',
@@ -20,7 +19,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   @Output() userWantsToSeeReferencedImpacts: EventEmitter<Value> = new EventEmitter();
 
   tableDataSource: MatTableDataSource<Value> = new MatTableDataSource<Value>();
-  displayedColumns = ['disable', 'name', 'description'];
+  displayedColumns = ['archived', 'name', 'description'];
 
   constructor(
     private logger: LogService,
@@ -38,15 +37,15 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
 
     this.valueDataService.loadedValues.subscribe(vals => {
       this.logger.info(this, 'Event \'loadedValues\' received from ValueTableComponent');
-      const filteredValues: Value[] = this.filterValues();
-      this.tableDataSource = new MatTableDataSource<Value>(filteredValues);
+      const filteredValuesLocal: Value[] = this.filterValues();
+      this.tableDataSource = new MatTableDataSource<Value>(filteredValuesLocal);
       this.initSorting();
     });
 
     this.valueDataService.changedValues.subscribe(vals => {
       this.logger.info(this, 'Event \'changedValues\' received from ValueTableComponent');
-      const filteredValues: Value[] = this.filterValues();
-      this.tableDataSource = new MatTableDataSource<Value>(filteredValues); // Why does this not work like in impact table?
+      const filteredValuesLocal: Value[] = this.filterValues();
+      this.tableDataSource = new MatTableDataSource<Value>(filteredValuesLocal); // Why does this not work like in impact table?
       this.initSorting();
     });
   }
@@ -104,6 +103,17 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
     this.updateValue(value);
   }
 
+  toggleValueArchived(event: Event, value: Value) {
+    const numImpactsUseValue = this.getReferencesImpacts(value);
+    if (numImpactsUseValue > 0) {
+      this.thwartValueOperation(value, numImpactsUseValue);
+    } else {
+      value.archived = !value.archived;
+      this.updateValue(value);
+      this.valueDataService.updateValue(value); // This will remove the disabled value from the filter bar dropdown.
+    }
+  }
+
   getReferencesImpacts(value: Value): number {
     let numImpactsUseValue = 0;
     this.impactDataService.impacts.forEach(impact => {
@@ -124,15 +134,5 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
       this.logger.info(this, 'User wants to see the impacts referencing the value');
       this.userWantsToSeeReferencedImpacts.emit(value);
     });
-  }
-
-  toggleValueDisable(event: Event, value: Value) {
-    const numImpactsUseValue = this.getReferencesImpacts(value);
-    if (numImpactsUseValue > 0) {
-      this.thwartValueOperation(value, numImpactsUseValue);
-    } else {
-      value.disable = !value.disable;
-      //this.valueDataService.updateValue(value); // This will remove the disabled value from the filter bar dropdown.
-    }
   }
 }

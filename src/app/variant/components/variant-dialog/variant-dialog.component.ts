@@ -3,8 +3,6 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Variant} from '../../models/Variant';
 import {VariantDataService} from '../../services/variant-data.service';
-import {VariantRestService} from '../../services/variant-rest.service';
-import {VariantDTO} from '../../models/VariantDTO';
 import {LogService} from '../../../shared/services/log.service';
 
 

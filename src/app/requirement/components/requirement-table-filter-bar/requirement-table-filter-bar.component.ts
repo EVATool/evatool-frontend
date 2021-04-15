@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ColumnCategoryFilterComponent} from '../../../shared/components/column-category-filter/column-category-filter.component';
-import {ImpactTableFilterEvent} from '../../../impact/components/impact-table-filter-bar/ImpactTableFilterEvent';
-import{RequirementTableFilterEvent} from '../../../requirement/components/requirement-table-filter-bar/RequirementTableFilterEvent';
+import {RequirementTableFilterEvent} from '../../../requirement/components/requirement-table-filter-bar/RequirementTableFilterEvent';
 import {SliderFilterSettings} from '../../../shared/components/impact-slider/SliderFilterSettings';
 import {ColumnSliderFilterComponent} from '../../../shared/components/column-slider-filter/column-slider-filter.component';
 import {HighlightSearchComponent} from '../../../shared/components/search-bar/highlight-search.component';

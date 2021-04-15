@@ -1,7 +1,7 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
 
-import { DimensionDataService } from './dimension-data.service';
+import {DimensionDataService} from './dimension-data.service';
 
 describe('DimensionDataService', () => {
   let service: DimensionDataService;

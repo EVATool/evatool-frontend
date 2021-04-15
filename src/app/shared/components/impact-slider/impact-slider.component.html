@@ -9,12 +9,12 @@
   </div>
 
   <div id="slider-container">
-    <mat-slider min="-1.0" max="1.0" step="0.1" [(ngModel)]="value" (input)="sliderValueChanged($event)"
+    <mat-slider [min]="minvalue" [max]="maxvalue" step="0.1" [(ngModel)]="value" (input)="sliderValueChanged($event)"
       (change)="sliderValueChangedFinal($event)"></mat-slider>
   </div>
 
   <div [hidden]="!isFilter || sliderFilterSettings.sliderFilterType!==2" id="slider-container">
-    <mat-slider min="-1.0" max="1.0" step="0.1" [(ngModel)]="valueSecond" (input)="sliderSecondValueChanged($event)"
+    <mat-slider [min]="minvalue" [max]="maxvalue" step="0.1" [(ngModel)]="valueSecond" (input)="sliderSecondValueChanged($event)"
       (change)="sliderValueChangedFinal($event)"></mat-slider>
   </div>
 
