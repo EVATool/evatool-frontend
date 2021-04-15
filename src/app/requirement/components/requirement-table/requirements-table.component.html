@@ -61,7 +61,7 @@
           [ngClass]="{'positiv' : isPositiv(element,impact),'negativ' : isNegativ(element,impact)}"
           (dblclick)="clickFunction(element,impact)">
         <div *ngIf="show(element, impact)" class="impact-slider-container">
-          <app-impact-slider [value]="valueForCell(element, impact)"
+          <app-impact-slider [isRisk]="impact.value<0" [isGoal]="impact.value>0" [minvalue]="impact.value>0?-1:impact.value" [maxvalue]="impact.value<0?1:impact.value" [value]="valueForCell(element, impact)"
                              (sliderValueChange)="valueChange(element, impact, $event)">
           </app-impact-slider>
         </div>

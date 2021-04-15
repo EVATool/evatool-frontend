@@ -261,6 +261,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         retValue = value.points;
       }
     });
+    if (retValue === 0){
+      retValue = impact.value;
+    }
     return retValue;
   }
 

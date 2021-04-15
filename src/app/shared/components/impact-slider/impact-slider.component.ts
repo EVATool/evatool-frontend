@@ -13,6 +13,8 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
   @Input() valueSecond: number = -1;
   @Input() deadzone: number = 0.0;
   @Input() isFilter: boolean = false;
+  @Input() minvalue: number = -1.0;
+  @Input() maxvalue: number = 1.0;
 
   @Input() isRisk: boolean = false;
   @Input() isGoal: boolean = false;
@@ -200,7 +202,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
         this.goalBar.nativeElement.style.position = 'absolute';
 
         this.riskBar.nativeElement.style.backgroundColor = 'red';
-        this.goalBar.nativeElement.style.backgroundColor = 'black';
+        this.goalBar.nativeElement.style.backgroundColor = 'darkgrey';
 
         this.riskBar.nativeElement.style.width = Math.max(-this.value * 50, 0) + '%';
         this.goalBar.nativeElement.style.width = '50%';
@@ -213,7 +215,7 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
         this.goalBar.nativeElement.style.float = 'left';
         this.goalBar.nativeElement.style.position = 'absolute';
 
-        this.riskBar.nativeElement.style.backgroundColor = 'black';
+        this.riskBar.nativeElement.style.backgroundColor = 'darkgrey';
         this.goalBar.nativeElement.style.backgroundColor = 'green';
 
         this.riskBar.nativeElement.style.width = '50%';
