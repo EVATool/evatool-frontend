@@ -33,10 +33,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     {req: '', imp: ''}
   ];
   columnDefinitions = [
-    { def: 'uniqueString', hide: true },
-    { def: 'requirementDescription', hide: true },
-    { def: 'variantsTitle', hide: true },
-    { def: 'values', hide: true }
+    {def: 'uniqueString', hide: true},
+    {def: 'requirementDescription', hide: true},
+    {def: 'variantsTitle', hide: true},
+    {def: 'values', hide: true}
   ];
   filterValues: any = {
     id: '',
@@ -47,10 +47,11 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     highlight: ''
   };
   private selectedRequirements: Requirements = new Requirements();
+
   constructor(private requirementsRestService: RequirementsRestService,
               private requirementsDataService: RequirementsDataService,
               private router: Router,
-              private dialog: MatDialog){
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -111,6 +112,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   private initFiltering(): void {
     this.tableDatasource.filterPredicate = this.createFilter();
   }
+
   private updateFilter(): void {
     this.tableDatasource.filter = JSON.stringify(this.filterValues);
   }
@@ -119,32 +121,15 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     return (data: Impact, filter: string): boolean => {
       const search = JSON.parse(filter);
 
-      const variantsFilter = search.variants.length === 0 || search.variants.indexOf(data.variants.variantsTitle) !== -1;
+      const variantsTitles = data.variantsTitle.map((v: Variants) => v.variantsTitle);
+      console.log(variantsTitles);
+      console.log(search.variants);
 
-      const valueSystemFilter = search.valueSystem.length === 0 || search.valueSystem.indexOf(data.valueEntity.name) !== -1;
+      const variantsFilter = search.variants.length === 0
+        || variantsTitles.some((s: string) => search.variants.includes(s));
 
-      let valueFilter = false;
-      switch (search.value.sliderFilterType) {
-        case SliderFilterType.Off:
-          valueFilter = true;
-          break;
 
-        case SliderFilterType.Between:
-          const minValue = Math.min(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
-          const maxValue = Math.max(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
-          if (search.value.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
-            valueFilter = data.value > minValue && data.value < maxValue;
-          } else {
-            valueFilter = data.value >= minValue && data.value <= maxValue;
-          }
-          break;
-
-        default:
-          valueFilter = true;
-          break;
-      }
-
-      return variantsFilter && valueSystemFilter && valueFilter;
+      return variantsFilter;
     };
   }
 
@@ -161,22 +146,28 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       .filter(cd => cd.hide)
       .map(cd => cd.def);
   }
+
   private initSorting(): void {
     this.tableDatasource.sort = this.sort;
   }
+
   concatDimension(parameter: any): string {
     let value = '';
     const dimension: Dimension[] = parameter.values;
-    if (dimension == null){ return value; }
+    if (dimension == null) {
+      return value;
+    }
     dimension.forEach(value1 => value = value.concat(value1.valueTitle, '\n'));
     return value;
   }
 
   isPositiv(element: Requirements, impact: Impact): boolean {
-    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) { return false; }
+    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) {
+      return false;
+    }
     let retValue = false;
     element.requirementImpactPoints.forEach(value => {
-      if (value.entityId === impact.id){
+      if (value.entityId === impact.id) {
         const points: number | null = value.points;
         if (points && 0 < points) {
           retValue = true;
@@ -187,10 +178,12 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   isNegativ(element: Requirements, impact: Impact): boolean {
-    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) { return false; }
+    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) {
+      return false;
+    }
     let retValue = false;
     element.requirementImpactPoints.forEach(value => {
-      if (value.entityId === impact.id){
+      if (value.entityId === impact.id) {
         const points: number | null = value.points;
         if (points && 0 > points) {
           retValue = true;
@@ -204,17 +197,17 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     let exist = false;
     let toDelete;
     this.showElement.forEach(se => {
-      if (se.req === element.rootEntityId && se.imp === impact.id){
-        exist =  true;
+      if (se.req === element.rootEntityId && se.imp === impact.id) {
+        exist = true;
         toDelete = se;
       }
     });
-    if (exist && toDelete != null){
+    if (exist && toDelete != null) {
       const index = this.showElement.indexOf(toDelete, 0);
       if (index > -1) {
         this.showElement.splice(index, 1);
       }
-    }else{
+    } else {
       this.showElement.push({req: element.rootEntityId, imp: impact.id});
     }
   }
@@ -229,7 +222,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
             toDelete = value;
           }
         });
-        if (toDelete != null){
+        if (toDelete != null) {
           const index = element.requirementImpactPoints.indexOf(toDelete, 0);
           if (index > -1) {
             element.requirementImpactPoints.splice(index, 1);
@@ -268,10 +261,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     this.requirementsDataService.updateRequirements(requirements);
   }
 
-  private randomFilter(): void{
+  private randomFilter(): void {
     const end = this.getRandomInt(10);
     this.columnDefinitions.forEach(cd => {
-      if (cd.def.endsWith('' + end)){
+      if (cd.def.endsWith('' + end)) {
         cd.hide = false;
       }
     });
@@ -281,16 +274,17 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     return Math.floor(Math.random() * max);
   }
 
-  testKeyPress(event: any): void{
-    if (event.ctrlKey && event.keyCode === 10){
+  testKeyPress(event: any): void {
+    if (event.ctrlKey && event.keyCode === 10) {
       this.requirementsDataService.copyRequirement(this.selectedRequirements);
     }
   }
 
   openDialog(): void {
-    this.dialog.open(VariantDialogComponent, { data : {id: ''}});
+    this.dialog.open(VariantDialogComponent, {data: {id: ''}});
   }
-  getSelectedRequirment(requirements: Requirements): void{
+
+  getSelectedRequirment(requirements: Requirements): void {
     this.selectedRequirements = requirements;
   }
 
@@ -306,8 +300,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   checkAchrived(variantsTitleElement: Variants[]): void {
-    if (variantsTitleElement.length > 0 && variantsTitleElement[0].archived){
-      this.dialog.open(VariantDialogComponent, { data : {id: '' + variantsTitleElement[0].entityId}});
+    if (variantsTitleElement.length > 0 && variantsTitleElement[0].archived) {
+      this.dialog.open(VariantDialogComponent, {data: {id: '' + variantsTitleElement[0].entityId}});
     }
   }
 
@@ -318,7 +312,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         retValue = value.points;
       }
     });
-    if (retValue === 0){
+    if (retValue === 0) {
       retValue = impact.value;
     }
     return retValue;
@@ -327,8 +321,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   show(element: Requirements, impact: Impact): boolean {
     let retValue = false;
     this.showElement.forEach(se => {
-      if (se.req === element.rootEntityId && se.imp === impact.id){
-        retValue =  true;
+      if (se.req === element.rootEntityId && se.imp === impact.id) {
+        retValue = true;
       }
     });
     return retValue;
