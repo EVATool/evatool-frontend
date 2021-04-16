@@ -2,13 +2,15 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 import {AnalysisRestService} from './analysis-rest.service';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDTO} from '../../model/AnalysisDTO';
+import {LogService} from '../../../shared/services/log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnalysisDataService {
 
-  constructor(private analysisRestService: AnalysisRestService) {
+  constructor(private analysisRestService: AnalysisRestService, private logger: LogService) {
+
   }
 
   @Output() analysisSaved: EventEmitter<Analysis> = new EventEmitter<Analysis>();
@@ -60,6 +62,7 @@ export class AnalysisDataService {
 
       }
     ).subscribe();
+    this.logger.info(this, 'Analysis created.');
   }
 
   update(analysis: Analysis): void {
@@ -74,12 +77,14 @@ export class AnalysisDataService {
       date: analysis.date
     }).subscribe(() => {
       this.loadAllAnalysis();
+      this.logger.info(this, 'Analysis updated.');
     });
   }
 
   loadAnalysis(id: string): void {
     this.analysisRestService.getAnalysisById(id).subscribe((analysisDto: AnalysisDTO) => {
       this.currentAnalysis = AnalysisDataService.fromDto(analysisDto);
+      this.logger.info(this, 'Analysis loaded.');
     });
   }
 
@@ -105,6 +110,14 @@ export class AnalysisDataService {
 
       this.templateAnalyses = this.analysisArray.filter(ana => ana.isTemplate);
       this.analyses = this.analysisArray.filter(ana => !ana.isTemplate);
+    });
+    this.logger.info(this, 'All Analyses loaded.');
+  }
+
+  deleteAnalysis(analysis: Analysis): void {
+    this.analysisRestService.deleteAnalysis(analysis).subscribe(() => {
+      this.loadAllAnalysis();
+      this.logger.info(this, 'Analysis deleted');
     });
   }
 
