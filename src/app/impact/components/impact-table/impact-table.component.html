@@ -99,7 +99,8 @@
               <div *ngIf="impact.edit">
                  <textarea matInput cdkTextareaAutosize [(ngModel)]="impact.description"
                            placeholder="Describe the impact..."
-                           (change)="descriptionChange(impact, $event)"></textarea>
+                           (input)="descriptionChange(impact, $event)"></textarea>
+                <!-- Workaround with highlight search. SHOULD be (change), not (input) -->
               </div>
               <div [innerHTML]="impact.description | highlightSearch: filterValues.highlight " *ngIf="!impact.edit">
               </div>
