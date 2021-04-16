@@ -26,7 +26,7 @@
                   placeholder="Describe the value..." (change)="descriptionChange(value)"></textarea>
         </div>
         <div class="delete-button-container">
-          <button mat-raised-button (click)="deleteValue(value)" matTooltip="Delete Value" matTooltipHideDelay="100"
+          <button type="button" mat-raised-button (click)="deleteValue(value)" matTooltip="Delete Value" matTooltipHideDelay="100"
                   matTooltipPosition="above">
             <mat-icon>delete</mat-icon>
           </button>
@@ -39,7 +39,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<button mat-raised-button class="add-value-button" (click)="createValue()">
+<button type="button" mat-raised-button class="add-value-button" (click)="createValue()">
   <mat-icon>add</mat-icon>
   {{type | titlecase}} Value
 </button>
