@@ -1,9 +1,13 @@
 import {Requirements} from '../models/Requirements';
 import {MatTable} from '@angular/material/table';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {RequirementsRestService} from "../services/requirements/requirements-rest.service";
-import {Router} from "@angular/router";
-import {RequirementsDataService} from "../services/requirements/requirements-data.service";
+import {RequirementsRestService} from '../services/requirements/requirements-rest.service';
+import {Router} from '@angular/router';
+import {RequirementsDataService} from '../services/requirements/requirements-data.service';
+import {RequirementTableFilterEvent} from '../components/requirement-table-filter-bar/RequirementTableFilterEvent';
+import {RequirementTableFilterBarComponent} from '../components/requirement-table-filter-bar/requirement-table-filter-bar.component';
+import {Impact} from '../../impact/models/Impact';
+import {RequirementsTableComponent} from '../components/requirement-table/requirements-table.component';
 
 @Component({
   selector: 'app-requirement-main',
@@ -11,7 +15,9 @@ import {RequirementsDataService} from "../services/requirements/requirements-dat
   styleUrls: ['./requirement-main.component.css']
 })
 export class RequirementMainComponent implements OnInit, AfterViewInit  {
-  @ViewChild(MatTable) table!: MatTable<any>;
+   // @ViewChild(MatTable) table!: MatTable<any>;
+  @ViewChild(RequirementTableFilterBarComponent) filterBar!: RequirementTableFilterBarComponent;
+  @ViewChild(RequirementsTableComponent) table!: RequirementsTableComponent;
   editField: string;
   data: Requirements[] = [];
   idForProject = '';
@@ -38,5 +44,8 @@ export class RequirementMainComponent implements OnInit, AfterViewInit  {
 
   addRequirements(): void {
     this.dataService.createRequirement(this.idForProject);
+  }
+  filterBarChanged(event: RequirementTableFilterEvent) {
+    this.table.filterChange(event);
   }
 }

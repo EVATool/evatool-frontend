@@ -39,6 +39,9 @@ export class ImpactTableFilterBarComponent implements OnInit {
     this.stakeholderDataService.loadedStakeholders.subscribe((stakeholders) => {
       this.stakeholdersChanged(stakeholders);
     });
+    this.stakeholderDataService.changedStakeholders.subscribe((stakeholders) => {
+      this.stakeholdersChanged(stakeholders);
+    });
 
     this.valueDataService.loadedValues.subscribe((values) => {
       this.valuesChanged(values);

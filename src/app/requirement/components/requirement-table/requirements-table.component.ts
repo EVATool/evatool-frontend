@@ -7,11 +7,13 @@ import {RequirementsRestService} from '../../services/requirements/requirements-
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
-import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Variants} from '../../models/Variants';
 import {MatSliderChange} from '@angular/material/slider';
 import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
+import {RequirementTableFilterEvent} from '../requirement-table-filter-bar/RequirementTableFilterEvent';
+import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
+import {SliderFilterBoundary, SliderFilterType} from '../../../shared/components/impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-requirement-table',
@@ -26,21 +28,31 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   impactSoureces: Impact[] = [];
   variantsSoureces: Variants[] = [];
   tableDatasource: MatTableDataSource<Requirements> = new MatTableDataSource<Requirements>();
-  idForProject = '';
   showElement = [
     {req: '', imp: ''}
   ];
   columnDefinitions = [
-    { def: 'uniqueString', hide: true },
-    { def: 'requirementDescription', hide: true },
-    { def: 'variantsTitle', hide: true },
-    { def: 'values', hide: true }
+    {def: 'uniqueString', hide: true},
+    {def: 'requirementDescription', hide: true},
+    {def: 'variantsTitle', hide: true},
+    {def: 'values', hide: true}
   ];
+  filterValues: any = {
+    id: '',
+    variants: [],
+    valueSystem: [],
+    impacts: [],
+    value: '',
+    description: '',
+    highlight: ''
+  };
   private selectedRequirements: Requirements = new Requirements();
+  private impactsToShow: string[] = [];
+
   constructor(private requirementsRestService: RequirementsRestService,
-              private requirementsDataService: RequirementsDataService,
+              public requirementsDataService: RequirementsDataService,
               private router: Router,
-              private dialog: MatDialog){
+              private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -51,6 +63,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       this.requirementsDataService.loadedRequirements.subscribe((requirements: Requirements[]) => {
         this.tableDatasource = new MatTableDataSource<Requirements>(requirements);
         this.initSorting();
+        this.initFiltering();
       });
       this.requirementsDataService.changedRequirements.subscribe((requirements: Requirements[]) => {
         this.tableDatasource.data = requirements;
@@ -75,8 +88,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         });
         let impactIdList: string[] = [];
         this.impactSoureces.forEach(value => {
-          impactIdList = impactIdList.concat(value.id);
-          this.columnDefinitions.push({def: value.id, hide: true});
+          impactIdList = impactIdList.concat(value.uniqueString);
+          this.columnDefinitions.push({def: value.uniqueString, hide: true});
         });
         this.displayedColumns = this.displayedColumns.concat(impactIdList);
       });
@@ -97,32 +110,89 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     this.requirementsDataService.onInit();
   }
 
-  getDisplayedColumns(): string[] {
-    // this.randomFilter();
-    return this.columnDefinitions
-      .filter(cd => cd.hide)
-      .map(cd => cd.def);
+  private initFiltering(): void {
+    this.tableDatasource.filterPredicate = this.createFilter();
   }
+
+  private updateFilter(): void {
+    this.tableDatasource.filter = JSON.stringify(this.filterValues);
+  }
+
+  private createFilter(): (data: any, filter: string) => boolean {
+    return (data: Impact, filter: string): boolean => {
+      const search = JSON.parse(filter);
+
+      const variantsTitles = data.variantsTitle.map((v: Variants) => v.variantsTitle);
+      const variantsFilter = search.variants.length === 0 || search.variants.every((s: string) => variantsTitles.includes(s));
+
+      const valueTitles = data.values.map((v: Dimension) => v.valueTitle);
+      const valueSystemFilter = search.valueSystem.length === 0 || search.valueSystem.every((s: string) => valueTitles.includes(s));
+
+      let valueFilter = true;
+      data.requirementImpactPoints.forEach((s: RequirementImpactPoints) => {
+        const minValue = Math.min(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
+        const maxValue = Math.max(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
+        if (s.points !== null && !(s.points >= minValue && s.points <= maxValue)) {
+          valueFilter = false;
+        }
+      });
+      return variantsFilter && valueSystemFilter && valueFilter;
+    };
+  }
+
+  filterChange(event: RequirementTableFilterEvent): void {
+    this.filterValues.highlight = event.highlightFilter;
+    this.filterValues.value = event.valueFilter;
+    this.filterValues.variants = event.variantsFilter;
+    this.filterValues.valueSystem = event.valueSystemFilter;
+    this.filterValues.impacts = event.impactFilter;
+    this.updateFilter();
+    this.updateColums();
+  }
+
+  updateColums(): void{
+    this.impactsToShow = this.filterValues.impacts;
+    this.displayedColumns = this.getDisplayedColumns();
+  }
+
+  getDisplayedColumns(): string[]{
+    const defaultColums: string[] = ['uniqueString', 'requirementDescription', 'variantsTitle', 'values'];
+    return this.columnDefinitions
+      .filter(cd => {
+        if (this.impactsToShow.length === 0){
+          return true;
+        }
+        if (defaultColums.includes(cd.def)) {
+          return true;
+        }
+        if (this.impactsToShow.includes(cd.def)){
+          return true;
+        }
+        return false;
+      }).map(cd => cd.def);
+  }
+
   private initSorting(): void {
     this.tableDatasource.sort = this.sort;
-    // const sortState: Sort = {active: 'Requirements', direction: 'asc'};
-    // this.sort.active = sortState.active;
-    // this.sort.direction = sortState.direction;
-    // this.sort.sortChange.emit(sortState);
   }
+
   concatDimension(parameter: any): string {
     let value = '';
     const dimension: Dimension[] = parameter.values;
-    if (dimension == null){ return value; }
+    if (dimension == null) {
+      return value;
+    }
     dimension.forEach(value1 => value = value.concat(value1.valueTitle, '\n'));
     return value;
   }
 
   isPositiv(element: Requirements, impact: Impact): boolean {
-    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) { return false; }
+    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) {
+      return false;
+    }
     let retValue = false;
     element.requirementImpactPoints.forEach(value => {
-      if (value.entityId === impact.id){
+      if (value.entityId === impact.id) {
         const points: number | null = value.points;
         if (points && 0 < points) {
           retValue = true;
@@ -133,10 +203,12 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   isNegativ(element: Requirements, impact: Impact): boolean {
-    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) { return false; }
+    if (element.requirementImpactPoints == null || element.requirementImpactPoints.length === 0) {
+      return false;
+    }
     let retValue = false;
     element.requirementImpactPoints.forEach(value => {
-      if (value.entityId === impact.id){
+      if (value.entityId === impact.id) {
         const points: number | null = value.points;
         if (points && 0 > points) {
           retValue = true;
@@ -150,17 +222,17 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     let exist = false;
     let toDelete;
     this.showElement.forEach(se => {
-      if (se.req === element.rootEntityId && se.imp === impact.id){
-        exist =  true;
+      if (se.req === element.rootEntityId && se.imp === impact.id) {
+        exist = true;
         toDelete = se;
       }
     });
-    if (exist && toDelete != null){
+    if (exist && toDelete != null) {
       const index = this.showElement.indexOf(toDelete, 0);
       if (index > -1) {
         this.showElement.splice(index, 1);
       }
-    }else{
+    } else {
       this.showElement.push({req: element.rootEntityId, imp: impact.id});
     }
   }
@@ -168,14 +240,14 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   valueChange(element: Requirements, impact: Impact, event: MatSliderChange): void {
     console.log(event.value);
     if (event.value !== null) {
-      if (event.value === 0.0) {
+      if (event.value === impact.value) {
         let toDelete: null | RequirementImpactPoints = null;
         element.requirementImpactPoints.forEach(value => {
           if (value.entityId === impact.id) {
             toDelete = value;
           }
         });
-        if (toDelete != null){
+        if (toDelete != null) {
           const index = element.requirementImpactPoints.indexOf(toDelete, 0);
           if (index > -1) {
             element.requirementImpactPoints.splice(index, 1);
@@ -202,7 +274,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     this.updateRequirement(element);
   }
 
-  descriptionChange(requirements: Requirements, event: Event): void {
+  descriptionChange(requirements: Requirements): void {
     this.updateRequirement(requirements);
   }
 
@@ -214,29 +286,17 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     this.requirementsDataService.updateRequirements(requirements);
   }
 
-  private randomFilter(): void{
-    const end = this.getRandomInt(10);
-    this.columnDefinitions.forEach(cd => {
-      if (cd.def.endsWith('' + end)){
-        cd.hide = false;
-      }
-    });
-  }
-
-  private getRandomInt(max: number): number {
-    return Math.floor(Math.random() * max);
-  }
-
-  testKeyPress(event: any): void{
-    if (event.ctrlKey && event.keyCode === 10){
+  testKeyPress(event: any): void {
+    if (event.ctrlKey && event.keyCode === 10) {
       this.requirementsDataService.copyRequirement(this.selectedRequirements);
     }
   }
 
   openDialog(): void {
-    this.dialog.open(VariantDialogComponent, { data : {id: ''}});
+    this.dialog.open(VariantDialogComponent, {data: {id: ''}});
   }
-  getSelectedRequirment(requirements: Requirements): void{
+
+  getSelectedRequirment(requirements: Requirements): void {
     this.selectedRequirements = requirements;
   }
 
@@ -252,19 +312,21 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   checkAchrived(variantsTitleElement: Variants[]): void {
-    if (variantsTitleElement.length > 0 && variantsTitleElement[0].archived){
-      this.dialog.open(VariantDialogComponent, { data : {id: '' + variantsTitleElement[0].entityId}});
+    if (variantsTitleElement.length > 0 && variantsTitleElement[0].archived) {
+      this.dialog.open(VariantDialogComponent, {data: {id: '' + variantsTitleElement[0].entityId}});
     }
   }
 
   valueForCell(element: Requirements, impact: Impact): number {
     let retValue: number | null = 0;
+    let found = false ;
     element.requirementImpactPoints.forEach(value => {
       if (value.entityId === impact.id) {
         retValue = value.points;
+        found = true;
       }
     });
-    if (retValue === 0){
+    if (!found) {
       retValue = impact.value;
     }
     return retValue;
@@ -273,8 +335,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   show(element: Requirements, impact: Impact): boolean {
     let retValue = false;
     this.showElement.forEach(se => {
-      if (se.req === element.rootEntityId && se.imp === impact.id){
-        retValue =  true;
+      if (se.req === element.rootEntityId && se.imp === impact.id) {
+        retValue = true;
       }
     });
     return retValue;
