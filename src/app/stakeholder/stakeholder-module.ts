@@ -22,7 +22,7 @@ import {HighlightSearchPipe} from '../shared/pipes/highlightSearch/highlight-sea
 
 @NgModule({
   declarations: [StakeholderMainComponent, StakeholderTableComponent, StakeholderPrioComponent,
-    StakeholderLevelComponent, StakeholderImpactComponent, StakeholderFilterbarComponent, HighlightSearchPipe],
+    StakeholderLevelComponent, StakeholderImpactComponent, StakeholderFilterbarComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -41,7 +41,6 @@ import {HighlightSearchPipe} from '../shared/pipes/highlightSearch/highlight-sea
   exports: [
     StakeholderMainComponent,
     StakeholderLevelComponent,
-    HighlightSearchPipe
   ]
 })
 export class StakeholderModule {

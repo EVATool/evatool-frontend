@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {SampleDataService} from "../../spec/sample-data.service";
 import {MockableService} from "../mockable.service";
+import {RestService} from "../../../shared/services/rest.service";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class ImpactRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyImpactDtos);
     } else {
-      return this.http.get<ImpactDto[]>(RestSettings.impactsUrl + "?analysisId=" + analysisId);
+      return this.http.get<ImpactDto[]>(RestService.getImpactsURL() + "?analysisId=" + analysisId);
     }
   }
 
@@ -37,7 +38,7 @@ export class ImpactRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(impactDto);
     } else {
-      return this.http.post(RestSettings.impactsUrl, impactDto, RestSettings.httpOptions);
+      return this.http.post(RestService.getImpactsURL(), impactDto, RestSettings.httpOptions);
     }
   }
 
@@ -46,7 +47,7 @@ export class ImpactRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(impactDto);
     } else {
-      return this.http.put(RestSettings.impactsUrl, impactDto, RestSettings.httpOptions);
+      return this.http.put(RestService.getImpactsURL(), impactDto, RestSettings.httpOptions);
     }
   }
 
@@ -55,7 +56,7 @@ export class ImpactRestService extends MockableService {
     if (this.useDummyData(this.data.offline)) {
       return of(impactDto);
     } else {
-      return this.http.delete(RestSettings.impactsUrl + '/' + impactDto.id);
+      return this.http.delete(RestService.getImpactsURL() + '/' + impactDto.id);
     }
   }
 }

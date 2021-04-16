@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTabGroup} from '@angular/material/tabs';
 import {Router} from '@angular/router';
-import {LogService} from "../../shared/services/log.service";
-import {ImpactMainComponent} from "../../impact/impact-main/impact-main.component";
+import {LogService} from '../../shared/services/log.service';
+import {ImpactMainComponent} from '../../impact/impact-main/impact-main.component';
+import {RequirementsDataService} from '../../requirement/services/requirements/requirements-data.service';
+import {StakeholderDataService} from '../../stakeholder/service/stakeholder-data.service';
 
 @Component({
   selector: 'app-shell-main',
@@ -16,6 +18,8 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
   analysisId = '';
 
   constructor(
+    private requirementsDataService: RequirementsDataService,
+    private stakeholderDataService: StakeholderDataService,
     private logger: LogService,
     private router: Router) {
 
@@ -36,7 +40,14 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
 
   }
 
-  tabChanged(event: number) {
+  tabChanged(event: number): void {
     this.logger.info(this, 'Selected Tab Changed to ' + event);
+    if (event === 0){
+      this.stakeholderDataService.loadStakeholder();
+    }else if (event === 2){
+      this.requirementsDataService.onInit();
+    }else if (event === 1){
+      this.impactMain.tabActivated();
+    }
   }
 }
