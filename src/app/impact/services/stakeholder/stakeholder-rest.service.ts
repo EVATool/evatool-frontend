@@ -23,12 +23,12 @@ export class StakeholderRestService extends MockableService {
 
   }
 
-  getStakeholders(analysisId: string): Observable<StakeholderDto[]> {
+  getStakeholders(): Observable<StakeholderDto[]> {
     this.logger.info(this, 'Get all Stakeholders');
     if (this.useDummyData(this.data.offline)) {
       return of(this.data.dummyStakeholderDtos);
     } else {
-      return this.http.get<StakeholderDto[]>(RestService.getStakeholdersURL() + "?analysisId=" + analysisId);
+      return this.http.get<StakeholderDto[]>(RestService.getStakeholdersURL() );
     }
   }
 

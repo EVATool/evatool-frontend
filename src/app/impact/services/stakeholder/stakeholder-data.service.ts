@@ -24,7 +24,7 @@ export class StakeholderDataService {
   onInit(): void {
     // Load stakeholders.
     this.analysisDataService.loadedAnalyses.subscribe(analysis => {
-      this.stakeholderRestService.getStakeholders(analysis.id).subscribe(stks => {
+      this.stakeholderRestService.getStakeholdersByAnalysisId(analysis.id).subscribe(stks => {
         const fromDtos: Stakeholder[] = [];
         stks.forEach(stk => {
           fromDtos.push(this.stakeholderMapperService.fromDto(stk));
@@ -38,7 +38,7 @@ export class StakeholderDataService {
 
   reload(): void {
     // Reload stakeholders.
-    this.stakeholderRestService.getStakeholders(this.analysisDataService.getCurrentAnalysis().id).subscribe(stks => {
+    this.stakeholderRestService.getStakeholdersByAnalysisId(this.analysisDataService.getCurrentAnalysis().id).subscribe(stks => {
       const newStakeholders: Stakeholder[] = [];
       stks.forEach(stk => {
         newStakeholders.push(this.stakeholderMapperService.fromDto(stk));

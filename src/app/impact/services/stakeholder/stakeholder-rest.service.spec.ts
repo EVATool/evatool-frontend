@@ -16,7 +16,7 @@ export class MockedStakeholderRestService extends StakeholderRestService {
     logger: LogService,
     http: HttpClient,
     data: SampleDataService) {
-    super(logger, http, data)
+    super(logger, http, data);
     this.mocked = true;
   }
 }
