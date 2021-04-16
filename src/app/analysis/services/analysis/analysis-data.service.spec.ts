@@ -2,8 +2,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {TestBed} from '@angular/core/testing';
 
 import {AnalysisDataService} from './analysis-data.service';
-import {AnalysisSampleDataService} from '../spec/analysis-sample-data.service';
-import {RestMockProvidersAnalysis} from '../spec/RestMockProvidersAnalysis';
+import {AnalysisSampleDataService} from '../spec-analysis/analysis-sample-data.service';
+import {RestMockProvidersAnalysis} from '../spec-analysis/RestMockProvidersAnalysis';
 
 describe('AnalysisDataService', () => {
   let service: AnalysisDataService;

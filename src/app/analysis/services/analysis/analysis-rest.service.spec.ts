@@ -2,7 +2,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {AnalysisRestService} from './analysis-rest.service';
 import {Injectable} from '@angular/core';
 import {LogService} from '../../../shared/services/log.service';
-import {AnalysisSampleDataService} from '../spec/analysis-sample-data.service';
+import {AnalysisSampleDataService} from '../spec-analysis/analysis-sample-data.service';
 import {Observable, of} from 'rxjs';
 import {AnalysisDTO} from '../../model/AnalysisDTO';
 import {Analysis} from '../../model/Analysis';

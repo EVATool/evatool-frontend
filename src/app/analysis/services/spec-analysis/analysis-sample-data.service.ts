@@ -84,14 +84,14 @@ export class AnalysisSampleDataService {
     },
   ];
 
-  public dummyDTOS = this.dummyAnalysisDTOs;
+  public analysisDummyDTOS = this.dummyAnalysisDTOs;
 
   getDummyAnalysesDTOs(): AnalysisDTO[] {
-    return this.dummyDTOS;
+    return this.analysisDummyDTOS;
   }
 
   getDummyAnalysisDTO(): AnalysisDTO {
-    return this.dummyDTOS[0];
+    return this.analysisDummyDTOS[0];
   }
 
   getDummyAnalysis(): Analysis {
@@ -99,10 +99,10 @@ export class AnalysisSampleDataService {
   }
 
   setup(): void {
-    this.dummyDTOS = this.dummyAnalysisDTOs;
+    this.analysisDummyDTOS = this.dummyAnalysisDTOs;
   }
 
   delete(): void {
-    this.dummyDTOS.pop();
+    this.analysisDummyDTOS.pop();
   }
 }
