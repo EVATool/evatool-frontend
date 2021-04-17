@@ -1,9 +1,9 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {ValueRestService} from '../value/value-rest.service';
-import {MockedValueRestService} from '../value/value-rest.service.spec';
+import {StakeholderRestService} from '../stakeholder-rest.service';
+import {MockedStakeholderRestService} from '../stakeholder-rest.service.spec';
 
-export class RestMockProvidersValues {
+export class RestMockProvidersStakeholder {
   public static readonly imports: any[] = [
     HttpClientTestingModule,
     RouterTestingModule,
@@ -11,8 +11,8 @@ export class RestMockProvidersValues {
 
   public static readonly providers: any[] = [
     {
-      provide: ValueRestService,
-      useClass: MockedValueRestService
+      provide: StakeholderRestService,
+      useClass: MockedStakeholderRestService
     }
   ];
 }

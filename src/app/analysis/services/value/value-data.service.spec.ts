@@ -28,7 +28,7 @@ describe('ValueDataService', () => {
     expect(service.values.length).toBeGreaterThanOrEqual(3);
   });
 
-  it('create default value', () => {
+  it('create value', () => {
     service.createValue(dataService.getDummyValue());
     expect(service.values.length).toBeGreaterThanOrEqual(1);
   });

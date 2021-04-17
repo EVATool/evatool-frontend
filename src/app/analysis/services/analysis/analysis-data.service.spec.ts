@@ -33,7 +33,7 @@ describe('AnalysisDataService', () => {
     expect(service.getCurrentAnalysis().rootEntityID === '1');
   });
 
-  it('create default Analysis', () => {
+  it('create Analysis', () => {
     service.save(dataService.getDummyAnalysis());
   });
 
