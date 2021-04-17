@@ -6,7 +6,7 @@ import {LogService} from '../../shared/services/log.service';
 @Component({
   selector: 'app-value-template',
   templateUrl: './value-template.component.html',
-  styleUrls: ['./value-template.component.css']
+  styleUrls: ['./value-template.component.scss']
 })
 export class ValueTemplateComponent implements OnInit, AfterViewInit, OnChanges {
   // @Input() template!: Analysis;

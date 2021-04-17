@@ -10,7 +10,7 @@ import {ValueTemplateComponent} from '../value-template/value-template.component
 @Component({
   selector: 'app-analysis-main',
   templateUrl: './analysis-main.component.html',
-  styleUrls: ['./analysis-main.component.css']
+  styleUrls: ['./analysis-main.component.scss']
 })
 export class AnalysisMainComponent implements OnInit {
 
