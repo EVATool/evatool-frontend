@@ -17,6 +17,7 @@ export class RequirementsDataService {
 
   requirements: Requirements[] = [];
   requirementsSource: Requirements[] = [];
+  public searchtext = '';
 
   constructor(private requirementsRestService: RequirementsRestService,
               private router: Router) {
@@ -87,5 +88,9 @@ export class RequirementsDataService {
       this.changedRequirement.emit(element);
       this.changedRequirements.emit(this.requirements);
     });
+  }
+
+  setSearchText(text: string): void{
+    this.searchtext = text;
   }
 }

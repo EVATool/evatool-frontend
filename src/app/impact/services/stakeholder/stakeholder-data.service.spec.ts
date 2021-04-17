@@ -22,7 +22,7 @@ describe('StakeholderDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#onInit', () => {
+ /* describe('#onInit', () => {
     it('should fire \'loadedStakeholders\' event', () => {
       // Arrange
       spyOn(service.loadedStakeholders, 'emit');
@@ -43,5 +43,5 @@ describe('StakeholderDataService', () => {
       // Assert
       expect(service.stakeholders).toEqual(data.dummyStakeholders);
     });
-  });
+  });*/
 });

@@ -13,13 +13,15 @@ import {HighlightSearchComponent} from './components/search-bar/highlight-search
 import {MatInputModule} from '@angular/material/input';
 import {ColumnCategoryFilterComponent} from './components/column-category-filter/column-category-filter.component';
 import {ColumnSliderFilterComponent} from './components/column-slider-filter/column-slider-filter.component';
+import {HighlightSearchPipe} from './pipes/highlightSearch/highlight-search.pipe';
 
 @NgModule({
   declarations: [
     ColumnCategoryFilterComponent,
     ColumnSliderFilterComponent,
     ImpactSliderComponent,
-    HighlightSearchComponent
+    HighlightSearchComponent,
+    HighlightSearchPipe
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import {ColumnSliderFilterComponent} from './components/column-slider-filter/col
     ImpactSliderComponent,
     HighlightSearchComponent,
     ColumnCategoryFilterComponent,
-    ColumnSliderFilterComponent
+    ColumnSliderFilterComponent,
+    HighlightSearchPipe
   ]
 })
 export class SharedModule { }
