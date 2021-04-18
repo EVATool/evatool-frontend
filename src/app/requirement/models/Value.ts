@@ -1,4 +1,4 @@
-export class Dimension {
+export class Value {
   [k: string]: any;
 
   entityId = '';

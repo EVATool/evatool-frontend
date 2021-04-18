@@ -1,4 +1,4 @@
-import {Dimension} from '../../models/Dimension';
+import {Value} from '../../models/Value';
 import {DimensionRestService} from './dimension-rest.service';
 import {EventEmitter, Injectable, Output} from '@angular/core';
 
@@ -9,9 +9,9 @@ export class DimensionDataService {
   @Output() dimensionsLoaded: EventEmitter<void> = new EventEmitter();
   @Output() dimensionTypesLoaded: EventEmitter<void> = new EventEmitter();
 
-  dummyDimensions: Dimension[] = [];
+  dummyDimensions: Value[] = [];
 
-  public dimensions: Dimension[] = this.dummyDimensions;
+  public dimensions: Value[] = this.dummyDimensions;
 
   constructor(private restService: DimensionRestService) {
 
@@ -30,28 +30,28 @@ export class DimensionDataService {
     });
   }
 
-  getDimensions(): Dimension[] {
+  getDimensions(): Value[] {
     return this.dimensions;
   }
 
-  getDefaultDimension(): Dimension {
+  getDefaultDimension(): Value {
     return this.dimensions[0];
   }
 
-  createDimension(dimension: Dimension): void {
+  createDimension(dimension: Value): void {
     this.restService.createDimension(dimension).subscribe(dim => {
       this.dimensions.push(dim);
     });
   }
 
-  updateDimension(dimension: Dimension): void {
+  updateDimension(dimension: Value): void {
     this.restService.updateDimension(dimension).subscribe(dim => {
       const index: number = this.dimensions.indexOf(dimension, 0);
       this.dimensions[index] = dim;
     });
   }
 
-  deleteDimension(dimension: Dimension): void {
+  deleteDimension(dimension: Value): void {
     this.restService.deleteDimension(dimension).subscribe(() => {
       const index: number = this.dimensions.indexOf(dimension, 0);
       this.dimensions.splice(index, 1);

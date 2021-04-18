@@ -1,4 +1,4 @@
-import {Dimension} from './Dimension';
+import {Value} from './Value';
 import {Variants} from "./Variants";
 import {RequirementImpactPoints} from "./RequirementImpactPoints";
 
@@ -8,7 +8,7 @@ export class Requirements{
   projectID = '';
   uniqueString = '';
   requirementDescription = '';
-  values!: Dimension[];
+  values!: Value[];
   requirementImpactPoints!: RequirementImpactPoints[];
   variantsTitle!: Variants[];
 }

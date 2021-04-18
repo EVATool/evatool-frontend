@@ -1,4 +1,4 @@
-import {Dimension} from './Dimension';
+import {Value} from './Value';
 
 export class Impact {
   [k: string]: any;
@@ -7,5 +7,5 @@ export class Impact {
   uniqueString = '';
   value = 0;
   description = '';
-  dimension!: Dimension;
+  dimension!: Value;
 }

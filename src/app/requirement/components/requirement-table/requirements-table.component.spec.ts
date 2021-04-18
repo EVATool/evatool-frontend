@@ -4,6 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {RequirementsTableComponent} from './requirements-table.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {RestMockProvidersRequirements} from '../../services/spec/RestMockProviders';
 
 describe('RequirementsTableComponent', () => {
   let component: RequirementsTableComponent;
@@ -11,7 +12,8 @@ describe('RequirementsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule, MatDialogModule],
+      imports: [HttpClientModule, RouterTestingModule, MatDialogModule, RestMockProvidersRequirements.imports],
+      providers: RestMockProvidersRequirements.providers,
       declarations: [RequirementsTableComponent]
     })
       .compileComponents();

@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Requirements} from '../../models/Requirements';
-import {Dimension} from '../../models/Dimension';
+import {Value} from '../../models/Value';
 import {Impact} from '../../models/Impact';
 import {MatTableDataSource} from '@angular/material/table';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
@@ -125,7 +125,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       const variantsTitles = data.variantsTitle.map((v: Variants) => v.variantsTitle);
       const variantsFilter = search.variants.length === 0 || search.variants.every((s: string) => variantsTitles.includes(s));
 
-      const valueTitles = data.values.map((v: Dimension) => v.valueTitle);
+      const valueTitles = data.values.map((v: Value) => v.valueTitle);
       const valueSystemFilter = search.valueSystem.length === 0 || search.valueSystem.every((s: string) => valueTitles.includes(s));
 
       let valueFilter = true;
@@ -178,7 +178,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   concatDimension(parameter: any): string {
     let value = '';
-    const dimension: Dimension[] = parameter.values;
+    const dimension: Value[] = parameter.values;
     if (dimension == null) {
       return value;
     }

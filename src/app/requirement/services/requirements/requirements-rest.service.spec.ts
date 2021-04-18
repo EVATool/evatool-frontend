@@ -22,7 +22,7 @@ import {RequirementsRestService} from './requirements-rest.service';
 import {Injectable} from '@angular/core';
 import {LogService} from '../../../shared/services/log.service';
 import {HttpClient} from '@angular/common/http';
-import {RequirementSampleDataService} from '../mock/sample-data-service';
+import {SampleDataService} from '../spec/sample-data-service';
 import {Observable, of} from 'rxjs';
 import {Requirements} from '../../models/Requirements';
 
@@ -34,7 +34,7 @@ export class MockedRequirementsRestService extends RequirementsRestService {
   constructor(
     logger: LogService,
     http: HttpClient,
-    private sampleData: RequirementSampleDataService) {
+    private sampleData: SampleDataService) {
     super(http);
   }
 

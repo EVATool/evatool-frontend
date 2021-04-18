@@ -27,7 +27,7 @@
 #add-impact-button-div{
   position: fixed;
   left: 1.5%;
-  bottom: 2.5%;
+  /*bottom: 2.5%;*/
   width: 100%;
 }
 .container .add-impact-button-container {

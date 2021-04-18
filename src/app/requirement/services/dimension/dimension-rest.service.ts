@@ -1,4 +1,4 @@
-import {Dimension} from './../../models/Dimension';
+import {Value} from '../../models/Value';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -24,23 +24,23 @@ export class DimensionRestService {
 
   }
 
-  getDimensions(): Observable<Dimension[]> {
-    return this.http.get<Dimension[]>(this.dimensionsUrl);
+  getDimensions(): Observable<Value[]> {
+    return this.http.get<Value[]>(this.dimensionsUrl);
   }
 
   getDimensionTypes(): Observable<string[]> {
     return this.http.get<string[]>(this.dimensionsUrl + '/types');
   }
 
-  createDimension(dimension: Dimension): Observable<any> {
+  createDimension(dimension: Value): Observable<any> {
     return this.http.post(this.dimensionsUrl, dimension, httpOptions);
   }
 
-  updateDimension(dimension: Dimension): Observable<any> {
+  updateDimension(dimension: Value): Observable<any> {
     return this.http.put(this.dimensionsUrl, dimension, httpOptions);
   }
 
-  deleteDimension(dimension: Dimension): Observable<any> {
+  deleteDimension(dimension: Value): Observable<any> {
     return this.http.delete(this.dimensionsUrl + '/' + dimension.entityId);
   }
 }

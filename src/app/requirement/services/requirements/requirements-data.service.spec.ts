@@ -1,12 +1,12 @@
 import {TestBed} from '@angular/core/testing';
 
 import {RequirementsDataService} from './requirements-data.service';
-import {RequirementSampleDataService} from '../mock/sample-data-service';
-import {RestMockProvidersRequirements} from '../mock/RestMockProviders';
+import {SampleDataService} from '../spec/sample-data-service';
+import {RestMockProvidersRequirements} from '../spec/RestMockProviders';
 
 describe('RequirementsDataService', () => {
   let service: RequirementsDataService;
-  let dataService: RequirementSampleDataService;
+  let dataService: SampleDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -15,7 +15,7 @@ describe('RequirementsDataService', () => {
       // imports: [HttpClientModule, RouterTestingModule]
     });
     service = TestBed.inject(RequirementsDataService);
-    dataService = TestBed.inject(RequirementSampleDataService);
+    dataService = TestBed.inject(SampleDataService);
     dataService.setup();
   });
 
