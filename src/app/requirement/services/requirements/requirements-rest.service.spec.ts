@@ -27,7 +27,7 @@ import {Observable, of} from 'rxjs';
 import {Requirements} from '../../models/Requirements';
 
 @Injectable({
-  provideIn: 'root'
+  providedIn: 'root'
 })
 
 export class MockedRequirementsRestService extends RequirementsRestService {
