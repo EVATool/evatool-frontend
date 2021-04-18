@@ -35,9 +35,9 @@ describe('RequirementsDataService', () => {
   });
 
   it('delete Requirement', () => {
-    const oldsize = service.matDataSource.data.length;
+    const oldsize = service.getMatDataSource().data.length;
     service.deleteRequirement(dataService.getDummyRequirement());
-    expect(oldsize).toBeLessThan(service.matDataSource.data.length);
+    expect(oldsize).toBeLessThan(service.getMatDataSource().data.length);
 
   });
 

@@ -52,6 +52,11 @@ export class RequirementsDataService {
     this.onInit();
   }
 
+  getMatDataSource(): MatTableDataSource<Requirements>{
+    this.onInit();
+    return this.matDataSource;
+  }
+
   createRequirement(idForProject: string): void {
     const requirementNew: Requirements = new Requirements();
     requirementNew.projectID = idForProject;
