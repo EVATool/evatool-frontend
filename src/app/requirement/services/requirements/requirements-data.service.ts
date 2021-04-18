@@ -2,6 +2,8 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Requirements} from '../../models/Requirements';
 import {RequirementsRestService} from './requirements-rest.service';
 import {Router} from '@angular/router';
+import {MatTableDataSource} from '@angular/material/table';
+import {Variant} from '../../../variant/models/Variant';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ export class RequirementsDataService {
   @Output() changedRequirement: EventEmitter<Requirements> = new EventEmitter();
   @Output() removedRequirement: EventEmitter<Requirements> = new EventEmitter();
   @Output() changedRequirements: EventEmitter<Requirements[]> = new EventEmitter();
+  matDataSource = new MatTableDataSource<Requirements>();
 
 
 
@@ -38,10 +41,15 @@ export class RequirementsDataService {
           };
           this.requirementsSource.push(requirement);
         });
+        this.matDataSource = new MatTableDataSource<Requirements>(this.requirements);
         this.requirements = this.requirementsSource;
         this.loadedRequirements.emit(this.requirements);
       });
     });
+  }
+
+  loadRequirements(): void{
+    this.onInit();
   }
 
   createRequirement(idForProject: string): void {
@@ -54,6 +62,13 @@ export class RequirementsDataService {
       this.changedRequirements.emit(this.requirements);
     });
   }
+
+  createRequirementt(): void {
+    const requirement = this.createDefaultRequirement();
+    this.requirements.push(requirement);
+    this.matDataSource = new MatTableDataSource<Requirements>(this.requirements);
+  }
+
   deleteRequirement(requirements: Requirements): void {
     this.requirementsRestService.deleteRequirements(requirements).subscribe(value => {
       const index = this.requirements.indexOf(requirements, 0);
@@ -93,4 +108,11 @@ export class RequirementsDataService {
   setSearchText(text: string): void{
     this.searchtext = text;
   }
+
+  private createDefaultRequirement(): Requirements {
+    const requirement = new Requirements();
+    requirement.editable = true;
+    return requirement;
+  }
+
 }
