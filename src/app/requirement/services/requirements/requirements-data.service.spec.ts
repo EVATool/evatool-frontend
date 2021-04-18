@@ -1,8 +1,6 @@
 import {TestBed} from '@angular/core/testing';
-import {HttpClientModule} from '@angular/common/http';
 
 import {RequirementsDataService} from './requirements-data.service';
-import {RouterTestingModule} from "@angular/router/testing";
 import {RequirementSampleDataService} from '../mock/sample-data-service';
 import {RestMockProvidersRequirements} from '../mock/RestMockProviders';
 

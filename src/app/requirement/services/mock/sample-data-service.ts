@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {Requirements} from '../../models/Requirements';
 
 @Injectable({
-  provideIn: 'root'
+  providedIn: 'root'
 })
-
 export class RequirementSampleDataService{
   constructor() {}
 
