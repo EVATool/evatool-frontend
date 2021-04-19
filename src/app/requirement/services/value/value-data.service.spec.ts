@@ -1,16 +1,16 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
 
-import {DimensionRestService} from './dimension-rest.service';
+import {ValueDataService} from './value-data.service';
 
-describe('DimensionRestService', () => {
-  let service: DimensionRestService;
+describe('DimensionDataService', () => {
+  let service: ValueDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule]
     });
-    service = TestBed.inject(DimensionRestService);
+    service = TestBed.inject(ValueDataService);
   });
 
   it('should be created', () => {

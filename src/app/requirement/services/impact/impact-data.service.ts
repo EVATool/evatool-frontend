@@ -1,4 +1,4 @@
-import {DimensionDataService} from '../dimension/dimension-data.service';
+import {ValueDataService} from '../value/value-data.service';
 import {Impact} from '../../models/Impact';
 import {EventEmitter, Injectable, Output} from '@angular/core';
 
@@ -13,9 +13,9 @@ export class ImpactDataService {
   impacts: Impact[] = this.dummyImpacts;
 
   constructor(
-    private dimensionDataService: DimensionDataService) {
+    private valueDataService: ValueDataService) {
     for (let impact of this.impacts) {
-      impact.dimension = this.dimensionDataService.getDimensions()[Math.floor(Math.random() * Math.floor(4))];
+      impact.valueSystem = this.valueDataService.getValues()[Math.floor(Math.random() * Math.floor(4))];
     }
   }
 
@@ -28,7 +28,7 @@ export class ImpactDataService {
 
     impact.id = 'TEST';
     impact.value = -0.9;
-    impact.dimension = this.dimensionDataService.getDefaultDimension();
+    impact.valueSystem = this.valueDataService.getDefaultValue();
 
     return impact;
   }

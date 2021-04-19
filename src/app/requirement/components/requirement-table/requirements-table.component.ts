@@ -82,7 +82,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
             uniqueString: impactRest.uniqueString,
             description: impactRest.description,
             value: impactRest.value,
-            dimension: impactRest.dimension
+            valueSystem: impactRest.valueSystem
           };
           this.impactSoureces.push(impact);
         });

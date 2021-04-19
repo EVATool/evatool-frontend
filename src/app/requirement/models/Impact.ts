@@ -7,5 +7,5 @@ export class Impact {
   uniqueString = '';
   value = 0;
   description = '';
-  dimension!: Value;
+  valueSystem!: Value;
 }
