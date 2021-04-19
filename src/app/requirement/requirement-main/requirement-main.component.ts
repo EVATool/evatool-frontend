@@ -12,7 +12,7 @@ import {RequirementsTableComponent} from '../components/requirement-table/requir
 @Component({
   selector: 'app-requirement-main',
   templateUrl: './requirement-main.component.html',
-  styleUrls: ['./requirement-main.component.css']
+  styleUrls: ['./requirement-main.component.scss']
 })
 export class RequirementMainComponent implements OnInit, AfterViewInit  {
    // @ViewChild(MatTable) table!: MatTable<any>;
