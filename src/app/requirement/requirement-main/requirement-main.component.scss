@@ -18,19 +18,46 @@
   top: 125px;
   right: 50px;
 }
-.add-impact-button-container {
-  position: fixed;
-  left: 1.5%;
-  bottom: 2.5%;
-  width: 100%;
-}
-#add-impact-button-div{
-  position: fixed;
-  left: 1.5%;
-  /*bottom: 2.5%;*/
-  width: 100%;
-}
-.container .add-impact-button-container {
+//.add-impact-button-div {
+//  position: fixed;
+//  left: 1.5%;
+//  bottom: 2.5%;
+//  width: 100%;
+//}
+//#add-requirement-button-div{
+//  position: fixed;
+//  left: 1.5%;
+//  /*bottom: 2.5%;*/
+//  width: 100%;
+//}
+//.container .add-requirement-button-div {
+//  flex: 0 1 auto;
+//  margin-left: auto;
+//}
+//.add-requirement-test-div {
+//  margin-left: 1.5vw;
+//  display: inline-block;
+//  font-size: 150%;
+//}
+
+.add-requirement-button-container {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+  display: inline-block;
+  opacity: 0.8;
+  transition: 250ms ease-out 100ms;
+  z-index: 10;
   flex: 0 1 auto;
-  margin-left: auto;
+
+  .add-requirement-text-container {
+    margin-right: 1.5vw;
+    display: inline-block;
+    font-size: 150%;
+  }
+}
+
+.add-requirement-button-container:hover {
+  opacity: 1 !important;
+  transition: 250ms ease-out 100ms;
 }
