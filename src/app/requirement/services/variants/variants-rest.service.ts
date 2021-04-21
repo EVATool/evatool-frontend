@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class VariantsRestService {
 
-  constructor() {
+  constructor(http: HttpClient) {
 
   }
 }

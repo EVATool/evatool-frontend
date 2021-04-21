@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Requirements} from '../../models/Requirements';
 import {VariantDTO} from '../../../variant/models/VariantDTO';
 import {Variant} from '../../../variant/models/Variant';
+import {ValueDto} from '../../../requirement/dtos/ValueDto';
+import {Value} from '../../../impact/models/Value';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class SampleDataService {
   constructor() {}
 
 
-  //Requirement
+  // Requirement test data
   dummyRequirements: Requirements[] = [
     {
       rootEntityId : '1',
@@ -43,6 +45,47 @@ export class SampleDataService {
 
   public dummyReq = this.dummyRequirements;
 
+  // Variants test data
+
+  dummyVariantDTOs: VariantDTO[] = [
+    {
+      id: '1', guiId: 'Var1', archived: false, subVariant: [], description: 'Description', title: 'Title', analysisId: '1'
+    },
+    {
+      id: '2', guiId: 'Var2', archived: false, subVariant: [], description: 'Description', title: 'Title', analysisId: '1'
+    },
+    {
+      id: '3', guiId: 'Var3', archived: false, subVariant: [], description: 'Description', title: 'Title', analysisId: '1'
+    },
+  ];
+
+  dummyVariantDTOsArchived: VariantDTO[] = [
+    {
+      id: '1', guiId: 'Var1', archived: true, subVariant: [], description: 'Description', title: 'Title', analysisId: '1'
+    },
+    {
+      id: '2', guiId: 'Var2', archived: false, subVariant: [], description: 'Description', title: 'Title', analysisId: '1'
+    },
+    {
+      id: '3', guiId: 'Var3', archived: false, subVariant: [], description: 'Description', title: 'Title', analysisId: '1'
+    },
+  ];
+
+
+  readonly dummyVariants: Variant[] = [
+    {
+      id: '1', guiId: 'Var1', description: 'Description', analysisId: '1', archived: false, editable: false, title: 'Titel 1'
+    },
+    {
+      id: '2', guiId: 'Var2', description: 'Description', analysisId: '1', archived: false, editable: false, title: 'Titel 1'
+    },
+    {
+      id: '3', guiId: 'Var3', description: 'Description', analysisId: '1', archived: false, editable: false, title: 'Titel 1'
+    }
+  ];
+
+  public dummyDTOS = this.dummyVariantDTOs;
+
   getDummyRequirements(): Requirements[] {
     return this.dummyReq;
   }
@@ -63,98 +106,26 @@ export class SampleDataService {
     this.dummyReq = this.dummyReq;
   }
 
-  //Variants
+  getDummyVariants(): Variant[] {
+    return this.dummyVariants;
+  }
 
-  dummyVariantDTOs: VariantDTO[] = [
-    {
-      id: '1',
-      guiId: 'Var1',
-      archived: false,
-      subVariant: [],
-      description: 'Description',
-      title: 'Title',
-      analysisId: '1'
-    },
-    {
-      id: '2',
-      guiId: 'Var2',
-      archived: false,
-      subVariant: [],
-      description: 'Description',
-      title: 'Title',
-      analysisId: '1'
-    },
-    {
-      id: '3',
-      guiId: 'Var3',
-      archived: false,
-      subVariant: [],
-      description: 'Description',
-      title: 'Title',
-      analysisId: '1'
-    },
-  ];
+  getDummyVariant(): Variant {
+    return this.dummyVariants[0];
+  }
 
-  dummyVariantDTOsArchived: VariantDTO[] = [
-    {
-      id: '1',
-      guiId: 'Var1',
-      archived: true,
-      subVariant: [],
-      description: 'Description',
-      title: 'Title',
-      analysisId: '1'
-    },
-    {
-      id: '2',
-      guiId: 'Var2',
-      archived: false,
-      subVariant: [],
-      description: 'Description',
-      title: 'Title',
-      analysisId: '1'
-    },
-    {
-      id: '3',
-      guiId: 'Var3',
-      archived: false,
-      subVariant: [],
-      description: 'Description',
-      title: 'Title',
-      analysisId: '1'
-    },
-  ];
+  getDummyVariantDTOs(): VariantDTO[] {
+    return this.dummyDTOS;
+  }
 
+  getDummyVariantDTO(): VariantDTO {
+    return this.dummyVariantDTOs[0];
+  }
 
-  readonly dummyVariants: Variant[] = [
-    {
-      id: '1',
-      guiId: 'Var1',
-      description: 'Description',
-      analysisId: '1',
-      archived: false,
-      editable: false,
-      title: 'Titel 1'
-    },
-    {
-      id: '2',
-      guiId: 'Var2',
-      description: 'Description',
-      analysisId: '1',
-      archived: false,
-      editable: false,
-      title: 'Titel 1'
-    },
-    {
-      id: '3',
-      guiId: 'Var3',
-      description: 'Description',
-      analysisId: '1',
-      archived: false,
-      editable: false,
-      title: 'Titel 1'
-    }
-  ];
-
-
+  setupVariants(): void {
+    this.dummyDTOS = this.dummyVariantDTOs;
+  }
+  
 }
+
+
