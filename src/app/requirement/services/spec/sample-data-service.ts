@@ -125,6 +125,38 @@ export class SampleDataService {
   setupVariants(): void {
     this.dummyDTOS = this.dummyVariantDTOs;
   }
+
+  readonly dummyValueDtos: ValueDto[] = [
+    {
+      entityId: '1', valueTitle: 'Feelings'
+    },
+    {
+      entityId: '2', valueTitle: 'Control'
+    },
+    {
+      entityId: '3', valueTitle: 'Finances'
+    },
+    {
+      entityId: '4', valueTitle: 'Safety'
+    },
+    {
+      entityId: '5', valueTitle: 'Care'
+    },
+    {
+      entityId: '6', valueTitle: 'Privacy'
+    },
+    {
+      entityId: '7', valueTitle: 'Self-Conception'
+    },
+    {
+      entityId: '8', valueTitle: 'Participation'
+    },
+    {
+      entityId: '9', valueTitle: 'Autonomy'
+    },
+  ];
+
+  readonly dummyValues: Value[] = [];
   
 }
 
