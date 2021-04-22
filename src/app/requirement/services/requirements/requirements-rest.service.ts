@@ -16,13 +16,6 @@ const httpOptions = { // Outsource!
   providedIn: 'root'
 })
 export class RequirementsRestService {
-
-  requirmentUrl = 'http://79.171.179.211:443/requirements'; // Outsource!
-  // requirmentUrl = 'http://localhost:8080/requirements'; // Outsource!
-  impactsUrl = 'http://79.171.179.211:443/impacts'; // Outsource!
-  // impactsUrl = 'http://localhost:8080/requirements/impacts'; // Outsource!
-  variantsUrl = 'http://79.171.179.211:443/variants'; // Outsource!
-
   constructor(private http: HttpClient) {
 
   }
@@ -36,8 +29,8 @@ export class RequirementsRestService {
   getImpactsAll(): Observable<Impact> {
     return this.http.get<any>(RestService.getImpactsURL());
   }
-  getVariants(): Observable<Variants> {
-    return this.http.get<any>(RestService.getVariantsURL());
+  getVariants(id: string): Observable<Variants> {
+    return this.http.get<any>(RestService.getVariantsURL() + '?analysisId=' + id);
   }
   createRequirements(requirement: Requirements): Observable<any> {
     return this.http.post(RestService.getRequirementesURL(), requirement, httpOptions);

@@ -32,7 +32,8 @@ export class VariantsDataService {
   }
 
   onInit(): void {
-    this.requirementsRestService.getVariants().subscribe((result: any) => {
+    this.router.routerState.root.queryParams.subscribe(params => {
+    this.requirementsRestService.getVariants(params.id).subscribe((result: any) => {
       this.variantsSoureces = [];
       result.forEach((variantsRest: Variants) => {
         const variants: Variants = {
@@ -43,8 +44,8 @@ export class VariantsDataService {
         };
         this.variantsSoureces.push(variants);
       });
-
     });
+  });
   }
 
   getVariants(): Variants[] {

@@ -93,7 +93,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         });
         this.displayedColumns = this.displayedColumns.concat(impactIdList);
       });
-      this.requirementsRestService.getVariants().subscribe((result: any) => {
+      this.requirementsRestService.getVariants(params.id).subscribe((result: any) => {
         this.variantsSoureces = [];
         result.forEach((variantsRest: Variants) => {
           const variants: Variants = {

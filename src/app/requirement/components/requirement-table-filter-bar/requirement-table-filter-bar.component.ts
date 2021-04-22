@@ -11,6 +11,7 @@ import {RequirementsRestService} from '../../services/requirements/requirements-
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
 import {VariantsDataService} from '../../services/variants/variants-data.service';
 import {Impact} from "../../models/Impact";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-requirement-table-filter-bar',
@@ -35,13 +36,15 @@ export class RequirementTableFilterBarComponent implements OnInit {
     private valueDataService: ValueDataService,
     private requirementsRestService: RequirementsRestService,
     private requirementsDataService: RequirementsDataService,
-    private variantsDataService: VariantsDataService) {
+    private variantsDataService: VariantsDataService,
+    private router: Router) {
     this.requirementTableFilterEvent = RequirementTableFilterEvent.getDefault();
   }
 
   ngOnInit(): void {
     {
-        this.requirementsRestService.getVariants().subscribe((result: any) => {
+      this.router.routerState.root.queryParams.subscribe(params => {
+        this.requirementsRestService.getVariants(params.id).subscribe((result: any) => {
           this.variantsTest = [];
           result.forEach((variantsRest: Variants) => {
             const variants: Variants = {
@@ -60,7 +63,7 @@ export class RequirementTableFilterBarComponent implements OnInit {
           this.impacts.push(impactRest.uniqueString);
         });
       });
-
+      });
     }
     this.valueDataService.loadedValues.subscribe((values) => {
       this.valuesChanged(values);
