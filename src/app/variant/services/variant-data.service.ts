@@ -27,6 +27,9 @@ export class VariantDataService{
     this.loadVariants();
   }
 
+  /**
+   * Load all Variants and refresh MatTableDataSource.
+   */
   loadVariants(): void{
     this.variantRestService.getVariantsByAnalysisId(this.analysisid).subscribe((result: any) => {
       this.variants = [];
@@ -52,10 +55,17 @@ export class VariantDataService{
     });
   }
 
+  /**
+   * Get list of all Variants and refresh MatTableDataSource.
+   */
   getVariants(): Variant[]{
     return this.variants;
   }
 
+  /**
+   * Create an basic Variant Object.
+   * @private
+   */
   private createDefaultVariant(): Variant {
     const variant = new Variant();
     variant.editable = true;
@@ -63,6 +73,9 @@ export class VariantDataService{
     return variant;
   }
 
+  /**
+   * Add Variant to the MatTableDataSource. This object will be transmitted later to the server.
+   */
   createVariant(): void {
     const variant = this.createDefaultVariant();
     this.variants.push(variant);
@@ -70,6 +83,10 @@ export class VariantDataService{
     this.logger.info(this, 'Default Variant added.');
   }
 
+  /**
+   * This passing object will be transmitted to the server.
+   * @param variant
+   */
   save(variant: Variant): void {
     console.log(this.analysisid);
     this.variantRestService.createVariants(
@@ -87,12 +104,19 @@ export class VariantDataService{
     this.logger.info(this, 'Variant saved.');
   }
 
+  /**
+   * Reads the Analysis Id from Router URL.
+   */
   loadAnalysisIDFromRouter(): void{
     this.router.routerState.root.queryParams.subscribe((paramMap) => {
       this.analysisid = paramMap.id;
      });
   }
 
+  /**
+   * Set Variants as archived. After archived reloading MatTableDataSource by loadVariants();.
+   * @param variant
+   */
   archive(variant: Variant): void {
     this.variantRestService.updateVariants({
       id: variant.id,
@@ -109,6 +133,10 @@ export class VariantDataService{
 
   }
 
+  /**
+   * Unset Variants as archived. After unarchive reloading MatTableDataSource by loadVariants();.
+   * @param variant
+   */
   unarchive(variant: Variant): void {
     this.variantRestService.updateVariants({
       id: variant.id,
@@ -124,6 +152,10 @@ export class VariantDataService{
     });
   }
 
+  /**
+   * Delete Variants from Server. After delete reloading MatTableDataSource by loadVariants();.
+   * @param variant
+   */
   delete(variant: Variant): void {
     this.variantRestService.deleteVariants(variant.id).subscribe(() => {
       this.logger.info(this, 'Variant archived.');
@@ -131,6 +163,10 @@ export class VariantDataService{
     });
   }
 
+  /**
+   * Update Variants at Server. After update reloading MatTableDataSource by loadVariants();.
+   * @param variant
+   */
   update(variant: Variant): void {
     this.variantRestService.updateVariants({
       id: variant.id,
