@@ -128,6 +128,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       const valueSystemFilter = search.valueSystem.length === 0 || search.valueSystem.every((s: string) => valueTitles.includes(s));
 
       let valueFilter = true;
+      const impactTitles = data.requirementImpactPoints.map((imp: RequirementImpactPoints) => imp.entityId);
       data.requirementImpactPoints.forEach((s: RequirementImpactPoints) => {
         const minValue = Math.min(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
         const maxValue = Math.max(search.value.sliderFilterValues[0], search.value.sliderFilterValues[1]);
@@ -135,7 +136,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
           valueFilter = false;
         }
       });
-      return variantsFilter && valueSystemFilter && valueFilter;
+      const impactFilter = search.impacts.length === 0 ||
+        search.impacts.every((s: string) => impactTitles.includes(this.impactSoureces.find(e => e.uniqueString === s)?.id));
+      return variantsFilter && valueSystemFilter && valueFilter && impactFilter;
     };
   }
 

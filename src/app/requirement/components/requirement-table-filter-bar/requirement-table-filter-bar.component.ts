@@ -57,7 +57,7 @@ export class RequirementTableFilterBarComponent implements OnInit {
           });
           this.variantsChanged(this.variantsTest);
         });
-        this.requirementsRestService.getImpactsAll().subscribe((result: any) => {
+        this.requirementsRestService.getImpacts(params.id).subscribe((result: any) => {
         this.impacts = [];
         result.forEach((impactRest: Impact) => {
           this.impacts.push(impactRest.uniqueString);
