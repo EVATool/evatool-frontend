@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="delete-button-container">
-            <button mat-fab (click)="deleteImpact(element)" matTooltip="Delete Impact" matTooltipHideDelay="100"
+            <button mat-fab (click)="deleteRequirement(element)" matTooltip="Delete Requirement" matTooltipHideDelay="100"
                     matTooltipPosition="above">
               <mat-icon>delete</mat-icon>
             </button>
@@ -38,9 +38,9 @@
     <ng-container matColumnDef="variantsTitle" sticky>
       <th id="title-col" mat-header-cell *matHeaderCellDef mat-sort-header
           matTooltip="Possible Variants" matTooltipPosition="above"> Variant(s)
-        <span style="font-size: 18px;" class="material-icons" (click)="openDialog()">info</span>
+        <span style="font-size: 18px;" class="material-icons" (click)="openVariantsDialog()">info</span>
       </th>
-      <td mat-cell (dblclick)="checkAchrived(element.variantsTitle)"
+      <td mat-cell (dblclick)="checkAchrivedAndOpenDialog(element.variantsTitle)"
           [matTooltip]="(element.variantsTitle.length>0 && element.variantsTitle[0].archived) ? 'Verwendete Variante ('+ element.variantsTitle[0].variantsTitle +') ist archiviert' : '' "
           *matCellDef='let element'
           [ngClass]="{'archived' : (element.variantsTitle.length>0 && element.variantsTitle[0].archived)}">
@@ -64,7 +64,7 @@
       <th id="values-col" mat-header-cell *matHeaderCellDef mat-sort-header
           matTooltip="The affected Value(s)" matTooltipPosition="above"> Value(s)</th>
       <td mat-cell *matCellDef="let element">
-        <div [innerHTML]="concatDimension(element) | highlightSearch: this.requirementsDataService.searchtext">
+        <div [innerHTML]="fillDimensionColumn(element) | highlightSearch: this.requirementsDataService.searchtext">
         </div>
     </ng-container>
 
@@ -73,8 +73,8 @@
           [width]="150" style="min-width: 150px;">
         {{impact.uniqueString}} </th>
       <td mat-cell *matCellDef="let element"
-          [ngClass]="{'positiv' : isPositiv(element,impact),'negativ' : isNegativ(element,impact)}"
-          (dblclick)="clickFunction(element,impact)">
+          [ngClass]="{'positiv' : isPositivOrNegativ(element,impact,true),'negativ' : isPositivOrNegativ(element,impact,false)}"
+          (dblclick)="setSliderVisible(element,impact)">
         <div *ngIf="show(element, impact)" class="impact-slider-container">
           <app-impact-slider [isRisk]="impact.value<0" [isGoal]="impact.value>0"
                              [minvalue]="impact.value>0?-1:impact.value" [maxvalue]="impact.value<0?1:impact.value"

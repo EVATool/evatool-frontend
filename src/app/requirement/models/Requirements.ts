@@ -1,6 +1,6 @@
 import {Value} from './Value';
-import {Variants} from "./Variants";
-import {RequirementImpactPoints} from "./RequirementImpactPoints";
+import {Variants} from './Variants';
+import {RequirementImpactPoints} from './RequirementImpactPoints';
 
 export class Requirements{
   [k: string]: any;

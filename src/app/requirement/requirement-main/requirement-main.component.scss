@@ -4,10 +4,6 @@
 }
 
 #requirement-table-div {
-  /*margin: 25px;
-  height: calc(100vh - 350px);
-  overflow-y: hidden;*/
-  /*scroll-behavior: smooth;*/
   margin-top: 10px;
   max-height: calc(100vh - 360px);
   overflow: auto;
@@ -18,27 +14,6 @@
   top: 125px;
   right: 50px;
 }
-//.add-impact-button-div {
-//  position: fixed;
-//  left: 1.5%;
-//  bottom: 2.5%;
-//  width: 100%;
-//}
-//#add-requirement-button-div{
-//  position: fixed;
-//  left: 1.5%;
-//  /*bottom: 2.5%;*/
-//  width: 100%;
-//}
-//.container .add-requirement-button-div {
-//  flex: 0 1 auto;
-//  margin-left: auto;
-//}
-//.add-requirement-test-div {
-//  margin-left: 1.5vw;
-//  display: inline-block;
-//  font-size: 150%;
-//}
 
 .add-requirement-button-container {
   margin-bottom: 5px;

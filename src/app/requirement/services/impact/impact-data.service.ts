@@ -14,7 +14,7 @@ export class ImpactDataService {
 
   constructor(
     private valueDataService: ValueDataService) {
-    for (let impact of this.impacts) {
+    for (const impact of this.impacts) {
       impact.valueSystem = this.valueDataService.getValues()[Math.floor(Math.random() * Math.floor(4))];
     }
   }
@@ -24,7 +24,7 @@ export class ImpactDataService {
   }
 
   private createDefaultImpact(): Impact {
-    let impact = new Impact();
+    const impact = new Impact();
 
     impact.id = 'TEST';
     impact.value = -0.9;
@@ -34,7 +34,7 @@ export class ImpactDataService {
   }
 
   createImpact(): Impact {
-    let impact = this.createDefaultImpact();
+    const impact = this.createDefaultImpact();
     this.impacts.push(impact);
     this.onCreateImpact.emit(impact);
     return impact;

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Requirements} from '../../models/Requirements';
-import {Impact} from "../../models/Impact";
-import {Variants} from "../../models/Variants";
+import {Impact} from '../../models/Impact';
+import {Variants} from '../../models/Variants';
 import {RestService} from '../../../shared/services/rest.service';
 
 const httpOptions = { // Outsource!

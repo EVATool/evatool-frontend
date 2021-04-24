@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
 
 import {VariantsDataService} from './variants-data.service';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 import {RestMockProvidersVariants} from '../../../variant/services/spec/RestMockProviders';
 import {SampleDataService} from '../spec/sample-data-service';
 

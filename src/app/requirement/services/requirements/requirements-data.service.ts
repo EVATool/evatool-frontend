@@ -3,7 +3,6 @@ import {Requirements} from '../../models/Requirements';
 import {RequirementsRestService} from './requirements-rest.service';
 import {Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
-import {Variant} from '../../../variant/models/Variant';
 
 @Injectable({
   providedIn: 'root'

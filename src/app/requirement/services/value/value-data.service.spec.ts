@@ -14,7 +14,7 @@ describe('ValueDataService', () => {
       imports: [HttpClientModule, RestMock.imports],
       providers: [RestMock.providers]
     });
-    data = TestBed.inject(SampleDataService)
+    data = TestBed.inject(SampleDataService);
     service = TestBed.inject(ValueDataService);
   });
 

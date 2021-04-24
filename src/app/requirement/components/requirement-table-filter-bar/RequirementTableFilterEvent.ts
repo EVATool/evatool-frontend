@@ -19,6 +19,6 @@ export class RequirementTableFilterEvent {
     this.highlightFilter = highlightFilter;
   }
   static getDefault(): RequirementTableFilterEvent {
-    return new RequirementTableFilterEvent([], [],[], SliderFilterSettings.getDefault(),'');
+    return new RequirementTableFilterEvent([], [], [], SliderFilterSettings.getDefault(), '');
   }
 }

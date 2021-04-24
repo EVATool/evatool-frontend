@@ -52,10 +52,6 @@ export class MockedRequirementsRestService extends RequirementsRestService {
     return of(this.sampleData.getDummyRequirements());
   }
 
-  getRequirementsById(id: any): Observable<any> {
-    return of(this.sampleData.getDummyRequirement());
-  }
-
   createRequirements(requirement: Requirements): Observable<any> {
     return of(this.sampleData.getDummyRequirement());
   }

@@ -1,12 +1,10 @@
 import {Requirements} from '../models/Requirements';
-import {MatTable} from '@angular/material/table';
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {RequirementsRestService} from '../services/requirements/requirements-rest.service';
 import {Router} from '@angular/router';
 import {RequirementsDataService} from '../services/requirements/requirements-data.service';
 import {RequirementTableFilterEvent} from '../components/requirement-table-filter-bar/RequirementTableFilterEvent';
 import {RequirementTableFilterBarComponent} from '../components/requirement-table-filter-bar/requirement-table-filter-bar.component';
-import {Impact} from '../../impact/models/Impact';
 import {RequirementsTableComponent} from '../components/requirement-table/requirements-table.component';
 
 @Component({
@@ -15,13 +13,11 @@ import {RequirementsTableComponent} from '../components/requirement-table/requir
   styleUrls: ['./requirement-main.component.scss']
 })
 export class RequirementMainComponent implements OnInit, AfterViewInit  {
-   // @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(RequirementTableFilterBarComponent) filterBar!: RequirementTableFilterBarComponent;
   @ViewChild(RequirementsTableComponent) table!: RequirementsTableComponent;
   editField: string;
   data: Requirements[] = [];
   idForProject = '';
-  private key = '';
   constructor(
     private service: RequirementsRestService,
     private dataService: RequirementsDataService,
@@ -38,14 +34,11 @@ export class RequirementMainComponent implements OnInit, AfterViewInit  {
     });
   }
 
-  changeValue(id: number, property: string, event: any): any {
-    this.editField = event.target.textContent;
-  }
 
   addRequirements(): void {
     this.dataService.createRequirement(this.idForProject);
   }
-  filterBarChanged(event: RequirementTableFilterEvent) {
+  filterBarChanged(event: RequirementTableFilterEvent): void {
     this.table.filterChange(event);
   }
 }

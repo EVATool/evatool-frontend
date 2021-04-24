@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ColumnCategoryFilterComponent} from '../../../shared/components/column-category-filter/column-category-filter.component';
-import {RequirementTableFilterEvent} from '../../../requirement/components/requirement-table-filter-bar/RequirementTableFilterEvent';
+import {RequirementTableFilterEvent} from './RequirementTableFilterEvent';
 import {SliderFilterSettings} from '../../../shared/components/impact-slider/SliderFilterSettings';
 import {ColumnSliderFilterComponent} from '../../../shared/components/column-slider-filter/column-slider-filter.component';
 import {HighlightSearchComponent} from '../../../shared/components/search-bar/highlight-search.component';
@@ -10,7 +10,7 @@ import {Variants} from '../../models/Variants';
 import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
 import {VariantsDataService} from '../../services/variants/variants-data.service';
-import {Impact} from "../../models/Impact";
+import {Impact} from '../../models/Impact';
 import {Router} from '@angular/router';
 
 @Component({
@@ -70,11 +70,11 @@ export class RequirementTableFilterBarComponent implements OnInit {
     });
   }
 
-  valuesChanged(values: Value[]) {
+  valuesChanged(values: Value[]): void {
     this.valueSystemNames = values.filter(value => !value.disable).map(value => value.name);
   }
 
-  variantsChanged(variants: Variants[]){
+  variantsChanged(variants: Variants[]): void{
     this.variantsNames = variants.map(value => value.variantsTitle);
   }
 
@@ -117,7 +117,7 @@ export class RequirementTableFilterBarComponent implements OnInit {
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.requirementTableFilterEvent);
   }
-  clearHighlight() {
+  clearHighlight(): void {
     this.suppressChildEvent = true;
 
     this.highlightFilter.clearFilter();

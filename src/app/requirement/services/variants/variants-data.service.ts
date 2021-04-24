@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {Variants} from "../../models/Variants";
+import {Variants} from '../../models/Variants';
 import {RequirementsRestService} from '../requirements/requirements-rest.service';
 import {Router} from '@angular/router';
 import {Requirements} from '../../models/Requirements';
@@ -54,11 +54,11 @@ export class VariantsDataService {
   }
 
   private createDefaultVariants(): Variants {
-    let variant = new Variants();
+    const variant = new Variants();
 
     variant.entityId = 'TEST';
     variant.variantsTitle = 'VariantsTest';
-    variant.description = "Dieser Variants wurde erstellt";
+    variant.description = 'Dieser Variants wurde erstellt';
 
     return variant;
   }
