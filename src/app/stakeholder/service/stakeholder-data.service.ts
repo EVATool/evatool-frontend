@@ -36,6 +36,9 @@ export class StakeholderDataService {
     analysisId: '',
   };
 
+  /**
+   * Check Impact Filters
+   */
   static checkImpactFilter(data: Stakeholder, value: any): boolean {
     const totalimpact = data.negativeImpact + data.positiveImpact;
     if (totalimpact === 0) {
@@ -45,6 +48,9 @@ export class StakeholderDataService {
     }
   }
 
+  /**
+   * Load all Stakeholder
+   */
   loadStakeholder(): void {
     this.loadAnalysisIDFromRouter();
     this.stakeholderRestService.getStakeholdersByAnalysisId(this.analysisid).subscribe((result: any) => {
@@ -77,7 +83,9 @@ export class StakeholderDataService {
     });
   }
 
-
+  /**
+   * Call createDefaultStakeholder()
+   */
   createStakeholder(): void {
     const stakeholder = this.createDefaultStakeholder();
     this.stakeholders.push(stakeholder);
@@ -85,6 +93,9 @@ export class StakeholderDataService {
     this.matDataSource.filterPredicate = this.customFilterPredicate;
   }
 
+  /**
+   * Create Stakeholder with data
+   */
   save(stakeholder: Stakeholder): void {
     this.stakeholderRestService.createStakeholder({
       rootEntityID: '',
@@ -99,6 +110,9 @@ export class StakeholderDataService {
     });
   }
 
+  /**
+   * Create default Stakeholder
+   */
   createDefaultStakeholder(): Stakeholder {
     const stakeholder = new Stakeholder();
     stakeholder.editable = true;
@@ -108,7 +122,9 @@ export class StakeholderDataService {
     return stakeholder;
   }
 
-
+  /**
+   * Multi Filter
+   */
   customFilterPredicate(data: Stakeholder, filters: string): boolean {
     const searchTerms = JSON.parse(filters);
     if (searchTerms.level !== '' && searchTerms.priority > 0) {
@@ -124,6 +140,9 @@ export class StakeholderDataService {
     }
   }
 
+  /**
+   * Set Filter
+   */
   filterSetFilter(filter?: Stakeholder): void {
     if (filter){
       this.matDataSource.filter = JSON.stringify(filter);
@@ -132,16 +151,25 @@ export class StakeholderDataService {
     }
   }
 
+  /**
+   * Filter priority
+   */
   filterPrio(prio: number): void {
     this.stakeholderFilter.priority = prio;
     this.filterSetFilter();
   }
 
+  /**
+   * Filter level
+   */
   filterLevel(level: string): void {
     this.stakeholderFilter.level = level;
     this.filterSetFilter();
   }
 
+  /**
+   * Reset Filter
+   */
   resetFilter(): void {
     this.stakeholderFilter.level = '';
     this.stakeholderFilter.priority = 0;
@@ -149,15 +177,24 @@ export class StakeholderDataService {
     this.filterSetFilter(this.stakeholderFilter);
   }
 
+  /**
+   * Filter Impact
+   */
   filterImpact(value: any): void {
     this.stakeholderFilter.negativeImpact = value;
     this.filterSetFilter();
   }
 
+  /**
+   * Set Search Text
+   */
   setSearchText(event: string): void {
     this.searchtext = event;
   }
 
+  /**
+   * Update Stakeholder
+   */
   update(stakeholder: Stakeholder): void {
     this.stakeholderRestService.updateStakeholder({
       rootEntityID: stakeholder.id,
@@ -171,12 +208,18 @@ export class StakeholderDataService {
     });
   }
 
+  /**
+   * Load Analysis ID
+   */
   loadAnalysisIDFromRouter(): void {
     this.router.routerState.root.queryParams.subscribe((paramMap) => {
       this.analysisid = paramMap.id;
     });
   }
 
+  /**
+   * Delete Stakeholder
+   */
   delete(stakeholder: Stakeholder): void {
     this.stakeholderRestService.deleteStakeholder(stakeholder).subscribe(() => {
       this.loadStakeholder();
