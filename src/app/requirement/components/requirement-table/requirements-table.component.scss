@@ -7,25 +7,14 @@ table {
   width: 100%;
 }
 
-input{
-
-}
-/*mat-icon{*/
-/*  display: none;*/
-/*}*/
-
-/*mat-list-item:hover mat-icon{*/
-/*  display: block;*/
-/*}*/
-
 .mat-header-cell{
   text-align: center;
 }
 
 .mat-column-uniqueString{
   text-align: left;
-  width:50px;
-  min-width:50px;
+  width:51px;
+  min-width:51px;
   left: 0px !important;
 }
 
@@ -38,8 +27,8 @@ input{
 .mat-column-variantsTitle{
   text-align: left;
   white-space: break-spaces;
-  width:100px;
-  min-width:100px;
+  width:184px;
+  min-width:184px;
   left: 575px !important;
 }
 .mat-column-values{
@@ -47,7 +36,7 @@ input{
   white-space: break-spaces;
   width:100px;
   min-width:100px;
-  left: 675px !important;
+  left: 762px !important;
 }
 
 .positiv{
@@ -86,8 +75,6 @@ textarea{
 .impact-slider-container {
   padding: 7px;
 }
-
-
 /* Delete row button */
 
 .description-wrapper {
@@ -107,7 +94,6 @@ textarea{
   display: table-cell;
   opacity: 0;
   vertical-align: middle;
-  /*text-align: right;*/
   transition: 250ms ease-out 100ms;
   padding: 0;
   padding-right: 10px;
