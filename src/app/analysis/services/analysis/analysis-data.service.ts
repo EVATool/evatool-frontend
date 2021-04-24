@@ -19,9 +19,6 @@ export class AnalysisDataService {
   public analyses: Analysis[] = [];
   private currentAnalysis!: Analysis;
 
-  /**
-   * AnalysisDTO -> Analysis
-   */
   static fromDto(analysisDTO: AnalysisDTO): Analysis {
     const analysis = new Analysis();
 
@@ -37,9 +34,6 @@ export class AnalysisDataService {
     return analysis;
   }
 
-  /**
-   * Analysis -> AnalysisDTO
-   */
   static toDto(analysis: Analysis): AnalysisDTO {
     const analysisDTO = new AnalysisDTO();
 
@@ -55,9 +49,6 @@ export class AnalysisDataService {
     return analysisDTO;
   }
 
-  /**
-   * Create Analysis
-   */
   save(analysis: Analysis): void {
     this.analysisRestService.createAnalysis({
         analysisName: analysis.analysisName,
@@ -74,9 +65,6 @@ export class AnalysisDataService {
     this.logger.info(this, 'Analysis created.');
   }
 
-  /**
-   * Update Analysis
-   */
   update(analysis: Analysis): void {
     this.analysisRestService.updateAnalysis({
       analysisName: analysis.analysisName,
@@ -93,9 +81,6 @@ export class AnalysisDataService {
     });
   }
 
-  /**
-   * Load Analysis by ID
-   */
   loadAnalysis(id: string): void {
     this.analysisRestService.getAnalysisById(id).subscribe((analysisDto: AnalysisDTO) => {
       this.currentAnalysis = AnalysisDataService.fromDto(analysisDto);
@@ -103,9 +88,6 @@ export class AnalysisDataService {
     });
   }
 
-  /**
-   * Load all Analyses
-   */
   loadAllAnalysis(): void {
     this.analysisRestService.getAnalysis().subscribe((result: any) => {
       this.analysisArray = [];
@@ -132,9 +114,6 @@ export class AnalysisDataService {
     this.logger.info(this, 'All Analyses loaded.');
   }
 
-  /**
-   * Delete Analysis
-   */
   deleteAnalysis(analysis: Analysis): void {
     this.analysisRestService.deleteAnalysis(analysis).subscribe(() => {
       this.loadAllAnalysis();
@@ -142,9 +121,6 @@ export class AnalysisDataService {
     });
   }
 
-  /**
-   * Get current Analysis
-   */
   getCurrentAnalysis(): Analysis {
     return this.currentAnalysis;
   }

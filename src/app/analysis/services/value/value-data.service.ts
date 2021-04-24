@@ -27,9 +27,6 @@ export class ValueDataService {
   public valuesTypes: string[] = [];
   public values: Value[] = [];
 
-  /**
-   * ValueDTO -> Value
-   */
   private static fromDto(valueDto: ValueDTO): Value {
     const value = new Value();
     value.id = valueDto.id;
@@ -42,9 +39,6 @@ export class ValueDataService {
     return value;
   }
 
-  /**
-   * Value -> ValueDTO
-   */
   private static toDto(value: Value): ValueDTO {
     const valueDto = new ValueDTO();
     valueDto.id = value.id;
@@ -65,9 +59,6 @@ export class ValueDataService {
     });
   }
 
-  /**
-   * Load Value by Analysis ID
-   */
   loadValuesByAnalysisId(id: string): void {
     this.analysisDataService.loadAnalysis(id);
     this.valueRestService.getValuesByAnalysisId(id).subscribe(valueDtoList => {
@@ -83,9 +74,6 @@ export class ValueDataService {
     });
   }
 
-  /**
-   * Create Value
-   */
   createValue(value: Value): void {
     this.logger.info(this, 'Create Value');
     const valueDto = ValueDataService.toDto(value);
@@ -98,9 +86,6 @@ export class ValueDataService {
     });
   }
 
-  /**
-   * Update Value
-   */
   updateValue(value: Value): void {
     this.logger.info(this, 'Update Value');
     const valueDto = ValueDataService.toDto(value);
@@ -110,9 +95,6 @@ export class ValueDataService {
     });
   }
 
-  /**
-   * Delete Value
-   */
   deleteValue(value: Value): void {
     this.logger.info(this, 'Delete Value');
     const valueDto = ValueDataService.toDto(value);
