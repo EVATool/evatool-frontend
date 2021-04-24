@@ -24,8 +24,8 @@ describe('VariantsDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('get Variants', () => {
-    service.getVariants();
+  it('should load variants', () => {
+    service.onInit();
     expect(service.variantsSoureces.length).toBeGreaterThanOrEqual(2);
   });
 
