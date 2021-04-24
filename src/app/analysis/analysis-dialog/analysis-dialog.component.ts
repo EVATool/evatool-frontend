@@ -11,7 +11,7 @@ import {ValueTemplateComponent} from '../value-template/value-template.component
 @Component({
   selector: 'app-analysis-dialog',
   templateUrl: './analysis-dialog.component.html',
-  styleUrls: ['./analysis-dialog.component.css']
+  styleUrls: ['./analysis-dialog.component.scss']
 })
 export class AnalysisDialogComponent implements OnInit {
   @ViewChild(ValueTemplateComponent) valueTemplateComponent!: ValueTemplateComponent;

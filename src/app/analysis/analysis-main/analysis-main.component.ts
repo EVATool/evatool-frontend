@@ -10,7 +10,7 @@ import {ValueTemplateComponent} from '../value-template/value-template.component
 @Component({
   selector: 'app-analysis-main',
   templateUrl: './analysis-main.component.html',
-  styleUrls: ['./analysis-main.component.css']
+  styleUrls: ['./analysis-main.component.scss']
 })
 export class AnalysisMainComponent implements OnInit {
 
@@ -48,18 +48,7 @@ export class AnalysisMainComponent implements OnInit {
   }
 
   deleteAnalysis(analysis: Analysis): void {
-    console.log(analysis);
-    this.analysisRestService.deleteAnalysis(analysis).subscribe((an) => {
-      // const index = this.analysisDataService.analysisArray.indexOf(an, 0);
-      // if (index > -1) {
-      //   this.analysisDataService.analysisArray.splice(index, 1);
-      //   this.analysisDataService.analyses.splice(index, 1);
-      //
-      //   // TODO Deletion works, but the UI is reloading as a whole.
-      //   window.location.reload();
-      // }
-      this.analysisDataService.loadAllAnalysis();
-    });
+    this.analysisDataService.deleteAnalysis(analysis);
   }
 
   saveTitle(analysis: Analysis): void {
