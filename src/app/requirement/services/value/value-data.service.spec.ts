@@ -26,27 +26,4 @@ describe('ValueDataService', () => {
     service.onInit();
     expect(service.values).toEqual(data.dummyValueDtos);
   });
-
-  it('should create a value', () => {
-    service.onInit();
-    const existingValues = service.values.length;
-    service.createValue(data.dummyValueDtos[0]);
-    expect(service.values.length).toBe(existingValues + 1);
-  });
-
-  it('should update a value', () => {
-    service.onInit();
-    const updateValue = service.values[0];
-    updateValue.valueTitle = 'New title';
-    service.updateValue(updateValue);
-    expect(service.values).toContain(updateValue);
-  });
-
-  it('should delete Value', () => {
-    service.onInit();
-    const exisitingValues = service.values.length;
-    const deleteValue = service.values[0];
-    service.deleteValue(deleteValue);
-    expect(service.values.length).toBe(exisitingValues - 1);
-  });
 });
