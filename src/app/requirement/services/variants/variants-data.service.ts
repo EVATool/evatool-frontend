@@ -3,6 +3,7 @@ import {Variants} from "../../models/Variants";
 import {RequirementsRestService} from '../requirements/requirements-rest.service';
 import {Router} from '@angular/router';
 import {Requirements} from '../../models/Requirements';
+import {VariantsRestService} from './variants-rest.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +29,12 @@ export class VariantsDataService {
 
   variantsSoureces: Variants[] = [];
 
-  constructor(private requirementsRestService: RequirementsRestService, private router: Router) {
+  constructor(private variantsRestService: VariantsRestService, private router: Router) {
   }
 
   onInit(): void {
     this.router.routerState.root.queryParams.subscribe(params => {
-    this.requirementsRestService.getVariants(params.id).subscribe((result: any) => {
+    this.variantsRestService.getVariants(params.id).subscribe((result: any) => {
       this.variantsSoureces = [];
       result.forEach((variantsRest: Variants) => {
         const variants: Variants = {
@@ -66,7 +67,7 @@ export class VariantsDataService {
   createImpact(): Variants {
     let variant = this.createDefaultVariants();
     this.variantsSoureces.push(variant);
-    this.onCreateVariants.emit(variant[]);
+    this.onCreateVariants.emit(variant);
     return variant;
   }
 }

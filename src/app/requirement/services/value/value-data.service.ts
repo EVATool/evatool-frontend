@@ -1,6 +1,7 @@
 import {Value} from '../../models/Value';
 import {ValueRestService} from './value-rest.service';
 import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Impact} from '../../models/Impact';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ValueDataService {
 
   dummyValues: Value[] = [];
 
-  public values: Value[] = this.dummyValues;
+  public values: Value[] = [];
 
   constructor(private restService: ValueRestService) {
 
@@ -38,11 +39,28 @@ export class ValueDataService {
     return this.values[0];
   }
 
-  createValue(value: Value): void {
+  createValue(value: Value): Value {
     this.restService.createValue(value).subscribe(dim => {
       this.values.push(dim);
     });
+    return value;
   }
+
+  // private createDefaultValues(): Value {
+  //   let value = new Value();
+  //
+  //   value.entityId = '1';
+  //   value.valueTitle = 'Test';
+  //
+  //   return value;
+  // }
+  //
+  // createImpact(): Impact {
+  //   let impact = this.createDefaultImpact();
+  //   this.impacts.push(impact);
+  //   this.onCreateImpact.emit(impact);
+  //   return impact;
+  // }
 
   updateValue(value: Value): void {
     this.restService.updateValue(value).subscribe(dim => {
@@ -58,3 +76,4 @@ export class ValueDataService {
     });
   }
 }
+
