@@ -3,7 +3,6 @@ import {Requirements} from '../../models/Requirements';
 import {Value} from '../../models/Value';
 import {Impact} from '../../models/Impact';
 import {MatTableDataSource} from '@angular/material/table';
-import {RequirementsRestService} from '../../services/requirements/requirements-rest.service';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {RequirementsDataService} from '../../services/requirements/requirements-data.service';
@@ -13,8 +12,8 @@ import {MatSliderChange} from '@angular/material/slider';
 import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
 import {RequirementTableFilterEvent} from '../requirement-table-filter-bar/RequirementTableFilterEvent';
 import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
-import {ImpactRestService} from "../../services/impact/impact-rest.service";
-import {VariantsRestService} from "../../services/variants/variants-rest.service";
+import {ImpactRestService} from '../../services/impact/impact-rest.service';
+import {VariantsRestService} from '../../services/variants/variants-rest.service';
 
 @Component({
   selector: 'app-requirement-table',
@@ -47,6 +46,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     description: '',
     highlight: ''
   };
+  analysisId = '';
   private selectedRequirements: Requirements = new Requirements();
   private impactsToShow: string[] = [];
 
@@ -62,6 +62,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.router.routerState.root.queryParams.subscribe(params => {
+      this.analysisId = params.id;
       this.requirementsDataService.loadedRequirements.subscribe((requirements: Requirements[]) => {
         this.tableDatasource = new MatTableDataSource<Requirements>(requirements);
         this.initSorting();
@@ -273,7 +274,18 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   openVariantsDialog(): void {
     const dialogref = this.dialog.open(VariantDialogComponent, {data: {id: ''}});
     dialogref.afterClosed().subscribe(() => {
-      // todo reload
+      this.variantsRestService.getVariants(this.analysisId).subscribe((result: any) => {
+        this.variantsSoureces = [];
+        result.forEach((variantsRest: Variants) => {
+          const variants: Variants = {
+            entityId: variantsRest.id,
+            description: variantsRest.description,
+            variantsTitle: variantsRest.title,
+            archived: variantsRest.archived
+          };
+          this.variantsSoureces.push(variants);
+        });
+      });
     });
   }
 
@@ -312,5 +324,30 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   show(element: Requirements, impact: Impact): boolean {
     return this.showElementSlider.some(se => se.req === element.rootEntityId && se.imp === impact.id);
+  }
+
+  reload(): void {
+    // clear the Arrays from the old imp
+    this.displayedColumns = this.displayedColumns.filter(value => !value.startsWith('IMP'));
+    this.columnDefinitions = this.columnDefinitions.filter(value => !value.def.startsWith('IMP'));
+    this.impactRestService.getImpacts(this.analysisId).subscribe((result: any) => {
+      this.impactSoureces = [];
+      result.forEach((impactRest: Impact) => {
+        const impact: Impact = {
+          id: impactRest.id,
+          uniqueString: impactRest.uniqueString,
+          description: impactRest.description,
+          value: impactRest.value,
+          valueSystem: impactRest.valueSystem
+        };
+        this.impactSoureces.push(impact);
+      });
+      let impactIdList: string[] = [];
+      this.impactSoureces.forEach(value => {
+        impactIdList = impactIdList.concat(value.uniqueString);
+        this.columnDefinitions.push({def: value.uniqueString, hide: true});
+      });
+      this.displayedColumns = this.displayedColumns.concat(impactIdList);
+    });
   }
 }

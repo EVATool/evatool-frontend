@@ -34,11 +34,13 @@ export class RequirementMainComponent implements OnInit, AfterViewInit  {
     });
   }
 
-
   addRequirements(): void {
     this.dataService.createRequirement(this.idForProject);
   }
   filterBarChanged(event: RequirementTableFilterEvent): void {
     this.table.filterChange(event);
+  }
+  tabActivated(): void {
+    this.table?.reload();
   }
 }

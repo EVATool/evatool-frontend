@@ -5,6 +5,7 @@ import {LogService} from '../../shared/services/log.service';
 import {ImpactMainComponent} from '../../impact/impact-main/impact-main.component';
 import {RequirementsDataService} from '../../requirement/services/requirements/requirements-data.service';
 import {StakeholderDataService} from '../../stakeholder/service/stakeholder-data.service';
+import {RequirementMainComponent} from "../../requirement/requirement-main/requirement-main.component";
 
 @Component({
   selector: 'app-shell-main',
@@ -14,6 +15,7 @@ import {StakeholderDataService} from '../../stakeholder/service/stakeholder-data
 export class ShellMainComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTabGroup) tab!: MatTabGroup;
   @ViewChild(ImpactMainComponent) impactMain!: ImpactMainComponent;
+  @ViewChild(RequirementMainComponent) requirementMainComponent!: RequirementMainComponent;
 
   analysisId = '';
 
@@ -46,6 +48,7 @@ export class ShellMainComponent implements OnInit, AfterViewInit {
       this.stakeholderDataService.loadStakeholder();
     }else if (event === 2){
       this.requirementsDataService.onInit();
+      this.requirementMainComponent.tabActivated();
     }else if (event === 1){
       this.impactMain.tabActivated();
     }

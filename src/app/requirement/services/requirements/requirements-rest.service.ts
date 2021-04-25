@@ -18,8 +18,8 @@ export class RequirementsRestService {
 
   }
 
-  getRequirements(id: string): Observable<Requirements[]> {
-    return this.http.get<Requirements[]>(RestService.getRequirementesURL() + '?analysisId=' + id);
+  getRequirements(analysisId: string): Observable<Requirements[]> {
+    return this.http.get<Requirements[]>(RestService.getRequirementesURL() + '?analysisId=' + analysisId);
   }
   createRequirements(requirement: Requirements): Observable<any> {
     return this.http.post(RestService.getRequirementesURL(), requirement, httpOptions);

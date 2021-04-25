@@ -82,14 +82,14 @@ export class RequirementsDataService {
     });
   }
 
-  copyRequirement(selectedQuestion: Requirements): void {
-    if (selectedQuestion.projectID != null) {
+  copyRequirement(copyRequirement: Requirements): void {
+    if (copyRequirement.projectID != null) {
       const requirementNew: Requirements = new Requirements();
-      requirementNew.requirementImpactPoints = selectedQuestion.requirementImpactPoints;
-      requirementNew.variantsTitle = selectedQuestion.variantsTitle;
-      requirementNew.projectID = selectedQuestion.projectID;
-      requirementNew.requirementDescription = selectedQuestion.requirementDescription;
-      requirementNew.values = selectedQuestion.values;
+      requirementNew.requirementImpactPoints = copyRequirement.requirementImpactPoints;
+      requirementNew.variantsTitle = copyRequirement.variantsTitle;
+      requirementNew.projectID = copyRequirement.projectID;
+      requirementNew.requirementDescription = copyRequirement.requirementDescription;
+      requirementNew.values = copyRequirement.values;
       this.requirementsRestService.createRequirements(requirementNew).subscribe(value => {
         this.requirements.push(value);
         this.addedRequirement.emit(value);
