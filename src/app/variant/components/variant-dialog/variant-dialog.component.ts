@@ -45,4 +45,8 @@ export class VariantDialogComponent implements OnInit {
     this.logger.info(this, 'Archive Button Clicked');
     this.variantDataService.archive(variant);
   }
+
+  close(): void{
+    this.dialogRef.afterClosed();
+  }
 }

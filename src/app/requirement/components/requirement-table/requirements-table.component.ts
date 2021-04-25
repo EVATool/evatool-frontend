@@ -271,7 +271,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   openVariantsDialog(): void {
-    this.dialog.open(VariantDialogComponent, {data: {id: ''}});
+    const dialogref = this.dialog.open(VariantDialogComponent, {data: {id: ''}});
+    dialogref.afterClosed().subscribe(() => {
+      // todo reload
+    });
   }
 
   getSelectedRequirment(requirements: Requirements): void {
