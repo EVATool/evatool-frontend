@@ -28,10 +28,4 @@ describe('VariantsDataService', () => {
     service.onInit();
     expect(service.variantsSoureces.length).toBeGreaterThanOrEqual(2);
   });
-
-  // it('update Variant', () => {
-  //   service.variantsSoureces
-  //   expect(service.variantsSoureces.length).toBeGreaterThanOrEqual(2);
-  // });
-
 });

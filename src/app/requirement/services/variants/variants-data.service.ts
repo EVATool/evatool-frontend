@@ -53,7 +53,7 @@ export class VariantsDataService {
     return this.variantsSoureces;
   }
 
-  private createDefaultVariants(): Variants {
+   createDefaultVariants(): Variants {
     let variant = new Variants();
 
     variant.entityId = 'TEST';
@@ -63,10 +63,10 @@ export class VariantsDataService {
     return variant;
   }
 
-  // createImpact(): Variants {
-  //   let variant = this.createDefaultVariants();
-  //   this.variantsSoureces.push(variant);
-  //   this.onCreateVariants.emit(variant[]);
-  //   return variant;
-  // }
+  createImpact(): Variants {
+    let variant = this.createDefaultVariants();
+    this.variantsSoureces.push(variant);
+    this.onCreateVariants.emit(variant[]);
+    return variant;
+  }
 }

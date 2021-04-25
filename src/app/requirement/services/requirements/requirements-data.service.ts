@@ -17,7 +17,7 @@ export class RequirementsDataService {
   matDataSource = new MatTableDataSource<Requirements>();
 
 
-
+  dummyRequirements: Requirements[] = [];
   requirements: Requirements[] = [];
   requirementsSource: Requirements[] = [];
   public searchtext = '';

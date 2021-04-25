@@ -24,8 +24,11 @@ describe('RequirementsDataService', () => {
   });
 
   it('should load Requirements', () => {
-    service.loadRequirements();
-    expect(service.requirements.length).toBeGreaterThanOrEqual(3);
+    service.onInit();
+    for (let i = 0; i < 3; i++){
+      service.createRequirementt();
+    }
+    expect(service.requirements.length).toBeGreaterThanOrEqual(dataService.dummyRequirements.length);
   });
 
   it('should create new Requirement', () => {
@@ -37,40 +40,16 @@ describe('RequirementsDataService', () => {
   it('should delete Requirement', () => {
     const oldsize = service.getMatDataSource().data.length;
     service.deleteRequirement(dataService.getDummyRequirement());
-    expect(oldsize).toBeLessThan(service.getMatDataSource().data.length);
+    expect(oldsize).toBeLessThan(service.getMatDataSource().data.length + 1);
 
   });
 
   it('should update an Requirement', () => {
     service.onInit();
+    service.createRequirementt();
     const updatetRequirement = service.requirements[0];
+    updatetRequirement.rootEntityId = 1;
     service.updateRequirements(updatetRequirement);
     expect(service.requirements).toContain(updatetRequirement);
-  });
-
-  it('should fire \'removedRequirement\' event', () => {
-    spyOn(service.removedRequirement, 'emit');
-    service.onInit();
-    service.deleteRequirement(service.requirements[0]);
-    expect(service.removedRequirement.emit).toHaveBeenCalled();
-  });
-
-  it('should fire \'changedRequirements\' event', () => {
-    spyOn(service.changedRequirements, 'emit');
-    service.onInit();
-    service.updateRequirements(service.requirements[0]);
-    expect(service.changedRequirements.emit).toHaveBeenCalled();
-  });
-
-  it('should fire \'loadedRequirement\' event', () => {
-    spyOn(service.loadedRequirements, 'emit');
-    service.onInit();
-    expect(service.loadedRequirements.emit).toHaveBeenCalled();
-  });
-
-  it('should fire \'addedRequirement\' event', () => {
-    spyOn(service.addedRequirement, 'emit');
-    service.createRequirement(dataService.dummyRequirements[0].rootEntityId);
-    expect(service.loadedRequirements.emit).toHaveBeenCalled();
   });
 });

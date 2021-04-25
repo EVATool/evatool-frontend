@@ -23,12 +23,17 @@ describe('ImpactDataService', () => {
   });
 
   it('should create impact', () => {
-    service.createImpact();
-    expect(service.impacts).toBeGreaterThanOrEqual(data.dummyImpacts.length);
+    for (let i = 0; i < 10; i++){
+      service.createImpact();
+    }
+    expect(service.impacts.length).toBeGreaterThanOrEqual(data.dummyImpacts.length);
   });
 
   it('should get impacts', () => {
+    for (let i = 0; i < 10; i++){
+      service.createImpact();
+    }
     service.getImpacts();
-    expect(service.impacts).toBeGreaterThanOrEqual(data.dummyImpacts.length);
+    expect(service.impacts.length).toBeGreaterThanOrEqual(data.dummyImpacts.length);
   });
 });
