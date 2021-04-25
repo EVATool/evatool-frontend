@@ -64,7 +64,7 @@
       <th id="values-col" mat-header-cell *matHeaderCellDef mat-sort-header
           matTooltip="The affected Value(s)" matTooltipPosition="above"> Value(s)</th>
       <td mat-cell *matCellDef="let element">
-        <div [innerHTML]="fillDimensionColumn(element) | highlightSearch: this.requirementsDataService.searchtext">
+        <div [innerHTML]="fillValuesColumn(element) | highlightSearch: this.requirementsDataService.searchtext">
         </div>
     </ng-container>
 

@@ -172,14 +172,14 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     this.tableDatasource.sort = this.sort;
   }
 
-  fillDimensionColumn(parameter: any): string {
-    let value = '';
-    const dimension: Value[] = parameter.values;
-    if (dimension == null) {
-      return value;
+  fillValuesColumn(parameter: any): string {
+    let retValue = '';
+    const values: Value[] = parameter.values;
+    if (values == null) {
+      return retValue;
     }
-    dimension.forEach(value1 => value = value.concat(value1.valueTitle, '\n'));
-    return value;
+    values.forEach(value1 => retValue = retValue.concat(value1.valueTitle, '\n'));
+    return retValue;
   }
 
   isPositivOrNegativ(element: Requirements, impact: Impact, positiv: boolean): boolean {
@@ -199,15 +199,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   setSliderVisible(element: Requirements, impact: Impact): void {
-    let exist = false;
-    let toRemove = null;
-    this.showElementSlider.forEach(value => {
-      if (value.req === element.rootEntityId && value.imp === impact.id) {
-        exist = true;
-        toRemove = value;
-      }
-    });
-    if (exist && toRemove != null) {
+    const toRemove = this.showElementSlider.find(value => value.req === element.rootEntityId && value.imp === impact.id);
+    if (toRemove != null) {
       const index = this.showElementSlider.indexOf(toRemove, 0);
       if (index > -1) {
         this.showElementSlider.splice(index, 1);
@@ -220,12 +213,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   valueChange(element: Requirements, impact: Impact, event: MatSliderChange): void {
     if (event.value !== null) {
       if (event.value === impact.value) {
-        let toDelete: null | RequirementImpactPoints = null;
-        element.requirementImpactPoints.forEach(value => {
-          if (value.entityId === impact.id) {
-            toDelete = value;
-          }
-        });
+        const toDelete: RequirementImpactPoints | undefined = element.requirementImpactPoints.find(value => value.entityId === impact.id);
         if (toDelete != null) {
           const index = element.requirementImpactPoints.indexOf(toDelete, 0);
           if (index > -1) {
@@ -308,16 +296,12 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   valueForCell(element: Requirements, impact: Impact): number {
-    let retValue: number | null = 0;
-    let found = false ;
-    element.requirementImpactPoints.forEach(value => {
-      if (value.entityId === impact.id) {
-        retValue = value.points;
-        found = true;
-      }
-    });
+    let retValue = 0;
+    const found = element.requirementImpactPoints.find(value => value.entityId === impact.id);
     if (!found) {
       retValue = impact.value;
+    }else {
+      retValue = (found.points as number);
     }
     return retValue;
   }
