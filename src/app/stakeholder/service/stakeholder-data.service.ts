@@ -77,7 +77,6 @@ export class StakeholderDataService {
     });
   }
 
-
   createStakeholder(): void {
     const stakeholder = this.createDefaultStakeholder();
     this.stakeholders.push(stakeholder);
@@ -108,7 +107,9 @@ export class StakeholderDataService {
     return stakeholder;
   }
 
-
+  /**
+   * Multi Filter
+   */
   customFilterPredicate(data: Stakeholder, filters: string): boolean {
     const searchTerms = JSON.parse(filters);
     if (searchTerms.level !== '' && searchTerms.priority > 0) {
