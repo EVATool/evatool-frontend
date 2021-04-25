@@ -5,7 +5,7 @@ import {ValueDataService} from './value-data.service';
 import {RestMock} from '../../../impact/spec/RestMock';
 import {SampleDataService} from '../spec/sample-data-service';
 
-describe('DimensionDataService', () => {
+describe('ValueDataService', () => {
   let service: ValueDataService;
   let data: SampleDataService;
 
@@ -14,7 +14,7 @@ describe('DimensionDataService', () => {
       imports: [HttpClientModule, RestMock.imports],
       providers: [RestMock.providers]
     });
-    data = TestBed.inject(SampleDataService)
+    data = TestBed.inject(SampleDataService);
     service = TestBed.inject(ValueDataService);
   });
 

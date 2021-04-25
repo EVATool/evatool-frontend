@@ -19,7 +19,6 @@ import {RequirementTableFilterBarComponent} from './components/requirement-table
 import {MatListModule} from '@angular/material/list';
 import {SharedModule} from '../shared/shared.module';
 import {ImpactModule} from '../impact/impact.module';
-import {HighlightSearch} from '../impact/pipes/HighlightSearch';
 import {StakeholderModule} from '../stakeholder/stakeholder-module';
 
 @NgModule({

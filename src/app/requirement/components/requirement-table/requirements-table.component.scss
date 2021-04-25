@@ -1,5 +1,5 @@
 div{
-  margin-block: 25px;
+  margin-block: 5px;
   max-height: 800px;
 }
 
@@ -7,47 +7,41 @@ table {
   width: 100%;
 }
 
-input{
-
-}
-/*mat-icon{*/
-/*  display: none;*/
-/*}*/
-
-/*mat-list-item:hover mat-icon{*/
-/*  display: block;*/
-/*}*/
-
 .mat-header-cell{
   text-align: center;
 }
 
+.mat-cell{
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 5px;
+}
+
 .mat-column-uniqueString{
   text-align: left;
-  width:50px;
-  min-width:50px;
-  left: 0px !important;
+  width:51px;
+  min-width:51px;
+  left: 0 !important;
 }
 
 .mat-column-requirementDescription{
   text-align: left;
   min-width:500px;
-  left: 75px !important;
+  left: 81.6px !important;
   text-overflow: ellipsis;
 }
 .mat-column-variantsTitle{
   text-align: left;
   white-space: break-spaces;
-  width:100px;
-  min-width:100px;
-  left: 575px !important;
+  width:184px;
+  min-width:184px;
+  left: 592.8px !important;
 }
 .mat-column-values{
   text-align: left;
   white-space: break-spaces;
   width:100px;
   min-width:100px;
-  left: 675px !important;
+  left: 791.2px !important;
 }
 
 .positiv{
@@ -75,8 +69,6 @@ input{
 }
 
 textarea{
-  max-height: 60px !important;
-  height: 60px !important;
   width: 95%;
   border: 0;
   margin-left: 10px;
@@ -84,10 +76,9 @@ textarea{
 }
 
 .impact-slider-container {
-  padding: 7px;
+  padding: 10px;
+  vertical-align: middle;
 }
-
-
 /* Delete row button */
 
 .description-wrapper {
@@ -107,7 +98,6 @@ textarea{
   display: table-cell;
   opacity: 0;
   vertical-align: middle;
-  /*text-align: right;*/
   transition: 250ms ease-out 100ms;
   padding: 0;
   padding-right: 10px;

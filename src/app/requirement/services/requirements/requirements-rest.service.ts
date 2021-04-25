@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Requirements} from '../../models/Requirements';
-import {Impact} from "../../models/Impact";
-import {Variants} from "../../models/Variants";
 import {RestService} from '../../../shared/services/rest.service';
 
 const httpOptions = { // Outsource!
@@ -20,17 +18,8 @@ export class RequirementsRestService {
 
   }
 
-  getRequirements(id: string): Observable<Requirements[]> {
-    return this.http.get<Requirements[]>(RestService.getRequirementesURL() + '?analysisId=' + id);
-  }
-  getImpacts(id: string): Observable<Impact> {
-    return this.http.get<any>(RestService.getImpactsURL() + '?analysisId=' + id);
-  }
-  getImpactsAll(): Observable<Impact> {
-    return this.http.get<any>(RestService.getImpactsURL());
-  }
-  getVariants(id: string): Observable<Variants> {
-    return this.http.get<any>(RestService.getVariantsURL() + '?analysisId=' + id);
+  getRequirements(analysisId: string): Observable<Requirements[]> {
+    return this.http.get<Requirements[]>(RestService.getRequirementesURL() + '?analysisId=' + analysisId);
   }
   createRequirements(requirement: Requirements): Observable<any> {
     return this.http.post(RestService.getRequirementesURL(), requirement, httpOptions);
