@@ -1,5 +1,5 @@
 div{
-  margin-block: 25px;
+  margin-block: 5px;
   max-height: 800px;
 }
 
@@ -9,6 +9,11 @@ table {
 
 .mat-header-cell{
   text-align: center;
+}
+
+.mat-cell{
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 5px;
 }
 
 .mat-column-uniqueString{
@@ -21,7 +26,7 @@ table {
 .mat-column-requirementDescription{
   text-align: left;
   min-width:500px;
-  left: 75px !important;
+  left: 81.6px !important;
   text-overflow: ellipsis;
 }
 .mat-column-variantsTitle{
@@ -29,14 +34,14 @@ table {
   white-space: break-spaces;
   width:184px;
   min-width:184px;
-  left: 575px !important;
+  left: 592.8px !important;
 }
 .mat-column-values{
   text-align: left;
   white-space: break-spaces;
   width:100px;
   min-width:100px;
-  left: 762px !important;
+  left: 791.2px !important;
 }
 
 .positiv{
@@ -64,8 +69,6 @@ table {
 }
 
 textarea{
-  max-height: 60px !important;
-  height: 60px !important;
   width: 95%;
   border: 0;
   margin-left: 10px;
@@ -73,7 +76,8 @@ textarea{
 }
 
 .impact-slider-container {
-  padding: 7px;
+  padding: 10px;
+  vertical-align: middle;
 }
 /* Delete row button */
 

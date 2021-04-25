@@ -13,6 +13,8 @@ import {MatSliderChange} from '@angular/material/slider';
 import {RequirementImpactPoints} from '../../models/RequirementImpactPoints';
 import {RequirementTableFilterEvent} from '../requirement-table-filter-bar/RequirementTableFilterEvent';
 import {VariantDialogComponent} from '../../../variant/components/variant-dialog/variant-dialog.component';
+import {ImpactRestService} from "../../services/impact/impact-rest.service";
+import {VariantsRestService} from "../../services/variants/variants-rest.service";
 
 @Component({
   selector: 'app-requirement-table',
@@ -48,8 +50,9 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   private selectedRequirements: Requirements = new Requirements();
   private impactsToShow: string[] = [];
 
-  constructor(private requirementsRestService: RequirementsRestService,
-              public requirementsDataService: RequirementsDataService,
+  constructor(public requirementsDataService: RequirementsDataService,
+              private impactRestService: ImpactRestService,
+              private variantsRestService: VariantsRestService,
               private router: Router,
               private dialog: MatDialog) {
   }
@@ -73,7 +76,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
           this.showElementSlider.push({req: requirements.rootEntityId, imp: imp.id});
         });
       });
-      this.requirementsRestService.getImpacts(params.id).subscribe((result: any) => {
+      this.impactRestService.getImpacts(params.id).subscribe((result: any) => {
         this.impactSoureces = [];
         result.forEach((impactRest: Impact) => {
           const impact: Impact = {
@@ -92,7 +95,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         });
         this.displayedColumns = this.displayedColumns.concat(impactIdList);
       });
-      this.requirementsRestService.getVariants(params.id).subscribe((result: any) => {
+      this.variantsRestService.getVariants(params.id).subscribe((result: any) => {
         this.variantsSoureces = [];
         result.forEach((variantsRest: Variants) => {
           const variants: Variants = {
