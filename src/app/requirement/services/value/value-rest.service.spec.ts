@@ -17,13 +17,4 @@ describe('ValueRestService', () => {
     data = TestBed.inject(SampleDataService);
     service = TestBed.inject(ValueRestService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should get Values', () => {
-    service.getValues();
-    expect(service.getValues).toEqual(data.dummyValues);
-  });
 });

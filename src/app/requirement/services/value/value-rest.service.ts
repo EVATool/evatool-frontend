@@ -31,16 +31,4 @@ export class ValueRestService {
   getValueTypes(): Observable<string[]> {
     return this.http.get<string[]>(this.valuesUrl + '/types');
   }
-
-  createValue(dimension: Value): Observable<any> {
-    return this.http.post(this.valuesUrl, dimension, httpOptions);
-  }
-
-  updateValue(dimension: Value): Observable<any> {
-    return this.http.put(this.valuesUrl, dimension, httpOptions);
-  }
-
-  deleteValue(dimension: Value): Observable<any> {
-    return this.http.delete(this.valuesUrl + '/' + dimension.entityId);
-  }
 }

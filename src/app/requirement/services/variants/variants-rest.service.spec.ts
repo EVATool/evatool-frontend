@@ -18,12 +18,8 @@ export class MockedVariantsRestService extends VariantsRestService{
     super(http);
   }
 
-  getVariants(): Observable<any> {
+  getVariants(id: any): Observable<any> {
     return of(this.sampleData.getDummyVariantDTOs());
-  }
-
-  getVariantsById(id: any): Observable<any> {
-    return of(this.sampleData.getDummyVariantDTO());
   }
 
 }

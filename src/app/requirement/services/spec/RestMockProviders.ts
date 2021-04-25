@@ -3,6 +3,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {RequirementsRestService} from '../requirements/requirements-rest.service';
 import {MockedRequirementsRestService} from '../requirements/requirements-rest.service.spec';
 import {VariantsRestService} from '../variants/variants-rest.service';
+import {MockedVariantsRestService} from "../variants/variants-rest.service.spec";
 
 export class RestMockProvidersRequirements{
   public static readonly imports: any[] = [
@@ -17,6 +18,7 @@ export class RestMockProvidersRequirements{
     },
     {
       provide: VariantsRestService,
+      useClass: MockedVariantsRestService
     }
   ];
 }

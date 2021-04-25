@@ -17,13 +17,4 @@ describe('ValueDataService', () => {
     data = TestBed.inject(SampleDataService);
     service = TestBed.inject(ValueDataService);
   });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should load values', () => {
-    service.onInit();
-    expect(service.values).toEqual(data.dummyValueDtos);
-  });
 });

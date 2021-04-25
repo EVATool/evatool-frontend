@@ -13,6 +13,7 @@ export class VariantsRestService {
 
   }
   getVariants(id: string): Observable<Variants> {
+    console.log("Restservice");
     return this.http.get<any>(RestService.getVariantsURL() + '?analysisId=' + id);
   }
 }

@@ -3,8 +3,8 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {VariantsDataService} from './variants-data.service';
 import {RouterTestingModule} from '@angular/router/testing';
-import {RestMockProvidersVariants} from '../../../variant/services/spec/RestMockProviders';
 import {SampleDataService} from '../spec/sample-data-service';
+import {RestMockProvidersRequirements} from "../spec/RestMockProviders";
 
 describe('VariantsDataService', () => {
   let service: VariantsDataService;
@@ -12,8 +12,8 @@ describe('VariantsDataService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule, RestMockProvidersVariants.imports],
-      providers: RestMockProvidersVariants.providers
+      imports: [HttpClientModule, RouterTestingModule, RestMockProvidersRequirements.imports],
+      providers: RestMockProvidersRequirements.providers
     });
     service = TestBed.inject(VariantsDataService);
     dataService = TestBed.inject(SampleDataService);
