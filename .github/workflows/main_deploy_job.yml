@@ -55,10 +55,8 @@ jobs:
     #        SCRIPT: sh evatool/frontend/docker/deploy.sh
 
       - name: copy folder
-        uses: andstor/copycat-action@v3
-        with:
-          src_path: dist
-          dst_path: docker/dist
+        run: |
+          cp dist docker/dist
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
