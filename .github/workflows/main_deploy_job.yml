@@ -56,7 +56,7 @@ jobs:
 
       - name: copy folder
         run: |
-          cp dist docker/dist
+          cp -r dist docker/dist
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
