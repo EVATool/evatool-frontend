@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  backendUrl: "localhost",
-  backendPort: "8080"
+  backendUrl: 'localhost',
+  backendPort: '8080'
 };
 
 /*
@@ -16,4 +16,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-//@angular-devkit/build-angular:browser
+@angular-devkit/build-angular:browser

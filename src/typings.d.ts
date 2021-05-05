@@ -1,6 +1,6 @@
-declare var $ENV: any;
-
 interface Env {
   backendUrl: string;
   backendPort: string;
 }
+
+declare var $ENV: Env;
