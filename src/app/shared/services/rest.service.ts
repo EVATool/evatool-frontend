@@ -8,7 +8,7 @@ export class RestService {
 
   private static readonly url = environment.backendUrl;
   private static readonly port = environment.backendPort;
-  private static readonly serverURL: string = 'http://{url}:{port}/';
+  private static readonly serverURL: string = 'http://' + RestService.url + ':' + RestService.port + '/';
 
   static getVariantsURL(): string {
     return this.serverURL + 'variants';
@@ -23,6 +23,7 @@ export class RestService {
   }
 
   static getAnalysisURL(): string {
+    console.log(this.serverURL)
     return this.serverURL + 'analysis';
   }
 
