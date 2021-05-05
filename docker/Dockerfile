@@ -1,6 +1,6 @@
 FROM nginx:1.17.1-alpine
-ENV HOST_URL
-ENV BACKEND_PORT
+ENV HOST_URL='0.0.0.0'
+ENV BACKEND_PORT='3306'
 EXPOSE 80
 COPY default.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
