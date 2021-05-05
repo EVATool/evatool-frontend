@@ -23,7 +23,7 @@ export class RestService {
   }
 
   static getAnalysisURL(): string {
-    console.log(this.serverURL)
+    console.log(this.serverURL);
     return this.serverURL + 'analysis';
   }
 
