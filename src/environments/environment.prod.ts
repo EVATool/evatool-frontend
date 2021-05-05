@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  backendUrl: "${HOST_URL}",
+  backendPort: "${BACKEND_PORT}"
 };

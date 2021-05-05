@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
 
-  private static readonly serverURL: string = 'http://79.171.179.211:443/';
+  private static readonly url = environment.backendUrl;
+  private static readonly port = environment.backendPort;
+  private static readonly serverURL: string = 'http://{url}:{port}/';
 
   static getVariantsURL(): string {
     return this.serverURL + 'variants';
