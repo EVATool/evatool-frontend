@@ -16,8 +16,8 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "types" : ["node", "lodash", "express", "zone.js", "webpack-env"],
     "typeRoots": [ "../node_modules/@types" ],
+    "types" : ["node"],
     "lib": [
       "es2018",
       "dom"
@@ -27,6 +27,8 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "typeRoots": [ "../node_modules/@types" ],
+    "types" : ["node"]
   }
 }
