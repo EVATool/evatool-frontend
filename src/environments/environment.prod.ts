@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  backendUrl: 'HOST_URL',
+  backendUrl: 'BACKEND_URL',
   backendPort: 'BACKEND_PORT'
 };
