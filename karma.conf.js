@@ -10,6 +10,7 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
+      require('jest-sonar-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     customLaunchers: {
@@ -34,7 +35,7 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/evatool-frontend'),
       subdir: '.',
       reporters: [
-        { type: 'html' },
+        { type: 'lcov' },
         { type: 'text-summary' }
       ]
     },
