@@ -1,27 +1,27 @@
-// import {SampleDataService} from '../../spec/sample-data.service';
-// import {RestSettings} from '../../settings/RestSettings';
-// import {HttpClient} from '@angular/common/http';
-// import {TestBed} from '@angular/core/testing';
-//
-// import {AnalysisRestService} from './analysis-rest.service';
-// import {LogService} from "../../../shared/services/log.service";
-// import {Injectable} from "@angular/core";
-// import {RestMock} from "../../spec/RestMock";
-// import {HttpTestingController} from "@angular/common/http/testing";
-//
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class MockedAnalysisRestService extends AnalysisRestService {
-//   constructor(
-//     logger: LogService,
-//     http: HttpClient,
-//     data: SampleDataService) {
-//     super(logger, http, data);
-//     this.mocked = true;
-//   }
-// }
-//
+import {SampleDataService} from '../../spec/sample-data.service';
+import {RestSettings} from '../../settings/RestSettings';
+import {HttpClient} from '@angular/common/http';
+import {TestBed} from '@angular/core/testing';
+
+import {AnalysisRestService} from './analysis-rest.service';
+import {LogService} from "../../../shared/services/log.service";
+import {Injectable} from "@angular/core";
+import {RestMock} from "../../spec/RestMock";
+import {HttpTestingController} from "@angular/common/http/testing";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MockedAnalysisRestService extends AnalysisRestService {
+  constructor(
+    logger: LogService,
+    http: HttpClient,
+    data: SampleDataService) {
+    super(logger, http, data);
+    this.mocked = true;
+  }
+}
+
 // describe('AnalysisRestService', () => {
 //   let data: SampleDataService;
 //   let httpMock: HttpTestingController;
