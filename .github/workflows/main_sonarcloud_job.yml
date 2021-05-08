@@ -16,6 +16,12 @@ jobs:
           fetch-depth: 0
 
       - name: Analyze with Sonarcloud
+        run: |
+          npm ci
+          npm run test:ci
+          npm run sonar
+
+      - name: Upload to Sonarcloud
         uses: sonarsource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
