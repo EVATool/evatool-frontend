@@ -1,0 +1,15 @@
+name: Tag on Dispatch
+
+on: [repository_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Tag from dispatch
+        uses: mathieudutour/github-tag-action@v5.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_prefix: ''
+          custom_tag: ${{ github.event.client_payload.RELEASE_VERSION }}
