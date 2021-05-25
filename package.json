@@ -10,7 +10,7 @@
 		"lint": "ng lint",
 		"e2e": "ng e2e",
 		"build:prod": "ng build --prod",
-		"test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
+		"test:prod": "ng test --browsers=ChromeHeadless --watch=false",
 		"sonar": "sonar-scanner",
 		"test:ci": "ng test --browsers ChromeHeadlessCI --code-coverage true --watch false"
 	},
