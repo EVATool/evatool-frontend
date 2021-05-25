@@ -66,6 +66,14 @@
                   "maximumError": "10mb"
                 }
               ]
+            },
+            "testing": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ]
             }
           }
         },
@@ -77,6 +85,9 @@
           "configurations": {
             "production": {
               "browserTarget": "evatool-frontend:build:production"
+            },
+            "testing": {
+              "browserTarget": "evatool-frontend:build:testing"
             }
           }
         },

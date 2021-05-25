@@ -1,12 +1,15 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { RequirementDeltaRestService } from './requirement-delta-rest.service';
+import {RequirementDeltaRestService} from './requirement-delta-rest.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('RequirementDeltaRestService', () => {
   let service: RequirementDeltaRestService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [HttpClientModule]
+    });
     service = TestBed.inject(RequirementDeltaRestService);
   });
 
