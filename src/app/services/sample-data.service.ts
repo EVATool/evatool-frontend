@@ -1,26 +1,27 @@
-import {Injectable} from "@angular/core";
-import {LogService} from "./log.service";
-import {AnalysisDto} from "../dto/AnalysisDto";
-import {Analysis} from "../model/Analysis";
-import {AnalysisMapperService} from "./mapper/analysis-mapper.service";
-import {ImpactMapperService} from "./mapper/impact-mapper.service";
-import {RequirementMapperService} from "./mapper/requirement-mapper.service";
-import {RequirementDeltaMapperService} from "./mapper/requirement-delta-mapper.service";
-import {StakeholderMapperService} from "./mapper/stakeholder-mapper.service";
-import {ValueMapperService} from "./mapper/value-mapper.service";
-import {VariantMapperService} from "./mapper/variant-mapper.service";
-import {Impact} from "../model/Impact";
-import {ImpactDto} from "../dto/ImpactDto";
-import {Value} from "../model/Value";
-import {RequirementDelta} from "../model/RequirementDelta";
-import {Requirement} from "../model/Requirement";
-import {Stakeholder} from "../model/Stakeholder";
-import {RequirementDto} from "../dto/RequirementDto";
-import {RequirementDeltaDto} from "../dto/RequirementDeltaDto";
-import {StakeholderDto} from "../dto/StakeholderDto";
-import {ValueDto} from "../dto/ValueDto";
-import {VariantDto} from "../dto/VariantDto";
-import {Variant} from "../model/Variant";
+import {Injectable} from '@angular/core';
+import {LogService} from './log.service';
+import {AnalysisDto} from '../dto/AnalysisDto';
+import {Analysis} from '../model/Analysis';
+import {AnalysisMapperService} from './mapper/analysis-mapper.service';
+import {ImpactMapperService} from './mapper/impact-mapper.service';
+import {RequirementMapperService} from './mapper/requirement-mapper.service';
+import {RequirementDeltaMapperService} from './mapper/requirement-delta-mapper.service';
+import {StakeholderMapperService} from './mapper/stakeholder-mapper.service';
+import {ValueMapperService} from './mapper/value-mapper.service';
+import {VariantMapperService} from './mapper/variant-mapper.service';
+import {Impact} from '../model/Impact';
+import {ImpactDto} from '../dto/ImpactDto';
+import {Value} from '../model/Value';
+import {RequirementDelta} from '../model/RequirementDelta';
+import {Requirement} from '../model/Requirement';
+import {Stakeholder} from '../model/Stakeholder';
+import {RequirementDto} from '../dto/RequirementDto';
+import {RequirementDeltaDto} from '../dto/RequirementDeltaDto';
+import {StakeholderDto} from '../dto/StakeholderDto';
+import {ValueDto} from '../dto/ValueDto';
+import {VariantDto} from '../dto/VariantDto';
+import {Variant} from '../model/Variant';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,9 @@ export class SampleDataService {
     private valueMapper: ValueMapperService,
     private variantMapper: VariantMapperService) {
 
-    // TODO skip if not in test mode
+    if (!environment.testing) {
+      return;
+    }
 
     // Prepare Analysis Data.
     this.analysisDtoList.forEach((analysisDto: AnalysisDto) => {

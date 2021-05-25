@@ -1,13 +1,18 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../../environments/environment";
-import {LogService} from "./log.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {SampleDataService} from "./sample-data.service";
+import {environment} from '../../environments/environment';
+import {LogService} from './log.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {SampleDataService} from './sample-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export abstract class RestService {
+
+  private readonly url = environment.backendUrl;
+  private readonly port = environment.backendPort;
+  private readonly serverUrl: string = 'http://' + this.url + ':' + this.port + '/';
+  //private readonly serverUrl = 'http://localhost:8080/';
 
   protected readonly httpOptions = {
     headers: new HttpHeaders({
@@ -20,15 +25,7 @@ export abstract class RestService {
                         protected sampleData: SampleDataService) {
   }
 
-  // Some kind of "useMockData" variable
-
-  //private static readonly url = environment.backendUrl;
-  //private static readonly port = environment.backendPort;
-  //private static readonly serverURL: string = 'http://' + RestService.url + ':' + RestService.port + '/';
-
-  //private readonly serverUrl = 'http://79.171.179.211:443/';
-  private readonly serverUrl = 'http://localhost:8080/';
-  protected readonly testing = false;
+  protected readonly testing = !environment.testing;
 
   protected readonly analysesUrl = this.serverUrl + 'analyses';
   protected readonly analysesDeepCopyUrl = this.analysesUrl + '/deep-copy';
@@ -43,6 +40,6 @@ export abstract class RestService {
   protected readonly stakeholderPriorityUrl = this.serverUrl + 'stakeholders/priorities';
   protected readonly stakeholderLevelsUrl = this.serverUrl + 'stakeholders/levels';
 
-  protected readonly byId = '?id='
-  protected readonly byAnalysisId = '?analysisId='
+  protected readonly byId = '?id=';
+  protected readonly byAnalysisId = '?analysisId=';
 }
