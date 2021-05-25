@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnalysisDialogComponent } from './analysis-dialog.component';
+import {SpecService} from '../../../services/spec.service';
 
 describe('AnalysisDialogComponent', () => {
   let component: AnalysisDialogComponent;
@@ -8,6 +9,7 @@ describe('AnalysisDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [ AnalysisDialogComponent ]
     })
     .compileComponents();

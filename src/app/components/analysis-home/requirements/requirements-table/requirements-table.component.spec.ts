@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RequirementsTableComponent } from './requirements-table.component';
+import {SpecService} from '../../../../services/spec.service';
 
 describe('RequirementsTableComponent', () => {
   let component: RequirementsTableComponent;
@@ -8,6 +9,7 @@ describe('RequirementsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [ RequirementsTableComponent ]
     })
     .compileComponents();

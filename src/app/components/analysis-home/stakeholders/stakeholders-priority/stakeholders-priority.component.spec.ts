@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StakeholdersPriorityComponent } from './stakeholders-priority.component';
+import {SpecService} from '../../../../services/spec.service';
 
 describe('StakeholdersPriorityComponent', () => {
   let component: StakeholdersPriorityComponent;
@@ -8,6 +9,7 @@ describe('StakeholdersPriorityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [ StakeholdersPriorityComponent ]
     })
     .compileComponents();

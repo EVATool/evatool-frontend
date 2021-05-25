@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ImpactDataService } from './impact-data.service';
+import {SpecService} from '../spec.service';
 
 describe('ImpactDataService', () => {
   let service: ImpactDataService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: SpecService.imports,
+    });
     service = TestBed.inject(ImpactDataService);
   });
 

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VariantsDialogComponent } from './variants-dialog.component';
+import {SpecService} from '../../../../services/spec.service';
 
 describe('VariantsDialogComponent', () => {
   let component: VariantsDialogComponent;
@@ -8,6 +9,7 @@ describe('VariantsDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [ VariantsDialogComponent ]
     })
     .compileComponents();

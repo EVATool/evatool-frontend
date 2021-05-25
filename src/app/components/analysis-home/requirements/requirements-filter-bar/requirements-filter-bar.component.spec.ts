@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RequirementsFilterBarComponent } from './requirements-filter-bar.component';
+import {SpecService} from '../../../../services/spec.service';
 
 describe('RequirementsFilterBarComponent', () => {
   let component: RequirementsFilterBarComponent;
@@ -8,6 +9,7 @@ describe('RequirementsFilterBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [ RequirementsFilterBarComponent ]
     })
     .compileComponents();

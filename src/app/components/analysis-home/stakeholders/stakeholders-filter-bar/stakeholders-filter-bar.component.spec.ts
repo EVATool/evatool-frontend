@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StakeholdersFilterBarComponent } from './stakeholders-filter-bar.component';
+import {SpecService} from '../../../../services/spec.service';
 
 describe('StakeholdersFilterBarComponent', () => {
   let component: StakeholdersFilterBarComponent;
@@ -8,6 +9,7 @@ describe('StakeholdersFilterBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [ StakeholdersFilterBarComponent ]
     })
     .compileComponents();

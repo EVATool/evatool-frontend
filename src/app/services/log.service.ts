@@ -4,12 +4,11 @@ import {Injectable} from '@angular/core';
 TODO List
 
 Refactoring from Modulith:
-- Sync front and backend
 - Make run in docker...
 
 
 
-New Features:
+Testing is completely bugged (0 tests found with no real cause)
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
@@ -90,7 +89,7 @@ export class LogService {
   }
 
   public formatMessage(sender: string, msg: string, logLevel: LogLevel): string {
-    return "[" + this.getLogLevel(logLevel) + "] " + this.getClassName(sender) + ": " + msg;
+    return '[' + this.getLogLevel(logLevel) + '] ' + this.getClassName(sender) + ': ' + msg;
   }
 
   trace(sender: any, msg: any) {

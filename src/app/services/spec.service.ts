@@ -8,4 +8,9 @@ export class SpecService {
     RouterTestingModule
   ];
 
+  public static readonly providers = [
+    HttpClientModule,
+    RouterTestingModule
+  ];
+
 }

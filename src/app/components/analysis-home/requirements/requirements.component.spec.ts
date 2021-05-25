@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RequirementsComponent } from './requirements.component';
+import {RequirementsComponent} from './requirements.component';
+import {SpecService} from '../../../services/spec.service';
 
 describe('RequirementsComponent', () => {
   let component: RequirementsComponent;
@@ -8,9 +9,11 @@ describe('RequirementsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RequirementsComponent ]
+      imports: SpecService.imports,
+      providers: SpecService.providers,
+      declarations: [RequirementsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -11,7 +11,7 @@ import {HomeComponent} from './components/home/home.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
 import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from "@angular/material/dialog";
 import {AnalysisTileComponent} from './components/home/analysis-tile/analysis-tile.component';
 import {AnalysisHomeComponent} from './components/analysis-home/analysis-home.component';
@@ -59,6 +59,7 @@ import {ImpactedFilterComponent} from './components/impacted-filter/impacted-fil
 import {PriorityFilterComponent} from './components/priority-filter/priority-filter.component';
 import {PluckPipe} from "./pipes/pluck.pipe";
 import {VarDirective} from "./directives/ng-var.directive";
+import {RequirementRestService} from './services/rest/requirement-rest.service';
 
 @NgModule({
   declarations: [
