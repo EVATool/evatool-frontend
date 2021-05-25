@@ -1,6 +1,6 @@
-export const environment = {
+export const environment = { // This is the test environment.
   production: false,
-  backendUrl: 'localhost',
-  backendPort: '8080',
-  testing: false
+  backendUrl: '',
+  backendPort: '',
+  testing: true
 };

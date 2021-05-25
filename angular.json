@@ -67,11 +67,11 @@
                 }
               ]
             },
-            "testing": {
+            "development": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.test.ts"
+                  "with": "src/environments/environment.dev.ts"
                 }
               ]
             }
@@ -86,8 +86,8 @@
             "production": {
               "browserTarget": "evatool-frontend:build:production"
             },
-            "testing": {
-              "browserTarget": "evatool-frontend:build:testing"
+            "development": {
+              "browserTarget": "evatool-frontend:build:development"
             }
           }
         },
