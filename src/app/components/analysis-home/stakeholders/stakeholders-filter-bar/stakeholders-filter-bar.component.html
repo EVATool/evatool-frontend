@@ -1,0 +1,44 @@
+<mat-list class="list-horizontal">
+  <mat-list-item>
+    <app-search-bar (highlightTextChanged)="highlightTextChange($event)"></app-search-bar>
+  </mat-list-item>
+  <mat-list-item>
+    <app-column-category-filter #levelFilter
+                                [categories]="this.stakeholderDataService.stakeholderLevels"
+                                [name]="'Level'"
+                                (filterChanged)="levelFilterChange($event)">
+    </app-column-category-filter>
+  </mat-list-item>
+
+  <mat-list-item>
+    <div>
+      <p>Priority</p>
+    </div>
+    <div class="category-filter-container-prior">
+      <app-stakeholders-priority [(prio)]="prio" class="filter prio-filter" [editable]="true"
+                            (prioChange)="priorityFilterChange($event)"></app-stakeholders-priority>
+    </div>
+  </mat-list-item>
+
+  <mat-list-item>
+    <div>
+      <p>Impacted</p>
+    </div>
+    <div class="category-filter-container-impact">
+      <app-stakeholders-impacted [editable]="true" (impactChange)="impactedFilterChange($event)"></app-stakeholders-impacted>
+    </div>
+  </mat-list-item>
+
+  <mat-list-item>
+    <button mat-raised-button
+            color="accent"
+            (click)='clearFilter();'
+            matTooltip="Clear all filters"
+            matTooltipHideDelay="100"
+            matTooltipPosition="above">Clear
+      <mat-icon>filter_alt</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>
+
+

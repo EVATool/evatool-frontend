@@ -1,0 +1,77 @@
+<div class="container">
+
+  <div mat-dialog-title>
+    <button mat-dialog-close mat-icon-button class="dialog-close">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="title-container" mat-dialog-title>
+      <h2 *ngIf="!isEditingAnalysis">Create Analysis</h2>
+      <h2 *ngIf="isEditingAnalysis">Edit Analysis</h2>
+    </div>
+  </div>
+
+  <form (ngSubmit)="onSubmit()">
+
+    <div>
+      <ng-container *ngIf="!isEditingAnalysis">
+        <mat-checkbox [(ngModel)]="useTemplate" name="useTemplate">
+          Use Template
+        </mat-checkbox>
+      </ng-container>
+
+      <mat-form-field *ngIf="useTemplate">
+        <mat-label>Template</mat-label>
+        <mat-select [(ngModel)]="template" name="selectedTemplate">
+          <ng-container *ngFor="let analysis of analysisData.analyses">
+            <mat-option *ngIf="analysis.isTemplate" [value]="analysis"
+                        (onSelectionChange)="template=analysis">
+              {{analysis.name}}
+            </mat-option>
+          </ng-container>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="!isEditingAnalysis">
+      <mat-checkbox [(ngModel)]="analysis.isTemplate" name="analysisIsTemplate">
+        Is a Template
+      </mat-checkbox>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="analysis.name" name="analysisName" required/>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="analysis.description" name="analysisDescription" required/>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Image Url</mat-label>
+        <input matInput [(ngModel)]="analysis.imageUrl" name="analysisImageUrl"/>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-checkbox [(ngModel)]="goToAnalysis" name="goToAnalysis">
+        Open Analysis when I'm done
+      </mat-checkbox>
+    </div>
+
+    <div>
+      <button mat-raised-button class="createButton button_cont b1" type="submit">
+        <div *ngIf="!isEditingAnalysis">Create Analysis</div>
+        <div *ngIf="isEditingAnalysis">Update Analysis</div>
+      </button>
+    </div>
+  </form>
+
+</div>

@@ -1,0 +1,10 @@
+<div class="entity-main-container">
+  <div class="filter-bar-container">
+    <app-stakeholders-filter-bar (filterChanged)="table.updateFilter($event)">
+    </app-stakeholders-filter-bar>
+  </div>
+
+  <div class="table-container">
+    <app-stakeholders-table #table></app-stakeholders-table>
+  </div>
+</div>

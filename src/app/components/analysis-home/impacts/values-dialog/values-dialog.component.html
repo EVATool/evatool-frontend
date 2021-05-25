@@ -1,0 +1,36 @@
+<div class="container">
+  <div mat-dialog-title>
+    <button mat-dialog-close mat-icon-button class="dialog-close">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="title-container" mat-dialog-title>
+      <h2 mat-dialog-title>Values</h2>
+    </div>
+  </div>
+
+  <div class="expansion-panel-container">
+    <ng-scrollbar>
+      <mat-accordion multi>
+        <div *ngFor="let valType of valueDataService.valueTypes">
+          <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{valType | titlecase}} Values
+              </mat-panel-title>
+              <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-values-table [valueType]="valType"
+                              (userWantsToSeeReferencedImpacts)="propagateSeeReferences($event)"></app-values-table>
+          </mat-expansion-panel>
+        </div>
+      </mat-accordion>
+    </ng-scrollbar>
+  </div>
+
+  <div class="action-container">
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close (click)="closeClick()">Close</button>
+    </mat-dialog-actions>
+  </div>
+</div>

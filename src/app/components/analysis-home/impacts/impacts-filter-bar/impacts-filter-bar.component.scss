@@ -1,0 +1,27 @@
+mat-list.list-horizontal {
+  .mat-list-item {
+    vertical-align: bottom;
+    display: inline-block;
+    height: auto;
+    width: auto;
+    //margin-right: -20px;
+
+    app-search-bar {
+      width: 15vw;
+    }
+
+    app-column-category-filter {
+      width: 15vw;
+    }
+
+    app-column-slider-filter {
+      width: 15vw;
+    }
+
+    button {
+      margin-bottom: 8px;
+      width: 90px;
+    }
+  }
+}
+

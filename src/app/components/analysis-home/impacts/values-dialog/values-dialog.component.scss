@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.container .title-container {
+  flex: 0 1 auto;
+}
+
+.container .expansion-panel-container {
+  flex: 1 1 auto;
+}
+
+.container .action-container {
+  flex: 0 1 auto;
+  margin-left: auto;
+}
+
+.dialog-close {
+  float: right;
+}

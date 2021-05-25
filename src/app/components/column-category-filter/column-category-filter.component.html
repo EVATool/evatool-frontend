@@ -1,0 +1,20 @@
+<div>
+  <p>{{name}}</p>
+</div>
+<div class="category-filter-container">
+  <mat-list-item role="listitem">
+    <mat-select matTooltip="{{filterValues.join(', ')}}"
+                matTooltipHideDelay="100"
+                matTooltipPosition="above"
+                placeholder="All"
+                name="filter"
+                [(ngModel)]="filterValues"
+                multiple>
+      <mat-option *ngFor="let category of categories"
+                  [value]="category"
+                  (click)="updateFilter()">
+        {{category}}
+      </mat-option>
+    </mat-select>
+  </mat-list-item>
+</div>

@@ -1,0 +1,22 @@
+$height: 1.5em;
+
+.level-wrapper {
+  display: inline-flex;
+  width: 100%;
+}
+
+.prio-level {
+  width: $height/2;
+  height: $height;
+  margin: 3px;
+  float: left;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  background: white;
+  display: table-cell;
+}
+
+.prio-level-show {
+  background: lightblue;
+}

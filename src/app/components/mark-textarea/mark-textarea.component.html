@@ -1,0 +1,5 @@
+<div #textareadiv class="highlight-textarea" contenteditable="true"
+     [innerHTML]="text | highlightSearch: highlightFilter"
+     (focusin)="focusEnter()"
+     (focusout)="focusLeave($event)">
+</div>

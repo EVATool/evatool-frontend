@@ -1,0 +1,33 @@
+<div class="container" (mouseenter)="mouseEnter()" (mouseleave)="mouseLeave()">
+
+  <div #goal id="goal-bar">
+
+  </div>
+
+  <div #risk id="risk-bar">
+
+  </div>
+
+  <div class="slider-container">
+    <mat-slider [min]="minvalue" [max]="maxvalue" step="0.1" [(ngModel)]="value" (input)="sliderValueChanged($event)"
+                (change)="sliderValueChangedFinal($event)"></mat-slider>
+  </div>
+
+  <div [hidden]="!isFilter || sliderFilterSettings.sliderFilterType!==2" class="slider-container">
+    <mat-slider [min]="minvalue" [max]="maxvalue" step="0.1" [(ngModel)]="valueSecond" (input)="sliderSecondValueChanged($event)"
+                (change)="sliderValueChangedFinal($event)"></mat-slider>
+  </div>
+
+  <div #thumb class="slider-thumb">
+
+  </div>
+
+  <div [hidden]="!isFilter || sliderFilterSettings.sliderFilterType!==2" #thumbSecond class="slider-thumb">
+
+  </div>
+
+  <div id="slider-middle">
+
+  </div>
+
+</div>

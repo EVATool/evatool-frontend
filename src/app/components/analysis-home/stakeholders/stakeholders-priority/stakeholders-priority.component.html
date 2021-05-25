@@ -1,0 +1,6 @@
+<div class="level-wrapper">
+  <div *ngFor="let p of stakeholderData.stakeholderPriorities; let i = index"
+       class="prio-level"
+       (click)="updatePrio(p, $event)"
+       [ngClass]="{'prio-level-show' : getShowPrio(prio, i)}"></div>
+</div>

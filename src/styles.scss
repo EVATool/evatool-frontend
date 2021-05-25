@@ -12,7 +12,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-@import 'app/stakeholder/components/stakeholder-impact/stakeholder-impact.component';
+@import 'app/components/analysis-home/stakeholders/stakeholders-impacted/stakeholders-impacted.component';
 @include stakeholder-impact-slider-theme();
 @include stakeholder-impact-slider-theme();
 
@@ -22,10 +22,43 @@ body {
 @import "app/layout/style/resets";
 @include resetStyle();
 
-
 .highlight {
   background-color: yellow;
 }
+
+/*
+Main shell for table and filter bar
+*/
+
+.entity-main-container {
+  display: flex;
+  flex-flow: column;
+  overflow: hidden;
+  height: 85vh; // Setting the height to 100% makes the mat-table vanish. Using flex with a mat-table seems impossible.
+
+  .filter-bar-container {
+    margin: 2%;
+    margin-left: 3%;
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .table-container {
+    margin-left: 5%;
+    margin-right: 3%;
+    flex: 1 1 auto;
+  }
+}
+
+/*
+Filter bar
+*/
+
+
+/*
+Entity table
+*/
+
 
 /**
 * Generated theme by Material Theme Generator

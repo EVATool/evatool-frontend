@@ -1,0 +1,19 @@
+.add-entity-container {
+  opacity: 0.8;
+  transition: 250ms ease-out 100ms;
+  z-index: 10;
+  flex: 0 1 auto;
+  margin-left: 10px;
+  margin-bottom: 10px;
+
+  .add-entity-text-container {
+    margin-left: 70px;
+    margin-top: -35px;
+    font-size: 150%;
+  }
+
+  .add-entity-button-container:focus-within, .add-entity-button-container:hover {
+    opacity: 1 !important;
+    transition: 250ms ease-out 100ms;
+  }
+}

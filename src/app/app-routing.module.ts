@@ -1,13 +1,13 @@
-import {PrivacyComponent} from './application-shell/privacy/privacy.component';
-import {ImprintComponent} from './application-shell/imprint/imprint.component';
-import {ShellMainComponent} from './application-shell/shell-main/shell-main.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './application-shell/home/home.component';
+import {HomeComponent} from "./components/home/home.component";
+import {AnalysisHomeComponent} from "./components/analysis-home/analysis-home.component";
+import {ImprintComponent} from "./components/imprint/imprint.component";
+import {PrivacyComponent} from "./components/privacy/privacy.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'analysis', component: ShellMainComponent },
+  { path: 'analysis', component: AnalysisHomeComponent },
   { path: 'imprint', component: ImprintComponent },
   { path: 'privacy', component: PrivacyComponent }
 ];
