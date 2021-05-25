@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VariantsTableComponent } from './variants-table.component';
+import {SpecService} from '../../../../../services/spec.service';
 
 describe('VariantsTableComponent', () => {
   let component: VariantsTableComponent;
@@ -8,6 +9,7 @@ describe('VariantsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [ VariantsTableComponent ]
     })
     .compileComponents();

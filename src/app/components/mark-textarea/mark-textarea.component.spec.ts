@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MarkTextareaComponent } from './mark-textarea.component';
+import {MarkTextareaComponent} from './mark-textarea.component';
+import {SpecService} from '../../services/spec.service';
+import {HighlightSearchPipe} from '../../pipes/highlight-search.pipe';
 
 describe('MarkTextareaComponent', () => {
   let component: MarkTextareaComponent;
@@ -8,9 +10,10 @@ describe('MarkTextareaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MarkTextareaComponent ]
+      imports: [HighlightSearchPipe],
+      declarations: [MarkTextareaComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

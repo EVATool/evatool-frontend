@@ -120,7 +120,7 @@ export class RequirementsTableComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef.scrolled.subscribe(e => {
+    this.scrollbarRef?.scrolled.subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
     });
 
