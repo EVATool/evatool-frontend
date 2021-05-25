@@ -25,7 +25,7 @@ export abstract class RestService {
                         protected sampleData: SampleDataService) {
   }
 
-  protected readonly testing = !environment.testing;
+  protected readonly testing = environment.testing;
 
   protected readonly analysesUrl = this.serverUrl + 'analyses';
   protected readonly analysesDeepCopyUrl = this.analysesUrl + '/deep-copy';

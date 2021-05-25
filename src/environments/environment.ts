@@ -2,5 +2,5 @@ export const environment = {
   production: false,
   backendUrl: 'localhost',
   backendPort: '8080',
-  testing: true
+  testing: false
 };
