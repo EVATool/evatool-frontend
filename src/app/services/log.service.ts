@@ -3,15 +3,6 @@ import {Injectable} from '@angular/core';
 /*
 TODO List
 
-Refactoring from Modulith:
-push into repos...
-- Make run in docker...
-Docker deploy does not work (no access to files, permission denied)
-
-
-
-Testing is completely bugged (0 tests found with no real cause)
-make Sonarcloud work even if tests fail (front and backend)
 Log Level in prod settings at least warn
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
@@ -27,6 +18,7 @@ How to deal with impacts going horizontal in requirement table
 Table row mousehover/focus highlight
 RequirementDelta color, minValue, maxValue in DTO (?)
 RequirementDelta in Requirements table (slider should appear on tab)
+make Sonarcloud work even if tests fail (front and backend)
 
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HTTP Interceptor (Datenbanki xD) (PWA?)
