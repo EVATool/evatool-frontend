@@ -13,6 +13,7 @@ describe('MarkTextareaComponent', () => {
       imports: SpecService.imports.concat([
         //HighlightSearchPipe
       ]),
+      providers: SpecService.providers,
       declarations: [MarkTextareaComponent]
     })
       .compileComponents();

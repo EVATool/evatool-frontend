@@ -7,7 +7,7 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outpu
 })
 export class MarkTextareaComponent implements OnInit, AfterViewInit {
   @ViewChild('textareadiv') textarea!: ElementRef;
-  @Input() highlightFilter!: string;
+  @Input() highlightFilter = '';
   @Input() text!: string;
   @Input() placeholder!: string;
   @Output() textChange = new EventEmitter<string>();

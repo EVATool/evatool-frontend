@@ -10,6 +10,7 @@ describe('ValuesDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
+      providers: SpecService.providers,
       declarations: [ ValuesDialogComponent ]
     })
     .compileComponents();

@@ -10,6 +10,7 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
+      providers: SpecService.providers,
       declarations: [ HomeComponent ]
     })
     .compileComponents();
