@@ -1,7 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VariantsDialogComponent } from './variants-dialog.component';
+import {VariantsDialogComponent} from './variants-dialog.component';
 import {SpecService} from '../../../../services/spec.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 describe('VariantsDialogComponent', () => {
   let component: VariantsDialogComponent;
@@ -10,10 +11,20 @@ describe('VariantsDialogComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
-      providers: SpecService.providers,
-      declarations: [ VariantsDialogComponent ]
+      providers: SpecService.providers.concat([
+          {
+            provide: MatDialogRef,
+            useValue: []
+          },
+          {
+            provide: MAT_DIALOG_DATA,
+            useValue: []
+          }
+        ]
+      ),
+      declarations: [VariantsDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

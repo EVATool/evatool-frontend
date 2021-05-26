@@ -14,7 +14,7 @@ export class AnalysisDialogComponent implements OnInit {
 
   analysis!: Analysis;
   template!: Analysis;
-  useTemplate: boolean = false;
+  useTemplate = false;
   isEditingAnalysis!: boolean;
   goToAnalysis!: boolean;
 
