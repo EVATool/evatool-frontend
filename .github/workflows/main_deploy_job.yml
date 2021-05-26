@@ -68,4 +68,4 @@ jobs:
             cd docker
             docker-compose down
             docker image prune -f -a
-            docker-compose -d up
+            docker-compose up -d
