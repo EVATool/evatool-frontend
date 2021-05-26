@@ -12,6 +12,7 @@ export class SpecService {
     RouterTestingModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatMenuModule
   ];
 
   public static readonly providers: any[] = [
