@@ -10,7 +10,7 @@
 
   </div>
   <div class="stakeholder-level-name" *ngIf="showDescription">
-    <div
-      [innerHTML]=" shownlevels[stakeholderData.stakeholderLevels.indexOf(level)].value | highlightSearch: filtertext"></div>
+    <div *ngIf="stakeholderData.stakeholderLevels?.length > 0"
+         [innerHTML]="shownlevels[stakeholderData.stakeholderLevels.indexOf(level)].value | highlightSearch: filtertext"></div>
   </div>
 </div>

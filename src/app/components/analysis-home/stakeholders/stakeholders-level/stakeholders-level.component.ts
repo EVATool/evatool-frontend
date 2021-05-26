@@ -9,7 +9,7 @@ import {StakeholderDataService} from "../../../../services/data/stakeholder-data
 })
 export class StakeholdersLevelComponent implements OnInit {
 
-  @Input() public level = 'NATURAL_PERSON';
+  @Input() public level = 'INDIVIDUAL';
   @Input() public editable = true;
   @Input() public showDescription = true;
   @Input() public filtertext = '';

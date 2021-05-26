@@ -10,11 +10,9 @@ describe('MarkTextareaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: SpecService.imports.concat([
-        //HighlightSearchPipe
-      ]),
+      imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [MarkTextareaComponent]
+      declarations: [MarkTextareaComponent, HighlightSearchPipe]
     })
       .compileComponents();
   });
