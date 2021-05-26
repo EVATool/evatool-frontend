@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 /*
 TODO List
 
+Use mark-textarea instead of textarea (unifies textarea style...)
 Log Level in prod settings at least warn
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
