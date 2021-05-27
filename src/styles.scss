@@ -16,14 +16,21 @@ body {
 @include stakeholder-impact-slider-theme();
 @include stakeholder-impact-slider-theme();
 
-@import "app/layout/style/style";
-@include defaultStyle();
-
 @import "app/layout/style/resets";
 @include resetStyle();
 
 .highlight {
   background-color: yellow;
+}
+
+.screen-reader-only {
+  display: none;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1%;
+  height: 1%;
+  overflow: hidden;
 }
 
 /*

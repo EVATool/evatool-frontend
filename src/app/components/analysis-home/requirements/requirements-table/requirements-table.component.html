@@ -1,6 +1,7 @@
 <div class="table-container">
   <ng-scrollbar>
     <table mat-table [dataSource]="tableDataSource" matSort>
+      <caption class="screen-reader-only">List of Requirements</caption>
 
       <ng-container matColumnDef="prefixSequenceId">
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
