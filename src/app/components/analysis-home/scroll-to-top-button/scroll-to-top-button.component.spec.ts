@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ScrollToTopButtonComponent } from './scroll-to-top-button.component';
+import {ScrollToTopButtonComponent} from './scroll-to-top-button.component';
 
 describe('ScrollToTopButtonComponent', () => {
   let component: ScrollToTopButtonComponent;

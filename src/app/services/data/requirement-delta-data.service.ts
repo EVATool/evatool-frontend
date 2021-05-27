@@ -1,16 +1,16 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {DataService} from "../data.service";
-import {LogService} from "../log.service";
-import {AnalysisDataService} from "./analysis-data.service";
-import {RequirementDelta} from "../../model/RequirementDelta";
-import {RequirementDeltaRestService} from "../rest/requirement-delta-rest.service";
-import {RequirementDeltaMapperService} from "../mapper/requirement-delta-mapper.service";
-import {ImpactDataService} from "./impact-data.service";
-import {RequirementDataService} from "./requirement-data.service";
-import {Analysis} from "../../model/Analysis";
-import {RequirementDeltaDto} from "../../dto/RequirementDeltaDto";
-import {Requirement} from "../../model/Requirement";
-import {Impact} from "../../model/Impact";
+import {DataService} from '../data.service';
+import {LogService} from '../log.service';
+import {AnalysisDataService} from './analysis-data.service';
+import {RequirementDelta} from '../../model/RequirementDelta';
+import {RequirementDeltaRestService} from '../rest/requirement-delta-rest.service';
+import {RequirementDeltaMapperService} from '../mapper/requirement-delta-mapper.service';
+import {ImpactDataService} from './impact-data.service';
+import {RequirementDataService} from './requirement-data.service';
+import {Analysis} from '../../model/Analysis';
+import {RequirementDeltaDto} from '../../dto/RequirementDeltaDto';
+import {Requirement} from '../../model/Requirement';
+import {Impact} from '../../model/Impact';
 
 @Injectable({
   providedIn: 'root'

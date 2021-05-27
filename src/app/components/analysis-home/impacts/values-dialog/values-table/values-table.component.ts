@@ -1,13 +1,13 @@
-import {AfterViewInit, EventEmitter, Component, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {MatSort} from "@angular/material/sort";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Value} from "../../../../../model/Value";
-import {LogService} from "../../../../../services/log.service";
-import {ValueDataService} from "../../../../../services/data/value-data.service";
-import {ImpactDataService} from "../../../../../services/data/impact-data.service";
-import {AnalysisDataService} from "../../../../../services/data/analysis-data.service";
-import {Impact} from "../../../../../model/Impact";
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Value} from '../../../../../model/Value';
+import {LogService} from '../../../../../services/log.service';
+import {ValueDataService} from '../../../../../services/data/value-data.service';
+import {ImpactDataService} from '../../../../../services/data/impact-data.service';
+import {AnalysisDataService} from '../../../../../services/data/analysis-data.service';
+import {Impact} from '../../../../../model/Impact';
 
 @Component({
   selector: 'app-values-table',

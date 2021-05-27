@@ -1,14 +1,12 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {StakeholderDataService} from "../../../../services/data/stakeholder-data.service";
-import {Stakeholder} from "../../../../model/Stakeholder";
-import {MatTable, MatTableDataSource} from "@angular/material/table";
-import {AnalysisDataService} from "../../../../services/data/analysis-data.service";
-import {StakeholderTableFilterEvent} from "../stakeholders-filter-bar/StakeholderTableFilterEvent";
-import {LogService} from "../../../../services/log.service";
-import {Impact} from "../../../../model/Impact";
-import {NgScrollbar} from "ngx-scrollbar";
-import {MatSort} from "@angular/material/sort";
-import {SliderFilterBoundary, SliderFilterType} from "../../../impact-slider/SliderFilterSettings";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {StakeholderDataService} from '../../../../services/data/stakeholder-data.service';
+import {Stakeholder} from '../../../../model/Stakeholder';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {AnalysisDataService} from '../../../../services/data/analysis-data.service';
+import {StakeholderTableFilterEvent} from '../stakeholders-filter-bar/StakeholderTableFilterEvent';
+import {LogService} from '../../../../services/log.service';
+import {NgScrollbar} from 'ngx-scrollbar';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-stakeholders-table',

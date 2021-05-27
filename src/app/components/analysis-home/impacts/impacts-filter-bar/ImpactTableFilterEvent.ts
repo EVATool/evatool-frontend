@@ -1,4 +1,4 @@
-import {SliderFilterSettings} from "../../../impact-slider/SliderFilterSettings";
+import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
 
 export class ImpactTableFilterEvent {
 

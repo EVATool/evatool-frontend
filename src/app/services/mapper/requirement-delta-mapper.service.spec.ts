@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { RequirementDeltaMapperService } from './requirement-delta-mapper.service';
+import {RequirementDeltaMapperService} from './requirement-delta-mapper.service';
 
 describe('RequirementDeltaMapperService', () => {
   let service: RequirementDeltaMapperService;

@@ -1,13 +1,12 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {DataService} from "../data.service";
-import {LogService} from "../log.service";
-import {ValueRestService} from "../rest/value-rest.service";
-import {ValueMapperService} from "../mapper/value-mapper.service";
-import {AnalysisDataService} from "./analysis-data.service";
-import {Analysis} from "../../model/Analysis";
-import {Value} from "../../model/Value";
-import {ValueDto} from "../../dto/ValueDto";
-import {Stakeholder} from "../../model/Stakeholder";
+import {DataService} from '../data.service';
+import {LogService} from '../log.service';
+import {ValueRestService} from '../rest/value-rest.service';
+import {ValueMapperService} from '../mapper/value-mapper.service';
+import {AnalysisDataService} from './analysis-data.service';
+import {Analysis} from '../../model/Analysis';
+import {Value} from '../../model/Value';
+import {ValueDto} from '../../dto/ValueDto';
 
 @Injectable({
   providedIn: 'root'

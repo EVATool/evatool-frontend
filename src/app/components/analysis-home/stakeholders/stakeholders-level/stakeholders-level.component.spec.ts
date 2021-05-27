@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StakeholdersLevelComponent } from './stakeholders-level.component';
+import {StakeholdersLevelComponent} from './stakeholders-level.component';
 import {SpecService} from '../../../../services/spec.service';
 import {HighlightSearchPipe} from '../../../../pipes/highlight-search.pipe';
 

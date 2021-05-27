@@ -1,5 +1,5 @@
-import {Variant} from "./Variant";
-import {Analysis} from "./Analysis";
+import {Variant} from './Variant';
+import {Analysis} from './Analysis';
 
 export class Requirement {
   [k: string]: any;

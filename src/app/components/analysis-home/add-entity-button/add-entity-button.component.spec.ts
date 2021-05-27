@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddEntityButtonComponent } from './add-entity-button.component';
+import {AddEntityButtonComponent} from './add-entity-button.component';
 
 describe('AddEntityButtonComponent', () => {
   let component: AddEntityButtonComponent;

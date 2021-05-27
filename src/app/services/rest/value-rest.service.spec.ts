@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ValueRestService } from './value-rest.service';
+import {ValueRestService} from './value-rest.service';
 import {SpecService} from '../spec.service';
 
 describe('ValueRestService', () => {

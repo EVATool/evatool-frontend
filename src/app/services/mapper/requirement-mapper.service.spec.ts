@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { RequirementMapperService } from './requirement-mapper.service';
+import {RequirementMapperService} from './requirement-mapper.service';
 
 describe('RequirementMapperService', () => {
   let service: RequirementMapperService;

@@ -1,24 +1,23 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Requirement} from "../../../../model/Requirement";
-import {Impact} from "../../../../model/Impact";
-import {VariantsDialogComponent} from "../variants-dialog/variants-dialog.component";
-import {Value} from "../../../../model/Value";
-import {RequirementDelta} from "../../../../model/RequirementDelta";
-import {RequirementTableFilterEvent} from "../requirements-filter-bar/RequirementTableFilterEvent";
-import {MatTable, MatTableDataSource} from "@angular/material/table";
-import {MatDialog} from "@angular/material/dialog";
-import {RequirementDataService} from "../../../../services/data/requirement-data.service";
-import {MatSort} from "@angular/material/sort";
-import {NgScrollbar} from "ngx-scrollbar";
-import {LogService} from "../../../../services/log.service";
-import {ImpactDataService} from "../../../../services/data/impact-data.service";
-import {ValueDataService} from "../../../../services/data/value-data.service";
-import {AnalysisDataService} from "../../../../services/data/analysis-data.service";
-import {RequirementDeltaDataService} from "../../../../services/data/requirement-delta-data.service";
-import {VariantDataService} from "../../../../services/data/variant-data.service";
-import {SliderFilterSettings} from "../../../impact-slider/SliderFilterSettings";
-import {Variant} from "../../../../model/Variant";
-import {trigger, state, style, animate, transition} from '@angular/animations';
+import {Requirement} from '../../../../model/Requirement';
+import {Impact} from '../../../../model/Impact';
+import {VariantsDialogComponent} from '../variants-dialog/variants-dialog.component';
+import {Value} from '../../../../model/Value';
+import {RequirementDelta} from '../../../../model/RequirementDelta';
+import {RequirementTableFilterEvent} from '../requirements-filter-bar/RequirementTableFilterEvent';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatDialog} from '@angular/material/dialog';
+import {RequirementDataService} from '../../../../services/data/requirement-data.service';
+import {MatSort} from '@angular/material/sort';
+import {NgScrollbar} from 'ngx-scrollbar';
+import {LogService} from '../../../../services/log.service';
+import {ImpactDataService} from '../../../../services/data/impact-data.service';
+import {ValueDataService} from '../../../../services/data/value-data.service';
+import {AnalysisDataService} from '../../../../services/data/analysis-data.service';
+import {RequirementDeltaDataService} from '../../../../services/data/requirement-delta-data.service';
+import {VariantDataService} from '../../../../services/data/variant-data.service';
+import {Variant} from '../../../../model/Variant';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-requirements-table',

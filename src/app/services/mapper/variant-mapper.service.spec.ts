@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { VariantMapperService } from './variant-mapper.service';
+import {VariantMapperService} from './variant-mapper.service';
 
 describe('VariantMapperService', () => {
   let service: VariantMapperService;

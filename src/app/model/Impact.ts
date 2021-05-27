@@ -1,6 +1,6 @@
-import {Value} from "./Value";
-import {Stakeholder} from "./Stakeholder";
-import {Analysis} from "./Analysis";
+import {Value} from './Value';
+import {Stakeholder} from './Stakeholder';
+import {Analysis} from './Analysis';
 
 export class Impact {
   [k: string]: any;

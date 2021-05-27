@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ImpactedFilterComponent } from './impacted-filter.component';
+import {ImpactedFilterComponent} from './impacted-filter.component';
 
 describe('ImpactedFilterComponent', () => {
   let component: ImpactedFilterComponent;

@@ -1,4 +1,4 @@
-import {Analysis} from "./Analysis";
+import {Analysis} from './Analysis';
 
 export class Variant {
   [k: string]: any;

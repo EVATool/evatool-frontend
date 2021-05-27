@@ -1,9 +1,9 @@
-import {AfterViewInit, EventEmitter, Component, Input, OnInit, Output, ViewChild, Inject} from '@angular/core';
-import {LogService} from "../../../../services/log.service";
-import {FormBuilder} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ValueDataService} from "../../../../services/data/value-data.service";
-import {Value} from "../../../../model/Value";
+import {Component, Inject, OnInit} from '@angular/core';
+import {LogService} from '../../../../services/log.service';
+import {FormBuilder} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {ValueDataService} from '../../../../services/data/value-data.service';
+import {Value} from '../../../../model/Value';
 
 @Component({
   selector: 'app-values-dialog',

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {LogService} from "../log.service";
-import {HttpClient} from "@angular/common/http";
-import {RestService} from "../rest.service";
-import {Observable, of} from "rxjs";
-import {VariantDto} from "../../dto/VariantDto";
-import {SampleDataService} from "../sample-data.service";
+import {LogService} from '../log.service';
+import {HttpClient} from '@angular/common/http';
+import {RestService} from '../rest.service';
+import {Observable, of} from 'rxjs';
+import {VariantDto} from '../../dto/VariantDto';
+import {SampleDataService} from '../sample-data.service';
 
 @Injectable({
   providedIn: 'root'

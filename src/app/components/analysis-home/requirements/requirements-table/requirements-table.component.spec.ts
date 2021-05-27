@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RequirementsTableComponent } from './requirements-table.component';
+import {RequirementsTableComponent} from './requirements-table.component';
 import {SpecService} from '../../../../services/spec.service';
 
 describe('RequirementsTableComponent', () => {

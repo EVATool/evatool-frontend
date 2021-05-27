@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {AnalysisDataService} from "./data/analysis-data.service";
-import {StakeholderDataService} from "./data/stakeholder-data.service";
-import {ValueDataService} from "./data/value-data.service";
-import {RequirementDataService} from "./data/requirement-data.service";
-import {ImpactDataService} from "./data/impact-data.service";
-import {RequirementDeltaDataService} from "./data/requirement-delta-data.service";
-import {VariantDataService} from "./data/variant-data.service";
-import {Analysis} from "../model/Analysis";
+import {AnalysisDataService} from './data/analysis-data.service';
+import {StakeholderDataService} from './data/stakeholder-data.service';
+import {ValueDataService} from './data/value-data.service';
+import {RequirementDataService} from './data/requirement-data.service';
+import {ImpactDataService} from './data/impact-data.service';
+import {RequirementDeltaDataService} from './data/requirement-delta-data.service';
+import {VariantDataService} from './data/variant-data.service';
+import {Analysis} from '../model/Analysis';
 
 @Injectable({
   providedIn: 'root'

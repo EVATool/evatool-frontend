@@ -1,19 +1,18 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTable, MatTableDataSource} from "@angular/material/table";
-import {NgScrollbar} from "ngx-scrollbar";
-import {MatSort} from "@angular/material/sort";
-import {Impact} from "../../../../model/Impact";
-import {LogService} from "../../../../services/log.service";
-import {ImpactDataService} from "../../../../services/data/impact-data.service";
-import {ValueDataService} from "../../../../services/data/value-data.service";
-import {StakeholderDataService} from "../../../../services/data/stakeholder-data.service";
-import {AnalysisDataService} from "../../../../services/data/analysis-data.service";
-import {RequirementRestService} from "../../../../services/rest/requirement-rest.service";
-import {MatDialog} from "@angular/material/dialog";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {SliderFilterBoundary, SliderFilterType} from "../../../impact-slider/SliderFilterSettings";
-import {ImpactTableFilterEvent} from "../impacts-filter-bar/ImpactTableFilterEvent";
-import {ValuesDialogComponent} from "../values-dialog/values-dialog.component";
+import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {NgScrollbar} from 'ngx-scrollbar';
+import {MatSort} from '@angular/material/sort';
+import {Impact} from '../../../../model/Impact';
+import {LogService} from '../../../../services/log.service';
+import {ImpactDataService} from '../../../../services/data/impact-data.service';
+import {ValueDataService} from '../../../../services/data/value-data.service';
+import {StakeholderDataService} from '../../../../services/data/stakeholder-data.service';
+import {AnalysisDataService} from '../../../../services/data/analysis-data.service';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SliderFilterBoundary, SliderFilterType} from '../../../impact-slider/SliderFilterSettings';
+import {ImpactTableFilterEvent} from '../impacts-filter-bar/ImpactTableFilterEvent';
+import {ValuesDialogComponent} from '../values-dialog/values-dialog.component';
 
 @Component({
   selector: 'app-impacts-table',

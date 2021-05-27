@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {LogService} from "../log.service";
-import {Analysis} from "../../model/Analysis";
-import {AnalysisDto} from "../../dto/AnalysisDto";
-import {MapperService} from "../mapper.service";
+import {LogService} from '../log.service';
+import {Analysis} from '../../model/Analysis';
+import {AnalysisDto} from '../../dto/AnalysisDto';
+import {MapperService} from '../mapper.service';
 
 @Injectable({
   providedIn: 'root'

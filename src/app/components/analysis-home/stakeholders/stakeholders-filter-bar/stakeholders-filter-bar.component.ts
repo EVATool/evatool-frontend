@@ -1,11 +1,9 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {StakeholderDataService} from "../../../../services/data/stakeholder-data.service";
-import {LogService} from "../../../../services/log.service";
-import {StakeholderTableFilterEvent} from "./StakeholderTableFilterEvent";
-import {ColumnCategoryFilterComponent} from "../../../column-category-filter/column-category-filter.component";
-import {HighlightSearchComponent} from "../../../highlight-search/highlight-search.component";
-import {PriorityFilterComponent} from "../../../priority-filter/priority-filter.component";
-import {ImpactedFilterComponent} from "../../../impacted-filter/impacted-filter.component";
+import {StakeholderDataService} from '../../../../services/data/stakeholder-data.service';
+import {LogService} from '../../../../services/log.service';
+import {StakeholderTableFilterEvent} from './StakeholderTableFilterEvent';
+import {ColumnCategoryFilterComponent} from '../../../column-category-filter/column-category-filter.component';
+import {HighlightSearchComponent} from '../../../highlight-search/highlight-search.component';
 
 @Component({
   selector: 'app-stakeholders-filter-bar',

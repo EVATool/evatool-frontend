@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StakeholdersPriorityComponent } from './stakeholders-priority.component';
+import {StakeholdersPriorityComponent} from './stakeholders-priority.component';
 import {SpecService} from '../../../../services/spec.service';
 
 describe('StakeholdersPriorityComponent', () => {

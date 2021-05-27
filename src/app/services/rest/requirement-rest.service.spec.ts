@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { RequirementRestService } from './requirement-rest.service';
+import {RequirementRestService} from './requirement-rest.service';
 import {SpecService} from '../spec.service';
 
 describe('RequirementRestService', () => {

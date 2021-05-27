@@ -1,14 +1,14 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ColumnSliderFilterComponent} from "../../../column-slider-filter/column-slider-filter.component";
-import {ColumnCategoryFilterComponent} from "../../../column-category-filter/column-category-filter.component";
-import {HighlightSearchComponent} from "../../../highlight-search/highlight-search.component";
-import {ImpactTableFilterEvent} from "./ImpactTableFilterEvent";
-import {LogService} from "../../../../services/log.service";
-import {StakeholderDataService} from "../../../../services/data/stakeholder-data.service";
-import {ValueDataService} from "../../../../services/data/value-data.service";
-import {SliderFilterSettings} from "../../../impact-slider/SliderFilterSettings";
-import {Value} from "../../../../model/Value";
-import {Stakeholder} from "../../../../model/Stakeholder";
+import {ColumnSliderFilterComponent} from '../../../column-slider-filter/column-slider-filter.component';
+import {ColumnCategoryFilterComponent} from '../../../column-category-filter/column-category-filter.component';
+import {HighlightSearchComponent} from '../../../highlight-search/highlight-search.component';
+import {ImpactTableFilterEvent} from './ImpactTableFilterEvent';
+import {LogService} from '../../../../services/log.service';
+import {StakeholderDataService} from '../../../../services/data/stakeholder-data.service';
+import {ValueDataService} from '../../../../services/data/value-data.service';
+import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
+import {Value} from '../../../../model/Value';
+import {Stakeholder} from '../../../../model/Stakeholder';
 
 @Component({
   selector: 'app-impacts-filter-bar',

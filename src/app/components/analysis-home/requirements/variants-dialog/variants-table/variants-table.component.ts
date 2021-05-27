@@ -1,12 +1,11 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {Variant} from "../../../../../model/Variant";
-import {VariantDataService} from "../../../../../services/data/variant-data.service";
-import {LogService} from "../../../../../services/log.service";
-import {MatSort} from "@angular/material/sort";
-import {Value} from "../../../../../model/Value";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {AnalysisDataService} from "../../../../../services/data/analysis-data.service";
+import {MatTableDataSource} from '@angular/material/table';
+import {Variant} from '../../../../../model/Variant';
+import {VariantDataService} from '../../../../../services/data/variant-data.service';
+import {LogService} from '../../../../../services/log.service';
+import {MatSort} from '@angular/material/sort';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {AnalysisDataService} from '../../../../../services/data/analysis-data.service';
 
 @Component({
   selector: 'app-variants-table',

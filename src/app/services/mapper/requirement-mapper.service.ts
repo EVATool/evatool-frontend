@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {MapperService} from "../mapper.service";
-import {LogService} from "../log.service";
-import {RequirementDto} from "../../dto/RequirementDto";
-import {Requirement} from "../../model/Requirement";
-import {Analysis} from "../../model/Analysis";
-import {Variant} from "../../model/Variant";
+import {MapperService} from '../mapper.service';
+import {LogService} from '../log.service';
+import {RequirementDto} from '../../dto/RequirementDto';
+import {Requirement} from '../../model/Requirement';
+import {Analysis} from '../../model/Analysis';
+import {Variant} from '../../model/Variant';
 
 @Injectable({
   providedIn: 'root'

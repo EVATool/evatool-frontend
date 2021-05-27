@@ -1,20 +1,16 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ColumnSliderFilterComponent} from "../../../column-slider-filter/column-slider-filter.component";
-import {ColumnCategoryFilterComponent} from "../../../column-category-filter/column-category-filter.component";
-import {HighlightSearchComponent} from "../../../highlight-search/highlight-search.component";
-import {Variant} from "../../../../model/Variant";
-import {ValueDataService} from "../../../../services/data/value-data.service";
-import {RequirementDataService} from "../../../../services/data/requirement-data.service";
-import {VariantRestService} from "../../../../services/rest/variant-rest.service";
-import {ImpactRestService} from "../../../../services/rest/impact-rest.service";
-import {Router} from "@angular/router";
-import {Value} from "../../../../model/Value";
-import {SliderFilterSettings} from "../../../impact-slider/SliderFilterSettings";
-import {RequirementTableFilterEvent} from "./RequirementTableFilterEvent";
-import {VariantDataService} from "../../../../services/data/variant-data.service";
-import {ImpactDataService} from "../../../../services/data/impact-data.service";
-import {Impact} from "../../../../model/Impact";
-import {LogService} from "../../../../services/log.service";
+import {ColumnSliderFilterComponent} from '../../../column-slider-filter/column-slider-filter.component';
+import {ColumnCategoryFilterComponent} from '../../../column-category-filter/column-category-filter.component';
+import {HighlightSearchComponent} from '../../../highlight-search/highlight-search.component';
+import {Variant} from '../../../../model/Variant';
+import {ValueDataService} from '../../../../services/data/value-data.service';
+import {Value} from '../../../../model/Value';
+import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
+import {RequirementTableFilterEvent} from './RequirementTableFilterEvent';
+import {VariantDataService} from '../../../../services/data/variant-data.service';
+import {ImpactDataService} from '../../../../services/data/impact-data.service';
+import {Impact} from '../../../../model/Impact';
+import {LogService} from '../../../../services/log.service';
 
 @Component({
   selector: 'app-requirements-filter-bar',

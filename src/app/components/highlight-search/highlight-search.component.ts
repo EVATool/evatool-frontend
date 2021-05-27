@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {LogService} from "../../services/log.service";
-import {MatInput} from "@angular/material/input";
+import {LogService} from '../../services/log.service';
+import {MatInput} from '@angular/material/input';
 
 @Component({
   selector: 'app-search-bar', // TODO Rename to app-highlight-search

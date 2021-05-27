@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {VariantDataService} from "../../../../services/data/variant-data.service";
-import {LogService} from "../../../../services/log.service";
+import {FormBuilder} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {VariantDataService} from '../../../../services/data/variant-data.service';
+import {LogService} from '../../../../services/log.service';
 
 @Component({
   selector: 'app-variants-dialog',

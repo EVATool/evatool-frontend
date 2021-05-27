@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StakeholdersImpactedComponent } from './stakeholders-impacted.component';
+import {StakeholdersImpactedComponent} from './stakeholders-impacted.component';
 
 describe('StakeholdersImpactedComponent', () => {
   let component: StakeholdersImpactedComponent;

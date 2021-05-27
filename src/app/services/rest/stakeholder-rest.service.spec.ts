@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { StakeholderRestService } from './stakeholder-rest.service';
+import {StakeholderRestService} from './stakeholder-rest.service';
 import {SpecService} from '../spec.service';
 
 describe('StakeholderRestService', () => {

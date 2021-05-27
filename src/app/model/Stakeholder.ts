@@ -1,4 +1,4 @@
-import {Analysis} from "./Analysis";
+import {Analysis} from './Analysis';
 
 export class Stakeholder {
   [k: string]: any;

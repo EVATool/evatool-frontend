@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ImpactMapperService } from './impact-mapper.service';
+import {ImpactMapperService} from './impact-mapper.service';
 
 describe('ImpactMapperService', () => {
   let service: ImpactMapperService;

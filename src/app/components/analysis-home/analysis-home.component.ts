@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, isDevMode, OnInit, ViewChild} from '@angular/core';
-import {LogService} from "../../services/log.service";
-import {MatTabGroup} from "@angular/material/tabs";
-import {AnalysisDataService} from "../../services/data/analysis-data.service";
+import {LogService} from '../../services/log.service';
+import {MatTabGroup} from '@angular/material/tabs';
+import {AnalysisDataService} from '../../services/data/analysis-data.service';
 
 @Component({
   selector: 'app-analysis-home',

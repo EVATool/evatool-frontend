@@ -1,18 +1,13 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {LogService} from "../log.service";
-import {AnalysisDataService} from "./analysis-data.service";
-import {DataService} from "../data.service";
-import {RequirementRestService} from "../rest/requirement-rest.service";
-import {RequirementMapperService} from "../mapper/requirement-mapper.service";
-import {Requirement} from "../../model/Requirement";
-import {Analysis} from "../../model/Analysis";
-import {RequirementDto} from "../../dto/RequirementDto";
-import {VariantDataService} from "./variant-data.service";
-import {Stakeholder} from "../../model/Stakeholder";
-import {Value} from "../../model/Value";
-import {Impact} from "../../model/Impact";
-import {Variant} from "../../model/Variant";
-import {ImpactDto} from "../../dto/ImpactDto";
+import {LogService} from '../log.service';
+import {AnalysisDataService} from './analysis-data.service';
+import {DataService} from '../data.service';
+import {RequirementRestService} from '../rest/requirement-rest.service';
+import {RequirementMapperService} from '../mapper/requirement-mapper.service';
+import {Requirement} from '../../model/Requirement';
+import {Analysis} from '../../model/Analysis';
+import {RequirementDto} from '../../dto/RequirementDto';
+import {VariantDataService} from './variant-data.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ImpactsFilterBarComponent } from './impacts-filter-bar.component';
+import {ImpactsFilterBarComponent} from './impacts-filter-bar.component';
 import {SpecService} from '../../../../services/spec.service';
 
 describe('ImpactsFilterBarComponent', () => {

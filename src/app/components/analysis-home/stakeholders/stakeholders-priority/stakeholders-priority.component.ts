@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {LogService} from "../../../../services/log.service";
-import {StakeholderDataService} from "../../../../services/data/stakeholder-data.service";
+import {LogService} from '../../../../services/log.service';
+import {StakeholderDataService} from '../../../../services/data/stakeholder-data.service';
 
 @Component({
   selector: 'app-stakeholders-priority',

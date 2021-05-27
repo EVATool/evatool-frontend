@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {MapperService} from "../mapper.service";
-import {LogService} from "../log.service";
-import {Impact} from "../../model/Impact";
-import {ImpactDto} from "../../dto/ImpactDto";
-import {Analysis} from "../../model/Analysis";
-import {Value} from "../../model/Value";
-import {Stakeholder} from "../../model/Stakeholder";
+import {MapperService} from '../mapper.service';
+import {LogService} from '../log.service';
+import {Impact} from '../../model/Impact';
+import {ImpactDto} from '../../dto/ImpactDto';
+import {Analysis} from '../../model/Analysis';
+import {Value} from '../../model/Value';
+import {Stakeholder} from '../../model/Stakeholder';
 
 @Injectable({
   providedIn: 'root'

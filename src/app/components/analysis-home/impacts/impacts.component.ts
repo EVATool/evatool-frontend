@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {LogService} from "../../../services/log.service";
-import {ImpactDataService} from "../../../services/data/impact-data.service";
-import {ValueDataService} from "../../../services/data/value-data.service";
-import {StakeholderDataService} from "../../../services/data/stakeholder-data.service";
-import {AnalysisDataService} from "../../../services/data/analysis-data.service";
-import {ImpactsTableComponent} from "./impacts-table/impacts-table.component";
-import {ImpactsFilterBarComponent} from "./impacts-filter-bar/impacts-filter-bar.component";
+import {LogService} from '../../../services/log.service';
+import {ImpactDataService} from '../../../services/data/impact-data.service';
+import {ValueDataService} from '../../../services/data/value-data.service';
+import {StakeholderDataService} from '../../../services/data/stakeholder-data.service';
+import {AnalysisDataService} from '../../../services/data/analysis-data.service';
+import {ImpactsTableComponent} from './impacts-table/impacts-table.component';
+import {ImpactsFilterBarComponent} from './impacts-filter-bar/impacts-filter-bar.component';
 
 @Component({
   selector: 'app-impacts',

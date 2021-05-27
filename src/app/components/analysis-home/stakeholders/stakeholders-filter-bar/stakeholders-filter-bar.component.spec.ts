@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StakeholdersFilterBarComponent } from './stakeholders-filter-bar.component';
+import {StakeholdersFilterBarComponent} from './stakeholders-filter-bar.component';
 import {SpecService} from '../../../../services/spec.service';
 
 describe('StakeholdersFilterBarComponent', () => {

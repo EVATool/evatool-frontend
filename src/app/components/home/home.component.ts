@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {LogService} from "../../services/log.service";
-import {AnalysisDataService} from "../../services/data/analysis-data.service";
-import {Router} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
-import {Analysis} from "../../model/Analysis";
-import {AnalysisDialogComponent} from "./analysis-dialog/analysis-dialog.component";
+import {LogService} from '../../services/log.service';
+import {AnalysisDataService} from '../../services/data/analysis-data.service';
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {Analysis} from '../../model/Analysis';
+import {AnalysisDialogComponent} from './analysis-dialog/analysis-dialog.component';
 
 @Component({
   selector: 'app-home',

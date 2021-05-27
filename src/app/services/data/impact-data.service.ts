@@ -1,17 +1,16 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {DataService} from "../data.service";
-import {LogService} from "../log.service";
-import {AnalysisDataService} from "./analysis-data.service";
-import {StakeholderDataService} from "./stakeholder-data.service";
-import {ValueDataService} from "./value-data.service";
-import {Analysis} from "../../model/Analysis";
-import {ImpactMapperService} from "../mapper/impact-mapper.service";
-import {ImpactRestService} from "../rest/impact-rest.service";
-import {ImpactDto} from "../../dto/ImpactDto";
-import {Impact} from "../../model/Impact";
-import {Variant} from "../../model/Variant";
-import {Value} from "../../model/Value";
-import {Stakeholder} from "../../model/Stakeholder";
+import {DataService} from '../data.service';
+import {LogService} from '../log.service';
+import {AnalysisDataService} from './analysis-data.service';
+import {StakeholderDataService} from './stakeholder-data.service';
+import {ValueDataService} from './value-data.service';
+import {Analysis} from '../../model/Analysis';
+import {ImpactMapperService} from '../mapper/impact-mapper.service';
+import {ImpactRestService} from '../rest/impact-rest.service';
+import {ImpactDto} from '../../dto/ImpactDto';
+import {Impact} from '../../model/Impact';
+import {Value} from '../../model/Value';
+import {Stakeholder} from '../../model/Stakeholder';
 
 @Injectable({
   providedIn: 'root'

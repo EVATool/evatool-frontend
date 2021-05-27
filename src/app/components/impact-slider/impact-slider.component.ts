@@ -1,7 +1,7 @@
-import {AfterViewInit, EventEmitter, Component, ElementRef, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from "./SliderFilterSettings";
-import {MatSlider, MatSliderChange} from "@angular/material/slider";
-import {LogService} from "../../services/log.service";
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from './SliderFilterSettings';
+import {MatSlider, MatSliderChange} from '@angular/material/slider';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-impact-slider',

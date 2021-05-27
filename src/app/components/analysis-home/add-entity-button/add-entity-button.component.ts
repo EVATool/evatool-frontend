@@ -18,6 +18,6 @@ export class AddEntityButtonComponent implements OnInit {
   }
 
   onClick(): void {
-    this.clicked.emit()
+    this.clicked.emit();
   }
 }

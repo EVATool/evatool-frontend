@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { StakeholderMapperService } from './stakeholder-mapper.service';
+import {StakeholderMapperService} from './stakeholder-mapper.service';
 
 describe('StakeholderMapperService', () => {
   let service: StakeholderMapperService;

@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Analysis} from "../../../model/Analysis";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {AnalysisDataService} from "../../../services/data/analysis-data.service";
-import {Router} from "@angular/router";
+import {Analysis} from '../../../model/Analysis';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {AnalysisDataService} from '../../../services/data/analysis-data.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-analysis-dialog',
