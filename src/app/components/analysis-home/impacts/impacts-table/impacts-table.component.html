@@ -4,7 +4,6 @@
       <caption class="screen-reader-only">List of impacts</caption>
 
       <ng-container matColumnDef='prefixSequenceId'>
-        <!-- TODO the line below had: [resizeColumn]="true" [index]="0" -->
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
           <div matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
         </th>
@@ -60,9 +59,6 @@
               <ng-container *ngFor="let val of valueDataService.values">
                 <mat-option *ngIf="!val.archived"
                             [value]="val">
-                  <!-- For also highlighting the unselected values
-                  <div [innerHTML]="val.name | highlightSearch: highlightFilter"></div>
-                  -->
                   {{val.name}}
                 </mat-option>
               </ng-container>
@@ -94,20 +90,10 @@
         <td mat-cell *matCellDef='let impact'>
           <div class="delete-button-wrapper">
             <div class="description-container">
-              <!--
-              <textarea matInput cdkTextareaAutosize
-                        [ngModel]="impact.description"
-                        (ngModelChange)="impact.description=$event"
-                        placeholder="Describe the impact..."
-                        (change)="updateImpact(impact)"></textarea>
-              -->
               <app-mark-textarea [(text)]="impact.description"
                                  (textChange)="updateImpact(impact)"
                                  [highlightFilter]="highlightFilter"
                                  [placeholder]="'Describe the impact...'"></app-mark-textarea>
-              <!--[ngModel]="impact.description | highlightSearch: highlightFilter"-->
-              <!--(ngModelChange)="impact.description=removeHtml($event)"-->
-              <!-- Workaround with highlight search. SHOULD be (change), not (input) -->
             </div>
             <div class="delete-button-container">
               <button mat-fab (click)="deleteImpact(impact)" matTooltip="Delete Impact" matTooltipHideDelay="100"

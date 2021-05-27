@@ -36,7 +36,6 @@
           </mat-icon>
         </th>
 
-        <!--(dblclick)="checkAchrivedAndOpenDialog(element.variantsTitle)"-->
         <td mat-cell *matCellDef='let requirement'>
           <mat-form-field>
             <mat-select [(ngModel)]="requirement.variants"
@@ -84,10 +83,6 @@
           </div>
         </th>
 
-        <!-- In tag below
-          [ngClass]="{'positiv' : isPositivOrNegativ(requirement,impact,true),'negativ' : isPositivOrNegativ(requirement,impact,false)}"
-          (dblclick)="setSliderVisible(requirement,impact)"
-        -->
         <td class="delta-cell"
             mat-cell *matCellDef="let requirement"
             (dblclick)="showDeltaSliderIfExistsElseCreate(requirement, impact)"
