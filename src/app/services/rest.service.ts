@@ -11,8 +11,8 @@ export abstract class RestService {
 
   private readonly url = environment.backendUrl;
   private readonly port = environment.backendPort;
-  private readonly serverUrl: string = 'http://' + this.url + ':' + this.port + '/';
-  //private readonly serverUrl = 'http://localhost:8080/';
+  private readonly protocol: string = environment.protocol;
+  private readonly serverUrl: string = this.protocol + '://' + this.url + ':' + this.port + '/';
 
   protected readonly httpOptions = {
     headers: new HttpHeaders({
