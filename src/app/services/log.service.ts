@@ -20,6 +20,7 @@ Table row mousehover/focus highlight
 RequirementDelta color, minValue, maxValue in DTO (?)
 RequirementDelta in Requirements table (slider should appear on tab)
 make Sonarcloud work even if tests fail (front and backend)
+Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen (frontend e2e and unit tests)
 
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HTTP Interceptor (Datenbanki xD) (PWA?)
@@ -41,19 +42,11 @@ Deep copy: copy everything?
 
 Dark Mode
 
-
-
-Infrastructure:
-Deploy to UID server in both main deploy GitHub Actions
-Deploy to dockerhub on dev (do not test, let failures pass!)
-
 Add simple keycloak
-Frontend and Backend should have envs: test, dev, prod?
 Add Flyway
-SonarCloud Status not shown in backend
 
+SonarCloud Status not shown in backend
 Update dependencies in docker compose every 3/4/6 months?
-Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen (frontend e2e and unit tests)
 
 */
 
