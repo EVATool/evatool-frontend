@@ -19,7 +19,7 @@ How to deal with impacts going horizontal in requirement table
 Table row mousehover/focus highlight
 RequirementDelta color, minValue, maxValue in DTO (?)
 RequirementDelta in Requirements table (slider should appear on tab)
-make Sonarcloud work even if tests fail (front and backend)
+make Sonarcloud work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
 Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen (frontend e2e and unit tests)
 
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
