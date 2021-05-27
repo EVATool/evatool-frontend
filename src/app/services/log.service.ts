@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 /*
 TODO List
 
+Features:
 Use mark-textarea instead of textarea (unifies textarea style...)
 Log Level in prod settings at least warn
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
@@ -19,13 +20,8 @@ How to deal with impacts going horizontal in requirement table
 Table row mousehover/focus highlight
 RequirementDelta color, minValue, maxValue in DTO (?)
 RequirementDelta in Requirements table (slider should appear on tab)
-make Sonarcloud work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
-Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen (frontend e2e and unit tests)
 
-Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HTTP Interceptor (Datenbanki xD) (PWA?)
-
-HUGE refactor: Rename + folder structure
 
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders)
 
@@ -40,13 +36,18 @@ Single user: reload data (how to update references?)
 Multi user: concurrency...
 Deep copy: copy everything?
 
-Dark Mode
+Code Quality:
+Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen (frontend e2e and unit tests)
+make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
+Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
+HUGE refactor: Rename + folder structure
+SonarCloud Status not shown in backend
 
+MISC:
+Update dependencies in docker compose every 3/4/6 months?
 Add simple keycloak
 Add Flyway
-
-SonarCloud Status not shown in backend
-Update dependencies in docker compose every 3/4/6 months?
+Dark Mode
 
 */
 
