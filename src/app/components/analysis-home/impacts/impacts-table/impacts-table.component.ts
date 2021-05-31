@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {MatSort} from '@angular/material/sort';
@@ -19,7 +19,7 @@ import {ValuesDialogComponent} from '../values-dialog/values-dialog.component';
   templateUrl: './impacts-table.component.html',
   styleUrls: ['./impacts-table.component.scss']
 })
-export class ImpactsTableComponent implements OnInit {
+export class ImpactsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Impact>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();

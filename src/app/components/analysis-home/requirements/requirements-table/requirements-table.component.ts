@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Requirement} from '../../../../model/Requirement';
 import {Impact} from '../../../../model/Impact';
 import {VariantsDialogComponent} from '../variants-dialog/variants-dialog.component';
@@ -47,7 +47,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
     )
   ]
 })
-export class RequirementsTableComponent implements OnInit {
+export class RequirementsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Impact>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -104,7 +104,6 @@ export class RequirementsTableComponent implements OnInit {
     this.staticDisplayedColumns.forEach((col: string) => displayedColumns.push(col));
 
     this.impactDataService.impacts.forEach((impact: Impact) => {
-      //displayedColumns.push(impact.prefixSequenceId);
       const index = displayedColumns.length - 1;
       if (excludeImpacts == null || !excludeImpacts.includes(impact.prefixSequenceId)) {
         displayedColumns.splice(index, 0, impact.prefixSequenceId);

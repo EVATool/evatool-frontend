@@ -31,8 +31,7 @@ export class AnalysisDataService extends DataService {
     // Load current analysis.
     this.router.routerState.root.queryParams.subscribe(params => {
       if (params.id !== undefined) {
-        this.logger.info(this, 'Extracted analysisId from Router: ' + params.id)
-        // TODO Error handling. And check if router url is correct and has id parameter.
+        this.logger.info(this, 'Extracted analysisId from Router: ' + params.id);
         this.changeCurrentAnalysis(params.id);
       }
     });
