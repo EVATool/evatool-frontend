@@ -5,8 +5,7 @@ import {environment} from '../../environments/environment';
 TODO List
 
 Features:
-New Stakeholder filter components (priority: toggle every priority separately)
--> Use Impact slider also for stakeholder.impacted (column and filter)? Current filter makes no sense
+Use Impact slider also for stakeholder.impacted (column and filter)? Current filter makes no sense
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Table row mousehover/focus highlight

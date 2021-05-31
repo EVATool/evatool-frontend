@@ -11,15 +11,7 @@
   </mat-list-item>
 
   <mat-list-item>
-    <app-priority-filter  (filterChanged)="priorityFilterChange($event)"></app-priority-filter>
-
-    <div>
-      <p>Priority</p>
-    </div>
-    <div class="category-filter-container-prior">
-      <app-stakeholders-priority [(prio)]="prio" class="filter prio-filter" [editable]="true"
-                                 (prioChange)="priorityFilterChange($event)"></app-stakeholders-priority>
-    </div>
+    <app-priority-filter (filterChanged)="priorityFilterChange($event)"></app-priority-filter>
   </mat-list-item>
 
   <mat-list-item>
