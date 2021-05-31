@@ -16,14 +16,12 @@
     </div>
     <div class="category-filter-container-prior">
       <app-stakeholders-priority [(prio)]="prio" class="filter prio-filter" [editable]="true"
-                            (prioChange)="priorityFilterChange($event)"></app-stakeholders-priority>
+                                 (prioChange)="priorityFilterChange($event)"></app-stakeholders-priority>
     </div>
   </mat-list-item>
 
   <mat-list-item>
-    <div class="impacted-filter-container-impact">
-      <app-impacted-filter (filterChanged)="impactedFilterChange($event)"></app-impacted-filter>
-    </div>
+    <app-impacted-filter (filterChanged)="impactedFilterChange($event)"></app-impacted-filter>
   </mat-list-item>
 
   <mat-list-item>
