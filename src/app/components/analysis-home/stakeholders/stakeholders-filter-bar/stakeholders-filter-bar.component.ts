@@ -19,7 +19,7 @@ export class StakeholdersFilterBarComponent {
 
   public levels = [
     {key: '', value: 'All'},
-    {key: 'NATURAL_PERSON', value: 'Individuell'},
+    {key: 'INDIVIDUAL', value: 'Individuell'},
     {key: 'ORGANIZATION', value: 'Organisation'},
     {key: 'SOCIETY', value: 'Gesellschaft'}
   ];
