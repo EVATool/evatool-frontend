@@ -5,18 +5,12 @@ import {environment} from '../../environments/environment';
 TODO List
 
 Features:
-Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
-Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
-Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
-Use default sorting (prefixId) in all data services...
-Variant modal: textarea alignment, option button vertical alignment (bugs also true for value dialog?), textboxes sometimes let scrollbar appear
 New Stakeholder filter components (priority: toggle every priority separately)
 -> Use Impact slider also for stakeholder.impacted (column and filter)?
 Category filter: select all, none, invert options
-sort arrows rendered ugly!
-Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder)
-How to deal with impacts going horizontal in requirement table
+Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Table row mousehover/focus highlight
+Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder)
 RequirementDelta color, minValue, maxValue in DTO (?)
 RequirementDelta in Requirements table (slider should appear on tab)
 
@@ -47,6 +41,12 @@ Update dependencies in docker compose every 3/4/6 months?
 Add simple keycloak
 Add Flyway
 Dark Mode
+
+Backlog:
+Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
+Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
+The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again?
+How to deal with impacts going horizontal in requirement table
 
 */
 
