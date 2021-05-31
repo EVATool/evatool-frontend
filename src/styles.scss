@@ -1,6 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/theming';
-
 @include mat-core();
 
 html, body {
@@ -276,7 +273,6 @@ $mat-warn: (
   )
 );
 $theme-warn: mat-palette($mat-warn, main, lighter, darker);
-;
 
 $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);

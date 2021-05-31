@@ -70,10 +70,7 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
     this.logger.info(this, 'Init Sorting');
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (stakeholder, property) => {
-      switch (property) {
-        default:
-          return stakeholder[property];
-      }
+      return stakeholder[property];
     };
   }
 
@@ -88,7 +85,8 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
 
       const levelFilter = searchTerms.level.length === 0 || searchTerms.level.indexOf(data.level) !== -1;
 
-      const priorityFilter = searchTerms.priority.length === 0 || searchTerms.priority === data.priority; //searchTerms.priority.indexOf(data.priority) !== -1;
+      //searchTerms.priority.indexOf(data.priority) !== -1;
+      const priorityFilter = searchTerms.priority.length === 0 || searchTerms.priority === data.priority;
 
       const impactedFilter = searchTerms.impacted === 0 || (data.impacted != null && data.impacted <= searchTerms.impacted);
 
