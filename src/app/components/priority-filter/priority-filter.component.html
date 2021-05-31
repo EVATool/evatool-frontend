@@ -1,1 +1,14 @@
-<p>priority-filter works!</p>
+<div>
+  <p>Impact</p>
+</div>
+<div class="priority-filter-container">
+
+  <mat-list class="list-horizontal">
+
+    <mat-list-item>
+      <app-stakeholders-priority [isFilter]="true" (priosChange)="priorityFilterChange($event)"></app-stakeholders-priority>
+    </mat-list-item>
+
+  </mat-list>
+
+</div>

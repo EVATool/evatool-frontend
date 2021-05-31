@@ -12,6 +12,7 @@ export class StakeholdersPriorityComponent {
   @Input() prio!: string;
   @Input() public editable = true;
   @Output() prioChange = new EventEmitter<string>();
+  @Output() priosChange = new EventEmitter<string[]>();
 
   @Input() isFilter = false;
   priorities: { [id: string]: boolean } = {};
@@ -26,6 +27,13 @@ export class StakeholdersPriorityComponent {
     }
     if (this.isFilter) {
       this.priorities[prio] = !this.priorities[prio];
+      const prios: string[] = [];
+      for (const p of this.stakeholderData.stakeholderPriorities) {
+        if (this.priorities[p]) {
+          prios.push(p);
+        }
+      }
+      this.priosChange.emit(prios);
     } else {
       this.prio = prio;
       event.stopPropagation();

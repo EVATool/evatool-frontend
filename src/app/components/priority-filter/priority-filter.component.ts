@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-priority-filter',
@@ -6,4 +6,16 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./priority-filter.component.scss']
 })
 export class PriorityFilterComponent {
+
+  @Output() filterChanged = new EventEmitter<string[]>();
+
+  priorityFilterChange(event: string[]): void {
+    this.filterChanged.emit(event);
+  }
+
+  clearFilter(): void {
+    // TODO
+
+    this.filterChanged.emit();
+  }
 }
