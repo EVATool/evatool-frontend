@@ -202,7 +202,7 @@ export class SampleDataService {
       id: '1',
       prefixSequenceId: 'IND1',
       name: 'Retep Groß',
-      priority: '2',
+      priority: 'LOW',
       level: 'INDIVIDUAL',
       impacted: 0.4,
       analysisId: '1'
@@ -211,7 +211,7 @@ export class SampleDataService {
       id: '2',
       prefixSequenceId: 'IND2',
       name: 'Leinad Lang',
-      priority: '2',
+      priority: 'HIGH',
       level: 'INDIVIDUAL',
       impacted: -0.7,
       analysisId: '1'

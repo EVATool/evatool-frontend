@@ -26,6 +26,7 @@ export class StakeholdersPriorityComponent {
       return;
     }
     if (this.isFilter) {
+      console.log(prio);
       this.priorities[prio] = !this.priorities[prio];
       const prios: string[] = [];
       for (const p of this.stakeholderData.stakeholderPriorities) {
@@ -43,7 +44,7 @@ export class StakeholdersPriorityComponent {
 
   getShowPrio(prio: string, position: number): boolean {
     if (this.isFilter) {
-      return this.priorities[prio];
+      return this.priorities[this.stakeholderData.stakeholderPriorities[position]];
     } else {
       const prioNumber = this.stakeholderData.stakeholderPriorities.indexOf(prio);
       return prioNumber >= position;
