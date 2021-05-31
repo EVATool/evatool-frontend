@@ -47,7 +47,6 @@ export class RequirementDataService extends DataService {
 
     this.requirementRest.getRequirementsByAnalysisId(analysisId).subscribe((requirementDtoList: RequirementDto[]) => {
       this.requirements = [];
-      console.log(requirementDtoList);
       requirementDtoList.forEach(requirementDto => {
         this.requirements.push(this.requirementMapper.fromDto(requirementDto, [this.analysisData.currentAnalysis], this.variantData.variants));
       });

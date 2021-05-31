@@ -49,7 +49,6 @@ export class StakeholdersFilterBarComponent {
   }
 
   impactedFilterChange(value: any): void {
-    console.log(value);
     this.stakeholderTableFilterEvent.impacted = value;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.stakeholderTableFilterEvent);

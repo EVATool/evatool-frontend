@@ -90,7 +90,6 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
       const priorityFilter = searchTerms.priority.length === 0 || searchTerms.priority.indexOf(data.priority) !== -1;
 
       const impactedFilter = searchTerms.impacted === -2 || (data.impacted != null && data.impacted <= searchTerms.impacted);
-      console.log(searchTerms.impacted);
 
       return levelFilter && priorityFilter && impactedFilter;
     };

@@ -26,7 +26,6 @@ export class StakeholdersPriorityComponent {
       return;
     }
     if (this.isFilter) {
-      console.log(prio);
       this.priorities[prio] = !this.priorities[prio];
       const prios: string[] = [];
       for (const p of this.stakeholderData.stakeholderPriorities) {
