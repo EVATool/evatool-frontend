@@ -5,13 +5,15 @@ import {environment} from '../../environments/environment';
 TODO List
 
 Features:
-Use Impact slider also for stakeholder.impacted (column and filter)? Current filter makes no sense
+Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
+Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Table row mousehover/focus highlight
 Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder)
 RequirementDelta color, minValue, maxValue in DTO (?)
 RequirementDelta in Requirements table (slider should appear on tab)
+Use Impact slider also for stakeholder.impacted (column and filter)? Current filter makes no sense
 
 HTTP Interceptor (Datenbanki xD) (PWA?)
 
@@ -29,7 +31,8 @@ Multi user: concurrency...
 Deep copy: copy everything?
 
 Code Quality:
-Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen (frontend e2e and unit tests)
+Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen
+Angular e2e tests
 make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HUGE refactor: Rename + folder structure
@@ -42,8 +45,6 @@ Add Flyway
 Dark Mode
 
 Backlog:
-Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
-Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again?
 How to deal with impacts going horizontal in requirement table
 
