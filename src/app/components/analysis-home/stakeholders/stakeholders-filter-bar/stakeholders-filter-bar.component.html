@@ -21,11 +21,8 @@
   </mat-list-item>
 
   <mat-list-item>
-    <div>
-      <p>Impacted</p>
-    </div>
-    <div class="category-filter-container-impact">
-      <app-stakeholders-impacted [editable]="true" (impactChange)="impactedFilterChange($event)"></app-stakeholders-impacted>
+    <div class="impacted-filter-container-impact">
+      <app-impacted-filter (filterChanged)="impactedFilterChange($event)"></app-impacted-filter>
     </div>
   </mat-list-item>
 

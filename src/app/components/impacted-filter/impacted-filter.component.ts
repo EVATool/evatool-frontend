@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-impacted-filter',
@@ -6,4 +6,12 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./impacted-filter.component.scss']
 })
 export class ImpactedFilterComponent {
+
+  @Output() filterChanged = new EventEmitter<number>();
+
+  impacted = 0;
+
+  impactedFilterChange(event: number | null): void {
+    this.filterChanged.emit(this.impacted);
+  }
 }

@@ -1,1 +1,14 @@
-<p>impacted-filter works!</p>
+<div>
+  <p>Impact</p>
+</div>
+<div class="impacted-filter-container">
+
+  <mat-list class="list-horizontal">
+
+    <mat-list-item>
+      <app-stakeholders-impacted [editable]="true" (impactChange)="impactedFilterChange($event)"></app-stakeholders-impacted>
+    </mat-list-item>
+
+  </mat-list>
+
+</div>
