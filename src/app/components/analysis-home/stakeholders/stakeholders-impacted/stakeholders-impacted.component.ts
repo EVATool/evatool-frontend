@@ -9,6 +9,7 @@ import {LogService} from '../../../../services/log.service';
 export class StakeholdersImpactedComponent implements OnInit {
   @Input() stakeholderImpacted!: number | null;
   @Input() editable = false;
+  @Input() isFilter = false;
   @Output() impactChange = new EventEmitter<number | null>();
   public impactIsNull = false;
 
@@ -23,7 +24,11 @@ export class StakeholdersImpactedComponent implements OnInit {
     if (this.stakeholderImpacted == null) {
       return null;
     }
-    return this.stakeholderImpacted * -1;
+    if (this.isFilter) {
+      return this.stakeholderImpacted;
+    } else {
+      return this.stakeholderImpacted * -1;
+    }
   }
 
   onImpactChange(event: any): void {
