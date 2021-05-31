@@ -11,6 +11,8 @@
   </mat-list-item>
 
   <mat-list-item>
+    <app-priority-filter  (filterChanged)="priorityFilterChange($event)"></app-priority-filter>
+
     <div>
       <p>Priority</p>
     </div>
