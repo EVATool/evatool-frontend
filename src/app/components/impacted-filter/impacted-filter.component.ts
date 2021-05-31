@@ -8,9 +8,9 @@ import {LogService} from '../../services/log.service';
 })
 export class ImpactedFilterComponent {
 
-  @Output() filterChanged = new EventEmitter<number>();
+  @Output() filterChanged = new EventEmitter<number | null>();
 
-  impacted: number | null = 0;
+  impacted: number | null = null;
 
   constructor(private logger: LogService) {
   }
@@ -20,7 +20,7 @@ export class ImpactedFilterComponent {
   }
 
   clearFilter(): void {
-    this.impacted = -2;
+    this.impacted = null;
     this.filterChanged.emit(this.impacted);
   }
 }
