@@ -46,9 +46,6 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.createdImpact.subscribe((impact: Impact) => {
       this.updateTableDataSource();
-      //const options = {bottom: -100, duration: 250};
-      //this.scrollbarRef.scrollTo(options);
-      // Flash newly created impact.
     });
 
     this.impactDataService.deletedImpact.subscribe((impact: Impact) => {
@@ -171,13 +168,6 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
 
   deleteImpact(impact: Impact): void {
     this.logger.info(this, 'Delete Impact');
-    // this.requirementRestService.getRequirementsReferencedByImpactId("" + impact.id).subscribe(referenced => { // TODO
-    //   if (!referenced) {
-    //     this.impactDataService.deleteImpact(impact);
-    //   } else {
-    //     this.snackBar.open('This impact is still being referenced by one or more impacts.', '', {duration: 5000})
-    //   }
-    // });
     this.impactDataService.deleteImpact(impact);
   }
 

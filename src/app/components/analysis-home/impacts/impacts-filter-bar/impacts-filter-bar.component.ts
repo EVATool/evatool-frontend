@@ -15,7 +15,7 @@ import {Stakeholder} from '../../../../model/Stakeholder';
   templateUrl: './impacts-filter-bar.component.html',
   styleUrls: ['./impacts-filter-bar.component.scss']
 })
-export class ImpactsFilterBarComponent implements OnInit, AfterViewInit {
+export class ImpactsFilterBarComponent implements OnInit {
   @ViewChild(ColumnSliderFilterComponent) meritFilter!: ColumnSliderFilterComponent;
   @ViewChild('stakeholderFilter') stakeholderFilter!: ColumnCategoryFilterComponent;
   @ViewChild('valuesFilter') valuesFilter!: ColumnCategoryFilterComponent;
@@ -71,10 +71,6 @@ export class ImpactsFilterBarComponent implements OnInit, AfterViewInit {
     });
 
     this.updateValues();
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   updateStakeholders(): void {

@@ -9,7 +9,7 @@ import {LogService} from '../../../../services/log.service';
   templateUrl: './variants-dialog.component.html',
   styleUrls: ['./variants-dialog.component.scss']
 })
-export class VariantsDialogComponent implements OnInit {
+export class VariantsDialogComponent {
 
   constructor(
     private logger: LogService,
@@ -17,10 +17,6 @@ export class VariantsDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<VariantsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { id: string },
     public variantDataService: VariantDataService) {
-  }
-
-  ngOnInit(): void {
-
   }
 
   closeClick(): void {

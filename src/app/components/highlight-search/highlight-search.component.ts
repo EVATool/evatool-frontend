@@ -7,14 +7,11 @@ import {MatInput} from '@angular/material/input';
   templateUrl: './highlight-search.component.html',
   styleUrls: ['./highlight-search.component.scss']
 })
-export class HighlightSearchComponent implements OnInit {
+export class HighlightSearchComponent {
   @ViewChild(MatInput) textfield!: MatInput;
   @Output() highlightTextChanged = new EventEmitter<string>();
 
   constructor(private logger: LogService) {
-  }
-
-  ngOnInit(): void {
   }
 
   searchTextChange(event: any): void {

@@ -7,7 +7,7 @@ import {StakeholderDataService} from '../../../../services/data/stakeholder-data
   templateUrl: './stakeholders-level.component.html',
   styleUrls: ['./stakeholders-level.component.scss']
 })
-export class StakeholdersLevelComponent implements OnInit {
+export class StakeholdersLevelComponent {
 
   @Input() public level = 'INDIVIDUAL';
   @Input() public editable = true;
@@ -23,9 +23,6 @@ export class StakeholdersLevelComponent implements OnInit {
 
   constructor(private logger: LogService,
               public stakeholderData: StakeholderDataService) {
-  }
-
-  ngOnInit(): void {
   }
 
   onLevelChange(): void {

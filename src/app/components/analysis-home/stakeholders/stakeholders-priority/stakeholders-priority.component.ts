@@ -7,7 +7,7 @@ import {StakeholderDataService} from '../../../../services/data/stakeholder-data
   templateUrl: './stakeholders-priority.component.html',
   styleUrls: ['./stakeholders-priority.component.scss']
 })
-export class StakeholdersPriorityComponent implements OnInit {
+export class StakeholdersPriorityComponent {
 
   // TODO isFilter
   @Input() prio!: string;
@@ -16,9 +16,6 @@ export class StakeholdersPriorityComponent implements OnInit {
 
   constructor(private logger: LogService,
               public stakeholderData: StakeholderDataService) {
-  }
-
-  ngOnInit(): void {
   }
 
   updatePrio(prio: any, event: any): void {

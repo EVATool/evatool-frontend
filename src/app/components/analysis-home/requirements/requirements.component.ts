@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   templateUrl: './requirements.component.html',
   styleUrls: ['./requirements.component.scss']
 })
-export class RequirementsComponent implements OnInit {
+export class RequirementsComponent {
   @ViewChild(RequirementsTableComponent) table!: RequirementsTableComponent;
   @ViewChild(RequirementsFilterBarComponent) filterBar!: RequirementsFilterBarComponent;
 
@@ -18,14 +18,6 @@ export class RequirementsComponent implements OnInit {
     private service: RequirementRestService,
     private dataService: RequirementDataService,
     private router: Router) {
-
-  }
-
-  ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(): void {
 
   }
 

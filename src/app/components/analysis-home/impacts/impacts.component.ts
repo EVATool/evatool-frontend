@@ -12,7 +12,7 @@ import {ImpactsFilterBarComponent} from './impacts-filter-bar/impacts-filter-bar
   templateUrl: './impacts.component.html',
   styleUrls: ['./impacts.component.scss']
 })
-export class ImpactsComponent implements OnInit {
+export class ImpactsComponent {
   @ViewChild(ImpactsTableComponent) table!: ImpactsTableComponent;
   @ViewChild(ImpactsFilterBarComponent) filterBar!: ImpactsFilterBarComponent;
 
@@ -22,19 +22,6 @@ export class ImpactsComponent implements OnInit {
     private valueDataService: ValueDataService,
     private stakeholderDataService: StakeholderDataService,
     private analysisDataService: AnalysisDataService) {
-
-  }
-
-  ngOnInit(): void {
-    // this.impactDataService.createdImpact.subscribe((impact: Impact) => {
-    //   this.logger.info(this, 'Event \'addedImpact\' received from ImpactDataService');
-    //   this.filterBar.clearFilter();
-    //   this.table.clearSort();
-    // });
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   tabActivated() {

@@ -24,7 +24,7 @@ export class VariantMapperService extends MapperService {
     variantDto.description = variant.description;
     variantDto.archived = variant.archived;
     variantDto.analysisId = variant.analysis.id;
-    variantDto.subVariantIds = variant.subVariants.map(variant => variant.id);
+    variantDto.subVariantIds = variant.subVariants.map(subVariant => subVariant.id);
 
     return variantDto;
   }
@@ -38,7 +38,7 @@ export class VariantMapperService extends MapperService {
     variant.name = variantDto.name;
     variant.description = variantDto.description;
     variant.archived = variantDto.archived;
-    for (let analysis of analyses) {
+    for (const analysis of analyses) {
       if (analysis.id === variantDto.analysisId) {
         variant.analysis = analysis;
         break;

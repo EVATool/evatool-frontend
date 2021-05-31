@@ -10,7 +10,7 @@ import {HighlightSearchComponent} from '../../../highlight-search/highlight-sear
   templateUrl: './stakeholders-filter-bar.component.html',
   styleUrls: ['./stakeholders-filter-bar.component.scss']
 })
-export class StakeholdersFilterBarComponent implements OnInit {
+export class StakeholdersFilterBarComponent {
   @ViewChild('levelFilter') levelFilter!: ColumnCategoryFilterComponent;
   //@ViewChild(PriorityFilterComponent) priorityFilter!: PriorityFilterComponent;
   //@ViewChild(ImpactedFilterComponent) impactedFilter!: ImpactedFilterComponent;
@@ -33,10 +33,6 @@ export class StakeholdersFilterBarComponent implements OnInit {
   constructor(private logger: LogService,
               public stakeholderDataService: StakeholderDataService) {
     this.stakeholderTableFilterEvent = StakeholderTableFilterEvent.getDefault();
-  }
-
-  ngOnInit(): void {
-
   }
 
   highlightTextChange(event: string): void {

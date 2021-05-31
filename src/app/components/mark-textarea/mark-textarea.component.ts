@@ -5,26 +5,18 @@ import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outpu
   templateUrl: './mark-textarea.component.html',
   styleUrls: ['./mark-textarea.component.scss']
 })
-export class MarkTextareaComponent implements OnInit, AfterViewInit {
+export class MarkTextareaComponent implements AfterViewInit {
   @ViewChild('textareadiv') textarea!: ElementRef;
   @Input() highlightFilter = '';
   @Input() text!: string;
   @Input() placeholder!: string;
   @Output() textChange = new EventEmitter<string>();
 
-  constructor() {
-
-  }
-
-  ngOnInit(): void {
-
-  }
-
   ngAfterViewInit(): void {
     this.showPlaceholderIfEmpty();
   }
 
-  focusEnter() {
+  focusEnter(): void {
     if (this.textIsEmpty()) {
       this.textarea.nativeElement.innerText = '';
       this.textarea.nativeElement.style.color = '#000000';
@@ -32,7 +24,8 @@ export class MarkTextareaComponent implements OnInit, AfterViewInit {
   }
 
   focusLeave(event: any): void {
-    this.text = this.removeHtml(event.target.innerHTML); // using the innerText property instead of cleaning the HTML manually should also work, but it does not.
+    // using the innerText property instead of cleaning the HTML manually should also work, but it does not.
+    this.text = this.removeHtml(event.target.innerHTML);
     this.textChange.emit(this.text);
     const interval = setTimeout(() => {
       this.showPlaceholderIfEmpty();
@@ -44,10 +37,10 @@ export class MarkTextareaComponent implements OnInit, AfterViewInit {
   }
 
   textIsEmpty(): boolean {
-    return this.text == null || this.text == '';
+    return this.text == null || this.text === '';
   }
 
-  showPlaceholderIfEmpty() {
+  showPlaceholderIfEmpty(): void {
     if (this.textIsEmpty()) {
       this.textarea.nativeElement.style.color = '#7f7f7f';
       this.textarea.nativeElement.innerText = this.placeholder;

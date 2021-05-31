@@ -5,11 +5,6 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './analysis-tile.component.html',
   styleUrls: ['./analysis-tile.component.scss']
 })
-export class AnalysisTileComponent implements OnInit {
-
-  constructor() { } // TODO
-
-  ngOnInit(): void {
-  }
+export class AnalysisTileComponent {
 
 }

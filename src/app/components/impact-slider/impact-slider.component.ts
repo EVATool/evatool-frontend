@@ -8,7 +8,7 @@ import {LogService} from '../../services/log.service';
   templateUrl: './impact-slider.component.html',
   styleUrls: ['./impact-slider.component.scss']
 })
-export class ImpactSliderComponent implements OnInit, AfterViewInit {
+export class ImpactSliderComponent implements AfterViewInit {
   @Input() value: number = 1;
   @Output() valueChange = new EventEmitter<number>();
 
@@ -35,17 +35,9 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
     this.sliderFilterSettings = SliderFilterSettings.getDefault();
   }
 
-  ngOnInit(): void {
-  }
-
-
   ngAfterViewInit(): void {
     this.legalValue = this.value;
     this.drawSlider();
-  }
-
-  onInit(): void {
-
   }
 
   invalidate(): void {
@@ -113,10 +105,11 @@ export class ImpactSliderComponent implements OnInit, AfterViewInit {
       thumb.nativeElement.style.height = '20px';
       thumb.nativeElement.style.width = '11px';
       thumb.nativeElement.style.float = 'left';
-      if (this.isFilter)
+      if (this.isFilter) {
         thumb.nativeElement.style.opacity = '1';
-      else
+      } else {
         thumb.nativeElement.style.transition = 'none';
+      }
     });
 
     if (this.isFilter) {

@@ -5,11 +5,11 @@ import {MatSliderChange} from "@angular/material/slider";
 import {LogService} from "../../services/log.service";
 
 @Component({
-  selector: 'app-column-slider-filter', // TODO Rename
+  selector: 'app-column-slider-filter',
   templateUrl: './column-slider-filter.component.html',
   styleUrls: ['./column-slider-filter.component.scss']
 })
-export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
+export class ColumnSliderFilterComponent {
   @ViewChild(ImpactSliderComponent) slider!: ImpactSliderComponent;
   @Input() name = '';
   @Output() filterChanged = new EventEmitter<SliderFilterSettings>();
@@ -20,14 +20,6 @@ export class ColumnSliderFilterComponent implements OnInit, AfterViewInit {
   public isVisible = false;
 
   constructor(private logger: LogService) {
-  }
-
-  ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   sliderFilterValueChanged(event: MatSliderChange): void {

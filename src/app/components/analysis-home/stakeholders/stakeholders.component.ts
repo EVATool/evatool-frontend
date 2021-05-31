@@ -8,15 +8,10 @@ import {LogService} from '../../../services/log.service';
   templateUrl: './stakeholders.component.html',
   styleUrls: ['./stakeholders.component.scss']
 })
-export class StakeholdersComponent implements OnInit {
+export class StakeholdersComponent {
   @ViewChild(StakeholdersTableComponent) table!: StakeholdersTableComponent;
   @ViewChild(StakeholdersFilterBarComponent) filterBar!: StakeholdersFilterBarComponent;
 
   constructor(private logger: LogService) {
-
   }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {LogService} from "../../services/log.service";
+import {LogService} from '../../services/log.service';
 
 @Component({
-  selector: 'app-column-category-filter', // TODO Rename
+  selector: 'app-column-category-filter',
   templateUrl: './column-category-filter.component.html',
   styleUrls: ['./column-category-filter.component.scss']
 })
-export class ColumnCategoryFilterComponent implements OnInit {
+export class ColumnCategoryFilterComponent {
   @Input() categories: string[] = [];
   @Input() name = 'Filter';
   @Output() filterChanged = new EventEmitter<string[]>();
@@ -14,9 +14,6 @@ export class ColumnCategoryFilterComponent implements OnInit {
   public filterValues: string[] = [];
 
   constructor(private logger: LogService) {
-  }
-
-  ngOnInit(): void {
   }
 
   updateFilter(): void {

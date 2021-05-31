@@ -37,9 +37,6 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
 
     this.valueDataService.createdValue.subscribe((value: Value) => {
       this.updateTableDataSource();
-      //const options = {bottom: -100, duration: 250};
-      //this.scrollbarRef.scrollTo(options);
-      // Flash newly created impact.
     });
 
     this.valueDataService.deletedValue.subscribe((value: Value) => {
@@ -51,7 +48,6 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initSorting();
-    //this.initFiltering();
   }
 
   updateTableDataSource(): void {
@@ -62,19 +58,19 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
     this.tableDataSource.sort = this.sort;
   }
 
-  createValue() {
+  createValue(): void {
     const value = this.valueDataService.createDefaultValue(
       this.analysisDataService.currentAnalysis);
-    value.type = this.valueType
+    value.type = this.valueType;
     this.valueDataService.createValue(value);
   }
 
-  updateValue(value: Value) {
+  updateValue(value: Value): void {
     this.logger.info(this, 'Update Value');
     this.valueDataService.updateValue(value);
   }
 
-  deleteValue(value: Value) {
+  deleteValue(value: Value): void {
     this.logger.info(this, 'Delete Value');
     const numImpactsUseValue = this.getReferencesImpacts(value);
     if (numImpactsUseValue > 0) {
@@ -84,7 +80,7 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  toggleValueArchived(event: Event, value: Value) {
+  toggleValueArchived(event: Event, value: Value): void {
     const numImpactsUseValue = this.getReferencesImpacts(value);
     if (numImpactsUseValue > 0) {
       this.thwartValueOperation(value, numImpactsUseValue);
@@ -104,11 +100,11 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
     return numImpactsUseValue;
   }
 
-  thwartValueOperation(value: Value, numImpactsUseValue: number) {
+  thwartValueOperation(value: Value, numImpactsUseValue: number): void {
     this.logger.warn(this, 'This value is still being used by ' + numImpactsUseValue + ' impacts');
     const message = 'This value cannot be excluded from the available selection. It is still being used by '
       + numImpactsUseValue + ' impact' + (numImpactsUseValue === 1 ? '' : 's') + '.';
-    const action = 'show'
+    const action = 'show';
     const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
     snackBarRef.onAction().subscribe(() => {
       this.logger.info(this, 'User wants to see the impacts referencing the value');

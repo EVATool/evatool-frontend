@@ -8,15 +8,11 @@ import {AnalysisDataService} from '../../services/data/analysis-data.service';
   templateUrl: './analysis-home.component.html',
   styleUrls: ['./analysis-home.component.scss']
 })
-export class AnalysisHomeComponent implements OnInit, AfterViewInit {
+export class AnalysisHomeComponent implements AfterViewInit {
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService) {
-
-  }
-
-  ngOnInit(): void {
 
   }
 
@@ -47,7 +43,7 @@ export class AnalysisHomeComponent implements OnInit, AfterViewInit {
         break;
 
       default:
-        this.logger.warn(this, 'Unknown tab')
+        this.logger.warn(this, 'Unknown tab');
         break;
     }
   }

@@ -6,22 +6,17 @@ import {LogService} from '../../../../services/log.service';
   templateUrl: './stakeholders-impacted.component.html',
   styleUrls: ['./stakeholders-impacted.component.scss']
 })
-export class StakeholdersImpactedComponent implements OnInit, AfterViewInit {
+export class StakeholdersImpactedComponent implements OnInit {
   @Input() stakeholderImpacted!: number | null;
   @Input() editable = false;
   @Output() impactChange = new EventEmitter<number | null>();
   public impactIsNull = false;
 
   constructor(private logger: LogService) {
-
   }
 
   ngOnInit(): void {
     this.impactIsNull = !this.editable && this.stakeholderImpacted == null;
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   getImpacted(): number | null {

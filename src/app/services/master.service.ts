@@ -23,10 +23,6 @@ export class MasterService {
   }
 
   init(): void {
-    this.analysisData.loadedCurrentAnalysis.subscribe((analysis: Analysis) => {
-
-    });
-
     this.requirementDeltaData.init();
     this.requirementData.init();
     this.impactData.init();
