@@ -19,16 +19,6 @@ export class StakeholdersFilterBarComponent {
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<StakeholderTableFilterEvent>();
 
-  public levels = [
-    {key: '', value: 'All'},
-    {key: 'INDIVIDUAL', value: 'Individuell'},
-    {key: 'ORGANIZATION', value: 'Organisation'},
-    {key: 'SOCIETY', value: 'Gesellschaft'}
-  ];
-
-  public preselect = this.levels[0];
-  public prio = 'ONE';
-
   stakeholderTableFilterEvent: StakeholderTableFilterEvent;
   suppressChildEvent = false;
 
@@ -73,10 +63,6 @@ export class StakeholdersFilterBarComponent {
     this.levelFilter.clearFilter();
     this.priorityFilter.clearFilter();
     this.impactedFilter.clearFilter();
-
-    this.prio = 'ONE';
-    this.preselect = this.levels[0];
-    // impacted not yet cleared...
 
     this.suppressChildEvent = false;
     this.filterChanged.emit(this.stakeholderTableFilterEvent);
