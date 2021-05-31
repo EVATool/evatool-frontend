@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, isDevMode, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';

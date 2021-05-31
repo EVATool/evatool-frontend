@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {StakeholdersPriorityComponent} from '../analysis-home/stakeholders/stakeholders-priority/stakeholders-priority.component';
 
 @Component({

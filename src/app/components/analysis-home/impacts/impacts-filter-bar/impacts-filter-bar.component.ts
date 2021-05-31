@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ColumnSliderFilterComponent} from '../../../column-slider-filter/column-slider-filter.component';
 import {ColumnCategoryFilterComponent} from '../../../column-category-filter/column-category-filter.component';
 import {HighlightSearchComponent} from '../../../highlight-search/highlight-search.component';

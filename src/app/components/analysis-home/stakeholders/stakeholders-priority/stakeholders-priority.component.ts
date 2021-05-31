@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LogService} from '../../../../services/log.service';
 import {StakeholderDataService} from '../../../../services/data/stakeholder-data.service';
 

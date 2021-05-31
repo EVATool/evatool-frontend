@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ImpactSliderComponent} from "../impact-slider/impact-slider.component";
-import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from "../impact-slider/SliderFilterSettings";
-import {MatSliderChange} from "@angular/material/slider";
-import {LogService} from "../../services/log.service";
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {ImpactSliderComponent} from '../impact-slider/impact-slider.component';
+import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from '../impact-slider/SliderFilterSettings';
+import {MatSliderChange} from '@angular/material/slider';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-column-slider-filter',

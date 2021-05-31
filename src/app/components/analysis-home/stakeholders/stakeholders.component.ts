@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {StakeholdersFilterBarComponent} from './stakeholders-filter-bar/stakeholders-filter-bar.component';
 import {StakeholdersTableComponent} from './stakeholders-table/stakeholders-table.component';
 import {LogService} from '../../../services/log.service';

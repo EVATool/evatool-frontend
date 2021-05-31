@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {RequirementsTableComponent} from './requirements-table/requirements-table.component';
 import {RequirementsFilterBarComponent} from './requirements-filter-bar/requirements-filter-bar.component';
 import {RequirementRestService} from '../../../services/rest/requirement-rest.service';

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {StakeholderDataService} from '../../../../services/data/stakeholder-data.service';
 import {LogService} from '../../../../services/log.service';
 import {StakeholderTableFilterEvent} from './StakeholderTableFilterEvent';

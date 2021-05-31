@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {LogService} from '../../../services/log.service';
 import {ImpactDataService} from '../../../services/data/impact-data.service';
 import {ValueDataService} from '../../../services/data/value-data.service';
@@ -26,6 +26,6 @@ export class ImpactsComponent {
 
   tabActivated() {
     this.logger.info(this, 'Tab activated');
-    //this.table?.reload(); // TODO...?
+    //this.table?.reload();
   }
 }
