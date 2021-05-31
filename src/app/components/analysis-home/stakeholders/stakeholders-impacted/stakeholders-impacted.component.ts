@@ -21,6 +21,14 @@ export class StakeholdersImpactedComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
+  }
+
+  getImpacted(): number | null {
+    if (this.stakeholderImpacted == null) {
+      return null;
+    }
+    return this.stakeholderImpacted * -1;
   }
 
   onImpactChange(event: any): void {
