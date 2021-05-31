@@ -88,9 +88,9 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
 
       const levelFilter = searchTerms.level.length === 0 || searchTerms.level.indexOf(data.level) !== -1;
 
-      const priorityFilter = searchTerms.priority.length === 0 || searchTerms.priority == data.priority; //searchTerms.priority.indexOf(data.priority) !== -1;
+      const priorityFilter = searchTerms.priority.length === 0 || searchTerms.priority === data.priority; //searchTerms.priority.indexOf(data.priority) !== -1;
 
-      var impactedFilter = searchTerms.impacted === 0 || (data.impacted != null && data.impacted <= searchTerms.impacted);
+      const impactedFilter = searchTerms.impacted === 0 || (data.impacted != null && data.impacted <= searchTerms.impacted);
 
       return levelFilter && priorityFilter && impactedFilter;
     };
