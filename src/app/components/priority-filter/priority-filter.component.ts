@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {StakeholdersPriorityComponent} from '../analysis-home/stakeholders/stakeholders-priority/stakeholders-priority.component';
 
 @Component({
   selector: 'app-priority-filter',
@@ -7,15 +8,20 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class PriorityFilterComponent {
 
+  @ViewChild(StakeholdersPriorityComponent) stakeholderPriority!: StakeholdersPriorityComponent;
+
   @Output() filterChanged = new EventEmitter<string[]>();
+
+  prios: { [id: string]: boolean } = {};
 
   priorityFilterChange(event: string[]): void {
     this.filterChanged.emit(event);
   }
 
   clearFilter(): void {
-    // TODO
-
+    for (const p of this.stakeholderPriority.stakeholderData.stakeholderPriorities) {
+      this.stakeholderPriority.priorities[p] = false;
+    }
     this.filterChanged.emit();
   }
 }

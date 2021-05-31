@@ -15,7 +15,7 @@ export class StakeholdersPriorityComponent {
   @Output() priosChange = new EventEmitter<string[]>();
 
   @Input() isFilter = false;
-  priorities: { [id: string]: boolean } = {};
+  @Input() priorities: { [id: string]: boolean } = {};
 
   constructor(private logger: LogService,
               public stakeholderData: StakeholderDataService) {
