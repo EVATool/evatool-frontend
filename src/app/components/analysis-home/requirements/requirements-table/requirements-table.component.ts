@@ -259,8 +259,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
 
   hideDeltaSliders(requirement: Requirement): void {
     const deltas = this.getRequirementDeltas(requirement);
-    for (let i = 0; i < deltas.length; i++) {
-      let delta: RequirementDelta = deltas[i];
+    for (const delta of deltas) {
       delta.visible = false;
     }
   }
