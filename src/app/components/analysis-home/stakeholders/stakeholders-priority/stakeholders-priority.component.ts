@@ -9,10 +9,12 @@ import {StakeholderDataService} from '../../../../services/data/stakeholder-data
 })
 export class StakeholdersPriorityComponent {
 
-  // TODO isFilter
   @Input() prio!: string;
   @Input() public editable = true;
   @Output() prioChange = new EventEmitter<string>();
+
+  @Input() isFilter = false;
+  priorities: { [id: string]: boolean } = {};
 
   constructor(private logger: LogService,
               public stakeholderData: StakeholderDataService) {
@@ -22,13 +24,21 @@ export class StakeholdersPriorityComponent {
     if (!this.editable) {
       return;
     }
-    this.prio = prio;
-    event.stopPropagation();
-    this.prioChange.emit(this.prio);
+    if (this.isFilter) {
+      this.priorities[prio] = !this.priorities[prio];
+    } else {
+      this.prio = prio;
+      event.stopPropagation();
+      this.prioChange.emit(this.prio);
+    }
   }
 
   getShowPrio(prio: string, position: number): boolean {
-    let prioNumber = this.stakeholderData.stakeholderPriorities.indexOf(prio);
-    return prioNumber >= position;
+    if (this.isFilter) {
+      return this.priorities[prio];
+    } else {
+      const prioNumber = this.stakeholderData.stakeholderPriorities.indexOf(prio);
+      return prioNumber >= position;
+    }
   }
 }
