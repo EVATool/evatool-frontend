@@ -30,11 +30,10 @@
       </div>
     </th>
     <td mat-cell *matCellDef='let value'>
-      <textarea matInput
-                cdkTextareaAutosize
-                [(ngModel)]="value.name"
-                placeholder="Name..."
-                (change)="updateValue(value)"></textarea>
+      <app-mark-textarea [(text)]="value.name"
+                         (textChange)="updateValue(value)"
+                         [highlightFilter]="''"
+                         [placeholder]="'Name...'"></app-mark-textarea>
     </td>
   </ng-container>
 
@@ -51,11 +50,10 @@
     <td mat-cell *matCellDef='let value'>
       <div class="description-wrapper">
         <div class="description-container">
-        <textarea matInput
-                  cdkTextareaAutosize
-                  [(ngModel)]="value.description"
-                  placeholder="Describe the value..."
-                  (change)="updateValue(value)"></textarea>
+          <app-mark-textarea [(text)]="value.description"
+                             (textChange)="updateValue(value)"
+                             [highlightFilter]="''"
+                             [placeholder]="'Describe the value...'"></app-mark-textarea>
         </div>
         <div class="options">
           <div class="option">

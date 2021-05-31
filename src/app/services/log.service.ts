@@ -5,7 +5,6 @@ import {environment} from '../../environments/environment';
 TODO List
 
 Features:
-Use mark-textarea instead of textarea (unifies textarea style...)
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
