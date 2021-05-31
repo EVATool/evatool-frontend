@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
 
 /*
 TODO List
 
 Features:
 Use mark-textarea instead of textarea (unifies textarea style...)
-Log Level in prod settings at least warn
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
@@ -66,7 +66,7 @@ export enum LogLevel {
 })
 export class LogService {
 
-  public static readonly logLevel: LogLevel = LogLevel.Info;
+  public static readonly logLevel: LogLevel = environment.production ? LogLevel.Error : LogLevel.Info;
 
   public shouldLog(logLevel: LogLevel): boolean {
     return LogService.logLevel <= logLevel;
@@ -84,42 +84,42 @@ export class LogService {
     return '[' + this.getLogLevel(logLevel) + '] ' + this.getClassName(sender) + ': ' + msg;
   }
 
-  trace(sender: any, msg: any) {
+  trace(sender: any, msg: string): void {
     const logLevel = LogLevel.Trace;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
-  debug(sender: any, msg: any) {
+  debug(sender: any, msg: string): void {
     const logLevel = LogLevel.Debug;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
-  info(sender: any, msg: any) {
+  info(sender: any, msg: string): void {
     const logLevel = LogLevel.Info;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
-  warn(sender: any, msg: any) {
+  warn(sender: any, msg: string): void {
     const logLevel = LogLevel.Warn;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
-  error(sender: any, msg: any) {
+  error(sender: any, msg: string): void {
     const logLevel = LogLevel.Error;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
-  fatal(sender: any, msg: any) {
+  fatal(sender: any, msg: string): void {
     const logLevel = LogLevel.Fatal;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
