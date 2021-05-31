@@ -22,6 +22,6 @@ export class PriorityFilterComponent {
     for (const p of this.stakeholderPriority.stakeholderData.stakeholderPriorities) {
       this.stakeholderPriority.priorities[p] = false;
     }
-    this.filterChanged.emit();
+    this.filterChanged.emit([]);
   }
 }
