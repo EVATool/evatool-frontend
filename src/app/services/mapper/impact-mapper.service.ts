@@ -41,6 +41,7 @@ export class ImpactMapperService extends MapperService {
     impact.merit = impactDto.merit;
     impact.description = impactDto.description;
     impact.isGoal = impactDto.isGoal;
+
     for (const analysis of analyses) {
       if (analysis.id === impactDto.analysisId) {
         impact.analysis = analysis;

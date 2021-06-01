@@ -3,7 +3,8 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
-Sample Data
+Sample Data (API calls to backend, separate from deployment!)
+Only purge data script (data and flyway, NOT keycloak!)
 Only filter selected/active impacts/deltas
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
@@ -41,11 +42,12 @@ SonarCloud Status not shown in backend
 MISC:
 Update dependencies in docker compose every 3/4/6 months?
 Add simple keycloak
-Add Flyway
+Add Flyway (special migrate test profile in backend)
 Dark Mode
 
 Backlog:
 The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again?
+Strange bug when negative impact was only slidable like a positive in requirements table
 How to deal with impacts going horizontal in requirement table
 
 */
