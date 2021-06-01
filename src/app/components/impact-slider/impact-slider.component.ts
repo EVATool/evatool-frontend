@@ -51,7 +51,7 @@ export class ImpactSliderComponent implements AfterViewInit {
         this.logger.info(this, 'Slider Deadzone Around Zero');
       } else if (this.isRisk && event.value > 0) {
         this.logger.info(this, 'Risk Slider Cropping Value');
-      } else if (this.isGoal && event.value < 0) {
+      } else if (this.isGoal && event.value <= 0) {
         this.logger.info(this, 'Goal Slider Cropping Value');
       } else {
         this.logger.info(this, `Slider Value Changed: ${event.value}`);
@@ -148,7 +148,7 @@ export class ImpactSliderComponent implements AfterViewInit {
           const biggerValue = Math.max(this.value, this.valueSecond);
           this.riskBar.nativeElement.style.width = '0%';
 
-          if (smallerValue != biggerValue) {
+          if (smallerValue !== biggerValue) {
             this.goalBar.nativeElement.style.backgroundColor = 'orange';
             this.goalBar.nativeElement.style.marginLeft = (50 + smallerValue * 50) + '%';
             this.goalBar.nativeElement.style.width = ((biggerValue - smallerValue) * 50) + '%';
