@@ -116,6 +116,7 @@ export class SampleDataService {
       prefixSequenceId: 'IMP1',
       merit: 0.7,
       description: 'Lorem Ipsum',
+      isGoal: true,
       analysisId: '1',
       valueId: '1',
       stakeholderId: '1'
@@ -125,6 +126,7 @@ export class SampleDataService {
       prefixSequenceId: 'IMP2',
       merit: 0.3,
       description: 'Lorem Ipsum',
+      isGoal: true,
       analysisId: '1',
       valueId: '2',
       stakeholderId: '2'
@@ -134,6 +136,7 @@ export class SampleDataService {
       prefixSequenceId: 'IMP3',
       merit: -0.2,
       description: 'Lorem Ipsum',
+      isGoal: false,
       analysisId: '1',
       valueId: '1',
       stakeholderId: '2'
@@ -170,8 +173,10 @@ export class SampleDataService {
     {
       id: '1',
       overwriteMerit: 0.2,
-      originalMerit: 0,
-      meritColor: 0,
+      originalMerit: 0.5,
+      minOverwriteMerit: 0,
+      maxOverwriteMerit: 0.5,
+      meritColorCode: '#00000',
       analysisId: '1',
       requirementId: '1',
       impactId: '1'
@@ -179,8 +184,10 @@ export class SampleDataService {
     {
       id: '2',
       overwriteMerit: 0.3,
-      originalMerit: 0,
-      meritColor: 0,
+      originalMerit: 0.7,
+      minOverwriteMerit: 0,
+      maxOverwriteMerit: 0.7,
+      meritColorCode: '#00000', // TODO some properties must be updated even when updating!
       analysisId: '1',
       requirementId: '1',
       impactId: '2'
@@ -188,8 +195,10 @@ export class SampleDataService {
     {
       id: '3',
       overwriteMerit: -0.1,
-      originalMerit: 0,
-      meritColor: 0,
+      originalMerit: -0.8,
+      minOverwriteMerit: -0.8,
+      maxOverwriteMerit: 0,
+      meritColorCode: '#00000',
       analysisId: '1',
       requirementId: '1',
       impactId: '3'

@@ -89,12 +89,12 @@
             (mouseenter)="deltaMouseEnter(requirement,impact)"
             (mouseleave)="deltaMouseLeave(requirement,impact)">
           <div class="delta-cell-div" *ngVar="getRequirementDelta(requirement, impact) as delta"
-               [ngClass]="{'unset' : delta == null, 'positive' : delta?.overwriteMerit > 0, 'negative': delta?.overwriteMerit < 0, 'neutral':delta?.overwriteMerit === impact.merit}">
+               [ngClass]="{'unset': delta == null, 'neutral': delta?.overwriteMerit === impact.merit, 'positive': delta?.overwriteMerit > 0, 'negative': delta?.overwriteMerit < 0}">
             <div class="delta-slider-div" *ngIf="delta?.visible">
-              <app-impact-slider [isRisk]="impact.merit < 0"
-                                 [isGoal]="impact.merit >= 0"
-                                 [minvalue]="impact.merit > 0 ? -1 : impact.merit"
-                                 [maxvalue]="impact.merit < 0 ?  1 : impact.merit"
+              <app-impact-slider [isRisk]="!impact.isGoal"
+                                 [isGoal]="impact.isGoal"
+                                 [minvalue]="delta.minOverwriteMerit"
+                                 [maxvalue]="delta.maxOverwriteMerit"
                                  [(value)]="delta.overwriteMerit"
                                  (sliderValueChange)="updateRequirementDelta(delta)">
               </app-impact-slider>

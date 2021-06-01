@@ -1,8 +1,10 @@
 export class RequirementDeltaDto {
   id !: string;
   overwriteMerit!: number;
-  originalMerit !: number;
-  meritColor !: number; // TODO what type? and min, max...
+  originalMerit!: number;
+  minOverwriteMerit!: number;
+  maxOverwriteMerit!: number;
+  meritColorCode !: string;
 
   analysisId !: string;
   requirementId !: string;

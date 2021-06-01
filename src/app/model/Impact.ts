@@ -9,6 +9,7 @@ export class Impact {
   prefixSequenceId!: string;
   merit !: number;
   description !: string;
+  isGoal!: boolean;
 
   analysis !: Analysis;
   value!: Value;

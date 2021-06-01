@@ -20,7 +20,11 @@ export class RequirementDeltaMapperService extends MapperService {
     const requirementDeltaDto = new RequirementDeltaDto();
 
     requirementDeltaDto.id = requirementDelta.id;
+    requirementDeltaDto.originalMerit = requirementDelta.originalMerit;
     requirementDeltaDto.overwriteMerit = requirementDelta.overwriteMerit;
+    requirementDeltaDto.minOverwriteMerit = requirementDelta.minOverwriteMerit;
+    requirementDeltaDto.maxOverwriteMerit = requirementDelta.maxOverwriteMerit;
+    requirementDeltaDto.meritColorCode = requirementDelta.meritColorCode;
     requirementDeltaDto.impactId = requirementDelta.impact.id;
     requirementDeltaDto.requirementId = requirementDelta.requirement.id;
 
@@ -32,14 +36,19 @@ export class RequirementDeltaMapperService extends MapperService {
     const requirementDelta = new RequirementDelta();
 
     requirementDelta.id = requirementDeltaDto.id;
+    requirementDelta.originalMerit = requirementDeltaDto.originalMerit;
     requirementDelta.overwriteMerit = requirementDeltaDto.overwriteMerit;
-    for (let requirement of requirements) {
+    requirementDelta.minOverwriteMerit = requirementDeltaDto.minOverwriteMerit;
+    requirementDelta.maxOverwriteMerit = requirementDeltaDto.maxOverwriteMerit;
+    requirementDelta.meritColorCode = requirementDeltaDto.meritColorCode;
+
+    for (const requirement of requirements) {
       if (requirement.id === requirementDeltaDto.requirementId) {
         requirementDelta.requirement = requirement;
         break;
       }
     }
-    for (let impact of impacts) {
+    for (const impact of impacts) {
       if (impact.id === requirementDeltaDto.impactId) {
         requirementDelta.impact = impact;
         break;

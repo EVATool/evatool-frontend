@@ -6,6 +6,10 @@ export class RequirementDelta {
 
   id !: string;
   overwriteMerit !: number;
+  originalMerit!: number;
+  minOverwriteMerit!: number;
+  maxOverwriteMerit!: number;
+  meritColorCode !: string;
 
   impact!: Impact;
   requirement!: Requirement;

@@ -3,6 +3,7 @@ export class ImpactDto {
   prefixSequenceId!: string;
   merit !: number;
   description !: string;
+  isGoal!: boolean;
 
   analysisId !: string;
   valueId !: string;

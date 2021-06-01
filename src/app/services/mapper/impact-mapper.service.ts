@@ -24,6 +24,7 @@ export class ImpactMapperService extends MapperService {
     impactDto.prefixSequenceId = impact.prefixSequenceId;
     impactDto.merit = impact.merit;
     impactDto.description = impact.description;
+    impactDto.isGoal = impact.isGoal;
     impactDto.analysisId = impact.analysis.id;
     impactDto.valueId = impact.value.id;
     impactDto.stakeholderId = impact.stakeholder.id;
@@ -39,19 +40,20 @@ export class ImpactMapperService extends MapperService {
     impact.prefixSequenceId = impactDto.prefixSequenceId;
     impact.merit = impactDto.merit;
     impact.description = impactDto.description;
-    for (let analysis of analyses) {
+    impact.isGoal = impactDto.isGoal;
+    for (const analysis of analyses) {
       if (analysis.id === impactDto.analysisId) {
         impact.analysis = analysis;
         break;
       }
     }
-    for (let value of values) {
+    for (const value of values) {
       if (value.id === impactDto.valueId) {
         impact.value = value;
         break;
       }
     }
-    for (let stakeholder of stakeholders) {
+    for (const stakeholder of stakeholders) {
       if (stakeholder.id === impactDto.stakeholderId) {
         impact.stakeholder = stakeholder;
         break;
