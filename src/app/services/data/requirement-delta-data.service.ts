@@ -46,16 +46,30 @@ export class RequirementDeltaDataService extends DataService {
       this.requirementsLoaded = true;
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
+
+    // Update local data with data from backend
+    this.updatedRequirementDelta.subscribe((delta: RequirementDelta) => {
+      const localDelta = this.requirementDeltas.find(d => d.id === delta.id);
+      if (localDelta != null) {
+        localDelta.originalMerit = delta.originalMerit; // TODO updateLocal method in mapper services.
+        localDelta.minOverwriteMerit = delta.minOverwriteMerit;
+        localDelta.maxOverwriteMerit = delta.maxOverwriteMerit;
+        localDelta.meritColorCode = delta.meritColorCode;
+      }
+    });
   }
 
   loadIfChildrenLoaded(analysisId: string): void {
     if (!this.impactsLoaded || !this.requirementsLoaded) {
       return;
     }
-    this.requirementDeltaRest.getRequirementDeltasByAnalysisId(analysisId).subscribe((requirementDeltaDtoList: RequirementDeltaDto[]) => {
+    this.requirementDeltaRest.getRequirementDeltasByAnalysisId(analysisId).subscribe((deltaDtoList: RequirementDeltaDto[]) => {
       this.requirementDeltas = [];
-      requirementDeltaDtoList.forEach(requirementDeltaDto => {
-        this.requirementDeltas.push(this.requirementDeltaMapper.fromDto(requirementDeltaDto, this.requirementData.requirements, this.impactData.impacts));
+      deltaDtoList.forEach(requirementDeltaDto => {
+        this.requirementDeltas.push(this.requirementDeltaMapper.fromDto(
+          requirementDeltaDto,
+          this.requirementData.requirements,
+          this.impactData.impacts));
       });
       this.loadedRequirementDeltas.emit(this.requirementDeltas);
       this.logger.info(this, 'RequirementDeltas loaded');

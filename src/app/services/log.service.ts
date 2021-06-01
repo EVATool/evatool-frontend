@@ -3,7 +3,6 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
-Purge script
 Sample Data
 Only filter selected/active impacts/deltas
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
