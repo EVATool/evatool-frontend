@@ -3,7 +3,7 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
-Only filter selected impacts
+Only filter selected/active impacts/deltas
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 Category filter: select all, none, invert options
