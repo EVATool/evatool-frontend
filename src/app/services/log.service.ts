@@ -3,11 +3,12 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
-Sample Data (API calls to backend, separate from deployment!)
-Only purge data script (data and flyway, NOT keycloak!)
+horizontal scrolling in req table
+
 Figure out lastUpdated datatype in back and frontend
 Stakeholder PrefixId in frontend should update directly
 Only filter selected/active impacts/deltas
+
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 Category filter: select all, none, invert options
@@ -51,6 +52,11 @@ Backlog:
 The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again?
 Strange bug when negative impact was only slidable like a positive in requirements table
 How to deal with impacts going horizontal in requirement table
+merit Color backend lookup table for possible values
+Sample Data (API calls to backend, separate from deployment!) -> [Create export Postman script from UI inserted stuff]
+  -> ExportController
+  -> how to deal with keycloak auth?
+Only purge data script (ONLY database with main data, what about flyway?)
 
 */
 
