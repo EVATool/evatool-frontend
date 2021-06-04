@@ -3,6 +3,8 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
+Tasks aus Jira (UID) -> das Jira public machen?
+
 horizontal scrolling in req table
 
 Figure out lastUpdated datatype in back and frontend
