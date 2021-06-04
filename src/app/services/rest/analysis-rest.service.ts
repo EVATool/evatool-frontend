@@ -19,9 +19,9 @@ export class AnalysisRestService extends RestService {
 
   getAnalysisById(id: string): Observable<AnalysisDto> {
     const url = this.analysesUrl + '/' + id;
-    this.logger.info(this, "Http get to: " + url);
+    this.logger.info(this, 'Http get to: ' + url);
     if (this.testing) {
-      return of(this.sampleData.analysisDtoList[0]);
+      return of(this.sampleData.analysesDtoList[0]);
     } else {
       return this.http.get<AnalysisDto>(url, this.httpOptions);
     }
@@ -29,9 +29,9 @@ export class AnalysisRestService extends RestService {
 
   getAnalyses(): Observable<AnalysisDto[]> {
     const url = this.analysesUrl;
-    this.logger.info(this, "Http get to: " + url);
+    this.logger.info(this, 'Http get to: ' + url);
     if (this.testing) {
-      return of(this.sampleData.analysisDtoList);
+      return of(this.sampleData.analysesDtoList);
     } else {
       return this.http.get<AnalysisDto[]>(url);
     }
@@ -39,10 +39,10 @@ export class AnalysisRestService extends RestService {
 
   deepCopy(templateAnalysisId: string, analysisDto: AnalysisDto): Observable<AnalysisDto> {
     const url = this.analysesDeepCopyUrl + '/' + templateAnalysisId;
-    this.logger.info(this, "Http post to: " + url);
+    this.logger.info(this, 'Http post to: ' + url);
     if (this.testing) {
       this.logger.error(this, 'OPERATION NOT SUPPORTED IN TEST MODE');
-      return of(this.sampleData.analysisDtoList[0]);
+      return of(this.sampleData.analysesDtoList[0]);
     } else {
       return this.http.post<AnalysisDto>(url, analysisDto, this.httpOptions);
     }

@@ -25,21 +25,27 @@ export abstract class RestService {
                         protected sampleData: SampleDataService) {
   }
 
-  protected readonly testing = environment.testing;
+  public testing = environment.testing;
 
-  protected readonly analysesUrl = this.serverUrl + 'analyses';
-  protected readonly analysesDeepCopyUrl = this.analysesUrl + '/deep-copy';
-  protected readonly stakeholdersUrl = this.serverUrl + 'stakeholders';
-  protected readonly valuesUrl = this.serverUrl + 'values';
-  protected readonly impactsUrl = this.serverUrl + 'impacts';
-  protected readonly requirementsUrl = this.serverUrl + 'requirements';
-  protected readonly requirementDeltasUrl = this.serverUrl + 'requirement-deltas';
-  protected readonly variantsUrl = this.serverUrl + 'variants';
+  public readonly analysesUrl = this.serverUrl + 'analyses';
+  public readonly analysesDeepCopyUrl = this.analysesUrl + '/deep-copy';
 
-  protected readonly valuesTypesUrl = this.serverUrl + 'values/types';
-  protected readonly stakeholderPriorityUrl = this.serverUrl + 'stakeholders/priorities';
-  protected readonly stakeholderLevelsUrl = this.serverUrl + 'stakeholders/levels';
+  public readonly stakeholdersUrl = this.serverUrl + 'stakeholders';
 
-  protected readonly byId = '?id=';
-  protected readonly byAnalysisId = '?analysisId=';
+  public readonly valuesUrl = this.serverUrl + 'values';
+
+  public readonly impactsUrl = this.serverUrl + 'impacts';
+
+  public readonly requirementsUrl = this.serverUrl + 'requirements';
+
+  public readonly requirementDeltasUrl = this.serverUrl + 'requirement-deltas';
+
+  public readonly variantsUrl = this.serverUrl + 'variants';
+
+  public readonly valuesTypesUrl = this.serverUrl + 'values/types';
+  public readonly stakeholderPriorityUrl = this.serverUrl + 'stakeholders/priorities';
+  public readonly stakeholderLevelsUrl = this.serverUrl + 'stakeholders/levels';
+
+  public readonly byId = '?id=';
+  public readonly byAnalysisId = '?analysisId=';
 }

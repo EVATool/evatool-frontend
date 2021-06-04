@@ -43,7 +43,7 @@ export class SampleDataService {
     }
 
     // Prepare Analysis Data.
-    this.analysisDtoList.forEach((analysisDto: AnalysisDto) => {
+    this.analysesDtoList.forEach((analysisDto: AnalysisDto) => {
       this.analyses.push(this.analysisMapper.fromDto(analysisDto));
     });
 
@@ -79,7 +79,7 @@ export class SampleDataService {
   }
 
   public readonly analyses: Analysis[] = [];
-  public readonly analysisDtoList: AnalysisDto[] = [
+  public readonly analysesDtoList: AnalysisDto[] = [
     {
       id: '1',
       prefixSequenceId: 'ANA1',

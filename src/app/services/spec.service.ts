@@ -4,11 +4,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FormBuilder} from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 export class SpecService {
 
   public static readonly imports: any[] = [
     HttpClientModule,
+    HttpClientTestingModule,
     RouterTestingModule,
     MatDialogModule,
     MatSnackBarModule,
