@@ -98,7 +98,6 @@ export class AnalysisDataService extends DataService {
     analysis.name = '';
     analysis.description = '';
     analysis.isTemplate = false;
-    analysis.imageUrl = '';
 
     return analysis;
   }
