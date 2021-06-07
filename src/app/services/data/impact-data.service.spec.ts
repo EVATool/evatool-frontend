@@ -80,8 +80,8 @@ describe('ImpactDataService', () => {
 
     // when
     const defaultImpact = service.createDefaultImpact(data.analyses[0],
-      masterService.stakeholderData.stakeholders[0],
-      masterService.valueData.values[0]);
+      data.stakeholders[0],
+      data.values[0]);
 
     // then
     expect(defaultImpact.id).toBeUndefined();
