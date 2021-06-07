@@ -12,13 +12,13 @@ import {VariantDataService} from './data/variant-data.service';
 })
 export class MasterService {
 
-  constructor(private analysisData: AnalysisDataService,
-              private stakeholderData: StakeholderDataService,
-              private valueData: ValueDataService,
-              private requirementData: RequirementDataService,
-              private impactData: ImpactDataService,
-              private requirementDeltaData: RequirementDeltaDataService,
-              private variantData: VariantDataService) {
+  constructor(public analysisData: AnalysisDataService,
+              public stakeholderData: StakeholderDataService,
+              public valueData: ValueDataService,
+              public requirementData: RequirementDataService,
+              public impactData: ImpactDataService,
+              public requirementDeltaData: RequirementDeltaDataService,
+              public variantData: VariantDataService) {
   }
 
   init(): void {
