@@ -5,9 +5,6 @@ import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
 import {MasterService} from '../master.service';
 import {Impact} from '../../model/Impact';
-import {Analysis} from '../../model/Analysis';
-import {Value} from '../../model/Value';
-import {Stakeholder} from '../../model/Stakeholder';
 
 describe('ImpactDataService', () => {
   let service: ImpactDataService;

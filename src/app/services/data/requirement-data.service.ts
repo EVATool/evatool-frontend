@@ -48,7 +48,9 @@ export class RequirementDataService extends DataService {
     this.requirementRest.getRequirementsByAnalysisId(analysisId).subscribe((requirementDtoList: RequirementDto[]) => {
       this.requirements = [];
       requirementDtoList.forEach(requirementDto => {
-        this.requirements.push(this.requirementMapper.fromDto(requirementDto, [this.analysisData.currentAnalysis], this.variantData.variants));
+        this.requirements.push(this.requirementMapper.fromDto(requirementDto,
+          [this.analysisData.currentAnalysis],
+          this.variantData.variants));
       });
       this.loadedRequirements.emit(this.requirements);
       this.logger.info(this, 'Requirements loaded');
@@ -57,7 +59,9 @@ export class RequirementDataService extends DataService {
 
   createRequirement(requirement: Requirement): void {
     this.requirementRest.createRequirement(this.requirementMapper.toDto(requirement)).subscribe((requirementDto: RequirementDto) => {
-      const createdRequirement = this.requirementMapper.fromDto(requirementDto, [this.analysisData.currentAnalysis], this.variantData.variants);
+      const createdRequirement = this.requirementMapper.fromDto(requirementDto,
+        [this.analysisData.currentAnalysis],
+        this.variantData.variants);
       this.requirements.push(createdRequirement);
       this.createdRequirement.emit(createdRequirement);
       this.logger.info(this, 'Requirement created');
@@ -66,7 +70,9 @@ export class RequirementDataService extends DataService {
 
   updateRequirement(requirement: Requirement): void {
     this.requirementRest.updateRequirement(this.requirementMapper.toDto(requirement)).subscribe((requirementDto: RequirementDto) => {
-      const updatedRequirement = this.requirementMapper.fromDto(requirementDto, [this.analysisData.currentAnalysis], this.variantData.variants);
+      const updatedRequirement = this.requirementMapper.fromDto(requirementDto,
+        [this.analysisData.currentAnalysis],
+        this.variantData.variants);
       this.updatedRequirement.emit(updatedRequirement);
       this.logger.info(this, 'Requirement updated');
     });
