@@ -19,7 +19,7 @@ export class ImpactRestService extends RestService {
 
   getImpactsByAnalysisId(analysisId: string): Observable<ImpactDto[]> {
     const url = this.impactsUrl + this.byAnalysisId + analysisId;
-    this.logger.info(this, "Http get to: " + url);
+    this.logger.info(this, 'Http get to: ' + url);
     if (this.testing) {
       return of(this.sampleData.impactDtoList);
     } else {
@@ -29,10 +29,10 @@ export class ImpactRestService extends RestService {
 
   createImpact(impactDto: ImpactDto): Observable<ImpactDto> {
     const url = this.impactsUrl;
-    this.logger.info(this, "Http post to: " + url);
+    this.logger.info(this, 'Http post to: ' + url);
     if (this.testing) {
       impactDto.id = '1337';
-      impactDto.prefixSequenceId = '12388u'
+      impactDto.prefixSequenceId = '12388u';
       return of(impactDto);
     } else {
       return this.http.post<ImpactDto>(url, impactDto, this.httpOptions);
@@ -41,7 +41,7 @@ export class ImpactRestService extends RestService {
 
   updateImpact(impactDto: ImpactDto): Observable<ImpactDto> {
     const url = this.impactsUrl;
-    this.logger.info(this, "Http put to: " + url);
+    this.logger.info(this, 'Http put to: ' + url);
     if (this.testing) {
       return of(impactDto);
     } else {
@@ -51,7 +51,7 @@ export class ImpactRestService extends RestService {
 
   deleteImpact(id: string): Observable<void> {
     const url = this.impactsUrl + '/' + id;
-    this.logger.info(this, "Http delete to: " + url);
+    this.logger.info(this, 'Http delete to: ' + url);
     if (this.testing) {
       return of(void 0);
     } else {
