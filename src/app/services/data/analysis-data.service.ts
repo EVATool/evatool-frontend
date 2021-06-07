@@ -37,7 +37,7 @@ export class AnalysisDataService extends DataService {
     });
   }
 
-  loadAnalyses():void{
+  loadAnalyses(): void {
     // Load all analyses.
     this.analysisRest.getAnalyses().subscribe((analysisDtoList: AnalysisDto[]) => {
       this.analyses = [];
@@ -64,7 +64,6 @@ export class AnalysisDataService extends DataService {
       this.createdAnalysis.emit(createdAnalysis);
       this.logger.info(this, 'Analysis deep copied');
     });
-    this.createdAnalysis.emit();
   }
 
   createAnalysis(analysis: Analysis): void {
