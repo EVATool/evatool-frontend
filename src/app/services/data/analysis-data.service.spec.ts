@@ -5,10 +5,12 @@ import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
 import {Router} from '@angular/router';
 import {Analysis} from '../../model/Analysis';
+import {MasterService} from '../master.service';
 
 describe('AnalysisDataService', () => {
   let service: AnalysisDataService;
   let data: SampleDataService;
+  let masterService: MasterService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,8 +25,9 @@ describe('AnalysisDataService', () => {
       ]
     });
     service = TestBed.inject(AnalysisDataService);
-    service.init();
     data = TestBed.inject(SampleDataService);
+    masterService = TestBed.inject(MasterService);
+    masterService.init();
   });
 
   it('should be created', () => {
