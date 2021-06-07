@@ -23,7 +23,6 @@ describe('ImpactRestService', () => {
     expect(service).toBeTruthy();
   });
 
-
   describe('Rest calls (MOCK)', () => {
 
     beforeEach(() => {
