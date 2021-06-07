@@ -4,6 +4,8 @@ import {AnalysisDataService} from './analysis-data.service';
 import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
 import {Analysis} from '../../model/Analysis';
+import {Router} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AnalysisDataService', () => {
   let service: AnalysisDataService;
@@ -12,6 +14,14 @@ describe('AnalysisDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: SpecService.imports,
+      providers: [
+        {
+          provide: Router,
+          useValue: {
+            url: '/analysis?id=1'
+          } // you could use also jasmine.createSpyObj() for methods
+        }
+      ]
     });
     service = TestBed.inject(AnalysisDataService);
     data = TestBed.inject(SampleDataService);
@@ -21,7 +31,7 @@ describe('AnalysisDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize', () => {
+  it('should initialize', () => { // TODO how to test router being read via subscribe in init method?
     // given
 
     // when
