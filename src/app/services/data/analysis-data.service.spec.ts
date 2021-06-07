@@ -4,6 +4,7 @@ import {AnalysisDataService} from './analysis-data.service';
 import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
 import {Router} from '@angular/router';
+import {Analysis} from '../../model/Analysis';
 
 describe('AnalysisDataService', () => {
   let service: AnalysisDataService;
@@ -41,73 +42,67 @@ describe('AnalysisDataService', () => {
 
   it('should load analyses', () => {
     // given
-    spyOn(service.loadedAnalyses, 'emit');
+
+    // then
+    service.loadedAnalyses.subscribe((analyses: Analysis[]) => {
+      expect(analyses).toEqual(data.analyses);
+    });
 
     // when
     service.loadAnalyses();
-
-    // then
-    expect(service.loadedAnalyses.emit).toHaveBeenCalled();
   });
 
   it('should change current analysis', () => {
     // given
-    spyOn(service.loadedCurrentAnalysis, 'emit');
-
-    // when
-    service.changeCurrentAnalysis('1');
+    const analysisId = '1';
 
     // then
-    expect(service.loadedCurrentAnalysis.emit).toHaveBeenCalled();
-  });
-
-  it('should deep copy analysis', () => {
-    // given
-    const templateAnalysis = data.analyses[0];
-    const analysis = data.analyses[1];
-    spyOn(service.createdAnalysis, 'emit');
+    service.loadedCurrentAnalysis.subscribe((analysis: Analysis) => {
+      expect(analysis.id).toEqual(analysisId);
+    });
 
     // when
-    service.deepCopy(templateAnalysis, analysis);
-
-    // then
-    expect(service.createdAnalysis.emit).toHaveBeenCalled();
+    service.changeCurrentAnalysis(analysisId);
   });
 
   it('should create analysis', () => {
     // given
     const createAnalysis = data.analyses[0];
-    spyOn(service.createdAnalysis, 'emit');
+
+    // then
+    service.createdAnalysis.subscribe((analysis: Analysis) => {
+      expect(service.analyses).toContain(analysis);
+    });
 
     // when
     service.createAnalysis(createAnalysis);
-
-    // then
-    expect(service.createdAnalysis.emit).toHaveBeenCalled();
   });
 
   it('should update analysis', () => {
     // given
-    const updateAnalysis = data.analyses[0];
-    spyOn(service.updatedAnalysis, 'emit');
-
-    // when
-    service.updateAnalysis(updateAnalysis);
+    const updatedAnalysis = data.analyses[0];
 
     // then
-    expect(service.updatedAnalysis.emit).toHaveBeenCalled();
+    service.updatedAnalysis.subscribe((analysis: Analysis) => {
+      expect(updatedAnalysis).toEqual(analysis);
+    });
+
+    // when
+    updatedAnalysis.isTemplate = !updatedAnalysis.isTemplate;
+    service.updateAnalysis(updatedAnalysis);
   });
 
   it('should delete analysis', () => {
     // given
-    const deleteAnalysis = data.analyses[0];
-    spyOn(service.deletedAnalysis, 'emit');
-
-    // when
-    service.deleteAnalysis(deleteAnalysis);
+    const deletedAnalysis = data.analyses[0];
 
     // then
-    expect(service.deletedAnalysis.emit).toHaveBeenCalled();
+    service.deletedAnalysis.subscribe((analysis: Analysis) => {
+      expect(service.analyses).not.toContain(analysis);
+    });
+
+    // when
+    service.deleteAnalysis(deletedAnalysis);
   });
 
   it('should create a default analysis', () => {
@@ -124,5 +119,78 @@ describe('AnalysisDataService', () => {
     expect(defaultAnalysis.isTemplate).toEqual(false);
     expect(defaultAnalysis.imageUrl).toBeUndefined();
     expect(defaultAnalysis.lastUpdated).toBeUndefined();
+  });
+
+  describe('event emitter', () => {
+    it('should fire loaded analyses event', () => {
+      // given
+      spyOn(service.loadedAnalyses, 'emit');
+
+      // when
+      service.loadAnalyses();
+
+      // then
+      expect(service.loadedAnalyses.emit).toHaveBeenCalled();
+    });
+
+    it('should fire change current analysis event', () => {
+      // given
+      spyOn(service.loadedCurrentAnalysis, 'emit');
+
+      // when
+      service.changeCurrentAnalysis('1');
+
+      // then
+      expect(service.loadedCurrentAnalysis.emit).toHaveBeenCalled();
+    });
+
+    it('should fire createdAnalysis event when deep copying analysis', () => {
+      // given
+      const templateAnalysis = data.analyses[0];
+      const analysis = data.analyses[1];
+      spyOn(service.createdAnalysis, 'emit');
+
+      // when
+      service.deepCopy(templateAnalysis, analysis);
+
+      // then
+      expect(service.createdAnalysis.emit).toHaveBeenCalled();
+    });
+
+    it('should fire created analysis event', () => {
+      // given
+      const createAnalysis = data.analyses[0];
+      spyOn(service.createdAnalysis, 'emit');
+
+      // when
+      service.createAnalysis(createAnalysis);
+
+      // then
+      expect(service.createdAnalysis.emit).toHaveBeenCalled();
+    });
+
+    it('should fire updated analysis event', () => {
+      // given
+      const updateAnalysis = data.analyses[0];
+      spyOn(service.updatedAnalysis, 'emit');
+
+      // when
+      service.updateAnalysis(updateAnalysis);
+
+      // then
+      expect(service.updatedAnalysis.emit).toHaveBeenCalled();
+    });
+
+    it('should fire deleted analysis event', () => {
+      // given
+      const deleteAnalysis = data.analyses[0];
+      spyOn(service.deletedAnalysis, 'emit');
+
+      // when
+      service.deleteAnalysis(deleteAnalysis);
+
+      // then
+      expect(service.deletedAnalysis.emit).toHaveBeenCalled();
+    });
   });
 });
