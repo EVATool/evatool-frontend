@@ -27,7 +27,6 @@ describe('StakeholderDataService', () => {
     expect(service).toBeTruthy();
   });
 
-
   it('should initialize', () => { // TODO
     // given
 
@@ -130,6 +129,7 @@ describe('StakeholderDataService', () => {
       expect(service.deletedStakeholder.emit).toHaveBeenCalled();
     });
 
-    // TODO Stakeholders types loaded event.
+    // TODO Stakeholders prio loaded event.
+    // TODO Stakeholders level loaded event.
   });
 });
