@@ -26,8 +26,7 @@ describe('ValueDataService', () => {
     expect(service).toBeTruthy();
   });
 
-
-  it('should initialize', () => { // TODO how to init?
+  it('should initialize', () => { // TODO
     // given
 
     // when
@@ -90,7 +89,6 @@ describe('ValueDataService', () => {
     expect(defaultValue.archived).toEqual(false);
     expect(defaultValue.analysis).toBeDefined();
   });
-
 
   describe('event emitter', () => {
     it('should fire created values event', () => {

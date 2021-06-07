@@ -88,6 +88,7 @@ export class StakeholderDataService extends DataService {
     stakeholder.name = '';
     stakeholder.priority = this.stakeholderPriorities[0];
     stakeholder.level = this.stakeholderLevels[0];
+    stakeholder.impacted = null;
     stakeholder.analysis = analysis;
 
     return stakeholder;
