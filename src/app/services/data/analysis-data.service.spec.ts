@@ -19,7 +19,7 @@ describe('AnalysisDataService', () => {
           provide: Router,
           useValue: {
             url: '/analysis?id=1'
-          } // you could use also jasmine.createSpyObj() for methods
+          }
         }
       ]
     });

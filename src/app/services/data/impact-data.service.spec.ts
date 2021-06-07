@@ -3,9 +3,6 @@ import {TestBed} from '@angular/core/testing';
 import {ImpactDataService} from './impact-data.service';
 import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
-import {Analysis} from '../../model/Analysis';
-import {Value} from '../../model/Value';
-import {Stakeholder} from '../../model/Stakeholder';
 import {ValueDataService} from './value-data.service';
 import {StakeholderDataService} from './stakeholder-data.service';
 
