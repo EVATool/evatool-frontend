@@ -5,11 +5,13 @@ import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
 import {ValueDataService} from './value-data.service';
 import {StakeholderDataService} from './stakeholder-data.service';
+import {AnalysisDataService} from './analysis-data.service';
 
 describe('ImpactDataService', () => {
   let service: ImpactDataService;
   let valueData: ValueDataService;
   let stakeholderData: StakeholderDataService;
+  let analysisData: AnalysisDataService;
   let data: SampleDataService;
 
   beforeEach(() => {
@@ -24,6 +26,9 @@ describe('ImpactDataService', () => {
     valueData.init();
     stakeholderData = TestBed.inject(StakeholderDataService);
     stakeholderData.init();
+    analysisData = TestBed.inject(AnalysisDataService);
+    analysisData.init();
+    analysisData.changeCurrentAnalysis('1');
   });
 
   it('should be created', () => {
@@ -77,7 +82,6 @@ describe('ImpactDataService', () => {
 
     // then
     expect(service.deletedImpact.emit).toHaveBeenCalled();
-    expect(service.impacts).not.toContain(deleteImpact);
   });
 
   it('should create a default impact', () => {

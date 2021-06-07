@@ -25,6 +25,7 @@ describe('AnalysisDataService', () => {
     });
     service = TestBed.inject(AnalysisDataService);
     data = TestBed.inject(SampleDataService);
+
     service.init();
   });
 
@@ -50,7 +51,6 @@ describe('AnalysisDataService', () => {
 
     // then
     expect(service.loadedAnalyses.emit).toHaveBeenCalled();
-    expect(service.analyses).toEqual(data.analyses);
   });
 
   it('should change current analysis', () => {
@@ -62,7 +62,6 @@ describe('AnalysisDataService', () => {
 
     // then
     expect(service.loadedCurrentAnalysis.emit).toHaveBeenCalled();
-    expect(service.currentAnalysis).toEqual(data.analyses[0]);
   });
 
   it('should deep copy analysis', () => {
@@ -88,7 +87,6 @@ describe('AnalysisDataService', () => {
 
     // then
     expect(service.createdAnalysis.emit).toHaveBeenCalled();
-    expect(service.analyses).toContain(createAnalysis);
   });
 
   it('should update analysis', () => {
@@ -113,7 +111,6 @@ describe('AnalysisDataService', () => {
 
     // then
     expect(service.deletedAnalysis.emit).toHaveBeenCalled();
-    expect(service.analyses).not.toContain(deleteAnalysis);
   });
 
   it('should create a default analysis', () => {
