@@ -3,32 +3,26 @@ import {TestBed} from '@angular/core/testing';
 import {ImpactDataService} from './impact-data.service';
 import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
-import {ValueDataService} from './value-data.service';
-import {StakeholderDataService} from './stakeholder-data.service';
-import {AnalysisDataService} from './analysis-data.service';
+import {MasterService} from '../master.service';
+import {Impact} from '../../model/Impact';
+import {Analysis} from '../../model/Analysis';
+import {Value} from '../../model/Value';
+import {Stakeholder} from '../../model/Stakeholder';
 
 describe('ImpactDataService', () => {
   let service: ImpactDataService;
-  let valueData: ValueDataService;
-  let stakeholderData: StakeholderDataService;
-  let analysisData: AnalysisDataService;
   let data: SampleDataService;
+  let masterService: MasterService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: SpecService.imports,
     });
     service = TestBed.inject(ImpactDataService);
-    service.init();
     data = TestBed.inject(SampleDataService);
-
-    valueData = TestBed.inject(ValueDataService);
-    valueData.init();
-    stakeholderData = TestBed.inject(StakeholderDataService);
-    stakeholderData.init();
-    analysisData = TestBed.inject(AnalysisDataService);
-    analysisData.init();
-    analysisData.changeCurrentAnalysis('1');
+    masterService = TestBed.inject(MasterService);
+    masterService.init();
+    masterService.analysisData.changeCurrentAnalysis('1');
   });
 
   it('should be created', () => {
@@ -38,57 +32,59 @@ describe('ImpactDataService', () => {
   it('should initialize', () => { // TODO
     // given
 
-
     // when
 
-
     // then
-
 
   });
 
   it('should create impact', () => {
     // given
     const createImpact = data.impacts[0];
-    spyOn(service.createdImpact, 'emit');
+
+    // then
+    service.createdImpact.subscribe((impact: Impact) => {
+      expect(service.impacts).toContain(impact);
+    });
 
     // when
     service.createImpact(createImpact);
-
-    // then
-    expect(service.createdImpact.emit).toHaveBeenCalled();
-    expect(service.impacts).toContain(createImpact);
   });
 
   it('should update impact', () => {
     // given
-    const updateImpact = data.impacts[0];
-    spyOn(service.updatedImpact, 'emit');
-
-    // when
-    service.updateImpact(updateImpact);
+    const updatedImpact = data.impacts[0];
 
     // then
-    expect(service.updatedImpact.emit).toHaveBeenCalled();
+    service.updatedImpact.subscribe((impact: Impact) => {
+      expect(updatedImpact).toEqual(impact);
+    });
+
+    // when
+    updatedImpact.description = 'updated';
+    service.updateImpact(updatedImpact);
   });
 
   it('should delete impact', () => {
     // given
-    const deleteImpact = data.impacts[0];
-    spyOn(service.deletedImpact, 'emit');
-
-    // when
-    service.deleteImpact(deleteImpact);
+    const deletedImpact = service.impacts[0]; // TODO why does this test fail if the service. is replaced with data.
 
     // then
-    expect(service.deletedImpact.emit).toHaveBeenCalled();
+    service.deletedImpact.subscribe((impact: Impact) => {
+      expect(service.impacts).not.toContain(impact);
+    });
+
+    // when
+    service.deleteImpact(deletedImpact);
   });
 
   it('should create a default impact', () => {
     // given
 
     // when
-    const defaultImpact = service.createDefaultImpact(data.analyses[0], data.stakeholders[0], data.values[0]);
+    const defaultImpact = service.createDefaultImpact(data.analyses[0],
+      masterService.stakeholderData.stakeholders[0],
+      masterService.valueData.values[0]);
 
     // then
     expect(defaultImpact.id).toBeUndefined();
@@ -99,5 +95,43 @@ describe('ImpactDataService', () => {
     expect(defaultImpact.analysis).toBeDefined();
     expect(defaultImpact.value).toBeDefined();
     expect(defaultImpact.stakeholder).toBeDefined();
+  });
+
+  describe('event emitter', () => {
+    it('should fire created impacts event', () => {
+      // given
+      const createImpacts = data.impacts[0];
+      spyOn(service.createdImpact, 'emit');
+
+      // when
+      service.createImpact(createImpacts);
+
+      // then
+      expect(service.createdImpact.emit).toHaveBeenCalled();
+    });
+
+    it('should fire updated impacts event', () => {
+      // given
+      const updateImpacts = data.impacts[0];
+      spyOn(service.updatedImpact, 'emit');
+
+      // when
+      service.updateImpact(updateImpacts);
+
+      // then
+      expect(service.updatedImpact.emit).toHaveBeenCalled();
+    });
+
+    it('should fire deleted impacts event', () => {
+      // given
+      const deleteImpacts = data.impacts[0];
+      spyOn(service.deletedImpact, 'emit');
+
+      // when
+      service.deleteImpact(deleteImpacts);
+
+      // then
+      expect(service.deletedImpact.emit).toHaveBeenCalled();
+    });
   });
 });

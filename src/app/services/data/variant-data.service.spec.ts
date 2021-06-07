@@ -5,7 +5,6 @@ import {SpecService} from '../spec.service';
 import {Variant} from '../../model/Variant';
 import {SampleDataService} from '../sample-data.service';
 import {MasterService} from '../master.service';
-import {Analysis} from '../../model/Analysis';
 
 describe('VariantDataService', () => {
   let service: VariantDataService;
