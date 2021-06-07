@@ -3,9 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {AnalysisDataService} from './analysis-data.service';
 import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
-import {Analysis} from '../../model/Analysis';
 import {Router} from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AnalysisDataService', () => {
   let service: AnalysisDataService;
@@ -24,9 +22,8 @@ describe('AnalysisDataService', () => {
       ]
     });
     service = TestBed.inject(AnalysisDataService);
-    data = TestBed.inject(SampleDataService);
-
     service.init();
+    data = TestBed.inject(SampleDataService);
   });
 
   it('should be created', () => {

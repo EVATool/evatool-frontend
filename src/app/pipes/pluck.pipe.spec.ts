@@ -1,4 +1,3 @@
-import {HighlightSearchPipe} from './highlight-search.pipe';
 import {PluckPipe} from './pluck.pipe';
 
 describe('PluckPipe', () => {

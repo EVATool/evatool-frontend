@@ -3,8 +3,6 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
-Split data service tests into initialization/after init?
-
 Tasks aus Jira (UID) -> das Jira public machen?
 
 horizontal scrolling in req table
