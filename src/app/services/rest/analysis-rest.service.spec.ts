@@ -142,6 +142,40 @@ describe('AnalysisRestService', () => {
       expect(req.request.method).toBe('POST');
     });
 
-    
+    it('should create analysis', () => {
+      // given
+      const analysisDto = data.analysesDtoList[0];
+
+      // when
+      service.createAnalysis(analysisDto).subscribe();
+
+      // then
+      const req = httpMock.expectOne(service.analysesUrl);
+      expect(req.request.method).toBe('POST');
+    });
+
+    it('should update analysis', () => {
+      // given
+      const analysisDto = data.analysesDtoList[0];
+
+      // when
+      service.updateAnalysis(analysisDto).subscribe();
+
+      // then
+      const req = httpMock.expectOne(service.analysesUrl);
+      expect(req.request.method).toBe('PUT');
+    });
+
+    it('should delete analysis', () => {
+      // given
+      const analysisDto = data.analysesDtoList[0];
+
+      // when
+      service.deleteAnalysis(analysisDto.id).subscribe();
+
+      // then
+      const req = httpMock.expectOne(service.analysesUrl + '/' + analysisDto.id);
+      expect(req.request.method).toBe('DELETE');
+    });
   });
 });
