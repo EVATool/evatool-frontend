@@ -19,7 +19,7 @@ export class VariantRestService extends RestService {
 
   getVariantsByAnalysisId(analysisId: string): Observable<VariantDto[]> {
     const url = this.variantsUrl + this.byAnalysisId + analysisId;
-    this.logger.info(this, "Http get to: " + url);
+    this.logger.info(this, 'Http get to: ' + url);
     if (this.testing) {
       return of(this.sampleData.variantDtoList);
     } else {
@@ -29,7 +29,7 @@ export class VariantRestService extends RestService {
 
   createVariant(variantDto: VariantDto): Observable<VariantDto> {
     const url = this.variantsUrl;
-    this.logger.info(this, "Http post to: " + url);
+    this.logger.info(this, 'Http post to: ' + url);
     if (this.testing) {
       return of(variantDto);
     } else {
@@ -39,7 +39,7 @@ export class VariantRestService extends RestService {
 
   updateVariant(variantDto: VariantDto): Observable<VariantDto> {
     const url = this.variantsUrl;
-    this.logger.info(this, "Http put to: " + url);
+    this.logger.info(this, 'Http put to: ' + url);
     if (this.testing) {
       return of(variantDto);
     } else {
@@ -49,7 +49,7 @@ export class VariantRestService extends RestService {
 
   deleteVariant(id: string): Observable<void> {
     const url = this.variantsUrl + '/' + id;
-    this.logger.info(this, "Http delete to: " + url);
+    this.logger.info(this, 'Http delete to: ' + url);
     if (this.testing) {
       return of(void 0);
     } else {
