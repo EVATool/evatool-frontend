@@ -24,29 +24,59 @@ describe('AnalysisRestService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should GET all analyses', () => {
-    // given
-    service.testing = true;
+  describe('Rest calls (TEST)', () => {
 
-    // when
-    const analyses = data.analysesDtoList;
+    it('should GET analysis by id', () => {
+      // given
 
-    // then
-    service.getAnalyses().subscribe((analysisDtoList: Analysis[]) => {
-      expect(analysisDtoList).toEqual(analyses);
+      // when
+      const analysisDto = data.analysesDtoList[0];
+
+      // then
+      service.getAnalysisById(analysisDto.id).subscribe((analysisDtoResponse: Analysis) => {
+        expect(analysisDtoResponse).toEqual(analysisDto);
+      });
+    });
+
+    it('should GET all analyses', () => {
+      // given
+
+      // when
+      const analysisDtoList = data.analysesDtoList;
+
+      // then
+      service.getAnalyses().subscribe((analysisDtoListResponse: Analysis[]) => {
+        expect(analysisDtoListResponse).toEqual(analysisDtoList);
+      });
     });
   });
 
-  it('should GET all analyses (MOCKED)', () => {
-    // given
-    service.testing = false;
-    const analyses = data.analysesDtoList;
+  describe('Rest calls (MOCK)', () => {
 
-    // when
-    service.getAnalyses().subscribe();
+    beforeEach(() => {
+      service.testing = false;
+    });
 
-    // then
-    const req = httpMock.expectOne(service.analysesUrl);
-    expect(req.request.method).toBe('GET');
+    it('should GET analysis by id', () => {
+      // given
+
+      // when
+      service.getAnalysisById('1').subscribe();
+
+      // then
+      const req = httpMock.expectOne(service.analysesUrl + '/1');
+      expect(req.request.method).toBe('GET');
+    });
+
+    it('should GET all analyses', () => {
+      // given
+
+      // when
+      service.getAnalyses().subscribe();
+
+      // then
+      const req = httpMock.expectOne(service.analysesUrl);
+      expect(req.request.method).toBe('GET');
+    });
   });
 });

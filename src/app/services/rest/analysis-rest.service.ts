@@ -50,7 +50,7 @@ export class AnalysisRestService extends RestService {
 
   createAnalysis(analysisDto: AnalysisDto): Observable<AnalysisDto> {
     const url = this.analysesUrl;
-    this.logger.info(this, "Http post to: " + url);
+    this.logger.info(this, 'Http post to: ' + url);
     if (this.testing) {
       return of(analysisDto);
     } else {
@@ -60,7 +60,7 @@ export class AnalysisRestService extends RestService {
 
   updateAnalysis(analysisDto: AnalysisDto): Observable<AnalysisDto> {
     const url = this.analysesUrl;
-    this.logger.info(this, "Http put to: " + url);
+    this.logger.info(this, 'Http put to: ' + url);
     if (this.testing) {
       return of(analysisDto);
     } else {
@@ -70,7 +70,7 @@ export class AnalysisRestService extends RestService {
 
   deleteAnalysis(id: string): Observable<void> {
     const url = this.analysesUrl + '/' + id;
-    this.logger.info(this, "Http delete to: " + url);
+    this.logger.info(this, 'Http delete to: ' + url);
     if (this.testing) {
       return of(void 0);
     } else {
