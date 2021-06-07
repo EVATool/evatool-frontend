@@ -58,6 +58,7 @@ import {ImpactedFilterComponent} from './components/impacted-filter/impacted-fil
 import {PriorityFilterComponent} from './components/priority-filter/priority-filter.component';
 import {PluckPipe} from './pipes/pluck.pipe';
 import {NgVarDirective} from './directives/ng-var.directive';
+// noinspection ES6UnusedImports
 import {} from 'jasmine'; // Because we are using jest and karma + jasmine
 
 @NgModule({
