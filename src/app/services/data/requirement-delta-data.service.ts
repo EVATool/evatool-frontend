@@ -78,7 +78,9 @@ export class RequirementDeltaDataService extends DataService {
 
   createRequirementDelta(requirementDelta: RequirementDelta): void {
     this.requirementDeltaRest.createRequirementDelta(this.requirementDeltaMapper.toDto(requirementDelta)).subscribe((requirementDeltaDto: RequirementDeltaDto) => {
-      const createdRequirementDelta = this.requirementDeltaMapper.fromDto(requirementDeltaDto, this.requirementData.requirements, this.impactData.impacts);
+      const createdRequirementDelta = this.requirementDeltaMapper.fromDto(requirementDeltaDto,
+        this.requirementData.requirements,
+        this.impactData.impacts);
       this.requirementDeltas.push(createdRequirementDelta);
       this.createdRequirementDelta.emit(createdRequirementDelta);
       this.logger.info(this, 'RequirementDelta created');
@@ -87,7 +89,9 @@ export class RequirementDeltaDataService extends DataService {
 
   updateRequirementDelta(requirementDelta: RequirementDelta): void {
     this.requirementDeltaRest.updateRequirementDelta(this.requirementDeltaMapper.toDto(requirementDelta)).subscribe((requirementDeltaDto: RequirementDeltaDto) => {
-      const updatedRequirementDelta = this.requirementDeltaMapper.fromDto(requirementDeltaDto, this.requirementData.requirements, this.impactData.impacts);
+      const updatedRequirementDelta = this.requirementDeltaMapper.fromDto(requirementDeltaDto,
+        this.requirementData.requirements,
+        this.impactData.impacts);
       this.updatedRequirementDelta.emit(updatedRequirementDelta);
       this.logger.info(this, 'RequirementDelta updated');
     });

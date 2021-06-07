@@ -5,8 +5,6 @@ import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
 import {MasterService} from '../master.service';
 import {Requirement} from '../../model/Requirement';
-import {Analysis} from '../../model/Analysis';
-import {Variant} from '../../model/Variant';
 
 describe('RequirementDataService', () => {
   let service: RequirementDataService;
@@ -27,7 +25,6 @@ describe('RequirementDataService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
 
   it('should initialize', () => { // TODO
     // given
