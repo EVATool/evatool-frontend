@@ -123,8 +123,11 @@ describe('AnalysisDataService', () => {
 
     // then
     expect(defaultAnalysis.id).toBeUndefined();
+    expect(defaultAnalysis.prefixSequenceId).toBeUndefined();
     expect(defaultAnalysis.name).toEqual('');
     expect(defaultAnalysis.description).toEqual('');
     expect(defaultAnalysis.isTemplate).toEqual(false);
+    expect(defaultAnalysis.imageUrl).toBeUndefined();
+    expect(defaultAnalysis.lastUpdated).toBeUndefined();
   });
 });
