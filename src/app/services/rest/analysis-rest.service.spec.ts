@@ -26,7 +26,7 @@ describe('AnalysisRestService', () => {
 
   describe('Rest calls (TEST)', () => {
 
-    it('should GET analysis by id', () => {
+    it('should find analysis by id', () => {
       // given
 
       // when
@@ -38,7 +38,7 @@ describe('AnalysisRestService', () => {
       });
     });
 
-    it('should GET all analyses', () => {
+    it('should find all analyses', () => {
       // given
 
       // when
@@ -49,6 +49,25 @@ describe('AnalysisRestService', () => {
         expect(analysisDtoListResponse).toEqual(analysisDtoList);
       });
     });
+
+    it('should deep copy analysis', () => {
+      // given
+
+      // when
+      const analysisDto = data.analysesDtoList[0];
+
+      // then
+      service.deepCopy(analysisDto.id, analysisDto).subscribe((analysisDtoResponse: Analysis) => {
+        expect(analysisDtoResponse).toEqual(analysisDto);
+      });
+    });
+
+    // create
+
+    // update
+
+    // delete
+
   });
 
   describe('Rest calls (MOCK)', () => {
@@ -57,7 +76,7 @@ describe('AnalysisRestService', () => {
       service.testing = false;
     });
 
-    it('should GET analysis by id', () => {
+    it('should find analysis by id', () => {
       // given
 
       // when
@@ -68,7 +87,7 @@ describe('AnalysisRestService', () => {
       expect(req.request.method).toBe('GET');
     });
 
-    it('should GET all analyses', () => {
+    it('should find all analyses', () => {
       // given
 
       // when
