@@ -45,13 +45,86 @@ describe('AnalysisDataService', () => {
     spyOn(service.loadedAnalyses, 'emit');
 
     // when
-    service.loadedAnalyses.subscribe((analyses: Analysis[]) => {
-      expect(analyses).toEqual(data.analyses);
-    });
     service.loadAnalyses();
 
     // then
     expect(service.loadedAnalyses.emit).toHaveBeenCalled();
     expect(service.analyses).toEqual(data.analyses);
+  });
+
+  it('should change current analysis', () => {
+    // given
+    spyOn(service.loadedCurrentAnalysis, 'emit');
+
+    // when
+    service.changeCurrentAnalysis('1');
+
+    // then
+    expect(service.loadedCurrentAnalysis.emit).toHaveBeenCalled();
+    expect(service.currentAnalysis).toEqual(data.analyses[0]);
+  });
+
+  it('should deep copy analysis', () => {
+    // given
+    const templateAnalysis = data.analyses[0];
+    const analysis = data.analyses[1];
+    spyOn(service.createdAnalysis, 'emit');
+
+    // when
+    service.deepCopy(templateAnalysis, analysis);
+
+    // then
+    expect(service.createdAnalysis.emit).toHaveBeenCalled();
+  });
+
+  it('should create analysis', () => {
+    // given
+    const createAnalysis = data.analyses[0];
+    spyOn(service.createdAnalysis, 'emit');
+
+    // when
+    service.createAnalysis(createAnalysis);
+
+    // then
+    expect(service.createdAnalysis.emit).toHaveBeenCalled();
+    expect(service.analyses).toContain(createAnalysis);
+  });
+
+  it('should update analysis', () => {
+    // given
+    const updateAnalysis = data.analyses[0];
+    spyOn(service.updatedAnalysis, 'emit');
+
+    // when
+    service.updateAnalysis(updateAnalysis);
+
+    // then
+    expect(service.updatedAnalysis.emit).toHaveBeenCalled();
+  });
+
+  it('should delete analysis', () => {
+    // given
+    const deleteAnalysis = data.analyses[0];
+    spyOn(service.deletedAnalysis, 'emit');
+
+    // when
+    service.deleteAnalysis(deleteAnalysis);
+
+    // then
+    expect(service.deletedAnalysis.emit).toHaveBeenCalled();
+    expect(service.analyses).not.toContain(deleteAnalysis);
+  });
+
+  it('should create a default analysis', () => {
+    // given
+
+    // when
+    const defaultAnalysis = service.createDefaultAnalysis();
+
+    // then
+    expect(defaultAnalysis.id).toBeUndefined();
+    expect(defaultAnalysis.name).toEqual('');
+    expect(defaultAnalysis.description).toEqual('');
+    expect(defaultAnalysis.isTemplate).toEqual(false);
   });
 });
