@@ -23,7 +23,6 @@ describe('ValueRestService', () => {
     expect(service).toBeTruthy();
   });
 
-
   describe('Rest calls (MOCK)', () => {
 
     beforeEach(() => {
