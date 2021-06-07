@@ -29,7 +29,7 @@ export class AnalysisDataService extends DataService {
 
   init(): void {
     // Load current analysis.
-    this.router.routerState.root.queryParams.subscribe(params => {
+    this.router.routerState?.root.queryParams.subscribe(params => { // TODO change back to no elvis when tests are done
       if (params.id !== undefined) {
         this.logger.info(this, 'Extracted analysisId from Router: ' + params.id);
         this.changeCurrentAnalysis(params.id);

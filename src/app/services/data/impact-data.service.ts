@@ -49,14 +49,17 @@ export class ImpactDataService extends DataService {
     });
   }
 
-  loadIfChildrenLoaded(analysisId: string): void {
+  private loadIfChildrenLoaded(analysisId: string): void {
     if (!this.stakeholdersLoaded || !this.valuesLoaded) {
       return;
     }
     this.impactRest.getImpactsByAnalysisId(analysisId).subscribe((impactDtoList: ImpactDto[]) => {
       this.impacts = [];
       impactDtoList.forEach(impactDto => {
-        this.impacts.push(this.impactMapper.fromDto(impactDto, [this.analysisData.currentAnalysis], this.valueData.values, this.stakeholderData.stakeholders));
+        this.impacts.push(this.impactMapper.fromDto(impactDto,
+          [this.analysisData.currentAnalysis],
+          this.valueData.values,
+          this.stakeholderData.stakeholders));
       });
       this.loadedImpacts.emit(this.impacts);
       this.logger.info(this, 'Impacts loaded');
@@ -65,7 +68,10 @@ export class ImpactDataService extends DataService {
 
   createImpact(impact: Impact): void {
     this.impactRest.createImpact(this.impactMapper.toDto(impact)).subscribe((impactDto: ImpactDto) => {
-      const createdImpact = this.impactMapper.fromDto(impactDto, [this.analysisData.currentAnalysis], this.valueData.values, this.stakeholderData.stakeholders);
+      const createdImpact = this.impactMapper.fromDto(impactDto,
+        [this.analysisData.currentAnalysis],
+        this.valueData.values,
+        this.stakeholderData.stakeholders);
       this.impacts.push(createdImpact);
       this.createdImpact.emit(createdImpact);
       this.logger.info(this, 'Impact created');
@@ -74,7 +80,10 @@ export class ImpactDataService extends DataService {
 
   updateImpact(impact: Impact): void {
     this.impactRest.updateImpact(this.impactMapper.toDto(impact)).subscribe((impactDto: ImpactDto) => {
-      const updatedImpact = this.impactMapper.fromDto(impactDto, [this.analysisData.currentAnalysis], this.valueData.values, this.stakeholderData.stakeholders);
+      const updatedImpact = this.impactMapper.fromDto(impactDto,
+        [this.analysisData.currentAnalysis],
+        this.valueData.values,
+        this.stakeholderData.stakeholders);
       this.updatedImpact.emit(updatedImpact);
       this.logger.info(this, 'Impact updated');
     });

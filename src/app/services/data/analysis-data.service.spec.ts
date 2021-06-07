@@ -25,6 +25,7 @@ describe('AnalysisDataService', () => {
     });
     service = TestBed.inject(AnalysisDataService);
     data = TestBed.inject(SampleDataService);
+    service.init();
   });
 
   it('should be created', () => {
