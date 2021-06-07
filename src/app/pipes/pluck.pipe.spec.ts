@@ -6,5 +6,5 @@ describe('PluckPipe', () => {
     expect(pipe).toBeTruthy();
   });
 
-  
+
 });
