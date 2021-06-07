@@ -1,4 +1,4 @@
-import {Directive, Input, TemplateRef, ViewContainerRef} from "@angular/core";
+import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
 
 @Directive({
   selector: '[ngVar]',
@@ -27,5 +27,6 @@ export class VarDirective {
   constructor(
     private templateRef: TemplateRef<any>,
     private vcRef: ViewContainerRef
-  ) {}
+  ) {
+  }
 }
