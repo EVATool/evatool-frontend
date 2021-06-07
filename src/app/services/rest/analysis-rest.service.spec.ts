@@ -62,12 +62,43 @@ describe('AnalysisRestService', () => {
       });
     });
 
-    // create
+    it('should create analysis', () => {
+      // given
+
+      // when
+      const analysisDto = data.analysesDtoList[0];
+
+      // then
+      service.createAnalysis(analysisDto).subscribe((analysisDtoResponse: Analysis) => {
+        expect(analysisDtoResponse).toEqual(analysisDto);
+      });
+    });
 
     // update
+    it('should update analysis', () => {
+      // given
+
+      // when
+      const analysisDto = data.analysesDtoList[0];
+
+      // then
+      service.updateAnalysis(analysisDto).subscribe((analysisDtoResponse: Analysis) => {
+        expect(analysisDtoResponse).toEqual(analysisDto);
+      });
+    });
 
     // delete
+    it('should delete analysis', () => {
+      // given
 
+      // when
+      const analysisDto = data.analysesDtoList[0];
+
+      // then
+      service.deleteAnalysis(analysisDto.id).subscribe(() => {
+        // pass
+      });
+    });
   });
 
   describe('Rest calls (MOCK)', () => {
@@ -97,5 +128,20 @@ describe('AnalysisRestService', () => {
       const req = httpMock.expectOne(service.analysesUrl);
       expect(req.request.method).toBe('GET');
     });
+
+    it('should deep copy analysis', () => {
+      // given
+      const templateAnalysisDto = data.analysesDtoList[0];
+      const analysisDto = data.analysesDtoList[1];
+
+      // when
+      service.deepCopy(templateAnalysisDto.id, analysisDto).subscribe();
+
+      // then
+      const req = httpMock.expectOne(service.analysesDeepCopyUrl + '/' + templateAnalysisDto.id);
+      expect(req.request.method).toBe('POST');
+    });
+
+    
   });
 });
