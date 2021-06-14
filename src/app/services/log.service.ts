@@ -3,6 +3,9 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
+Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
+HUGE refactor: Rename + folder structure
+
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly
@@ -20,14 +23,6 @@ Rework impact slider (arrow keys supported) and filtering (drag middle bar and c
 How to archive? What happens? Difference between values and variants?
 How should be cascaded??
 Filtering: And/Or, what is the default filtering?
-
-Code Quality:
-Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen
-Angular e2e tests
-make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
-Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
-HUGE refactor: Rename + folder structure
-SonarCloud Status not shown in backend
 
 MISC:
 Update dependencies in docker compose every 3/4/6 months?
@@ -49,6 +44,9 @@ Only purge data script (ONLY database with main data, what about flyway?)
 Localization (figure out angular localization, error codes in backend, put language in docker [environment variable])
 Single user: reload data (how to update references?)
 Multi user: concurrency...
+SonarCloud Status not shown in backend
+make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
+Angular e2e tests
 
 */
 
