@@ -154,8 +154,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         case 'values':
           return this.getAffectedValues(requirement).join(',');
         case 'variants':
-          //return requirement.variants.map(variant => variant.name).join(',');
-          return requirement.variants.length;
+          return requirement.variants.map(variant => variant.name).join(',');
         default:
           return requirement[property];
       }
@@ -181,7 +180,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       deltas.forEach((delta: RequirementDelta) => {
         const minValue = Math.min(searchTerms.merit.sliderFilterValues[0], searchTerms.merit.sliderFilterValues[1]);
         const maxValue = Math.max(searchTerms.merit.sliderFilterValues[0], searchTerms.merit.sliderFilterValues[1]);
-        if (delta.overwriteMerit !== null && !(delta.overwriteMerit >= minValue && delta.overwriteMerit <= maxValue)) {
+        console.log(searchTerms);
+        if (searchTerms.impact.includes(delta.impact.prefixSequenceId)
+          && delta.overwriteMerit !== null
+          && !(delta.overwriteMerit >= minValue && delta.overwriteMerit <= maxValue)) {
           meritFilter = false;
         }
       });
