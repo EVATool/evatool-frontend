@@ -82,7 +82,7 @@ td, th, tr {
 }
 
 .mat-column-description {
-  width: 250px;
+  width: 150px;
   text-overflow: ellipsis;
 }
 
@@ -91,7 +91,8 @@ td, th, tr {
 }
 
 .mat-column-values {
-  width: 200px;
+  min-width: 100px;
+  width: 100px;
   text-overflow: ellipsis;
   word-wrap: anywhere;
   overflow-wrap: anywhere;
@@ -99,7 +100,7 @@ td, th, tr {
 }
 
 .mat-column-impact {
-  width: 300px;
+  width: 50px;
 }
 
 .mat-column-delete-button {

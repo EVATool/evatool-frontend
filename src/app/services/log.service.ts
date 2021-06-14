@@ -5,8 +5,6 @@ import {environment} from '../../environments/environment';
 Features:
 Tasks aus Jira (UID) -> das Jira public machen?
 
-horizontal scrolling in req table
-
 Stakeholder PrefixId in frontend should update directly
 
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
