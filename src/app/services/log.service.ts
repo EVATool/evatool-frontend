@@ -5,32 +5,21 @@ import {environment} from '../../environments/environment';
 Features:
 Tasks aus Jira (UID) -> das Jira public machen?
 
-Stakeholder PrefixId in frontend should update directly
-
+Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Table row mousehover/focus highlight
 Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder)
-RequirementDelta color, minValue, maxValue in DTO (?)
-RequirementDelta in Requirements table (slider should appear on tab)
 Use Impact slider also for stakeholder.impacted (column and filter)? Current filter makes no sense
 
-HTTP Interceptor (Datenbanki xD) (PWA?)
-
+RequirementDelta in Requirements table (slider should appear on tab)
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders)
 
 How to archive? What happens? Difference between values and variants?
 How should be cascaded??
 Filtering: And/Or, what is the default filtering?
-
-Localization (figure out angular localization, error codes in backend, put language in docker [environment variable])
-Use username and passwords in docker-compose from github secrets (set env vars in docker-compose command)
-
-Single user: reload data (how to update references?)
-Multi user: concurrency...
-Deep copy: copy everything?
 
 Code Quality:
 Coverage auf ~100%, nicht nur positive tests und die Fehlerbehandlung testen
@@ -45,6 +34,8 @@ Update dependencies in docker compose every 3/4/6 months?
 Add simple keycloak
 Add Flyway (special migrate test profile in backend)
 Dark Mode
+HTTP Interceptor (Datenbanki xD) (PWA?)
+Deep copy: copy everything?
 
 Backlog:
 The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again?
@@ -55,6 +46,9 @@ Sample Data (API calls to backend, separate from deployment!) -> [Create export 
   -> ExportController
   -> how to deal with keycloak auth?
 Only purge data script (ONLY database with main data, what about flyway?)
+Localization (figure out angular localization, error codes in backend, put language in docker [environment variable])
+Single user: reload data (how to update references?)
+Multi user: concurrency...
 
 */
 
