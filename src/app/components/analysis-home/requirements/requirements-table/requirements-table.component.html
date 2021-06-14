@@ -74,11 +74,11 @@
 
       <ng-container *ngFor="let impact of impactDataService.impacts" matColumnDef="{{impact.prefixSequenceId}}">
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div
-            matTooltip="{{impact.description + '&#13;' + 'Stakeholder: ' + impact.stakeholder.name + '&#13;' + 'Value: ' + impact.value.name}}"
-            matTooltipHideDelay="100"
-            matTooltipPosition="above"
-            matTooltipClass="multi-line-tooltip">
+          <div class="mat-column-impact"
+               matTooltip="{{impact.description + '&#13;' + 'Stakeholder: ' + impact.stakeholder.name + '&#13;' + 'Value: ' + impact.value.name}}"
+               matTooltipHideDelay="100"
+               matTooltipPosition="above"
+               matTooltipClass="multi-line-tooltip">
             {{impact.prefixSequenceId}}
           </div>
         </th>
