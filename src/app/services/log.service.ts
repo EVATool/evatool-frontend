@@ -7,7 +7,6 @@ Tasks aus Jira (UID) -> das Jira public machen?
 
 horizontal scrolling in req table
 
-Figure out lastUpdated datatype in back and frontend
 Stakeholder PrefixId in frontend should update directly
 Only filter selected/active impacts/deltas
 

@@ -87,7 +87,7 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       isTemplate: false,
       imageUrl: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
-      lastUpdated: '1379847549076'
+      lastUpdated: 1379847549076
     },
     {
       id: '2',
@@ -96,7 +96,7 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       isTemplate: false,
       imageUrl: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
-      lastUpdated: '1379847549076'
+      lastUpdated: 1379847549076
     },
     {
       id: '3',
@@ -105,7 +105,7 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       isTemplate: true,
       imageUrl: 'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
-      lastUpdated: '1379847549076'
+      lastUpdated: 1379847549076
     }
   ];
 

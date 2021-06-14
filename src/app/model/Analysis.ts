@@ -7,5 +7,5 @@ export class Analysis {
   description!: string;
   isTemplate !: boolean;
   imageUrl!: string;
-  lastUpdated!: string;
+  lastUpdated!: number;
 }

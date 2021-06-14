@@ -5,5 +5,5 @@ export class AnalysisDto {
   description !: string;
   isTemplate !: boolean;
   imageUrl !: string;
-  lastUpdated !: string;
+  lastUpdated !: number;
 }
