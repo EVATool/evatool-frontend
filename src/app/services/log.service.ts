@@ -3,6 +3,9 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
+Analyse: new analysis -> new, delete analyse -> modal with yes/no
+Priority filter (stakeholder)
+Impact filter (stakeholder)
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HUGE refactor: Rename + folder structure
 
@@ -20,8 +23,8 @@ Use Impact slider also for stakeholder.impacted (column and filter)? Current fil
 RequirementDelta in Requirements table (slider should appear on tab)
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders)
 
-How to archive? What happens? Difference between values and variants?
-How should be cascaded??
+How to archive? What happens? Difference between values and variants? (highlight)
+How should be cascaded?? (warn when references, forbid)
 Filtering: And/Or, what is the default filtering?
 
 MISC:

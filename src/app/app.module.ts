@@ -59,7 +59,8 @@ import {PriorityFilterComponent} from './components/priority-filter/priority-fil
 import {PluckPipe} from './pipes/pluck.pipe';
 import {NgVarDirective} from './directives/ng-var.directive';
 // noinspection ES6UnusedImports
-import {} from 'jasmine'; // Because we are using jest and karma + jasmine
+import {} from 'jasmine';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component'; // Because we are using jest and karma + jasmine
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import {} from 'jasmine'; // Because we are using jest and karma + jasmine
     AnalysisDialogComponent,
     ImpactedFilterComponent,
     PriorityFilterComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,

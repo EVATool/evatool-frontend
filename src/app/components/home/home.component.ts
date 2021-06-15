@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from './analysis-dialog/analysis-dialog.component';
+import {ConfirmationDialogComponent} from '../../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +33,16 @@ export class HomeComponent implements OnInit {
   }
 
   deleteAnalysis(analysis: Analysis): void {
-    this.analysisData.deleteAnalysis(analysis);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      disableClose: false
+    });
+    dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete?';
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.analysisData.deleteAnalysis(analysis);
+      }
+    });
   }
 
   openAnalysis(analysis: Analysis): void {
