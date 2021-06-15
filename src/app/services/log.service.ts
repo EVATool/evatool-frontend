@@ -3,21 +3,19 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
-Priority filter (stakeholder, fix bugs, should filter properly)
-Impact filter (stakeholder, impact slider...)
+Use Impact slider also for stakeholder.impacted (only and filter)? Current filter makes no sense
+
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HUGE refactor: Rename + folder structure
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly
+
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
-Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
-Table row mousehover/focus highlight
 Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder)
-Use Impact slider also for stakeholder.impacted (column and filter)? Current filter makes no sense
 
 RequirementDelta in Requirements table (slider should appear on tab)
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders)
@@ -35,6 +33,7 @@ HTTP Interceptor (Datenbanki xD) (PWA?)
 Deep copy: copy everything?
 
 Backlog:
+Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again?
 Strange bug when negative impact was only slidable like a positive in requirements table
 How to deal with impacts going horizontal in requirement table
