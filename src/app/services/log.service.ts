@@ -15,22 +15,17 @@ Update values that come from backend in local object, e.g. Stakeholder PrefixId 
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
-Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder)
-
-RequirementDelta in Requirements table (slider should appear on tab)
-Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders)
+Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder) - HTTP Interceptor (Datenbanki xD) (PWA?)
 
 How to archive? What happens? Difference between values and variants? (highlight)
 How should be cascaded?? (warn when references, forbid)
 Filtering: And/Or, what is the default filtering?
 
 MISC:
-Update dependencies in docker compose every 3/4/6 months?
-Add simple keycloak
-Add Flyway (special migrate test profile in backend)
-Dark Mode
-HTTP Interceptor (Datenbanki xD) (PWA?)
+Add keycloak
+Add flyway (special migrate test profile in backend)
 Deep copy: copy everything?
+Localization (figure out angular localization, error codes in backend, put language in docker [environment variable])
 
 Backlog:
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
@@ -42,12 +37,12 @@ Sample Data (API calls to backend, separate from deployment!) -> [Create export 
   -> ExportController
   -> how to deal with keycloak auth?
 Only purge data script (ONLY database with main data, what about flyway?)
-Localization (figure out angular localization, error codes in backend, put language in docker [environment variable])
 Single user: reload data (how to update references?)
 Multi user: concurrency...
 SonarCloud Status not shown in backend
 make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
 Angular e2e tests
+Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table
 
 */
 
