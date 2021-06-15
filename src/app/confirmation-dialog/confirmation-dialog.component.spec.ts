@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ConfirmationDialogComponent } from './confirmation-dialog.component';
+import {ConfirmationDialogComponent} from './confirmation-dialog.component';
+import {SpecService} from '../services/spec.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 describe('ConfirmationDialogComponent', () => {
   let component: ConfirmationDialogComponent;
@@ -8,9 +10,17 @@ describe('ConfirmationDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConfirmationDialogComponent ]
+      imports: SpecService.imports,
+      providers: SpecService.providers.concat([
+          {
+            provide: MatDialogRef,
+            useValue: []
+          }
+        ]
+      ),
+      declarations: [ConfirmationDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

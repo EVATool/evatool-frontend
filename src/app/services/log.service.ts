@@ -3,9 +3,8 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
-Analyse: new analysis -> new, delete analyse -> modal with yes/no
-Priority filter (stakeholder)
-Impact filter (stakeholder)
+Priority filter (stakeholder, fix bugs, should filter properly)
+Impact filter (stakeholder, impact slider...)
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HUGE refactor: Rename + folder structure
 
