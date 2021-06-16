@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {MasterService} from './services/master.service';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../environments/environment';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,10 @@ import {environment} from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'evatool-frontend';
+  title = '';
 
-  constructor(private master: MasterService,
+  constructor(private titleService: Title,
+              private master: MasterService,
               public translate: TranslateService) {
     this.master.init();
 
@@ -27,5 +29,9 @@ export class AppComponent {
     } else {
       translate.use(browserLang);
     }
+
+    this.translate.get('TITLE').subscribe((title: string) => {
+      this.titleService.setTitle(title);
+    });
   }
 }
