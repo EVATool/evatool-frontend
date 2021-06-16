@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 How to archive? What happens? Difference between values and variants? -> (allow, highlight)
-How should be deleted? -> (warn when references, forbid) [values should be highlighted]
+How should be deleted? -> (warn when references, forbid)
 
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HUGE refactor: Rename + folder structure
