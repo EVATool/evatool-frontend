@@ -4,8 +4,9 @@
   <div id="left"><!--left section-->
     <br>
     <div>
-      <button mat-raised-button (click)="openAnalysisDialog(analysisData.createDefaultAnalysis())"
-              class="createAnalysisButton">New
+      <button mat-raised-button
+              (click)="openAnalysisDialog(analysisData.createDefaultAnalysis())"
+              class="createAnalysisButton">{{'HOME.NEW_ANALYSIS_BUTTON_TEXT' | translate}}
       </button>
     </div>
   </div>

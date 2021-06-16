@@ -10,7 +10,7 @@ import {HomeComponent} from './components/home/home.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AnalysisTileComponent} from './components/home/analysis-tile/analysis-tile.component';
 import {AnalysisHomeComponent} from './components/analysis-home/analysis-home.component';
@@ -61,6 +61,8 @@ import {NgVarDirective} from './directives/ng-var.directive';
 // noinspection ES6UnusedImports
 import {} from 'jasmine'; // Because we are using jest and karma + jasmine
 import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -69,6 +71,9 @@ export const customTooltipDefaults: MatTooltipDefaultOptions = {
   touchendHideDelay: 100
 };
 
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,6 +139,14 @@ export const customTooltipDefaults: MatTooltipDefaultOptions = {
     MatTooltipModule,
     MatSnackBarModule,
     MatCheckboxModule,
+    TranslateModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [
     {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: customTooltipDefaults}

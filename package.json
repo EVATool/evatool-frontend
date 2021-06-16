@@ -27,6 +27,8 @@
 		"@angular/platform-browser-dynamic": "~11.2.3",
 		"@angular/router": "~11.2.3",
 		"@neomorphism/ng-neomorphism": "^0.46.1",
+		"@ngx-translate/core": "^13.0.0",
+		"@ngx-translate/http-loader": "^6.0.0",
 		"ng-keyboard-shortcuts": "^10.1.17",
 		"ng-multiselect-dropdown": "^0.3.4",
 		"ngx-scrollbar": "^7.5.4",
