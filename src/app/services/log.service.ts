@@ -4,7 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [split into tooltip/table/etc-theme?]
+Unify EVERYTHING (move modal height/width to scss of modal, Functions)
 HUGE refactor: Rename + folder structure
 Localization (figure out angular localization, error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
 
