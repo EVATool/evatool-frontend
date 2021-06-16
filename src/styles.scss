@@ -1,6 +1,11 @@
 @import '~@angular/material/theming'; // This has to stay at the top of the file.
 @include mat-core();
 
+
+/*
+Global Style
+*/
+
 html, body {
   height: 100%;
 }
@@ -8,6 +13,16 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.screen-reader-only {
+  display: none;
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1%;
+  height: 1%;
+  overflow: hidden;
 }
 
 @import 'app/components/analysis-home/stakeholders/stakeholders-impacted/stakeholders-impacted.component';
@@ -45,17 +60,6 @@ Misc
   }
 }
 
-.screen-reader-only {
-  display: none;
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1%;
-  height: 1%;
-  overflow: hidden;
-}
-
-
 /*
 Shell Filter Bar and Main Entity Table
 */
@@ -84,7 +88,38 @@ Shell Filter Bar and Main Entity Table
 /*
 Filter bar
 */
+@mixin filter-bar-theme(){
+  mat-list.list-horizontal {
+    .mat-list-item {
+      vertical-align: bottom;
+      display: inline-block;
+      height: auto;
+      width: auto;
+      //margin-right: -20px;
 
+      app-search-bar {
+        width: 15vw;
+      }
+
+      app-column-category-filter { // use custom UI components for level filter instead of column category filter
+        width: 15vw;
+      }
+
+      app-priority-filter {
+        width: 110px;
+      }
+
+      app-column-slider-filter {
+        width: 15vw;
+      }
+
+      button {
+        margin-bottom: 8px;
+        width: 90px;
+      }
+    }
+  }
+}
 
 /*
 Entity Main Table
