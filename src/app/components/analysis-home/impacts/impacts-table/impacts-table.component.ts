@@ -10,7 +10,7 @@ import {StakeholderDataService} from '../../../../services/data/stakeholder-data
 import {AnalysisDataService} from '../../../../services/data/analysis-data.service';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {SliderFilterBoundary, SliderFilterType} from '../../../impact-slider/SliderFilterSettings';
+import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from '../../../impact-slider/SliderFilterSettings';
 import {ImpactTableFilterEvent} from '../impacts-filter-bar/ImpactTableFilterEvent';
 import {ValuesDialogComponent} from '../values-dialog/values-dialog.component';
 
@@ -102,46 +102,7 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
 
       const valueFilter = searchTerms.value.length === 0 || searchTerms.value.indexOf(data.value.name) !== -1;
 
-      let meritFilter = false;
-      switch (searchTerms.merit.sliderFilterType) { // TODO Write methods in SliderEvent...
-        case SliderFilterType.Off:
-          meritFilter = true;
-          break;
-
-        case SliderFilterType.LessThan:
-          if (searchTerms.merit.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
-            meritFilter = data.merit < searchTerms.merit.sliderFilterValues[0];
-          } else {
-            meritFilter = data.merit <= searchTerms.merit.sliderFilterValues[0];
-          }
-          break;
-
-        case SliderFilterType.GreaterThan:
-          if (searchTerms.merit.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
-            meritFilter = data.merit > searchTerms.merit.sliderFilterValues[0];
-          } else {
-            meritFilter = data.merit >= searchTerms.merit.sliderFilterValues[0];
-          }
-          break;
-
-        case SliderFilterType.Equality:
-          meritFilter = data.merit === searchTerms.merit.sliderFilterValues[0];
-          break;
-
-        case SliderFilterType.Between:
-          const minValue = Math.min(searchTerms.merit.sliderFilterValues[0], searchTerms.merit.sliderFilterValues[1]);
-          const maxValue = Math.max(searchTerms.merit.sliderFilterValues[0], searchTerms.merit.sliderFilterValues[1]);
-          if (searchTerms.merit.sliderFilterBoundary === SliderFilterBoundary.Exclude) {
-            meritFilter = data.merit > minValue && data.merit < maxValue;
-          } else {
-            meritFilter = data.merit >= minValue && data.merit <= maxValue;
-          }
-          break;
-
-        default:
-          meritFilter = true;
-          break;
-      }
+      const meritFilter = SliderFilterSettings.filter(searchTerms.merit, data.merit);
 
       return stakeholderFilter && valueFilter && meritFilter;
     };

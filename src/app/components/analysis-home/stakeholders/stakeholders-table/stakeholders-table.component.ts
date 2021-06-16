@@ -7,6 +7,7 @@ import {StakeholderTableFilterEvent} from '../stakeholders-filter-bar/Stakeholde
 import {LogService} from '../../../../services/log.service';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {MatSort} from '@angular/material/sort';
+import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-stakeholders-table',
@@ -87,8 +88,7 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
 
       const priorityFilter = searchTerms.priority.length === 0 || searchTerms.priority.indexOf(data.priority) !== -1;
 
-      // TODO change
-      const impactedFilter = searchTerms.impacted == null || (data.impacted != null && data.impacted <= -searchTerms.impacted);
+      const impactedFilter = data.impacted != null && SliderFilterSettings.filter(searchTerms.impacted, data.impacted * -1);
 
       return levelFilter && priorityFilter && impactedFilter;
     };

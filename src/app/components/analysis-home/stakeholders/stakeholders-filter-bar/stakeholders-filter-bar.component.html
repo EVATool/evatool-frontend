@@ -15,7 +15,9 @@
   </mat-list-item>
 
   <mat-list-item>
-    <app-impacted-filter (filterChanged)="impactedFilterChange($event)"></app-impacted-filter>
+    <app-column-slider-filter class="filter-slider"
+                              (filterChanged)="impactedFilterChange($event)">
+    </app-column-slider-filter>
   </mat-list-item>
 
   <mat-list-item>
