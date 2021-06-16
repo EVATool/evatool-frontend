@@ -244,7 +244,7 @@ export class SampleDataService {
       name: 'Edigg :DD',
       type: 'SOCIAL',
       description: 'Lorem Ipsum',
-      archived: false,
+      archived: true,
       analysisId: '1'
     }
   ];
