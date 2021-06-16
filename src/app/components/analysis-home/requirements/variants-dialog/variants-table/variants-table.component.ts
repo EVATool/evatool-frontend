@@ -109,6 +109,6 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
   }
 
   archivedVariantReferenced(variant: Variant): boolean {
-    return this.ids.includes(variant.id);
+    return this.ids?.includes(variant.id);
   }
 }
