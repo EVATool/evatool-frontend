@@ -3,8 +3,6 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
-Use Impact slider also for stakeholder.impacted (only and filter)? Current filter makes no sense
-
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HUGE refactor: Rename + folder structure
 
@@ -19,7 +17,7 @@ Meaningful errors (e.g. when trying to add impact but there is no value or no st
 
 How to archive? What happens? Difference between values and variants? (highlight)
 How should be cascaded?? (warn when references, forbid)
-Filtering: And/Or, what is the default filtering?
+Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
 
 MISC:
 Add keycloak

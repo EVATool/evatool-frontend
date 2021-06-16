@@ -18,6 +18,7 @@ import {RequirementDeltaDataService} from '../../../../services/data/requirement
 import {VariantDataService} from '../../../../services/data/variant-data.service';
 import {Variant} from '../../../../model/Variant';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-requirements-table',
@@ -178,12 +179,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       let meritFilter = true;
       const deltas = this.getRequirementDeltas(data);
       deltas.forEach((delta: RequirementDelta) => {
-        const minValue = Math.min(searchTerms.merit.sliderFilterValues[0], searchTerms.merit.sliderFilterValues[1]);
-        const maxValue = Math.max(searchTerms.merit.sliderFilterValues[0], searchTerms.merit.sliderFilterValues[1]);
         console.log(searchTerms);
         if (!searchTerms.impact.includes(delta.impact.prefixSequenceId)
           && delta.overwriteMerit !== null
-          && !(delta.overwriteMerit >= minValue && delta.overwriteMerit <= maxValue)) {
+          && !SliderFilterSettings.filter(searchTerms.merit, delta.overwriteMerit)) {
           meritFilter = false;
         }
       });
