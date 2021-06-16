@@ -3,5 +3,7 @@ export const environment = { // This is the test environment.
   protocol: '',
   backendUrl: '',
   backendPort: '',
-  testing: true
+  testing: true,
+  defaultLang: 'en',
+  useDefaultOverBrowserLang: 'true'
 };

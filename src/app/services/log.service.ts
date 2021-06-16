@@ -7,8 +7,9 @@ Features:
 How to archive? What happens? Difference between values and variants? -> (allow, highlight)
 How should be deleted? -> (warn when references, forbid)
 
-Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal, tooltip settings)
+Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal)
 HUGE refactor: Rename + folder structure
+Localization (figure out angular localization, error codes in backend, put language in docker [environment variable])
 
 
 
@@ -22,10 +23,9 @@ Meaningful errors (e.g. when trying to add impact but there is no value or no st
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
 
 MISC:
-Add keycloak
+Add keycloak (enable/disable with flag in .env docker-compose)
 Add flyway (special migrate test profile in backend)
 Deep copy: copy everything?
-Localization (figure out angular localization, error codes in backend, put language in docker [environment variable])
 
 Backlog:
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??

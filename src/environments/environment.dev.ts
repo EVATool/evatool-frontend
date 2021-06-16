@@ -3,5 +3,7 @@ export const environment = {
   protocol: 'http',
   backendUrl: 'localhost',
   backendPort: '8080',
-  testing: false
+  testing: false,
+  defaultLang: 'en',
+  useDefaultOverBrowserLang: 'true'
 };

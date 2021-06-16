@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {MasterService} from './services/master.service';
 import {TranslateService} from '@ngx-translate/core';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,10 @@ export class AppComponent {
     translate.setDefaultLang('en');
 
     const browserLang = translate.getBrowserLang();
-    const defaultLang = 'en'; // TODO env var
-    const useDefaultOverBrowserLang = false; // TODO env var
+    const defaultLang = environment.defaultLang;
+    const useDefaultOverBrowserLang = environment.useDefaultOverBrowserLang;
 
-    if (useDefaultOverBrowserLang) {
+    if (useDefaultOverBrowserLang === 'true') {
       translate.use(defaultLang);
     } else {
       translate.use(browserLang);
