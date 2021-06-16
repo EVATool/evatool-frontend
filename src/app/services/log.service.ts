@@ -3,20 +3,22 @@ import {environment} from '../../environments/environment';
 
 /*
 Features:
+
+How to archive? What happens? Difference between values and variants? -> (allow, highlight)
+How should be deleted? -> (warn when references, forbid)
+
 Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [styles folder with exports, and then import required stuff (?)]
 HUGE refactor: Rename + folder structure
+
+
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly
-
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder) - HTTP Interceptor (Datenbanki xD) (PWA?)
-
-How to archive? What happens? Difference between values and variants? (highlight)
-How should be cascaded?? (warn when references, forbid)
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
 
 MISC:
