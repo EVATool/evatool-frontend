@@ -17,6 +17,7 @@ import {Impact} from '../../../../../model/Impact';
 export class ValuesTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @Input() valueType!: string;
+  @Input() id = '';
   @Output() userWantsToSeeReferencedImpacts: EventEmitter<Value> = new EventEmitter();
 
   displayedColumns = ['archived', 'name', 'description'];

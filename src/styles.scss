@@ -25,6 +25,9 @@ body {
     background-color: orange;
   }
 
+  ::ng-deep .multi-line-tooltip {
+    white-space: pre-line !important;
+  }
 }
 
 .screen-reader-only {

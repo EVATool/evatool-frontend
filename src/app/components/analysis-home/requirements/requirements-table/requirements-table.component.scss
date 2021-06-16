@@ -1,3 +1,6 @@
+@import "src/styles.scss";
+@include global-theme();
+
 /* Table */
 
 // explicitly set vertical alignment for the whole table to overwrite default browser styling
@@ -168,10 +171,6 @@ td, th, tr {
   top: 125px;
   right: 30px;
   z-index: 10;
-}
-
-::ng-deep .multi-line-tooltip {
-  white-space: pre-line !important;
 }
 
 .delta-cell {

@@ -137,13 +137,19 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
     this.impactDataService.deleteImpact(impact);
   }
 
-  openValueModal(): void {
+  openValueModal(id?: string): void {
     this.logger.info(this, 'Opening Value Modal Dialog');
+
+    if (id === undefined) {
+      id = '';
+    } else {
+
+    }
 
     const dialogRef = this.dialog.open(ValuesDialogComponent, {
       height: '80%',
       width: '50%',
-      data: {parameter: 'I left this here because maybe we will need it c:'}
+      data: {id: id}
     });
 
     dialogRef.afterClosed().subscribe((data) => {

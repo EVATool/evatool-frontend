@@ -62,17 +62,17 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
     this.tableDataSource.sort = this.sort;
   }
 
-  createVariant() {
+  createVariant(): void {
     const variant = this.variantDataService.createDefaultVariant(
       this.analysisDataService.currentAnalysis);
     this.variantDataService.createVariant(variant);
   }
 
-  updateVariant(variant: Variant) {
+  updateVariant(variant: Variant): void {
     this.variantDataService.updateVariant(variant);
   }
 
-  deleteVariant(variant: Variant) {
+  deleteVariant(variant: Variant): void {
     this.variantDataService.deleteVariant(variant);
   }
 }

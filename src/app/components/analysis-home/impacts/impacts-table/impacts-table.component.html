@@ -50,11 +50,11 @@
           </mat-icon>
         </th>
 
-        <td mat-cell
+        <td mat-cell *matCellDef='let impact'
             [ngClass]="{'references-archived' : impact.value.archived}"
             [matTooltipDisabled]="!impact.value.archived"
-            matTooltip="This impact references an archived value"
-            *matCellDef='let impact'>
+            matTooltip="{{'This impact references an archived value' + '&#13;' + 'Double click to open a dialog highlighting it'}}"
+            matTooltipClass="multi-line-tooltip">
           <mat-form-field>
             <mat-select [(ngModel)]="impact.value" (selectionChange)="updateImpact(impact)">
               <mat-select-trigger>
