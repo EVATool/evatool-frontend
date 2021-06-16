@@ -59,24 +59,25 @@ Misc
 /*
 Shell Filter Bar and Main Entity Table
 */
+@mixin entity-shell-theme() {
+  .entity-main-container {
+    display: flex;
+    flex-flow: column;
+    overflow: hidden;
+    height: 85vh; // Setting the height to 100% makes the mat-table vanish. Using flex with a mat-table seems impossible.
 
-.entity-main-container {
-  display: flex;
-  flex-flow: column;
-  overflow: hidden;
-  height: 85vh; // Setting the height to 100% makes the mat-table vanish. Using flex with a mat-table seems impossible.
+    .filter-bar-container {
+      margin: 2%;
+      margin-left: 3%;
+      flex: 0 0 auto;
+      width: 100%;
+    }
 
-  .filter-bar-container {
-    margin: 2%;
-    margin-left: 3%;
-    flex: 0 0 auto;
-    width: 100%;
-  }
-
-  .table-container {
-    margin-left: 5%;
-    margin-right: 3%;
-    flex: 1 1 auto;
+    .table-container {
+      margin-left: 5%;
+      margin-right: 3%;
+      flex: 1 1 auto;
+    }
   }
 }
 
@@ -93,7 +94,7 @@ Entity Main Table
 /*
 Entity Modal
 */
-@mixin entity-modal-theme(){
+@mixin entity-modal-theme() {
   .container {
     display: flex;
     flex-flow: column;
