@@ -32,7 +32,9 @@
               <mat-panel-title>Archive</mat-panel-title>
               <mat-panel-description></mat-panel-description>
             </mat-expansion-panel-header>
-            <app-variants-table [archived]="true"></app-variants-table>
+            <app-variants-table [ids]="ids"
+                                [archived]="true"
+                                (userWantsToSeeReferencedRequirements)="propagateSeeReferences($event)"></app-variants-table>
           </mat-expansion-panel>
         </div>
       </mat-accordion>

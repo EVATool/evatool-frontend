@@ -3,6 +3,8 @@ import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {VariantDataService} from '../../../../services/data/variant-data.service';
 import {LogService} from '../../../../services/log.service';
+import {Value} from '../../../../model/Value';
+import {Variant} from '../../../../model/Variant';
 
 @Component({
   selector: 'app-variants-dialog',
@@ -11,15 +13,23 @@ import {LogService} from '../../../../services/log.service';
 })
 export class VariantsDialogComponent {
 
+  ids!: string[];
+
   constructor(
     private logger: LogService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<VariantsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { id: string },
+    @Inject(MAT_DIALOG_DATA) public data: { ids: string[] },
     public variantDataService: VariantDataService) {
+    this.ids = data.ids;
   }
 
   closeClick(): void {
     this.dialogRef.close();
+  }
+
+  propagateSeeReferences(variant: Variant): void {
+    this.logger.info(this, 'User wants to see the requirements referencing the variant');
+    this.dialogRef.close({showReferencedRequirements: true, variant: variant});
   }
 }

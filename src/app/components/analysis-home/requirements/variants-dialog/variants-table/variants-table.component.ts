@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../../../../../model/Variant';
 import {VariantDataService} from '../../../../../services/data/variant-data.service';
@@ -6,6 +6,8 @@ import {LogService} from '../../../../../services/log.service';
 import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AnalysisDataService} from '../../../../../services/data/analysis-data.service';
+import {RequirementDataService} from '../../../../../services/data/requirement-data.service';
+import {Requirement} from '../../../../../model/Requirement';
 
 @Component({
   selector: 'app-variants-table',
@@ -15,12 +17,14 @@ import {AnalysisDataService} from '../../../../../services/data/analysis-data.se
 export class VariantsTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @Input() archived!: boolean;
-  @Input() id = '';
+  @Input() ids: string[] = [];
+  @Output() userWantsToSeeReferencedRequirements: EventEmitter<Variant> = new EventEmitter();
 
   displayedColumns = ['name', 'description'];
   tableDataSource: MatTableDataSource<Variant> = new MatTableDataSource<Variant>();
 
   constructor(private logger: LogService,
+              private requirementDataService: RequirementDataService,
               public variantDataService: VariantDataService,
               private analysisDataService: AnalysisDataService,
               private snackBar: MatSnackBar) {
@@ -73,6 +77,38 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteVariant(variant: Variant): void {
-    this.variantDataService.deleteVariant(variant);
+    this.logger.info(this, 'Delete Variant');
+    const numRequirementsUseVariant = this.getReferencesRequirements(variant);
+    if (numRequirementsUseVariant > 0) {
+      this.thwartValueOperation(variant, numRequirementsUseVariant);
+    } else {
+      this.variantDataService.deleteVariant(variant);
+    }
+  }
+
+  getReferencesRequirements(variant: Variant): number {
+    let numRequirementsUseVariant = 0;
+    this.requirementDataService.requirements.forEach((requirement: Requirement) => {
+      if (requirement.variants.includes(variant)) {
+        numRequirementsUseVariant++;
+      }
+    });
+    return numRequirementsUseVariant;
+  }
+
+  thwartValueOperation(variant: Variant, numRequirementsUseVariant: number): void {
+    this.logger.warn(this, 'This variant is still being used by ' + numRequirementsUseVariant + ' requirements');
+    const message = 'This variant cannot be deleted. It is still being used by '
+      + numRequirementsUseVariant + ' requirement' + (numRequirementsUseVariant === 1 ? '' : 's') + '.';
+    const action = 'show';
+    const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+    snackBarRef.onAction().subscribe(() => {
+      this.logger.info(this, 'User wants to see the requirements referencing the variant');
+      this.userWantsToSeeReferencedRequirements.emit(variant);
+    });
+  }
+
+  archivedVariantReferenced(variant: Variant): boolean {
+    return this.ids.includes(variant.id);
   }
 }

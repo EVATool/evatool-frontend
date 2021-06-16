@@ -137,8 +137,8 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
     this.impactDataService.deleteImpact(impact);
   }
 
-  openValueModal(id?: string): void {
-    this.logger.info(this, 'Opening Value Modal Dialog');
+  openValuesDialog(id?: string): void {
+    this.logger.info(this, 'Opening Values Dialog');
 
     const dialogRef = this.dialog.open(ValuesDialogComponent, {
       height: '80%',
@@ -147,9 +147,8 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      this.logger.info(this, 'Closing Value Modal Dialog');
+      this.logger.info(this, 'Closing Values Dialog');
 
-      // Highlighting of impacts referencing value.
       if (data?.showReferencedImpacts) {
         this.deletionFlaggedValue = data.value;
         this.impactDataService.impacts.forEach(impact => {

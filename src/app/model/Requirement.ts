@@ -10,4 +10,7 @@ export class Requirement {
 
   analysis!: Analysis;
   variants: Variant[] = [];
+
+  // UI
+  highlighted = false;
 }

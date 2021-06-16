@@ -1,3 +1,7 @@
+@import './src/styles';
+
+@include global-theme();
+
 /* Table */
 
 // explicitly set vertical alignment for the whole table to overwrite default browser styling

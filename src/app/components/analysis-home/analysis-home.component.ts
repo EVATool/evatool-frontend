@@ -18,7 +18,7 @@ export class AnalysisHomeComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (isDevMode()) {
-      this.tabGroup.selectedIndex = 1;
+      this.tabGroup.selectedIndex = 2;
     }
   }
 

@@ -58,6 +58,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   tableDataSource = new MatTableDataSource<Requirement>();
   windowScrolled = false;
   highlightFilter = '';
+  deletionFlaggedVariant!: Variant;
 
   constructor(
     private logger: LogService,
@@ -204,6 +205,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   updateRequirement(requirement: Requirement): void {
+    this.logger.info(this, 'Update Requirement');
+    if (requirement.highlighted) {
+      requirement.highlighted = requirement.variants.includes(this.deletionFlaggedVariant);
+    }
     this.requirementDataService.updateRequirement(requirement);
   }
 
@@ -265,12 +270,37 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openVariantsDialog(): void {
-    const dialogref = this.dialog.open(VariantsDialogComponent, {
+  openVariantsDialog(ids?: string[]): void {
+    this.logger.info(this, 'Opening Variants Dialog');
+
+    const dialogRef = this.dialog.open(VariantsDialogComponent, {
       height: '60%',
       width: '50%',
-      data: {id: ''}
+      data: {ids: ids}
     });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      this.logger.info(this, 'Closing Variants Dialog');
+
+      if (data?.showReferencedRequirements) {
+        this.deletionFlaggedVariant = data.variant;
+        this.requirementDataService.requirements.forEach(requirement => {
+          requirement.highlighted = requirement.variants.includes(data.variant);
+        });
+      }
+    });
+  }
+
+  referencesArchivedVariant(requirement: Requirement): boolean {
+    return this.getReferencedArchivedVariants(requirement).length > 0;
+  }
+
+  getReferencedArchivedVariants(requirement: Requirement): Variant[] {
+    return requirement.variants.filter(v => v.archived);
+  }
+
+  getReferencedArchivedVariantIds(requirement: Requirement): string[] {
+    return this.getReferencedArchivedVariants(requirement).map(v => v.id);
   }
 
   getAffectedValues(requirement: Requirement): string[] {
