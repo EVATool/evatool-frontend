@@ -35,7 +35,6 @@ Sample Data (API calls to backend, separate from deployment!) -> [Create export 
   -> how to deal with keycloak auth?
 Only purge data script (ONLY database with main data, what about flyway?)
 Single user: reload data (how to update references?)
-BUG: horizontal lines between rows randomly went missing (impact and req table, but not in stakeholder table???)
 Multi user: concurrency...
 SonarCloud Status not shown in backend
 make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
