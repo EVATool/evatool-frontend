@@ -57,7 +57,7 @@ Misc
 
 
 /*
-Shell for table and filter bar
+Shell Filter Bar and Main Entity Table
 */
 
 .entity-main-container {
@@ -86,14 +86,37 @@ Filter bar
 
 
 /*
-Main table
+Entity Main Table
 */
 
 
 /*
-Modal
+Entity Modal
 */
+@mixin entity-modal-theme(){
+  .container {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+  }
 
+  .container .title-container {
+    flex: 0 1 auto;
+  }
+
+  .container .expansion-panel-container {
+    flex: 1 1 auto;
+  }
+
+  .container .action-container {
+    flex: 0 1 auto;
+    margin-left: auto;
+  }
+
+  .dialog-close {
+    float: right;
+  }
+}
 
 /*
 Modal table

@@ -1,22 +1,3 @@
-.container {
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-}
+@import "./src/styles.scss";
 
-.container .title-container {
-  flex: 0 1 auto;
-}
-
-.container .expansion-panel-container {
-  flex: 1 1 auto;
-}
-
-.container .action-container {
-  flex: 0 1 auto;
-  margin-left: auto;
-}
-
-.dialog-close {
-  float: right;
-}
+@include entity-modal-theme();
