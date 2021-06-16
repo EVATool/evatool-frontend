@@ -1,10 +1,20 @@
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {FormBuilder} from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {
+  DEFAULT_LANGUAGE,
+  MissingTranslationHandler,
+  TranslateCompiler,
+  TranslateLoader, TranslateModule,
+  TranslateParser,
+  TranslateService,
+  TranslateStore, USE_DEFAULT_LANG, USE_EXTEND, USE_STORE
+} from '@ngx-translate/core';
+import {HttpLoaderFactory} from '../app.module';
 
 export class SpecService {
 
@@ -14,7 +24,14 @@ export class SpecService {
     RouterTestingModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ];
 
   public static readonly providers: any[] = [
@@ -23,7 +40,8 @@ export class SpecService {
     MatDialogModule,
     MatSnackBarModule,
     FormBuilder,
-    MatMenuModule
+    MatMenuModule,
+    TranslateService,
   ];
 
 }

@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {HomeComponent} from './home.component';
 import {SpecService} from '../../services/spec.service';
+import {TranslatePipe} from '@ngx-translate/core';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,9 +12,9 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [ HomeComponent ]
+      declarations: [HomeComponent, TranslatePipe]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
