@@ -43,7 +43,7 @@ import {ValuesTableComponent} from './components/analysis-home/impacts/values-di
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {MatSortModule} from '@angular/material/sort';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions, MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {RequirementsFilterBarComponent} from './components/analysis-home/requirements/requirements-filter-bar/requirements-filter-bar.component';
 import {RequirementsTableComponent} from './components/analysis-home/requirements/requirements-table/requirements-table.component';
@@ -59,8 +59,15 @@ import {PriorityFilterComponent} from './components/priority-filter/priority-fil
 import {PluckPipe} from './pipes/pluck.pipe';
 import {NgVarDirective} from './directives/ng-var.directive';
 // noinspection ES6UnusedImports
-import {} from 'jasmine';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component'; // Because we are using jest and karma + jasmine
+import {} from 'jasmine'; // Because we are using jest and karma + jasmine
+import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
+
+export const customTooltipDefaults: MatTooltipDefaultOptions = {
+  position: 'above',
+  showDelay: 100,
+  hideDelay: 100,
+  touchendHideDelay: 100
+};
 
 @NgModule({
   declarations: [
@@ -128,7 +135,9 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatSnackBarModule,
     MatCheckboxModule,
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: customTooltipDefaults}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

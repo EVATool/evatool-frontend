@@ -5,9 +5,7 @@
     <th scope="col" mat-header-cell *matHeaderCellDef>
       <div [hidden]="true"
            mat-sort-header
-           matTooltip="The value name"
-           matTooltipHideDelay="100"
-           matTooltipPosition="above">
+           matTooltip="The value name">
         Name
       </div>
     </th>
@@ -23,9 +21,7 @@
     <th scope="col" mat-header-cell *matHeaderCellDef>
       <div [hidden]="true"
            mat-sort-header
-           matTooltip="The value description"
-           matTooltipHideDelay="100"
-           matTooltipPosition="above">
+           matTooltip="The value description">
         Description
       </div>
     </th>
@@ -44,9 +40,7 @@
               mat-icon-button
               name="archive"
               (click)="variant.archived=true; updateVariant(variant)"
-              matTooltip="Archive Variant"
-              matTooltipHideDelay="100"
-              matTooltipPosition="above">
+              matTooltip="Archive Variant">
               <mat-icon>archive</mat-icon>
             </button>
           </div>
@@ -56,9 +50,7 @@
               mat-icon-button
               name="unarchive"
               (click)="variant.archived=false; updateVariant(variant)"
-              matTooltip="Un-archive Variant"
-              matTooltipHideDelay="100"
-              matTooltipPosition="above">
+              matTooltip="Un-archive Variant">
               <mat-icon>unarchive</mat-icon>
             </button>
           </div>
@@ -68,9 +60,7 @@
               mat-icon-button
               name="delete"
               (click)="deleteVariant(variant)"
-              matTooltip="Delete Variant"
-              matTooltipHideDelay="100"
-              matTooltipPosition="above">
+              matTooltip="Delete Variant">
               <mat-icon>delete</mat-icon>
             </button>
           </div>

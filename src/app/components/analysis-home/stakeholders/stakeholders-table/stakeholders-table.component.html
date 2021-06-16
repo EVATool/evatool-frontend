@@ -5,7 +5,7 @@
 
       <ng-container matColumnDef='prefixSequenceId'>
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div matTooltip="An artificial ID" matTooltipHideDelay="100" matTooltipPosition="above">ID</div>
+          <div matTooltip="An artificial ID">ID</div>
         </th>
 
         <td mat-cell *matCellDef='let stakeholder'>
@@ -15,7 +15,7 @@
 
       <ng-container matColumnDef='name'>
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div matTooltip="The stakeholder name" matTooltipHideDelay="100" matTooltipPosition="above">
+          <div matTooltip="The stakeholder name">
             Stakeholder
           </div>
         </th>
@@ -29,7 +29,7 @@
 
       <ng-container matColumnDef='level'>
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div matTooltip="The stakeholder level" matTooltipHideDelay="100" matTooltipPosition="above">
+          <div matTooltip="The stakeholder level">
             Level
           </div>
         </th>
@@ -43,7 +43,7 @@
 
       <ng-container matColumnDef='priority'>
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div matTooltip="The stakeholder priority" matTooltipHideDelay="100" matTooltipPosition="above">
+          <div matTooltip="The stakeholder priority">
             Priority
           </div>
         </th>
@@ -56,7 +56,7 @@
 
       <ng-container matColumnDef="impacted">
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div matTooltip="How the stakeholder is impacted" matTooltipHideDelay="100" matTooltipPosition="above">
+          <div matTooltip="How the stakeholder is impacted">
             Impacted
           </div>
         </th>
@@ -67,9 +67,7 @@
               <app-stakeholders-impacted [stakeholderImpacted]="stakeholder.impacted"></app-stakeholders-impacted>
             </div>
             <div class="delete-button-container">
-              <button mat-fab (click)="deleteStakeholder(stakeholder)" matTooltip="Delete Impact"
-                      matTooltipHideDelay="100"
-                      matTooltipPosition="above">
+              <button mat-fab (click)="deleteStakeholder(stakeholder)" matTooltip="Delete Impact">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
