@@ -12,7 +12,7 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [HomeComponent, TranslatePipe]
+      declarations: [HomeComponent]
     })
       .compileComponents();
   });
