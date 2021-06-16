@@ -181,7 +181,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
         const minValue = Math.min(searchTerms.merit.sliderFilterValues[0], searchTerms.merit.sliderFilterValues[1]);
         const maxValue = Math.max(searchTerms.merit.sliderFilterValues[0], searchTerms.merit.sliderFilterValues[1]);
         console.log(searchTerms);
-        if (searchTerms.impact.includes(delta.impact.prefixSequenceId)
+        if (!searchTerms.impact.includes(delta.impact.prefixSequenceId)
           && delta.overwriteMerit !== null
           && !(delta.overwriteMerit >= minValue && delta.overwriteMerit <= maxValue)) {
           meritFilter = false;
