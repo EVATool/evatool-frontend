@@ -12,12 +12,15 @@ import {Value} from '../../../../model/Value';
 })
 export class ValuesDialogComponent {
 
+  id!: string;
+
   constructor(
     private logger: LogService,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ValuesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public valueDataService: ValueDataService) {
+    this.id = data.id;
   }
 
   closeClick(): void {

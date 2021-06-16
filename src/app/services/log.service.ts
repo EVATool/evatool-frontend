@@ -7,7 +7,7 @@ Features:
 How to archive? What happens? Difference between values and variants? -> (allow, highlight)
 How should be deleted? -> (warn when references, forbid)
 
-Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal)
+Unify EVERYTHING (Functions, style, no local shit, scrollbar, move modal height/width to scss of modal) [split into tooltip/table/etc-theme?]
 HUGE refactor: Rename + folder structure
 Localization (figure out angular localization, error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
 

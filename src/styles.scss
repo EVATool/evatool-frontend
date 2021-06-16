@@ -28,6 +28,18 @@ body {
   ::ng-deep .multi-line-tooltip {
     white-space: pre-line !important;
   }
+
+  .dropdown-reference {
+    float: left;
+    width: 85%;
+    margin-right: -15px;
+  }
+
+  .warning-icon-button {
+    margin-right: -15px;
+    margin-top: 9px;
+    float: right;
+  }
 }
 
 .screen-reader-only {
