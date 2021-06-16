@@ -1,11 +1,7 @@
 @import '~@angular/material/theming'; // This has to stay at the top of the file.
 @include mat-core();
 
-
-/*
-Global Style
-*/
-
+// Global Style
 html, body {
   height: 100%;
 }
@@ -31,9 +27,7 @@ body {
 @import "app/layout/style/resets";
 @include reset-style();
 
-/*
-Misc
-*/
+// Misc
 @mixin misc-theme() {
   .highlight {
     background-color: yellow;
@@ -60,9 +54,7 @@ Misc
   }
 }
 
-/*
-Shell Filter Bar and Main Entity Table
-*/
+// Shell Filter Bar and Main Entity Table
 @mixin entity-shell-theme() {
   .entity-main-container {
     display: flex;
@@ -85,10 +77,8 @@ Shell Filter Bar and Main Entity Table
   }
 }
 
-/*
-Filter bar
-*/
-@mixin filter-bar-theme(){
+// Filter bar
+@mixin filter-bar-theme() {
   mat-list.list-horizontal {
     .mat-list-item {
       vertical-align: bottom;
@@ -121,14 +111,129 @@ Filter bar
   }
 }
 
-/*
-Entity Main Table
-*/
+// Entity Main Table
+@mixin main-table-theme() {
+  /* Table */
 
+  // explicitly set vertical alignment for the whole table to overwrite default browser styling
+  // (see https://stackoverflow.com/questions/28109062/cancel-vertical-align-property for more information)
+  thead, tbody, tfoot {
+    vertical-align: middle
+  }
 
-/*
-Entity Modal
-*/
+  td, th, tr {
+    vertical-align: middle
+  }
+
+  .table-container {
+    overflow: hidden;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+
+    mat-table {
+      flex: 1 1 auto;
+    }
+  }
+
+  .mat-table {
+    width: 100%;
+    height: 80px;
+
+    &.resizing {
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: col-resize;
+    }
+
+    .mat-cell {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mat-cell:last-child, .mat-header-cell:last-child {
+      border-right: 0 solid rgba(0, 0, 0, 0.12);
+    }
+
+    .mat-cell, .mat-header-cell {
+      border-right: 1px solid rgba(0, 0, 0, 0.12);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+      &:not(:nth-child(1)) {
+        padding: 0 10px;
+      }
+    }
+
+    .mat-header-cell {
+      position: relative;
+      border-right: 0 solid rgba(0, 0, 0, 0.12);
+      border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+
+      &:not(:last-child) {
+        .resize-holder {
+          cursor: col-resize;
+          width: 20px;
+          height: 100%;
+          position: absolute;
+          right: -10px;
+          top: 0;
+          z-index: 100;
+        }
+      }
+    }
+  }
+
+  .mat-list.list-horizontal {
+    .mat-list-item {
+      vertical-align: middle;
+      display: inline-block;
+      height: auto;
+      width: auto;
+    }
+  }
+
+  .scroll-to-top-button {
+    position: fixed;
+    top: 125px;
+    right: 30px;
+    z-index: 10;
+  }
+
+  .add-entity-button {
+    margin-bottom: 25px;
+    margin-top: 5px;
+    margin-left: 5px;
+    display: inline-block;
+  }
+
+  .delete-button-container {
+    display: table-cell;
+    opacity: 0;
+    vertical-align: middle;
+    text-align: right;
+    transition: 250ms ease-out 100ms;
+    padding-right: 20px;
+  }
+
+  .delete-button-container:focus-within,
+  .delete-button-container:hover {
+    opacity: 1 !important;
+    transition: 250ms ease-out 100ms;
+  }
+
+  .mat-row:hover .delete-button-container {
+    opacity: 0.2;
+    transition: 250ms ease-out 100ms;
+  }
+
+  .mat-row:focus-within .delete-button-container {
+    opacity: 0.5;
+    transition: 250ms ease-out 100ms;
+  }
+}
+
+// Entity Modal
 @mixin entity-modal-theme() {
   .container {
     display: flex;
@@ -154,9 +259,7 @@ Entity Modal
   }
 }
 
-/*
-Modal table
-*/
+// Modal table
 @mixin modal-table-theme() {
   table {
     width: 100%;
