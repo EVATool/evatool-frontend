@@ -14,9 +14,12 @@ body {
 @include stakeholder-impact-slider-theme();
 
 @import "app/layout/style/resets";
-@include resetStyle();
+@include reset-style();
 
-@mixin global-theme() {
+/*
+Misc
+*/
+@mixin misc-theme() {
   .highlight {
     background-color: yellow;
   }
@@ -52,8 +55,9 @@ body {
   overflow: hidden;
 }
 
+
 /*
-Main shell for table and filter bar
+Shell for table and filter bar
 */
 
 .entity-main-container {
@@ -82,7 +86,17 @@ Filter bar
 
 
 /*
-Entity table
+Main table
+*/
+
+
+/*
+Modal
+*/
+
+
+/*
+Modal table
 */
 
 
