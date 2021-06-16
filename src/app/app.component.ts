@@ -10,8 +10,6 @@ import {Title} from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = '';
-
   constructor(private titleService: Title,
               private master: MasterService,
               public translate: TranslateService) {
