@@ -12,13 +12,14 @@ body {
 
 @import 'app/components/analysis-home/stakeholders/stakeholders-impacted/stakeholders-impacted.component';
 @include stakeholder-impact-slider-theme();
-@include stakeholder-impact-slider-theme();
 
 @import "app/layout/style/resets";
 @include resetStyle();
 
-.highlight {
-  background-color: yellow;
+@mixin global-theme() {
+  .highlight {
+    background-color: yellow;
+  }
 }
 
 .screen-reader-only {

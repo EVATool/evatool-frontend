@@ -43,21 +43,27 @@
 
       <ng-container matColumnDef='value'>
         <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
-          <div matTooltip="The value affecting the stakeholder" matTooltipHideDelay="100" matTooltipPosition="above">
+          <div>
             Value
           </div>
           <mat-icon id="value-modal" (click)="$event.stopPropagation(); openValueModal();">info
           </mat-icon>
         </th>
 
-        <td mat-cell *matCellDef='let impact'>
+        <td mat-cell
+            [ngClass]="{'references-archived' : impact.value.archived}"
+            [matTooltipDisabled]="!impact.value.archived"
+            matTooltip="This impact references an archived value"
+            matTooltipHideDelay="100"
+            matTooltipPosition="above"
+            *matCellDef='let impact'>
           <mat-form-field>
             <mat-select [(ngModel)]="impact.value" (selectionChange)="updateImpact(impact)">
               <mat-select-trigger>
                 <div [innerHTML]="impact.value.name | highlightSearch: highlightFilter"></div>
               </mat-select-trigger>
               <ng-container *ngFor="let val of valueDataService.values">
-                <mat-option *ngIf="!val.archived"
+                <mat-option *ngIf="!val.archived || impact.value === val"
                             [value]="val">
                   {{val.name}}
                 </mat-option>
@@ -106,7 +112,7 @@
       </ng-container>
 
       <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight' : row.highlighted}"></tr>
     </table>
   </ng-scrollbar>
 

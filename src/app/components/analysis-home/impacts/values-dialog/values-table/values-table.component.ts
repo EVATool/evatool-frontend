@@ -81,13 +81,8 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
   }
 
   toggleValueArchived(event: Event, value: Value): void {
-    const numImpactsUseValue = this.getReferencesImpacts(value);
-    if (numImpactsUseValue > 0) {
-      this.thwartValueOperation(value, numImpactsUseValue);
-    } else {
-      value.archived = !value.archived;
-      this.updateValue(value);
-    }
+    value.archived = !value.archived;
+    this.updateValue(value);
   }
 
   getReferencesImpacts(value: Value): number {
@@ -102,7 +97,7 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
 
   thwartValueOperation(value: Value, numImpactsUseValue: number): void {
     this.logger.warn(this, 'This value is still being used by ' + numImpactsUseValue + ' impacts');
-    const message = 'This value cannot be excluded from the available selection. It is still being used by '
+    const message = 'This value cannot be deleted. It is still being used by '
       + numImpactsUseValue + ' impact' + (numImpactsUseValue === 1 ? '' : 's') + '.';
     const action = 'show';
     const snackBarRef = this.snackBar.open(message, action, {duration: 5000});

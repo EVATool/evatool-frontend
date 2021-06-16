@@ -10,9 +10,10 @@ import {StakeholderDataService} from '../../../../services/data/stakeholder-data
 import {AnalysisDataService} from '../../../../services/data/analysis-data.service';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {SliderFilterBoundary, SliderFilterSettings, SliderFilterType} from '../../../impact-slider/SliderFilterSettings';
+import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
 import {ImpactTableFilterEvent} from '../impacts-filter-bar/ImpactTableFilterEvent';
 import {ValuesDialogComponent} from '../values-dialog/values-dialog.component';
+import {Value} from '../../../../model/Value';
 
 @Component({
   selector: 'app-impacts-table',
@@ -28,6 +29,7 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
   tableDataSource = new MatTableDataSource<Impact>();
   windowScrolled = false;
   highlightFilter = '';
+  deletionFlaggedValue!: Value;
 
   constructor(
     private logger: LogService,
@@ -124,6 +126,9 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
 
   updateImpact(impact: Impact): void {
     this.logger.info(this, 'Update Impact');
+    if (impact.highlighted) {
+      impact.highlighted = impact.value === this.deletionFlaggedValue;
+    }
     this.impactDataService.updateImpact(impact);
   }
 
@@ -146,8 +151,9 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
 
       // Highlighting of impacts referencing value.
       if (data?.showReferencedImpacts) {
+        this.deletionFlaggedValue = data.value;
         this.impactDataService.impacts.forEach(impact => {
-          impact.highlight = impact.value === data.value;
+          impact.highlighted = impact.value === data.value;
         });
       }
     });

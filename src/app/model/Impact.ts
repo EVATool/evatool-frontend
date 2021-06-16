@@ -14,4 +14,7 @@ export class Impact {
   analysis !: Analysis;
   value!: Value;
   stakeholder!: Stakeholder;
+
+  // UI
+  highlighted = false;
 }
