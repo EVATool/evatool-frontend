@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttpInfo, HttpEventType} from '../../services/HttpInfo';
+import {HttpInfo, HttpInfoType} from '../../services/HttpInfo';
 
 @Component({
   selector: 'app-http-loader',
@@ -31,7 +31,7 @@ export class HttpLoaderComponent implements OnInit {
       this.logger.debug(this, 'There are NO active http requests');
       this.loadingSpinnerShown = false;
 
-      if (lastHttpEvent.type === HttpEventType.Complete) {
+      if (lastHttpEvent.type === HttpInfoType.Complete) {
         this.successIconShown = true;
 
         const interval = setTimeout(() => {

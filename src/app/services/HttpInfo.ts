@@ -1,12 +1,12 @@
 export class HttpInfo {
 
   timestamp = 0;
-  type!: HttpEventType;
+  type!: HttpInfoType;
   message = '';
 
 }
 
-export enum HttpEventType {
+export enum HttpInfoType {
   Next = 0,
   Error = 1,
   Complete = 2

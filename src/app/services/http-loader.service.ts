@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {LogService} from './log.service';
-import {HttpInfo, HttpEventType} from './HttpInfo';
+import {HttpInfo, HttpInfoType} from './HttpInfo';
 import {HttpRequest} from '@angular/common/http';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class HttpLoaderService {
 
   next(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http request started.');
-    const httpInfo = this.buildHttpInfo(request, HttpEventType.Next);
+    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Next);
     this.httpNext.emit(httpInfo);
     this.httpRequest(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
@@ -30,7 +30,7 @@ export class HttpLoaderService {
 
   error(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http response failed.');
-    const httpInfo = this.buildHttpInfo(request, HttpEventType.Error);
+    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error);
     this.httpError.emit(httpInfo);
     this.httpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
@@ -38,7 +38,7 @@ export class HttpLoaderService {
 
   complete(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http response was successful.');
-    const httpInfo = this.buildHttpInfo(request, HttpEventType.Complete);
+    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Complete);
     this.httpComplete.emit(httpInfo);
     this.httpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
@@ -69,7 +69,7 @@ export class HttpLoaderService {
     }
   }
 
-  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpEventType): HttpInfo {
+  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpInfoType): HttpInfo {
     const httpInfo = new HttpInfo();
     httpInfo.message = '';
     httpInfo.timestamp = Date.now().valueOf();

@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 HUGE refactor: Rename + folder structure
-Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder) - HTTP Interceptor (Datenbanki xD) (PWA?) [delete is forbidden in frontend, should get error from backend and display that in UI]
+Meaningful errors (get ErrorMessage with errorCode, e.g. when trying to add impact but there is no value or no stakeholder) - (PWA?) [delete is forbidden in frontend, should get error from backend and display that in UI]
 Localization (error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
 Http interceptor and loader (forward error code from backend to localized error message in snackBar, Event log in loader UI, )
 
