@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {retry, tap} from 'rxjs/operators';
 import {LogService} from './log.service';
@@ -9,6 +9,9 @@ import {HttpLoaderService} from './http-loader.service';
   providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
+  @Output() httpNext: EventEmitter<HttpRequest<any>> = new EventEmitter();
+  @Output() httpError: EventEmitter<HttpRequest<any>> = new EventEmitter();
+  @Output() httpComplete: EventEmitter<HttpRequest<any>> = new EventEmitter();
 
   private retryCount = 2;
 
@@ -24,9 +27,9 @@ export class HttpInterceptorService implements HttpInterceptor {
           // Request.
           (data: any) => {
             this.logger.info(this, 'NEXT');
-            if (!request.url.includes('/i18n/')) {
-              this.httpLoader.next();
-            }
+            //if (!request.url.includes('/i18n/')) {
+              this.httpLoader.next(request);
+            //}
           },
           // Response error.
           (error: HttpErrorResponse) => {
@@ -39,13 +42,13 @@ export class HttpInterceptorService implements HttpInterceptor {
               errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
             }
             this.logger.error(this, errorMsg);
-            this.httpLoader.error();
+            this.httpLoader.error(request);
             return throwError(errorMsg);
           },
           // Response complete.
           () => {
             this.logger.info(this, 'COMPLETE');
-            this.httpLoader.complete();
+            this.httpLoader.complete(request);
           })
       );
   }

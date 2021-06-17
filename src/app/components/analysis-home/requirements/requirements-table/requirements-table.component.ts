@@ -180,7 +180,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       let meritFilter = true;
       const deltas = this.getRequirementDeltas(data);
       deltas.forEach((delta: RequirementDelta) => {
-        console.log(searchTerms);
         if (!searchTerms.impact.includes(delta.impact.prefixSequenceId)
           && delta.overwriteMerit !== null
           && !SliderFilterSettings.filter(searchTerms.merit, delta.overwriteMerit)) {
