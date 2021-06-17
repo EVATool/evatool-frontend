@@ -10,7 +10,7 @@ import {HomeComponent} from './components/home/home.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AnalysisTileComponent} from './components/home/analysis-tile/analysis-tile.component';
 import {AnalysisHomeComponent} from './components/analysis-home/analysis-home.component';
@@ -63,6 +63,7 @@ import {} from 'jasmine'; // Because we are using jest and karma + jasmine
 import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpInterceptorService} from './services/http-interceptor.service';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -74,6 +75,7 @@ export const customTooltipDefaults: MatTooltipDefaultOptions = {
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -139,7 +141,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatTooltipModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    TranslateModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -149,7 +150,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
   ],
   providers: [
-    {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: customTooltipDefaults}
+    {
+      provide: MAT_TOOLTIP_DEFAULT_OPTIONS,
+      useValue: customTooltipDefaults
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

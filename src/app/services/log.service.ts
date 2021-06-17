@@ -6,6 +6,7 @@ Features:
 
 HUGE refactor: Rename + folder structure
 HTTP interceptor
+Show success/failure of http requests (possibility to repeat failed requests, and see log of requests)
 Localization (error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
 
 
