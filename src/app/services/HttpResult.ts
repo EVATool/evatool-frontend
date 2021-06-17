@@ -1,6 +1,6 @@
-export class HttpEvent {
+export class HttpResult {
 
-  timestamp = '';
+  timestamp = 0;
   type!: HttpEventType;
   message = '';
 

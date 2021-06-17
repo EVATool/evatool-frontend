@@ -1,21 +1,20 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {LogService} from './log.service';
-import {HttpEvent, HttpEventType} from './HttpEvent';
+import {HttpResult, HttpEventType} from './HttpResult';
 import {HttpRequest} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpLoaderService {
-  @Output() httpNext: EventEmitter<HttpEvent> = new EventEmitter();
-  @Output() httpError: EventEmitter<HttpEvent> = new EventEmitter();
-  @Output() httpComplete: EventEmitter<HttpEvent> = new EventEmitter();
+  @Output() httpNext: EventEmitter<HttpResult> = new EventEmitter();
+  @Output() httpError: EventEmitter<HttpResult> = new EventEmitter();
+  @Output() httpComplete: EventEmitter<HttpResult> = new EventEmitter();
   @Output() numHttpChanges: EventEmitter<number> = new EventEmitter();
   @Output() httpActive: EventEmitter<void> = new EventEmitter();
-  @Output() httpNotActive: EventEmitter<HttpEvent> = new EventEmitter();
+  @Output() httpNotActive: EventEmitter<HttpResult> = new EventEmitter();
 
   numHttp = 0;
-  httpEvents: HttpEvent[] = [];
   private activeRequests: HttpRequest<any>[] = [];
 
   constructor(private logger: LogService) {
@@ -23,7 +22,7 @@ export class HttpLoaderService {
 
   next(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http request started.');
-    const httpEvent = this.ackHttpEvent(request, HttpEventType.Next);
+    const httpEvent = this.buildHttpResult(request, HttpEventType.Next);
     this.httpNext.emit(httpEvent);
     this.httpRequest(request, httpEvent);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
@@ -31,7 +30,7 @@ export class HttpLoaderService {
 
   error(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http response failed.');
-    const httpEvent = this.ackHttpEvent(request, HttpEventType.Error);
+    const httpEvent = this.buildHttpResult(request, HttpEventType.Error);
     this.httpError.emit(httpEvent);
     this.httpResponse(request, httpEvent);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
@@ -39,13 +38,13 @@ export class HttpLoaderService {
 
   complete(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http response was successful.');
-    const httpEvent = this.ackHttpEvent(request, HttpEventType.Complete);
+    const httpEvent = this.buildHttpResult(request, HttpEventType.Complete);
     this.httpComplete.emit(httpEvent);
     this.httpResponse(request, httpEvent);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
-  private httpRequest(request: HttpRequest<any>, httpEvent: HttpEvent): void {
+  private httpRequest(request: HttpRequest<any>, httpEvent: HttpResult): void {
     if (!this.activeRequests.includes(request)) {
       this.activeRequests.push(request);
 
@@ -57,7 +56,7 @@ export class HttpLoaderService {
     }
   }
 
-  private httpResponse(request: HttpRequest<any>, httpEvent: HttpEvent): void {
+  private httpResponse(request: HttpRequest<any>, httpEvent: HttpResult): void {
     if (this.activeRequests.includes(request)) {
       const index: number = this.activeRequests.indexOf(request, 0);
       this.activeRequests.splice(index, 1);
@@ -70,12 +69,11 @@ export class HttpLoaderService {
     }
   }
 
-  private ackHttpEvent(request: HttpRequest<any>, httpEventType: HttpEventType): HttpEvent {
-    const httpEvent = new HttpEvent();
+  private buildHttpResult(request: HttpRequest<any>, httpEventType: HttpEventType): HttpResult {
+    const httpEvent = new HttpResult();
     httpEvent.message = '';
-    httpEvent.timestamp = Date.now().toPrecision();
+    httpEvent.timestamp = Date.now().valueOf();
     httpEvent.type = httpEventType;
-    this.httpEvents.push(httpEvent);
     return httpEvent;
   }
 }

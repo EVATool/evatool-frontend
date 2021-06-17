@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttpEvent, HttpEventType} from '../../services/HttpEvent';
+import {HttpResult, HttpEventType} from '../../services/HttpResult';
 
 @Component({
   selector: 'app-http-loader',
@@ -12,7 +12,7 @@ import {HttpEvent, HttpEventType} from '../../services/HttpEvent';
 export class HttpLoaderComponent implements OnInit {
 
   loadingSpinnerShown = false;
-  snackBarCurrentlyShown = false;
+  snackBarShown = false;
   successIconShown = false;
 
   constructor(private logger: LogService,
@@ -27,7 +27,7 @@ export class HttpLoaderComponent implements OnInit {
       this.loadingSpinnerShown = true;
     });
 
-    this.httpLoaderService.httpNotActive.subscribe((lastHttpEvent: HttpEvent) => {
+    this.httpLoaderService.httpNotActive.subscribe((lastHttpEvent: HttpResult) => {
       this.logger.debug(this, 'There are NO active http requests');
       this.loadingSpinnerShown = false;
 
@@ -40,15 +40,15 @@ export class HttpLoaderComponent implements OnInit {
       }
     });
 
-    this.httpLoaderService.httpError.subscribe((httpEvent: HttpEvent) => {
-      if (!this.snackBarCurrentlyShown) {
-        this.snackBarCurrentlyShown = true;
+    this.httpLoaderService.httpError.subscribe((httpEvent: HttpResult) => {
+      if (!this.snackBarShown) {
+        this.snackBarShown = true;
         const message = 'An http request failed';
         const action = '';
         const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
         snackBarRef.afterDismissed().subscribe(() => {
           console.log('closing http error snackbar...');
-          this.snackBarCurrentlyShown = false;
+          this.snackBarShown = false;
         });
       }
     });
