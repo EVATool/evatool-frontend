@@ -60,10 +60,11 @@ import {PluckPipe} from './pipes/pluck.pipe';
 import {NgVarDirective} from './directives/ng-var.directive';
 // noinspection ES6UnusedImports
 import {} from 'jasmine'; // Because we are using jest and karma + jasmine
-import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from './components/confirmation-dialog/confirmation-dialog.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpInterceptorService} from './services/http-interceptor.service';
+import { HttpLoaderComponent } from './components/http-loader/http-loader.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -117,6 +118,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ImpactedFilterComponent,
     PriorityFilterComponent,
     ConfirmationDialogComponent,
+    HttpLoaderComponent,
   ],
   imports: [
     BrowserModule,

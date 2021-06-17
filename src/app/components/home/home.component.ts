@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from './analysis-dialog/analysis-dialog.component';
-import {ConfirmationDialogComponent} from '../../confirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-home',

@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ConfirmationDialogComponent} from './confirmation-dialog.component';
-import {SpecService} from '../services/spec.service';
+import {SpecService} from '../../services/spec.service';
 import {MatDialogRef} from '@angular/material/dialog';
 
 describe('ConfirmationDialogComponent', () => {
