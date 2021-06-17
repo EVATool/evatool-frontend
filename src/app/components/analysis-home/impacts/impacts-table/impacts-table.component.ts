@@ -117,6 +117,15 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
   }
 
   createImpact(): void {
+    if (this.stakeholderDataService.stakeholders.length === 0) {
+      const message = 'There must be at least one stakeholder for an impact to exist';
+      const action = '';
+      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+    } else if (this.valueDataService.values.length === 0) {
+      const message = 'There must be at least one value for an impact to exist';
+      const action = '';
+      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+    }
     const impact = this.impactDataService.createDefaultImpact(
       this.analysisDataService.currentAnalysis,
       this.stakeholderDataService.stakeholders[0],

@@ -5,21 +5,16 @@ import {environment} from '../../environments/environment';
 Features:
 
 Http interceptor and loader (Meaningful errors from error codes from backend)
-  - (value and variant -> functional error)
-  - (impact with null child -> functional error)
-  - (get ErrorMessage with errorCode, e.g. when trying to add impact but there is no value or no stakeholder)
-  - (Analysis template not selected)
+  - (value, variant, stakeholder, impact -> functional error)
 Localization (change lang in frontend [localStorage])
 HUGE refactor: Rename + folder structure
-
-
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly (mapper functions with source target)
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
-Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
+Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses, dialog: ensure template selected + textfields not empty
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
 Delta: Load color for deltas as discrete lookup from backend (like values.types)? This makes the colors available in test mode
 
