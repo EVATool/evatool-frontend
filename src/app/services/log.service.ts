@@ -20,6 +20,7 @@ Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
 Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder) - HTTP Interceptor (Datenbanki xD) (PWA?) [delete is forbidden in frontend, should get error from backend and display that in UI]
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
+Delta: Load color for deltas as discrete lookup from backend (like values.types)? This makes the colors available in test mode
 
 MISC:
 Add keycloak (enable/disable with flag in .env docker-compose)
