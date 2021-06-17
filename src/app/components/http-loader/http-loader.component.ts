@@ -41,7 +41,7 @@ export class HttpLoaderComponent implements OnInit {
     });
 
     this.httpLoaderService.httpError.subscribe((httpInfo: HttpInfo) => {
-      if (!this.snackBarShown) {
+      if (!httpInfo.functionalErrorCode && !this.snackBarShown) {
         this.snackBarShown = true;
         const message = 'An http request failed';
         const action = '';

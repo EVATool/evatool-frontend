@@ -10,7 +10,6 @@ export class HttpLoaderService {
   @Output() httpNext: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() httpError: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() httpComplete: EventEmitter<HttpInfo> = new EventEmitter();
-  @Output() functionalErrorCode: EventEmitter<number> = new EventEmitter();
   @Output() numHttpChanges: EventEmitter<number> = new EventEmitter();
   @Output() httpActive: EventEmitter<void> = new EventEmitter();
   @Output() httpNotActive: EventEmitter<HttpInfo> = new EventEmitter();

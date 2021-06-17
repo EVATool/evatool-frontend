@@ -4,10 +4,13 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
+Http interceptor and loader (Meaningful errors from error codes from backend)
+  - (value and variant -> functional error)
+  - (impact with null child -> functional error)
+  - (get ErrorMessage with errorCode, e.g. when trying to add impact but there is no value or no stakeholder)
+  - (Analysis template not selected)
+Localization (change lang in frontend [localStorage])
 HUGE refactor: Rename + folder structure
-Meaningful errors (get ErrorMessage with errorCode, e.g. when trying to add impact but there is no value or no stakeholder) - (PWA?) [delete is forbidden in frontend, should get error from backend and display that in UI]
-Localization (error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
-Http interceptor and loader (forward error code from backend to localized error message in snackBar, Event log in loader UI, )
 
 
 
@@ -36,7 +39,7 @@ Sample Data (API calls to backend, separate from deployment!) -> [Create export 
   -> how to deal with keycloak auth?
 Only purge data script (ONLY database with main data, what about flyway?)
 Single user: reload data (how to update references?)
-Multi user: concurrency...
+Multi user: concurrency... (PWA?)
 SonarCloud Status not shown in backend
 make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
 Angular e2e tests
