@@ -43,7 +43,7 @@ export class HttpLoaderComponent implements OnInit {
     this.httpLoaderService.httpError.subscribe((httpEvent: HttpEvent) => {
       if (!this.snackBarCurrentlyShown) {
         this.snackBarCurrentlyShown = true;
-        const message = 'An http request failed :c';
+        const message = 'An http request failed';
         const action = '';
         const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
         snackBarRef.afterDismissed().subscribe(() => {
