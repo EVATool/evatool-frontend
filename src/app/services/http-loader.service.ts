@@ -10,6 +10,7 @@ export class HttpLoaderService {
   @Output() httpNext: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() httpError: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() httpComplete: EventEmitter<HttpInfo> = new EventEmitter();
+  @Output() functionalErrorCode: EventEmitter<number> = new EventEmitter();
   @Output() numHttpChanges: EventEmitter<number> = new EventEmitter();
   @Output() httpActive: EventEmitter<void> = new EventEmitter();
   @Output() httpNotActive: EventEmitter<HttpInfo> = new EventEmitter();
@@ -28,9 +29,9 @@ export class HttpLoaderService {
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
-  error(request: HttpRequest<any>): void {
+  error(request: HttpRequest<any>, functionalErrorCode: number): void {
     this.logger.info(this, 'An http response failed.');
-    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error);
+    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error, functionalErrorCode);
     this.httpError.emit(httpInfo);
     this.httpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
@@ -69,11 +70,11 @@ export class HttpLoaderService {
     }
   }
 
-  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpInfoType): HttpInfo {
+  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpInfoType, functionalErrorCode?: number): HttpInfo {
     const httpInfo = new HttpInfo();
-    httpInfo.message = '';
     httpInfo.timestamp = Date.now().valueOf();
     httpInfo.type = httpInfoType;
+    httpInfo.functionalErrorCode = functionalErrorCode;
     return httpInfo;
   }
 }

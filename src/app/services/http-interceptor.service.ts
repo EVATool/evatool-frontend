@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {LogService} from './log.service';
@@ -32,15 +32,19 @@ export class HttpInterceptorService implements HttpInterceptor {
           // Response error.
           (error: HttpErrorResponse) => {
             let errorMsg = '';
+            let functionalErrorCode = null;
             if (error.error instanceof ErrorEvent) {
               this.logger.error(this, 'ERROR: This is a client side error');
               errorMsg = `Error: ${error.error.message}`;
             } else {
+              if (error.error.functionalErrorCode) {
+                functionalErrorCode = error.error.functionalErrorCode;
+              }
               this.logger.error(this, 'ERROR: This is a server side error');
               errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
             }
             this.logger.error(this, errorMsg);
-            this.httpLoader.error(request);
+            this.httpLoader.error(request, functionalErrorCode);
             return throwError(errorMsg);
           },
           // Response complete.

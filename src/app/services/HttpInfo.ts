@@ -2,7 +2,7 @@ export class HttpInfo {
 
   timestamp = 0;
   type!: HttpInfoType;
-  message = '';
+  functionalErrorCode?: number;
 
 }
 
