@@ -21,7 +21,7 @@ export class AnalysisRestService extends RestService {
     const url = this.analysesUrl + '/' + id;
     this.logger.info(this, 'Http get to: ' + url);
     if (this.testing) {
-      return of(this.sampleData.analysesDtoList[0]);
+      return of(this.sampleData.analysesDtoList[+id - 1]);
     } else {
       return this.http.get<AnalysisDto>(url, this.httpOptions);
     }
