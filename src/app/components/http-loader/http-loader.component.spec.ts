@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HttpLoaderComponent } from './http-loader.component';
+import {HttpLoaderComponent} from './http-loader.component';
 
 describe('HttpLoaderComponent', () => {
   let component: HttpLoaderComponent;

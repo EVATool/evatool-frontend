@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {retry, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {LogService} from './log.service';
 import {HttpLoaderService} from './http-loader.service';
 
@@ -27,9 +27,7 @@ export class HttpInterceptorService implements HttpInterceptor {
           // Request.
           (data: any) => {
             this.logger.info(this, 'NEXT');
-            //if (!request.url.includes('/i18n/')) {
-              this.httpLoader.next(request);
-            //}
+            this.httpLoader.next(request);
           },
           // Response error.
           (error: HttpErrorResponse) => {

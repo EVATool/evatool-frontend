@@ -3,7 +3,6 @@ import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {VariantDataService} from '../../../../services/data/variant-data.service';
 import {LogService} from '../../../../services/log.service';
-import {Value} from '../../../../model/Value';
 import {Variant} from '../../../../model/Variant';
 
 @Component({

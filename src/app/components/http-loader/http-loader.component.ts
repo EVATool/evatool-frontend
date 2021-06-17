@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttpEvent} from '../../services/HttpEvent';
+import {HttpEvent, HttpEventType} from '../../services/HttpEvent';
 
 @Component({
   selector: 'app-http-loader',
@@ -11,8 +11,9 @@ import {HttpEvent} from '../../services/HttpEvent';
 })
 export class HttpLoaderComponent implements OnInit {
 
-  loading = false;
+  loadingSpinnerShown = false;
   snackBarCurrentlyShown = false;
+  successIconShown = false;
 
   constructor(private logger: LogService,
               private httpLoaderService: HttpLoaderService,
@@ -22,16 +23,21 @@ export class HttpLoaderComponent implements OnInit {
   ngOnInit(): void {
     this.httpLoaderService.httpActive.subscribe(() => {
       this.logger.debug(this, 'There are active http requests');
-      this.loading = true;
+      this.successIconShown = false;
+      this.loadingSpinnerShown = true;
     });
 
-    this.httpLoaderService.httpNotActive.subscribe(() => {
+    this.httpLoaderService.httpNotActive.subscribe((lastHttpEvent: HttpEvent) => {
       this.logger.debug(this, 'There are NO active http requests');
-      this.loading = false;
-    });
+      this.loadingSpinnerShown = false;
 
-    this.httpLoaderService.httpComplete.subscribe((httpEvent: HttpEvent) => {
+      if (lastHttpEvent.type === HttpEventType.Complete) {
+        this.successIconShown = true;
 
+        const interval = setTimeout(() => {
+          this.successIconShown = false;
+        }, 1000);
+      }
     });
 
     this.httpLoaderService.httpError.subscribe((httpEvent: HttpEvent) => {

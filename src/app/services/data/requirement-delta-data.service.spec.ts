@@ -5,8 +5,6 @@ import {SpecService} from '../spec.service';
 import {RequirementDelta} from '../../model/RequirementDelta';
 import {SampleDataService} from '../sample-data.service';
 import {MasterService} from '../master.service';
-import {Impact} from '../../model/Impact';
-import {Requirement} from '../../model/Requirement';
 
 describe('RequirementDeltaDeltaDataService', () => {
   let service: RequirementDeltaDataService;

@@ -1,7 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {LogService} from './log.service';
-import {Variant} from '../model/Variant';
-import {HttpEvent} from './HttpEvent';
+import {HttpEvent, HttpEventType} from './HttpEvent';
 import {HttpRequest} from '@angular/common/http';
 
 @Injectable({
@@ -13,39 +12,40 @@ export class HttpLoaderService {
   @Output() httpComplete: EventEmitter<HttpEvent> = new EventEmitter();
   @Output() numHttpChanges: EventEmitter<number> = new EventEmitter();
   @Output() httpActive: EventEmitter<void> = new EventEmitter();
-  @Output() httpNotActive: EventEmitter<void> = new EventEmitter();
+  @Output() httpNotActive: EventEmitter<HttpEvent> = new EventEmitter();
 
-  private numHttp = 0;
+  numHttp = 0;
   httpEvents: HttpEvent[] = [];
   private activeRequests: HttpRequest<any>[] = [];
 
   constructor(private logger: LogService) {
-    // TODO use semaphores?
-    // TODO does this increment/decrement of numHttp suffice? There is already a workaround with 'i18n'
   }
 
   next(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http request started.');
-    this.httpNext.emit(this.ackHttpEvent(request));
-    this.httpRequest(request);
+    const httpEvent = this.ackHttpEvent(request, HttpEventType.Next);
+    this.httpNext.emit(httpEvent);
+    this.httpRequest(request, httpEvent);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
   error(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http response failed.');
-    this.httpError.emit(this.ackHttpEvent(request));
-    this.httpResponse(request);
+    const httpEvent = this.ackHttpEvent(request, HttpEventType.Error);
+    this.httpError.emit(httpEvent);
+    this.httpResponse(request, httpEvent);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
   complete(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http response was successful.');
-    this.httpComplete.emit(this.ackHttpEvent(request));
-    this.httpResponse(request);
+    const httpEvent = this.ackHttpEvent(request, HttpEventType.Complete);
+    this.httpComplete.emit(httpEvent);
+    this.httpResponse(request, httpEvent);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
-  private httpRequest(request: HttpRequest<any>): void {
+  private httpRequest(request: HttpRequest<any>, httpEvent: HttpEvent): void {
     if (!this.activeRequests.includes(request)) {
       this.activeRequests.push(request);
 
@@ -57,22 +57,24 @@ export class HttpLoaderService {
     }
   }
 
-  private httpResponse(request: HttpRequest<any>): void {
+  private httpResponse(request: HttpRequest<any>, httpEvent: HttpEvent): void {
     if (this.activeRequests.includes(request)) {
       const index: number = this.activeRequests.indexOf(request, 0);
       this.activeRequests.splice(index, 1);
 
       this.numHttp--;
-      //this.numHttp = Math.max(this.numHttp, 0);
       this.numHttpChanges.emit(this.numHttp);
       if (this.numHttp === 0) {
-        this.httpNotActive.emit();
+        this.httpNotActive.emit(httpEvent);
       }
     }
   }
 
-  private ackHttpEvent(request: HttpRequest<any>): HttpEvent {
+  private ackHttpEvent(request: HttpRequest<any>, httpEventType: HttpEventType): HttpEvent {
     const httpEvent = new HttpEvent();
+    httpEvent.message = '';
+    httpEvent.timestamp = Date.now().toPrecision();
+    httpEvent.type = httpEventType;
     this.httpEvents.push(httpEvent);
     return httpEvent;
   }

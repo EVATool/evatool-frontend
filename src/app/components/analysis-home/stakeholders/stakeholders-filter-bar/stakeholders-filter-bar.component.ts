@@ -4,9 +4,7 @@ import {LogService} from '../../../../services/log.service';
 import {StakeholderTableFilterEvent} from './StakeholderTableFilterEvent';
 import {ColumnCategoryFilterComponent} from '../../../column-category-filter/column-category-filter.component';
 import {HighlightSearchComponent} from '../../../highlight-search/highlight-search.component';
-import {ImpactedFilterComponent} from '../../../impacted-filter/impacted-filter.component';
 import {PriorityFilterComponent} from '../../../priority-filter/priority-filter.component';
-import {ImpactSliderComponent} from '../../../impact-slider/impact-slider.component';
 import {ColumnSliderFilterComponent} from '../../../column-slider-filter/column-slider-filter.component';
 
 @Component({
