@@ -3,13 +3,15 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable, throwError} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {LogService} from './log.service';
+import {HttpLoaderService} from './http-loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private logger: LogService) {
+  constructor(private logger: LogService,
+              private httpLoader: HttpLoaderService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -18,6 +20,9 @@ export class HttpInterceptorService implements HttpInterceptor {
         // Request.
         (data: any) => {
           this.logger.info(this, 'NEXT');
+          if (!request.url.includes('/i18n/')) {
+            this.httpLoader.next();
+          }
         },
         // Response error.
         (error: HttpErrorResponse) => {
@@ -30,11 +35,13 @@ export class HttpInterceptorService implements HttpInterceptor {
             errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           }
           this.logger.error(this, errorMsg);
+          this.httpLoader.error();
           return throwError(errorMsg);
         },
         // Response complete.
         () => {
           this.logger.info(this, 'COMPLETE');
+          this.httpLoader.complete();
         })
       );
   }
