@@ -6,7 +6,7 @@ Features:
 
 HUGE refactor: Rename + folder structure
 Test data in backend (when server restart)
-HTTP interceptor https://medium.com/angular-in-depth/top-10-ways-to-use-interceptors-in-angular-db450f8a62d6
+HTTP interceptor https://medium.com/angular-in-depth/top-10-ways-to-use-interceptors-in-angular-db450f8a62d6, https://stackblitz.com/github/melcor76/interceptors?file=src%2Fapp%2Finterceptors%2Ferror.interceptor.ts
 HTTP loader (+ UI in AppModule) Show success/failure of http requests (possibility to repeat (or autorepeat) failed requests, and see log of requests)
 Localization (error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
 

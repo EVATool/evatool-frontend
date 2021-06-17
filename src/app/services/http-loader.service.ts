@@ -10,7 +10,7 @@ export class HttpLoaderService {
   @Output() httpError: EventEmitter<void> = new EventEmitter();
   @Output() httpComplete: EventEmitter<void> = new EventEmitter();
 
-  @Output() numHttpChanges: EventEmitter<void> = new EventEmitter();
+  @Output() numHttpChanges: EventEmitter<number> = new EventEmitter();
 
   @Output() httpActive: EventEmitter<void> = new EventEmitter();
   @Output() httpNotActive: EventEmitter<void> = new EventEmitter();
@@ -42,10 +42,18 @@ export class HttpLoaderService {
 
   private httpRequest(): void {
     this.numHttp++;
+    this.numHttpChanges.emit(this.numHttp);
+    if (this.numHttp > 0) {
+      this.httpActive.emit();
+    }
   }
 
   private httpResponse(): void {
     this.numHttp--;
     this.numHttp = Math.max(this.numHttp, 0);
+    this.numHttpChanges.emit(this.numHttp);
+    if (this.numHttp === 0) {
+      this.httpNotActive.emit();
+    }
   }
 }
