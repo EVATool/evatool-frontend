@@ -7,8 +7,10 @@ Features:
 HUGE refactor: Rename + folder structure
 Test data in backend (when server restart, dev env)
 HTTP interceptor https://medium.com/angular-in-depth/top-10-ways-to-use-interceptors-in-angular-db450f8a62d6, https://stackblitz.com/github/melcor76/interceptors?file=src%2Fapp%2Finterceptors%2Ferror.interceptor.ts
+Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder) - HTTP Interceptor (Datenbanki xD) (PWA?) [delete is forbidden in frontend, should get error from backend and display that in UI]
 HTTP loader (+ UI in AppModule) Show success/failure of http requests (possibility to repeat (or autorepeat) failed requests, and see log of requests)
 Localization (error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
+Stakeholder level (readonly -> grey)
 
 
 
@@ -18,7 +20,6 @@ Update values that come from backend in local object, e.g. Stakeholder PrefixId 
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
-Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder) - HTTP Interceptor (Datenbanki xD) (PWA?) [delete is forbidden in frontend, should get error from backend and display that in UI]
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
 Delta: Load color for deltas as discrete lookup from backend (like values.types)? This makes the colors available in test mode
 
@@ -43,6 +44,7 @@ SonarCloud Status not shown in backend
 make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
 Angular e2e tests
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table
+BUG: why is footer hidden in home component?
 
 */
 

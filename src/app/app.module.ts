@@ -64,7 +64,8 @@ import {ConfirmationDialogComponent} from './components/confirmation-dialog/conf
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpInterceptorService} from './services/http-interceptor.service';
-import { HttpLoaderComponent } from './components/http-loader/http-loader.component';
+import {HttpLoaderComponent} from './components/http-loader/http-loader.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -118,7 +119,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ImpactedFilterComponent,
     PriorityFilterComponent,
     ConfirmationDialogComponent,
-    HttpLoaderComponent,
+    HttpLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -150,6 +151,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    MatProgressSpinnerModule
   ],
   providers: [
     {
