@@ -19,7 +19,7 @@ export class HttpLoaderService {
 
   constructor(private logger: LogService) {
     // TODO use semaphores?
-    // TODO does this increment/decrement of numHttp succife? There is already a workaround with 'i18n'
+    // TODO does this increment/decrement of numHttp suffice? There is already a workaround with 'i18n'
   }
 
   next(): void {
