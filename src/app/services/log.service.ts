@@ -5,13 +5,14 @@ import {environment} from '../../environments/environment';
 Features:
 
 HUGE refactor: Rename + folder structure
-Localization (figure out angular localization, error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
+HTTP interceptor
+Localization (error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
 
 
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly
+Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly (mapper functions with source target)
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses
