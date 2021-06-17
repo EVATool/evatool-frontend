@@ -5,12 +5,9 @@ import {environment} from '../../environments/environment';
 Features:
 
 HUGE refactor: Rename + folder structure
-Test data in backend (when server restart, dev env)
-HTTP interceptor https://medium.com/angular-in-depth/top-10-ways-to-use-interceptors-in-angular-db450f8a62d6, https://stackblitz.com/github/melcor76/interceptors?file=src%2Fapp%2Finterceptors%2Ferror.interceptor.ts
 Meaningful errors (e.g. when trying to add impact but there is no value or no stakeholder) - HTTP Interceptor (Datenbanki xD) (PWA?) [delete is forbidden in frontend, should get error from backend and display that in UI]
-HTTP loader (+ UI in AppModule) Show success/failure of http requests (possibility to repeat (or autorepeat) failed requests, and see log of requests)
 Localization (error codes in backend, change lang in frontend [localStorage]) https://stackblitz.com/github/ngx-translate/example?file=src%2Fapp%2Fapp.component.ts
-Stakeholder level (readonly -> grey)
+Http interceptor and loader (forward error code from backend to localized error message in snackBar, Event log in loader UI, )
 
 
 
@@ -34,7 +31,7 @@ The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again
 Strange bug when negative impact was only slidable like a positive in requirements table
 How to deal with impacts going horizontal in requirement table
 merit Color backend lookup table for possible values
-Sample Data (API calls to backend, separate from deployment!) -> [Create export Postman script from UI inserted stuff]
+Sample Data (API calls to backend, separate from deployment!) -> [Create export Postman(??) script from UI inserted stuff] Postman script should not be used, use own json format for backend rest calls (import + export)
   -> ExportController
   -> how to deal with keycloak auth?
 Only purge data script (ONLY database with main data, what about flyway?)

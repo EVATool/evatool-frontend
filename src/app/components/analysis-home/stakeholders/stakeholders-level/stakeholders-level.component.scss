@@ -24,13 +24,13 @@ $size: 3em;
 .stakeholder-level {
   justify-content: center;
 
-  .level-gesellschaft {
+  .level-society {
     width: $size;
     height: $size;
     @include circle;
   }
 
-  .level-organisation {
+  .level-organization {
     width: $size/100*60;
     height: $size/100*60;
     background: white;
@@ -49,6 +49,9 @@ $size: 3em;
     background: lightblue;
   }
 
+  .selected-level-readonly {
+    background: #c1c1c1;
+  }
 }
 
 .stakeholder-level-wrapper {
