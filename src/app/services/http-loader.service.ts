@@ -9,7 +9,11 @@ export class HttpLoaderService {
   @Output() httpNext: EventEmitter<void> = new EventEmitter();
   @Output() httpError: EventEmitter<void> = new EventEmitter();
   @Output() httpComplete: EventEmitter<void> = new EventEmitter();
+
   @Output() numHttpChanges: EventEmitter<void> = new EventEmitter();
+
+  @Output() httpActive: EventEmitter<void> = new EventEmitter();
+  @Output() httpNotActive: EventEmitter<void> = new EventEmitter();
 
   private numHttp = 0;
 
