@@ -1,18 +1,18 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {LogService} from './log.service';
-import {HttpResult, HttpEventType} from './HttpResult';
+import {HttpInfo, HttpEventType} from './HttpInfo';
 import {HttpRequest} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpLoaderService {
-  @Output() httpNext: EventEmitter<HttpResult> = new EventEmitter();
-  @Output() httpError: EventEmitter<HttpResult> = new EventEmitter();
-  @Output() httpComplete: EventEmitter<HttpResult> = new EventEmitter();
+  @Output() httpNext: EventEmitter<HttpInfo> = new EventEmitter();
+  @Output() httpError: EventEmitter<HttpInfo> = new EventEmitter();
+  @Output() httpComplete: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() numHttpChanges: EventEmitter<number> = new EventEmitter();
   @Output() httpActive: EventEmitter<void> = new EventEmitter();
-  @Output() httpNotActive: EventEmitter<HttpResult> = new EventEmitter();
+  @Output() httpNotActive: EventEmitter<HttpInfo> = new EventEmitter();
 
   numHttp = 0;
   private activeRequests: HttpRequest<any>[] = [];
@@ -44,7 +44,7 @@ export class HttpLoaderService {
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
-  private httpRequest(request: HttpRequest<any>, httpEvent: HttpResult): void {
+  private httpRequest(request: HttpRequest<any>, httpEvent: HttpInfo): void {
     if (!this.activeRequests.includes(request)) {
       this.activeRequests.push(request);
 
@@ -56,7 +56,7 @@ export class HttpLoaderService {
     }
   }
 
-  private httpResponse(request: HttpRequest<any>, httpEvent: HttpResult): void {
+  private httpResponse(request: HttpRequest<any>, httpEvent: HttpInfo): void {
     if (this.activeRequests.includes(request)) {
       const index: number = this.activeRequests.indexOf(request, 0);
       this.activeRequests.splice(index, 1);
@@ -69,8 +69,8 @@ export class HttpLoaderService {
     }
   }
 
-  private buildHttpResult(request: HttpRequest<any>, httpEventType: HttpEventType): HttpResult {
-    const httpEvent = new HttpResult();
+  private buildHttpResult(request: HttpRequest<any>, httpEventType: HttpEventType): HttpInfo {
+    const httpEvent = new HttpInfo();
     httpEvent.message = '';
     httpEvent.timestamp = Date.now().valueOf();
     httpEvent.type = httpEventType;

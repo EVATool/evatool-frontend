@@ -1,4 +1,4 @@
-export class HttpResult {
+export class HttpInfo {
 
   timestamp = 0;
   type!: HttpEventType;

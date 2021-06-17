@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttpResult, HttpEventType} from '../../services/HttpResult';
+import {HttpInfo, HttpEventType} from '../../services/HttpInfo';
 
 @Component({
   selector: 'app-http-loader',
@@ -27,7 +27,7 @@ export class HttpLoaderComponent implements OnInit {
       this.loadingSpinnerShown = true;
     });
 
-    this.httpLoaderService.httpNotActive.subscribe((lastHttpEvent: HttpResult) => {
+    this.httpLoaderService.httpNotActive.subscribe((lastHttpEvent: HttpInfo) => {
       this.logger.debug(this, 'There are NO active http requests');
       this.loadingSpinnerShown = false;
 
@@ -40,7 +40,7 @@ export class HttpLoaderComponent implements OnInit {
       }
     });
 
-    this.httpLoaderService.httpError.subscribe((httpEvent: HttpResult) => {
+    this.httpLoaderService.httpError.subscribe((httpEvent: HttpInfo) => {
       if (!this.snackBarShown) {
         this.snackBarShown = true;
         const message = 'An http request failed';
