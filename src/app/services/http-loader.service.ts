@@ -22,29 +22,29 @@ export class HttpLoaderService {
 
   next(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http request started.');
-    const httpEvent = this.buildHttpResult(request, HttpEventType.Next);
-    this.httpNext.emit(httpEvent);
-    this.httpRequest(request, httpEvent);
+    const httpInfo = this.buildHttpInfo(request, HttpEventType.Next);
+    this.httpNext.emit(httpInfo);
+    this.httpRequest(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
   error(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http response failed.');
-    const httpEvent = this.buildHttpResult(request, HttpEventType.Error);
-    this.httpError.emit(httpEvent);
-    this.httpResponse(request, httpEvent);
+    const httpInfo = this.buildHttpInfo(request, HttpEventType.Error);
+    this.httpError.emit(httpInfo);
+    this.httpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
   complete(request: HttpRequest<any>): void {
     this.logger.info(this, 'An http response was successful.');
-    const httpEvent = this.buildHttpResult(request, HttpEventType.Complete);
-    this.httpComplete.emit(httpEvent);
-    this.httpResponse(request, httpEvent);
+    const httpInfo = this.buildHttpInfo(request, HttpEventType.Complete);
+    this.httpComplete.emit(httpInfo);
+    this.httpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
-  private httpRequest(request: HttpRequest<any>, httpEvent: HttpInfo): void {
+  private httpRequest(request: HttpRequest<any>, httpInfo: HttpInfo): void {
     if (!this.activeRequests.includes(request)) {
       this.activeRequests.push(request);
 
@@ -56,7 +56,7 @@ export class HttpLoaderService {
     }
   }
 
-  private httpResponse(request: HttpRequest<any>, httpEvent: HttpInfo): void {
+  private httpResponse(request: HttpRequest<any>, httpInfo: HttpInfo): void {
     if (this.activeRequests.includes(request)) {
       const index: number = this.activeRequests.indexOf(request, 0);
       this.activeRequests.splice(index, 1);
@@ -64,16 +64,16 @@ export class HttpLoaderService {
       this.numHttp--;
       this.numHttpChanges.emit(this.numHttp);
       if (this.numHttp === 0) {
-        this.httpNotActive.emit(httpEvent);
+        this.httpNotActive.emit(httpInfo);
       }
     }
   }
 
-  private buildHttpResult(request: HttpRequest<any>, httpEventType: HttpEventType): HttpInfo {
-    const httpEvent = new HttpInfo();
-    httpEvent.message = '';
-    httpEvent.timestamp = Date.now().valueOf();
-    httpEvent.type = httpEventType;
-    return httpEvent;
+  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpEventType): HttpInfo {
+    const httpInfo = new HttpInfo();
+    httpInfo.message = '';
+    httpInfo.timestamp = Date.now().valueOf();
+    httpInfo.type = httpInfoType;
+    return httpInfo;
   }
 }
