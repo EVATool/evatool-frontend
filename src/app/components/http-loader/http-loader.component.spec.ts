@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {HttpLoaderComponent} from './http-loader.component';
+import {SpecService} from '../../services/spec.service';
 
 describe('HttpLoaderComponent', () => {
   let component: HttpLoaderComponent;
@@ -8,9 +9,11 @@ describe('HttpLoaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HttpLoaderComponent ]
+      imports: SpecService.imports,
+      providers: SpecService.providers,
+      declarations: [HttpLoaderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
