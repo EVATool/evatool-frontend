@@ -51,8 +51,12 @@ export class ImpactSliderComponent implements AfterViewInit {
         this.logger.info(this, 'Slider Deadzone Around Zero');
       } else if (this.isRisk && event.value > 0) {
         this.logger.info(this, 'Risk Slider Cropping Value');
-      } else if (this.isGoal && event.value <= 0) { // TODO instead of <= create new settings for == 0 (impact.merit is 0)
+      } else if (this.isGoal && event.value < 0) { // TODO instead of <= create new settings for == 0 (impact.merit is 0)
         this.logger.info(this, 'Goal Slider Cropping Value');
+      } else if (this.minvalue > event.value) { // TODO visual cues for min and max value
+        this.logger.info(this, 'Below min Cropping Value');
+      } else if (this.maxvalue < event.value) {
+        this.logger.info(this, 'Above max Cropping Value');
       } else {
         this.logger.info(this, `Slider Value Changed: ${event.value}`);
         this.value = event.value;

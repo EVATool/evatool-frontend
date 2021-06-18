@@ -4,12 +4,13 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
+req delta, delete icon too big
 Cross UI events (redo 3 out of 4 events)
 HUGE refactor: Rename + folder structure
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly (mapper functions with source target)
+Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly (mapper functions with source target) [remove req delta code...]
 All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
