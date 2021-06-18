@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 Http interceptor and loader (Meaningful errors from error codes from backend)
-  - (stakeholder, impact -> functional error) [show impacts, requirements]
+  - (impact -> functional error) [show requirements]
 HUGE refactor: Rename + folder structure
 
 Tasks aus Jira (UID) -> das Jira public machen?
