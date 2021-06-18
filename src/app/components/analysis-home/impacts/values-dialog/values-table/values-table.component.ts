@@ -39,7 +39,6 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
       if (httpInfo.functionalErrorCode === 1001) {
         const value = this.valueDataService.values.find(v => v.id === httpInfo.tag);
         if (value) {
-          console.log('asdfijnasdjofhgbsdfgjoh');
           const numImpactsUseValue = this.getReferencesImpacts(value);
           if (numImpactsUseValue > 0) {
             this.thwartValueOperation(value, numImpactsUseValue);
