@@ -28,9 +28,9 @@ export class HttpLoaderService {
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
-  error(request: HttpRequest<any>, functionalErrorCode: number): void {
+  error(request: HttpRequest<any>, functionalErrorCode: number, tag: any): void {
     this.logger.info(this, 'An http response failed.');
-    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error, functionalErrorCode);
+    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error, functionalErrorCode, tag);
     this.httpError.emit(httpInfo);
     this.httpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
@@ -69,11 +69,12 @@ export class HttpLoaderService {
     }
   }
 
-  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpInfoType, functionalErrorCode?: number): HttpInfo {
+  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpInfoType, functionalErrorCode?: number, tag?: any): HttpInfo {
     const httpInfo = new HttpInfo();
     httpInfo.timestamp = Date.now().valueOf();
     httpInfo.type = httpInfoType;
     httpInfo.functionalErrorCode = functionalErrorCode;
+    httpInfo.tag = tag;
     return httpInfo;
   }
 }

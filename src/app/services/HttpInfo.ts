@@ -3,6 +3,7 @@ export class HttpInfo {
   timestamp = 0;
   type!: HttpInfoType;
   functionalErrorCode?: number;
+  tag?: any;
 
 }
 

@@ -33,16 +33,18 @@ export class HttpInterceptorService implements HttpInterceptor {
           (error: HttpErrorResponse) => {
             let errorMsg = '';
             let functionalErrorCode = null;
+            let tag = null;
             if (error.error instanceof ErrorEvent) {
               this.logger.error(this, 'ERROR: This is a client side error');
               errorMsg = `Error: ${error.error.message}`;
             } else {
               functionalErrorCode = error.error.functionalErrorCode;
+              tag = error.error.tag;
               this.logger.error(this, 'ERROR: This is a server side error');
               errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
             }
             this.logger.error(this, errorMsg);
-            this.httpLoader.error(request, functionalErrorCode);
+            this.httpLoader.error(request, functionalErrorCode, tag);
             return throwError(errorMsg);
           },
           // Response complete.

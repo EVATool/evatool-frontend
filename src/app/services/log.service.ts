@@ -6,6 +6,7 @@ Features:
 
 Http interceptor and loader (Meaningful errors from error codes from backend)
   - (value, variant, stakeholder, impact -> functional error)
+Check cascade, orphanRemoval
 Localization (change lang in frontend [localStorage])
 HUGE refactor: Rename + folder structure
 

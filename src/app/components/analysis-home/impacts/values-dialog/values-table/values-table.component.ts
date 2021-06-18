@@ -8,6 +8,8 @@ import {ValueDataService} from '../../../../../services/data/value-data.service'
 import {ImpactDataService} from '../../../../../services/data/impact-data.service';
 import {AnalysisDataService} from '../../../../../services/data/analysis-data.service';
 import {Impact} from '../../../../../model/Impact';
+import {HttpLoaderService} from '../../../../../services/http-loader.service';
+import {HttpInfo} from '../../../../../services/HttpInfo';
 
 @Component({
   selector: 'app-values-table',
@@ -28,10 +30,26 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
     private valueDataService: ValueDataService,
     private impactDataService: ImpactDataService,
     private analysisDataService: AnalysisDataService,
+    private httpLoader: HttpLoaderService,
     private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
+      if (httpInfo.functionalErrorCode === 1001) {
+        const value = this.valueDataService.values.find(v => v.id === httpInfo.tag);
+        if (value) {
+          console.log('asdfijnasdjofhgbsdfgjoh');
+          const numImpactsUseValue = this.getReferencesImpacts(value);
+          if (numImpactsUseValue > 0) {
+            this.thwartValueOperation(value, numImpactsUseValue);
+          } else {
+            this.valueDataService.deleteValue(value);
+          }
+        }
+      }
+    });
+
     this.valueDataService.loadedValues.subscribe((values: Value[]) => {
       this.updateTableDataSource();
     });
@@ -73,12 +91,7 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
 
   deleteValue(value: Value): void {
     this.logger.info(this, 'Delete Value');
-    const numImpactsUseValue = this.getReferencesImpacts(value);
-    if (numImpactsUseValue > 0) {
-      this.thwartValueOperation(value, numImpactsUseValue);
-    } else {
-      this.valueDataService.deleteValue(value);
-    }
+    this.valueDataService.deleteValue(value);
   }
 
   toggleValueArchived(event: Event, value: Value): void {
