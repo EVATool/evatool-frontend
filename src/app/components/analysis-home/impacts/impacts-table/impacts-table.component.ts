@@ -15,6 +15,8 @@ import {ImpactTableFilterEvent} from '../impacts-filter-bar/ImpactTableFilterEve
 import {ValuesDialogComponent} from '../values-dialog/values-dialog.component';
 import {Value} from '../../../../model/Value';
 import {Stakeholder} from '../../../../model/Stakeholder';
+import {RequirementDelta} from '../../../../model/RequirementDelta';
+import {CrossUiEventService, ImpactReferencedByRequirementEvent} from '../../../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-impacts-table',
@@ -39,11 +41,22 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
     public valueDataService: ValueDataService,
     public stakeholderDataService: StakeholderDataService,
     public analysisDataService: AnalysisDataService,
+    private crossUI: CrossUiEventService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.crossUI.impactReferencedByRequirement.subscribe((event: ImpactReferencedByRequirementEvent) => {
+      const message = 'This impact cannot be deleted. It is still being used by '
+        + event.deltas.length + ' requirements' + (event.deltas.length === 1 ? '' : 's') + '.';
+      const action = 'show';
+      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+      snackBarRef.onAction().subscribe(() => {
+        this.crossUI.userWantsToSeeImpactReferencedByRequirement.emit(event);
+      });
+    });
+
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
       this.updateTableDataSource();
     });

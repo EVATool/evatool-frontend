@@ -90,12 +90,12 @@
         </th>
 
         <td class="delta-cell"
+            [ngClass]="{'highlight': getRequirementDelta(requirement, impact)?.highlighted}"
             mat-cell *matCellDef="let requirement"
             (dblclick)="showDeltaSliderIfExistsElseCreate(requirement, impact)"
             (mouseenter)="deltaMouseEnter(requirement,impact)"
             (mouseleave)="deltaMouseLeave(requirement,impact)">
           <div class="delta-cell-div" *ngVar="getRequirementDelta(requirement, impact) as delta"
-               [ngClass]="{'unset': delta == null, 'neutral': delta?.overwriteMerit === impact.merit, 'positive': delta?.overwriteMerit > 0, 'negative': delta?.overwriteMerit < 0}"
                [ngStyle]="{'background-color': delta?.meritColorCode}">
             <div class="delta-slider-div" *ngIf="delta?.visible">
               <app-impact-slider [isRisk]="!impact.isGoal"

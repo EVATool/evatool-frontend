@@ -19,6 +19,9 @@ import {VariantDataService} from '../../../../services/data/variant-data.service
 import {Variant} from '../../../../model/Variant';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
+import {CrossUiEventService, ImpactReferencedByRequirementEvent} from '../../../../services/cross-ui-event.service';
+import {FunctionalErrorCodeService} from '../../../../services/functional-error-code.service';
+import {Stakeholder} from '../../../../model/Stakeholder';
 
 @Component({
   selector: 'app-requirements-table',
@@ -59,6 +62,7 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   windowScrolled = false;
   highlightFilter = '';
   deletionFlaggedVariant!: Variant;
+  deletionFlaggedImpact!: Impact;
 
   constructor(
     private logger: LogService,
@@ -68,10 +72,18 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
     public valueDataService: ValueDataService,
     public analysisDataService: AnalysisDataService,
     public variantDataService: VariantDataService,
+    private crossUI: CrossUiEventService,
     private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.crossUI.userWantsToSeeImpactReferencedByRequirement.subscribe((event: ImpactReferencedByRequirementEvent) => {
+      this.deletionFlaggedImpact = event.impact;
+      this.requirementDeltaDataService.requirementDeltas.forEach((delta: RequirementDelta) => {
+        delta.highlighted = event.deltas.includes(delta);
+      });
+    });
+
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
       this.updateImpactColumns();
     });
@@ -220,6 +232,10 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   updateRequirementDelta(delta: RequirementDelta): void {
+    if (delta.highlighted) {
+      delta.highlighted = delta.impact === this.deletionFlaggedImpact;
+    }
+
     this.requirementDeltaDataService.updateRequirementDelta(delta);
   }
 

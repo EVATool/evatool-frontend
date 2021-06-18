@@ -6,13 +6,15 @@ import {RequirementDataService} from './data/requirement-data.service';
 import {ImpactDataService} from './data/impact-data.service';
 import {RequirementDeltaDataService} from './data/requirement-delta-data.service';
 import {VariantDataService} from './data/variant-data.service';
+import {CrossUiEventService} from './cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MasterService {
 
-  constructor(public analysisData: AnalysisDataService,
+  constructor(private crossUI: CrossUiEventService,
+              public analysisData: AnalysisDataService,
               public stakeholderData: StakeholderDataService,
               public valueData: ValueDataService,
               public requirementData: RequirementDataService,
@@ -22,6 +24,7 @@ export class MasterService {
   }
 
   init(): void {
+    this.crossUI.init();
     this.requirementDeltaData.init();
     this.requirementData.init();
     this.impactData.init();

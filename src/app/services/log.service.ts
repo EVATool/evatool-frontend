@@ -4,8 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Http interceptor and loader (Meaningful errors from error codes from backend)
-  - (impact -> functional error) [show requirements]
+Cross UI events (redo 3 out of 4 events)
 HUGE refactor: Rename + folder structure
 
 Tasks aus Jira (UID) -> das Jira public machen?
@@ -42,6 +41,7 @@ Angular e2e tests
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table
 BUG: why is footer hidden in home component?
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option)
+Impact slider in delta is completely bugged
 
 */
 

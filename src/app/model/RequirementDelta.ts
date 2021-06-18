@@ -15,6 +15,7 @@ export class RequirementDelta {
   requirement!: Requirement;
 
   // UI
+  highlighted = false;
   visible = false;
   hover = false;
 }

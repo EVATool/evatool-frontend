@@ -6,6 +6,7 @@ import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {StakeholdersComponent} from './stakeholders/stakeholders.component';
 import {ImpactsComponent} from './impacts/impacts.component';
+import {CrossUiEventService, ImpactReferencedByRequirementEvent} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-analysis-home',
@@ -18,11 +19,16 @@ export class AnalysisHomeComponent implements AfterViewInit {
   @ViewChild(ImpactsComponent) impactsComponent!: ImpactsComponent;
 
   constructor(private logger: LogService,
-              public analysisData: AnalysisDataService) {
+              public analysisData: AnalysisDataService,
+              private crossUI: CrossUiEventService) {
 
   }
 
   ngAfterViewInit(): void {
+    this.crossUI.userWantsToSeeImpactReferencedByRequirement.subscribe((event: ImpactReferencedByRequirementEvent) => {
+      this.tabGroup.selectedIndex = 2;
+    });
+
     if (isDevMode()) {
       this.tabGroup.selectedIndex = 2;
     }
