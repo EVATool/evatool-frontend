@@ -37,9 +37,6 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
 
     this.variantDataService.createdVariant.subscribe((variant: Variant) => {
       this.updateTableDataSource();
-      //const options = {bottom: -100, duration: 250};
-      //this.scrollbarRef.scrollTo(options);
-      // Flash newly created impact.
     });
 
     this.variantDataService.updatedVariant.subscribe((variant: Variant) => {
