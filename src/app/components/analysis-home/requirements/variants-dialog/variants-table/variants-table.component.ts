@@ -8,6 +8,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AnalysisDataService} from '../../../../../services/data/analysis-data.service';
 import {RequirementDataService} from '../../../../../services/data/requirement-data.service';
 import {Requirement} from '../../../../../model/Requirement';
+import {HttpInfo} from '../../../../../services/HttpInfo';
+import {FunctionalErrorCodeService} from '../../../../../services/functional-error-code.service';
+import {HttpLoaderService} from '../../../../../services/http-loader.service';
 
 @Component({
   selector: 'app-variants-table',
@@ -27,10 +30,23 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
               private requirementDataService: RequirementDataService,
               public variantDataService: VariantDataService,
               private analysisDataService: AnalysisDataService,
+              private httpLoader: HttpLoaderService,
               private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
+      if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.VARIANT_REFERENCED_BY_REQUIREMENT) {
+        const value = this.variantDataService.variants.find(v => v.id === httpInfo.tag);
+        if (value) {
+          const numImpactsUseValue = this.getReferencesRequirements(value);
+          if (numImpactsUseValue > 0) {
+            this.thwartValueOperation(value, numImpactsUseValue);
+          }
+        }
+      }
+    });
+
     this.variantDataService.loadedVariants.subscribe((variants: Variant[]) => {
       this.updateTableDataSource();
     });

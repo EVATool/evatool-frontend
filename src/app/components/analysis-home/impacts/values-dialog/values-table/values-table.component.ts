@@ -43,8 +43,6 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
           const numImpactsUseValue = this.getReferencesImpacts(value);
           if (numImpactsUseValue > 0) {
             this.thwartValueOperation(value, numImpactsUseValue);
-          } else {
-            this.valueDataService.deleteValue(value);
           }
         }
       }
