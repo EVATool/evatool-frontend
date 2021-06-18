@@ -17,7 +17,7 @@ Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses, dialog: ensure template selected + textfields not empty
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
 Delta: Load color for deltas as discrete lookup from backend (like values.types)? This makes the colors available in test mode
-Disable delete button until result reveiced
+Disable delete button until result received
 
 MISC:
 Add keycloak (enable/disable with flag in .env docker-compose)

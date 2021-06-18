@@ -70,8 +70,6 @@ export class RequirementDeltaDataService extends DataService {
           requirementDeltaDto,
           this.requirementData.requirements,
           this.impactData.impacts));
-        console.log(this.requirementDeltas);
-
       });
       this.loadedRequirementDeltas.emit(this.requirementDeltas);
       this.logger.info(this, 'RequirementDeltas loaded');
