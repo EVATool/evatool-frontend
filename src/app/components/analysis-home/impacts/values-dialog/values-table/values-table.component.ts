@@ -10,6 +10,7 @@ import {AnalysisDataService} from '../../../../../services/data/analysis-data.se
 import {Impact} from '../../../../../model/Impact';
 import {HttpLoaderService} from '../../../../../services/http-loader.service';
 import {HttpInfo} from '../../../../../services/HttpInfo';
+import {FunctionalErrorCodeService} from '../../../../../services/functional-error-code.service';
 
 @Component({
   selector: 'app-values-table',
@@ -36,7 +37,7 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
-      if (httpInfo.functionalErrorCode === 1001) {
+      if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT) {
         const value = this.valueDataService.values.find(v => v.id === httpInfo.tag);
         if (value) {
           const numImpactsUseValue = this.getReferencesImpacts(value);
