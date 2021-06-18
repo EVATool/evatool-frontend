@@ -108,7 +108,8 @@
             </div>
 
             <div class="delete-delta-button"
-                 *ngIf="delta?.hover || delta?.visible" [@inOutAnimation]>
+                 [@inOutAnimation]
+                 *ngIf="delta?.hover && !delta?.visible">
               <button mat-icon-button (click)="deleteRequirementDelta(delta)">
                 <mat-icon>delete</mat-icon>
               </button>

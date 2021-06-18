@@ -20,8 +20,6 @@ import {Variant} from '../../../../model/Variant';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
 import {CrossUiEventService, ImpactReferencedByRequirementEvent} from '../../../../services/cross-ui-event.service';
-import {FunctionalErrorCodeService} from '../../../../services/functional-error-code.service';
-import {Stakeholder} from '../../../../model/Stakeholder';
 
 @Component({
   selector: 'app-requirements-table',

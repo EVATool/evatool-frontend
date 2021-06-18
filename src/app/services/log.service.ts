@@ -4,7 +4,6 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-req delta, delete icon too big
 Cross UI events (redo 3 out of 4 events)
 HUGE refactor: Rename + folder structure
 
@@ -25,6 +24,7 @@ Add flyway (special migrate test profile in backend)
 Deep copy: copy everything?
 
 Backlog:
+tooltips should update when entity properties change
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again?
 Strange bug when negative impact was only slidable like a positive in requirements table
@@ -34,7 +34,7 @@ Sample Data (API calls to backend, separate from deployment!) -> [Create export 
   -> ExportController
   -> how to deal with keycloak auth?
 Only purge data script (ONLY database with main data, what about flyway?)
-Single user: reload data (how to update references?)
+Single user: reload data when tab changes? (how to update references?)
 Multi user: concurrency... (PWA?)
 SonarCloud Status not shown in backend
 make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
