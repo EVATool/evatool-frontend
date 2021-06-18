@@ -14,6 +14,7 @@ import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings'
 import {ImpactTableFilterEvent} from '../impacts-filter-bar/ImpactTableFilterEvent';
 import {ValuesDialogComponent} from '../values-dialog/values-dialog.component';
 import {Value} from '../../../../model/Value';
+import {Stakeholder} from '../../../../model/Stakeholder';
 
 @Component({
   selector: 'app-impacts-table',
@@ -30,6 +31,7 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
   windowScrolled = false;
   highlightFilter = '';
   deletionFlaggedValue!: Value;
+  deletionFlaggedStakeholder!: Stakeholder;
 
   constructor(
     private logger: LogService,
@@ -136,8 +138,10 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
   updateImpact(impact: Impact): void {
     this.logger.info(this, 'Update Impact');
     if (impact.highlighted) {
-      impact.highlighted = impact.value === this.deletionFlaggedValue;
+      impact.highlighted = impact.value === this.deletionFlaggedValue
+        || impact.stakeholder === this.deletionFlaggedStakeholder;
     }
+
     this.impactDataService.updateImpact(impact);
   }
 
@@ -164,6 +168,13 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
           impact.highlighted = impact.value === data.value;
         });
       }
+    });
+  }
+
+  highlightImpactsByStakeholder(stakeholder: Stakeholder): void {
+    this.deletionFlaggedStakeholder = stakeholder;
+    this.impactDataService.impacts.forEach(impact => {
+      impact.highlighted = impact.stakeholder === stakeholder;
     });
   }
 }

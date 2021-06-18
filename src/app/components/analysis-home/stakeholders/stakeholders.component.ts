@@ -1,7 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {StakeholdersFilterBarComponent} from './stakeholders-filter-bar/stakeholders-filter-bar.component';
 import {StakeholdersTableComponent} from './stakeholders-table/stakeholders-table.component';
 import {LogService} from '../../../services/log.service';
+import {Stakeholder} from '../../../model/Stakeholder';
 
 @Component({
   selector: 'app-stakeholders',
@@ -11,7 +12,12 @@ import {LogService} from '../../../services/log.service';
 export class StakeholdersComponent {
   @ViewChild(StakeholdersTableComponent) table!: StakeholdersTableComponent;
   @ViewChild(StakeholdersFilterBarComponent) filterBar!: StakeholdersFilterBarComponent;
+  @Output() userWantsToSeeReferencedImpacts: EventEmitter<Stakeholder> = new EventEmitter();
 
   constructor(private logger: LogService) {
+  }
+
+  propagateSeeReferences(stakeholder: Stakeholder): void {
+    this.userWantsToSeeReferencedImpacts.emit(stakeholder);
   }
 }

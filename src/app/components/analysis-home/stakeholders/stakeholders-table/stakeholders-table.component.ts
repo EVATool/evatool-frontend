@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {StakeholderDataService} from '../../../../services/data/stakeholder-data.service';
 import {Stakeholder} from '../../../../model/Stakeholder';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
@@ -8,6 +8,13 @@ import {LogService} from '../../../../services/log.service';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {MatSort} from '@angular/material/sort';
 import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
+import {HttpLoaderService} from '../../../../services/http-loader.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpInfo} from '../../../../services/HttpInfo';
+import {FunctionalErrorCodeService} from '../../../../services/functional-error-code.service';
+import {Value} from '../../../../model/Value';
+import {Impact} from '../../../../model/Impact';
+import {ImpactDataService} from '../../../../services/data/impact-data.service';
 
 @Component({
   selector: 'app-stakeholders-table',
@@ -18,6 +25,7 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Stakeholder>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
+  @Output() userWantsToSeeReferencedImpacts: EventEmitter<Stakeholder> = new EventEmitter();
 
   displayedColumns = ['prefixSequenceId', 'name', 'level', 'priority', 'impacted'];
   tableDataSource = new MatTableDataSource<Stakeholder>();
@@ -26,10 +34,25 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
 
   constructor(private logger: LogService,
               public stakeholderData: StakeholderDataService,
-              private analysisData: AnalysisDataService) {
+              private analysisData: AnalysisDataService,
+              private impactData: ImpactDataService,
+              private httpLoader: HttpLoaderService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
+      if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT) {
+        const value = this.stakeholderData.stakeholders.find(s => s.id === httpInfo.tag);
+        if (value) {
+          const numImpactsUseValue = this.getReferencedImpacts(value);
+          if (numImpactsUseValue > 0) {
+            this.thwartValueOperation(value, numImpactsUseValue);
+          }
+        }
+      }
+    });
+
     this.stakeholderData.loadedStakeholders.subscribe((stakeholders: Stakeholder[]) => {
       this.updateTableDataSource();
     });
@@ -107,5 +130,28 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
     this.logger.info(this, 'Filter Changed');
     this.highlightFilter = event.highlight;
     this.tableDataSource.filter = JSON.stringify(event);
+  }
+
+
+  getReferencedImpacts(stakeholder: Stakeholder): number {
+    let numImpactsUseStakeholder = 0;
+    this.impactData.impacts.forEach((impact: Impact) => {
+      if (impact.stakeholder === stakeholder) {
+        numImpactsUseStakeholder++;
+      }
+    });
+    return numImpactsUseStakeholder;
+  }
+
+  thwartValueOperation(stakeholder: Stakeholder, numImpactsUseStakeholder: number): void {
+    this.logger.warn(this, 'This stakeholder is still being used by ' + numImpactsUseStakeholder + ' impacts');
+    const message = 'This stakeholder cannot be deleted. It is still being used by '
+      + numImpactsUseStakeholder + ' impact' + (numImpactsUseStakeholder === 1 ? '' : 's') + '.';
+    const action = 'show';
+    const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+    snackBarRef.onAction().subscribe(() => {
+      this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
+      this.userWantsToSeeReferencedImpacts.emit(stakeholder);
+    });
   }
 }

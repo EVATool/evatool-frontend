@@ -40,7 +40,7 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
       if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT) {
         const value = this.valueDataService.values.find(v => v.id === httpInfo.tag);
         if (value) {
-          const numImpactsUseValue = this.getReferencesImpacts(value);
+          const numImpactsUseValue = this.getReferencedImpacts(value);
           if (numImpactsUseValue > 0) {
             this.thwartValueOperation(value, numImpactsUseValue);
           }
@@ -97,7 +97,7 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
     this.updateValue(value);
   }
 
-  getReferencesImpacts(value: Value): number {
+  getReferencedImpacts(value: Value): number {
     let numImpactsUseValue = 0;
     this.impactDataService.impacts.forEach((impact: Impact) => {
       if (impact.value === value) {

@@ -5,9 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 Http interceptor and loader (Meaningful errors from error codes from backend)
-  - (value, variant, stakeholder, impact -> functional error)
-Check cascade, orphanRemoval
-Localization (change lang in frontend [localStorage])
+  - (stakeholder, impact -> functional error) [show impacts, requirements]
 HUGE refactor: Rename + folder structure
 
 Tasks aus Jira (UID) -> das Jira public machen?
@@ -19,6 +17,7 @@ Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses, dialog: ensure template selected + textfields not empty
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
 Delta: Load color for deltas as discrete lookup from backend (like values.types)? This makes the colors available in test mode
+Disable delete button until result reveiced
 
 MISC:
 Add keycloak (enable/disable with flag in .env docker-compose)
@@ -42,6 +41,7 @@ make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dm
 Angular e2e tests
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table
 BUG: why is footer hidden in home component?
+Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option)
 
 */
 

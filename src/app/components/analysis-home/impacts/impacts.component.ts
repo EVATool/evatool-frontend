@@ -6,6 +6,7 @@ import {StakeholderDataService} from '../../../services/data/stakeholder-data.se
 import {AnalysisDataService} from '../../../services/data/analysis-data.service';
 import {ImpactsTableComponent} from './impacts-table/impacts-table.component';
 import {ImpactsFilterBarComponent} from './impacts-filter-bar/impacts-filter-bar.component';
+import {Stakeholder} from '../../../model/Stakeholder';
 
 @Component({
   selector: 'app-impacts',
@@ -27,5 +28,9 @@ export class ImpactsComponent {
   tabActivated() {
     this.logger.info(this, 'Tab activated');
     //this.table?.reload();
+  }
+
+  highlightImpactsByStakeholder(stakeholder: Stakeholder): void {
+    this.table.highlightImpactsByStakeholder(stakeholder);
   }
 }

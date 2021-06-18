@@ -2,6 +2,10 @@ import {AfterViewInit, Component, isDevMode, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
+import {Value} from '../../model/Value';
+import {Stakeholder} from '../../model/Stakeholder';
+import {StakeholdersComponent} from './stakeholders/stakeholders.component';
+import {ImpactsComponent} from './impacts/impacts.component';
 
 @Component({
   selector: 'app-analysis-home',
@@ -10,6 +14,8 @@ import {AnalysisDataService} from '../../services/data/analysis-data.service';
 })
 export class AnalysisHomeComponent implements AfterViewInit {
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
+  @ViewChild(StakeholdersComponent) stakeholdersComponent!: StakeholdersComponent;
+  @ViewChild(ImpactsComponent) impactsComponent!: ImpactsComponent;
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService) {
@@ -46,5 +52,11 @@ export class AnalysisHomeComponent implements AfterViewInit {
         this.logger.warn(this, 'Unknown tab');
         break;
     }
+  }
+
+  propagateSeeReferences(stakeholder: Stakeholder): void {
+    this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
+    this.tabGroup.selectedIndex = 1;
+    this.impactsComponent.highlightImpactsByStakeholder(stakeholder);
   }
 }

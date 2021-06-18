@@ -39,7 +39,7 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
       if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.VARIANT_REFERENCED_BY_REQUIREMENT) {
         const value = this.variantDataService.variants.find(v => v.id === httpInfo.tag);
         if (value) {
-          const numImpactsUseValue = this.getReferencesRequirements(value);
+          const numImpactsUseValue = this.getReferencedRequirements(value);
           if (numImpactsUseValue > 0) {
             this.thwartValueOperation(value, numImpactsUseValue);
           }
@@ -91,15 +91,10 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
 
   deleteVariant(variant: Variant): void {
     this.logger.info(this, 'Delete Variant');
-    const numRequirementsUseVariant = this.getReferencesRequirements(variant);
-    if (numRequirementsUseVariant > 0) {
-      this.thwartValueOperation(variant, numRequirementsUseVariant);
-    } else {
-      this.variantDataService.deleteVariant(variant);
-    }
+    this.variantDataService.deleteVariant(variant);
   }
 
-  getReferencesRequirements(variant: Variant): number {
+  getReferencedRequirements(variant: Variant): number {
     let numRequirementsUseVariant = 0;
     this.requirementDataService.requirements.forEach((requirement: Requirement) => {
       if (requirement.variants.includes(variant)) {
