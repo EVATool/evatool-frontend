@@ -19,15 +19,15 @@ import {ValueDataService} from './data/value-data.service';
   providedIn: 'root'
 })
 export class CrossUiEventService { // TODO use this instead of routing events manually through UI screens
-  @Output() impactReferencedByRequirement: EventEmitter<ImpactReferencedByRequirementEvent> = new EventEmitter();
-  @Output() stakeholderReferencedByImpact: EventEmitter<StakeholderReferencedByImpactEvent> = new EventEmitter();
-  @Output() valueReferencedByImpact: EventEmitter<ValueReferencedByImpactEvent> = new EventEmitter();
-  @Output() variantReferencedByRequirement: EventEmitter<VariantReferencedByRequirementEvent> = new EventEmitter();
+  @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
+  @Output() stakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
+  @Output() valueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
+  @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
-  @Output() userWantsToSeeImpactReferencedByRequirement: EventEmitter<ImpactReferencedByRequirementEvent> = new EventEmitter();
-  @Output() userWantsToSeeStakeholderReferencedByImpact: EventEmitter<StakeholderReferencedByImpactEvent> = new EventEmitter();
-  @Output() userWantsToSeeValueReferencedByImpact: EventEmitter<ValueReferencedByImpactEvent> = new EventEmitter();
-  @Output() userWantsToSeeVariantReferencedByRequirement: EventEmitter<VariantReferencedByRequirementEvent> = new EventEmitter();
+  @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
+  @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
+  @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
+  @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
   constructor(private httpLoader: HttpLoaderService,
               private impactData: ImpactDataService,
@@ -45,7 +45,7 @@ export class CrossUiEventService { // TODO use this instead of routing events ma
           const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
           const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
           if (impact && deltas) {
-            this.impactReferencedByRequirement.emit(new ImpactReferencedByRequirementEvent(impact, deltas));
+            this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementsEvent(impact, deltas));
           }
           break;
 
@@ -53,7 +53,7 @@ export class CrossUiEventService { // TODO use this instead of routing events ma
           const stakeholder = this.stakeholderData.stakeholders.find(s => s.id = httpInfo.tag.stakeholderId);
           const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
           if (stakeholder && impactsStakeholder) {
-            this.stakeholderReferencedByImpact.emit(new StakeholderReferencedByImpactEvent(stakeholder, impactsStakeholder));
+            this.stakeholderReferencedByImpacts.emit(new StakeholderReferencedByImpactsEvent(stakeholder, impactsStakeholder));
           }
           break;
 
@@ -61,7 +61,7 @@ export class CrossUiEventService { // TODO use this instead of routing events ma
           const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
           const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
           if (value && impactsValue) {
-            this.valueReferencedByImpact.emit(new ValueReferencedByImpactEvent(value, impactsValue));
+            this.valueReferencedByImpacts.emit(new ValueReferencedByImpactsEvent(value, impactsValue));
           }
           break;
 
@@ -69,7 +69,7 @@ export class CrossUiEventService { // TODO use this instead of routing events ma
           const variant = this.variantData.variants.find(v => v.id = httpInfo.tag.variantId);
           const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
           if (variant && requirements) {
-            this.variantReferencedByRequirement.emit(new VariantReferencedByRequirementEvent(variant, requirements));
+            this.variantReferencedByRequirements.emit(new VariantReferencedByRequirementsEvent(variant, requirements));
           }
           break;
 
@@ -81,7 +81,8 @@ export class CrossUiEventService { // TODO use this instead of routing events ma
   }
 }
 
-export class ImpactReferencedByRequirementEvent {
+// TODO outsource events into file.
+export class ImpactReferencedByRequirementsEvent {
 
   impact!: Impact;
   deltas!: RequirementDelta[];
@@ -92,7 +93,7 @@ export class ImpactReferencedByRequirementEvent {
   }
 }
 
-export class StakeholderReferencedByImpactEvent {
+export class StakeholderReferencedByImpactsEvent {
 
   stakeholder!: Stakeholder;
   impacts!: Impact[];
@@ -104,7 +105,7 @@ export class StakeholderReferencedByImpactEvent {
 }
 
 
-export class ValueReferencedByImpactEvent {
+export class ValueReferencedByImpactsEvent {
 
   value!: Value;
   impacts!: Impact[];
@@ -115,7 +116,7 @@ export class ValueReferencedByImpactEvent {
   }
 }
 
-export class VariantReferencedByRequirementEvent {
+export class VariantReferencedByRequirementsEvent {
 
   variant!: Variant;
   requirements!: Requirement[];
