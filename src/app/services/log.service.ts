@@ -16,6 +16,7 @@ Analysis TODO Complete rework, Analysis-Tile component, template like normal ana
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
 Delta: Load color for deltas as discrete lookup from backend (like values.types)? This makes the colors available in test mode
 Disable delete button until result received
+route to 404 website if analysis does not exist
 
 MISC:
 Add keycloak (enable/disable with flag in .env docker-compose)
