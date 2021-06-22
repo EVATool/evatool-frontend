@@ -9,11 +9,11 @@ import {ImpactsFilterBarComponent} from '../impacts-filter-bar/impacts-filter-ba
 import {Stakeholder} from '../../model/Stakeholder';
 
 @Component({
-  selector: 'app-impacts',
-  templateUrl: './impacts.component.html',
-  styleUrls: ['./impacts.component.scss']
+  selector: 'app-impact-edit',
+  templateUrl: './impact-edit.component.html',
+  styleUrls: ['./impact-edit.component.scss']
 })
-export class ImpactsComponent {
+export class ImpactEditComponent {
   @ViewChild(ImpactsTableComponent) table!: ImpactsTableComponent;
   @ViewChild(ImpactsFilterBarComponent) filterBar!: ImpactsFilterBarComponent;
 

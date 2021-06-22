@@ -14,9 +14,9 @@ import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/h
 import {MatDialogModule} from '@angular/material/dialog';
 import {AnalysisTileComponent} from './components/analysis-tile/analysis-tile.component';
 import {AnalysisEditComponent} from './components/analysis-edit/analysis-edit.component';
-import {StakeholdersComponent} from './components/stakeholders/stakeholders.component';
-import {ImpactsComponent} from './components/impacts/impacts.component';
-import {RequirementsComponent} from './components/requirements/requirements.component';
+import {StakeholderEditComponent} from './components/stakeholder-edit/stakeholder-edit.component';
+import {ImpactEditComponent} from './components/impact-edit/impact-edit.component';
+import {RequirementEditComponent} from './components/requirement-edit/requirement-edit.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ImprintComponent} from './components/imprint/imprint.component';
@@ -85,9 +85,9 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     HomeComponent,
     AnalysisTileComponent,
     AnalysisEditComponent,
-    StakeholdersComponent,
-    ImpactsComponent,
-    RequirementsComponent,
+    StakeholderEditComponent,
+    ImpactEditComponent,
+    RequirementEditComponent,
     DashboardComponent,
     ImprintComponent,
     PrivacyComponent,

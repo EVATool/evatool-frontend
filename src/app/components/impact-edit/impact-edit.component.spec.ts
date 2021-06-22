@@ -1,23 +1,23 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ImpactsComponent} from './impacts.component';
+import {ImpactEditComponent} from './impact-edit.component';
 import {SpecService} from '../../services/spec.service';
 
 describe('ImpactsComponent', () => {
-  let component: ImpactsComponent;
-  let fixture: ComponentFixture<ImpactsComponent>;
+  let component: ImpactEditComponent;
+  let fixture: ComponentFixture<ImpactEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [ImpactsComponent]
+      declarations: [ImpactEditComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImpactsComponent);
+    fixture = TestBed.createComponent(ImpactEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

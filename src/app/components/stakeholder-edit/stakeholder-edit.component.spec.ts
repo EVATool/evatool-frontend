@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {StakeholdersComponent} from './stakeholders.component';
+import {StakeholderEditComponent} from './stakeholder-edit.component';
 
 describe('StakeholdersComponent', () => {
-  let component: StakeholdersComponent;
-  let fixture: ComponentFixture<StakeholdersComponent>;
+  let component: StakeholderEditComponent;
+  let fixture: ComponentFixture<StakeholderEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StakeholdersComponent ]
+      declarations: [ StakeholderEditComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StakeholdersComponent);
+    fixture = TestBed.createComponent(StakeholderEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -4,8 +4,8 @@ import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
-import {StakeholdersComponent} from '../stakeholders/stakeholders.component';
-import {ImpactsComponent} from '../impacts/impacts.component';
+import {StakeholderEditComponent} from '../stakeholder-edit/stakeholder-edit.component';
+import {ImpactEditComponent} from '../impact-edit/impact-edit.component';
 import {
   CrossUiEventService,
   ImpactReferencedByRequirementsEvent,
@@ -19,8 +19,8 @@ import {
 })
 export class AnalysisEditComponent implements AfterViewInit {
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
-  @ViewChild(StakeholdersComponent) stakeholdersComponent!: StakeholdersComponent;
-  @ViewChild(ImpactsComponent) impactsComponent!: ImpactsComponent;
+  @ViewChild(StakeholderEditComponent) stakeholdersComponent!: StakeholderEditComponent;
+  @ViewChild(ImpactEditComponent) impactsComponent!: ImpactEditComponent;
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,

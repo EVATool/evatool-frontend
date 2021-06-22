@@ -6,11 +6,11 @@ import {RequirementDataService} from '../../services/data/requirement-data.servi
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-requirements',
-  templateUrl: './requirements.component.html',
-  styleUrls: ['./requirements.component.scss']
+  selector: 'app-requirement-edit',
+  templateUrl: './requirement-edit.component.html',
+  styleUrls: ['./requirement-edit.component.scss']
 })
-export class RequirementsComponent {
+export class RequirementEditComponent {
   @ViewChild(RequirementsTableComponent) table!: RequirementsTableComponent;
   @ViewChild(RequirementsFilterBarComponent) filterBar!: RequirementsFilterBarComponent;
 

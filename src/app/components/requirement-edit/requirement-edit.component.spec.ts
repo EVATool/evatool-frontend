@@ -1,23 +1,23 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {RequirementsComponent} from './requirements.component';
+import {RequirementEditComponent} from './requirement-edit.component';
 import {SpecService} from '../../services/spec.service';
 
 describe('RequirementsComponent', () => {
-  let component: RequirementsComponent;
-  let fixture: ComponentFixture<RequirementsComponent>;
+  let component: RequirementEditComponent;
+  let fixture: ComponentFixture<RequirementEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [RequirementsComponent]
+      declarations: [RequirementEditComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RequirementsComponent);
+    fixture = TestBed.createComponent(RequirementEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
