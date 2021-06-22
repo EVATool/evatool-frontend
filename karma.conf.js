@@ -13,6 +13,15 @@ module.exports = function (config) {
       require('jest-sonar-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
+    files: [
+      {
+        pattern: './src/assets/**',
+        watched: false,
+        included: false,
+        nocache: false,
+        served: true
+      }
+    ],
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
@@ -35,8 +44,8 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, './coverage/evatool-frontend'),
       subdir: '.',
       reporters: [
-        { type: 'lcov' },
-        { type: 'text-summary' }
+        {type: 'lcov'},
+        {type: 'text-summary'}
       ]
     },
     reporters: ['progress', 'kjhtml'],
