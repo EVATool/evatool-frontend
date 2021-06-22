@@ -41,17 +41,27 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
-      if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT) {
-        const value = this.stakeholderData.stakeholders.find(s => s.id === httpInfo.tag);
-        if (value) {
-          const numImpactsUseValue = this.getReferencedImpacts(value);
-          if (numImpactsUseValue > 0) {
-            this.thwartValueOperation(value, numImpactsUseValue);
-          }
-        }
-      }
-    });
+    // this.logger.warn(this, 'This stakeholder is still being used by ' + numImpactsUseStakeholder + ' impacts');
+    // const message = 'This stakeholder cannot be deleted. It is still being used by '
+    //   + numImpactsUseStakeholder + ' impact' + (numImpactsUseStakeholder === 1 ? '' : 's') + '.';
+    // const action = 'show';
+    // const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+    // snackBarRef.onAction().subscribe(() => {
+    //   this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
+    //   this.userWantsToSeeReferencedImpacts.emit(stakeholder);
+    // });
+    //
+    // this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
+    //   if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT) {
+    //     const value = this.stakeholderData.stakeholders.find(s => s.id === httpInfo.tag);
+    //     if (value) {
+    //       const numImpactsUseValue = this.getReferencedImpacts(value);
+    //       if (numImpactsUseValue > 0) {
+    //         this.thwartValueOperation(value, numImpactsUseValue);
+    //       }
+    //     }
+    //   }
+    // });
 
     this.stakeholderData.loadedStakeholders.subscribe((stakeholders: Stakeholder[]) => {
       this.updateTableDataSource();
@@ -130,28 +140,5 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
     this.logger.info(this, 'Filter Changed');
     this.highlightFilter = event.highlight;
     this.tableDataSource.filter = JSON.stringify(event);
-  }
-
-
-  getReferencedImpacts(stakeholder: Stakeholder): number {
-    let numImpactsUseStakeholder = 0;
-    this.impactData.impacts.forEach((impact: Impact) => {
-      if (impact.stakeholder === stakeholder) {
-        numImpactsUseStakeholder++;
-      }
-    });
-    return numImpactsUseStakeholder;
-  }
-
-  thwartValueOperation(stakeholder: Stakeholder, numImpactsUseStakeholder: number): void {
-    this.logger.warn(this, 'This stakeholder is still being used by ' + numImpactsUseStakeholder + ' impacts');
-    const message = 'This stakeholder cannot be deleted. It is still being used by '
-      + numImpactsUseStakeholder + ' impact' + (numImpactsUseStakeholder === 1 ? '' : 's') + '.';
-    const action = 'show';
-    const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-    snackBarRef.onAction().subscribe(() => {
-      this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
-      this.userWantsToSeeReferencedImpacts.emit(stakeholder);
-    });
   }
 }

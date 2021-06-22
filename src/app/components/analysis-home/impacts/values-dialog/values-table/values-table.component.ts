@@ -52,18 +52,6 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
       });
     });
 
-    this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
-      if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT) {
-        const value = this.valueDataService.values.find(v => v.id === httpInfo.tag);
-        if (value) {
-          const numImpactsUseValue = this.getReferencedImpacts(value);
-          if (numImpactsUseValue > 0) {
-            this.thwartValueOperation(value, numImpactsUseValue);
-          }
-        }
-      }
-    });
-
     this.valueDataService.loadedValues.subscribe((values: Value[]) => {
       this.updateTableDataSource();
     });
@@ -111,27 +99,5 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
   toggleValueArchived(event: Event, value: Value): void {
     value.archived = !value.archived;
     this.updateValue(value);
-  }
-
-  getReferencedImpacts(value: Value): number {
-    let numImpactsUseValue = 0;
-    this.impactDataService.impacts.forEach((impact: Impact) => {
-      if (impact.value === value) {
-        numImpactsUseValue++;
-      }
-    });
-    return numImpactsUseValue;
-  }
-
-  thwartValueOperation(value: Value, numImpactsUseValue: number): void {
-    this.logger.warn(this, 'This value is still being used by ' + numImpactsUseValue + ' impacts');
-    const message = 'This value cannot be deleted. It is still being used by '
-      + numImpactsUseValue + ' impact' + (numImpactsUseValue === 1 ? '' : 's') + '.';
-    const action = 'show';
-    const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-    snackBarRef.onAction().subscribe(() => {
-      this.logger.info(this, 'User wants to see the impacts referencing the value');
-      this.userWantsToSeeReferencedImpacts.emit(value);
-    });
   }
 }

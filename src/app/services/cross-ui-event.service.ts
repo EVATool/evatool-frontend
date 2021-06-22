@@ -18,14 +18,14 @@ import {ValueDataService} from './data/value-data.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CrossUiEventService { // TODO use this instead of routing events manually through UI screens
+export class CrossUiEventService {
   @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
   @Output() stakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
   @Output() valueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
   @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
   @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
-  @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
+  @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter(); // TODO
   @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 

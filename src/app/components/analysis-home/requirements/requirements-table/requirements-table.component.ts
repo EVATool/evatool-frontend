@@ -19,7 +19,11 @@ import {VariantDataService} from '../../../../services/data/variant-data.service
 import {Variant} from '../../../../model/Variant';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../../../impact-slider/SliderFilterSettings';
-import {CrossUiEventService, ImpactReferencedByRequirementsEvent} from '../../../../services/cross-ui-event.service';
+import {
+  CrossUiEventService,
+  ImpactReferencedByRequirementsEvent,
+  ValueReferencedByImpactsEvent, VariantReferencedByRequirementsEvent
+} from '../../../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-requirements-table',
@@ -75,6 +79,13 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.crossUI.userWantsToSeeVariantReferencedByRequirements.subscribe((event: VariantReferencedByRequirementsEvent) => {
+      this.deletionFlaggedVariant = event.variant;
+      event.requirements.forEach(requirement => {
+        requirement.highlighted = true;
+      });
+    });
+
     this.crossUI.userWantsToSeeImpactReferencedByRequirements.subscribe((event: ImpactReferencedByRequirementsEvent) => {
       this.deletionFlaggedImpact = event.impact;
       event.deltas.forEach((delta: RequirementDelta) => {

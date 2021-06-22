@@ -4,7 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Cross UI events (redo 3 out of 4 events for functional events)
+Cross UI events (redo 1 out of 4 events for functional events)
 redo archive events as crossUI events
 
 HUGE refactor: Rename + folder structure

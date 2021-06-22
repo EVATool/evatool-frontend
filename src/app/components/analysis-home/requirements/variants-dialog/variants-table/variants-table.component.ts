@@ -11,6 +11,11 @@ import {Requirement} from '../../../../../model/Requirement';
 import {HttpInfo} from '../../../../../services/HttpInfo';
 import {FunctionalErrorCodeService} from '../../../../../services/functional-error-code.service';
 import {HttpLoaderService} from '../../../../../services/http-loader.service';
+import {
+  CrossUiEventService,
+  ValueReferencedByImpactsEvent,
+  VariantReferencedByRequirementsEvent
+} from '../../../../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-variants-table',
@@ -31,20 +36,19 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
               public variantDataService: VariantDataService,
               private analysisDataService: AnalysisDataService,
               private httpLoader: HttpLoaderService,
+              private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
-      if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.VARIANT_REFERENCED_BY_REQUIREMENT) {
-        const value = this.variantDataService.variants.find(v => v.id === httpInfo.tag);
-        if (value) {
-          const numImpactsUseValue = this.getReferencedRequirements(value);
-          if (numImpactsUseValue > 0) {
-            this.thwartValueOperation(value, numImpactsUseValue);
-          }
-        }
-      }
+    this.crossUI.variantReferencedByRequirements.subscribe((event: VariantReferencedByRequirementsEvent) => {
+      const message = 'This variant cannot be deleted. It is still being used by '
+        + event.requirements.length + ' requirement' + (event.requirements.length === 1 ? '' : 's') + '.';
+      const action = 'show';
+      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+      snackBarRef.onAction().subscribe(() => {
+        this.crossUI.userWantsToSeeVariantReferencedByRequirements.emit(event);
+      });
     });
 
     this.variantDataService.loadedVariants.subscribe((variants: Variant[]) => {
@@ -92,16 +96,6 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
   deleteVariant(variant: Variant): void {
     this.logger.info(this, 'Delete Variant');
     this.variantDataService.deleteVariant(variant);
-  }
-
-  getReferencedRequirements(variant: Variant): number {
-    let numRequirementsUseVariant = 0;
-    this.requirementDataService.requirements.forEach((requirement: Requirement) => {
-      if (requirement.variants.includes(variant)) {
-        numRequirementsUseVariant++;
-      }
-    });
-    return numRequirementsUseVariant;
   }
 
   thwartValueOperation(variant: Variant, numRequirementsUseVariant: number): void {
