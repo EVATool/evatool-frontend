@@ -73,7 +73,7 @@ export const customTooltipDefaults: MatTooltipDefaultOptions = {
   touchendHideDelay: 100
 };
 
-export function HttpLoaderFactory(httpClient: HttpClient) {
+export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(httpClient);
 }
 
