@@ -3,6 +3,8 @@ import {MasterService} from './services/master.service';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../environments/environment';
 import {Title} from '@angular/platform-browser';
+import enLanguage from './../assets/i18n/en.json';
+import deLanguage from './../assets/i18n/de.json';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +15,8 @@ export class AppComponent {
   constructor(private titleService: Title,
               private master: MasterService,
               public translate: TranslateService) {
-    this.master.init();
-
+    // Language settings.
+    translate.setTranslation('en', enLanguage);
     translate.addLangs(['en', 'de']);
     translate.setDefaultLang('en');
 
@@ -23,13 +25,28 @@ export class AppComponent {
     const useDefaultOverBrowserLang = environment.useDefaultOverBrowserLang;
 
     if (useDefaultOverBrowserLang === 'true') {
-      translate.use(defaultLang);
+      translate.setTranslation(defaultLang, this.getLang(defaultLang));
+      translate.setDefaultLang(defaultLang);
     } else {
-      translate.use(browserLang);
+      translate.setTranslation(browserLang, this.getLang(browserLang));
+      translate.setDefaultLang(browserLang);
     }
 
     this.translate.get('TITLE').subscribe((title: string) => {
       this.titleService.setTitle(title);
     });
+
+    // Master service init.
+    this.master.init();
+  }
+
+  private getLang(lang: string): any {
+    if (lang === 'en') {
+      return enLanguage;
+    } else if (lang === 'de') {
+      return deLanguage;
+    } else {
+      throw new Error('Language ' + lang + ' not supported');
+    }
   }
 }
