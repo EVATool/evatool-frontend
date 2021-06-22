@@ -1,9 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AnalysisDialogComponent} from './analysis-dialog.component';
-import {SpecService} from '../../../services/spec.service';
+import {SpecService} from '../../services/spec.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Analysis} from '../../../model/Analysis';
+import {Analysis} from '../../model/Analysis';
 
 describe('AnalysisDialogComponent', () => {
   let component: AnalysisDialogComponent;

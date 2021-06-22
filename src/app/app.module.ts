@@ -12,7 +12,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
-import {AnalysisTileComponent} from './components/home/analysis-tile/analysis-tile.component';
+import {AnalysisTileComponent} from './components/analysis-tile/analysis-tile.component';
 import {AnalysisHomeComponent} from './components/analysis-home/analysis-home.component';
 import {StakeholdersComponent} from './components/analysis-home/stakeholders/stakeholders.component';
 import {ImpactsComponent} from './components/analysis-home/impacts/impacts.component';
@@ -52,7 +52,7 @@ import {VariantsTableComponent} from './components/analysis-home/requirements/va
 import {AddEntityButtonComponent} from './components/analysis-home/add-entity-button/add-entity-button.component';
 import {ScrollToTopButtonComponent} from './components/analysis-home/scroll-to-top-button/scroll-to-top-button.component';
 import {MarkTextareaComponent} from './components/mark-textarea/mark-textarea.component';
-import {AnalysisDialogComponent} from './components/home/analysis-dialog/analysis-dialog.component';
+import {AnalysisDialogComponent} from './components/analysis-dialog/analysis-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {PriorityFilterComponent} from './components/priority-filter/priority-filter.component';
 import {PluckPipe} from './pipes/pluck.pipe';
