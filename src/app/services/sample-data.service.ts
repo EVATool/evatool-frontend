@@ -100,7 +100,7 @@ export class SampleDataService {
     },
     {
       id: '3',
-      prefixSequenceId: 'ANA1',
+      prefixSequenceId: 'TMP1',
       name: 'Template 1',
       description: 'Lorem Ipsum',
       isTemplate: true,
