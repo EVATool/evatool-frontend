@@ -1,11 +1,11 @@
 <div class="entity-main-container">
   <div class="filter-bar-container">
-    <app-stakeholders-filter-bar (filterChanged)="table.updateFilter($event)">
-    </app-stakeholders-filter-bar>
+    <app-stakeholder-filter-bar (filterChanged)="table.updateFilter($event)">
+    </app-stakeholder-filter-bar>
   </div>
 
   <div class="table-container">
-    <app-stakeholders-table #table>
-    </app-stakeholders-table>
+    <app-stakeholder-table #table>
+    </app-stakeholder-table>
   </div>
 </div>

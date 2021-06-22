@@ -4,8 +4,6 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-HUGE refactor: Rename + folder structure
-
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly (mapper functions with source target) [remove req delta code...]

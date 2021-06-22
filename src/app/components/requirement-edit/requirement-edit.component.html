@@ -1,10 +1,10 @@
 <div class="entity-main-container">
   <div class="filter-bar-container">
-    <app-requirements-filter-bar (filterChanged)="table.updateFilter($event)">
-    </app-requirements-filter-bar>
+    <app-requirement-filter-bar (filterChanged)="table.updateFilter($event)">
+    </app-requirement-filter-bar>
   </div>
 
   <div class="table-container">
-    <app-requirements-table #table></app-requirements-table>
+    <app-requirement-table #table></app-requirement-table>
   </div>
 </div>

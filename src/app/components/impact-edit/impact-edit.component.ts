@@ -4,8 +4,8 @@ import {ImpactDataService} from '../../services/data/impact-data.service';
 import {ValueDataService} from '../../services/data/value-data.service';
 import {StakeholderDataService} from '../../services/data/stakeholder-data.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
-import {ImpactsTableComponent} from '../impacts-table/impacts-table.component';
-import {ImpactsFilterBarComponent} from '../impacts-filter-bar/impacts-filter-bar.component';
+import {ImpactTableComponent} from '../impact-table/impact-table.component';
+import {ImpactFilterBarComponent} from '../impact-filter-bar/impact-filter-bar.component';
 import {Stakeholder} from '../../model/Stakeholder';
 
 @Component({
@@ -14,8 +14,8 @@ import {Stakeholder} from '../../model/Stakeholder';
   styleUrls: ['./impact-edit.component.scss']
 })
 export class ImpactEditComponent {
-  @ViewChild(ImpactsTableComponent) table!: ImpactsTableComponent;
-  @ViewChild(ImpactsFilterBarComponent) filterBar!: ImpactsFilterBarComponent;
+  @ViewChild(ImpactTableComponent) table!: ImpactTableComponent;
+  @ViewChild(ImpactFilterBarComponent) filterBar!: ImpactFilterBarComponent;
 
   constructor(
     private logger: LogService,

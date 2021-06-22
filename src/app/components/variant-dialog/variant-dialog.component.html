@@ -1,0 +1,48 @@
+<div class="container">
+  <div mat-dialog-title>
+    <button mat-dialog-close mat-icon-button class="dialog-close">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="title-container" mat-dialog-title>
+      <h2>Variants</h2>
+    </div>
+  </div>
+
+
+  <div class="expansion-panel-container">
+    <ng-scrollbar>
+      <mat-accordion multi>
+
+        <!-- Selection -->
+        <div>
+          <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Selection</mat-panel-title>
+              <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-variant-table [archived]="false"></app-variant-table>
+          </mat-expansion-panel>
+        </div>
+
+        <!-- Archive -->
+        <div>
+          <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Archive</mat-panel-title>
+              <mat-panel-description></mat-panel-description>
+            </mat-expansion-panel-header>
+            <app-variant-table [ids]="ids"
+                                [archived]="true"></app-variant-table>
+          </mat-expansion-panel>
+        </div>
+      </mat-accordion>
+    </ng-scrollbar>
+  </div>
+
+  <div class="action-container">
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close (click)="closeClick()">Close</button>
+    </mat-dialog-actions>
+  </div>
+</div>

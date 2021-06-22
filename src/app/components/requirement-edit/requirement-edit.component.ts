@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
-import {RequirementsTableComponent} from '../requirements-table/requirements-table.component';
-import {RequirementsFilterBarComponent} from '../requirements-filter-bar/requirements-filter-bar.component';
+import {RequirementTableComponent} from '../requirement-table/requirement-table.component';
+import {RequirementFilterBarComponent} from '../requirement-filter-bar/requirement-filter-bar.component';
 import {RequirementRestService} from '../../services/rest/requirement-rest.service';
 import {RequirementDataService} from '../../services/data/requirement-data.service';
 import {Router} from '@angular/router';
@@ -11,8 +11,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./requirement-edit.component.scss']
 })
 export class RequirementEditComponent {
-  @ViewChild(RequirementsTableComponent) table!: RequirementsTableComponent;
-  @ViewChild(RequirementsFilterBarComponent) filterBar!: RequirementsFilterBarComponent;
+  @ViewChild(RequirementTableComponent) table!: RequirementTableComponent;
+  @ViewChild(RequirementFilterBarComponent) filterBar!: RequirementFilterBarComponent;
 
   constructor(
     private service: RequirementRestService,

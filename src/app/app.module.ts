@@ -21,11 +21,11 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ImprintComponent} from './components/imprint/imprint.component';
 import {PrivacyComponent} from './components/privacy/privacy.component';
-import {StakeholdersFilterBarComponent} from './components/stakeholders-filter-bar/stakeholders-filter-bar.component';
-import {StakeholdersImpactedComponent} from './components/stakeholders-impacted/stakeholders-impacted.component';
-import {StakeholdersLevelComponent} from './components/stakeholders-level/stakeholders-level.component';
-import {StakeholdersPriorityComponent} from './components/stakeholders-priority/stakeholders-priority.component';
-import {StakeholdersTableComponent} from './components/stakeholders-table/stakeholders-table.component';
+import {StakeholderFilterBarComponent} from './components/stakeholder-filter-bar/stakeholder-filter-bar.component';
+import {StakeholderImpactedComponent} from './components/stakeholder-impacted/stakeholder-impacted.component';
+import {StakeholderLevelComponent} from './components/stakeholder-level/stakeholder-level.component';
+import {StakeholderPriorityComponent} from './components/stakeholder-priority/stakeholder-priority.component';
+import {StakeholderTableComponent} from './components/stakeholder-table/stakeholder-table.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {HighlightSearchPipe} from './pipes/highlight-search.pipe';
 import {MatListModule} from '@angular/material/list';
@@ -36,19 +36,19 @@ import {ColumnSliderFilterComponent} from './components/column-slider-filter/col
 import {ColumnCategoryFilterComponent} from './components/column-category-filter/column-category-filter.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
-import {ValuesDialogComponent} from './components/values-dialog/values-dialog.component';
-import {ImpactsFilterBarComponent} from './components/impacts-filter-bar/impacts-filter-bar.component';
-import {ImpactsTableComponent} from './components/impacts-table/impacts-table.component';
-import {ValuesTableComponent} from './components/values-table/values-table.component';
+import {ValueDialogComponent} from './components/value-dialog/value-dialog.component';
+import {ImpactFilterBarComponent} from './components/impact-filter-bar/impact-filter-bar.component';
+import {ImpactTableComponent} from './components/impact-table/impact-table.component';
+import {ValueTableComponent} from './components/value-table/value-table.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {MatSortModule} from '@angular/material/sort';
 import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions, MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {RequirementsFilterBarComponent} from './components/requirements-filter-bar/requirements-filter-bar.component';
-import {RequirementsTableComponent} from './components/requirements-table/requirements-table.component';
-import {VariantsDialogComponent} from './components/variants-dialog/variants-dialog.component';
-import {VariantsTableComponent} from './components/variants-table/variants-table.component';
+import {RequirementFilterBarComponent} from './components/requirement-filter-bar/requirement-filter-bar.component';
+import {RequirementTableComponent} from './components/requirement-table/requirement-table.component';
+import {VariantDialogComponent} from './components/variant-dialog/variant-dialog.component';
+import {VariantTableComponent} from './components/variant-table/variant-table.component';
 import {AddEntityButtonComponent} from './components/add-entity-button/add-entity-button.component';
 import {ScrollToTopButtonComponent} from './components/scroll-to-top-button/scroll-to-top-button.component';
 import {MarkTextareaComponent} from './components/mark-textarea/mark-textarea.component';
@@ -91,11 +91,11 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     DashboardComponent,
     ImprintComponent,
     PrivacyComponent,
-    StakeholdersFilterBarComponent,
-    StakeholdersImpactedComponent,
-    StakeholdersLevelComponent,
-    StakeholdersPriorityComponent,
-    StakeholdersTableComponent,
+    StakeholderFilterBarComponent,
+    StakeholderImpactedComponent,
+    StakeholderLevelComponent,
+    StakeholderPriorityComponent,
+    StakeholderTableComponent,
     HighlightSearchPipe,
     PluckPipe,
     NgVarDirective,
@@ -103,14 +103,14 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     ColumnSliderFilterComponent,
     ColumnCategoryFilterComponent,
     ImpactSliderComponent,
-    ValuesDialogComponent,
-    ImpactsFilterBarComponent,
-    ImpactsTableComponent,
-    ValuesTableComponent,
-    RequirementsFilterBarComponent,
-    RequirementsTableComponent,
-    VariantsDialogComponent,
-    VariantsTableComponent,
+    ValueDialogComponent,
+    ImpactFilterBarComponent,
+    ImpactTableComponent,
+    ValueTableComponent,
+    RequirementFilterBarComponent,
+    RequirementTableComponent,
+    VariantDialogComponent,
+    VariantTableComponent,
     AddEntityButtonComponent,
     ScrollToTopButtonComponent,
     MarkTextareaComponent,

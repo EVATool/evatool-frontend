@@ -21,7 +21,7 @@ body {
   overflow: hidden;
 }
 
-@import 'app/components/stakeholders-impacted/stakeholders-impacted.component';
+@import 'app/components/stakeholder-impacted/stakeholder-impacted.component';
 @include stakeholder-impact-slider-theme();
 
 @import "app/layout/style/resets";

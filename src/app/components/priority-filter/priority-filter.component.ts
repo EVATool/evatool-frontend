@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
-import {StakeholdersPriorityComponent} from '../stakeholders-priority/stakeholders-priority.component';
+import {StakeholderPriorityComponent} from '../stakeholder-priority/stakeholder-priority.component';
 
 @Component({
   selector: 'app-priority-filter',
@@ -8,7 +8,7 @@ import {StakeholdersPriorityComponent} from '../stakeholders-priority/stakeholde
 })
 export class PriorityFilterComponent {
 
-  @ViewChild(StakeholdersPriorityComponent) stakeholderPriority!: StakeholdersPriorityComponent;
+  @ViewChild(StakeholderPriorityComponent) stakeholderPriority!: StakeholderPriorityComponent;
 
   @Output() filterChanged = new EventEmitter<string[]>();
 
