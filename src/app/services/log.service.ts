@@ -4,8 +4,6 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Sort entities from backend by id again (or sort them in some other way)
-
 HUGE refactor: Rename + folder structure
 
 Tasks aus Jira (UID) -> das Jira public machen?
