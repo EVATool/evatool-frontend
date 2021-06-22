@@ -5,6 +5,7 @@ import {environment} from '../environments/environment';
 import {Title} from '@angular/platform-browser';
 import enLanguage from './../assets/i18n/en.json';
 import deLanguage from './../assets/i18n/de.json';
+import {LogService} from './services/log.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import deLanguage from './../assets/i18n/de.json';
 export class AppComponent {
   constructor(private titleService: Title,
               private master: MasterService,
-              public translate: TranslateService) {
+              public translate: TranslateService,
+              private logger: LogService) {
     // Language settings.
     translate.setTranslation('en', enLanguage);
     translate.addLangs(['en', 'de']);
@@ -24,10 +26,10 @@ export class AppComponent {
     const useDefaultOverBrowserLang = environment.useDefaultOverBrowserLang;
 
     if (useDefaultOverBrowserLang === 'true') {
-      translate.setTranslation(defaultLang, this.getLang(defaultLang));
+      translate.setTranslation(defaultLang, this.getLangJson(defaultLang));
       translate.setDefaultLang(defaultLang);
     } else {
-      translate.setTranslation(browserLang, this.getLang(browserLang));
+      translate.setTranslation(browserLang, this.getLangJson(browserLang));
       translate.setDefaultLang(browserLang);
     }
 
@@ -39,13 +41,14 @@ export class AppComponent {
     this.master.init();
   }
 
-  private getLang(lang: string): any {
+  private getLangJson(lang: string): any {
     if (lang === 'en') {
       return enLanguage;
     } else if (lang === 'de') {
       return deLanguage;
     } else {
-      throw new Error('Language ' + lang + ' not supported');
+      this.logger.error(this, 'Language "' + lang + '" not supported. Using en language.');
+      return enLanguage;
     }
   }
 }
