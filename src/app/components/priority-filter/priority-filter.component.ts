@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
-import {StakeholdersPriorityComponent} from '../analysis-home/stakeholders/stakeholders-priority/stakeholders-priority.component';
+import {StakeholdersPriorityComponent} from '../stakeholders-priority/stakeholders-priority.component';
 
 @Component({
   selector: 'app-priority-filter',

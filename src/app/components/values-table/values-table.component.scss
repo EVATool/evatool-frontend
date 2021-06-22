@@ -1,0 +1,12 @@
+@import '../../../styles';
+
+@include misc-theme();
+@include modal-table-theme();
+
+.mat-column-archived {
+  width: 15% !important;
+}
+
+.mat-column-name {
+  width: 20% !important;
+}

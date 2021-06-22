@@ -1,0 +1,63 @@
+@import '../../../styles';
+
+@include misc-theme();
+@include main-table-theme();
+
+.mat-column-prefixSequenceId {
+  width: 80px;
+}
+
+.mat-column-name {
+  width: 250px;
+  text-overflow: ellipsis;
+}
+
+.mat-column-level {
+  width: 200px;
+}
+
+.mat-column-priority {
+  width: 150px;
+}
+
+.mat-column-impacted {
+  width: 150px;
+}
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 8px;
+}
+
+#value-modal {
+  margin-left: 5%;
+}
+
+.impact-slider-container {
+  margin-top: 2%;
+}
+
+.value-percentage {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: -5%;
+}
+
+/* Delete row button */
+
+.delete-button-wrapper {
+  display: table;
+  width: 100%;
+}
+
+.impacted-container {
+  display: table-cell;
+  text-align: left;
+  padding: 2px;
+  vertical-align: middle;
+  width: 99%;
+  overflow: hidden;
+}

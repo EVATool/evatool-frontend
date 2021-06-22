@@ -13,19 +13,19 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AnalysisTileComponent} from './components/analysis-tile/analysis-tile.component';
-import {AnalysisHomeComponent} from './components/analysis-home/analysis-home.component';
-import {StakeholdersComponent} from './components/analysis-home/stakeholders/stakeholders.component';
-import {ImpactsComponent} from './components/analysis-home/impacts/impacts.component';
-import {RequirementsComponent} from './components/analysis-home/requirements/requirements.component';
+import {AnalysisEditComponent} from './components/analysis-edit/analysis-edit.component';
+import {StakeholdersComponent} from './components/stakeholders/stakeholders.component';
+import {ImpactsComponent} from './components/impacts/impacts.component';
+import {RequirementsComponent} from './components/requirements/requirements.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import {DashboardComponent} from './components/analysis-home/dashboard/dashboard.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {ImprintComponent} from './components/imprint/imprint.component';
 import {PrivacyComponent} from './components/privacy/privacy.component';
-import {StakeholdersFilterBarComponent} from './components/analysis-home/stakeholders/stakeholders-filter-bar/stakeholders-filter-bar.component';
-import {StakeholdersImpactedComponent} from './components/analysis-home/stakeholders/stakeholders-impacted/stakeholders-impacted.component';
-import {StakeholdersLevelComponent} from './components/analysis-home/stakeholders/stakeholders-level/stakeholders-level.component';
-import {StakeholdersPriorityComponent} from './components/analysis-home/stakeholders/stakeholders-priority/stakeholders-priority.component';
-import {StakeholdersTableComponent} from './components/analysis-home/stakeholders/stakeholders-table/stakeholders-table.component';
+import {StakeholdersFilterBarComponent} from './components/stakeholders-filter-bar/stakeholders-filter-bar.component';
+import {StakeholdersImpactedComponent} from './components/stakeholders-impacted/stakeholders-impacted.component';
+import {StakeholdersLevelComponent} from './components/stakeholders-level/stakeholders-level.component';
+import {StakeholdersPriorityComponent} from './components/stakeholders-priority/stakeholders-priority.component';
+import {StakeholdersTableComponent} from './components/stakeholders-table/stakeholders-table.component';
 import {MatSliderModule} from '@angular/material/slider';
 import {HighlightSearchPipe} from './pipes/highlight-search.pipe';
 import {MatListModule} from '@angular/material/list';
@@ -36,21 +36,21 @@ import {ColumnSliderFilterComponent} from './components/column-slider-filter/col
 import {ColumnCategoryFilterComponent} from './components/column-category-filter/column-category-filter.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
-import {ValuesDialogComponent} from './components/analysis-home/impacts/values-dialog/values-dialog.component';
-import {ImpactsFilterBarComponent} from './components/analysis-home/impacts/impacts-filter-bar/impacts-filter-bar.component';
-import {ImpactsTableComponent} from './components/analysis-home/impacts/impacts-table/impacts-table.component';
-import {ValuesTableComponent} from './components/analysis-home/impacts/values-dialog/values-table/values-table.component';
+import {ValuesDialogComponent} from './components/values-dialog/values-dialog.component';
+import {ImpactsFilterBarComponent} from './components/impacts-filter-bar/impacts-filter-bar.component';
+import {ImpactsTableComponent} from './components/impacts-table/impacts-table.component';
+import {ValuesTableComponent} from './components/values-table/values-table.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {MatSortModule} from '@angular/material/sort';
 import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions, MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {RequirementsFilterBarComponent} from './components/analysis-home/requirements/requirements-filter-bar/requirements-filter-bar.component';
-import {RequirementsTableComponent} from './components/analysis-home/requirements/requirements-table/requirements-table.component';
-import {VariantsDialogComponent} from './components/analysis-home/requirements/variants-dialog/variants-dialog.component';
-import {VariantsTableComponent} from './components/analysis-home/requirements/variants-dialog/variants-table/variants-table.component';
-import {AddEntityButtonComponent} from './components/analysis-home/add-entity-button/add-entity-button.component';
-import {ScrollToTopButtonComponent} from './components/analysis-home/scroll-to-top-button/scroll-to-top-button.component';
+import {RequirementsFilterBarComponent} from './components/requirements-filter-bar/requirements-filter-bar.component';
+import {RequirementsTableComponent} from './components/requirements-table/requirements-table.component';
+import {VariantsDialogComponent} from './components/variants-dialog/variants-dialog.component';
+import {VariantsTableComponent} from './components/variants-table/variants-table.component';
+import {AddEntityButtonComponent} from './components/add-entity-button/add-entity-button.component';
+import {ScrollToTopButtonComponent} from './components/scroll-to-top-button/scroll-to-top-button.component';
 import {MarkTextareaComponent} from './components/mark-textarea/mark-textarea.component';
 import {AnalysisDialogComponent} from './components/analysis-dialog/analysis-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -84,7 +84,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     FooterComponent,
     HomeComponent,
     AnalysisTileComponent,
-    AnalysisHomeComponent,
+    AnalysisEditComponent,
     StakeholdersComponent,
     ImpactsComponent,
     RequirementsComponent,
