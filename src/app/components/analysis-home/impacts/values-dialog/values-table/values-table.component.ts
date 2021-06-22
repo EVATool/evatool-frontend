@@ -11,6 +11,11 @@ import {Impact} from '../../../../../model/Impact';
 import {HttpLoaderService} from '../../../../../services/http-loader.service';
 import {HttpInfo} from '../../../../../services/HttpInfo';
 import {FunctionalErrorCodeService} from '../../../../../services/functional-error-code.service';
+import {
+  CrossUiEventService,
+  ImpactReferencedByRequirementsEvent,
+  ValueReferencedByImpactsEvent
+} from '../../../../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-values-table',
@@ -32,10 +37,21 @@ export class ValuesTableComponent implements OnInit, AfterViewInit {
     private impactDataService: ImpactDataService,
     private analysisDataService: AnalysisDataService,
     private httpLoader: HttpLoaderService,
+    private crossUI: CrossUiEventService,
     private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.crossUI.valueReferencedByImpacts.subscribe((event: ValueReferencedByImpactsEvent) => {
+      const message = 'This value cannot be deleted. It is still being used by '
+        + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
+      const action = 'show';
+      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+      snackBarRef.onAction().subscribe(() => {
+        this.crossUI.userWantsToSeeValueReferencedByImpacts.emit(event);
+      });
+    });
+
     this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
       if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT) {
         const value = this.valueDataService.values.find(v => v.id === httpInfo.tag);

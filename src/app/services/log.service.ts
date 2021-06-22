@@ -6,7 +6,7 @@ Features:
 
 Cross UI events (redo 3 out of 4 events for functional events)
 redo archive events as crossUI events
-.
+
 HUGE refactor: Rename + folder structure
 
 Tasks aus Jira (UID) -> das Jira public machen?

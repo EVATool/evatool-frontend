@@ -77,8 +77,8 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.crossUI.userWantsToSeeImpactReferencedByRequirements.subscribe((event: ImpactReferencedByRequirementsEvent) => {
       this.deletionFlaggedImpact = event.impact;
-      this.requirementDeltaDataService.requirementDeltas.forEach((delta: RequirementDelta) => {
-        delta.highlighted = event.deltas.includes(delta);
+      event.deltas.forEach((delta: RequirementDelta) => {
+        delta.highlighted = true;
       });
     });
 

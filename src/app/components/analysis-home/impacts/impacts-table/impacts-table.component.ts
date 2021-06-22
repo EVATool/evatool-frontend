@@ -16,7 +16,11 @@ import {ValuesDialogComponent} from '../values-dialog/values-dialog.component';
 import {Value} from '../../../../model/Value';
 import {Stakeholder} from '../../../../model/Stakeholder';
 import {RequirementDelta} from '../../../../model/RequirementDelta';
-import {CrossUiEventService, ImpactReferencedByRequirementsEvent} from '../../../../services/cross-ui-event.service';
+import {
+  CrossUiEventService,
+  ImpactReferencedByRequirementsEvent,
+  ValueReferencedByImpactsEvent
+} from '../../../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-impacts-table',
@@ -47,9 +51,16 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.crossUI.userWantsToSeeValueReferencedByImpacts.subscribe((event: ValueReferencedByImpactsEvent) => {
+      this.deletionFlaggedValue = event.value;
+      event.impacts.forEach(impact => {
+        impact.highlighted = true;
+      });
+    });
+
     this.crossUI.impactReferencedByRequirements.subscribe((event: ImpactReferencedByRequirementsEvent) => {
       const message = 'This impact cannot be deleted. It is still being used by '
-        + event.deltas.length + ' requirements' + (event.deltas.length === 1 ? '' : 's') + '.';
+        + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
       const action = 'show';
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
       snackBarRef.onAction().subscribe(() => {
@@ -170,17 +181,6 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
       height: '80%',
       width: '50%',
       data: {id: id}
-    });
-
-    dialogRef.afterClosed().subscribe((data) => {
-      this.logger.info(this, 'Closing Values Dialog');
-
-      if (data?.showReferencedImpacts) {
-        this.deletionFlaggedValue = data.value;
-        this.impactDataService.impacts.forEach(impact => {
-          impact.highlighted = impact.value === data.value;
-        });
-      }
     });
   }
 
