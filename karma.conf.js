@@ -22,6 +22,9 @@ module.exports = function (config) {
         served: true
       }
     ],
+    proxies: {
+      '/assets/': '/base/src/assets/'
+    },
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
