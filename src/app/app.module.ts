@@ -54,7 +54,6 @@ import {ScrollToTopButtonComponent} from './components/analysis-home/scroll-to-t
 import {MarkTextareaComponent} from './components/mark-textarea/mark-textarea.component';
 import {AnalysisDialogComponent} from './components/home/analysis-dialog/analysis-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {ImpactedFilterComponent} from './components/impacted-filter/impacted-filter.component';
 import {PriorityFilterComponent} from './components/priority-filter/priority-filter.component';
 import {PluckPipe} from './pipes/pluck.pipe';
 import {NgVarDirective} from './directives/ng-var.directive';
@@ -116,7 +115,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ScrollToTopButtonComponent,
     MarkTextareaComponent,
     AnalysisDialogComponent,
-    ImpactedFilterComponent,
     PriorityFilterComponent,
     ConfirmationDialogComponent,
     HttpLoaderComponent
