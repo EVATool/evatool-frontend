@@ -36,6 +36,7 @@ export class ValueDataService extends DataService {
         valueDtoList.forEach(valueDto => {
           this.values.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
         });
+        this.values = this.sortDefault(this.values);
         this.loadedValues.emit(this.values);
         this.logger.info(this, 'Values loaded');
       });

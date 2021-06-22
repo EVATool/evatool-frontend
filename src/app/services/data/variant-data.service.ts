@@ -34,6 +34,7 @@ export class VariantDataService extends DataService {
         variantDtoList.forEach(variantDto => {
           this.variants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));
         });
+        this.variants = this.sortDefault(this.variants);
         this.loadedVariants.emit(this.variants);
         this.logger.info(this, 'Variants loaded');
       });

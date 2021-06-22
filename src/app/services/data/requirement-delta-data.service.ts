@@ -71,6 +71,7 @@ export class RequirementDeltaDataService extends DataService {
           this.requirementData.requirements,
           this.impactData.impacts));
       });
+      this.requirementDeltas = this.sortDefault(this.requirementDeltas);
       this.loadedRequirementDeltas.emit(this.requirementDeltas);
       this.logger.info(this, 'RequirementDeltas loaded');
     });

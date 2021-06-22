@@ -52,6 +52,7 @@ export class RequirementDataService extends DataService {
           [this.analysisData.currentAnalysis],
           this.variantData.variants));
       });
+      this.requirements = this.sortDefault(this.requirements);
       this.loadedRequirements.emit(this.requirements);
       this.logger.info(this, 'Requirements loaded');
     });

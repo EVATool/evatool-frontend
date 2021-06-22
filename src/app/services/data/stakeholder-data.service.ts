@@ -38,6 +38,7 @@ export class StakeholderDataService extends DataService {
         stakeholderDtoList.forEach(stakeholderDto => {
           this.stakeholders.push(this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]));
         });
+        this.stakeholders = this.sortDefault(this.stakeholders);
         this.loadedStakeholders.emit(this.stakeholders);
         this.logger.info(this, 'Stakeholders loaded');
       });

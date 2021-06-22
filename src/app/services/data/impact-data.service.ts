@@ -61,6 +61,7 @@ export class ImpactDataService extends DataService {
           this.valueData.values,
           this.stakeholderData.stakeholders));
       });
+      this.impacts = this.sortDefault(this.impacts);
       this.loadedImpacts.emit(this.impacts);
       this.logger.info(this, 'Impacts loaded');
     });

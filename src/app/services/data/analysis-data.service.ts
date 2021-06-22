@@ -44,6 +44,7 @@ export class AnalysisDataService extends DataService {
       analysisDtoList.forEach(analysisDto => {
         this.analyses.push(this.analysisMapper.fromDto(analysisDto));
       });
+      this.analyses = this.sortDefault(this.analyses);
       this.loadedAnalyses.emit(this.analyses);
       this.logger.info(this, 'Analyses loaded');
     });
