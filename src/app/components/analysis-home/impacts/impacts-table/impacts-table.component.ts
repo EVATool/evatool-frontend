@@ -18,7 +18,7 @@ import {Stakeholder} from '../../../../model/Stakeholder';
 import {RequirementDelta} from '../../../../model/RequirementDelta';
 import {
   CrossUiEventService,
-  ImpactReferencedByRequirementsEvent,
+  ImpactReferencedByRequirementsEvent, StakeholderReferencedByImpactsEvent,
   ValueReferencedByImpactsEvent
 } from '../../../../services/cross-ui-event.service';
 
@@ -54,6 +54,13 @@ export class ImpactsTableComponent implements OnInit, AfterViewInit {
     this.crossUI.userWantsToSeeValueReferencedByImpacts.subscribe((event: ValueReferencedByImpactsEvent) => {
       this.deletionFlaggedValue = event.value;
       event.impacts.forEach(impact => {
+        impact.highlighted = true;
+      });
+    });
+
+    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.subscribe((event: StakeholderReferencedByImpactsEvent) => {
+      this.deletionFlaggedStakeholder = event.stakeholder;
+      event.impacts.forEach((impact: Impact) => {
         impact.highlighted = true;
       });
     });

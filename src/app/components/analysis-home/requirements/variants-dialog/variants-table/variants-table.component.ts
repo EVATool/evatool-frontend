@@ -98,18 +98,6 @@ export class VariantsTableComponent implements OnInit, AfterViewInit {
     this.variantDataService.deleteVariant(variant);
   }
 
-  thwartValueOperation(variant: Variant, numRequirementsUseVariant: number): void {
-    this.logger.warn(this, 'This variant is still being used by ' + numRequirementsUseVariant + ' requirements');
-    const message = 'This variant cannot be deleted. It is still being used by '
-      + numRequirementsUseVariant + ' requirement' + (numRequirementsUseVariant === 1 ? '' : 's') + '.';
-    const action = 'show';
-    const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-    snackBarRef.onAction().subscribe(() => {
-      this.logger.info(this, 'User wants to see the requirements referencing the variant');
-      this.userWantsToSeeReferencedRequirements.emit(variant);
-    });
-  }
-
   archivedVariantReferenced(variant: Variant): boolean {
     return this.ids?.includes(variant.id);
   }

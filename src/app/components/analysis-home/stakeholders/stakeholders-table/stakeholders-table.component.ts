@@ -15,6 +15,7 @@ import {FunctionalErrorCodeService} from '../../../../services/functional-error-
 import {Value} from '../../../../model/Value';
 import {Impact} from '../../../../model/Impact';
 import {ImpactDataService} from '../../../../services/data/impact-data.service';
+import {CrossUiEventService, StakeholderReferencedByImpactsEvent} from '../../../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-stakeholders-table',
@@ -37,19 +38,24 @@ export class StakeholdersTableComponent implements OnInit, AfterViewInit {
               private analysisData: AnalysisDataService,
               private impactData: ImpactDataService,
               private httpLoader: HttpLoaderService,
+              private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    // this.logger.warn(this, 'This stakeholder is still being used by ' + numImpactsUseStakeholder + ' impacts');
-    // const message = 'This stakeholder cannot be deleted. It is still being used by '
-    //   + numImpactsUseStakeholder + ' impact' + (numImpactsUseStakeholder === 1 ? '' : 's') + '.';
-    // const action = 'show';
-    // const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-    // snackBarRef.onAction().subscribe(() => {
-    //   this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
-    //   this.userWantsToSeeReferencedImpacts.emit(stakeholder);
-    // });
+    this.crossUI.stakeholderReferencedByImpacts.subscribe((event: StakeholderReferencedByImpactsEvent) => {
+      this.logger.warn(this, 'This stakeholder is still being used by ' + event.impacts.length + ' impacts');
+      const message = 'This stakeholder cannot be deleted. It is still being used by '
+        + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
+      const action = 'show';
+      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+      snackBarRef.onAction().subscribe(() => {
+        this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
+        this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.emit(event);
+      });
+    });
+
+
     //
     // this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
     //   if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT) {

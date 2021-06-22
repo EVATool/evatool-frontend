@@ -4,8 +4,8 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Cross UI events (redo 1 out of 4 events for functional events)
 redo archive events as crossUI events
+Sort entities from backend by id again (or sort them in some other way)
 
 HUGE refactor: Rename + folder structure
 
@@ -28,7 +28,6 @@ Deep copy: copy everything?
 Backlog:
 tooltips should update when entity properties change
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
-The default sorting method caused IMP1, IMP3, IMP2 once. Does this happend again?
 Strange bug when negative impact was only slidable like a positive in requirements table
 How to deal with impacts going horizontal in requirement table
 merit Color backend lookup table for possible values
