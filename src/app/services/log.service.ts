@@ -4,7 +4,6 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-redo archive events as crossUI events
 Sort entities from backend by id again (or sort them in some other way)
 
 HUGE refactor: Rename + folder structure

@@ -67,10 +67,4 @@ export class AnalysisHomeComponent implements AfterViewInit {
         break;
     }
   }
-
-  propagateSeeReferences(stakeholder: Stakeholder): void {
-    this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
-    this.tabGroup.selectedIndex = 1;
-    this.impactsComponent.highlightImpactsByStakeholder(stakeholder);
-  }
 }

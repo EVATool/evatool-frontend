@@ -302,17 +302,6 @@ export class RequirementsTableComponent implements OnInit, AfterViewInit {
       width: '50%',
       data: {ids: ids}
     });
-
-    dialogRef.afterClosed().subscribe((data) => {
-      this.logger.info(this, 'Closing Variants Dialog');
-
-      if (data?.showReferencedRequirements) {
-        this.deletionFlaggedVariant = data.variant;
-        this.requirementDataService.requirements.forEach(requirement => {
-          requirement.highlighted = requirement.variants.includes(data.variant);
-        });
-      }
-    });
   }
 
   referencesArchivedVariant(requirement: Requirement): boolean {

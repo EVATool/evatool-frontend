@@ -29,8 +29,4 @@ export class ImpactsComponent {
     this.logger.info(this, 'Tab activated');
     //this.table?.reload();
   }
-
-  highlightImpactsByStakeholder(stakeholder: Stakeholder): void {
-    this.table.highlightImpactsByStakeholder(stakeholder);
-  }
 }

@@ -16,8 +16,4 @@ export class StakeholdersComponent {
 
   constructor(private logger: LogService) {
   }
-
-  propagateSeeReferences(stakeholder: Stakeholder): void {
-    this.userWantsToSeeReferencedImpacts.emit(stakeholder);
-  }
 }

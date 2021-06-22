@@ -38,9 +38,4 @@ export class VariantsDialogComponent implements OnInit {
   closeClick(): void {
     this.dialogRef.close();
   }
-
-  propagateSeeReferences(variant: Variant): void {
-    this.logger.info(this, 'User wants to see the requirements referencing the variant');
-    this.dialogRef.close({showReferencedRequirements: true, variant: variant});
-  }
 }
