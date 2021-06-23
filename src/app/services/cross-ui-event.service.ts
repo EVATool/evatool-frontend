@@ -15,6 +15,7 @@ import {RequirementDataService} from './data/requirement-data.service';
 import {StakeholderDataService} from './data/stakeholder-data.service';
 import {ValueDataService} from './data/value-data.service';
 import {Analysis} from '../model/Analysis';
+import {AnalysisDataService} from './data/analysis-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,13 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
   @Output() requirementDeltaDeletionFailed: EventEmitter<RequirementDeltaDeletionFailedEvent> = new EventEmitter();
 
   constructor(private httpLoader: HttpLoaderService,
+              private analysisData: AnalysisDataService,
+              private valueData: ValueDataService,
+              private stakeholderData: StakeholderDataService,
               private impactData: ImpactDataService,
-              private requirementDeltaData: RequirementDeltaDataService,
               private variantData: VariantDataService,
               private requirementData: RequirementDataService,
-              private stakeholderData: StakeholderDataService,
-              private valueData: ValueDataService) {
+              private requirementDeltaData: RequirementDeltaDataService) {
   }
 
   init(): void {
@@ -86,28 +88,47 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
             break;
         }
       } else {
-        if (httpInfo.method === 'DELETE') { // TODO only throw events.
+        if (httpInfo.method === 'DELETE') {
           const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1);
           const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
           const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
+          const notFound = httpInfo.httpStatusCode === 404;
 
           if (apiEndpoint === 'analyses') {
-
+            const analysis = this.analysisData.analyses.find(a => a.id === id);
+            if (analysis) {
+              this.analysisDeletionFailed.emit(new AnalysisDeletionFailedEvent(analysis, notFound));
+            }
           } else if (apiEndpoint === 'stakeholders') {
-
+            const stakeholder = this.stakeholderData.stakeholders.find(s => s.id === id);
+            if (stakeholder) {
+              this.stakeholderDeletionFailed.emit(new StakeholderDeletionFailedEvent(stakeholder, notFound));
+            }
           } else if (apiEndpoint === 'values') {
-
+            const value = this.valueData.values.find(v => v.id === id);
+            if (value) {
+              this.valueDeletionFailed.emit(new ValueDeletionFailedEvent(value, notFound));
+            }
           } else if (apiEndpoint === 'impacts') {
-
+            const impact = this.impactData.impacts.find(i => i.id === id);
+            if (impact) {
+              this.impactDeletionFailed.emit(new ImpactDeletionFailedEvent(impact, notFound));
+            }
           } else if (apiEndpoint === 'variants') {
-
+            const variant = this.variantData.variants.find(v => v.id === id);
+            if (variant) {
+              this.variantDeletionFailed.emit(new VariantDeletionFailedEvent(variant, notFound));
+            }
           } else if (apiEndpoint === 'requirements') {
             const requirement = this.requirementData.requirements.find(r => r.id === id);
             if (requirement) {
-              this.requirementDeletionFailed.emit(new RequirementDeletionFailedEvent(requirement));
+              this.requirementDeletionFailed.emit(new RequirementDeletionFailedEvent(requirement, notFound));
             }
           } else if (apiEndpoint === 'requirement-deltas') {
-
+            const requirementDelta = this.requirementDeltaData.requirementDeltas.find(rd => rd.id === id);
+            if (requirementDelta) {
+              this.requirementDeltaDeletionFailed.emit(new RequirementDeltaDeletionFailedEvent(requirementDelta, notFound));
+            }
           }
         }
       }
@@ -163,50 +184,52 @@ export class VariantReferencedByRequirementsEvent {
 
 export abstract class DeletionFailedEvent<T> {
   entity!: T;
+  notFound!: boolean;
 
-  protected constructor(entity: T) {
+  protected constructor(entity: T, notFound: boolean) {
     this.entity = entity;
+    this.notFound = notFound;
   }
 }
 
 export class AnalysisDeletionFailedEvent extends DeletionFailedEvent<Analysis> {
-  constructor(analysis: Analysis) {
-    super(analysis);
+  constructor(analysis: Analysis, notFound: boolean) {
+    super(analysis, notFound);
   }
 }
 
 export class StakeholderDeletionFailedEvent extends DeletionFailedEvent<Stakeholder> {
-  constructor(stakeholder: Stakeholder) {
-    super(stakeholder);
+  constructor(stakeholder: Stakeholder, notFound: boolean) {
+    super(stakeholder, notFound);
   }
 }
 
 export class ValueDeletionFailedEvent extends DeletionFailedEvent<Value> {
-  constructor(value: Value) {
-    super(value);
+  constructor(value: Value, notFound: boolean) {
+    super(value, notFound);
   }
 }
 
 export class ImpactDeletionFailedEvent extends DeletionFailedEvent<Impact> {
-  constructor(impact: Impact) {
-    super(impact);
+  constructor(impact: Impact, notFound: boolean) {
+    super(impact, notFound);
   }
 }
 
 export class VariantDeletionFailedEvent extends DeletionFailedEvent<Variant> {
-  constructor(variant: Variant) {
-    super(variant);
+  constructor(variant: Variant, notFound: boolean) {
+    super(variant, notFound);
   }
 }
 
 export class RequirementDeletionFailedEvent extends DeletionFailedEvent<Requirement> {
-  constructor(requirement: Requirement) {
-    super(requirement);
+  constructor(requirement: Requirement, notFound: boolean) {
+    super(requirement, notFound);
   }
 }
 
 export class RequirementDeltaDeletionFailedEvent extends DeletionFailedEvent<RequirementDelta> {
-  constructor(requirementDelta: RequirementDelta) {
-    super(requirementDelta);
+  constructor(requirementDelta: RequirementDelta, notFound: boolean) {
+    super(requirementDelta, notFound);
   }
 }

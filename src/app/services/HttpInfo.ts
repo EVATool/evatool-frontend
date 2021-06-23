@@ -3,6 +3,7 @@ export class HttpInfo {
   timestamp = 0;
   path!: string;
   method!: string;
+  httpStatusCode!: number;
   type!: HttpInfoType;
   functionalErrorCode?: number;
   tag?: any;

@@ -6,7 +6,7 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-Disable delete button until result received
+Disable delete button until result received (sub to events)
 tooltips should update when entity properties change
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
