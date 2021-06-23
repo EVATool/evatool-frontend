@@ -3,8 +3,8 @@ import {TestBed} from '@angular/core/testing';
 import {AnalysisRestService} from './analysis-rest.service';
 import {SpecService} from '../spec.service';
 import {SampleDataService} from '../sample-data.service';
-import {Analysis} from '../../model/Analysis';
 import {HttpTestingController} from '@angular/common/http/testing';
+import {AnalysisDto} from '../../dto/AnalysisDto';
 
 describe('AnalysisRestService', () => {
   let service: AnalysisRestService;
@@ -33,7 +33,7 @@ describe('AnalysisRestService', () => {
       const analysisDto = data.analysesDtoList[0];
 
       // then
-      service.getAnalysisById(analysisDto.id).subscribe((analysisDtoResponse: Analysis) => {
+      service.getAnalysisById(analysisDto.id).subscribe((analysisDtoResponse: AnalysisDto) => {
         expect(analysisDtoResponse).toEqual(analysisDto);
       });
     });
@@ -45,7 +45,7 @@ describe('AnalysisRestService', () => {
       const analysisDtoList = data.analysesDtoList;
 
       // then
-      service.getAnalyses().subscribe((analysisDtoListResponse: Analysis[]) => {
+      service.getAnalyses().subscribe((analysisDtoListResponse: AnalysisDto[]) => {
         expect(analysisDtoListResponse).toEqual(analysisDtoList);
       });
     });
@@ -57,7 +57,7 @@ describe('AnalysisRestService', () => {
       const analysisDto = data.analysesDtoList[0];
 
       // then
-      service.deepCopy(analysisDto.id, analysisDto).subscribe((analysisDtoResponse: Analysis) => {
+      service.deepCopy(analysisDto.id, analysisDto).subscribe((analysisDtoResponse: AnalysisDto) => {
         expect(analysisDtoResponse).toEqual(analysisDto);
       });
     });
@@ -69,7 +69,7 @@ describe('AnalysisRestService', () => {
       const analysisDto = data.analysesDtoList[0];
 
       // then
-      service.createAnalysis(analysisDto).subscribe((analysisDtoResponse: Analysis) => {
+      service.createAnalysis(analysisDto).subscribe((analysisDtoResponse: AnalysisDto) => {
         expect(analysisDtoResponse).toEqual(analysisDto);
       });
     });
@@ -82,7 +82,7 @@ describe('AnalysisRestService', () => {
       const analysisDto = data.analysesDtoList[0];
 
       // then
-      service.updateAnalysis(analysisDto).subscribe((analysisDtoResponse: Analysis) => {
+      service.updateAnalysis(analysisDto).subscribe((analysisDtoResponse: AnalysisDto) => {
         expect(analysisDtoResponse).toEqual(analysisDto);
       });
     });
