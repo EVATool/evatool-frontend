@@ -21,6 +21,6 @@ export class HighlightSearchPipe implements PipeTransform {
       return value;
     }
 
-    return value.replace(regex, `<span class='highlight'>$1</span>`);
+    return value.replace(regex, `<span class="highlighted-text">$1</span>`);
   }
 }

@@ -16,7 +16,7 @@ describe('HighlightSearchPipe', () => {
     const highlightedText = pipe.transform(text, highlightFilter);
 
     // then
-    expect(highlightedText).toEqual('highlight <span class=\'highlight\'>m</span>e');
+    expect(highlightedText).toEqual('highlight <span class="highlighted-text">m</span>e');
   });
 
   it('should enclose the same filter string multiple times', () => {
@@ -29,7 +29,7 @@ describe('HighlightSearchPipe', () => {
     const highlightedText = pipe.transform(text, highlightFilter);
 
     // then
-    expect(highlightedText).toEqual('<span class=\'highlight\'>h</span>ig<span class=\'highlight\'>h</span>lig<span class=\'highlight\'>h</span>t me');
+    expect(highlightedText).toEqual('<span class="highlighted-text">h</span>ig<span class="highlighted-text">h</span>lig<span class="highlighted-text">h</span>t me');
   });
 
   it('should be case insensitive when searching but case sensitive when replacing', () => {
@@ -42,6 +42,6 @@ describe('HighlightSearchPipe', () => {
     const highlightedText = pipe.transform(text, highlightFilter);
 
     // then
-    expect(highlightedText).toEqual('<span class=\'highlight\'>H</span>ig<span class=\'highlight\'>h</span>lig<span class=\'highlight\'>h</span>t me');
+    expect(highlightedText).toEqual('<span class="highlighted-text">H</span>ig<span class="highlighted-text">h</span>lig<span class="highlighted-text">h</span>t me');
   });
 });
