@@ -6,8 +6,6 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-tooltips should update when entity properties change
-
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses, dialog: ensure template selected + textfields not empty

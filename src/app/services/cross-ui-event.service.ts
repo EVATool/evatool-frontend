@@ -16,6 +16,7 @@ import {StakeholderDataService} from './data/stakeholder-data.service';
 import {ValueDataService} from './data/value-data.service';
 import {Analysis} from '../model/Analysis';
 import {AnalysisDataService} from './data/analysis-data.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,8 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
 
   @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
+
+  @Output() analysisWithIdNotFound: EventEmitter<AnalysisWithIdNotFound> = new EventEmitter();
 
   @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
   @Output() stakeholderDeletionFailed: EventEmitter<StakeholderDeletionFailedEvent> = new EventEmitter();
@@ -88,12 +91,14 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
             break;
         }
       } else {
-        if (httpInfo.method === 'DELETE') { // TODO change this to DELETE or UPDATE? then remove entities in event subscriptions.
-          const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1); // TODO make this more resilient.
-          const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
-          const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
-          const notFound = httpInfo.httpStatusCode === 404;
+        const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1); // TODO make this more resilient.
+        const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
+        const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
+        const notFound = httpInfo.httpStatusCode === 404;
 
+        if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
+          this.analysisWithIdNotFound.emit(new AnalysisWithIdNotFound(id));
+        } else if (httpInfo.method === 'DELETE') { // TODO change this to DELETE || UPDATE? then remove entities in event subscriptions.
           if (apiEndpoint === 'analyses') {
             const analysis = this.analysisData.analyses.find(a => a.id === id);
             if (analysis) {
@@ -178,6 +183,15 @@ export class VariantReferencedByRequirementsEvent {
   constructor(variant: Variant, requirements: Requirement[]) {
     this.variant = variant;
     this.requirements = requirements;
+  }
+}
+
+
+export class AnalysisWithIdNotFound {
+  id!: string;
+
+  constructor(id: string) {
+    this.id = id;
   }
 }
 

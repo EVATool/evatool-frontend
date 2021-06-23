@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, isDevMode, OnInit, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
@@ -9,21 +9,29 @@ import {
   ImpactReferencedByRequirementsEvent,
   StakeholderReferencedByImpactsEvent
 } from '../../services/cross-ui-event.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-analysis-edit',
   templateUrl: './analysis-edit.component.html',
   styleUrls: ['./analysis-edit.component.scss']
 })
-export class AnalysisEditComponent implements AfterViewInit {
+export class AnalysisEditComponent implements OnInit, AfterViewInit {
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
   @ViewChild(StakeholderEditComponent) stakeholdersComponent!: StakeholderEditComponent;
   @ViewChild(ImpactEditComponent) impactsComponent!: ImpactEditComponent;
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
-              private crossUI: CrossUiEventService) {
+              private crossUI: CrossUiEventService,
+              private router: Router) {
+  }
 
+  ngOnInit(): void {
+    this.crossUI.analysisWithIdNotFound.subscribe(() => {
+      console.log('____________________________');
+      this.router.navigate(['/404']);
+    });
   }
 
   ngAfterViewInit(): void {
