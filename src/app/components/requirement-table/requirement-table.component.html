@@ -75,7 +75,7 @@
           </div>
         </th>
         <td mat-cell *matCellDef='let requirement'>
-          <div [innerHTML]="getAffectedValues(requirement).join(', ') | highlightSearch: this.highlightFilter">
+          <div [innerHTML]="getAffectedValues(requirement).join(', ') | highlightSearch: highlightFilter">
           </div>
         </td>
       </ng-container>
