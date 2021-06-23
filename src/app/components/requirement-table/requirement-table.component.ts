@@ -245,6 +245,10 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
     this.requirementDataService.deleteRequirement(requirement);
   }
 
+  getVariantNamesOfRequirement(requirement: Requirement): string {
+    return requirement.variants.map(v => v.name).join(', ');
+  }
+
   createRequirementDelta(delta: RequirementDelta): void {
     this.requirementDeltaDataService.createRequirementDelta(delta);
   }

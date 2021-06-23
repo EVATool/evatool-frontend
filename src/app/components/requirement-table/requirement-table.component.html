@@ -41,11 +41,11 @@
           <mat-form-field class="dropdown-reference">
             <mat-select [(ngModel)]="requirement.variants"
                         (selectionChange)="updateRequirement(requirement)"
-                        matTooltip="{{(requirement.variants | pluck: 'name').join(', ')}}"
+                        [matTooltip]="getVariantNamesOfRequirement(requirement)"
                         multiple>
               <mat-select-trigger>
                 <div
-                  [innerHTML]="(requirement.variants | pluck: 'name').join(', ') | highlightSearch: highlightFilter">
+                  [innerHTML]="getVariantNamesOfRequirement(requirement) | highlightSearch: highlightFilter">
                 </div>
               </mat-select-trigger>
               <ng-container *ngFor="let variant of variantDataService.variants">
