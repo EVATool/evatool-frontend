@@ -29,6 +29,7 @@ Multi user: concurrency... (PWA?)
 SonarCloud Status not shown in backend
 make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
 Angular e2e tests
+Better 404 page (information about what might have been misinputted)
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table, mat-slider has an ABSOLUTE min width...
 BUG: why is footer hidden in home component?
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
