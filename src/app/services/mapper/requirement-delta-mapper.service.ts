@@ -5,6 +5,8 @@ import {RequirementDelta} from '../../model/RequirementDelta';
 import {RequirementDeltaDto} from '../../dto/RequirementDeltaDto';
 import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
+import {AnalysisDto} from '../../dto/AnalysisDto';
+import {Analysis} from '../../model/Analysis';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +36,11 @@ export class RequirementDeltaMapperService extends MapperService {
   fromDto(requirementDeltaDto: RequirementDeltaDto, requirements: Requirement[], impacts: Impact[]): RequirementDelta {
     this.logger.info(this, 'Mapping RequirementDeltaDto to RequirementDelta');
     const requirementDelta = new RequirementDelta();
+    this.updateFromDto(requirementDeltaDto, requirementDelta, requirements, impacts);
+    return requirementDelta;
+  }
 
+  updateFromDto(requirementDeltaDto: RequirementDeltaDto, requirementDelta: RequirementDelta, requirements: Requirement[], impacts: Impact[]): void {
     requirementDelta.id = requirementDeltaDto.id;
     requirementDelta.originalMerit = requirementDeltaDto.originalMerit;
     requirementDelta.overwriteMerit = requirementDeltaDto.overwriteMerit;
@@ -54,7 +60,5 @@ export class RequirementDeltaMapperService extends MapperService {
         break;
       }
     }
-
-    return requirementDelta;
   }
 }

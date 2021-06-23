@@ -6,6 +6,7 @@ import {ImpactDto} from '../../dto/ImpactDto';
 import {Analysis} from '../../model/Analysis';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
+import {AnalysisDto} from '../../dto/AnalysisDto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,11 @@ export class ImpactMapperService extends MapperService {
   fromDto(impactDto: ImpactDto, analyses: Analysis[], values: Value[], stakeholders: Stakeholder[]): Impact {
     this.logger.info(this, 'Mapping ImpactDto to Impact');
     const impact = new Impact();
+    this.updateFromDto(impactDto, impact, analyses, values, stakeholders);
+    return impact;
+  }
 
+  updateFromDto(impactDto: ImpactDto, impact: Impact, analyses: Analysis[], values: Value[], stakeholders: Stakeholder[]): void {
     impact.id = impactDto.id;
     impact.prefixSequenceId = impactDto.prefixSequenceId;
     impact.merit = impactDto.merit;
@@ -60,7 +65,5 @@ export class ImpactMapperService extends MapperService {
         break;
       }
     }
-
-    return impact;
   }
 }

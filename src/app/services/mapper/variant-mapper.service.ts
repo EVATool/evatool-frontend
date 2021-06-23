@@ -4,6 +4,8 @@ import {LogService} from '../log.service';
 import {Variant} from '../../model/Variant';
 import {VariantDto} from '../../dto/VariantDto';
 import {Analysis} from '../../model/Analysis';
+import {ValueDto} from '../../dto/ValueDto';
+import {Value} from '../../model/Value';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,11 @@ export class VariantMapperService extends MapperService {
   fromDto(variantDto: any, analyses: Analysis[]): any {
     this.logger.info(this, 'Mapping VariantDto to Variant');
     const variant = new Variant();
+    this.updateFromDto(variantDto, variant, analyses);
+    return variant;
+  }
 
+  updateFromDto(variantDto: VariantDto, variant: Variant, analyses: Analysis[]): void {
     variant.id = variantDto.id;
     variant.prefixSequenceId = variantDto.prefixSequenceId;
     variant.name = variantDto.name;
@@ -45,7 +51,5 @@ export class VariantMapperService extends MapperService {
       }
     }
     //variant.subVariantIds = variantDto.subVariants.map(subVar => subVar.id);
-
-    return variant;
   }
 }

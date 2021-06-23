@@ -4,6 +4,9 @@ import {MapperService} from '../mapper.service';
 import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
 import {Analysis} from '../../model/Analysis';
+import {StakeholderDto} from '../../dto/StakeholderDto';
+import {Stakeholder} from '../../model/Stakeholder';
+import {dispatchTouchEvent} from '@angular/cdk/testing/testbed/fake-events';
 
 @Injectable({
   providedIn: 'root'
@@ -31,19 +34,21 @@ export class ValueMapperService extends MapperService {
   fromDto(valueDto: ValueDto, analyses: Analysis[]): Value {
     this.logger.info(this, 'Mapping ValueDto to Value');
     const value = new Value();
+    this.updateFromDto(valueDto, value, analyses);
+    return value;
+  }
 
+  updateFromDto(valueDto: ValueDto, value: Value, analyses: Analysis[]): void {
     value.id = valueDto.id;
     value.name = valueDto.name;
     value.type = valueDto.type;
     value.description = valueDto.description;
     value.archived = valueDto.archived;
-    for (let analysis of analyses) {
+    for (const analysis of analyses) {
       if (analysis.id === valueDto.analysisId) {
         value.analysis = analysis;
         break;
       }
     }
-
-    return value;
   }
 }

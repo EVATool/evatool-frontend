@@ -4,6 +4,9 @@ import {LogService} from '../log.service';
 import {Stakeholder} from '../../model/Stakeholder';
 import {StakeholderDto} from '../../dto/StakeholderDto';
 import {Analysis} from '../../model/Analysis';
+import {RequirementDto} from '../../dto/RequirementDto';
+import {Requirement} from '../../model/Requirement';
+import {Variant} from '../../model/Variant';
 
 @Injectable({
   providedIn: 'root'
@@ -32,20 +35,22 @@ export class StakeholderMapperService extends MapperService {
   fromDto(stakeholderDto: StakeholderDto, analyses: Analysis[]): Stakeholder {
     this.logger.info(this, 'Mapping StakeholderDto to Stakeholder');
     const stakeholder = new Stakeholder();
+    this.updateFromDto(stakeholderDto, stakeholder, analyses);
+    return stakeholder;
+  }
 
+  updateFromDto(stakeholderDto: StakeholderDto, stakeholder: Stakeholder, analyses: Analysis[]): void {
     stakeholder.id = stakeholderDto.id;
     stakeholder.prefixSequenceId = stakeholderDto.prefixSequenceId;
     stakeholder.name = stakeholderDto.name;
     stakeholder.priority = stakeholderDto.priority;
     stakeholder.level = stakeholderDto.level;
     stakeholder.impacted = stakeholderDto.impacted;
-    for (let analysis of analyses) {
+    for (const analysis of analyses) {
       if (analysis.id === stakeholderDto.analysisId) {
         stakeholder.analysis = analysis;
         break;
       }
     }
-
-    return stakeholder;
   }
 }

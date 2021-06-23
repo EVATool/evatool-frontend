@@ -31,7 +31,12 @@ export class AnalysisMapperService extends MapperService {
   fromDto(analysisDto: AnalysisDto): Analysis {
     this.logger.info(this, 'Mapping AnalysisDto to Analysis');
     const analysis = new Analysis();
+    this.updateFromDto(analysisDto, analysis);
+    return analysis;
+  }
 
+  updateFromDto(analysisDto: AnalysisDto, analysis: Analysis): void {
+    this.logger.info(this, 'Updating Analysis from AnalysisDto');
     analysis.id = analysisDto.id;
     analysis.prefixSequenceId = analysisDto.prefixSequenceId;
     analysis.name = analysisDto.name;
@@ -39,7 +44,5 @@ export class AnalysisMapperService extends MapperService {
     analysis.isTemplate = analysisDto.isTemplate;
     analysis.imageUrl = analysisDto.imageUrl;
     analysis.lastUpdated = analysisDto.lastUpdated;
-
-    return analysis;
   }
 }
