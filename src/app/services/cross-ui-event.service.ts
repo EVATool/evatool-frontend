@@ -14,20 +14,31 @@ import {VariantDataService} from './data/variant-data.service';
 import {RequirementDataService} from './data/requirement-data.service';
 import {StakeholderDataService} from './data/stakeholder-data.service';
 import {ValueDataService} from './data/value-data.service';
+import {Analysis} from '../model/Analysis';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CrossUiEventService {
+export class CrossUiEventService { // TODO what should this be called? Its just masking http errors until now...
   @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
-  @Output() stakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
-  @Output() valueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
-  @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
-
   @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
-  @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter(); // TODO
+
+  @Output() stakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
+  @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
+
+  @Output() valueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
   @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
+
+  @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
+
+  @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
+  @Output() stakeholderDeletionFailed: EventEmitter<StakeholderDeletionFailedEvent> = new EventEmitter();
+  @Output() valueDeletionFailed: EventEmitter<ValueDeletionFailedEvent> = new EventEmitter();
+  @Output() impactDeletionFailed: EventEmitter<ImpactDeletionFailedEvent> = new EventEmitter();
+  @Output() variantDeletionFailed: EventEmitter<VariantDeletionFailedEvent> = new EventEmitter();
+  @Output() requirementDeletionFailed: EventEmitter<RequirementDeletionFailedEvent> = new EventEmitter();
+  @Output() requirementDeltaDeletionFailed: EventEmitter<RequirementDeltaDeletionFailedEvent> = new EventEmitter();
 
   constructor(private httpLoader: HttpLoaderService,
               private impactData: ImpactDataService,
@@ -40,42 +51,65 @@ export class CrossUiEventService {
 
   init(): void {
     this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
-      switch (httpInfo.functionalErrorCode) {
-        case FunctionalErrorCodeService.IMPACT_REFERENCED_BY_REQUIREMENT:
-          const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
-          const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
-          if (impact && deltas) {
-            this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementsEvent(impact, deltas));
-          }
-          break;
+      if (httpInfo.functionalErrorCode) {
+        switch (httpInfo.functionalErrorCode) {
+          case FunctionalErrorCodeService.IMPACT_REFERENCED_BY_REQUIREMENT:
+            const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
+            const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
+            if (impact && deltas) {
+              this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementsEvent(impact, deltas));
+            }
+            break;
 
-        case FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT:
-          const stakeholder = this.stakeholderData.stakeholders.find(s => s.id = httpInfo.tag.stakeholderId);
-          const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
-          if (stakeholder && impactsStakeholder) {
-            this.stakeholderReferencedByImpacts.emit(new StakeholderReferencedByImpactsEvent(stakeholder, impactsStakeholder));
-          }
-          break;
+          case FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT:
+            const stakeholder = this.stakeholderData.stakeholders.find(s => s.id = httpInfo.tag.stakeholderId);
+            const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
+            if (stakeholder && impactsStakeholder) {
+              this.stakeholderReferencedByImpacts.emit(new StakeholderReferencedByImpactsEvent(stakeholder, impactsStakeholder));
+            }
+            break;
 
-        case FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT:
-          const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
-          const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
-          if (value && impactsValue) {
-            this.valueReferencedByImpacts.emit(new ValueReferencedByImpactsEvent(value, impactsValue));
-          }
-          break;
+          case FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT:
+            const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
+            const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
+            if (value && impactsValue) {
+              this.valueReferencedByImpacts.emit(new ValueReferencedByImpactsEvent(value, impactsValue));
+            }
+            break;
 
-        case FunctionalErrorCodeService.VARIANT_REFERENCED_BY_REQUIREMENT:
-          const variant = this.variantData.variants.find(v => v.id = httpInfo.tag.variantId);
-          const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
-          if (variant && requirements) {
-            this.variantReferencedByRequirements.emit(new VariantReferencedByRequirementsEvent(variant, requirements));
-          }
-          break;
+          case FunctionalErrorCodeService.VARIANT_REFERENCED_BY_REQUIREMENT:
+            const variant = this.variantData.variants.find(v => v.id = httpInfo.tag.variantId);
+            const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
+            if (variant && requirements) {
+              this.variantReferencedByRequirements.emit(new VariantReferencedByRequirementsEvent(variant, requirements));
+            }
+            break;
+        }
+      } else {
+        if (httpInfo.method === 'DELETE') { // TODO only throw events.
+          const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1);
+          const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
+          const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
 
-        default:
-          // no functional error.
-          break;
+          if (apiEndpoint === 'analyses') {
+
+          } else if (apiEndpoint === 'stakeholders') {
+
+          } else if (apiEndpoint === 'values') {
+
+          } else if (apiEndpoint === 'impacts') {
+
+          } else if (apiEndpoint === 'variants') {
+
+          } else if (apiEndpoint === 'requirements') {
+            const requirement = this.requirementData.requirements.find(r => r.id === id);
+            if (requirement) {
+              this.requirementDeletionFailed.emit(new RequirementDeletionFailedEvent(requirement));
+            }
+          } else if (apiEndpoint === 'requirement-deltas') {
+
+          }
+        }
       }
     });
   }
@@ -104,7 +138,6 @@ export class StakeholderReferencedByImpactsEvent {
   }
 }
 
-
 export class ValueReferencedByImpactsEvent {
 
   value!: Value;
@@ -124,5 +157,56 @@ export class VariantReferencedByRequirementsEvent {
   constructor(variant: Variant, requirements: Requirement[]) {
     this.variant = variant;
     this.requirements = requirements;
+  }
+}
+
+
+export abstract class DeletionFailedEvent<T> {
+  entity!: T;
+
+  protected constructor(entity: T) {
+    this.entity = entity;
+  }
+}
+
+export class AnalysisDeletionFailedEvent extends DeletionFailedEvent<Analysis> {
+  constructor(analysis: Analysis) {
+    super(analysis);
+  }
+}
+
+export class StakeholderDeletionFailedEvent extends DeletionFailedEvent<Stakeholder> {
+  constructor(stakeholder: Stakeholder) {
+    super(stakeholder);
+  }
+}
+
+export class ValueDeletionFailedEvent extends DeletionFailedEvent<Value> {
+  constructor(value: Value) {
+    super(value);
+  }
+}
+
+export class ImpactDeletionFailedEvent extends DeletionFailedEvent<Impact> {
+  constructor(impact: Impact) {
+    super(impact);
+  }
+}
+
+export class VariantDeletionFailedEvent extends DeletionFailedEvent<Variant> {
+  constructor(variant: Variant) {
+    super(variant);
+  }
+}
+
+export class RequirementDeletionFailedEvent extends DeletionFailedEvent<Requirement> {
+  constructor(requirement: Requirement) {
+    super(requirement);
+  }
+}
+
+export class RequirementDeltaDeletionFailedEvent extends DeletionFailedEvent<RequirementDelta> {
+  constructor(requirementDelta: RequirementDelta) {
+    super(requirementDelta);
   }
 }

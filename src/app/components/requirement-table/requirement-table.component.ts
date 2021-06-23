@@ -21,7 +21,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {
   CrossUiEventService,
-  ImpactReferencedByRequirementsEvent,
+  ImpactReferencedByRequirementsEvent, RequirementDeletionFailedEvent,
   VariantReferencedByRequirementsEvent
 } from '../../services/cross-ui-event.service';
 
@@ -91,6 +91,10 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
       event.deltas.forEach((delta: RequirementDelta) => {
         delta.highlighted = true;
       });
+    });
+
+    this.crossUI.requirementDeletionFailed.subscribe((event: RequirementDeletionFailedEvent) => {
+      event.entity.deletionFlagged = false;
     });
 
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
@@ -233,6 +237,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteRequirement(requirement: Requirement): void {
+    requirement.deletionFlagged = true;
     this.requirementDataService.deleteRequirement(requirement);
   }
 
@@ -249,6 +254,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteRequirementDelta(delta: RequirementDelta): void {
+    delta.deletionFlagged = true;
     this.requirementDeltaDataService.deleteRequirementDelta(delta);
   }
 

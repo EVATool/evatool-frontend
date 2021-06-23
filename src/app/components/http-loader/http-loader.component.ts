@@ -47,7 +47,6 @@ export class HttpLoaderComponent implements OnInit {
         const action = '';
         const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
         snackBarRef.afterDismissed().subscribe(() => {
-          console.log('closing http error snackbar...');
           this.snackBarShown = false;
         });
       }

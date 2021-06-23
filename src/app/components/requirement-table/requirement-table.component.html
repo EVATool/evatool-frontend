@@ -110,7 +110,9 @@
             <div class="delete-delta-button"
                  [@inOutAnimation]
                  *ngIf="delta?.hover && !delta?.visible">
-              <button mat-icon-button (click)="deleteRequirementDelta(delta)">
+              <button mat-icon-button
+                      [disabled]="delta.deletionFlagged"
+                      (click)="deleteRequirementDelta(delta)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -123,7 +125,10 @@
         </th>
         <td mat-cell *matCellDef='let requirement'>
           <div class="delete-button-container">
-            <button mat-icon-button (click)="deleteRequirement(requirement)" matTooltip="Delete Requirement">
+            <button mat-icon-button
+                    [disabled]="requirement.deletionFlagged"
+                    (click)="deleteRequirement(requirement)"
+                    matTooltip="Delete Requirement">
               <mat-icon>delete</mat-icon>
             </button>
           </div>

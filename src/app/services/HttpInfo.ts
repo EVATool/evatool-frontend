@@ -1,6 +1,8 @@
 export class HttpInfo {
 
   timestamp = 0;
+  path!: string;
+  method!: string;
   type!: HttpInfoType;
   functionalErrorCode?: number;
   tag?: any;

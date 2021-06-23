@@ -13,4 +13,5 @@ export class Requirement {
 
   // UI
   highlighted = false;
+  deletionFlagged = false;
 }

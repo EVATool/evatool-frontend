@@ -18,4 +18,5 @@ export class RequirementDelta {
   highlighted = false;
   visible = false;
   hover = false;
+  deletionFlagged = false;
 }
