@@ -9,15 +9,14 @@ Tasks aus Jira (UID) -> das Jira public machen?
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses, dialog: ensure template selected + textfields not empty
-
-MISC:
-Add keycloak (enable/disable with flag in .env docker-compose)
-Add flyway (special migrate test profile in backend)
 Deep copy: copy everything?
+Add keycloak [wait for https] (enable/disable with flag in .env docker-compose AND enable/disable in special backend/frontend env for easy testing/developing)
+Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 
 Backlog:
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 Strange bug when negative impact was only slidable like a positive in requirements table
+Strange bug where requirement table contained requirements with same prefixSequenceId. How can this happen? Was that the fault of the updateFromDto method?
 How to deal with impacts going horizontal in requirement table
 merit Color backend lookup table for possible values
 Sample Data (API calls to backend, separate from deployment!) -> [Create export Postman(??) script from UI inserted stuff] Postman script should not be used, use own json format for backend rest calls (import + export)
