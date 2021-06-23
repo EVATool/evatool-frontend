@@ -81,11 +81,12 @@ export class ImpactDataService extends DataService {
 
   updateImpact(impact: Impact): void {
     this.impactRest.updateImpact(this.impactMapper.toDto(impact)).subscribe((impactDto: ImpactDto) => {
-      const updatedImpact = this.impactMapper.fromDto(impactDto,
+      this.impactMapper.updateFromDto(impactDto,
+        impact,
         [this.analysisData.currentAnalysis],
         this.valueData.values,
         this.stakeholderData.stakeholders);
-      this.updatedImpact.emit(updatedImpact);
+      this.updatedImpact.emit(impact);
       this.logger.info(this, 'Impact updated');
     });
   }

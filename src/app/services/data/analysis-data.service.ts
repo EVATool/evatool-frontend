@@ -78,8 +78,8 @@ export class AnalysisDataService extends DataService {
 
   updateAnalysis(analysis: Analysis): void {
     this.analysisRest.updateAnalysis(this.analysisMapper.toDto(analysis)).subscribe((analysisDto: AnalysisDto) => {
-      const updatedAnalysis = this.analysisMapper.fromDto(analysisDto);
-      this.updatedAnalysis.emit(updatedAnalysis);
+      this.analysisMapper.updateFromDto(analysisDto, analysis);
+      this.updatedAnalysis.emit(analysis);
       this.logger.info(this, 'Analysis updated');
     });
   }

@@ -52,8 +52,8 @@ export class VariantDataService extends DataService {
 
   updateVariant(variant: Variant): void {
     this.variantRest.updateVariant(this.variantMapper.toDto(variant)).subscribe((variantDto: VariantDto) => {
-      const updatedVariant = this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]);
-      this.updatedVariant.emit(updatedVariant);
+      this.variantMapper.updateFromDto(variantDto, variant, [this.analysisData.currentAnalysis]);
+      this.updatedVariant.emit(variant);
       this.logger.info(this, 'Variant updated');
     });
   }

@@ -68,8 +68,8 @@ export class StakeholderDataService extends DataService {
 
   updateStakeholder(stakeholder: Stakeholder): void {
     this.stakeholderRest.updateStakeholder(this.stakeholderMapper.toDto(stakeholder)).subscribe((stakeholderDto: StakeholderDto) => {
-      const updatedStakeholder = this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]);
-      this.updatedStakeholder.emit(updatedStakeholder);
+      this.stakeholderMapper.updateFromDto(stakeholderDto, stakeholder, [this.analysisData.currentAnalysis]);
+      this.updatedStakeholder.emit(stakeholder);
       this.logger.info(this, 'Stakeholder updated');
     });
   }

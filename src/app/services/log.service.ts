@@ -6,14 +6,11 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-Update values that come from backend in local object, e.g. Stakeholder PrefixId in frontend should update directly (mapper functions with source target) [remove req delta code...]
-All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
+Disable delete button until result received
+tooltips should update when entity properties change
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
 Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses, dialog: ensure template selected + textfields not empty
-Filtering: And/Or, what is the default filtering? (how does this apply to deltas)
-Delta: Load color for deltas as discrete lookup from backend (like values.types)? This makes the colors available in test mode
-Disable delete button until result received
 route to 404 website if analysis does not exist
 
 MISC:
@@ -22,7 +19,6 @@ Add flyway (special migrate test profile in backend)
 Deep copy: copy everything?
 
 Backlog:
-tooltips should update when entity properties change
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 Strange bug when negative impact was only slidable like a positive in requirements table
 How to deal with impacts going horizontal in requirement table
@@ -40,6 +36,8 @@ Rework impact slider (arrow keys supported) and filtering (drag middle bar and c
 BUG: why is footer hidden in home component?
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Impact slider in delta is completely bugged
+All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
+Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
 
 */
 

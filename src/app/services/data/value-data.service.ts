@@ -60,8 +60,8 @@ export class ValueDataService extends DataService {
 
   updateValue(value: Value): void {
     this.valueRest.updateValue(this.valueMapper.toDto(value)).subscribe((valueDto: ValueDto) => {
-      const updatedValue = this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]);
-      this.updatedValue.emit(updatedValue);
+      this.valueMapper.updateFromDto(valueDto, value, [this.analysisData.currentAnalysis]);
+      this.updatedValue.emit(value);
       this.logger.info(this, 'Value updated');
     });
   }

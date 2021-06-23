@@ -71,10 +71,11 @@ export class RequirementDataService extends DataService {
 
   updateRequirement(requirement: Requirement): void {
     this.requirementRest.updateRequirement(this.requirementMapper.toDto(requirement)).subscribe((requirementDto: RequirementDto) => {
-      const updatedRequirement = this.requirementMapper.fromDto(requirementDto,
+      this.requirementMapper.updateFromDto(requirementDto,
+        requirement,
         [this.analysisData.currentAnalysis],
         this.variantData.variants);
-      this.updatedRequirement.emit(updatedRequirement);
+      this.updatedRequirement.emit(requirement);
       this.logger.info(this, 'Requirement updated');
     });
   }
