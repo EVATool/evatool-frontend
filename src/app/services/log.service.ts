@@ -37,6 +37,7 @@ Localization (Use values from jsons everywhere, translate them, change lang in f
 Impact slider in delta is completely bugged
 All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
+Determine convention for html tag order and enforce (e.g. matInput, [input], (output), ([bind]))
 
 */
 
