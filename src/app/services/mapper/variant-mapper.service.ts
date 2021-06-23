@@ -4,8 +4,6 @@ import {LogService} from '../log.service';
 import {Variant} from '../../model/Variant';
 import {VariantDto} from '../../dto/VariantDto';
 import {Analysis} from '../../model/Analysis';
-import {ValueDto} from '../../dto/ValueDto';
-import {Value} from '../../model/Value';
 
 @Injectable({
   providedIn: 'root'

@@ -10,10 +10,6 @@ import {MatSort} from '@angular/material/sort';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttpInfo} from '../../services/HttpInfo';
-import {FunctionalErrorCodeService} from '../../services/functional-error-code.service';
-import {Value} from '../../model/Value';
-import {Impact} from '../../model/Impact';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {CrossUiEventService, StakeholderReferencedByImpactsEvent} from '../../services/cross-ui-event.service';
 

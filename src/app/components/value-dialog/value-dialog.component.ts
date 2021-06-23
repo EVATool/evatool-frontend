@@ -3,7 +3,6 @@ import {LogService} from '../../services/log.service';
 import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ValueDataService} from '../../services/data/value-data.service';
-import {Value} from '../../model/Value';
 import {CrossUiEventService, ValueReferencedByImpactsEvent} from '../../services/cross-ui-event.service';
 
 @Component({

@@ -6,7 +6,6 @@ import {StakeholderDataService} from '../../services/data/stakeholder-data.servi
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {ImpactTableComponent} from '../impact-table/impact-table.component';
 import {ImpactFilterBarComponent} from '../impact-filter-bar/impact-filter-bar.component';
-import {Stakeholder} from '../../model/Stakeholder';
 
 @Component({
   selector: 'app-impact-edit',

@@ -5,8 +5,6 @@ import {RequirementDelta} from '../../model/RequirementDelta';
 import {RequirementDeltaDto} from '../../dto/RequirementDeltaDto';
 import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
-import {AnalysisDto} from '../../dto/AnalysisDto';
-import {Analysis} from '../../model/Analysis';
 
 @Injectable({
   providedIn: 'root'

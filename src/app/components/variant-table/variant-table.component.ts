@@ -7,15 +7,8 @@ import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {RequirementDataService} from '../../services/data/requirement-data.service';
-import {Requirement} from '../../model/Requirement';
-import {HttpInfo} from '../../services/HttpInfo';
-import {FunctionalErrorCodeService} from '../../services/functional-error-code.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
-import {
-  CrossUiEventService,
-  ValueReferencedByImpactsEvent,
-  VariantReferencedByRequirementsEvent
-} from '../../services/cross-ui-event.service';
+import {CrossUiEventService, VariantReferencedByRequirementsEvent} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-variant-table',

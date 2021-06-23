@@ -6,7 +6,6 @@ import {ImpactDto} from '../../dto/ImpactDto';
 import {Analysis} from '../../model/Analysis';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
-import {AnalysisDto} from '../../dto/AnalysisDto';
 
 @Injectable({
   providedIn: 'root'

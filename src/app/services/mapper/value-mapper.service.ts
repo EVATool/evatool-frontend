@@ -4,9 +4,6 @@ import {MapperService} from '../mapper.service';
 import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
 import {Analysis} from '../../model/Analysis';
-import {StakeholderDto} from '../../dto/StakeholderDto';
-import {Stakeholder} from '../../model/Stakeholder';
-import {dispatchTouchEvent} from '@angular/cdk/testing/testbed/fake-events';
 
 @Injectable({
   providedIn: 'root'

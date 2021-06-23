@@ -15,10 +15,10 @@ import {ImpactTableFilterEvent} from '../impact-filter-bar/ImpactTableFilterEven
 import {ValueDialogComponent} from '../value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
-import {RequirementDelta} from '../../model/RequirementDelta';
 import {
   CrossUiEventService,
-  ImpactReferencedByRequirementsEvent, StakeholderReferencedByImpactsEvent,
+  ImpactReferencedByRequirementsEvent,
+  StakeholderReferencedByImpactsEvent,
   ValueReferencedByImpactsEvent
 } from '../../services/cross-ui-event.service';
 

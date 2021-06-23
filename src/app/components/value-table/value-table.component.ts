@@ -7,15 +7,8 @@ import {LogService} from '../../services/log.service';
 import {ValueDataService} from '../../services/data/value-data.service';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
-import {Impact} from '../../model/Impact';
 import {HttpLoaderService} from '../../services/http-loader.service';
-import {HttpInfo} from '../../services/HttpInfo';
-import {FunctionalErrorCodeService} from '../../services/functional-error-code.service';
-import {
-  CrossUiEventService,
-  ImpactReferencedByRequirementsEvent,
-  ValueReferencedByImpactsEvent
-} from '../../services/cross-ui-event.service';
+import {CrossUiEventService, ValueReferencedByImpactsEvent} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-value-table',

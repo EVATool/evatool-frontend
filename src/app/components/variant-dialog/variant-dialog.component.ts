@@ -3,12 +3,7 @@ import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {VariantDataService} from '../../services/data/variant-data.service';
 import {LogService} from '../../services/log.service';
-import {Variant} from '../../model/Variant';
-import {
-  CrossUiEventService,
-  ValueReferencedByImpactsEvent,
-  VariantReferencedByRequirementsEvent
-} from '../../services/cross-ui-event.service';
+import {CrossUiEventService, VariantReferencedByRequirementsEvent} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-variant-dialog',

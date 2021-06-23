@@ -4,9 +4,6 @@ import {LogService} from '../log.service';
 import {Stakeholder} from '../../model/Stakeholder';
 import {StakeholderDto} from '../../dto/StakeholderDto';
 import {Analysis} from '../../model/Analysis';
-import {RequirementDto} from '../../dto/RequirementDto';
-import {Requirement} from '../../model/Requirement';
-import {Variant} from '../../model/Variant';
 
 @Injectable({
   providedIn: 'root'

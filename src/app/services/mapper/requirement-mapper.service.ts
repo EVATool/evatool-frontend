@@ -5,7 +5,6 @@ import {RequirementDto} from '../../dto/RequirementDto';
 import {Requirement} from '../../model/Requirement';
 import {Analysis} from '../../model/Analysis';
 import {Variant} from '../../model/Variant';
-import {AnalysisDto} from '../../dto/AnalysisDto';
 
 @Injectable({
   providedIn: 'root'

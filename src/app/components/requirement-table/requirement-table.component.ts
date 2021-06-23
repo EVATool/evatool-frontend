@@ -22,7 +22,7 @@ import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {
   CrossUiEventService,
   ImpactReferencedByRequirementsEvent,
-  ValueReferencedByImpactsEvent, VariantReferencedByRequirementsEvent
+  VariantReferencedByRequirementsEvent
 } from '../../services/cross-ui-event.service';
 
 @Component({

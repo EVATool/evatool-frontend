@@ -2,8 +2,6 @@ import {AfterViewInit, Component, isDevMode, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
-import {Value} from '../../model/Value';
-import {Stakeholder} from '../../model/Stakeholder';
 import {StakeholderEditComponent} from '../stakeholder-edit/stakeholder-edit.component';
 import {ImpactEditComponent} from '../impact-edit/impact-edit.component';
 import {
