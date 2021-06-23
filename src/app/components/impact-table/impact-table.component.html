@@ -106,7 +106,10 @@
                                  [placeholder]="'Describe the impact...'"></app-mark-textarea>
             </div>
             <div class="delete-button-container">
-              <button mat-icon-button (click)="deleteImpact(impact)" matTooltip="Delete Impact">
+              <button mat-icon-button
+                      matTooltip="Delete Impact"
+                      [disabled]="impact.deletionFlagged"
+                      (click)="deleteImpact(impact)" >
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

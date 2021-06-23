@@ -8,7 +8,12 @@ import {ValueDataService} from '../../services/data/value-data.service';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
-import {CrossUiEventService, ValueReferencedByImpactsEvent} from '../../services/cross-ui-event.service';
+import {
+  CrossUiEventService,
+  RequirementDeletionFailedEvent,
+  ValueDeletionFailedEvent,
+  ValueReferencedByImpactsEvent
+} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-value-table',
@@ -43,6 +48,10 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
       snackBarRef.onAction().subscribe(() => {
         this.crossUI.userWantsToSeeValueReferencedByImpacts.emit(event);
       });
+    });
+
+    this.crossUI.valueDeletionFailed.subscribe((event: ValueDeletionFailedEvent) => {
+      event.entity.deletionFlagged = false;
     });
 
     this.valueDataService.loadedValues.subscribe((values: Value[]) => {
@@ -85,7 +94,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteValue(value: Value): void {
-    this.logger.info(this, 'Delete Value');
+    value.deletionFlagged = true;
     this.valueDataService.deleteValue(value);
   }
 

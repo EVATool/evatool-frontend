@@ -21,7 +21,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {
   CrossUiEventService,
-  ImpactReferencedByRequirementsEvent, RequirementDeletionFailedEvent,
+  ImpactReferencedByRequirementsEvent, RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent,
   VariantReferencedByRequirementsEvent
 } from '../../services/cross-ui-event.service';
 
@@ -94,6 +94,10 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
     });
 
     this.crossUI.requirementDeletionFailed.subscribe((event: RequirementDeletionFailedEvent) => {
+      event.entity.deletionFlagged = false;
+    });
+
+    this.crossUI.requirementDeltaDeletionFailed.subscribe((event: RequirementDeltaDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 

@@ -59,6 +59,7 @@
               *ngIf="variant.archived"
               mat-icon-button
               name="delete"
+              [disabled]="variant.deletionFlagged"
               (click)="deleteVariant(variant)"
               matTooltip="Delete Variant">
               <mat-icon>delete</mat-icon>

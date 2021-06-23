@@ -11,7 +11,12 @@ import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
-import {CrossUiEventService, StakeholderReferencedByImpactsEvent} from '../../services/cross-ui-event.service';
+import {
+  CrossUiEventService,
+  StakeholderDeletionFailedEvent,
+  StakeholderReferencedByImpactsEvent,
+  ValueDeletionFailedEvent
+} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-stakeholder-table',
@@ -51,19 +56,9 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit {
       });
     });
 
-
-    //
-    // this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
-    //   if (httpInfo.functionalErrorCode === FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT) {
-    //     const value = this.stakeholderData.stakeholders.find(s => s.id === httpInfo.tag);
-    //     if (value) {
-    //       const numImpactsUseValue = this.getReferencedImpacts(value);
-    //       if (numImpactsUseValue > 0) {
-    //         this.thwartValueOperation(value, numImpactsUseValue);
-    //       }
-    //     }
-    //   }
-    // });
+    this.crossUI.stakeholderDeletionFailed.subscribe((event: StakeholderDeletionFailedEvent) => {
+      event.entity.deletionFlagged = false;
+    });
 
     this.stakeholderData.loadedStakeholders.subscribe((stakeholders: Stakeholder[]) => {
       this.updateTableDataSource();
@@ -135,6 +130,7 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteStakeholder(stakeholder: Stakeholder): void {
+    stakeholder.deletionFlagged = true;
     this.stakeholderData.deleteStakeholder(stakeholder);
   }
 

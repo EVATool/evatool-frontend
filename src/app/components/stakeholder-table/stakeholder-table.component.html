@@ -67,7 +67,10 @@
               <app-stakeholder-impacted [stakeholderImpacted]="stakeholder.impacted"></app-stakeholder-impacted>
             </div>
             <div class="delete-button-container">
-              <button mat-icon-button (click)="deleteStakeholder(stakeholder)" matTooltip="Delete Stakeholder">
+              <button mat-icon-button
+                      matTooltip="Delete Stakeholder"
+                      [disabled]="stakeholder.deletionFlagged"
+                      (click)="deleteStakeholder(stakeholder)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

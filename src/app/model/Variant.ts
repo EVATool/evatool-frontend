@@ -11,4 +11,7 @@ export class Variant {
 
   analysis!: Analysis;
   subVariants: Variant[] = [];
+
+  // UI
+  deletionFlagged = false;
 }

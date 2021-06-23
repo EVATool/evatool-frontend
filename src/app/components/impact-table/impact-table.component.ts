@@ -16,9 +16,9 @@ import {ValueDialogComponent} from '../value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {
-  CrossUiEventService,
+  CrossUiEventService, ImpactDeletionFailedEvent,
   ImpactReferencedByRequirementsEvent,
-  StakeholderReferencedByImpactsEvent,
+  StakeholderReferencedByImpactsEvent, ValueDeletionFailedEvent,
   ValueReferencedByImpactsEvent
 } from '../../services/cross-ui-event.service';
 
@@ -73,6 +73,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
       snackBarRef.onAction().subscribe(() => {
         this.crossUI.userWantsToSeeImpactReferencedByRequirements.emit(event);
       });
+    });
+
+    this.crossUI.impactDeletionFailed.subscribe((event: ImpactDeletionFailedEvent) => {
+      event.entity.deletionFlagged = false;
     });
 
     this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
@@ -177,7 +181,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteImpact(impact: Impact): void {
-    this.logger.info(this, 'Delete Impact');
+    impact.deletionFlagged = true;
     this.impactDataService.deleteImpact(impact);
   }
 

@@ -8,4 +8,7 @@ export class Analysis {
   isTemplate !: boolean;
   imageUrl!: string;
   lastUpdated!: number;
+
+  // UI
+  deletionFlagged = false;
 }

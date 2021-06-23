@@ -88,8 +88,8 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
             break;
         }
       } else {
-        if (httpInfo.method === 'DELETE') {
-          const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1);
+        if (httpInfo.method === 'DELETE') { // TODO change this to DELETE or UPDATE? then remove entities in event subscriptions.
+          const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1); // TODO make this more resilient.
           const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
           const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
           const notFound = httpInfo.httpStatusCode === 404;

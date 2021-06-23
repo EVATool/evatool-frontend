@@ -17,4 +17,5 @@ export class Impact {
 
   // UI
   highlighted = false;
+  deletionFlagged = false;
 }

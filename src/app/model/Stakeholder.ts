@@ -11,4 +11,7 @@ export class Stakeholder {
   impacted!: number | null;
 
   analysis!: Analysis;
+
+  // UI
+  deletionFlagged = false;
 }

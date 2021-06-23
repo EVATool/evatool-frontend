@@ -54,6 +54,7 @@
         <div class="options">
           <div class="option">
             <button mat-icon-button
+                    [disabled]="value.deletionFlagged"
                     (click)="deleteValue(value)"
                     matTooltip="Delete Value">
               <mat-icon>delete</mat-icon>

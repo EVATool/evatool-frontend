@@ -8,7 +8,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {RequirementDataService} from '../../services/data/requirement-data.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
-import {CrossUiEventService, VariantReferencedByRequirementsEvent} from '../../services/cross-ui-event.service';
+import {
+  CrossUiEventService,
+  RequirementDeletionFailedEvent, VariantDeletionFailedEvent,
+  VariantReferencedByRequirementsEvent
+} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-variant-table',
@@ -42,6 +46,10 @@ export class VariantTableComponent implements OnInit, AfterViewInit {
       snackBarRef.onAction().subscribe(() => {
         this.crossUI.userWantsToSeeVariantReferencedByRequirements.emit(event);
       });
+    });
+
+    this.crossUI.variantDeletionFailed.subscribe((event: VariantDeletionFailedEvent) => {
+      event.entity.deletionFlagged = false;
     });
 
     this.variantDataService.loadedVariants.subscribe((variants: Variant[]) => {
@@ -87,7 +95,7 @@ export class VariantTableComponent implements OnInit, AfterViewInit {
   }
 
   deleteVariant(variant: Variant): void {
-    this.logger.info(this, 'Delete Variant');
+    variant.deletionFlagged = true;
     this.variantDataService.deleteVariant(variant);
   }
 
