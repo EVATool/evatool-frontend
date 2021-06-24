@@ -32,7 +32,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Load current analysis.
     const analysisId = this.route.snapshot.params['id'];
-    const analysisIdIsUUID = analysisId.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
+    const analysisIdIsUUID = analysisId?.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
     if (analysisIdIsUUID) {
       this.analysisData.changeCurrentAnalysis(analysisId);
     } else {
