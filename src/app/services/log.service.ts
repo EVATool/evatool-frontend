@@ -7,9 +7,8 @@ Features:
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Analysis:
-Scrollbar and only scroll tiles (not header and footer)
 Analysis-Tile component
-template like normal analysis
+Scrollbar and only scroll tiles (not header and footer)
 filter/search analyses (separate into analysis and template)
 
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
