@@ -17,7 +17,7 @@
     <hr style="width:50%; margin: auto;">
     <div class="content-wrapper">
       <div *ngFor="let analysis of analysisData.analyses;" class="news-card">
-        <img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" class="news-card__image">
+        <img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" alt="error" class="news-card__image">
         <div class="news-card__text-wrapper">
           <div class="dropdown">
             <button mat-button [matMenuTriggerFor]="menu">
