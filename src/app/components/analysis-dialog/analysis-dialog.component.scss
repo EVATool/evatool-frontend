@@ -16,16 +16,20 @@
     }
   }
 
-  .right-column {
-    margin-top: 30px;
-  }
-
   .sole-column {
     width: 90%;
   }
 
+  .right-column {
+    margin-top: 30px;
+  }
+
   .action-container {
     margin: -50px 0 1px 15px;
+
+    .fixed-size-button {
+      width: 150px;
+    }
 
     mat-checkbox {
       margin: 15px 0 0 10px;
