@@ -4,14 +4,14 @@
     <div class="analysis-actions">
       <button mat-icon-button
               class="action-button"
-              [matTooltip]="'Edit Analysis'"
+              [matTooltip]="'Edit'"
               [disabled]="analysis.deletionFlagged"
               (click)="$event.stopPropagation(); openAnalysisDialog(analysis)">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button
               class="action-button"
-              [matTooltip]="'Delete Analysis'"
+              [matTooltip]="'Delete'"
               [disabled]="analysis.deletionFlagged"
               (click)="$event.stopPropagation(); deleteAnalysis(analysis)">
         <mat-icon>delete</mat-icon>
@@ -23,4 +23,11 @@
       <p class="analysis-description">{{analysis.description}}</p>
     </div>
   </div>
+
+  <mat-icon *ngIf="analysis.isTemplate"
+            class="template-info"
+            [matTooltip]="'This is a template'">
+    sticky_note_2
+  </mat-icon>
+
 </div>
