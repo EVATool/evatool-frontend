@@ -4,7 +4,7 @@ import {ValueDialogComponent} from './value-dialog.component';
 import {SpecService} from '../../services/spec.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-describe('ValuesDialogComponent', () => {
+describe('ValueDialogComponent', () => {
   let component: ValueDialogComponent;
   let fixture: ComponentFixture<ValueDialogComponent>;
 

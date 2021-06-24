@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {StakeholderEditComponent} from './stakeholder-edit.component';
 
-describe('StakeholdersComponent', () => {
+describe('StakeholderEditComponent', () => {
   let component: StakeholderEditComponent;
   let fixture: ComponentFixture<StakeholderEditComponent>;
 

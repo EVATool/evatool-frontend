@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {RequirementTableComponent} from './requirement-table.component';
 import {SpecService} from '../../services/spec.service';
 
-describe('RequirementsTableComponent', () => {
+describe('RequirementTableComponent', () => {
   let component: RequirementTableComponent;
   let fixture: ComponentFixture<RequirementTableComponent>;
 

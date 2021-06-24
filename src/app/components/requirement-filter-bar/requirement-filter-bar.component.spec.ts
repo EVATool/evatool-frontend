@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {RequirementFilterBarComponent} from './requirement-filter-bar.component';
 import {SpecService} from '../../services/spec.service';
 
-describe('RequirementsFilterBarComponent', () => {
+describe('RequirementFilterBarComponent', () => {
   let component: RequirementFilterBarComponent;
   let fixture: ComponentFixture<RequirementFilterBarComponent>;
 

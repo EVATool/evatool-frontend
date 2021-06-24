@@ -4,7 +4,7 @@ import {VariantDialogComponent} from './variant-dialog.component';
 import {SpecService} from '../../services/spec.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-describe('VariantsDialogComponent', () => {
+describe('VariantDialogComponent', () => {
   let component: VariantDialogComponent;
   let fixture: ComponentFixture<VariantDialogComponent>;
 

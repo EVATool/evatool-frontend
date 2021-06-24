@@ -4,7 +4,7 @@ import {StakeholderLevelComponent} from './stakeholder-level.component';
 import {SpecService} from '../../services/spec.service';
 import {HighlightSearchPipe} from '../../pipes/highlight-search.pipe';
 
-describe('StakeholdersLevelComponent', () => {
+describe('StakeholderLevelComponent', () => {
   let component: StakeholderLevelComponent;
   let fixture: ComponentFixture<StakeholderLevelComponent>;
 

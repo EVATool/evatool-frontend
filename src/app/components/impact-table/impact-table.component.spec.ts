@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ImpactTableComponent} from './impact-table.component';
 import {SpecService} from '../../services/spec.service';
 
-describe('ImpactsTableComponent', () => {
+describe('ImpactTableComponent', () => {
   let component: ImpactTableComponent;
   let fixture: ComponentFixture<ImpactTableComponent>;
 

@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {StakeholderImpactedComponent} from './stakeholder-impacted.component';
 
-describe('StakeholdersImpactedComponent', () => {
+describe('StakeholderImpactedComponent', () => {
   let component: StakeholderImpactedComponent;
   let fixture: ComponentFixture<StakeholderImpactedComponent>;
 

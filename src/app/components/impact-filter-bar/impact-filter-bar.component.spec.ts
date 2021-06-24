@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ImpactFilterBarComponent} from './impact-filter-bar.component';
 import {SpecService} from '../../services/spec.service';
 
-describe('ImpactsFilterBarComponent', () => {
+describe('ImpactFilterBarComponent', () => {
   let component: ImpactFilterBarComponent;
   let fixture: ComponentFixture<ImpactFilterBarComponent>;
 

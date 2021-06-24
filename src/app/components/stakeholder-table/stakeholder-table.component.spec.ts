@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {StakeholderTableComponent} from './stakeholder-table.component';
 import {SpecService} from '../../services/spec.service';
 
-describe('StakeholdersTableComponent', () => {
+describe('StakeholderTableComponent', () => {
   let component: StakeholderTableComponent;
   let fixture: ComponentFixture<StakeholderTableComponent>;
 

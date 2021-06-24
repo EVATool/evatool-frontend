@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {VariantTableComponent} from './variant-table.component';
 import {SpecService} from '../../services/spec.service';
 
-describe('VariantsTableComponent', () => {
+describe('VariantTableComponent', () => {
   let component: VariantTableComponent;
   let fixture: ComponentFixture<VariantTableComponent>;
 
