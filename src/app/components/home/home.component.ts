@@ -37,10 +37,10 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
-    dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete?';
+    dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete this analysis?';
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
         this.analysisData.deleteAnalysis(analysis);
       }
     });
