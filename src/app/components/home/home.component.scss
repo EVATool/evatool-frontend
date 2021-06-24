@@ -4,7 +4,7 @@
 
 #right-panel {
   width: 80%;
-  margin-left: 20%;
+  margin-left: 21%;
 }
 
 .new-analysis-button {
@@ -35,22 +35,4 @@
   display: flex;
   flex-flow: row wrap;
   padding: 0.5rem;
-}
-
-.news-card {
-  min-width: 290px;
-  height: 300px;
-
-  border: 0 solid aqua;
-  margin: 0.5rem;
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.5rem;
-  flex: 1;
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
 }

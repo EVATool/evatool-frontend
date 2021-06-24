@@ -1,27 +1,27 @@
-<div class="news-card">
-<img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" alt="" class="news-card__image">
-<div class="news-card__text-wrapper">
-  <div class="dropdown">
-    <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon>settings</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="openAnalysisDialog(analysis)">
-        <mat-icon>edit</mat-icon>
-        Edit Analysis
+<div class="analysis-tile">
+  <img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" alt="" class="news-card__image">
+  <div class="news-card__text-wrapper">
+    <div class="dropdown">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>settings</mat-icon>
       </button>
-      <button mat-menu-item (click)="deleteAnalysis(analysis)">
-        <mat-icon>delete</mat-icon>
-        Delete Analysis
-      </button>
-    </mat-menu>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="openAnalysisDialog(analysis)">
+          <mat-icon>edit</mat-icon>
+          Edit Analysis
+        </button>
+        <button mat-menu-item (click)="deleteAnalysis(analysis)">
+          <mat-icon>delete</mat-icon>
+          Delete Analysis
+        </button>
+      </mat-menu>
+    </div>
+    <h2 class="news-card__title">{{analysis.name}}</h2>
+    <div class="news-card__post-date">Last edit: {{analysis.lastUpdated | date:"dd.MM.yyyy - HH:mm"}}</div>
+    <div class="news-card__details-wrapper">
+      <p class="news-card__excerpt">{{analysis.description}}</p>
+      <button (click)="openAnalysis(analysis)" mat-raised-button class="news-card__read-more">Spectate <em
+        class="fas fa-long-arrow-alt-right"></em></button>
+    </div>
   </div>
-  <h2 class="news-card__title">{{analysis.name}}</h2>
-  <div class="news-card__post-date">Last edit: {{analysis.lastUpdated | date:"dd.MM.yyyy - HH:mm"}}</div>
-  <div class="news-card__details-wrapper">
-    <p class="news-card__excerpt">{{analysis.description}}</p>
-    <button (click)="openAnalysis(analysis)" mat-raised-button class="news-card__read-more">Spectate <em
-      class="fas fa-long-arrow-alt-right"></em></button>
-  </div>
-</div>
 </div>
