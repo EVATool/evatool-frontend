@@ -5,8 +5,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.component';
-import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
-import {ROUTES} from '../../app-routes';
+import {AnalysisDeletionFailedEvent, CrossUiEventService} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-home',
@@ -17,12 +16,15 @@ export class HomeComponent implements OnInit {
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
+              private crossUI: CrossUiEventService,
               private router: Router,
               private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    // TODO deletion failed event...
+    this.crossUI.analysisDeletionFailed.subscribe((event: AnalysisDeletionFailedEvent) => {
+      event.entity.deletionFlagged = false;
+    });
 
     this.analysisData.loadAnalyses();
   }
@@ -33,22 +35,5 @@ export class HomeComponent implements OnInit {
       width: '40%',
       data: {analysis: analysis}
     });
-  }
-
-  deleteAnalysis(analysis: Analysis): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      disableClose: false
-    });
-    dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete this analysis?';
-
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult) {
-        this.analysisData.deleteAnalysis(analysis);
-      }
-    });
-  }
-
-  openAnalysis(analysis: Analysis): void {
-    this.router.navigate([ROUTES.analysis, analysis.id]);
   }
 }
