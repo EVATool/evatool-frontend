@@ -7,6 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {LogService} from '../../services/log.service';
 import {Router} from '@angular/router';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
+import {AnalysisDeletionFailedEvent, CrossUiEventService} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-analysis-tile',
@@ -18,11 +19,15 @@ export class AnalysisTileComponent implements OnInit {
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
+              private crossUI: CrossUiEventService,
               private router: Router,
               private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.crossUI.analysisDeletionFailed.subscribe((event: AnalysisDeletionFailedEvent) => {
+      event.entity.deletionFlagged = false;
+    });
   }
 
   openAnalysisDialog(analysis: Analysis): void {
@@ -41,6 +46,7 @@ export class AnalysisTileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
+        analysis.deletionFlagged = true;
         this.analysisData.deleteAnalysis(analysis);
       }
     });

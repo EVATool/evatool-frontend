@@ -22,10 +22,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.crossUI.analysisDeletionFailed.subscribe((event: AnalysisDeletionFailedEvent) => {
-      event.entity.deletionFlagged = false;
-    });
-
     this.analysisData.loadAnalyses();
   }
 

@@ -5,12 +5,14 @@
       <button mat-icon-button
               class="action-button"
               [matTooltip]="'Edit Analysis'"
+              [disabled]="analysis.deletionFlagged"
               (click)="$event.stopPropagation(); openAnalysisDialog(analysis)">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button
               class="action-button"
               [matTooltip]="'Delete Analysis'"
+              [disabled]="analysis.deletionFlagged"
               (click)="$event.stopPropagation(); deleteAnalysis(analysis)">
         <mat-icon>delete</mat-icon>
       </button>
