@@ -4,14 +4,19 @@
 
 .form-container {
 
-  margin: 50px;
+  margin: 15px 0 15px 0;
 
-  .left-column {
+  .column {
+    margin: 15px;
     width: 40%;
+
+    div {
+      margin: 10px;
+    }
   }
 
   .right-column {
-    width: 40%;
+    margin-top: 30px;
   }
 
   .action-container {

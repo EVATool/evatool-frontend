@@ -15,34 +15,7 @@
   <form (ngSubmit)="onSubmit()">
     <div class="form-container">
       <div fxLayout="row">
-        <div fxLayout="column" class="left-column">
-          <mat-checkbox *ngIf="!isEditingAnalysis"
-                        [(ngModel)]="analysis.isTemplate"
-                        name="analysisIsTemplate">
-            This is a Template
-          </mat-checkbox>
-
-          <mat-checkbox *ngIf="!isEditingAnalysis"
-                        [(ngModel)]="useTemplate"
-                        name="useTemplate">
-            Use Template
-          </mat-checkbox>
-
-          <mat-form-field *ngIf="useTemplate">
-            <mat-label>Template</mat-label>
-            <mat-select [(ngModel)]="template"
-                        name="selectedTemplate">
-              <ng-container *ngFor="let analysis of analysisData.analyses">
-                <mat-option *ngIf="analysis.isTemplate" [value]="analysis"
-                            (onSelectionChange)="template=analysis">
-                  {{analysis.name}}
-                </mat-option>
-              </ng-container>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div fxLayout="column" class="right-column">
+        <div fxLayout="column" class="column">
           <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput
@@ -66,6 +39,39 @@
                    (change)="updateAnalysis(analysis)"
                    name="analysisImageUrl"/>
           </mat-form-field>
+        </div>
+
+        <div fxLayout="column" class="column right-column">
+          <div>
+            <mat-checkbox *ngIf="!isEditingAnalysis"
+                          [(ngModel)]="analysis.isTemplate"
+                          name="analysisIsTemplate">
+              This is a Template
+            </mat-checkbox>
+          </div>
+
+          <div>
+            <mat-checkbox *ngIf="!isEditingAnalysis"
+                          [(ngModel)]="useTemplate"
+                          name="useTemplate">
+              Use Template
+            </mat-checkbox>
+          </div>
+
+          <div>
+            <mat-form-field *ngIf="useTemplate">
+              <mat-label>Template</mat-label>
+              <mat-select [(ngModel)]="template"
+                          name="selectedTemplate">
+                <ng-container *ngFor="let analysis of analysisData.analyses">
+                  <mat-option *ngIf="analysis.isTemplate" [value]="analysis"
+                              (onSelectionChange)="template=analysis">
+                    {{analysis.name}}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
       </div>
 
