@@ -2,11 +2,11 @@ import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {StakeholderPriorityComponent} from '../stakeholder-priority/stakeholder-priority.component';
 
 @Component({
-  selector: 'app-priority-filter',
-  templateUrl: './priority-filter.component.html',
-  styleUrls: ['./priority-filter.component.scss']
+  selector: 'app-filter-priority',
+  templateUrl: './filter-priority.component.html',
+  styleUrls: ['./filter-priority.component.scss']
 })
-export class PriorityFilterComponent {
+export class FilterPriorityComponent {
 
   @ViewChild(StakeholderPriorityComponent) stakeholderPriority!: StakeholderPriorityComponent;
 

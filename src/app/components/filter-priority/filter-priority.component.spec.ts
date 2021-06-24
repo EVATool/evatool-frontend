@@ -1,20 +1,20 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PriorityFilterComponent} from './priority-filter.component';
+import {FilterPriorityComponent} from './filter-priority.component';
 
-describe('PriorityFilterComponent', () => {
-  let component: PriorityFilterComponent;
-  let fixture: ComponentFixture<PriorityFilterComponent>;
+describe('FilterPriorityComponent', () => {
+  let component: FilterPriorityComponent;
+  let fixture: ComponentFixture<FilterPriorityComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PriorityFilterComponent ]
+      declarations: [ FilterPriorityComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PriorityFilterComponent);
+    fixture = TestBed.createComponent(FilterPriorityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
