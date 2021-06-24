@@ -11,10 +11,12 @@
 
   <div id="right-panel">
     <div class="analyses-title">Analyses</div>
+    <ng-scrollbar>
       <div class="analyses-tiles-wrapper">
         <div *ngFor="let analysis of analysisData.analyses;">
           <app-analysis-tile [analysis]="analysis"></app-analysis-tile>
         </div>
       </div>
+    </ng-scrollbar>
   </div>
 </div>
