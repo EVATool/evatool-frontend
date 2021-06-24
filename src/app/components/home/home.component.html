@@ -17,7 +17,7 @@
     <hr style="width:50%; margin: auto;">
     <div class="content-wrapper">
       <div *ngFor="let analysis of analysisData.analyses;" class="news-card">
-        <img src="{{analysis.imageUrl}}" alt="" class="news-card__image">
+        <img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" class="news-card__image">
         <div class="news-card__text-wrapper">
           <div class="dropdown">
             <button mat-button [matMenuTriggerFor]="menu">
@@ -35,7 +35,7 @@
             </mat-menu>
           </div>
           <h2 class="news-card__title">{{analysis.name}}</h2>
-          <div class="news-card__post-date">Last edit: {{analysis.lastUpdated| date:"dd.MM.yyyy - HH:mm"}}</div>
+          <div class="news-card__post-date">Last edit: {{analysis.lastUpdated | date:"dd.MM.yyyy - HH:mm"}}</div>
           <div class="news-card__details-wrapper">
             <p class="news-card__excerpt">{{analysis.description}}</p>
             <button (click)="openAnalysis(analysis)" mat-raised-button class="news-card__read-more">Spectate <em

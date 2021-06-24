@@ -6,11 +6,8 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-Analysis Dialog:
-visuals of dialog UI
-BUGGED: opens analysis when checkbox is not selected
-
 Analysis:
+Default image in assets
 Scrollbar and only scroll tiles (not header and footer)
 Analysis-Tile component
 template like normal analysis
@@ -39,6 +36,7 @@ make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dm
 Angular e2e tests
 Better 404 page (information about what might have been misinputted)
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table, mat-slider has an ABSOLUTE min width...
+BUGGED: dialog analysis opens analysis when checkbox is not selected
 BUG: why is footer hidden in home component?
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Impact slider in delta is completely bugged
