@@ -4,6 +4,6 @@ export const ROUTES = {
   analysis: 'analysis',
   imprint: 'imprint',
   privacy: 'privacy',
-  notFound: '404',
+  pageNotFound: '404',
   any: '**'
 };

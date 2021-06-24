@@ -34,7 +34,7 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
   @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
-  @Output() analysisWithIdNotFound: EventEmitter<AnalysisWithIdNotFound> = new EventEmitter();
+  @Output() analysisWithValidIdNotFound: EventEmitter<AnalysisWithIdNotFound> = new EventEmitter();
 
   @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
   @Output() stakeholderDeletionFailed: EventEmitter<StakeholderDeletionFailedEvent> = new EventEmitter();
@@ -97,7 +97,7 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
         const notFound = httpInfo.httpStatusCode === 404;
 
         if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
-          this.analysisWithIdNotFound.emit(new AnalysisWithIdNotFound(id));
+          this.analysisWithValidIdNotFound.emit(new AnalysisWithIdNotFound(id));
         } else if (httpInfo.method === 'DELETE') { // TODO change this to DELETE || UPDATE? then remove entities in event subscriptions.
           if (apiEndpoint === 'analyses') {
             const analysis = this.analysisData.analyses.find(a => a.id === id);

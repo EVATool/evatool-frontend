@@ -65,7 +65,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpInterceptorService} from './services/http-interceptor.service';
 import {HttpLoaderComponent} from './components/http-loader/http-loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -119,7 +119,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     PriorityFilterComponent,
     ConfirmationDialogComponent,
     HttpLoaderComponent,
-    NotFoundComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

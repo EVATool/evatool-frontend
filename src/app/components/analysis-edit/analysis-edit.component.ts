@@ -36,8 +36,12 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
     if (analysisIdIsUUID) {
       this.analysisData.changeCurrentAnalysis(analysisId);
     } else {
-      this.router.navigate(['404']);
+      this.router.navigate([ROUTES.pageNotFound]);
     }
+
+    this.crossUI.analysisWithValidIdNotFound.subscribe(() => {
+      this.router.navigate([ROUTES.pageNotFound]);
+    });
 
     this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.subscribe((event: StakeholderReferencedByImpactsEvent) => {
       this.tabGroup.selectedIndex = 1;
@@ -45,10 +49,6 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
 
     this.crossUI.userWantsToSeeImpactReferencedByRequirements.subscribe((event: ImpactReferencedByRequirementsEvent) => {
       this.tabGroup.selectedIndex = 2;
-    });
-
-    this.crossUI.analysisWithIdNotFound.subscribe(() => {
-      this.router.navigate([ROUTES.notFound]);
     });
   }
 
