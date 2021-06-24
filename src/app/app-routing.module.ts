@@ -5,14 +5,15 @@ import {AnalysisEditComponent} from './components/analysis-edit/analysis-edit.co
 import {ImprintComponent} from './components/imprint/imprint.component';
 import {PrivacyComponent} from './components/privacy/privacy.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
+import {ROUTES} from './app-routes';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'analysis', component: AnalysisEditComponent},
-  {path: 'imprint', component: ImprintComponent},
-  {path: 'privacy', component: PrivacyComponent},
-  {path: '404', component: NotFoundComponent},
-  {path: '**', redirectTo: '404'}
+  {path: ROUTES.home, component: HomeComponent},
+  {path: ROUTES.analysis, component: AnalysisEditComponent},
+  {path: ROUTES.imprint, component: ImprintComponent},
+  {path: ROUTES.privacy, component: PrivacyComponent},
+  {path: ROUTES.notFound, component: NotFoundComponent},
+  {path: ROUTES.any, redirectTo: ROUTES.notFound}
 ];
 
 @NgModule({

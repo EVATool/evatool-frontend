@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {Router} from '@angular/router';
+import {ROUTES} from '../../app-routes';
 
 @Component({
   selector: 'app-analysis-dialog',
@@ -58,6 +59,6 @@ export class AnalysisDialogComponent implements OnInit {
   }
 
   openAnalysis(analysis: Analysis): void {
-    this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
+    this.router.navigate([ROUTES.analysis, {id: analysis.id}]);
   }
 }

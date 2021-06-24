@@ -9,7 +9,8 @@ import {
   ImpactReferencedByRequirementsEvent,
   StakeholderReferencedByImpactsEvent
 } from '../../services/cross-ui-event.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ROUTES} from '../../app-routes';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -24,13 +25,36 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
               private crossUI: CrossUiEventService,
-              private router: Router) {
+              private router: Router,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    // Load current analysis.
+    const id = this.route.snapshot.params['id'];
+
+    console.log('__________________________');
+    console.log(id);
+
+
+    // Load current analysis.
+    // this.router.routerState?.root.queryParams.subscribe(params => { // TODO change back to no elvis when tests are done
+    //   const currentUrlIsAnalysis = this.router.url.includes('/analysis');
+    //   const analysisIdIsUUID = params.id === undefined ?
+    //     false : params.id.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
+    //
+    //   if (currentUrlIsAnalysis) {
+    //     if (analysisIdIsUUID) {
+    //       this.logger.info(this, 'Extracted analysisId from Router: ' + params.id);
+    //       this.changeCurrentAnalysis(params.id);
+    //     } else {
+    //       //this.router.navigate(['404']);
+    //     }
+    //   }
+    // });
+
     this.crossUI.analysisWithIdNotFound.subscribe(() => {
-      console.log('____________________________');
-      this.router.navigate(['/404']);
+      this.router.navigate([ROUTES.notFound]);
     });
   }
 

@@ -4,7 +4,6 @@ import {LogService} from '../log.service';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisRestService} from '../rest/analysis-rest.service';
 import {AnalysisMapperService} from '../mapper/analysis-mapper.service';
-import {Router} from '@angular/router';
 import {AnalysisDto} from '../../dto/AnalysisDto';
 
 @Injectable({
@@ -22,30 +21,11 @@ export class AnalysisDataService extends DataService {
 
   constructor(protected logger: LogService,
               private analysisRest: AnalysisRestService,
-              private analysisMapper: AnalysisMapperService,
-              private router: Router) {
+              private analysisMapper: AnalysisMapperService) {
     super(logger);
   }
 
   init(): void {
-    // Load current analysis.
-    this.router.routerState?.root.queryParams.subscribe(params => { // TODO change back to no elvis when tests are done
-      const currentUrl = this.router.url;
-      const currentUrlIsAnalysis = currentUrl.includes('/analysis');
-      const currentUrlIsAnalysisWithId = currentUrl.includes('/analysis?id=');
-      const analysisId = params.id;
-      const analysisIdIsUUID = analysisId === undefined ?
-        false : analysisId.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
-
-      if (currentUrlIsAnalysis) {
-        if (currentUrlIsAnalysisWithId && analysisIdIsUUID) {
-          this.logger.info(this, 'Extracted analysisId from Router: ' + params.id);
-          this.changeCurrentAnalysis(params.id);
-        } else {
-          this.router.navigate(['404']);
-        }
-      }
-    });
   }
 
   loadAnalyses(): void {

@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.component';
 import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
+import {ROUTES} from '../../app-routes';
 
 @Component({
   selector: 'app-home',
@@ -46,6 +47,6 @@ export class HomeComponent implements OnInit {
   }
 
   openAnalysis(analysis: Analysis): void {
-    this.router.navigate(['/analysis'], {queryParams: {id: analysis.id}, queryParamsHandling: 'merge'});
+    this.router.navigate([ROUTES.analysis, {id: analysis.id}]);
   }
 }
