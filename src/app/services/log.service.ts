@@ -7,7 +7,6 @@ Features:
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Analysis:
-Default image in assets
 Scrollbar and only scroll tiles (not header and footer)
 Analysis-Tile component
 template like normal analysis
