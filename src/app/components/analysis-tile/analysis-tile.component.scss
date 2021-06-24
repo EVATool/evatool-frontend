@@ -49,6 +49,11 @@
   transition: background-color 1.5s ease;
 }
 
+.action-button {
+  opacity: 0;
+  transition: .5s ease;
+}
+
 .analysis-name {
   transition: color 1s ease;
   margin-bottom: .5rem;
@@ -73,7 +78,6 @@
 @media (min-width: 900px) {
   .analysis-tile:hover .details-wrapper {
     max-height: 20rem;
-    height: 4rem;
     opacity: 1;
   }
 
@@ -88,5 +92,9 @@
   .analysis-tile:hover .analysis-image {
     transform: scale(1.2);
     z-index: -1;
+  }
+
+  .analysis-tile:hover .action-button {
+    opacity: 1;
   }
 }

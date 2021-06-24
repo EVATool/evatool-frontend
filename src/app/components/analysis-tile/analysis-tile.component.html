@@ -1,13 +1,17 @@
 <div class="analysis-tile" (click)="openAnalysis(analysis)">
   <img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" alt="" class="analysis-image">
   <div class="analysis-actions">
-    <button mat-menu-item (click)="$event.stopPropagation(); openAnalysisDialog(analysis)">
+    <button mat-icon-button
+            class="action-button"
+            [matTooltip]="'Edit Analysis'"
+            (click)="$event.stopPropagation(); openAnalysisDialog(analysis)">
       <mat-icon>edit</mat-icon>
-      Edit Analysis
     </button>
-    <button mat-menu-item (click)="$event.stopPropagation(); deleteAnalysis(analysis)">
+    <button mat-icon-button
+            class="action-button"
+            [matTooltip]="'Delete Analysis'"
+            (click)="$event.stopPropagation(); deleteAnalysis(analysis)">
       <mat-icon>delete</mat-icon>
-      Delete Analysis
     </button>
     <h2 class="analysis-name">{{analysis.name}}</h2>
     <div class="analysis-last-updated">Last edit: {{analysis.lastUpdated | date:"dd.MM.yyyy - HH:mm"}}</div>
