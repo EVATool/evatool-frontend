@@ -66,6 +66,7 @@ import {HttpInterceptorService} from './services/http-interceptor.service';
 import {HttpLoaderComponent} from './components/http-loader/http-loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import {FlexModule} from '@angular/flex-layout';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -151,7 +152,8 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       }
     }),
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FlexModule
   ],
   providers: [
     {

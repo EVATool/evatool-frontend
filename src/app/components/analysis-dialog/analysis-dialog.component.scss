@@ -2,4 +2,19 @@
 
 @include entity-modal-theme();
 
+.form-container {
 
+  margin: 50px;
+
+  .left-column {
+    width: 40%;
+  }
+
+  .right-column {
+    width: 40%;
+  }
+
+  .action-container {
+
+  }
+}
