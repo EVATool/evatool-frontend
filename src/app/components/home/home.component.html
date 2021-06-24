@@ -11,10 +11,10 @@
 
   <div id="right-panel">
     <div class="analyses-title">Analyses</div>
-    <div class="content-wrapper">
-      <div *ngFor="let analysis of analysisData.analyses;">
-        <app-analysis-tile [analysis]="analysis"></app-analysis-tile>
+      <div class="analyses-tiles-wrapper">
+        <div *ngFor="let analysis of analysisData.analyses;">
+          <app-analysis-tile [analysis]="analysis"></app-analysis-tile>
+        </div>
       </div>
-    </div>
   </div>
 </div>

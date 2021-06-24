@@ -29,10 +29,12 @@
   margin-right: 70px;
 }
 
-.content-wrapper {
+.analyses-tiles-wrapper {
   margin: 0 auto;
   max-width: 1200px;
+  height: 1000px;
   display: flex;
   flex-flow: row wrap;
   padding: 0.5rem;
+  overflow-y: scroll;
 }
