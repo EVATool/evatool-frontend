@@ -30,9 +30,20 @@ export class AnalysisDataService extends DataService {
   init(): void {
     // Load current analysis.
     this.router.routerState?.root.queryParams.subscribe(params => { // TODO change back to no elvis when tests are done
-      if (params.id !== undefined) {
-        this.logger.info(this, 'Extracted analysisId from Router: ' + params.id);
-        this.changeCurrentAnalysis(params.id);
+      const currentUrl = this.router.url;
+      const currentUrlIsAnalysis = currentUrl.includes('/analysis');
+      const currentUrlIsAnalysisWithId = currentUrl.includes('/analysis?id=');
+      const analysisId = params.id;
+      const analysisIdIsUUID = analysisId === undefined ?
+        false : analysisId.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
+
+      if (currentUrlIsAnalysis) {
+        if (currentUrlIsAnalysisWithId && analysisIdIsUUID) {
+          this.logger.info(this, 'Extracted analysisId from Router: ' + params.id);
+          this.changeCurrentAnalysis(params.id);
+        } else {
+          this.router.navigate(['404']);
+        }
       }
     });
   }
