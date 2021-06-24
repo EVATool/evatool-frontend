@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // TODO deletion failed event...
+
     this.analysisData.loadAnalyses();
   }
 

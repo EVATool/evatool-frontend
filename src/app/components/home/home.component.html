@@ -35,7 +35,7 @@
             </mat-menu>
           </div>
           <h2 class="news-card__title">{{analysis.name}}</h2>
-          <div class="news-card__post-date">Last edit: {{analysis.lastUpdated| date:"dd.MM.yyyy - hh:mm"}}</div>
+          <div class="news-card__post-date">Last edit: {{analysis.lastUpdated| date:"dd.MM.yyyy - HH:MM"}}</div>
           <div class="news-card__details-wrapper">
             <p class="news-card__excerpt">{{analysis.description}}</p>
             <button (click)="openAnalysis(analysis)" mat-raised-button class="news-card__read-more">Spectate <em

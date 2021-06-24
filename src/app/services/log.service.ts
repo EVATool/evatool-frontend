@@ -7,6 +7,9 @@ Features:
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Analysis: analysis-dialog, analysis changes locally if user does not click on update button
+Scrollbar and only scroll tiles (not header and footer)
+last edit not updating
+BUGGED: opens analysis when checkbox is not selected
 Analysis: Analysis-Tile component
 Analysis: template like normal analysis
 Analysis: analysis-dialog, ensure template selected + textfields not empty

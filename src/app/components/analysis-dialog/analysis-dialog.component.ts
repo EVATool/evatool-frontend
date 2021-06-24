@@ -21,7 +21,7 @@ export class AnalysisDialogComponent implements OnInit {
 
   constructor(public analysisData: AnalysisDataService,
               private router: Router,
-              private analysisDialogComponent: MatDialogRef<AnalysisDialogComponent>,
+              private dialogRef: MatDialogRef<AnalysisDialogComponent>,
               private snackbar: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.analysis = data.analysis;
@@ -31,24 +31,26 @@ export class AnalysisDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.analysisData.createdAnalysis.subscribe((analysis: Analysis) => {
-      this.processServiceEvent(analysis);
-    });
-
-    this.analysisData.updatedAnalysis.subscribe((analysis: Analysis) => {
-      this.processServiceEvent(analysis);
+      this.submitButtonClick(analysis);
     });
   }
 
-  processServiceEvent(analysis: Analysis): void {
+  submitButtonClick(analysis: Analysis): void {
     if (this.goToAnalysis) {
       this.openAnalysis(analysis);
     }
-    this.analysisDialogComponent.close();
+    this.dialogRef.close();
+  }
+
+  updateAnalysis(analysis: Analysis): void {
+    if (this.isEditingAnalysis) {
+      this.analysisData.updateAnalysis(analysis);
+    }
   }
 
   onSubmit(): void {
     if (this.isEditingAnalysis) {
-      this.analysisData.updateAnalysis(this.analysis);
+      this.submitButtonClick(this.analysis);
     } else {
       if (this.useTemplate) {
         this.analysisData.deepCopy(this.template, this.analysis);
