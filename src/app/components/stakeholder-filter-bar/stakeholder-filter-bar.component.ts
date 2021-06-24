@@ -5,7 +5,7 @@ import {StakeholderTableFilterEvent} from './StakeholderTableFilterEvent';
 import {ColumnCategoryFilterComponent} from '../column-category-filter/column-category-filter.component';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {FilterPriorityComponent} from '../filter-priority/filter-priority.component';
-import {ColumnSliderFilterComponent} from '../column-slider-filter/column-slider-filter.component';
+import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
 
 @Component({
   selector: 'app-stakeholder-filter-bar',
@@ -15,7 +15,7 @@ import {ColumnSliderFilterComponent} from '../column-slider-filter/column-slider
 export class StakeholderFilterBarComponent {
   @ViewChild('levelFilter') levelFilter!: ColumnCategoryFilterComponent;
   @ViewChild(FilterPriorityComponent) priorityFilter!: FilterPriorityComponent;
-  @ViewChild(ColumnSliderFilterComponent) impactedFilter!: ColumnSliderFilterComponent;
+  @ViewChild(FilterSliderComponent) impactedFilter!: FilterSliderComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<StakeholderTableFilterEvent>();
 

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ColumnSliderFilterComponent} from '../column-slider-filter/column-slider-filter.component';
+import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
 import {ColumnCategoryFilterComponent} from '../column-category-filter/column-category-filter.component';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {ImpactTableFilterEvent} from './ImpactTableFilterEvent';
@@ -16,7 +16,7 @@ import {Stakeholder} from '../../model/Stakeholder';
   styleUrls: ['./impact-filter-bar.component.scss']
 })
 export class ImpactFilterBarComponent implements OnInit {
-  @ViewChild(ColumnSliderFilterComponent) meritFilter!: ColumnSliderFilterComponent;
+  @ViewChild(FilterSliderComponent) meritFilter!: FilterSliderComponent;
   @ViewChild('stakeholderFilter') stakeholderFilter!: ColumnCategoryFilterComponent;
   @ViewChild('valuesFilter') valuesFilter!: ColumnCategoryFilterComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;

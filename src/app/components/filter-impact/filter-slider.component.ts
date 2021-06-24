@@ -5,11 +5,11 @@ import {MatSliderChange} from '@angular/material/slider';
 import {LogService} from '../../services/log.service';
 
 @Component({
-  selector: 'app-column-slider-filter',
-  templateUrl: './column-slider-filter.component.html',
-  styleUrls: ['./column-slider-filter.component.scss']
+  selector: 'app-filter-impact',
+  templateUrl: './filter-slider.component.html',
+  styleUrls: ['./filter-slider.component.scss']
 })
-export class ColumnSliderFilterComponent {
+export class FilterSliderComponent {
   @ViewChild(ImpactSliderComponent) slider!: ImpactSliderComponent;
   @Input() name = '';
   @Output() filterChanged = new EventEmitter<SliderFilterSettings>();

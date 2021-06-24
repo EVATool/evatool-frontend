@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {ColumnSliderFilterComponent} from '../column-slider-filter/column-slider-filter.component';
+import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
 import {ColumnCategoryFilterComponent} from '../column-category-filter/column-category-filter.component';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {Variant} from '../../model/Variant';
@@ -18,7 +18,7 @@ import {LogService} from '../../services/log.service';
   styleUrls: ['./requirement-filter-bar.component.scss']
 })
 export class RequirementFilterBarComponent implements OnInit {
-  @ViewChild(ColumnSliderFilterComponent) sliderFilter!: ColumnSliderFilterComponent;
+  @ViewChild(FilterSliderComponent) sliderFilter!: FilterSliderComponent;
   @ViewChild('variantsFilter') variantsFilter!: ColumnCategoryFilterComponent;
   @ViewChild('valueSystemFilter') valueSystemFilter!: ColumnCategoryFilterComponent;
   @ViewChild('impactFilter') impactFilter!: ColumnCategoryFilterComponent;

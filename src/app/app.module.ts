@@ -32,7 +32,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {HighlightSearchComponent} from './components/highlight-search/highlight-search.component';
 import {ImpactSliderComponent} from './components/impact-slider/impact-slider.component';
-import {ColumnSliderFilterComponent} from './components/column-slider-filter/column-slider-filter.component';
+import {FilterSliderComponent} from './components/filter-impact/filter-slider.component';
 import {ColumnCategoryFilterComponent} from './components/column-category-filter/column-category-filter.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
@@ -102,7 +102,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     PluckPipe,
     NgVarDirective,
     HighlightSearchComponent,
-    ColumnSliderFilterComponent,
+    FilterSliderComponent,
     ColumnCategoryFilterComponent,
     ImpactSliderComponent,
     ValueDialogComponent,
