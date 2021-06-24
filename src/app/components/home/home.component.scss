@@ -1,11 +1,10 @@
 #left-panel {
-  float: left;
   width: 20%;
 }
 
 #right-panel {
-  float: right;
   width: 80%;
+  margin-left: 20%;
 }
 
 .new-analysis-button {
@@ -16,7 +15,7 @@
   padding: 20px 60px;
   margin-left: 50px;
   margin-top: 230px;
-  width: 240px;
+  width: 15%;
   text-transform: uppercase;
   border-radius: 20px;
   position: fixed;
@@ -39,16 +38,17 @@
 }
 
 .news-card {
+  min-width: 290px;
+  height: 300px;
+
   border: 0 solid aqua;
   margin: 0.5rem;
   position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
   flex: 1;
-  min-width: 290px;
-  max-width: 30%;
-  height: 300px;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
