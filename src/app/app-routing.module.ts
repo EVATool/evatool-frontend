@@ -9,7 +9,7 @@ import {ROUTES} from './app-routes';
 
 const routes: Routes = [
   {path: ROUTES.home, component: HomeComponent},
-  {path: ROUTES.analysis, component: AnalysisEditComponent},
+  {path: ROUTES.analysisWithId, component: AnalysisEditComponent},
   {path: ROUTES.imprint, component: ImprintComponent},
   {path: ROUTES.privacy, component: PrivacyComponent},
   {path: ROUTES.notFound, component: NotFoundComponent},

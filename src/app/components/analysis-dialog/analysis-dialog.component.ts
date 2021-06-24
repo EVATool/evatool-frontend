@@ -59,6 +59,6 @@ export class AnalysisDialogComponent implements OnInit {
   }
 
   openAnalysis(analysis: Analysis): void {
-    this.router.navigate([ROUTES.analysis, {id: analysis.id}]);
+    this.router.navigate([ROUTES.analysis, analysis.id]);
   }
 }

@@ -1,6 +1,7 @@
 export const ROUTES = {
   home: '',
-  analysis: 'analysis/:id',
+  analysisWithId: 'analysis/:id',
+  analysis: 'analysis',
   imprint: 'imprint',
   privacy: 'privacy',
   notFound: '404',
