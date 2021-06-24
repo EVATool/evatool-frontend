@@ -14,6 +14,12 @@ import {AnalysisDeletionFailedEvent, CrossUiEventService} from '../../services/c
 })
 export class HomeComponent implements OnInit {
 
+  analyses: Analysis[] = [];
+  analysisNameFilter = '';
+  showAnalyses = true;
+  showTemplates = true;
+  sortByIsTemplateAsc = true;
+
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
               private crossUI: CrossUiEventService,
@@ -22,7 +28,37 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.analysisData.loadedAnalyses.subscribe(() => {
+      this.updateData(this.analysisData.analyses);
+    });
+
+    this.analysisData.createdAnalysis.subscribe(() => {
+      this.updateData(this.analysisData.analyses);
+    });
+
+    this.analysisData.deletedAnalysis.subscribe(() => {
+      this.updateData(this.analysisData.analyses);
+    });
+
     this.analysisData.loadAnalyses();
+  }
+
+  updateData(analyses: Analysis[]): void {
+    let temp = analyses.sort(this.sortByIsTemplate);
+    if (!this.sortByIsTemplateAsc) {
+      temp = temp.reverse();
+    }
+    this.analyses = temp;
+  }
+
+  sortByIsTemplate(a: Analysis, b: Analysis): number {
+    if (a.isTemplate === b.isTemplate) {
+      return 0;
+    } else if (a.isTemplate && !b.isTemplate) {
+      return 1;
+    } else {
+      return -1;
+    }
   }
 
   openAnalysisDialog(analysis: Analysis): void {

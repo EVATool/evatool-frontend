@@ -13,8 +13,11 @@
     <div class="analyses-title">Analyses</div>
     <ng-scrollbar>
       <div class="analyses-tiles-wrapper">
-        <div *ngFor="let analysis of analysisData.analyses;">
-          <app-analysis-tile [analysis]="analysis"></app-analysis-tile>
+        <div *ngFor="let analysis of analyses;">
+          <div
+            *ngIf="analysis.name.includes(analysisNameFilter) && (analysis.isTemplate === showTemplates || !analysis.isTemplate === showAnalyses)">
+            <app-analysis-tile [analysis]="analysis"></app-analysis-tile>
+          </div>
         </div>
       </div>
     </ng-scrollbar>
