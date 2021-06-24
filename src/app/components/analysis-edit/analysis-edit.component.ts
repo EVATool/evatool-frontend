@@ -31,34 +31,14 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Load current analysis.
-    const id = this.route.snapshot.params['id'];
+    const analysisId = this.route.snapshot.params['id'];
+    const analysisIdIsUUID = analysisId.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
+    if (analysisIdIsUUID) {
+      this.analysisData.changeCurrentAnalysis(analysisId);
+    } else {
+      this.router.navigate(['404']);
+    }
 
-    console.log('__________________________');
-    console.log(id);
-
-
-    // Load current analysis.
-    // this.router.routerState?.root.queryParams.subscribe(params => { // TODO change back to no elvis when tests are done
-    //   const currentUrlIsAnalysis = this.router.url.includes('/analysis');
-    //   const analysisIdIsUUID = params.id === undefined ?
-    //     false : params.id.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
-    //
-    //   if (currentUrlIsAnalysis) {
-    //     if (analysisIdIsUUID) {
-    //       this.logger.info(this, 'Extracted analysisId from Router: ' + params.id);
-    //       this.changeCurrentAnalysis(params.id);
-    //     } else {
-    //       //this.router.navigate(['404']);
-    //     }
-    //   }
-    // });
-
-    this.crossUI.analysisWithIdNotFound.subscribe(() => {
-      this.router.navigate([ROUTES.notFound]);
-    });
-  }
-
-  ngAfterViewInit(): void {
     this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.subscribe((event: StakeholderReferencedByImpactsEvent) => {
       this.tabGroup.selectedIndex = 1;
     });
@@ -67,6 +47,12 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
       this.tabGroup.selectedIndex = 2;
     });
 
+    this.crossUI.analysisWithIdNotFound.subscribe(() => {
+      this.router.navigate([ROUTES.notFound]);
+    });
+  }
+
+  ngAfterViewInit(): void {
     if (isDevMode()) {
       this.tabGroup.selectedIndex = 2;
     }

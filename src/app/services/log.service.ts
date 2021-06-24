@@ -6,7 +6,7 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-make param into path, analysisId
+Why does route param look so ugly?
 rename to PageNotFoundComponent
 
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color

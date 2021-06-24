@@ -6,3 +6,7 @@ export const ROUTES = {
   notFound: '404',
   any: '**'
 };
+
+export const PARAMETERS = { // TODO how to use this?
+  analysisId: 'id'
+};
