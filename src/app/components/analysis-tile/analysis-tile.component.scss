@@ -50,7 +50,8 @@
 }
 
 .analysis-actions {
-
+  position: fixed;
+  right: 15px;
 }
 
 .action-button {
@@ -76,7 +77,7 @@
 }
 
 .analysis-description {
-  width: 90%;
+  width: 100%;
   font-weight: 300;
 }
 
