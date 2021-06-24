@@ -6,9 +6,14 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
+Analysis: analysis-dialog, analysis changes locally if user does not click on update button
+Analysis: Analysis-Tile component
+Analysis: template like normal analysis
+Analysis: analysis-dialog, ensure template selected + textfields not empty
+Analysis: filter/search analyses
+
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Category filter: select all, none, invert options
-Analysis TODO Complete rework, Analysis-Tile component, template like normal analysis, filter/search analyses, dialog: ensure template selected + textfields not empty
 Deep copy: copy everything?
 Add keycloak [wait for https] (enable/disable with flag in .env docker-compose AND enable/disable in special backend/frontend env for easy testing/developing)
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
