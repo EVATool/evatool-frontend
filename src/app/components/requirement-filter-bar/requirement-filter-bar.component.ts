@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
-import {ColumnCategoryFilterComponent} from '../column-category-filter/column-category-filter.component';
+import {FilterCategoryComponent} from '../filter-category/filter-category.component';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {Variant} from '../../model/Variant';
 import {ValueDataService} from '../../services/data/value-data.service';
@@ -19,9 +19,9 @@ import {LogService} from '../../services/log.service';
 })
 export class RequirementFilterBarComponent implements OnInit {
   @ViewChild(FilterSliderComponent) sliderFilter!: FilterSliderComponent;
-  @ViewChild('variantsFilter') variantsFilter!: ColumnCategoryFilterComponent;
-  @ViewChild('valueSystemFilter') valueSystemFilter!: ColumnCategoryFilterComponent;
-  @ViewChild('impactFilter') impactFilter!: ColumnCategoryFilterComponent;
+  @ViewChild('variantsFilter') variantsFilter!: FilterCategoryComponent;
+  @ViewChild('valueSystemFilter') valueSystemFilter!: FilterCategoryComponent;
+  @ViewChild('impactFilter') impactFilter!: FilterCategoryComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<RequirementTableFilterEvent>();
 

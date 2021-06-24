@@ -2,11 +2,11 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LogService} from '../../services/log.service';
 
 @Component({
-  selector: 'app-column-category-filter',
-  templateUrl: './column-category-filter.component.html',
-  styleUrls: ['./column-category-filter.component.scss']
+  selector: 'app-filter-category',
+  templateUrl: './filter-category.component.html',
+  styleUrls: ['./filter-category.component.scss']
 })
-export class ColumnCategoryFilterComponent {
+export class FilterCategoryComponent {
   @Input() categories: string[] = [];
   @Input() name = 'Filter';
   @Output() filterChanged = new EventEmitter<string[]>();

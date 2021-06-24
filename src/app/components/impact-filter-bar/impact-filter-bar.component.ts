@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
-import {ColumnCategoryFilterComponent} from '../column-category-filter/column-category-filter.component';
+import {FilterCategoryComponent} from '../filter-category/filter-category.component';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {ImpactTableFilterEvent} from './ImpactTableFilterEvent';
 import {LogService} from '../../services/log.service';
@@ -17,8 +17,8 @@ import {Stakeholder} from '../../model/Stakeholder';
 })
 export class ImpactFilterBarComponent implements OnInit {
   @ViewChild(FilterSliderComponent) meritFilter!: FilterSliderComponent;
-  @ViewChild('stakeholderFilter') stakeholderFilter!: ColumnCategoryFilterComponent;
-  @ViewChild('valuesFilter') valuesFilter!: ColumnCategoryFilterComponent;
+  @ViewChild('stakeholderFilter') stakeholderFilter!: FilterCategoryComponent;
+  @ViewChild('valuesFilter') valuesFilter!: FilterCategoryComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 

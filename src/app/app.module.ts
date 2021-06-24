@@ -33,7 +33,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {HighlightSearchComponent} from './components/highlight-search/highlight-search.component';
 import {ImpactSliderComponent} from './components/impact-slider/impact-slider.component';
 import {FilterSliderComponent} from './components/filter-impact/filter-slider.component';
-import {ColumnCategoryFilterComponent} from './components/column-category-filter/column-category-filter.component';
+import {FilterCategoryComponent} from './components/filter-category/filter-category.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {ValueDialogComponent} from './components/value-dialog/value-dialog.component';
@@ -103,7 +103,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     NgVarDirective,
     HighlightSearchComponent,
     FilterSliderComponent,
-    ColumnCategoryFilterComponent,
+    FilterCategoryComponent,
     ImpactSliderComponent,
     ValueDialogComponent,
     ImpactFilterBarComponent,

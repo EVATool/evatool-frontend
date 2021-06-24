@@ -5,27 +5,27 @@
   </mat-list-item>
 
   <mat-list-item>
-    <app-column-category-filter #variantsFilter
+    <app-filter-category #variantsFilter
                                 [categories]="variantNames"
                                 [name]="'Variants'"
                                 (filterChanged)="variantFilterChanged($event)">
-    </app-column-category-filter>
+    </app-filter-category>
   </mat-list-item>
 
   <mat-list-item>
-    <app-column-category-filter #valueSystemFilter
+    <app-filter-category #valueSystemFilter
                                 [categories]="valueNames"
                                 [name]="'Values'"
                                 (filterChanged)="valueFilterChanged($event)">
-    </app-column-category-filter>
+    </app-filter-category>
   </mat-list-item>
 
   <mat-list-item>
-    <app-column-category-filter #impactFilter
+    <app-filter-category #impactFilter
                                 [categories]="impactPrefixIds"
                                 [name]="'Impacts'"
                                 (filterChanged)="impactFilterChanged($event)">
-    </app-column-category-filter>
+    </app-filter-category>
   </mat-list-item>
 
   <mat-list-item>

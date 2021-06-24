@@ -2,7 +2,7 @@ import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {StakeholderDataService} from '../../services/data/stakeholder-data.service';
 import {LogService} from '../../services/log.service';
 import {StakeholderTableFilterEvent} from './StakeholderTableFilterEvent';
-import {ColumnCategoryFilterComponent} from '../column-category-filter/column-category-filter.component';
+import {FilterCategoryComponent} from '../filter-category/filter-category.component';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {FilterPriorityComponent} from '../filter-priority/filter-priority.component';
 import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
@@ -13,7 +13,7 @@ import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
   styleUrls: ['./stakeholder-filter-bar.component.scss']
 })
 export class StakeholderFilterBarComponent {
-  @ViewChild('levelFilter') levelFilter!: ColumnCategoryFilterComponent;
+  @ViewChild('levelFilter') levelFilter!: FilterCategoryComponent;
   @ViewChild(FilterPriorityComponent) priorityFilter!: FilterPriorityComponent;
   @ViewChild(FilterSliderComponent) impactedFilter!: FilterSliderComponent;
   @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;

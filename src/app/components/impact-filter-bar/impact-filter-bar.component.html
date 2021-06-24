@@ -5,19 +5,19 @@
   </mat-list-item>
 
   <mat-list-item>
-    <app-column-category-filter #stakeholderFilter
+    <app-filter-category #stakeholderFilter
                                 [categories]="this.stakeholderNames"
                                 [name]="'Stakeholders'"
                                 (filterChanged)="stakeholderFilterChanged($event)">
-    </app-column-category-filter>
+    </app-filter-category>
   </mat-list-item>
 
   <mat-list-item>
-    <app-column-category-filter #valuesFilter
+    <app-filter-category #valuesFilter
                                 [categories]="valueNames"
                                 [name]="'Values'"
                                 (filterChanged)="valueFilterChanged($event)">
-    </app-column-category-filter>
+    </app-filter-category>
   </mat-list-item>
 
   <mat-list-item>
