@@ -22,7 +22,7 @@ export class AnalysisDialogComponent implements OnInit {
   constructor(public analysisData: AnalysisDataService,
               private router: Router,
               private dialogRef: MatDialogRef<AnalysisDialogComponent>,
-              private snackbar: MatSnackBar,
+              private snackBar: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.analysis = data.analysis;
     this.isEditingAnalysis = this.analysis.id != null;
@@ -53,7 +53,13 @@ export class AnalysisDialogComponent implements OnInit {
       this.submitButtonClick(this.analysis);
     } else {
       if (this.useTemplate) {
-        this.analysisData.deepCopy(this.template, this.analysis);
+        if (this.template === undefined) {
+          const message = 'You have to select a template';
+          const action = '';
+          this.snackBar.open(message, action, {duration: 5000});
+        } else {
+          this.analysisData.deepCopy(this.template, this.analysis);
+        }
       } else {
         this.analysisData.createAnalysis(this.analysis);
       }

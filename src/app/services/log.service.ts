@@ -7,7 +7,6 @@ Features:
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Analysis Dialog:
-ensure template selected + textfields not empty
 visuals of dialog UI
 BUGGED: opens analysis when checkbox is not selected
 
