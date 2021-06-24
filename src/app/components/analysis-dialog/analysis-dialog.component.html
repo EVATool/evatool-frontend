@@ -5,7 +5,8 @@
     </button>
 
     <div class="title-container" mat-dialog-title>
-      <h2 *ngIf="!isEditingAnalysis">Create Analysis</h2>
+      <h2 *ngIf="!isEditingAnalysis && !analysis.isTemplate">Create Analysis</h2>
+      <h2 *ngIf="!isEditingAnalysis && analysis.isTemplate">Create Template</h2>
       <h2 *ngIf="isEditingAnalysis && !analysis.isTemplate">Edit Analysis</h2>
       <h2 *ngIf="isEditingAnalysis && analysis.isTemplate">Edit Template</h2>
     </div>
@@ -15,14 +16,16 @@
 
     <div>
       <ng-container *ngIf="!isEditingAnalysis">
-        <mat-checkbox [(ngModel)]="useTemplate" name="useTemplate">
+        <mat-checkbox [(ngModel)]="useTemplate"
+                      name="useTemplate">
           Use Template
         </mat-checkbox>
       </ng-container>
 
       <mat-form-field *ngIf="useTemplate">
         <mat-label>Template</mat-label>
-        <mat-select [(ngModel)]="template" name="selectedTemplate">
+        <mat-select [(ngModel)]="template"
+                    name="selectedTemplate">
           <ng-container *ngFor="let analysis of analysisData.analyses">
             <mat-option *ngIf="analysis.isTemplate" [value]="analysis"
                         (onSelectionChange)="template=analysis">
@@ -81,7 +84,8 @@
     <div>
       <button mat-raised-button
               type="submit">
-        <div *ngIf="!isEditingAnalysis">Create Analysis</div>
+        <div *ngIf="!isEditingAnalysis && !analysis.isTemplate">Create Analysis</div>
+        <div *ngIf="!isEditingAnalysis && analysis.isTemplate">Create Template</div>
         <div *ngIf="isEditingAnalysis">Done</div>
       </button>
     </div>
