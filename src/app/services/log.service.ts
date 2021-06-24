@@ -7,8 +7,6 @@ Features:
 Tasks aus Jira (UID) -> das Jira public machen?
 
 Analysis:
-Analysis-Tile component
-Multiple click safe delete of analysis (deletionFlagged)
 Scrollbar and only scroll tiles (not header and footer)
 filter/search analyses (separate into analysis and template)
 
