@@ -8,7 +8,8 @@
 
   .column {
     margin: 15px;
-    width: 40%;
+    width: 45%;
+    height: 200px;
 
     div {
       margin: 10px;
@@ -19,7 +20,15 @@
     margin-top: 30px;
   }
 
-  .action-container {
+  .sole-column {
+    width: 90%;
+  }
 
+  .action-container {
+    margin: -50px 0 1px 15px;
+
+    mat-checkbox {
+      margin: 15px 0 0 10px;
+    }
   }
 }

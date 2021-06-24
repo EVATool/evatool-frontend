@@ -15,7 +15,7 @@
   <form (ngSubmit)="onSubmit()">
     <div class="form-container">
       <div fxLayout="row">
-        <div fxLayout="column" class="column">
+        <div fxLayout="column" class="column" [ngClass]="{'sole-column' : isEditingAnalysis}">
           <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput
@@ -41,7 +41,7 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="column" class="column right-column">
+        <div fxLayout="column" class="column right-column" *ngIf="!isEditingAnalysis">
           <div>
             <mat-checkbox *ngIf="!isEditingAnalysis"
                           [(ngModel)]="analysis.isTemplate"
@@ -76,11 +76,6 @@
       </div>
 
       <div fxLayout="row" class="action-container">
-        <mat-checkbox [(ngModel)]="goToAnalysis"
-                      name="goToAnalysis">
-          Open Analysis when I'm done
-        </mat-checkbox>
-
         <div mat-dialog-actions>
           <button class="submit-button"
                   mat-raised-button
@@ -90,6 +85,11 @@
             <div *ngIf="isEditingAnalysis">Done</div>
           </button>
         </div>
+
+        <mat-checkbox [(ngModel)]="goToAnalysis"
+                      name="goToAnalysis">
+          Open when I'm done
+        </mat-checkbox>
       </div>
     </div>
   </form>
