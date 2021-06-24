@@ -41,12 +41,16 @@
   z-index: -1;
 }
 
-.analysis-actions {
+.interactive-panel {
   position: sticky;
   bottom: 0;
   padding: 1rem;
   color: white;
   transition: background-color 1.5s ease;
+}
+
+.analysis-actions {
+
 }
 
 .action-button {
@@ -72,6 +76,7 @@
 }
 
 .analysis-description {
+  width: 90%;
   font-weight: 300;
 }
 
@@ -81,7 +86,7 @@
     opacity: 1;
   }
 
-  .analysis-tile:hover .analysis-actions {
+  .analysis-tile:hover .interactive-panel {
     background-color: rgba(0, 0, 0, 0.6);
   }
 

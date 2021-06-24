@@ -1,18 +1,20 @@
 <div class="analysis-tile" (click)="openAnalysis(analysis)">
   <img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" alt="" class="analysis-image">
-  <div class="analysis-actions">
-    <button mat-icon-button
-            class="action-button"
-            [matTooltip]="'Edit Analysis'"
-            (click)="$event.stopPropagation(); openAnalysisDialog(analysis)">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button mat-icon-button
-            class="action-button"
-            [matTooltip]="'Delete Analysis'"
-            (click)="$event.stopPropagation(); deleteAnalysis(analysis)">
-      <mat-icon>delete</mat-icon>
-    </button>
+  <div class="interactive-panel">
+    <div class="analysis-actions">
+      <button mat-icon-button
+              class="action-button"
+              [matTooltip]="'Edit Analysis'"
+              (click)="$event.stopPropagation(); openAnalysisDialog(analysis)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button
+              class="action-button"
+              [matTooltip]="'Delete Analysis'"
+              (click)="$event.stopPropagation(); deleteAnalysis(analysis)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
     <h2 class="analysis-name">{{analysis.name}}</h2>
     <div class="analysis-last-updated">Last edit: {{analysis.lastUpdated | date:"dd.MM.yyyy - HH:mm"}}</div>
     <div class="details-wrapper">
