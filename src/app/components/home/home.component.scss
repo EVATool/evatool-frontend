@@ -1,17 +1,6 @@
-#left-panel {
-  width: 500px;
-}
-
-#right-panel {
-  position: fixed;
-  width: 80%;
-  height: 83vh;
-  right: 0;
-}
-
 .analysis-ui {
   position: fixed;
-  width: 250px;
+  width: 20px;
   margin-left: 25px;
   margin-right: 25px;
   margin-top: 150px;
@@ -60,17 +49,22 @@
   }
 }
 
-.analyses-title {
-  text-align: center;
-  font-size: 28px;
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
+.analyses-tile-container {
+  position: fixed;
+  width: 80%;
+  height: 83vh;
+  right: 0;
 
-.analyses-tiles-wrapper {
-  margin: 0 auto;
-  max-width: 1200px;
-  display: flex;
-  flex-flow: row wrap;
-  padding: 0.5rem;
+  .analyses-title {
+    text-align: center;
+    width: 100%;
+    font-size: 28px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  .analyses-tiles-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+  }
 }

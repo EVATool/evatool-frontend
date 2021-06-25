@@ -1,75 +1,73 @@
 <div fxLayout="column">
-  <div id="left-panel">
-    <div fxLayout="column" class="analysis-ui">
-      <button mat-raised-button
-              (click)="openAnalysisDialog(analysisData.createDefaultAnalysis())"
-              class="new-analysis-button">{{'HOME.NEW_ANALYSIS_BUTTON_TEXT' | translate}}
-      </button>
+  <div fxLayout="column" class="analysis-ui">
+    <button mat-raised-button
+            (click)="openAnalysisDialog(analysisData.createDefaultAnalysis())"
+            class="new-analysis-button">{{'HOME.NEW_ANALYSIS_BUTTON_TEXT' | translate}}
+    </button>
 
-      <mat-form-field class="analysis-name-filter">
-        <mat-label>Name Includes</mat-label>
-        <input matInput
-               [(ngModel)]="analysisNameFilter"
-               (change)="updateData(analysisData.analyses)"/>
-      </mat-form-field>
+    <mat-form-field class="analysis-name-filter">
+      <mat-label>Name Includes</mat-label>
+      <input matInput
+             [(ngModel)]="analysisNameFilter"
+             (change)="updateData(analysisData.analyses)"/>
+    </mat-form-field>
 
-      <div fxLayout="row" class="analysis-is-template-filter">
-        <mat-checkbox id="show-analyses"
-                      [(ngModel)]="showAnalyses"
-                      [matTooltip]="'Whether to show analyses'">
-          Analyses
-        </mat-checkbox>
+    <div fxLayout="row" class="analysis-is-template-filter">
+      <mat-checkbox id="show-analyses"
+                    [(ngModel)]="showAnalyses"
+                    [matTooltip]="'Whether to show analyses'">
+        Analyses
+      </mat-checkbox>
 
-        <mat-checkbox id="show-templates"
-                      [(ngModel)]="showTemplates"
-                      [matTooltip]="'Whether to show templates'">
-          Templates
-        </mat-checkbox>
+      <mat-checkbox id="show-templates"
+                    [(ngModel)]="showTemplates"
+                    [matTooltip]="'Whether to show templates'">
+        Templates
+      </mat-checkbox>
+    </div>
+
+    <div fxLayout="row" class="analysis-sort-by-container">
+      <div class="analysis-sort-by-text">
+        Template/Analysis
       </div>
+      <mat-button-toggle-group class="analysis-sort-by-buttons" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle value="desc"
+                           [matTooltip]="'Show templates, then analyses'"
+                           (change)="sortByIsTemplateAsc=false; updateData(analysisData.analyses)"
+                           [checked]="!sortByIsTemplateAsc">
+          <mat-icon>arrow_upward</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="asc"
+                           [matTooltip]="'Show analyses, then templates'"
+                           (change)="sortByIsTemplateAsc=true; updateData(analysisData.analyses)"
+                           [checked]="sortByIsTemplateAsc">
+          <mat-icon>arrow_downward</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
 
-      <div fxLayout="row" class="analysis-sort-by-container">
-        <div class="analysis-sort-by-text">
-          Template/Analysis
-        </div>
-        <mat-button-toggle-group class="analysis-sort-by-buttons" name="fontStyle" aria-label="Font Style">
-          <mat-button-toggle value="desc"
-                             [matTooltip]="'Show templates, then analyses'"
-                             (change)="sortByIsTemplateAsc=false; updateData(analysisData.analyses)"
-                             [checked]="!sortByIsTemplateAsc">
-            <mat-icon>arrow_upward</mat-icon>
-          </mat-button-toggle>
-          <mat-button-toggle value="asc"
-                             [matTooltip]="'Show analyses, then templates'"
-                             (change)="sortByIsTemplateAsc=true; updateData(analysisData.analyses)"
-                             [checked]="sortByIsTemplateAsc">
-            <mat-icon>arrow_downward</mat-icon>
-          </mat-button-toggle>
-        </mat-button-toggle-group>
+    <div fxLayout="row" class="analysis-sort-by-container">
+      <div class="analysis-sort-by-text">
+        Last Edited
       </div>
-
-      <div fxLayout="row" class="analysis-sort-by-container">
-        <div class="analysis-sort-by-text">
-          Last Edited
-        </div>
-        <mat-button-toggle-group class="analysis-sort-by-buttons" name="fontStyle" aria-label="Font Style">
-          <mat-button-toggle value="desc"
-                             [matTooltip]="'Show recently edited analyses last'"
-                             (change)="sortByLastEditedAsc=false; updateData(analysisData.analyses)"
-                             [checked]="!sortByLastEditedAsc">
-            <mat-icon>arrow_upward</mat-icon>
-          </mat-button-toggle>
-          <mat-button-toggle value="asc"
-                             [matTooltip]="'Show recently edited analyses first'"
-                             (change)="sortByLastEditedAsc=true; updateData(analysisData.analyses)"
-                             [checked]="sortByLastEditedAsc">
-            <mat-icon>arrow_downward</mat-icon>
-          </mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
+      <mat-button-toggle-group class="analysis-sort-by-buttons" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle value="desc"
+                           [matTooltip]="'Show recently edited analyses last'"
+                           (change)="sortByLastEditedAsc=false; updateData(analysisData.analyses)"
+                           [checked]="!sortByLastEditedAsc">
+          <mat-icon>arrow_upward</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="asc"
+                           [matTooltip]="'Show recently edited analyses first'"
+                           (change)="sortByLastEditedAsc=true; updateData(analysisData.analyses)"
+                           [checked]="sortByLastEditedAsc">
+          <mat-icon>arrow_downward</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
   </div>
 
-  <div id="right-panel">
+  <div class="analyses-tile-container">
     <div class="analyses-title">Analyses</div>
     <ng-scrollbar>
       <div class="analyses-tiles-wrapper">
