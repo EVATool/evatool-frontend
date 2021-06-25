@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   showAnalyses = true;
   showTemplates = true;
   sortByIsTemplateAsc = true;
+  sortByLastEditedAsc = true;
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
     if (!this.sortByIsTemplateAsc) {
       temp = temp.reverse();
     }
+    //temp = temp.sort(this.sortByLastUpdated);
     this.analyses = temp;
   }
 
@@ -55,6 +57,16 @@ export class HomeComponent implements OnInit {
     if (a.isTemplate === b.isTemplate) {
       return 0;
     } else if (a.isTemplate && !b.isTemplate) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
+  sortByLastUpdated(a: Analysis, b: Analysis): number {
+    if (a.lastUpdated === b.lastUpdated) {
+      return 0;
+    } else if (a.lastUpdated < b.lastUpdated) {
       return 1;
     } else {
       return -1;

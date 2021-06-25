@@ -8,6 +8,7 @@ import {FooterComponent} from './layout/footer/footer.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HomeComponent} from './components/home/home.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatMenuModule} from '@angular/material/menu';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
@@ -128,6 +129,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
