@@ -8,6 +8,21 @@
                 name="filter"
                 [(ngModel)]="filterValues"
                 multiple>
+      <mat-option class="option-button"
+                  (click)="clearSelection()">
+        <mat-icon class="mat-option-icon">clear</mat-icon>
+        Clear
+      </mat-option>
+      <mat-option class="option-button"
+                  (click)="selectAll()">
+        <mat-icon class="mat-option-icon">format_list_bulleted</mat-icon>
+        All
+      </mat-option>
+      <mat-option class="option-button"
+                  (click)="invertSelection()">
+        <mat-icon class="mat-option-icon">swap_calls</mat-icon>
+        Invert
+      </mat-option>
       <mat-option *ngFor="let category of categories"
                   [value]="category"
                   (click)="updateFilter()">

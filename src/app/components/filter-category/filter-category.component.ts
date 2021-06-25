@@ -21,6 +21,30 @@ export class FilterCategoryComponent {
     this.filterChanged.emit(this.filterValues);
   }
 
+  clearSelection(): void {
+    this.filterValues = [];
+    this.updateFilter();
+  }
+
+  selectAll(): void {
+    this.filterValues = [];
+    for (const value of this.categories) {
+      this.filterValues.push(value);
+    }
+    this.updateFilter();
+  }
+
+  invertSelection(): void {
+    const invertedSelection = [];
+    for (const value of this.categories) {
+      if (!this.filterValues.includes(value)) {
+        invertedSelection.push(value);
+      }
+    }
+    this.filterValues = invertedSelection;
+    this.updateFilter();
+  }
+
   clearFilter(): void {
     this.logger.debug(this, 'Clear ' + this.name + '-filter');
     this.filterValues = [];

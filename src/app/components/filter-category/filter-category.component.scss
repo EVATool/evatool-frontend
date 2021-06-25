@@ -8,3 +8,13 @@ p {
   border-bottom: 1px solid black;
   max-height: 48px;
 }
+
+::ng-deep .option-button .mat-pseudo-checkbox {
+  display: none;
+}
+
+.mat-option-icon {
+  margin-left: -5px;
+  width: 7px;
+  transform: scale(1.0);
+}
