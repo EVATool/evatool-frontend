@@ -47,6 +47,26 @@
           </mat-button-toggle>
         </mat-button-toggle-group>
       </div>
+
+      <div fxLayout="row" class="analysis-last-updated-sort">
+        <div class="sort-by-last-updated-text">
+          Last Edited
+        </div>
+        <mat-button-toggle-group class="analysis-sort-by-last-updated" name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle value="desc"
+                             [matTooltip]="'???'"
+                             (change)="sortByLastEditedAsc=false; updateData(analysisData.analyses)"
+                             [checked]="!sortByLastEditedAsc">
+            <mat-icon>arrow_upward</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="asc"
+                             [matTooltip]="'Show recently edited analyses first'"
+                             (change)="sortByLastEditedAsc=true; updateData(analysisData.analyses)"
+                             [checked]="sortByLastEditedAsc">
+            <mat-icon>arrow_downward</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
     </div>
   </div>
 
