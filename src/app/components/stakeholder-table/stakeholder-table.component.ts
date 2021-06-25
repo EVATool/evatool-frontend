@@ -115,7 +115,7 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit {
 
       const priorityFilter = searchTerms.priority.length === 0 || searchTerms.priority.indexOf(data.priority) !== -1;
 
-      const impactedFilter = data.impacted != null && SliderFilterSettings.filter(searchTerms.impacted, data.impacted * -1);
+      const impactedFilter = data.impacted === null || SliderFilterSettings.filter(searchTerms.impacted, data.impacted * -1);
 
       return levelFilter && priorityFilter && impactedFilter;
     };

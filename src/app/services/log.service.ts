@@ -6,8 +6,6 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-fix broken stakeholder filter bar
-
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Deep copy: copy everything?
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)

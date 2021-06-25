@@ -54,7 +54,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (isDevMode()) {
-      this.tabGroup.selectedIndex = 2;
+      this.tabGroup.selectedIndex = 0;
     }
   }
 
