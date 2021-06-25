@@ -33,6 +33,7 @@
 
   .analysis-is-template-filter {
     margin-top: 25px;
+    margin-bottom: 15px;
 
     #show-analyses {
       margin-left: 25px;
@@ -43,29 +44,17 @@
     }
   }
 
-  .analysis-is-template-sort {
+  .analysis-sort-by-container {
     margin-top: 25px;
 
-    .sort-by-is-template-text {
+    .analysis-sort-by-text {
+      width: 130px;
       margin-top: 13px;
       margin-right: 10px;
     }
 
-    .analysis-sort-by-is-template {
-      float: right;
-    }
-  }
-
-  .analysis-last-updated-sort {
-    margin-top: 25px;
-
-    .sort-by-last-updated-text {
-      margin-top: 13px;
-      margin-right: 10px;
-    }
-
-    .analysis-sort-by-last-updated {
-      float: right;
+    .analysis-sort-by-buttons {
+      margin-right: 15px;
     }
   }
 }

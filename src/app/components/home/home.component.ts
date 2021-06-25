@@ -47,8 +47,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateData(analyses: Analysis[]): void {
-    const temp = analyses.sort(this.sortByIsTemplate());
-    this.analyses = temp;
+    this.analyses = analyses.sort(this.sortByIsTemplate());
   }
 
   sortByIsTemplate(): (a: Analysis, b: Analysis) => number {
