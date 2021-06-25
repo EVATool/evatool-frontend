@@ -49,7 +49,7 @@
   }
 }
 
-.analyses-tile-container {
+.analyses-tiles-container {
   position: fixed;
   height: 83vh;
   right: 0;
@@ -64,6 +64,7 @@
   }
 
   .analyses-tiles-wrapper {
+    flex: auto;
     display: flex;
     flex-flow: row wrap;
     padding: 15px;
