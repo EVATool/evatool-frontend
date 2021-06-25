@@ -1,24 +1,24 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {MarkTextareaComponent} from './mark-textarea.component';
+import {HighlightTextareaComponent} from './highlight-textarea.component';
 import {SpecService} from '../../services/spec.service';
 import {HighlightSearchPipe} from '../../pipes/highlight-search.pipe';
 
-describe('MarkTextareaComponent', () => {
-  let component: MarkTextareaComponent;
-  let fixture: ComponentFixture<MarkTextareaComponent>;
+describe('HighlightTextareaComponent', () => {
+  let component: HighlightTextareaComponent;
+  let fixture: ComponentFixture<HighlightTextareaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [MarkTextareaComponent, HighlightSearchPipe]
+      declarations: [HighlightTextareaComponent, HighlightSearchPipe]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MarkTextareaComponent);
+    fixture = TestBed.createComponent(HighlightTextareaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

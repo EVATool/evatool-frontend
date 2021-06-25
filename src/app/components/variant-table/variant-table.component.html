@@ -10,10 +10,10 @@
       </div>
     </th>
     <td mat-cell *matCellDef='let variant'>
-      <app-mark-textarea [(text)]="variant.name"
+      <app-highlight-textarea [(text)]="variant.name"
                          (textChange)="updateVariant(variant)"
                          [highlightFilter]="''"
-                         [placeholder]="'Name...'"></app-mark-textarea>
+                         [placeholder]="'Name...'"></app-highlight-textarea>
     </td>
   </ng-container>
 
@@ -28,10 +28,10 @@
     <td mat-cell *matCellDef='let variant'>
       <div class="description-wrapper">
         <div class="description-container">
-          <app-mark-textarea [(text)]="variant.description"
+          <app-highlight-textarea [(text)]="variant.description"
                              (textChange)="updateVariant(variant)"
                              [highlightFilter]="''"
-                             [placeholder]="'Describe the variant...'"></app-mark-textarea>
+                             [placeholder]="'Describe the variant...'"></app-highlight-textarea>
         </div>
         <div class="options">
           <div class="option">

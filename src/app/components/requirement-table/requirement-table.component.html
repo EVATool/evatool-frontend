@@ -20,10 +20,10 @@
           </div>
         </th>
         <td mat-cell *matCellDef='let requirement'>
-          <app-mark-textarea [(text)]="requirement.description"
+          <app-highlight-textarea [(text)]="requirement.description"
                              (textChange)="updateRequirement(requirement)"
                              [highlightFilter]="highlightFilter"
-                             [placeholder]="'Describe the requirement...'"></app-mark-textarea>
+                             [placeholder]="'Describe the requirement...'"></app-highlight-textarea>
         </td>
       </ng-container>
 

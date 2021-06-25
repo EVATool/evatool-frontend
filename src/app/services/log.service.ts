@@ -6,7 +6,10 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
+Highlight (highlight-textarea):
+text not instantly highlighted when typing (and wrongly updated)
+solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
+
 Deep copy: copy everything?
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 Add keycloak [wait for https] (enable/disable with flag in .env docker-compose AND enable/disable in special backend/frontend env for easy testing/developing)

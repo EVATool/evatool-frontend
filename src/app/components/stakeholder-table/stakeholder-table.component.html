@@ -20,10 +20,10 @@
           </div>
         </th>
         <td mat-cell *matCellDef='let stakeholder'>
-          <app-mark-textarea [(text)]="stakeholder.name"
+          <app-highlight-textarea [(text)]="stakeholder.name"
                              (textChange)="updateStakeholder(stakeholder)"
                              [highlightFilter]="highlightFilter"
-                             [placeholder]="'Stakeholder name...'"></app-mark-textarea>
+                             [placeholder]="'Stakeholder name...'"></app-highlight-textarea>
         </td>
       </ng-container>
 

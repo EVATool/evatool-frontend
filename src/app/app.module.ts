@@ -52,7 +52,7 @@ import {VariantDialogComponent} from './components/variant-dialog/variant-dialog
 import {VariantTableComponent} from './components/variant-table/variant-table.component';
 import {AddEntityButtonComponent} from './components/add-entity-button/add-entity-button.component';
 import {ScrollToTopButtonComponent} from './components/scroll-to-top-button/scroll-to-top-button.component';
-import {MarkTextareaComponent} from './components/mark-textarea/mark-textarea.component';
+import {HighlightTextareaComponent} from './components/highlight-textarea/highlight-textarea.component';
 import {AnalysisDialogComponent} from './components/analysis-dialog/analysis-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {FilterPriorityComponent} from './components/filter-priority/filter-priority.component';
@@ -116,7 +116,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     VariantTableComponent,
     AddEntityButtonComponent,
     ScrollToTopButtonComponent,
-    MarkTextareaComponent,
+    HighlightTextareaComponent,
     AnalysisDialogComponent,
     FilterPriorityComponent,
     ConfirmationDialogComponent,

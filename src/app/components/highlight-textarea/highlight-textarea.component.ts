@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 
 @Component({
-  selector: 'app-mark-textarea',
-  templateUrl: './mark-textarea.component.html',
-  styleUrls: ['./mark-textarea.component.scss']
+  selector: 'app-highlight-textarea',
+  templateUrl: './highlight-textarea.component.html',
+  styleUrls: ['./highlight-textarea.component.scss']
 })
-export class MarkTextareaComponent implements AfterViewInit {
+export class HighlightTextareaComponent implements AfterViewInit {
   @ViewChild('textareadiv') textarea!: ElementRef;
   @Input() highlightFilter = '';
   @Input() text!: string;
