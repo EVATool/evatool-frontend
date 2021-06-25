@@ -7,7 +7,6 @@ Features:
 Tasks aus Jira (UID) -> das Jira public machen?
 
 fix broken stakeholder filter bar
-Change Impact filter (invert) of requriement table
 
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Deep copy: copy everything?

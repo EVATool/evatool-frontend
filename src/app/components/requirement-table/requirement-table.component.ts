@@ -127,17 +127,15 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
     this.requirementDeltaDataService.createdRequirementDelta.subscribe((delta: RequirementDelta) => {
       this.showDeltaSlider(delta);
     });
-
   }
 
-  updateImpactColumns(excludeImpacts?: string[]): void {
+  updateImpactColumns(includeOnlyTheseImpacts?: string[]): void {
     const displayedColumns: string[] = [];
     this.staticDisplayedColumns.forEach((col: string) => displayedColumns.push(col));
 
     this.impactDataService.impacts.forEach((impact: Impact) => {
-      const index = displayedColumns.length - 1;
-      if (excludeImpacts == null || !excludeImpacts.includes(impact.prefixSequenceId)) {
-        displayedColumns.splice(index, 0, impact.prefixSequenceId);
+      if (!includeOnlyTheseImpacts || includeOnlyTheseImpacts.length === 0 || includeOnlyTheseImpacts.includes(impact.prefixSequenceId)) {
+        displayedColumns.push(impact.prefixSequenceId);
       }
     });
 
