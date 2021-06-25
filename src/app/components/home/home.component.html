@@ -76,7 +76,7 @@
       <div class="analyses-tiles-wrapper">
         <div *ngFor="let analysis of analyses;">
           <div
-            *ngIf="analysis.name.includes(analysisNameFilter) && ((analysis.isTemplate === showTemplates && !analysis.isTemplate === showAnalyses) || ( showAnalyses && showTemplates))">
+            *ngIf="analysis.name.toLowerCase().includes(analysisNameFilter.toLowerCase()) && ((analysis.isTemplate === showTemplates && !analysis.isTemplate === showAnalyses) || ( showAnalyses && showTemplates))">
             <app-analysis-tile [analysis]="analysis"></app-analysis-tile>
           </div>
         </div>
