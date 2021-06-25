@@ -6,8 +6,6 @@ Features:
 
 Tasks aus Jira (UID) -> das Jira public machen?
 
-Change analysis home to div with column flex layout
-
 Category filter: select all, none, invert options
 Highlight (mark-textarea) TODO text not instantly highlighted when typing (and wrongly updated) solution: manually set selection?, placeholder disappears when typing not already when focussing, placeholder color
 Deep copy: copy everything?
@@ -37,6 +35,7 @@ Impact slider in delta is completely bugged
 All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
 Determine convention for html tag order and enforce (e.g. matInput, [input], (output), ([bind]))
+Huge styling refactor (Zooming, mobile, resizing)
 
 */
 
