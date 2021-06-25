@@ -1,10 +1,12 @@
 #left-panel {
-
+  width: 500px;
 }
 
 #right-panel {
-  padding-left: 20%;
+  position: fixed;
+  width: 80%;
   height: 83vh;
+  right: 0;
 }
 
 .analysis-ui {
