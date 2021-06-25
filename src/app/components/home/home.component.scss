@@ -1,18 +1,18 @@
 #left-panel {
-  width: 20%;
+
 }
 
 #right-panel {
-  width: 75%;
-  margin-left: 21%;
+  padding-left: 20%;
+  width: 150px;
   height: 83vh;
 }
 
 .analysis-ui {
   position: fixed;
   width: 250px;
-  margin-left: 35px;
-  margin-right: 35px;
+  margin-left: 25px;
+  margin-right: 25px;
   margin-top: 150px;
 
   .new-analysis-button {
@@ -62,7 +62,7 @@
 .analyses-title {
   text-align: center;
   font-size: 28px;
-  margin-top: 1px;
+  margin-top: 15px;
   margin-bottom: 10px;
 }
 
