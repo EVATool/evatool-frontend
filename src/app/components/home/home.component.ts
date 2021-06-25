@@ -6,6 +6,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.component';
 import {AnalysisDeletionFailedEvent, CrossUiEventService} from '../../services/cross-ui-event.service';
+import {Impact} from '../../model/Impact';
+import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 
 @Component({
   selector: 'app-home',
@@ -45,22 +47,29 @@ export class HomeComponent implements OnInit {
   }
 
   updateData(analyses: Analysis[]): void {
-    let temp = analyses.sort(this.sortByIsTemplate);
-    if (!this.sortByIsTemplateAsc) {
-      temp = temp.reverse();
-    }
-    //temp = temp.sort(this.sortByLastUpdated);
+    const temp = analyses.sort(this.sortByIsTemplate());
     this.analyses = temp;
   }
 
-  sortByIsTemplate(a: Analysis, b: Analysis): number {
-    if (a.isTemplate === b.isTemplate) {
-      return 0;
-    } else if (a.isTemplate && !b.isTemplate) {
-      return 1;
-    } else {
-      return -1;
-    }
+  sortByIsTemplate(): (a: Analysis, b: Analysis) => number {
+    const reverseByIsTemplate = this.sortByIsTemplateAsc ? 1 : -1;
+    const reverseByLastUpdated = this.sortByLastEditedAsc ? 1 : -1;
+
+    return (a: Analysis, b: Analysis): number => {
+      if (a.isTemplate === b.isTemplate) {
+        if (a.lastUpdated === b.lastUpdated) {
+          return 0;
+        } else if (a.lastUpdated < b.lastUpdated) {
+          return 1 * reverseByLastUpdated;
+        } else {
+          return -1 * reverseByLastUpdated;
+        }
+      } else if (a.isTemplate && !b.isTemplate) {
+        return 1 * reverseByIsTemplate;
+      } else {
+        return -1 * reverseByIsTemplate;
+      }
+    };
   }
 
   sortByLastUpdated(a: Analysis, b: Analysis): number {
