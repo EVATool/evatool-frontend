@@ -13,7 +13,7 @@ Add keycloak
 -> multiple tenants
 
 -> Test prod
-  -> enable ssl and enable keycloak env vars must be properly used
+  -> enable ssl, enable keycloak, client id, realm,  env vars must be properly used
 -> Disable keycloak in backend settings! (IMPOSSIBLE)
   -> Same problem for running application in non-keycloak profile
   -> Tests try to use keycloak, only enable keycloak in keycloak and prod env
