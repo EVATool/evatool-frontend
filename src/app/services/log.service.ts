@@ -6,12 +6,12 @@ Features:
 
 Tasks aus Jira (UID)
 
-Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
-
-Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 Add keycloak [wait for https] (enable/disable with flag in .env docker-compose AND enable/disable in special backend/frontend env for easy testing/developing)
+  -> Tests try to use keycloak, only enable keycloak in keycloak and prod env
+Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 
 Backlog:
+Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
