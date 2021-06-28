@@ -10,7 +10,6 @@ import {AnalysisDto} from '../dto/AnalysisDto';
   providedIn: 'root'
 })
 export class AuthService extends RestService {
-  @Output() authorizationInitialized: EventEmitter<void> = new EventEmitter();
 
   private token!: string;
   private tokenExpiresIn!: number;
@@ -26,7 +25,7 @@ export class AuthService extends RestService {
     super(logger, http, sampleData);
   }
 
-  init(): void {
+  getToken(): string {
     if (environment.useAuth) {
       // TODO Setup token and refresh token so that getToken always returns a valid token.
       if (!this.refreshToken) {
@@ -41,7 +40,6 @@ export class AuthService extends RestService {
 
         this.http.post(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
           this.takeInAuthResponse(authResponse);
-          this.authorizationInitialized.emit();
         });
       } else {
         const authRequest = 'grant_type=refresh_token' +
@@ -51,17 +49,12 @@ export class AuthService extends RestService {
 
         this.http.post<any>(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
           this.takeInAuthResponse(authResponse);
-          this.authorizationInitialized.emit();
         });
       }
     } else {
       this.token = 'Not used';
       this.refreshToken = 'Not used';
-      this.authorizationInitialized.emit();
     }
-  }
-
-  getToken(): string {
     return this.token;
   }
 

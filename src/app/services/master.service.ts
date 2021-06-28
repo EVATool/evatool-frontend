@@ -28,17 +28,13 @@ export class MasterService {
   init(): void {
     this.crossUI.init();
 
-    this.authService.authorizationInitialized.subscribe(() => {
-      this.requirementDeltaData.init();
-      this.requirementData.init();
-      this.impactData.init();
-      this.variantData.init();
-      this.valueData.init();
-      this.stakeholderData.init();
-      this.analysisData.init();
-    });
-
-    this.authService.init();
+    this.requirementDeltaData.init();
+    this.requirementData.init();
+    this.impactData.init();
+    this.variantData.init();
+    this.valueData.init();
+    this.stakeholderData.init();
+    this.analysisData.init();
 
     this.crossUI.initComplete.emit();
     this.crossUI.initialized = true;
