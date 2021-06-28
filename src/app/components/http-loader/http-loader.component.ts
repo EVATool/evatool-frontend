@@ -3,6 +3,9 @@ import {LogService} from '../../services/log.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpInfo, HttpInfoType} from '../../services/HttpInfo';
+import {CrossUiEventService} from '../../services/cross-ui-event.service';
+import {Router} from '@angular/router';
+import {ROUTES} from '../../app-routes';
 
 @Component({
   selector: 'app-http-loader',
@@ -17,6 +20,8 @@ export class HttpLoaderComponent implements OnInit {
 
   constructor(private logger: LogService,
               private httpLoaderService: HttpLoaderService,
+              private crossUI: CrossUiEventService,
+              private router: Router,
               private snackBar: MatSnackBar) {
   }
 
@@ -40,9 +45,25 @@ export class HttpLoaderComponent implements OnInit {
       }
     });
 
+    this.crossUI.authenticationFailed.subscribe(() => { // 401
+      console.log('ROUTEEEEEEEEEEEEEEEEEEEEEEEE');
+      this.router.navigate([ROUTES.login]);
+    });
+
+    this.crossUI.authorizationFailed.subscribe(() => { // 403
+      // TODO should be impossible to receive, because UI is disabled for users that cannot edit
+      //  But still: this should be handled separately! (better dis play message)
+    });
+
+    // Generic http error display.
     this.httpLoaderService.httpError.subscribe((httpInfo: HttpInfo) => {
-      console.log(httpInfo); // This should stay here.
-      if (httpInfo.httpStatusCode !== 404 && httpInfo.httpStatusCode !== 401 && !httpInfo.functionalErrorCode && !this.snackBarShown) {
+      if (httpInfo.httpStatusCode !== 404
+        && httpInfo.httpStatusCode !== 403
+        && httpInfo.httpStatusCode !== 401
+        && !httpInfo.functionalErrorCode
+        && !this.snackBarShown) {
+
+        console.log(httpInfo); // This should stay here.
         this.snackBarShown = true;
         const message = 'An http request failed';
         const action = '';

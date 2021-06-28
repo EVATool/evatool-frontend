@@ -18,10 +18,11 @@ export class AuthService {
     if (environment.useAuth) {
       // TODO Setup token and refresh token so that getToken always returns a valid token.
       this.token = 'lel';
+      this.refreshToken = 'ALSO TEST';
       this.authorizationInitialized.emit();
     } else {
-      this.token = 'TEST';
-      this.refreshToken = 'ALSO TEST';
+      this.token = 'Not used';
+      this.refreshToken = 'Not used';
       this.authorizationInitialized.emit();
     }
   }

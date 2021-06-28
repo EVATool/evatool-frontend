@@ -103,6 +103,8 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
         const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
         const notFound = httpInfo.httpStatusCode === 404;
 
+        console.log('------------------------');
+        console.log(httpInfo.httpStatusCode);
         if (httpInfo.httpStatusCode === 401) {
           this.authenticationFailed.emit(new AuthenticationFailedEvent());
         } else if (httpInfo.httpStatusCode === 403) {
