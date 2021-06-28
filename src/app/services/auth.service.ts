@@ -44,12 +44,10 @@ export class AuthService extends RestService {
           this.authorizationInitialized.emit();
         });
       } else {
-        const authRequest = {
-          grant_type: 'refresh_token',
-          scope: 'openid',
-          client_id: this.authClient,
-          refresh_token: this.refreshToken
-        };
+        const authRequest = 'grant_type=refresh_token' +
+          '&scope=openid' +
+          '&client_id=' + this.authClient +
+          '&refresh_token=' + this.refreshToken;
 
         this.http.post<any>(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
           this.takeInAuthResponse(authResponse);

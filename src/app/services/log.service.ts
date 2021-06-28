@@ -10,6 +10,7 @@ Add keycloak
   -> Simple login page and POST to keycloak
   -> Get/refresh tokens in AuthService
   -> Same problem for running application in non-keycloak profile
+  -> cashe credentials locally (at least refresh token) and load when page is refreshed
   -> Test prod
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 
