@@ -46,13 +46,11 @@ export class HttpLoaderComponent implements OnInit {
     });
 
     this.crossUI.authenticationFailed.subscribe(() => { // 401
-      console.log('ROUTEEEEEEEEEEEEEEEEEEEEEEEE');
       this.router.navigate([ROUTES.login]);
     });
 
     this.crossUI.authorizationFailed.subscribe(() => { // 403
-      // TODO should be impossible to receive, because UI is disabled for users that cannot edit
-      //  But still: this should be handled separately! (better dis play message)
+      this.router.navigate([ROUTES.accessDenied]);
     });
 
     // Generic http error display.

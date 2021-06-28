@@ -5,8 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 Add keycloak
--> Display remaining login of refresh token in UI
--> Simple login page and POST to keycloak
+-> Simple login page
 -> access denied page
 
 -> cashe credentials locally (at least refresh token) and load when page is refreshed

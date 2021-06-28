@@ -5,6 +5,7 @@ import {RestService} from './rest.service';
 import {HttpClient} from '@angular/common/http';
 import {SampleDataService} from './sample-data.service';
 import {Router} from '@angular/router';
+import {ROUTES} from '../app-routes';
 
 @Injectable({
   providedIn: 'root'
@@ -81,7 +82,7 @@ export class AuthService extends RestService {
       this.refreshTokenExpiresIn -= 1;
 
       if (this.tokenExpiresIn < 0) {
-        this.router.navigate(['login']);
+        this.router.navigate([ROUTES.login]);
       }
     }, 1000);
   }

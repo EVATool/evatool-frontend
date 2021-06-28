@@ -7,10 +7,12 @@ import {PrivacyComponent} from './components/privacy/privacy.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {ROUTES} from './app-routes';
 import {LoginComponent} from './components/login/login.component';
+import {AccessDeniedComponent} from './components/access-denied/access-denied.component';
 
 const routes: Routes = [
   {path: ROUTES.home, component: HomeComponent},
   {path: ROUTES.login, component: LoginComponent},
+  {path: ROUTES.accessDenied, component: AccessDeniedComponent},
   {path: ROUTES.analysisWithId, component: AnalysisEditComponent},
   {path: ROUTES.imprint, component: ImprintComponent},
   {path: ROUTES.privacy, component: PrivacyComponent},
