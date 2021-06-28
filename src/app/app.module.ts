@@ -74,6 +74,7 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import { AuthRemainingComponent } from './components/auth-remaining/auth-remaining.component';
 import { TitlePageComponent } from './components/title-page/title-page.component';
 import { TimeOutComponent } from './components/time-out/time-out.component';
+import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -132,7 +133,8 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     AccessDeniedComponent,
     AuthRemainingComponent,
     TitlePageComponent,
-    TimeOutComponent
+    TimeOutComponent,
+    TermsAndConditionsComponent
   ],
   imports: [
     BrowserModule,
