@@ -69,6 +69,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {FlexModule} from '@angular/flex-layout';
 import {AuthInterceptorService} from './services/auth-interceptor.service';
+import { LoginComponent } from './components/login/login.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -122,7 +123,8 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     FilterPriorityComponent,
     ConfirmationDialogComponent,
     HttpLoaderComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
