@@ -12,11 +12,12 @@ Add keycloak
 -> cashe credentials locally (at least refresh token) and load when page is refreshed
 -> multiple tenants
 
--> Test prod
-  -> enable ssl, enable keycloak, client id, realm,  env vars must be properly used
--> Disable keycloak in backend settings! (IMPOSSIBLE)
-  -> Same problem for running application in non-keycloak profile
+-> Prod and test
+  -> Disable keycloak in backend settings! (IMPOSSIBLE)
   -> Tests try to use keycloak, only enable keycloak in keycloak and prod env
+  -> Same problem for running application in non-keycloak profile
+  -> enable ssl, enable keycloak, client id, realm,  env vars must be properly used
+  -> When keycloak is disabled, it should really be off even in prod settings (docker-compose env var KEYCLOAK_ENABLED=false)
 
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 
