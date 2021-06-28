@@ -19,4 +19,10 @@ export class AuthRemainingComponent implements OnInit {
   refreshToken(): void {
     this.authService.refreshExistingToken();
   }
+
+  getRemainingTokenTime(): string {
+    const minutes = Math.floor(this.authService.tokenExpiresIn / 60);
+    const seconds = this.authService.tokenExpiresIn - 60 * minutes;
+    return minutes + ':' + (seconds + '').padStart(2, '0');
+  }
 }
