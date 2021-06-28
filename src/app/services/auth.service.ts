@@ -4,7 +4,6 @@ import {environment} from '../../environments/environment';
 import {RestService} from './rest.service';
 import {HttpClient} from '@angular/common/http';
 import {SampleDataService} from './sample-data.service';
-import {AnalysisDto} from '../dto/AnalysisDto';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,6 @@ export class AuthService extends RestService {
 
   getToken(): string {
     if (environment.useAuth) {
-      // TODO Setup token and refresh token so that getToken always returns a valid token.
       if (!this.refreshToken) {
         const authRequest = 'grant_type=password' +
           '&scope=openid' +

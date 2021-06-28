@@ -11,6 +11,7 @@ Add keycloak
   -> Add annotations in backend
   -> Test refresh token in AuthService
   -> Same problem for running application in non-keycloak profile
+  -> access denied page
   -> cashe credentials locally (at least refresh token) and load when page is refreshed
   -> multiple tenants
   -> Test prod
