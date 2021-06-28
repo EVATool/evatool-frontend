@@ -1,1 +1,21 @@
-<p>login works!</p>
+<div fxLayout="column" class="login-form-container">
+
+  <h2> Sign in </h2>
+
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput [(ngModel)]="authService.username">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput [(ngModel)]="authService.password">
+  </mat-form-field>
+
+  <button mat-button>
+    Sign in
+  </button>
+
+  Terms & condition Forgot password
+
+</div>

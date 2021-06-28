@@ -18,8 +18,8 @@ export class AuthService extends RestService {
   private refreshToken!: string;
   refreshTokenExpiresIn!: number;
 
-  username = 'admin';
-  password = 'admin';
+  username = '';
+  password = '';
 
   constructor(protected logger: LogService,
               protected http: HttpClient,
@@ -48,9 +48,6 @@ export class AuthService extends RestService {
       '&client_id=' + this.authClient +
       '&username=' + this.username +
       '&password=' + this.password;
-
-    console.log(this.authUrl);
-    console.log(authRequest);
 
     this.http.post(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       this.takeInAuthResponse(authResponse);

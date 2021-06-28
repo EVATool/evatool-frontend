@@ -58,6 +58,7 @@ export class HttpLoaderComponent implements OnInit {
       if (httpInfo.httpStatusCode !== 404
         && httpInfo.httpStatusCode !== 403
         && httpInfo.httpStatusCode !== 401
+        && httpInfo.httpStatusCode !== 0
         && !httpInfo.functionalErrorCode
         && !this.snackBarShown) {
 
