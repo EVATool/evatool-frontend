@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
+import {LogService} from '../../services/log.service';
 
 @Component({
   selector: 'app-auth-remaining',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthRemainingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private logger: LogService,
+              public authService: AuthService) {
+  }
 
   ngOnInit(): void {
   }
 
+  refreshToken(): void {
+    this.authService.refreshExistingToken();
+  }
 }

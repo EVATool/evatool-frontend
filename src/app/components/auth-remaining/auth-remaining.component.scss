@@ -1,0 +1,17 @@
+.auth-remaining-container {
+  position: fixed;
+  right: 20px;
+  bottom: 40px;
+
+  .remaining-time-text {
+    font-size: 150%;
+    margin-bottom: -27px;
+    width: 40px;
+  }
+
+  mat-icon {
+    font-size: 30px;
+    cursor: pointer;
+    margin-left: -40px;
+  }
+}

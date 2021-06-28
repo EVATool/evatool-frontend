@@ -1,1 +1,9 @@
-<p>auth-remaining works!</p>
+<div *ngIf="authService.tokenExpiresIn > 0" class="auth-remaining-container">
+  <p class="remaining-time-text">
+    {{authService.tokenExpiresIn}}
+  </p>
+
+  <mat-icon matTooltip="Refresh Token"
+            (click)="refreshToken()">update
+  </mat-icon>
+</div>
