@@ -8,9 +8,11 @@ Add keycloak
   -> enable ssl and enable keycloak env vars must be properly used
   -> Tests try to use keycloak, only enable keycloak in keycloak and prod env
   -> Simple login page and POST to keycloak
-  -> Get/refresh tokens in AuthService
+  -> Add annotations in backend
+  -> Test refresh token in AuthService
   -> Same problem for running application in non-keycloak profile
   -> cashe credentials locally (at least refresh token) and load when page is refreshed
+  -> multiple tenants
   -> Test prod
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 
