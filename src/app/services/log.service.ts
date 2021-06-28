@@ -6,7 +6,6 @@ Features:
 
 Add keycloak
 -> Simple login page
--> access denied page
 
 -> cashe credentials locally (at least refresh token) and load when page is refreshed
 -> multiple tenants

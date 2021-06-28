@@ -12,7 +12,7 @@ import {ROUTES} from '../app-routes';
 })
 export class AuthService extends RestService {
 
-  authEnabled = environment.useAuth;
+  authorized = false;
   private token!: string;
   tokenExpiresIn!: number;
   private refreshToken!: string;
@@ -70,6 +70,7 @@ export class AuthService extends RestService {
   }
 
   takeInAuthResponse(authResponse: any): void {
+    this.authorized = true;
     this.token = authResponse.access_token;
     this.tokenExpiresIn = authResponse.expires_in;
     this.refreshToken = authResponse.refresh_token;
@@ -82,6 +83,7 @@ export class AuthService extends RestService {
       this.refreshTokenExpiresIn -= 1;
 
       if (this.tokenExpiresIn < 0) {
+        this.authorized = false;
         this.router.navigate([ROUTES.login]);
       }
     }, 1000);
