@@ -22,6 +22,9 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class CrossUiEventService { // TODO what should this be called? Its just masking http errors until now...
+  @Output() initComplete: EventEmitter<void> = new EventEmitter();
+  initialized = false;
+
   @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
   @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
 
@@ -34,6 +37,7 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
   @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
+  // TODO: Consider moving the following events into the interceptor. They are technically all just http events/errors.
   @Output() analysisWithValidIdNotFound: EventEmitter<AnalysisWithIdNotFound> = new EventEmitter();
 
   @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
@@ -43,6 +47,9 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
   @Output() variantDeletionFailed: EventEmitter<VariantDeletionFailedEvent> = new EventEmitter();
   @Output() requirementDeletionFailed: EventEmitter<RequirementDeletionFailedEvent> = new EventEmitter();
   @Output() requirementDeltaDeletionFailed: EventEmitter<RequirementDeltaDeletionFailedEvent> = new EventEmitter();
+
+  @Output() authenticationFailed: EventEmitter<AuthenticationFailedEvent> = new EventEmitter();
+  @Output() authorizationFailed: EventEmitter<AuthorizationFailedEvent> = new EventEmitter();
 
   constructor(private httpLoader: HttpLoaderService,
               private analysisData: AnalysisDataService,
@@ -96,7 +103,11 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
         const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
         const notFound = httpInfo.httpStatusCode === 404;
 
-        if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
+        if (httpInfo.httpStatusCode === 401) {
+          this.authenticationFailed.emit(new AuthenticationFailedEvent());
+        } else if (httpInfo.httpStatusCode === 403) {
+          this.authorizationFailed.emit(new AuthorizationFailedEvent());
+        } else if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
           this.analysisWithValidIdNotFound.emit(new AnalysisWithIdNotFound(id));
         } else if (httpInfo.method === 'DELETE') { // TODO change this to DELETE || UPDATE? then remove entities in event subscriptions.
           if (apiEndpoint === 'analyses') {
@@ -246,4 +257,10 @@ export class RequirementDeltaDeletionFailedEvent extends DeletionFailedEvent<Req
   constructor(requirementDelta: RequirementDelta, notFound: boolean) {
     super(requirementDelta, notFound);
   }
+}
+
+export class AuthenticationFailedEvent { // TODO extend with information
+}
+
+export class AuthorizationFailedEvent {
 }

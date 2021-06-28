@@ -5,9 +5,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.component';
-import {AnalysisDeletionFailedEvent, CrossUiEventService} from '../../services/cross-ui-event.service';
-import {Impact} from '../../model/Impact';
-import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
+import {CrossUiEventService} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-home',
@@ -43,7 +41,13 @@ export class HomeComponent implements OnInit {
       this.updateData(this.analysisData.analyses);
     });
 
-    this.analysisData.loadAnalyses();
+    this.crossUI.initComplete.subscribe(() => {
+      this.analysisData.loadAnalyses();
+    });
+
+    if (this.crossUI.initialized) {
+      this.analysisData.loadAnalyses();
+    }
   }
 
   updateData(analyses: Analysis[]): void {

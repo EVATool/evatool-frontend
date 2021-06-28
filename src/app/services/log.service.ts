@@ -11,6 +11,7 @@ Add keycloak [wait for https] (enable/disable with flag in .env docker-compose A
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 
 Backlog:
+git fetch causes permission error in deploy GitHub Actions
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)

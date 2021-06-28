@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {AnalysisDataService} from './data/analysis-data.service';
 import {StakeholderDataService} from './data/stakeholder-data.service';
 import {ValueDataService} from './data/value-data.service';
@@ -7,6 +7,7 @@ import {ImpactDataService} from './data/impact-data.service';
 import {RequirementDeltaDataService} from './data/requirement-delta-data.service';
 import {VariantDataService} from './data/variant-data.service';
 import {CrossUiEventService} from './cross-ui-event.service';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,17 +21,26 @@ export class MasterService {
               public requirementData: RequirementDataService,
               public impactData: ImpactDataService,
               public requirementDeltaData: RequirementDeltaDataService,
-              public variantData: VariantDataService) {
+              public variantData: VariantDataService,
+              private authService: AuthService) {
   }
 
   init(): void {
     this.crossUI.init();
-    this.requirementDeltaData.init();
-    this.requirementData.init();
-    this.impactData.init();
-    this.variantData.init();
-    this.valueData.init();
-    this.stakeholderData.init();
-    this.analysisData.init();
+
+    this.authService.authorizationInitialized.subscribe(() => {
+      this.requirementDeltaData.init();
+      this.requirementData.init();
+      this.impactData.init();
+      this.variantData.init();
+      this.valueData.init();
+      this.stakeholderData.init();
+      this.analysisData.init();
+    });
+
+    this.authService.init();
+
+    this.crossUI.initComplete.emit();
+    this.crossUI.initialized = true;
   }
 }
