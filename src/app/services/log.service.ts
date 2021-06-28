@@ -4,11 +4,16 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Tasks aus Jira (UID)
-
-Add keycloak [wait for https] (enable/disable with flag in .env docker-compose AND enable/disable in special backend/frontend env for easy testing/developing)
+Add keycloak
+  -> enable ssl and enable keycloak env vars must be properly used
   -> Tests try to use keycloak, only enable keycloak in keycloak and prod env
+  -> Simple login page and POST to keycloak
+  -> Get/refresh tokens in AuthService
+  -> Same problem for running application in non-keycloak profile
+  -> Test prod
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
+
+Tasks aus Jira (UID)
 
 Backlog:
 git fetch causes permission error in deploy GitHub Actions
