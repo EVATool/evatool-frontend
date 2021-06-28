@@ -42,18 +42,18 @@ export class StakeholderDataService extends DataService {
         this.loadedStakeholders.emit(this.stakeholders);
         this.logger.info(this, 'Stakeholders loaded');
       });
-    });
 
-    // Load Stakeholder Priorities.
-    this.stakeholderRest.getStakeholderPriorities().subscribe((stakeholderPriorities: string[]) => {
-      stakeholderPriorities.forEach((stakeholderPriority: string) => this.stakeholderPriorities.push(stakeholderPriority));
-      this.loadedStakeholderPriorities.emit(this.stakeholderPriorities);
-    });
+      // Load Stakeholder Priorities.
+      this.stakeholderRest.getStakeholderPriorities().subscribe((stakeholderPriorities: string[]) => {
+        stakeholderPriorities.forEach((stakeholderPriority: string) => this.stakeholderPriorities.push(stakeholderPriority));
+        this.loadedStakeholderPriorities.emit(this.stakeholderPriorities);
+      });
 
-    // Load Stakeholder Levels.
-    this.stakeholderRest.getStakeholderLevels().subscribe((stakeholderLevels: string[]) => {
-      stakeholderLevels.forEach((stakeholderLevel: string) => this.stakeholderLevels.push(stakeholderLevel));
-      this.loadedStakeholderLevels.emit(this.stakeholderLevels);
+      // Load Stakeholder Levels.
+      this.stakeholderRest.getStakeholderLevels().subscribe((stakeholderLevels: string[]) => {
+        stakeholderLevels.forEach((stakeholderLevel: string) => this.stakeholderLevels.push(stakeholderLevel));
+        this.loadedStakeholderLevels.emit(this.stakeholderLevels);
+      });
     });
   }
 

@@ -40,12 +40,12 @@ export class ValueDataService extends DataService {
         this.loadedValues.emit(this.values);
         this.logger.info(this, 'Values loaded');
       });
-    });
 
-    // Load Value Types.
-    this.valueRest.getValueTypes().subscribe((valueTypes: string[]) => {
-      valueTypes.forEach((valueType: string) => this.valueTypes.push(valueType));
-      this.loadedValueTypes.emit(this.valueTypes);
+      // Load Value Types.
+      this.valueRest.getValueTypes().subscribe((valueTypes: string[]) => {
+        valueTypes.forEach((valueType: string) => this.valueTypes.push(valueType));
+        this.loadedValueTypes.emit(this.valueTypes);
+      });
     });
   }
 
