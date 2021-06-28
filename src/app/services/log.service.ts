@@ -12,27 +12,26 @@ Add flyway [only setup, do not migrate from this point onward!] (special migrate
 Add keycloak [wait for https] (enable/disable with flag in .env docker-compose AND enable/disable in special backend/frontend env for easy testing/developing)
 
 Backlog:
+Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
+Better 404 page (information about what might have been misinputted)
+Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
+All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
+Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table, mat-slider has an ABSOLUTE min width...
+Sample Data (API calls to backend, separate from deployment!) -> [Create export Postman(??) script from UI inserted stuff] Postman script should not be used, use own json format for backend rest calls (import + export)
+Single user: reload data when tab changes? (how to update references?)
+Multi user: concurrency... (PWA?)
+Angular e2e tests
+Determine convention for html tag order and enforce (e.g. matInput, [input], (output), ([bind]))
+control click (or middle click) on analysis tile -> new tab
+Huge styling refactor (Zooming, mobile, resizing)
+make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
+SonarCloud Status not shown in backend
+
+Bugs:
 Visuals of ValueModal changes when there is no entry in impact table. Mat form required to load??
 Strange bug when negative impact was only slidable like a positive in requirements table
 Strange bug where requirement table contained requirements with same prefixSequenceId. How can this happen? Was that the fault of the updateFromDto method?
-How to deal with impacts going horizontal in requirement table
-Sample Data (API calls to backend, separate from deployment!) -> [Create export Postman(??) script from UI inserted stuff] Postman script should not be used, use own json format for backend rest calls (import + export)
-  -> ExportController (how to deal with keycloak auth?)
-Only purge data script (ONLY database with main data, what about flyway?)
-Single user: reload data when tab changes? (how to update references?)
-Multi user: concurrency... (PWA?)
-SonarCloud Status not shown in backend
-make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
-Angular e2e tests
-control click (or middle click) on analysis tile -> new tab
-Better 404 page (information about what might have been misinputted)
-Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table, mat-slider has an ABSOLUTE min width...
 BUGGED: dialog analysis opens analysis when checkbox is not selected
-Impact slider in delta is completely bugged
-All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
-Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
-Determine convention for html tag order and enforce (e.g. matInput, [input], (output), ([bind]))
-Huge styling refactor (Zooming, mobile, resizing)
 
 */
 
