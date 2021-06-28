@@ -77,7 +77,7 @@ export class HttpLoaderService { // TODO remove this class
     httpInfo.timestamp = Date.now().valueOf();
     httpInfo.path = request.url;
     httpInfo.method = request.method;
-    httpInfo.httpStatusCode = error?.httpStatusCode || error?.status || 0;
+    httpInfo.httpStatusCode = error?.status || error?.httpStatusCode || 0;
     httpInfo.type = httpInfoType;
     httpInfo.functionalErrorCode = functionalErrorCode;
     httpInfo.tag = tag;
