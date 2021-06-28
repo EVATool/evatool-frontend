@@ -9,14 +9,27 @@ import {SampleDataService} from './sample-data.service';
 })
 export abstract class RestService {
 
-  private readonly url = environment.backendUrl;
-  private readonly port = environment.backendPort;
   private readonly protocol: string = environment.protocol;
-  private readonly serverUrl: string = this.protocol + '://' + this.url + ':' + this.port + '/';
+  private readonly url = environment.backendUrl;
+  private readonly serverUrl = this.protocol + '://' + this.url;
+
+  private readonly backendPort = environment.backendPort;
+  private readonly backendUrl = this.serverUrl + ':' + this.backendPort + '/';
+
+  private readonly authPort = environment.authPort;
+  private readonly authRealm = environment.authRealm;
+  protected readonly authClient = environment.authClient;
+  protected readonly authUrl = this.serverUrl + ':' + this.authPort + '/auth/realms/' + this.authRealm + '/protocol/openid-connect/token';
 
   protected readonly httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
+    })
+  };
+
+  protected readonly httpAuthOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
     })
   };
 
@@ -27,24 +40,24 @@ export abstract class RestService {
 
   public testing = environment.testing;
 
-  public readonly analysesUrl = this.serverUrl + 'analyses';
+  public readonly analysesUrl = this.backendUrl + 'analyses';
   public readonly analysesDeepCopyUrl = this.analysesUrl + '/deep-copy';
 
-  public readonly stakeholdersUrl = this.serverUrl + 'stakeholders';
+  public readonly stakeholdersUrl = this.backendUrl + 'stakeholders';
 
-  public readonly valuesUrl = this.serverUrl + 'values';
+  public readonly valuesUrl = this.backendUrl + 'values';
 
-  public readonly impactsUrl = this.serverUrl + 'impacts';
+  public readonly impactsUrl = this.backendUrl + 'impacts';
 
-  public readonly requirementsUrl = this.serverUrl + 'requirements';
+  public readonly requirementsUrl = this.backendUrl + 'requirements';
 
-  public readonly requirementDeltasUrl = this.serverUrl + 'requirement-deltas';
+  public readonly requirementDeltasUrl = this.backendUrl + 'requirement-deltas';
 
-  public readonly variantsUrl = this.serverUrl + 'variants';
+  public readonly variantsUrl = this.backendUrl + 'variants';
 
-  public readonly valuesTypesUrl = this.serverUrl + 'values/types';
-  public readonly stakeholderPriorityUrl = this.serverUrl + 'stakeholders/priorities';
-  public readonly stakeholderLevelsUrl = this.serverUrl + 'stakeholders/levels';
+  public readonly valuesTypesUrl = this.backendUrl + 'values/types';
+  public readonly stakeholderPriorityUrl = this.backendUrl + 'stakeholders/priorities';
+  public readonly stakeholderLevelsUrl = this.backendUrl + 'stakeholders/levels';
 
   public readonly byId = '?id=';
   public readonly byAnalysisId = '?analysisId=';

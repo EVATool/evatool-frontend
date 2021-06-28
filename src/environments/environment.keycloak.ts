@@ -6,5 +6,8 @@ export const environment = {
   testing: false,
   defaultLang: 'en',
   useDefaultOverBrowserLang: 'true',
-  useAuth: true
+  useAuth: true,
+  authPort: '8081',
+  authRealm: 'evatool-realm',
+  authClient: 'evatool-app'
 };
