@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 Add keycloak
--> Test refresh token in AuthService
+-> Display remaining login of refresh token in UI
 -> Simple login page and POST to keycloak
 -> access denied page
 
@@ -20,7 +20,6 @@ Add keycloak
   -> When keycloak is disabled, it should really be off even in prod settings (docker-compose env var KEYCLOAK_ENABLED=false)
 
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
-
 Tasks aus Jira (UID)
 
 Backlog:
