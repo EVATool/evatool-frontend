@@ -4,7 +4,9 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Tasks aus Jira (UID) -> das Jira public machen?
+Tasks aus Jira (UID)
+
+Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 Add keycloak [wait for https] (enable/disable with flag in .env docker-compose AND enable/disable in special backend/frontend env for easy testing/developing)
@@ -26,7 +28,6 @@ control click (or middle click) on analysis tile -> new tab
 Better 404 page (information about what might have been misinputted)
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table, mat-slider has an ABSOLUTE min width...
 BUGGED: dialog analysis opens analysis when checkbox is not selected
-Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Impact slider in delta is completely bugged
 All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
