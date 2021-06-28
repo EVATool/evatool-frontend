@@ -71,6 +71,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {AuthInterceptorService} from './services/auth-interceptor.service';
 import { LoginComponent } from './components/login/login.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import { AuthRemainingComponent } from './components/auth-remaining/auth-remaining.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -126,7 +127,8 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     HttpLoaderComponent,
     PageNotFoundComponent,
     LoginComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    AuthRemainingComponent
   ],
   imports: [
     BrowserModule,
