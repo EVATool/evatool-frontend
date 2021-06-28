@@ -72,6 +72,7 @@ import {AuthInterceptorService} from './services/auth-interceptor.service';
 import { LoginComponent } from './components/login/login.component';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { AuthRemainingComponent } from './components/auth-remaining/auth-remaining.component';
+import { TitlePageComponent } from './components/title-page/title-page.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -128,7 +129,8 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     PageNotFoundComponent,
     LoginComponent,
     AccessDeniedComponent,
-    AuthRemainingComponent
+    AuthRemainingComponent,
+    TitlePageComponent
   ],
   imports: [
     BrowserModule,
