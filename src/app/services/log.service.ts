@@ -5,17 +5,18 @@ import {environment} from '../../environments/environment';
 Features:
 
 Add keycloak
-  -> POST and DELET do not work. They get blocked by CORS?
+-> Test refresh token in AuthService
+-> Simple login page and POST to keycloak
+-> access denied page
+
+-> cashe credentials locally (at least refresh token) and load when page is refreshed
+-> multiple tenants
+
+-> Test prod
   -> enable ssl and enable keycloak env vars must be properly used
-  -> Tests try to use keycloak, only enable keycloak in keycloak and prod env
+-> Disable keycloak in backend settings! (IMPOSSIBLE)
   -> Same problem for running application in non-keycloak profile
-  -> Simple login page and POST to keycloak
-  -> Test refresh token in AuthService
-  -> access denied page
-  -> cashe credentials locally (at least refresh token) and load when page is refreshed
-  -> multiple tenants
-  -> Test prod
-  -> Disable keycloak in backend settings! (IMPOSSIBLE)
+  -> Tests try to use keycloak, only enable keycloak in keycloak and prod env
 
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
 
