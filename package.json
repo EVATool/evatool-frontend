@@ -4,7 +4,8 @@
 	"scripts": {
 		"ng": "ng",
 		"start": "ng serve",
-		"start:development": "ng serve --configuration=development",
+    "start:development": "ng serve --configuration=development",
+    "start:keycloak": "ng serve --configuration=keycloak",
 		"build": "ng build",
 		"test": "ng test",
 		"lint": "ng lint",

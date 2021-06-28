@@ -5,5 +5,6 @@ export const environment = { // This is the test environment.
   backendPort: '',
   testing: true,
   defaultLang: 'en',
-  useDefaultOverBrowserLang: 'true'
+  useDefaultOverBrowserLang: 'true',
+  useAuth: false
 };

@@ -6,5 +6,5 @@ export const environment = {
   testing: false,
   defaultLang: 'en',
   useDefaultOverBrowserLang: 'true',
-  useAuth: false
+  useAuth: true
 };
