@@ -5,7 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 Add keycloak
--> Simple login page (login and registration)
+-> Simple login page (login, registration, forgot password, terms and conditions)
 
 -> cashe credentials locally (at least refresh token) and load when page is refreshed
 -> multiple tenants

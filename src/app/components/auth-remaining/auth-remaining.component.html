@@ -1,4 +1,4 @@
-<div *ngIf="authService.authenticated && authService.tokenExpiresIn > 0" class="auth-remaining-container">
+<div *ngIf="authService.authenticated" class="auth-remaining-container">
   <p class="remaining-time-text">
     {{getRemainingTokenTime()}}
   </p>

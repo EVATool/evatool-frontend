@@ -82,7 +82,7 @@ export class AuthService extends RestService {
       this.tokenExpiresIn -= 1;
       this.refreshTokenExpiresIn -= 1;
 
-      if (this.tokenExpiresIn < 0) {
+      if (this.refreshTokenExpiresIn <= 0) {
         this.authenticated = false;
         this.router.navigate([ROUTES.login]);
       }
