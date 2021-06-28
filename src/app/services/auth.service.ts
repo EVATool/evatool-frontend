@@ -17,8 +17,8 @@ export class AuthService extends RestService {
   private refreshToken!: string;
   private refreshTokenExpiresIn!: number;
 
-  username!: string;
-  password!: string;
+  username = 'admin';
+  password = 'admin';
 
   constructor(protected logger: LogService,
               protected http: HttpClient,
@@ -30,13 +30,11 @@ export class AuthService extends RestService {
     if (environment.useAuth) {
       // TODO Setup token and refresh token so that getToken always returns a valid token.
       if (!this.refreshToken) {
-        const authRequest = {
-          grant_type: 'password',
-          scope: 'openid',
-          client_id: this.authClient,
-          username: 'admin',
-          password: 'admin'
-        };
+        const authRequest = 'grant_type=password' +
+          '&scope=openid' +
+          '&client_id=' + this.authClient +
+          '&username=' + this.username +
+          '&password=' + this.password;
 
         console.log(this.authUrl);
         console.log(authRequest);
