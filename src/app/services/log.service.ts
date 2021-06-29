@@ -5,10 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 Add keycloak
--> Simple login page (login, registration, forgot password, terms and conditions) [error message, route when success]
-
 -> use refresh token and auth event in auth interceptor??
--> cashe credentials locally (at least refresh token) and load when page is refreshed
 -> multiple tenants
 
 -> Prod and test
@@ -30,6 +27,7 @@ Filtering: And/Or, what is the default filtering? (how does this apply to deltas
 All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table, mat-slider has an ABSOLUTE min width...
 Sample Data (API calls to backend, separate from deployment!) -> [Create export Postman(??) script from UI inserted stuff] Postman script should not be used, use own json format for backend rest calls (import + export)
+Cashe login credentials locally (at least refresh token) and load when page is refreshed
 Single user: reload data when tab changes? (how to update references?)
 Multi user: concurrency... (PWA?)
 Angular e2e tests

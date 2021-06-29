@@ -30,7 +30,7 @@ export class AuthService extends RestService {
 
   getToken(): string {
     if (environment.useAuth) {
-      if (!this.refreshToken) {
+      if (!this.refreshTokenExpiresIn || this.refreshTokenExpiresIn <= 0) {
         this.getInitialToken();
       } else {
         this.refreshExistingToken();
@@ -68,7 +68,6 @@ export class AuthService extends RestService {
   }
 
   takeInAuthResponse(authResponse: any): void {
-    this.authenticated = true;
     this.token = authResponse.access_token;
     this.tokenExpiresIn = authResponse.expires_in;
     this.refreshToken = authResponse.refresh_token;
@@ -76,6 +75,7 @@ export class AuthService extends RestService {
   }
 
   startTimers(): void {
+    this.authenticated = true;
     const interval = setInterval(() => {
       this.tokenExpiresIn -= 1;
       this.refreshTokenExpiresIn -= 1;
