@@ -12,10 +12,19 @@
     <input matInput [(ngModel)]="authService.password">
   </mat-form-field>
 
-  <button mat-button>
+  <button class="sign-button"
+          mat-button
+          (click)="authService.getInitialToken()">
     Sign in
   </button>
 
-  Terms & condition Forgot password
-
+  <div fxLayout="row" class="aux-actions">
+    <div class="terms-and-conditions">
+      Terms & condition
+    </div>
+    <div class="forgot-password">
+      Forgot password
+    </div>
+  </div>
 </div>
+

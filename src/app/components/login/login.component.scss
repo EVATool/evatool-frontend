@@ -1,15 +1,35 @@
 .login-form-container {
 
+  h2 {
+    margin-bottom: 60px;
+  }
+
+  mat-form-field {
+    margin-bottom: 40px;
+  }
 
   .sign-button {
     border: none;
     background: #404040;
     color: #ffffff !important;
     font-weight: 100;
-    padding: 20px 60px;
+    height: 40px;
     width: 100%;
     text-transform: uppercase;
-    border-radius: 20px;
+    border-radius: 10px;
   }
 
+  .aux-actions {
+    margin-top: 40px;
+    width: 100%;
+
+    .terms-and-conditions {
+      text-transform: uppercase;
+    }
+
+    .forgot-password {
+      float: right;
+    }
+  }
 }
+

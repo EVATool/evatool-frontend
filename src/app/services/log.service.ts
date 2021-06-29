@@ -5,8 +5,9 @@ import {environment} from '../../environments/environment';
 Features:
 
 Add keycloak
--> Simple login page (login, registration, forgot password, terms and conditions)
+-> Simple login page (login, registration, forgot password, terms and conditions) [error message, route when success]
 
+-> use refresh token and auth event in auth interceptor
 -> cashe credentials locally (at least refresh token) and load when page is refreshed
 -> multiple tenants
 
