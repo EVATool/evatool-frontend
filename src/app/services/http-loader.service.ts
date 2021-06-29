@@ -31,9 +31,9 @@ export class HttpLoaderService { // TODO remove this class
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
-  error(request: HttpRequest<any>, error: any, functionalErrorCode: number, tag: any): void {
+  error(request: HttpRequest<any>, httpStatusCode: number, functionalErrorCode: number, tag: any): void {
     this.logger.info(this, 'An http response failed.');
-    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error, functionalErrorCode, tag, error);
+    const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error, functionalErrorCode, tag, httpStatusCode);
     this.httpError.emit(httpInfo);
     this.processHttpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
@@ -72,12 +72,12 @@ export class HttpLoaderService { // TODO remove this class
     }
   }
 
-  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpInfoType, functionalErrorCode?: number, tag?: any, error?: any): HttpInfo {
+  private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpInfoType, functionalErrorCode?: number, tag?: any, httpStatusCode?: number): HttpInfo {
     const httpInfo = new HttpInfo();
     httpInfo.timestamp = Date.now().valueOf();
     httpInfo.path = request.url;
     httpInfo.method = request.method;
-    httpInfo.httpStatusCode = error?.status || error?.httpStatusCode || 0;
+    httpInfo.httpStatusCode = httpStatusCode || -1;
     httpInfo.type = httpInfoType;
     httpInfo.functionalErrorCode = functionalErrorCode;
     httpInfo.tag = tag;

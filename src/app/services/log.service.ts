@@ -7,7 +7,8 @@ Features:
 Add keycloak
 -> Simple login page (login, registration, forgot password, terms and conditions) [error message, route when success]
 
--> use refresh token and auth event in auth interceptor
+-> Fix http status code 0 and get "Invalid credentials" to display on login page.
+-> use refresh token and auth event in auth interceptor??
 -> cashe credentials locally (at least refresh token) and load when page is refreshed
 -> multiple tenants
 

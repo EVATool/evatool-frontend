@@ -44,7 +44,8 @@ export class HttpInterceptorService implements HttpInterceptor {
               errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
             }
             this.logger.error(this, errorMsg);
-            this.httpLoader.error(request, error.error || error, functionalErrorCode, tag);
+            const httpStatus = error.error.status || error.error.httpStatusCode || error.status;
+            this.httpLoader.error(request, httpStatus, functionalErrorCode, tag);
             return throwError(errorMsg);
           },
           // Response complete.

@@ -68,6 +68,7 @@ export class AuthService extends RestService {
 
     this.http.post<any>(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       this.takeInAuthResponse(authResponse);
+      this.tokenAcquired.emit(this.token);
     });
   }
 
