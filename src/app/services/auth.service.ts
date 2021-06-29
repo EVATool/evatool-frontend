@@ -35,9 +35,6 @@ export class AuthService extends RestService {
       } else {
         this.refreshExistingToken();
       }
-    } else {
-      this.token = 'Not used';
-      this.refreshToken = 'Not used';
     }
     return this.token;
   }
@@ -82,8 +79,14 @@ export class AuthService extends RestService {
 
       if (this.refreshTokenExpiresIn <= 0) {
         this.authenticated = false;
-        this.router.navigate([ROUTES.login]);
+        this.logout();
       }
     }, 1000);
+  }
+
+  logout(): void {
+    this.username = '';
+    this.password = '';
+    this.router.navigate([ROUTES.login]);
   }
 }
