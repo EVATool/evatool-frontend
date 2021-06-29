@@ -11,6 +11,7 @@ import {AccessDeniedComponent} from './components/access-denied/access-denied.co
 import {TitlePageComponent} from './components/title-page/title-page.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
+import {TimeOutComponent} from './components/time-out/time-out.component';
 
 const routes: Routes = [
   {path: ROUTES.home, component: HomeComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: ROUTES.login, component: LoginComponent},
   {path: ROUTES.forgotPassword, component: ForgotPasswordComponent},
   {path: ROUTES.termsAndConditions, component: TermsAndConditionsComponent},
+  {path: ROUTES.timeOut, component: TimeOutComponent},
   {path: ROUTES.accessDenied, component: AccessDeniedComponent},
   {path: ROUTES.analysisWithId, component: AnalysisEditComponent},
   {path: ROUTES.imprint, component: ImprintComponent},

@@ -3,6 +3,7 @@ import {LogService} from '../../services/log.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
+import {CrossUiEventService} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,12 @@ export class LoginComponent implements OnInit {
 
   constructor(private logger: LogService,
               private router: Router,
+              private crossUI: CrossUiEventService,
               public authService: AuthService) {
   }
 
   ngOnInit(): void {
+
   }
 
   termsAndConditions(): void {
@@ -25,5 +28,9 @@ export class LoginComponent implements OnInit {
 
   forgotPassword(): void {
     this.router.navigate([ROUTES.forgotPassword]);
+  }
+
+  onSubmit(): void {
+
   }
 }

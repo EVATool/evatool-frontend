@@ -4,6 +4,7 @@ export const ROUTES = {
   login: 'login',
   forgotPassword: 'forgot-password',
   termsAndConditions: 'terms-and-conditions',
+  timeOut: 'time-out',
   accessDenied: 'access-denied',
   analysisWithId: 'analysis/:id',
   analysis: 'analysis',
