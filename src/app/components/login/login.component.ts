@@ -4,6 +4,7 @@ import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
 import {CrossUiEventService} from '../../services/cross-ui-event.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +16,16 @@ export class LoginComponent implements OnInit {
   constructor(private logger: LogService,
               private router: Router,
               private crossUI: CrossUiEventService,
+              private snackBar: MatSnackBar,
               public authService: AuthService) {
   }
 
   ngOnInit(): void {
-
+    this.crossUI.authenticationFailed.subscribe(() => {
+      const message = 'Invalid credentials';
+      const action = '';
+      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+    });
   }
 
   termsAndConditions(): void {
@@ -31,6 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-
+    this.authService.getInitialToken();
   }
 }
