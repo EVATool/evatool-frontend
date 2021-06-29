@@ -31,6 +31,7 @@ Single user: reload data when tab changes? (how to update references?)
 Multi user: concurrency... (PWA?)
 Angular e2e tests
 rework material forms (validation)
+Log to file (frontend and backend container)
 Determine convention for html tag order and enforce (e.g. matInput, [input], (output), ([bind]))
 control click (or middle click) on analysis tile -> new tab
 Huge styling refactor (Zooming, mobile, resizing)
