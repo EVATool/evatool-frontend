@@ -11,8 +11,6 @@ import {ROUTES} from '../app-routes';
   providedIn: 'root'
 })
 export class AuthService extends RestService {
-  @Output() tokenAcquired: EventEmitter<string> = new EventEmitter();
-  @Output() tokenExpired: EventEmitter<void> = new EventEmitter();
 
   authenticated = false;
   private token!: string;
@@ -40,7 +38,6 @@ export class AuthService extends RestService {
     } else {
       this.token = 'Not used';
       this.refreshToken = 'Not used';
-      this.tokenAcquired.emit(this.token);
     }
     return this.token;
   }
@@ -55,7 +52,6 @@ export class AuthService extends RestService {
     this.http.post(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       this.takeInAuthResponse(authResponse);
       this.startTimers();
-      this.tokenAcquired.emit(this.token);
       this.router.navigate([ROUTES.home]);
     });
   }
@@ -68,7 +64,6 @@ export class AuthService extends RestService {
 
     this.http.post<any>(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       this.takeInAuthResponse(authResponse);
-      this.tokenAcquired.emit(this.token);
     });
   }
 
@@ -87,7 +82,6 @@ export class AuthService extends RestService {
 
       if (this.refreshTokenExpiresIn <= 0) {
         this.authenticated = false;
-        this.tokenExpired.emit();
         this.router.navigate([ROUTES.login]);
       }
     }, 1000);
