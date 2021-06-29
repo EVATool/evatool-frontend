@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +13,12 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes('/auth/realms/')) { // Leave requests to auth server alone.
+    if (!environment.useAuth || req.url.includes('/auth/realms/')) { // Leave requests to auth server alone.
       return next.handle(req);
     } else {
       const authToken = this.auth.getToken();
-      if (authToken) {
-        const authReq = this.injectToken(req, authToken);
-        return next.handle(authReq);
-      } else {
-        return next.handle(req);
-      }
+      const authReq = this.injectToken(req, authToken);
+      return next.handle(authReq);
     }
   }
 

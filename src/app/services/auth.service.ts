@@ -13,9 +13,9 @@ import {ROUTES} from '../app-routes';
 export class AuthService extends RestService {
 
   authenticated = false;
-  private token: string | null = null;
+  private token!: string;
   tokenExpiresIn = 0;
-  private refreshToken: string | null = null;
+  private refreshToken!: string;
   refreshTokenExpiresIn = 0;
 
   username = '';
@@ -29,14 +29,12 @@ export class AuthService extends RestService {
   }
 
   getToken(): string {
-    if (environment.useAuth) {
-      if (!this.refreshTokenExpiresIn || this.refreshTokenExpiresIn <= 0) {
-        this.getInitialToken();
-      } else {
-        this.refreshExistingToken();
-      }
+    if (!this.refreshTokenExpiresIn || this.refreshTokenExpiresIn <= 0) {
+      this.getInitialToken();
+    } else {
+      this.refreshExistingToken();
     }
-    return this.token || '';
+    return this.token;
   }
 
   getInitialToken(): void {
@@ -92,9 +90,9 @@ export class AuthService extends RestService {
   }
 
   logout(): void {
-    this.token = null;
+    this.token = '';
     this.tokenExpiresIn = 0;
-    this.refreshToken = null;
+    this.refreshToken = '';
     this.refreshTokenExpiresIn = 0;
     this.username = '';
     this.password = '';
