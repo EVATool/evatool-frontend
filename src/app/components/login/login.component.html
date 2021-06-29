@@ -3,12 +3,16 @@
   <h2> Sign in </h2>
   <mat-form-field>
     <mat-label>Username</mat-label>
-    <input matInput [(ngModel)]="authService.username">
+    <input matInput
+           [(ngModel)]="authService.username"
+           (keydown.enter)="onSubmit()">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input matInput [(ngModel)]="authService.password">
+    <input matInput
+           [(ngModel)]="authService.password"
+           (keydown.enter)="onSubmit()">
   </mat-form-field>
 
   <button class="sign-in-button"
