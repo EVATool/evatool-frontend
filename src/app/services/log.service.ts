@@ -31,6 +31,7 @@ Cashe login credentials locally (at least refresh token) and load when page is r
 Single user: reload data when tab changes? (how to update references?)
 Multi user: concurrency... (PWA?)
 Angular e2e tests
+rework material forms (validation)
 Determine convention for html tag order and enforce (e.g. matInput, [input], (output), ([bind]))
 control click (or middle click) on analysis tile -> new tab
 Huge styling refactor (Zooming, mobile, resizing)

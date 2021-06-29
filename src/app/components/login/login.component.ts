@@ -13,6 +13,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class LoginComponent implements OnInit {
 
+  showPassword = false;
+
   constructor(private logger: LogService,
               private router: Router,
               private crossUI: CrossUiEventService,
