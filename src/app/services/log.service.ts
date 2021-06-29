@@ -5,10 +5,13 @@ import {environment} from '../../environments/environment';
 Features:
 
 Add keycloak
--> multiple tenants
+-> multiple tenants (do it with multiple realms!)
   -> https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html
-  -> https://github.com/czetsuya/spring-keycloak-multi-tenant
-  -> https://github.com/vimalKeshu/movie-app/blob/master/src/main/resources/application.properties
+  -> https://issues.redhat.com/browse/KEYCLOAK-4139?_sscc=t
+  -> Create template realm for new tenant
+  -> backend must dynamically set realm (not in .properties file)
+  -> Add realm textfield in login form
+  -> Rework roles
 
 -> Prod and test
   -> Disable keycloak in backend settings! (IMPOSSIBLE)
