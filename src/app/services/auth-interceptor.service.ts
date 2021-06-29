@@ -17,13 +17,17 @@ export class AuthInterceptorService implements HttpInterceptor {
     } else {
       const authToken = this.auth.getToken();
       if (authToken) {
-        const authReq = req.clone({
-          headers: req.headers.set('Authorization', 'Bearer ' + authToken)
-        });
+        const authReq = this.injectToken(req, authToken);
         return next.handle(authReq);
       } else {
         return next.handle(req);
       }
     }
+  }
+
+  injectToken(req: HttpRequest<any>, authToken: string): HttpRequest<any> {
+    return req.clone({
+      headers: req.headers.set('Authorization', 'Bearer ' + authToken)
+    });
   }
 }

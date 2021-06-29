@@ -13,10 +13,10 @@ import {ROUTES} from '../app-routes';
 export class AuthService extends RestService {
 
   authenticated = false;
-  private token!: string;
-  tokenExpiresIn!: number;
-  private refreshToken!: string;
-  refreshTokenExpiresIn!: number;
+  private token: string | null = null;
+  tokenExpiresIn = 0;
+  private refreshToken: string | null = null;
+  refreshTokenExpiresIn = 0;
 
   username = '';
   password = '';
@@ -36,7 +36,7 @@ export class AuthService extends RestService {
         this.refreshExistingToken();
       }
     }
-    return this.token;
+    return this.token || '';
   }
 
   getInitialToken(): void {
@@ -85,6 +85,10 @@ export class AuthService extends RestService {
   }
 
   logout(): void {
+    this.token = null;
+    this.tokenExpiresIn = 0;
+    this.refreshToken = null;
+    this.refreshTokenExpiresIn = 0;
     this.username = '';
     this.password = '';
     this.router.navigate([ROUTES.login]);
