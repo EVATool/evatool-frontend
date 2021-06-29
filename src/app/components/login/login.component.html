@@ -10,10 +10,14 @@
 
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input matInput
+    <input matInput type="password"
            [(ngModel)]="authService.password"
            (keydown.enter)="onSubmit()">
   </mat-form-field>
+
+  <button mat-icon-button class="toggle-password-button">
+    <mat-icon>remove_red_eye</mat-icon>
+  </button>
 
   <button class="sign-in-button"
           mat-button
