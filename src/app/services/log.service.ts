@@ -5,7 +5,6 @@ import {environment} from '../../environments/environment';
 Features:
 
 Add keycloak
--> use refresh token and auth event in auth interceptor??
 -> multiple tenants
 
 -> Prod and test
