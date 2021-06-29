@@ -47,28 +47,30 @@ export class AuthService extends RestService {
       '&password=' + this.password;
 
     this.http.post(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
-      this.takeInAuthResponse(authResponse);
+      this.takeInAuthResponse(authResponse,);
       this.startTimers();
       this.router.navigate([ROUTES.home]);
     });
   }
 
-  refreshExistingToken(): void {
+  refreshExistingToken(ignoreRefreshToken: boolean = false): void {
     const authRequest = 'grant_type=refresh_token' +
       '&scope=openid' +
       '&client_id=' + this.authClient +
       '&refresh_token=' + this.refreshToken;
 
     this.http.post<any>(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
-      this.takeInAuthResponse(authResponse);
+      this.takeInAuthResponse(authResponse, ignoreRefreshToken);
     });
   }
 
-  takeInAuthResponse(authResponse: any): void {
+  takeInAuthResponse(authResponse: any, ignoreRefreshToken: boolean = false): void {
     this.token = authResponse.access_token;
     this.tokenExpiresIn = authResponse.expires_in;
-    this.refreshToken = authResponse.refresh_token;
-    this.refreshTokenExpiresIn = authResponse.refresh_expires_in;
+    if (!ignoreRefreshToken) {
+      this.refreshToken = authResponse.refresh_token;
+      this.refreshTokenExpiresIn = authResponse.refresh_expires_in;
+    }
   }
 
   startTimers(): void {
@@ -76,6 +78,11 @@ export class AuthService extends RestService {
     const interval = setInterval(() => {
       this.tokenExpiresIn -= 1;
       this.refreshTokenExpiresIn -= 1;
+
+      if (this.tokenExpiresIn === 10) { // Try to get new token with refresh token if token expires in 10 seconds
+        this.logger.info(this, 'Refreshing Token...');
+        this.refreshExistingToken(true);
+      }
 
       if (this.refreshTokenExpiresIn <= 0) {
         this.authenticated = false;
