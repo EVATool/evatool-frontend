@@ -21,6 +21,7 @@ Add flyway [only setup, do not migrate from this point onward!] (special migrate
 Tasks aus Jira (UID)
 
 Backlog:
+Logout option in user menu (user menu does not yet exist) [top right]
 git fetch causes permission error in deploy GitHub Actions
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
