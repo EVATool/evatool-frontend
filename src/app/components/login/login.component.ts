@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
@@ -28,6 +28,11 @@ export class LoginComponent implements OnInit {
       const action = '';
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
     });
+
+    if (isDevMode()) {
+      this.authService.username = 'admin';
+      this.authService.password = 'admin';
+    }
   }
 
   termsAndConditions(): void {
