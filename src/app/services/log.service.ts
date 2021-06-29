@@ -6,6 +6,9 @@ Features:
 
 Add keycloak
 -> multiple tenants
+  -> https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html
+  -> https://github.com/czetsuya/spring-keycloak-multi-tenant
+  -> https://github.com/vimalKeshu/movie-app/blob/master/src/main/resources/application.properties
 
 -> Prod and test
   -> Disable keycloak in backend settings! (IMPOSSIBLE)
