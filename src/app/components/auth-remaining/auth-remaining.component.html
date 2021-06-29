@@ -1,6 +1,11 @@
 <div *ngIf="authService.authenticated" class="auth-remaining-container">
   <p class="remaining-time-text">
-    {{getRemainingTokenTime()}}
+    {{getRemainingTokenTime(authService.refreshTokenExpiresIn)}}
+  </p>
+
+  <p *ngIf="'false'"
+     class="remaining-time-text">
+    {{getRemainingTokenTime(authService.tokenExpiresIn)}}
   </p>
 
   <mat-icon matTooltip="Refresh Token"

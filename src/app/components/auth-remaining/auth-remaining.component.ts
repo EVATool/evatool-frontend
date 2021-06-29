@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {LogService} from '../../services/log.service';
 
@@ -20,9 +20,9 @@ export class AuthRemainingComponent implements OnInit {
     this.authService.refreshExistingToken();
   }
 
-  getRemainingTokenTime(): string {
-    const minutes = Math.floor(this.authService.refreshTokenExpiresIn / 60);
-    const seconds = this.authService.refreshTokenExpiresIn - 60 * minutes;
+  getRemainingTokenTime(time: number): string {
+    const minutes = Math.floor(time / 60);
+    const seconds = time - 60 * minutes;
     return this.padLeft(minutes, 2, '0') + ':' + this.padLeft(seconds, 2, '0');
   }
 
