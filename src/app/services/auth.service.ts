@@ -18,6 +18,8 @@ export class AuthService extends RestService {
   private refreshToken!: string;
   refreshTokenExpiresIn = 0;
 
+  isAutoRefreshing = false;
+
   username = '';
   password = '';
 
@@ -68,6 +70,8 @@ export class AuthService extends RestService {
     if (!ignoreRefreshToken) {
       this.refreshToken = authResponse.refresh_token;
       this.refreshTokenExpiresIn = authResponse.refresh_expires_in;
+    } else {
+      this.isAutoRefreshing = false;
     }
   }
 
@@ -77,7 +81,8 @@ export class AuthService extends RestService {
       this.tokenExpiresIn -= 1;
       this.refreshTokenExpiresIn -= 1;
 
-      if (this.tokenExpiresIn === 10) { // Try to get new token with refresh token if token expires in 10 seconds
+      if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing) { // Try to get new token with refresh token if token expires in 10 seconds
+        this.isAutoRefreshing = true;
         this.logger.info(this, 'Refreshing Token...');
         this.refreshExistingToken(true);
       }
