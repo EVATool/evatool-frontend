@@ -18,11 +18,13 @@
     Sign in
   </button>
 
-  <div fxLayout="row" class="aux-actions">
-    <div class="terms-and-conditions">
+  <div class="aux-actions">
+    <div class="terms-and-conditions"
+         (click)="termsAndConditions()">
       Terms & condition
     </div>
-    <div class="forgot-password">
+    <div class="forgot-password"
+         (click)="forgotPassword()">
       Forgot password
     </div>
   </div>

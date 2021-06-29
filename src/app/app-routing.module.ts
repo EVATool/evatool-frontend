@@ -8,10 +8,16 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
 import {ROUTES} from './app-routes';
 import {LoginComponent} from './components/login/login.component';
 import {AccessDeniedComponent} from './components/access-denied/access-denied.component';
+import {TitlePageComponent} from './components/title-page/title-page.component';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
 
 const routes: Routes = [
   {path: ROUTES.home, component: HomeComponent},
+  {path: ROUTES.title, component: TitlePageComponent},
   {path: ROUTES.login, component: LoginComponent},
+  {path: ROUTES.forgotPassword, component: ForgotPasswordComponent},
+  {path: ROUTES.termsAndConditions, component: TermsAndConditionsComponent},
   {path: ROUTES.accessDenied, component: AccessDeniedComponent},
   {path: ROUTES.analysisWithId, component: AnalysisEditComponent},
   {path: ROUTES.imprint, component: ImprintComponent},
