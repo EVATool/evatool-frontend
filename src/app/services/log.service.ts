@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
+Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
 Test how to read env vars (or application properties?) with @Value annotation
 Set dynamic realm in backend
 Rework roles (reader and writer)
