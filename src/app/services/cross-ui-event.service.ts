@@ -40,6 +40,8 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
   // TODO: Consider moving the following events into the interceptor. They are technically all just http events/errors.
   @Output() analysisWithValidIdNotFound: EventEmitter<AnalysisWithIdNotFound> = new EventEmitter();
 
+  @Output() realmNotFound: EventEmitter<RealmNotFoundEvent> = new EventEmitter();
+
   @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
   @Output() stakeholderDeletionFailed: EventEmitter<StakeholderDeletionFailedEvent> = new EventEmitter();
   @Output() valueDeletionFailed: EventEmitter<ValueDeletionFailedEvent> = new EventEmitter();
@@ -109,6 +111,8 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
           this.authorizationFailed.emit(new AuthorizationFailedEvent());
         } else if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
           this.analysisWithValidIdNotFound.emit(new AnalysisWithIdNotFound(id));
+        } else if (false) {
+          this.realmNotFound.emit(new RealmNotFoundEvent('???')); // TODO
         } else if (httpInfo.method === 'DELETE') { // TODO change this to DELETE || UPDATE? then remove entities in event subscriptions.
           if (apiEndpoint === 'analyses') {
             const analysis = this.analysisData.analyses.find(a => a.id === id);
@@ -206,6 +210,13 @@ export class AnalysisWithIdNotFound {
   }
 }
 
+export class RealmNotFoundEvent {
+  realm!: string;
+
+  constructor(realm: string) {
+    this.realm = realm;
+  }
+}
 
 export abstract class DeletionFailedEvent<T> {
   entity!: T;
