@@ -8,10 +8,9 @@ Add keycloak
 -> multiple tenants (do it with multiple realms!)
   -> https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html
   -> https://issues.redhat.com/browse/KEYCLOAK-4139?_sscc=t
-  -> Create template realm for new tenant
-  -> backend must dynamically set realm (not in .properties file)
+  -> Create template realm for new tenant (not template but tutorial)
   -> Add realm textfield in login form
-  -> Rework roles
+  -> Rework roles (reader and writer)
 
 -> Prod and test
   -> Disable keycloak in backend settings! (IMPOSSIBLE)
