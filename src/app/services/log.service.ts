@@ -4,11 +4,11 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Create template realm for new tenant (not template but tutorial)
-Add realm textfield in login form
-Disable keycloak in backend settings! (IMPOSSIBLE)
+Test how to read env vars (or application properties?) with @Value annotation
+Set dynamic realm in backend
 Rework roles (reader and writer)
-
+Disable keycloak in backend settings! (IMPOSSIBLE)
+Create template realm for new tenant (not template but tutorial)
 Production (env vars and docker)
 
 
