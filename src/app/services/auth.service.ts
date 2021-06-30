@@ -99,6 +99,7 @@ export class AuthService extends RestService {
     this.tokenExpiresIn = 0;
     this.refreshToken = '';
     this.refreshTokenExpiresIn = 0;
+    this.tenant = '';
     this.username = '';
     this.password = '';
     this.router.navigate([ROUTES.login]);
