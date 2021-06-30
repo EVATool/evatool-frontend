@@ -111,8 +111,8 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
           this.authorizationFailed.emit(new AuthorizationFailedEvent());
         } else if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
           this.analysisWithValidIdNotFound.emit(new AnalysisWithIdNotFound(id));
-        } else if (false) {
-          this.realmNotFound.emit(new RealmNotFoundEvent('???')); // TODO
+        } else if (httpInfo.path.includes('/auth/realms/') && notFound) {
+          this.realmNotFound.emit(new RealmNotFoundEvent(httpInfo.path.split('/')[3]));
         } else if (httpInfo.method === 'DELETE') { // TODO change this to DELETE || UPDATE? then remove entities in event subscriptions.
           if (apiEndpoint === 'analyses') {
             const analysis = this.analysisData.analyses.find(a => a.id === id);
