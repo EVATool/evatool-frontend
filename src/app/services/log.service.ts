@@ -4,14 +4,10 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Rework roles (reader and writer)
+Create template realm for new tenant (not template but tutorial)
+Add realm textfield in login form
 Disable keycloak in backend settings! (IMPOSSIBLE)
-
-MULTIPLE TENANTS (do it with multiple realms!??)
-- https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html
-- https://issues.redhat.com/browse/KEYCLOAK-4139?_sscc=t
-- Create template realm for new tenant (not template but tutorial)
-- Add realm textfield in login form? How to make multi tenancy change as little as possible?
+Rework roles (reader and writer)
 
 Production (env vars and docker)
 
@@ -39,6 +35,7 @@ rework material forms (validation)
 Log to file (frontend and backend container)
 Determine convention for html tag order and enforce (e.g. matInput, [input], (output), ([bind]))
 control click (or middle click) on analysis tile -> new tab
+redirect to unknown error page if http status code is 0 in error case?
 Huge styling refactor (Zooming, mobile, resizing)
 make Sonarcloud Github Action work even if tests fail (front [] and backend [-Dmaven.test.failure.ignore=true])
 SonarCloud Status not shown in backend

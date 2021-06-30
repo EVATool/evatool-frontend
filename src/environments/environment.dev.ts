@@ -8,6 +8,5 @@ export const environment = {
   useDefaultOverBrowserLang: 'true',
   useAuth: false,
   authPort: '',
-  authRealm: '',
   authClient: ''
 };

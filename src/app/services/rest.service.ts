@@ -17,9 +17,7 @@ export abstract class RestService {
   private readonly backendUrl = this.serverUrl + ':' + this.backendPort + '/';
 
   private readonly authPort = environment.authPort;
-  private readonly authRealm = environment.authRealm;
   protected readonly authClient = environment.authClient;
-  protected readonly authUrl = this.serverUrl + ':' + this.authPort + '/auth/realms/' + this.authRealm + '/protocol/openid-connect/token';
 
   protected readonly httpOptions = {
     headers: new HttpHeaders({
@@ -61,4 +59,8 @@ export abstract class RestService {
 
   public readonly byId = '?id=';
   public readonly byAnalysisId = '?analysisId=';
+
+  protected getAuthUrl(authRealm: string): string {
+    return this.serverUrl + ':' + this.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
+  }
 }

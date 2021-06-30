@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     });
 
     if (isDevMode()) {
+      this.authService.tenant = 'evatool-realm';
       this.authService.username = 'admin';
       this.authService.password = 'admin';
     }

@@ -8,6 +8,5 @@ export const environment = {
   useDefaultOverBrowserLang: 'true',
   useAuth: true,
   authPort: '8081',
-  authRealm: 'evatool-realm',
   authClient: 'evatool-app'
 };

@@ -1,6 +1,5 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {LogService} from './log.service';
-import {environment} from '../../environments/environment';
 import {RestService} from './rest.service';
 import {HttpClient} from '@angular/common/http';
 import {SampleDataService} from './sample-data.service';
@@ -20,6 +19,7 @@ export class AuthService extends RestService {
 
   isAutoRefreshing = false;
 
+  tenant = '';
   username = '';
   password = '';
 
@@ -46,8 +46,8 @@ export class AuthService extends RestService {
       '&username=' + this.username +
       '&password=' + this.password;
 
-    this.http.post(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
-      this.takeInAuthResponse(authResponse,);
+    this.http.post(this.getAuthUrl(this.tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
+      this.takeInAuthResponse(authResponse);
       this.startTimers();
       this.router.navigate([ROUTES.home]);
     });
@@ -59,7 +59,7 @@ export class AuthService extends RestService {
       '&client_id=' + this.authClient +
       '&refresh_token=' + this.refreshToken;
 
-    this.http.post<any>(this.authUrl, authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
+    this.http.post<any>(this.getAuthUrl(this.tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       this.takeInAuthResponse(authResponse, ignoreRefreshToken);
     });
   }

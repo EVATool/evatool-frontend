@@ -8,6 +8,5 @@ export const environment = {
   useDefaultOverBrowserLang: 'USE_DEFAULT_OVER_BROWSER_LANGUAGE', // TODO make client store preference in local storage (override this)
   useAuth: 'ENABLE_AUTH',
   authPort: 'AUTH_PORT',
-  authRealm: 'AUTH_REALM',
   authClient: 'AUTH_CLIENT'
 };
