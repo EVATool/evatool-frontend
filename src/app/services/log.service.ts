@@ -4,7 +4,6 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
 Test how to read env vars (or application properties?) with @Value annotation
 Set dynamic realm in backend
 Rework roles (reader and writer)
@@ -22,6 +21,7 @@ Tasks aus Jira (UID)
 Backlog:
 git fetch causes permission error in deploy GitHub Actions
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
+Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
