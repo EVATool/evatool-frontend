@@ -4,22 +4,21 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Add keycloak
--> multiple tenants (do it with multiple realms!)
-  -> https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html
-  -> https://issues.redhat.com/browse/KEYCLOAK-4139?_sscc=t
-  -> Create template realm for new tenant (not template but tutorial)
-  -> Add realm textfield in login form
-  -> Rework roles (reader and writer)
+Rework roles (reader and writer)
+Disable keycloak in backend settings! (IMPOSSIBLE)
 
--> Prod and test
-  -> Disable keycloak in backend settings! (IMPOSSIBLE)
-  -> Tests try to use keycloak, only enable keycloak in keycloak and prod env
-  -> Same problem for running application in non-keycloak profile
-  -> enable ssl, enable keycloak, client id, realm,  env vars must be properly used
-  -> When keycloak is disabled, it should really be off even in prod settings (docker-compose env var KEYCLOAK_ENABLED=false)
+MULTIPLE TENANTS (do it with multiple realms!??)
+- https://www.czetsuyatech.com/2020/11/how-to-implement-multitenancy-with-spring-boot-and-keycloak.html
+- https://issues.redhat.com/browse/KEYCLOAK-4139?_sscc=t
+- Create template realm for new tenant (not template but tutorial)
+- Add realm textfield in login form? How to make multi tenancy change as little as possible?
+
+Production (env vars and docker)
+
+
 
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
+
 Tasks aus Jira (UID)
 
 Backlog:
