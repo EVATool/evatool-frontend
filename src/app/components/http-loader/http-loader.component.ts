@@ -55,16 +55,15 @@ export class HttpLoaderComponent implements OnInit {
 
     // Generic http error display.
     this.httpLoaderService.httpError.subscribe((httpInfo: HttpInfo) => {
+      console.log(httpInfo); // This should stay here.
       if (httpInfo.httpStatusCode !== 404
         && httpInfo.httpStatusCode !== 403
         && httpInfo.httpStatusCode !== 401
-        && httpInfo.httpStatusCode !== 0
         && !httpInfo.functionalErrorCode
         && !this.snackBarShown) {
 
-        console.log(httpInfo); // This should stay here.
         this.snackBarShown = true;
-        const message = 'An http request failed';
+        const message = 'An http request failed (status ' + httpInfo.httpStatusCode + ')';
         const action = '';
         const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
         snackBarRef.afterDismissed().subscribe(() => {
