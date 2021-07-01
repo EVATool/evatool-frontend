@@ -11,10 +11,6 @@
   </button>
 
   <mat-menu #menu="matMenu">
-    <label mat-menu-item>
-      <mat-icon>info</mat-icon>
-      <span>Logged in as {{authService.username}}</span>
-    </label>
     <button mat-menu-item
             (click)="authService.logout()">
       <mat-icon>power_settings_new</mat-icon>
