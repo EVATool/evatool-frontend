@@ -4,7 +4,6 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-repair: keycloak peroperties in backend commented , user 403
 Always set realm (realm attribute should not be nullable even in single realm mode [use default single realm])
 Use env vars for auth in backend
 Disable keycloak in backend settings! (IMPOSSIBLE)
