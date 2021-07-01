@@ -7,6 +7,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpLoaderFactory} from '../app.module';
+import {Router} from '@angular/router';
 
 export class SpecService {
 
@@ -33,6 +34,6 @@ export class SpecService {
     MatSnackBarModule,
     FormBuilder,
     MatMenuModule,
-    TranslateService,
+    TranslateService
   ];
 }

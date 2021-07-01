@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AuthRemainingComponent } from './auth-remaining.component';
+import {AuthRemainingComponent} from './auth-remaining.component';
+import {SpecService} from '../../services/spec.service';
 
 describe('AuthRemainingComponent', () => {
   let component: AuthRemainingComponent;
@@ -8,9 +9,11 @@ describe('AuthRemainingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AuthRemainingComponent ]
+      imports: SpecService.imports,
+      providers: SpecService.providers,
+      declarations: [AuthRemainingComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
