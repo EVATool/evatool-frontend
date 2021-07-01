@@ -78,23 +78,28 @@ export class AuthService extends RestService {
   startTimers(): void {
     this.authenticated = true;
     const interval = setInterval(() => {
+      if (!this.authenticated) {
+        clearInterval(interval);
+      }
+
       this.tokenExpiresIn -= 1;
       this.refreshTokenExpiresIn -= 1;
 
-      if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing) { // Try to get new token with refresh token if token expires in 10 seconds
+      // Try to get new token with refresh token if token expires soon.
+      if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing && this.authenticated) {
         this.isAutoRefreshing = true;
         this.logger.info(this, 'Refreshing Token...');
         this.refreshExistingToken(true);
       }
 
       if (this.refreshTokenExpiresIn <= 0) {
-        this.authenticated = false;
         this.logout();
       }
     }, 1000);
   }
 
   logout(): void {
+    this.authenticated = false;
     this.token = '';
     this.tokenExpiresIn = 0;
     this.refreshToken = '';
