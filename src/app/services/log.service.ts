@@ -9,7 +9,7 @@ Create template realm for new tenant (how to easily import multiple times?)
 Disable keycloak in backend settings! (IMPOSSIBLE)
 Use env vars for auth in backend and frontend
 Production (env vars and docker) [single tenant mode (auth but only one realm -> no tenant option in login screen)]
-
+- Ignore existing realm json docker (https://stackoverflow.com/questions/61184888/how-to-import-multiple-realm-in-keycloak)
 
 
 Add flyway [only setup, do not migrate from this point onward!] (special migrate test profile in backend?)
