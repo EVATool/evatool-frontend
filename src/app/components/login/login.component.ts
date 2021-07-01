@@ -26,13 +26,13 @@ export class LoginComponent implements OnInit {
     this.crossUI.authenticationFailed.subscribe(() => {
       const message = 'Invalid credentials';
       const action = '';
-      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+      this.snackBar.open(message, action, {duration: 5000});
     });
 
     this.crossUI.realmNotFound.subscribe((event: RealmNotFoundEvent) => {
       const message = 'Tenant ' + event.realm + ' does not exist';
       const action = '';
-      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+      this.snackBar.open(message, action, {duration: 5000});
     });
 
     if (isDevMode()) {
@@ -51,6 +51,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.authService.getInitialToken();
+    if (this.authService.tenant === '') {
+      this.snackBar.open('Please enter a tenant', '', {duration: 5000});
+    } else if (this.authService.username === '') {
+      this.snackBar.open('Please enter a username', '', {duration: 5000});
+    } else if (this.authService.password === '') {
+      this.snackBar.open('Please enter a password', '', {duration: 5000});
+    } else {
+      this.authService.getInitialToken();
+    }
   }
 }
