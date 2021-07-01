@@ -4,7 +4,6 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Why log in after going to privacy and then clicking ETHIK TOOL?
 Create template realm for new tenant (how to easily import multiple times?)
 
 Disable keycloak in backend settings! (IMPOSSIBLE)
