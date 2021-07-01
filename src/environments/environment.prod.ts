@@ -6,7 +6,7 @@ export const environment = {
   testing: false,
   defaultLang: 'DEFAULT_LANGUAGE',
   useDefaultOverBrowserLang: 'USE_DEFAULT_OVER_BROWSER_LANGUAGE', // TODO make client store preference in local storage (override this)
-  useAuth: 'ENABLE_AUTH',
+  authEnabled: 'ENABLE_AUTH',
   authPort: 'AUTH_PORT',
   authClient: 'AUTH_CLIENT'
 };

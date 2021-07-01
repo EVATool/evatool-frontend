@@ -6,7 +6,7 @@ export const environment = { // This is the test environment.
   testing: true,
   defaultLang: 'en',
   useDefaultOverBrowserLang: 'true',
-  useAuth: false,
+  authEnabled: false,
   authPort: '',
   authClient: ''
 };

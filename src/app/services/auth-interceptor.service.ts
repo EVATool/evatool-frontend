@@ -9,11 +9,13 @@ import {environment} from '../../environments/environment';
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
+  authEnabled = environment.authEnabled;
+
   constructor(private authService: AuthService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!environment.useAuth || req.url.includes('/auth/realms/')) { // Leave requests to auth server alone.
+    if (!this.authEnabled || this.isAuthUrl(req.url)) { // Leave requests to auth server alone.
       return next.handle(req);
     } else {
       let authReq = req;
@@ -33,5 +35,9 @@ export class AuthInterceptorService implements HttpInterceptor {
     return req.clone({
       headers: req.headers.set('Realm', realm)
     });
+  }
+
+  isAuthUrl(url: string): boolean {
+    return url.includes('/auth/realms/');
   }
 }
