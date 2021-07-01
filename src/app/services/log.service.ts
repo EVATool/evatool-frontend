@@ -4,9 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Test how to read env vars (or application properties?) with @Value annotation
 Set dynamic realm in backend
-Rework roles (reader and writer)
 Disable keycloak in backend settings! (IMPOSSIBLE)
 Create template realm for new tenant (not template but tutorial)
 Logout option in user menu (user menu does not yet exist) [top right]
