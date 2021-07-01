@@ -49,7 +49,7 @@ export class AuthService extends RestService {
     this.http.post(this.getAuthUrl(tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       this.tenant = tenant;
       this.username = username;
-      this.password = password;
+      this.password = password; // TODO do not save or purge password so its not in memory. It is not required for refreshing the token.
       this.takeInAuthResponse(authResponse);
       this.startTimers();
       this.router.navigate([ROUTES.home]);
