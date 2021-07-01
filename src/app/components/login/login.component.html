@@ -4,21 +4,21 @@
   <mat-form-field>
     <mat-label>Tenant</mat-label>
     <input matInput
-           [(ngModel)]="authService.tenant"
+           [(ngModel)]="tenant"
            (keydown.enter)="onSubmit()">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Username</mat-label>
     <input matInput
-           [(ngModel)]="authService.username"
+           [(ngModel)]="username"
            (keydown.enter)="onSubmit()">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Password</mat-label>
     <input matInput [type]="showPassword ? 'text' : 'password'"
-           [(ngModel)]="authService.password"
+           [(ngModel)]="password"
            (keydown.enter)="onSubmit()">
   </mat-form-field>
 

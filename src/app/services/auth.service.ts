@@ -32,21 +32,24 @@ export class AuthService extends RestService {
 
   getToken(): string {
     if (!this.refreshTokenExpiresIn || this.refreshTokenExpiresIn <= 0) {
-      this.getInitialToken();
+      this.login(this.tenant, this.username, this.password);
     } else {
       this.refreshExistingToken();
     }
     return this.token;
   }
 
-  getInitialToken(): void {
+  login(tenant: string, username: string, password: string): void {
     const authRequest = 'grant_type=password' +
       '&scope=openid' +
       '&client_id=' + this.authClient +
-      '&username=' + this.username +
-      '&password=' + this.password;
+      '&username=' + username +
+      '&password=' + password;
 
-    this.http.post(this.getAuthUrl(this.tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
+    this.http.post(this.getAuthUrl(tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
+      this.tenant = tenant;
+      this.username = username;
+      this.password = password;
       this.takeInAuthResponse(authResponse);
       this.startTimers();
       this.router.navigate([ROUTES.home]);

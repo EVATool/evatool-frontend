@@ -14,6 +14,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
 
   showPassword = false;
+  tenant = '';
+  username = '';
+  password = '';
 
   constructor(private logger: LogService,
               private router: Router,
@@ -36,9 +39,9 @@ export class LoginComponent implements OnInit {
     });
 
     if (isDevMode()) {
-      this.authService.tenant = 'evatool-realm';
-      this.authService.username = 'admin';
-      this.authService.password = 'admin';
+      this.tenant = 'evatool-realm';
+      this.username = 'admin';
+      this.password = 'admin';
     }
   }
 
@@ -51,14 +54,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.authService.tenant === '') {
+    if (this.tenant === '') {
       this.snackBar.open('Please enter a tenant', '', {duration: 5000});
-    } else if (this.authService.username === '') {
+    } else if (this.username === '') {
       this.snackBar.open('Please enter a username', '', {duration: 5000});
-    } else if (this.authService.password === '') {
+    } else if (this.password === '') {
       this.snackBar.open('Please enter a password', '', {duration: 5000});
     } else {
-      this.authService.getInitialToken();
+      this.authService.login(this.tenant, this.username, this.password);
     }
   }
 }
