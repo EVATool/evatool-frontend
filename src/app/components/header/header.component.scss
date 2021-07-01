@@ -4,44 +4,18 @@
   padding: 10px;
   vertical-align: middle;
   height: 35px;
-}
 
-.container {
-  display: inline;
-  position: relative;
-}
+  a {
+    color: white;
+    text-decoration: none;
 
-#action-container {
-  padding-left: 2%;
-}
+    h1 {
+      display: inline;
+    }
+  }
 
-#user-container {
-  float: right;
-}
-
-h1 {
-  display: inline;
-}
-
-.vl {
-  display: inline-block;
-  border-left: 1px solid white;
-  height: 35px;
-  position: absolute;
-  margin-left: -1vw;
-}
-
-a {
-  color: white;
-  text-decoration: none;
-}
-
-ul {
-  display: inline;
-}
-
-li {
-  display: inline;
-  padding-left: 1vw;
-  vertical-align: middle;
+  button {
+    float: right;
+    margin-top: -5px;
+  }
 }
