@@ -6,9 +6,10 @@ Features:
 
 Always set realm (realm attribute should not be nullable even in single realm mode [use default single realm])
 Use env vars for auth in backend
-Disable keycloak in backend settings! (IMPOSSIBLE)
-Create template realm for new tenant (not template but tutorial)
 Logout option in user menu (user menu does not yet exist) [top right]
+Create template realm for new tenant (not template but tutorial)
+
+Disable keycloak in backend settings! (IMPOSSIBLE)
 Production (env vars and docker) [single tenant mode (auth but only one realm -> no tenant option in login screen)]
 
 
