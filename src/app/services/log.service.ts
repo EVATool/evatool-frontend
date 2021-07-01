@@ -4,8 +4,9 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Set dynamic realm in backend
-Always set ream (realm attribute should not be nullable even in single realm mode [use default single realm])
+repair: keycloak peroperties in backend commented , user 403
+Always set realm (realm attribute should not be nullable even in single realm mode [use default single realm])
+Use env vars for auth in backend
 Disable keycloak in backend settings! (IMPOSSIBLE)
 Create template realm for new tenant (not template but tutorial)
 Logout option in user menu (user menu does not yet exist) [top right]
