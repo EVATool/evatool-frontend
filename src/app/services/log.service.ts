@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 Features:
 
 Set dynamic realm in backend
+Always set ream (realm attribute should not be nullable even in single realm mode [use default single realm])
 Disable keycloak in backend settings! (IMPOSSIBLE)
 Create template realm for new tenant (not template but tutorial)
 Logout option in user menu (user menu does not yet exist) [top right]
