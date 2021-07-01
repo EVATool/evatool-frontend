@@ -14,7 +14,6 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!environment.useAuth || req.url.includes('/auth/realms/')) { // Leave requests to auth server alone.
-      //req = this.addRealm(req);
       return next.handle(req);
     } else {
       const authToken = this.authService.getToken();
