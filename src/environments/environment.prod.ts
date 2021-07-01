@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  protocol: 'http', // TODO change to https (or infer from whether keycloak is enabled)
+  protocol: 'PROTOCOL', // TODO change to https (or infer from whether keycloak is enabled)
   backendUrl: 'BACKEND_URL',
   backendPort: 'BACKEND_PORT',
   testing: false,
