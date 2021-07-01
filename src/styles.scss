@@ -28,7 +28,7 @@ body {
 @import 'app/components/stakeholder-impacted/stakeholder-impacted.component';
 @include stakeholder-impact-slider-theme();
 
-@import "app/layout/style/resets";
+@import "resets";
 @include reset-style();
 
 // Misc
