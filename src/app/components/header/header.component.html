@@ -5,6 +5,7 @@
   </a>
 
   <button mat-icon-button
+          *ngIf="authService.authenticated"
           [matMenuTriggerFor]="menu">
     <mat-icon>person</mat-icon>
   </button>
