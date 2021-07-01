@@ -12,9 +12,9 @@ import {ROUTES} from '../app-routes';
 export class AuthService extends RestService {
 
   authenticated = false;
-  private token!: string;
+  private token = 'null'; // TODO sending an empty string causes a 500 return code. This should be handled in backend.
   tokenExpiresIn = 0;
-  private refreshToken!: string;
+  private refreshToken = 'null';
   refreshTokenExpiresIn = 0;
 
   isAutoRefreshing = false;
@@ -103,9 +103,9 @@ export class AuthService extends RestService {
 
   logout(): void {
     this.authenticated = false;
-    this.token = '';
+    this.token = 'null';
     this.tokenExpiresIn = 0;
-    this.refreshToken = '';
+    this.refreshToken = 'null';
     this.refreshTokenExpiresIn = 0;
     this.tenant = '';
     this.username = '';
