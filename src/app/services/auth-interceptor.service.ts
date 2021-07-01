@@ -16,9 +16,10 @@ export class AuthInterceptorService implements HttpInterceptor {
     if (!environment.useAuth || req.url.includes('/auth/realms/')) { // Leave requests to auth server alone.
       return next.handle(req);
     } else {
+      let authReq = req;
       const authToken = this.authService.getToken();
-      let authReq = this.injectToken(req, authToken);
-      authReq = this.addRealm(authReq);
+      authReq = this.injectToken(authReq, authToken);
+      authReq = this.injectRealm(authReq, this.authService.tenant);
       return next.handle(authReq);
     }
   }
@@ -29,9 +30,9 @@ export class AuthInterceptorService implements HttpInterceptor {
     });
   }
 
-  addRealm(req: HttpRequest<any>): HttpRequest<any> {
+  injectRealm(req: HttpRequest<any>, realm: string): HttpRequest<any> {
     return req.clone({
-      headers: req.headers.set('Realm', this.authService.tenant)
+      headers: req.headers.set('Realm', realm)
     });
   }
 }
