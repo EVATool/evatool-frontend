@@ -4,18 +4,26 @@
     <h1> ETHIK TOOL </h1>
   </a>
 
-  <button mat-icon-button
-          *ngIf="authService.authenticated"
-          [matMenuTriggerFor]="menu">
-    <mat-icon>person</mat-icon>
-  </button>
+  <div class="user-menu">
+    <div fxLayout="row">
+      <div class="current-user">
+        {{authService.username}}
+      </div>
 
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item
-            (click)="authService.logout()">
-      <mat-icon>power_settings_new</mat-icon>
-      <span>Logout</span>
-    </button>
-  </mat-menu>
+      <button mat-icon-button
+              *ngIf="authService.authenticated"
+              [matMenuTriggerFor]="menu">
+        <mat-icon>person</mat-icon>
+      </button>
+    </div>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
+              (click)="authService.logout()">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
 
 </header>

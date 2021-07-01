@@ -14,8 +14,17 @@
     }
   }
 
-  button {
+  .user-menu {
     float: right;
-    margin-top: -5px;
+
+    .current-user {
+      font-size: 120%;
+      margin-top: 8px;
+      margin-right: 5px;
+    }
+
+    button {
+      margin-top: -5px;
+    }
   }
 }
