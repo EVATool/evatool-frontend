@@ -4,12 +4,11 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Always set realm (realm attribute should not be nullable even in single realm mode [use default single realm])
-Use env vars for auth in backend and backend
 Logout option in user menu (user menu does not yet exist) [top right]
 Create template realm for new tenant (how to easily import multiple times?)
 
 Disable keycloak in backend settings! (IMPOSSIBLE)
+Use env vars for auth in backend and frontend
 Production (env vars and docker) [single tenant mode (auth but only one realm -> no tenant option in login screen)]
 
 
