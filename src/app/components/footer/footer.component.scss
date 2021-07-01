@@ -1,35 +1,35 @@
-.header {
+.footer {
   position: fixed;
-  background-color: #333333;
-  color: white;
-}
-
-.container {
-  float: right;
-  display: inline;
+  //background-color: #f0f0f0;
+  //border-top: 1px solid #2d2d2d;
+  bottom: 0;
   width: 100%;
-  text-align: right;
-}
+  height: 40px;
 
-a {
-  display: inline;
-  color: rgb(155, 155, 155);
-  text-decoration: none;
-}
+  .container {
+    width: 100%;
+    text-align: right;
 
-ul {
-  display: inline;
-}
+    ul {
+      li {
+        display: inline;
+        padding-left: 1.5vw;
+        padding-bottom: 1.5vw;
+        vertical-align: middle;
 
-li {
-  display: inline;
-  padding-left: 1.5vw;
-  padding-bottom: 1.5vw;
-  vertical-align: middle;
-}
+        a { // TODO why is this ignoring any margin (top and bottom) put in?
+          margin-bottom: 10px;
+          color: rgb(155, 155, 155);
+          text-decoration: none;
+        }
 
-.mat-icon {
-  color: rgb(155, 155, 155);
-  margin-right: 0.5vw;
-  margin-top: 0.5vh;
+        .mat-icon {
+          cursor: default;
+          color: rgb(155, 155, 155);
+          margin-right: 8px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
 }

@@ -4,7 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Logout option in user menu (user menu does not yet exist) [top right] (and also rework header)
+Why log in after going to privacy and then clicking ETHIK TOOL?
 Create template realm for new tenant (how to easily import multiple times?)
 
 Disable keycloak in backend settings! (IMPOSSIBLE)
