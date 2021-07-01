@@ -28,14 +28,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.crossUI.authenticationFailed.subscribe(() => {
       const message = 'Invalid credentials';
-      const action = '';
-      this.snackBar.open(message, action, {duration: 5000});
+      this.snackBar.open(message, '', {duration: 5000});
     });
 
     this.crossUI.realmNotFound.subscribe((event: RealmNotFoundEvent) => {
+      // TODO consider using the same message as in the authenticationFailed method to prohibit checking for which tenants exist.
       const message = 'Tenant ' + event.realm + ' does not exist';
-      const action = '';
-      this.snackBar.open(message, action, {duration: 5000});
+      this.snackBar.open(message, '', {duration: 5000});
     });
 
     if (isDevMode()) {

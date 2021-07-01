@@ -4,8 +4,6 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Create template realm for new tenant (how to easily import multiple times?)
-
 Disable keycloak in backend settings! (IMPOSSIBLE)
 Use env vars for auth in backend and frontend
 Production (env vars and docker) [single tenant mode (auth but only one realm -> no tenant option in login screen)]
