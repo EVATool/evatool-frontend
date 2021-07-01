@@ -21,6 +21,7 @@ Backlog:
 git fetch causes permission error in deploy GitHub Actions
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
+Make UI work in firefix/Chrome
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
