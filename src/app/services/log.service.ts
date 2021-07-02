@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
+Keycloak
 - merge into dev
 - merge into experimental
 - test docker-compose locally
