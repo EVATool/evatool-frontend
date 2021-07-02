@@ -5,9 +5,9 @@ export const environment = { // This is the test environment.
   serverAddr: '',
   backendPort: '',
   defaultLang: 'en',
-  useDefaultOverBrowserLang: 'true',
+  useDefaultOverBrowserLang: true,
   authProtocol: '',
-  authEnabled: 'false',
-  authMultiTenancyEnabled: 'false',
+  authEnabled: false,
+  authMultiTenancyEnabled: false,
   authPort: ''
 };
