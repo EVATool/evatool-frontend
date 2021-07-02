@@ -4,9 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Use env vars for auth in backend and frontend
-Production (env vars and docker) [single tenant mode (auth but only one realm -> no tenant option in login screen)]
-- Ignore existing realm json docker (https://stackoverflow.com/questions/61184888/how-to-import-multiple-realm-in-keycloak)
+Ignore existing realm json docker (https://stackoverflow.com/questions/61184888/how-to-import-multiple-realm-in-keycloak)
 
 
 
