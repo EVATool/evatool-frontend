@@ -2,8 +2,8 @@ find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,SERVER_PROTOCOL,'"$
 find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,SERVER_ADDR,'"$SERVER_ADDR"',g' {} \;
 find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,BACKEND_PORT,'"$BACKEND_PORT"',g' {} \;
 find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,DEFAULT_LANGUAGE,'"$DEFAULT_LANGUAGE"',g' {} \;
-find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,USE_DEFAULT_OVER_BROWSER_LANGUAGE,'"$USE_DEFAULT_OVER_BROWSER_LANGUAGE"',g' {} \;
-find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,AUTH_ENABLED,'"$AUTH_ENABLED"',g' {} \;
-find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,AUTH_MULTI_TENANCY_ENABLED,'"$AUTH_MULTI_TENANCY_ENABLED"',g' {} \;
+find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,'USE_DEFAULT_OVER_BROWSER_LANGUAGE','"$USE_DEFAULT_OVER_BROWSER_LANGUAGE"',g' {} \;
+find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,'AUTH_ENABLED','"$AUTH_ENABLED"',g' {} \;
+find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,'AUTH_MULTI_TENANCY_ENABLED','"$AUTH_MULTI_TENANCY_ENABLED"',g' {} \;
 find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,AUTH_PORT,'"$AUTH_PORT"',g' {} \;
 nginx -g "daemon off;"
