@@ -22,6 +22,7 @@ Redirect to home from login component when auth is disabled?
 Make UI work in firefix/Chrome
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)
+How to deal with http status code 0? Ignore it? and hide the snackbar when the status is 0 (only in prod)?
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
 All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
 Rework impact slider (arrow keys supported) and filtering (drag middle bar and change borders) and appear on tab, focus in requirement table, mat-slider has an ABSOLUTE min width...
