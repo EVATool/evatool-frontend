@@ -9,7 +9,7 @@ import {SampleDataService} from './sample-data.service';
 })
 export abstract class RestService {
 
-  private readonly backendUrl = environment.backendProtocol + '://' + environment.backendAddr + ':' + environment.backendPort + '/';
+  private readonly backendUrl = environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.backendPort + '/';
 
   protected readonly httpOptions = {
     headers: new HttpHeaders({
@@ -53,6 +53,6 @@ export abstract class RestService {
   public readonly byAnalysisId = '?analysisId=';
 
   protected getAuthUrl(authRealm: string): string {
-    return environment.authProtocol + '://' + environment.authAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
+    return environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
   }
 }
