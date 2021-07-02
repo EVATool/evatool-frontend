@@ -5,9 +5,10 @@ import {environment} from '../../environments/environment';
 Features:
 
 Disable keycloak in backend settings! (IMPOSSIBLE)
+Remove controller tests and rename rest to controler tests
 
 Use env vars for auth in backend and frontend
-Remove login routing when auth is off
+- Remove login routing when auth is off
 Production (env vars and docker) [single tenant mode (auth but only one realm -> no tenant option in login screen)]
 - Ignore existing realm json docker (https://stackoverflow.com/questions/61184888/how-to-import-multiple-realm-in-keycloak)
 
