@@ -6,8 +6,9 @@ Features:
 
 Keycloak
 - test docker-compose locally
-  - keycloak container does not start
+  - keycloak container does not start (now it does start? why?)
   - frontend boolean vars are not read properly
+  - Frontend receives cors errors (when authenticated)
   - Import default realm: Ignore existing realm json docker (https://stackoverflow.com/questions/61184888/how-to-import-multiple-realm-in-keycloak)
 - merge in main
 
