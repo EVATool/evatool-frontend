@@ -56,15 +56,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
     console.log(environment.authMultiTenancyEnabled);
     console.log(environment.useDefaultOverBrowserLang);
     console.log('-----------------------------------------------');
-    console.log(environment.authEnabled === true);
-    console.log(environment.authEnabled == true);
     console.log(environment.authEnabled === 'true');
     console.log(environment.authEnabled == 'true');
+    console.log(environment.authEnabled !== 'true');
+    console.log(environment.authEnabled != 'true');
     console.log('-----------------------------------------------');
-    console.log(environment.authEnabled === false);
-    console.log(environment.authEnabled == false);
     console.log(environment.authEnabled === 'false');
     console.log(environment.authEnabled == 'false');
+    console.log(environment.authEnabled !== 'false');
+    console.log(environment.authEnabled != 'false');
 
   }
 
