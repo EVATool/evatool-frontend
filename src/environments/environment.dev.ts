@@ -5,9 +5,9 @@ export const environment = {
   serverAddr: 'localhost',
   backendPort: '8080',
   defaultLang: 'en',
-  useDefaultOverBrowserLang: 'true',
+  useDefaultOverBrowserLang: true,
   authProtocol: '',
-  authEnabled: 'false',
-  authMultiTenancyEnabled: 'false',
+  authEnabled: false,
+  authMultiTenancyEnabled: false,
   authPort: ''
 };
