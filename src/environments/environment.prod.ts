@@ -1,4 +1,3 @@
-// @ts-ignore
 export const environment = {
   production: true,
   testing: false,
@@ -6,11 +5,11 @@ export const environment = {
   serverAddr: 'SERVER_ADDR',
   backendPort: 'BACKEND_PORT',
   defaultLang: 'DEFAULT_LANGUAGE',
-// @ts-ignore
+  // @ts-ignore
   useDefaultOverBrowserLang: USE_DEFAULT_OVER_BROWSER_LANGUAGE,
-// @ts-ignore
+  // @ts-ignore
   authEnabled: AUTH_ENABLED,
-// @ts-ignore
+  // @ts-ignore
   authMultiTenancyEnabled: AUTH_MULTI_TENANCY_ENABLED,
   authPort: 'AUTH_PORT'
 };
