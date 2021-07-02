@@ -1,12 +1,14 @@
 export const environment = {
   production: false,
-  protocol: 'http',
-  backendUrl: 'localhost',
+  backendProtocol: 'http',
+  backendAddr: 'localhost',
   backendPort: '8080',
   testing: false,
   defaultLang: 'en',
   useDefaultOverBrowserLang: 'true',
+  authProtocol: 'http',
   authEnabled: true,
-  authPort: '8081',
-  authClient: 'evatool-app'
+  authMultiTenancyEnabled: true,
+  authAddr: 'localhost',
+  authPort: '8081'
 };

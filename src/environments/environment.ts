@@ -1,12 +1,14 @@
 export const environment = { // This is the test environment.
   production: false,
-  protocol: '',
-  backendUrl: '',
+  backendProtocol: '',
+  backendAddr: '',
   backendPort: '',
   testing: true,
   defaultLang: 'en',
   useDefaultOverBrowserLang: 'true',
+  authProtocol: '',
   authEnabled: false,
-  authPort: '',
-  authClient: ''
+  authMultiTenancyEnabled: false,
+  authAddr: '',
+  authPort: ''
 };

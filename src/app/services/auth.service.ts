@@ -42,7 +42,7 @@ export class AuthService extends RestService {
   login(tenant: string, username: string, password: string): void {
     const authRequest = 'grant_type=password' +
       '&scope=openid' +
-      '&client_id=' + this.authClient +
+      '&client_id=evatool-app' +
       '&username=' + username +
       '&password=' + password;
 
@@ -59,7 +59,7 @@ export class AuthService extends RestService {
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
     const authRequest = 'grant_type=refresh_token' +
       '&scope=openid' +
-      '&client_id=' + this.authClient +
+      '&client_id=evatool-app' +
       '&refresh_token=' + this.refreshToken;
 
     this.http.post<any>(this.getAuthUrl(this.tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {

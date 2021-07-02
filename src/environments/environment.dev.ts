@@ -1,12 +1,14 @@
 export const environment = {
   production: false,
-  protocol: 'http',
-  backendUrl: 'localhost',
+  backendProtocol: 'http',
+  backendAddr: 'localhost',
   backendPort: '8080',
   testing: false,
   defaultLang: 'en',
   useDefaultOverBrowserLang: 'true',
-  authEnabled: false,
-  authPort: '',
-  authClient: ''
+  authProtocol: '',
+  authEnabled: '',
+  authMultiTenancyEnabled: '',
+  authAddr: '',
+  authPort: ''
 };

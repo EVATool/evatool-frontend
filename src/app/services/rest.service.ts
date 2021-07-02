@@ -9,15 +9,7 @@ import {SampleDataService} from './sample-data.service';
 })
 export abstract class RestService {
 
-  private readonly protocol: string = environment.protocol;
-  private readonly url = environment.backendUrl;
-  private readonly serverUrl = this.protocol + '://' + this.url;
-
-  private readonly backendPort = environment.backendPort;
-  private readonly backendUrl = this.serverUrl + ':' + this.backendPort + '/';
-
-  private readonly authPort = environment.authPort;
-  protected readonly authClient = environment.authClient;
+  private readonly backendUrl = environment.backendProtocol + '://' + environment.backendAddr + ':' + environment.backendPort + '/';
 
   protected readonly httpOptions = {
     headers: new HttpHeaders({
@@ -61,6 +53,6 @@ export abstract class RestService {
   public readonly byAnalysisId = '?analysisId=';
 
   protected getAuthUrl(authRealm: string): string {
-    return this.serverUrl + ':' + this.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
+    return environment.authProtocol + '://' + environment.authAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/backendProtocol/openid-connect/token';
   }
 }
