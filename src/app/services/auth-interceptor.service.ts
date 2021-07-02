@@ -9,13 +9,11 @@ import {environment} from '../../environments/environment';
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
-  authEnabled = environment.authEnabled;
-
   constructor(private authService: AuthService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!this.authEnabled || this.isAuthUrl(req.url)) { // Leave requests to auth server alone.
+    if (!environment.authEnabled || this.isAuthUrl(req.url)) { // Leave requests to auth server alone.
       return next.handle(req);
     } else {
       let authReq = req;
