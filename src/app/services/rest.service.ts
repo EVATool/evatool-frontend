@@ -53,6 +53,6 @@ export abstract class RestService {
   public readonly byAnalysisId = '?analysisId=';
 
   protected getAuthUrl(authRealm: string): string {
-    return environment.authProtocol + '://' + environment.authAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/backendProtocol/openid-connect/token';
+    return environment.authProtocol + '://' + environment.authAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
   }
 }
