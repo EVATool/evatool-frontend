@@ -50,10 +50,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
     if (!this.tenantSelectionEnabled) {
       this.tenant = 'evatool-realm';
     }
+
+    console.log('-----------------------------------------------');
+    console.log('-----------------------------------------------');
+    console.log('-----------------------------------------------');
+    console.log('-----------------------------------------------');
+    console.log('-----------------------------------------------');
+    console.log(environment.authEnabled);
+    console.log(environment.authMultiTenancyEnabled);
+    console.log(environment.useDefaultOverBrowserLang);
   }
 
   ngAfterViewInit(): void {
-    if (environment.authEnabled === 'false' && !environment.testing) {
+    if (environment.authEnabled !== 'true' && !environment.testing) {
       const message = 'Authentication is disabled. You will not be able to login.';
       this.snackBar.open(message, '', {duration: 5000});
     }
