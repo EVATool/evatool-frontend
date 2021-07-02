@@ -25,7 +25,7 @@ export class AppComponent {
     const defaultLang = environment.defaultLang;
     const useDefaultOverBrowserLang = environment.useDefaultOverBrowserLang;
 
-    if (useDefaultOverBrowserLang === 'true') {
+    if (useDefaultOverBrowserLang) {
       translate.setTranslation(defaultLang, this.getLangJson(defaultLang));
       translate.setDefaultLang(defaultLang);
     } else {

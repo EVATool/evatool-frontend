@@ -15,7 +15,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
 
-  tenantSelectionEnabled = environment.authMultiTenancyEnabled === 'true';
+  tenantSelectionEnabled = environment.authMultiTenancyEnabled;
 
   showPassword = false;
   tenant = '';
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (environment.authEnabled !== 'true' && !environment.testing) {
+    if (!environment.authEnabled && !environment.testing) {
       const message = 'Authentication is disabled. You will not be able to login.';
       this.snackBar.open(message, '', {duration: 5000});
     }
