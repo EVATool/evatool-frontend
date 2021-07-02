@@ -1,17 +1,18 @@
-import {Component, isDevMode, OnInit} from '@angular/core';
+import {AfterViewInit, Component, isDevMode, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
 import {CrossUiEventService, RealmNotFoundEvent} from '../../services/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
   showPassword = false;
   tenant = '';
@@ -41,6 +42,13 @@ export class LoginComponent implements OnInit {
       this.tenant = 'evatool-realm';
       this.username = 'admin';
       this.password = 'admin';
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (!environment.authEnabled) {
+      const message = 'Authentication is disabled. You will not be able to login.';
+      this.snackBar.open(message, '', {duration: 5000});
     }
   }
 
