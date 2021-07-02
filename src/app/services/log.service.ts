@@ -5,7 +5,6 @@ import {environment} from '../../environments/environment';
 Features:
 
 Keycloak
-- merge into experimental
 - test docker-compose locally
   - Import default realm: Ignore existing realm json docker (https://stackoverflow.com/questions/61184888/how-to-import-multiple-realm-in-keycloak)
 - merge in main

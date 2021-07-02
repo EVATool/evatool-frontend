@@ -6,6 +6,7 @@ import {HttpInfo, HttpInfoType} from '../../services/HttpInfo';
 import {CrossUiEventService} from '../../services/cross-ui-event.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-http-loader',
@@ -55,7 +56,9 @@ export class HttpLoaderComponent implements OnInit {
 
     // Generic http error display.
     this.httpLoaderService.httpError.subscribe((httpInfo: HttpInfo) => {
-      console.log(httpInfo); // This should stay here.
+      if (!environment.production) {
+        console.log(httpInfo); // This should stay here.
+      }
       if (httpInfo.httpStatusCode !== 404
         && httpInfo.httpStatusCode !== 403
         && httpInfo.httpStatusCode !== 401
