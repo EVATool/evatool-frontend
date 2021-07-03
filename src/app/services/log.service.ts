@@ -5,7 +5,8 @@ import {environment} from '../../environments/environment';
 Features:
 
 Keycloak
-- Frontend receives cors errors (when authenticated) [and 500 status] (get rid of exceptions even if they dont cause errors in keycloak profile)
+- Frontend receives cors errors (when authenticated) [and 500 status when logged in and sending GET to /analyses]
+  - get rid of exceptions even if they dont cause errors in keycloak profile?
 - merge in main
 
 
@@ -20,7 +21,7 @@ Localization (Use values from jsons everywhere, translate them, change lang in f
 Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
 Redirect to home from login component when auth is disabled?
 Make UI work in firefix/Chrome
-Import default realm in docker-compose: users are not imported (https://stackoverflow.com/questions/48930281/export-all-users-from-keycloak)
+How to make default realm export file reuseable to create a new standard realm (or even n realms) with a set name
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)
 How to deal with http status code 0? Ignore it? and hide the snackbar when the status is 0 (only in prod)?
