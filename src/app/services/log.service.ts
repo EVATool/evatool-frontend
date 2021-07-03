@@ -7,7 +7,7 @@ Features:
 Keycloak
 - test docker-compose locally
   - Import default realm: Ignore existing realm json docker (https://stackoverflow.com/questions/61184888/how-to-import-multiple-realm-in-keycloak)
-  - Frontend receives cors errors (when authenticated)
+  - Frontend receives cors errors (when authenticated) [and 500 status]
 - merge in main
 
 
