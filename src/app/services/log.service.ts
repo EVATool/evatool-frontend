@@ -6,6 +6,7 @@ Features:
 
 Keycloak
 - Frontend receives cors errors (when authenticated) [and 500 status when logged in and sending GET to /analyses]
+  - Access prod with postman and see if same error happens
   - get rid of exceptions even if they dont cause errors in keycloak profile?
 - merge in main
 
@@ -33,6 +34,7 @@ Cashe login credentials locally (at least refresh token) and load when page is r
 Single user: reload data when tab changes? (how to update references?)
 Multi user: concurrency... (PWA?)
 Angular e2e tests
+docker container of mysql takes very long to start, this backend container fails (docker desktop on windows) [workaournd: wait 5 minutes for mysql database, then restart backend] (use postgres instead of mysql??)
 rework material forms (validation)
 Log to file (frontend and backend container)
 Determine convention for html tag order and enforce (e.g. matInput, [input], (output), ([bind]))
