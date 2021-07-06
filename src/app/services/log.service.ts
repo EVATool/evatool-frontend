@@ -5,10 +5,13 @@ import {environment} from '../../environments/environment';
 Features:
 
 Keycloak
-- Frontend receives cors errors (when authenticated) [and 500 status when logged in and sending GET to /analyses]
+- Frontend receives cors errors in prod (when authenticated) [and 500 status when logged in and sending GET to /analyses]
   - Access prod with postman and see if same error happens
   - get rid of exceptions even if they dont cause errors in keycloak profile?
+- keycloak is not configured properly yet (redirecting not working and /h2-console is not reachable)
 - merge in main
+
+Test flyway in production
 
 Tasks aus Jira (UID)
 
@@ -17,7 +20,6 @@ git fetch causes permission error in deploy GitHub Actions
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
 Redirect to home from login component when auth is disabled?
-keycloak is not configured properly yet (redirecting not working and /h2-console is not reachable)
 Make UI work in firefix/Chrome
 How to make default realm export file reuseable to create a new standard realm (or even n realms) with a set name
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
