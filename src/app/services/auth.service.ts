@@ -46,6 +46,10 @@ export class AuthService extends RestService {
       '&username=' + username +
       '&password=' + password;
 
+    if (tenant === '') {
+      tenant = 'evatool-realm';
+    }
+
     this.http.post(this.getAuthUrl(tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       this.tenant = tenant;
       this.username = username;
