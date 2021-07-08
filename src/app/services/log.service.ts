@@ -6,6 +6,8 @@ Features:
 
 Keycloak
 - Frontend receives cors errors in prod (when authenticated) [and 500 status when logged in and sending GET to /analyses]
+  - Use docker container as address?
+  - Add auth network?
 - keycloak is not configured properly yet (redirecting not working and /h2-console is not reachable)
 - merge in main
 
