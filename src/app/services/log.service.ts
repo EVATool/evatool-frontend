@@ -6,8 +6,6 @@ Features:
 
 Keycloak
 - Frontend receives cors errors in prod (when authenticated) [and 500 status when logged in and sending GET to /analyses]
-  - Access prod with postman and see if same error happens
-  - get rid of exceptions even if they dont cause errors in keycloak profile?
 - keycloak is not configured properly yet (redirecting not working and /h2-console is not reachable)
 - merge in main
 
