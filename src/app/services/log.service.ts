@@ -5,13 +5,14 @@ import {environment} from '../../environments/environment';
 Features:
 
 Keycloak
-- Frontend receives cors errors in prod (when authenticated) [and 500 status when logged in and sending GET to /analyses]
-  - Use docker container as address?
+- Prod
+  - Use docker container as address (now errors are gone! Good! But login causes 401)
   - Add auth network?
-- keycloak is not configured properly yet (redirecting not working and /h2-console is not reachable)
 - merge in main
 
 Test flyway in production
+
+Standalone flag for public version? Uses can register and have their own realm
 
 Tasks aus Jira (UID)
 
@@ -21,6 +22,7 @@ Localization (Use values from jsons everywhere, translate them, change lang in f
 Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
 Redirect to home from login component when auth is disabled?
 Make UI work in firefix/Chrome
+keycloak is not configured properly yet (loging redirecting not working, /h2-console and /swagger are not reachable)
 How to make default realm export file reuseable to create a new standard realm (or even n realms) with a set name
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)
