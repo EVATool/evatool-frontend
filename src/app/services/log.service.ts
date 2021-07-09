@@ -4,15 +4,9 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Keycloak
-- Prod
-  - Use docker container as address (now errors are gone! Good! But login causes 401)
-  - Add auth network?
-- merge in main
+Keycloak prod: Test with auth disabled and merge in main
 
 Test flyway in production
-
-Standalone flag for public version? Uses can register and have their own realm
 
 Tasks aus Jira (UID)
 
@@ -20,9 +14,13 @@ Backlog:
 git fetch causes permission error in deploy GitHub Actions
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
+Standalone flag for public version? Uses can register and have their own realm
 Redirect to home from login component when auth is disabled?
 Make UI work in firefix/Chrome
 keycloak is not configured properly yet (loging redirecting not working, /h2-console and /swagger are not reachable)
+keycloak docker container can auth from frontend, but access from backend to keycloak container always causes 401
+keycloak login on non-existent realm causes CORS error, only in prod?) [snackBar at bottom, status 0]
+keycloak: add auth network
 How to make default realm export file reuseable to create a new standard realm (or even n realms) with a set name
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)
