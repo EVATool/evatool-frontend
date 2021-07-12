@@ -19,6 +19,7 @@ Catch 404 in login form when realm does not exist (why does 404 not appear in fr
 Standalone flag for public version? Uses can register and have their own realm
 Redirect to home from login component when auth is disabled?
 Make UI work in firefix/Chrome
+keycloak https required on real server
 keycloak is not configured properly yet (loging redirecting not working, /h2-console and /swagger are not reachable)
 keycloak docker container can auth from frontend, but access from backend to keycloak container always causes 401 in prod
 keycloak login on non-existent realm causes CORS error, only in prod?) [snackBar at bottom, status 0]
