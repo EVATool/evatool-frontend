@@ -4,11 +4,7 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Keycloak prod: Test with auth disabled and merge in main (test with other than localhost AUTH_ADDR)
-
 Test flyway in production
-
-docker compose file comment with explanations
 
 Tasks aus Jira (UID)
 
@@ -27,6 +23,7 @@ keycloak How to make default realm export file reuseable to create a new standar
 keycloak Test changing users of default realm and restarting docker-compose. Does re-import overwrite changes?
 docker: rework networks (add auth network?) networks only required for inter-container communication
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
+docker compose file comment with explanations
 Better 404 page (information about what might have been misinputted)
 How to deal with http status code 0? Ignore it? and hide the snackbar when the status is 0 (only in prod)?
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
