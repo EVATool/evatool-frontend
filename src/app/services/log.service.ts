@@ -4,8 +4,8 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Test flyway in production
-
+better documentation in repos for how to start aux docker containers.
+add mock-prod profile to front and backend
 Tasks aus Jira (UID)
 
 Backlog:
