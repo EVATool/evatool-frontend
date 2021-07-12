@@ -4,9 +4,11 @@ import {environment} from '../../environments/environment';
 /*
 Features:
 
-Keycloak prod: Test with auth disabled and merge in main
+Keycloak prod: Test with auth disabled and merge in main (test with other than localhost AUTH_ADDR)
 
 Test flyway in production
+
+docker compose file comment with explanations
 
 Tasks aus Jira (UID)
 
@@ -18,10 +20,11 @@ Standalone flag for public version? Uses can register and have their own realm
 Redirect to home from login component when auth is disabled?
 Make UI work in firefix/Chrome
 keycloak is not configured properly yet (loging redirecting not working, /h2-console and /swagger are not reachable)
-keycloak docker container can auth from frontend, but access from backend to keycloak container always causes 401
+keycloak docker container can auth from frontend, but access from backend to keycloak container always causes 401 in prod
 keycloak login on non-existent realm causes CORS error, only in prod?) [snackBar at bottom, status 0]
-keycloak: add auth network
-How to make default realm export file reuseable to create a new standard realm (or even n realms) with a set name
+keycloak How to make default realm export file reuseable to create a new standard realm (or even n realms) with a set name
+keycloak Test changing users of default realm and restarting docker-compose. Does re-import overwrite changes?
+docker: rework networks (add auth network?) networks only required for inter-container communication
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 Better 404 page (information about what might have been misinputted)
 How to deal with http status code 0? Ignore it? and hide the snackbar when the status is 0 (only in prod)?
