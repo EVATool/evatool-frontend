@@ -3,7 +3,15 @@ import {environment} from '../../environments/environment';
 
 /*
 TODO:
-Delete requirement button in req table is in the middle??
+EvaTool Jira
+
+Sample Data (Import/Export) Use own json format for backend rest calls (import + export)
+Standalone version with user registration (create new realm, with user and password etc...)
+
+Delete requirement button in req table is in the middle?
+Stakeholder prio filter UI too many elements (not cleared?)
+Make UI work in firefix/Chrome
+keycloak docker container can auth from frontend, but access from backend to keycloak container always causes 401 in prod
 Tasks aus Jira (UID) [remove duplicates, ]
 
 better documentation in repos for how to start aux docker containers
@@ -17,15 +25,12 @@ docker: rework networks (add auth network?) networks only required for inter-con
 Only purge data script (ONLY database with main data, DELETE FROM ANALYSIS)
 All Tables: How to deal with filter when adding new row? Remove filter? Display message if new row is hidden by filter? scroll to new row? Flash new row?
 How to deal with http status code 0? Ignore it? and hide the snackbar when the status is 0 (only in prod)?
-Sample Data (API calls to backend, separate from deployment!) -> [Create export Postman(??) script from UI inserted stuff] Postman script should not be used, use own json format for backend rest calls (import + export)
 Filtering: And/Or, what is the default filtering? (how does this apply to deltas?)
 
 BACKLOG:
 Localization (Use values from jsons everywhere, translate them, change lang in frontend [localStorage] and overwrite the useDefaultOverBrowserLang option) [languageService, saves all available languages for selection, use it in selection and AppComponent]
 Catch 404 in login form when realm does not exist (why does 404 not appear in frontend but in postman?)
-Make UI work in firefix/Chrome
 keycloak is not configured properly yet (loging redirecting not working, /h2-console and /swagger are not reachable)
-keycloak docker container can auth from frontend, but access from backend to keycloak container always causes 401 in prod
 keycloak login on non-existent realm causes CORS error, only in prod?) [snackBar at bottom, status 0]
 keycloak How to make default realm export file reuseable to create a new standard realm (or even n realms) with a set name
 keycloak Test changing users of default realm and restarting docker-compose. Does re-import overwrite changes?
