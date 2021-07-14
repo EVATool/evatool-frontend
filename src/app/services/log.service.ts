@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 
 /*
 TODO:
+Delete requirement button in req table is in the middle??
 Tasks aus Jira (UID) [remove duplicates, ]
 
 better documentation in repos for how to start aux docker containers
