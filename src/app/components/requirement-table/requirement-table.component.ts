@@ -142,7 +142,6 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
       }
     });
 
-    console.log(displayedColumns);
     this.displayedColumns = displayedColumns;
   }
 
@@ -239,7 +238,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
     if (requirement.highlighted) {
       requirement.highlighted = requirement.variants.includes(this.deletionFlaggedVariant);
     }
-    console.log(requirement.variants.length);
+
     this.requirementDataService.updateRequirement(requirement);
   }
 
@@ -249,7 +248,15 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
   }
 
   getVariantNamesOfRequirement(requirement: Requirement): string {
-    return requirement.variants.map(v => v.name).join(', ');
+    // TODO this shows a requirement to have twice the actual variants.
+    const uniqueVariants: Variant[] = [];
+    for (const variant of requirement.variants) {
+      if (!uniqueVariants.includes(variant)) {
+        uniqueVariants.push(variant);
+      }
+    }
+    //return requirement.variants.map(v => v.name).join(', ');
+    return uniqueVariants.map(v => v.name).join(', ');
   }
 
   createRequirementDelta(delta: RequirementDelta): void {
