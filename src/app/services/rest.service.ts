@@ -49,8 +49,8 @@ export abstract class RestService {
   public readonly stakeholderPriorityUrl = this.backendUrl + 'stakeholders/priorities';
   public readonly stakeholderLevelsUrl = this.backendUrl + 'stakeholders/levels';
 
-  public readonly importAnalysesUrl = this.backendUrl + '/import/analyses';
-  public readonly exportAnalysesUrl = this.backendUrl + '/export/analyses';
+  public readonly importAnalysesUrl = this.backendUrl + 'import/analyses';
+  public readonly exportAnalysesUrl = this.backendUrl + 'export/analyses';
 
   public readonly byId = '?id=';
   public readonly byAnalysisId = '?analysisId=';

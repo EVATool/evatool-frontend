@@ -44,6 +44,14 @@ export class HomeComponent implements OnInit {
       this.updateData(this.analysisData.analyses);
     });
 
+    this.analysisData.exportedAnalysis.subscribe((exportedAnalyses: string) => {
+      console.log(exportedAnalyses);
+      // TODO save file dialog (no filename in backend required?) Does it happen automatically?
+
+
+      this.inSelectionMode = false;
+    });
+
     this.crossUI.initComplete.subscribe(() => {
       this.analysisData.loadAnalyses();
     });
@@ -145,13 +153,9 @@ export class HomeComponent implements OnInit {
 
     if (exportAnalyses.length === 0) {
       this.snackbar.open('At least one analysis must be selected.', '', {duration: 5000});
+      return;
     }
 
-    // TODO save file dialog (no filename in backend required?) Does it happen automatically?
-
-    // TODO rest call
-
-
-    this.inSelectionMode = false; // TODO only call this on successful execution.
+    this.analysisData.exportAnalyses(exportAnalyses.map(a => a.id), 'test');
   }
 }

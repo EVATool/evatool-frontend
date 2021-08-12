@@ -5,6 +5,7 @@ import {Analysis} from '../../model/Analysis';
 import {AnalysisRestService} from '../rest/analysis-rest.service';
 import {AnalysisMapperService} from '../mapper/analysis-mapper.service';
 import {AnalysisDto} from '../../dto/AnalysisDto';
+import {ImportExportRestService} from '../rest/import-export-rest.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,15 @@ export class AnalysisDataService extends DataService {
   @Output() createdAnalysis: EventEmitter<Analysis> = new EventEmitter();
   @Output() updatedAnalysis: EventEmitter<Analysis> = new EventEmitter();
   @Output() deletedAnalysis: EventEmitter<Analysis> = new EventEmitter();
+  @Output() exportedAnalysis: EventEmitter<string> = new EventEmitter();
 
   analyses: Analysis[] = [];
   currentAnalysis!: Analysis;
 
   constructor(protected logger: LogService,
               private analysisRest: AnalysisRestService,
-              private analysisMapper: AnalysisMapperService) {
+              private analysisMapper: AnalysisMapperService,
+              private importExportRest: ImportExportRestService) {
     super(logger);
   }
 
@@ -94,12 +97,14 @@ export class AnalysisDataService extends DataService {
     return analysis;
   }
 
-  // TODO consider moving these import/export functions into a seprate import-export-data-service.
+  // TODO consider moving these import/export functions into a separate import-export-data-service.
   importAnalyses(): void {
 
   }
 
-  exportAnalyses(): void {
-
+  exportAnalyses(analysisIds: string[], filename: string): void {
+    this.importExportRest.exportAnalyses(analysisIds, filename).subscribe((exportAnalyses: string) => {
+      this.exportedAnalysis.emit(exportAnalyses);
+    });
   }
 }
