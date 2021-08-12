@@ -11,4 +11,5 @@ export class Analysis {
 
   // UI
   deletionFlagged = false;
+  selected = false;
 }

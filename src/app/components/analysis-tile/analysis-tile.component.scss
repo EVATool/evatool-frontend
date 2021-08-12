@@ -113,3 +113,11 @@
     opacity: 1;
   }
 }
+
+.selection-checkbox{
+  position: fixed;
+  top: 40%;
+  left: 48%;
+  transform: scale(5);
+  pointer-events: none; // Clicking is done through the tile.
+}

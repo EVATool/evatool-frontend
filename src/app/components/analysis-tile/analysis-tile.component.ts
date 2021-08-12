@@ -16,6 +16,7 @@ import {AnalysisDeletionFailedEvent, CrossUiEventService} from '../../services/c
 })
 export class AnalysisTileComponent implements OnInit {
   @Input() analysis!: Analysis;
+  @Input() inSelectionMode!: boolean;
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
@@ -53,6 +54,10 @@ export class AnalysisTileComponent implements OnInit {
   }
 
   openAnalysis(analysis: Analysis): void {
-    this.router.navigate([ROUTES.analysis, analysis.id]);
+    if (this.inSelectionMode) {
+      this.analysis.selected = !this.analysis.selected;
+    } else {
+      this.router.navigate([ROUTES.analysis, analysis.id]);
+    }
   }
 }

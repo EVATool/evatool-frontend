@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   showTemplates = true;
   sortByIsTemplateAsc = true;
   sortByLastEditedAsc = true;
+  inSelectionMode = false;
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
@@ -91,5 +92,15 @@ export class HomeComponent implements OnInit {
       width: '40%',
       data: {analysis: analysis}
     });
+  }
+
+  importAnalyses(): void {
+
+  }
+
+  exportAnalyses(): void {
+    this.inSelectionMode = !this.inSelectionMode;
+
+
   }
 }

@@ -47,6 +47,21 @@
       margin-right: 15px;
     }
   }
+
+  .analysis-import-export-container {
+    margin-top: 30px;
+
+    .import-analyses-button {
+      width: 100px;
+      height: 50px;
+    }
+
+    .export-analyses-button {
+      width: 100px;
+      height: 50px;
+      margin-left: 20px;
+    }
+  }
 }
 
 .analyses-tiles-container {

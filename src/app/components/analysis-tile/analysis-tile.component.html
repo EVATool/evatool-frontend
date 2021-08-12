@@ -30,4 +30,9 @@
     sticky_note_2
   </mat-icon>
 
+  <mat-checkbox *ngIf="inSelectionMode"
+                class="selection-checkbox"
+                [(ngModel)]="analysis.selected">
+  </mat-checkbox>
+
 </div>

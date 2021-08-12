@@ -67,7 +67,16 @@
     </div>
 
     <!-- TODO export import controls! (make checkbox appear on tiles when choosing to export) -->
-
+    <div fxLayout="row" class="analysis-import-export-container">
+      <button mat-raised-button
+              class="import-analyses-button"
+              (click)="importAnalyses()">Import
+      </button>
+      <button mat-raised-button
+              class="export-analyses-button"
+              (click)="exportAnalyses()">Export
+      </button>
+    </div>
   </div>
 
   <div class="analyses-tiles-container">
@@ -77,7 +86,7 @@
         <div *ngFor="let analysis of analyses;">
           <div
             *ngIf="analysis.name.toLowerCase().includes(analysisNameFilter.toLowerCase()) && ((analysis.isTemplate === showTemplates && !analysis.isTemplate === showAnalyses) || ( showAnalyses && showTemplates))">
-            <app-analysis-tile [analysis]="analysis"></app-analysis-tile>
+            <app-analysis-tile [analysis]="analysis" [inSelectionMode]="inSelectionMode"></app-analysis-tile>
           </div>
         </div>
       </div>
