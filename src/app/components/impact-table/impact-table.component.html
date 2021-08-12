@@ -23,7 +23,7 @@
           <mat-list class="list-horizontal">
             <mat-list-item>
               <app-stakeholder-level [showDescription]="false" [editable]="false"
-                                      [level]="impact.stakeholder.level"></app-stakeholder-level>
+                                     [level]="impact.stakeholder.level"></app-stakeholder-level>
             </mat-list-item>
             <mat-list-item>
               <mat-form-field>
@@ -46,7 +46,9 @@
           <div matTooltip="The affected value">
             Value
           </div>
-          <mat-icon id="value-modal" (click)="$event.stopPropagation(); openValuesDialog();">info
+          <mat-icon id="value-modal"
+                    (click)="$event.stopPropagation(); openValuesDialog();"
+                    [matTooltip]="'Edit the available values'">edit
           </mat-icon>
         </th>
 
@@ -101,15 +103,15 @@
           <div class="delete-button-wrapper">
             <div class="description-container">
               <app-highlight-textarea [(text)]="impact.description"
-                                 (textChange)="updateImpact(impact)"
-                                 [highlightFilter]="highlightFilter"
-                                 [placeholder]="'Describe the impact...'"></app-highlight-textarea>
+                                      (textChange)="updateImpact(impact)"
+                                      [highlightFilter]="highlightFilter"
+                                      [placeholder]="'Describe the impact...'"></app-highlight-textarea>
             </div>
             <div class="delete-button-container">
               <button mat-icon-button
                       matTooltip="Delete Impact"
                       [disabled]="impact.deletionFlagged"
-                      (click)="deleteImpact(impact)" >
+                      (click)="deleteImpact(impact)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
