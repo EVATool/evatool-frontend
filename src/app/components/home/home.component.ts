@@ -7,6 +7,7 @@ import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.component';
 import {CrossUiEventService} from '../../services/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { saveAs } from 'file-saver/FileSaver';
 
 @Component({
   selector: 'app-home',
@@ -47,7 +48,8 @@ export class HomeComponent implements OnInit {
     this.analysisData.exportedAnalysis.subscribe((exportedAnalyses: string) => {
       console.log(exportedAnalyses);
       // TODO save file dialog (no filename in backend required?) Does it happen automatically?
-
+      const blob = new Blob(['Hello, World!']);
+      saveAs(blob, 'out.txt');
 
       this.inSelectionMode = false;
     });
