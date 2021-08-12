@@ -17,10 +17,10 @@ export class ImportExportRestService extends RestService {
     super(logger, http, sampleData);
   }
 
-  importAnalyses(importAnalyses: string): Observable<void> {
+  importAnalyses(importAnalyses: string): Observable<AnalysisDto[]> {
     const url = this.importAnalysesUrl;
     this.logger.info(this, 'Http post to: ' + url);
-    return this.http.post<void>(url, importAnalyses, this.httpOptions);
+    return this.http.post<AnalysisDto[]>(url, importAnalyses, this.httpOptions);
   }
 
   exportAnalyses(analysisIds: string[], filename: string): Observable<object> {

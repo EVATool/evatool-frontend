@@ -98,9 +98,12 @@ export class AnalysisDataService extends DataService {
   }
 
   importAnalyses(importAnalyses: string): void {
-    this.importExportRest.importAnalyses(importAnalyses).subscribe(() => {
+    this.importExportRest.importAnalyses(importAnalyses).subscribe((importedAnalysisDtoList: AnalysisDto[]) => {
       // TODO backend should return list of DTOs
-
+      for (const importedAnalysisDto of importedAnalysisDtoList) {
+        const importedAnalysis = this.analysisMapper.fromDto(importedAnalysisDto);
+        this.analyses.push(importedAnalysis);
+      }
     });
   }
 
