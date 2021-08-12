@@ -96,17 +96,24 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  openImportDialog(target: any): void {
+    const files = target.files;
+    document.getElementById('select-file')?.click();
+    if (files?.length > 0) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const contents = reader.result as string;
+        console.log(contents);
+      };
+      reader.readAsText(files[0]);
+    }
+  }
+
   importAnalyses(): void {
     // TODO open file dialog
-    document.getElementById('select-file')?.click();
 
 
     // TODO rest call
-  }
-
-  selectImportFileChange(file: any): void {
-    console.log(file.files);
-    console.log(document.getElementById('select-file')?.getAttribute('value'));
   }
 
   exportAnalyses(): void {

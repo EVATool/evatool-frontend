@@ -70,7 +70,7 @@
       <button mat-raised-button
               class="import-analyses-button"
               matTooltip="Import analyses from a file"
-              (click)="importAnalyses()">Import
+              (click)="openImportDialog($event.target)">Import
       </button>
       <button mat-raised-button
               class="export-analyses-button"
@@ -97,7 +97,7 @@
                type="file"
                style="display: none"
                accept=".json,.txt"
-               (change)="selectImportFileChange($event.target)"/>
+               (change)="openImportDialog($event.target)"/>
       </div>
     </div>
   </div>
