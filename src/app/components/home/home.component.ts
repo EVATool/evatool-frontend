@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {Router} from '@angular/router';
@@ -115,6 +115,11 @@ export class HomeComponent implements OnInit {
     }
 
     this.inSelectionMode = !this.inSelectionMode;
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onKeydownHandler(event: KeyboardEvent): void {
+    this.abortExport();
   }
 
   abortExport(): void {
