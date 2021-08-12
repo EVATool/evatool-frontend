@@ -46,9 +46,8 @@ export class HomeComponent implements OnInit {
     });
 
     this.analysisData.exportedAnalysis.subscribe((exportAnalyses: object) => {
-      //console.log(exportAnalyses);
       const blob = new Blob([JSON.stringify(exportAnalyses)]);
-      saveAs(blob, 'Analysis-Export.json');
+      saveAs(blob, 'Analysis-Export.json'); // TODO the json is prettified, but its all one line in the file.
       this.inSelectionMode = false;
     });
 
