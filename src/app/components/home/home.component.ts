@@ -45,11 +45,11 @@ export class HomeComponent implements OnInit {
       this.updateData(this.analysisData.analyses);
     });
 
-    this.analysisData.exportedAnalysis.subscribe((exportedAnalyses: string) => {
+    this.analysisData.exportedAnalysis.subscribe((exportedAnalyses: any) => {
       console.log(exportedAnalyses);
       // TODO save file dialog (no filename in backend required?) Does it happen automatically?
-      const blob = new Blob(['Hello, World!']);
-      saveAs(blob, 'out.txt');
+      const blob = new Blob([exportedAnalyses.toString()]);
+      saveAs(blob, 'Analysis-Export.json');
 
       this.inSelectionMode = false;
     });
