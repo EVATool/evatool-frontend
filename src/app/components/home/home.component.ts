@@ -106,6 +106,7 @@ export class HomeComponent implements OnInit {
 
   selectImportFileChange(file: any): void {
     console.log(file.files);
+    console.log(document.getElementById('select-file')?.getAttribute('value'));
   }
 
   exportAnalyses(): void {
@@ -132,8 +133,8 @@ export class HomeComponent implements OnInit {
       this.snackbar.open('At least one analysis must be selected.', '', {duration: 5000});
     }
 
-    // TODO rest call
     // TODO save file dialog (no filename in backend required?)
+    // TODO rest call
 
     this.inSelectionMode = false; // TODO only call this on successful execution.
   }
