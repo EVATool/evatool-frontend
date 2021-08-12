@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
 
   exportAnalyses(): void {
     for (const analysis of this.analysisData.analyses) {
-      analysis.selection = false;
+      analysis.selected = false;
     }
 
     this.inSelectionMode = !this.inSelectionMode;
