@@ -102,18 +102,20 @@ export class HomeComponent implements OnInit {
     if (files?.length > 0) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        const contents = reader.result as string;
-        console.log(contents);
+        const importString = reader.result as string;
+        console.log(importString);
+        this.importAnalyses(importString);
       };
       reader.readAsText(files[0]);
     }
   }
 
-  importAnalyses(): void {
-    // TODO open file dialog
-
+  importAnalyses(importString: string): void {
 
     // TODO rest call
+
+    // TODO backend should return list of DTOs
+
   }
 
   exportAnalyses(): void {
@@ -145,7 +147,8 @@ export class HomeComponent implements OnInit {
       this.snackbar.open('At least one analysis must be selected.', '', {duration: 5000});
     }
 
-    // TODO save file dialog (no filename in backend required?)
+    // TODO save file dialog (no filename in backend required?) Does it happen automatically?
+
     // TODO rest call
 
     this.inSelectionMode = false; // TODO only call this on successful execution.
