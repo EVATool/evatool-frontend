@@ -61,6 +61,20 @@
       height: 50px;
       margin-left: 20px;
     }
+
+    .analysis-export-sub-actions {
+      position: fixed;
+      left: 260px;
+      margin-top: -15px;
+
+      .export-abort-button {
+
+      }
+
+      .export-commit-button {
+
+      }
+    }
   }
 }
 

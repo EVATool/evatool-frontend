@@ -70,12 +70,31 @@
     <div fxLayout="row" class="analysis-import-export-container">
       <button mat-raised-button
               class="import-analyses-button"
+              matTooltip="Import analyses from a file"
               (click)="importAnalyses()">Import
       </button>
       <button mat-raised-button
               class="export-analyses-button"
+              matTooltip="Export analyses to a file"
               (click)="exportAnalyses()">Export
       </button>
+
+      <div *ngIf="inSelectionMode"
+           fxLayout="column"
+           class="analysis-export-sub-actions">
+        <button mat-icon-button
+                class="export-abort-button"
+                matTooltip="Abort"
+                (click)="abortExport()">
+          <mat-icon>cancel</mat-icon>
+        </button>
+        <button mat-icon-button
+                class="export-commit-button"
+                matTooltip="Export"
+                (click)="commitExport()">
+          <mat-icon>done</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 

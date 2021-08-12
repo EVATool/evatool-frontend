@@ -53,10 +53,10 @@ export class AnalysisTileComponent implements OnInit {
     });
   }
 
-  openAnalysis(analysis: Analysis): void {
+  clickAnalysisTile(analysis: Analysis): void {
     if (this.inSelectionMode) {
       this.analysis.selected = !this.analysis.selected;
-    } else {
+    } else { // Open analysis.
       this.router.navigate([ROUTES.analysis, analysis.id]);
     }
   }

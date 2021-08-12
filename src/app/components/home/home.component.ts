@@ -99,8 +99,18 @@ export class HomeComponent implements OnInit {
   }
 
   exportAnalyses(): void {
-    this.inSelectionMode = !this.inSelectionMode;
+    for (const analysis of this.analysisData.analyses) {
+      analysis.selection = false;
+    }
 
+    this.inSelectionMode = !this.inSelectionMode;
+  }
+
+  abortExport(): void {
+
+  }
+
+  commitExport(): void {
 
   }
 }
