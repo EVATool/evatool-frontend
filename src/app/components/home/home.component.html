@@ -93,6 +93,11 @@
                 (click)="commitExport()">
           <mat-icon>done</mat-icon>
         </button>
+        <input id="select-file"
+               type="file"
+               style="display: none"
+               accept=".json,.txt"
+               (change)="selectImportFileChange($event.target)"/>
       </div>
     </div>
   </div>

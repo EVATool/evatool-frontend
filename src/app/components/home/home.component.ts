@@ -98,10 +98,14 @@ export class HomeComponent implements OnInit {
 
   importAnalyses(): void {
     // TODO open file dialog
-
+    document.getElementById('select-file')?.click();
 
 
     // TODO rest call
+  }
+
+  selectImportFileChange(file: any): void {
+    console.log(file.files);
   }
 
   exportAnalyses(): void {
