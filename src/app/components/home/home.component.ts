@@ -46,8 +46,10 @@ export class HomeComponent implements OnInit {
     });
 
     this.analysisData.exportedAnalysis.subscribe((exportAnalyses: object) => {
-      const blob = new Blob([JSON.stringify(exportAnalyses)]);
-      saveAs(blob, 'Analysis-Export.json'); // TODO the json is prettified on the server, but its all one line in the file.
+      // TODO the json is prettified on the server, but its all one line in the file.
+      //  This is work-around in the next line, but should not be necessary, because it is already done on the backend (angular object loses that information).
+      const blob = new Blob([JSON.stringify(exportAnalyses, null, 4)]);
+      saveAs(blob, 'Analysis-Export.json');
       this.inSelectionMode = false;
     });
 
