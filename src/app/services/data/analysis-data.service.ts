@@ -93,4 +93,13 @@ export class AnalysisDataService extends DataService {
 
     return analysis;
   }
+
+  // TODO consider moving these import/export functions into a seprate import-export-data-service.
+  importAnalyses(): void {
+
+  }
+
+  exportAnalyses(): void {
+
+  }
 }

@@ -151,6 +151,7 @@ export class HomeComponent implements OnInit {
 
     // TODO rest call
 
+
     this.inSelectionMode = false; // TODO only call this on successful execution.
   }
 }
