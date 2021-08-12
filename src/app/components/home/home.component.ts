@@ -125,11 +125,15 @@ export class HomeComponent implements OnInit {
   }
 
   exportAnalyses(): void {
-    for (const analysis of this.analysisData.analyses) {
-      analysis.selected = false;
-    }
+    if (this.inSelectionMode) {
+      this.commitExport();
+    } else {
+      for (const analysis of this.analysisData.analyses) {
+        analysis.selected = false;
+      }
 
-    this.inSelectionMode = !this.inSelectionMode;
+      this.inSelectionMode = !this.inSelectionMode;
+    }
   }
 
   @HostListener('document:keydown.escape', ['$event'])

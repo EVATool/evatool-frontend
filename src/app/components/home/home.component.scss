@@ -62,17 +62,18 @@
       margin-left: 20px;
     }
 
+    .click-again-to-confirm {
+      color: #fff;
+      background-color: #0074D9;
+    }
+
     .analysis-export-sub-actions {
       position: fixed;
       left: 260px;
-      margin-top: -15px;
 
       .export-abort-button {
-
-      }
-
-      .export-commit-button {
-
+        margin-top: 2px;
+        transform: scale(1.5);
       }
     }
   }

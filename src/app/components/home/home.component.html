@@ -74,6 +74,7 @@
       </button>
       <button mat-raised-button
               class="export-analyses-button"
+              [ngClass]="{'click-again-to-confirm' : inSelectionMode}"
               matTooltip="Export analyses to a file"
               (click)="exportAnalyses()">Export
       </button>
@@ -91,12 +92,6 @@
                 matTooltip="Abort"
                 (click)="abortExport()">
           <mat-icon>cancel</mat-icon>
-        </button>
-        <button mat-icon-button
-                class="export-commit-button"
-                matTooltip="Export"
-                (click)="commitExport()">
-          <mat-icon>done</mat-icon>
         </button>
       </div>
     </div>
