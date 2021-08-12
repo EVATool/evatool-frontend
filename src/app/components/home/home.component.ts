@@ -45,10 +45,9 @@ export class HomeComponent implements OnInit {
       this.updateData(this.analysisData.analyses);
     });
 
-    this.analysisData.exportedAnalysis.subscribe((data: Blob) => {
-      console.log(data);
-      console.log(data.type);
-      const blob = new Blob([data], {type: 'text/plain; charset=utf-8'});
+    this.analysisData.exportedAnalysis.subscribe((exportAnalyses: string) => {
+      console.log(JSON.stringify(exportAnalyses));
+      const blob = new Blob([JSON.stringify(exportAnalyses)]);
       saveAs(blob, 'Analysis-Export.json');
       this.inSelectionMode = false;
     });
