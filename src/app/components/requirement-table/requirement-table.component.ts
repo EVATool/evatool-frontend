@@ -21,7 +21,9 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {
   CrossUiEventService,
-  ImpactReferencedByRequirementsEvent, RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent,
+  ImpactReferencedByRequirementsEvent,
+  RequirementDeletionFailedEvent,
+  RequirementDeltaDeletionFailedEvent,
   VariantReferencedByRequirementsEvent
 } from '../../services/cross-ui-event.service';
 
@@ -135,10 +137,12 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.impacts.forEach((impact: Impact) => {
       if (!includeOnlyTheseImpacts || includeOnlyTheseImpacts.length === 0 || includeOnlyTheseImpacts.includes(impact.prefixSequenceId)) {
-        displayedColumns.push(impact.prefixSequenceId);
+        const index = displayedColumns.length - 2;
+        displayedColumns.splice(index, 0, impact.prefixSequenceId);
       }
     });
 
+    console.log(displayedColumns);
     this.displayedColumns = displayedColumns;
   }
 
@@ -235,6 +239,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
     if (requirement.highlighted) {
       requirement.highlighted = requirement.variants.includes(this.deletionFlaggedVariant);
     }
+    console.log(requirement.variants.length);
     this.requirementDataService.updateRequirement(requirement);
   }
 
