@@ -19,7 +19,7 @@ export class ImportExportRestService extends RestService {
 
   importAnalyses(importAnalyses: string): Observable<void> {
     const url = this.importAnalysesUrl;
-    this.logger.info(this, 'Http get to: ' + url);
+    this.logger.info(this, 'Http post to: ' + url);
     return this.http.post<void>(url, importAnalyses, this.httpOptions);
   }
 

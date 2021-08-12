@@ -97,8 +97,11 @@ export class AnalysisDataService extends DataService {
     return analysis;
   }
 
-  importAnalyses(): void {
+  importAnalyses(importAnalyses: string): void {
+    this.importExportRest.importAnalyses(importAnalyses).subscribe(() => {
+      // TODO backend should return list of DTOs
 
+    });
   }
 
   exportAnalyses(analysisIds: string[], filename: string): void {

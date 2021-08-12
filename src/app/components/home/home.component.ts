@@ -121,11 +121,7 @@ export class HomeComponent implements OnInit {
   }
 
   importAnalyses(importString: string): void {
-
-    // TODO rest call
-
-    // TODO backend should return list of DTOs
-
+    this.analysisData.importAnalyses(importString);
   }
 
   exportAnalyses(): void {
