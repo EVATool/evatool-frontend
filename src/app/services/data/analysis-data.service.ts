@@ -16,7 +16,7 @@ export class AnalysisDataService extends DataService {
   @Output() createdAnalysis: EventEmitter<Analysis> = new EventEmitter();
   @Output() updatedAnalysis: EventEmitter<Analysis> = new EventEmitter();
   @Output() deletedAnalysis: EventEmitter<Analysis> = new EventEmitter();
-  @Output() exportedAnalysis: EventEmitter<string> = new EventEmitter();
+  @Output() exportedAnalysis: EventEmitter<object> = new EventEmitter();
 
   analyses: Analysis[] = [];
   currentAnalysis!: Analysis;
@@ -102,7 +102,7 @@ export class AnalysisDataService extends DataService {
   }
 
   exportAnalyses(analysisIds: string[], filename: string): void {
-    this.importExportRest.exportAnalyses(analysisIds, filename).subscribe((exportAnalyses: string) => {
+    this.importExportRest.exportAnalyses(analysisIds, filename).subscribe((exportAnalyses: object) => {
       this.exportedAnalysis.emit(exportAnalyses);
     });
   }
