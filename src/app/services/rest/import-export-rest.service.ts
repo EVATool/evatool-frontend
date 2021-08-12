@@ -23,9 +23,9 @@ export class ImportExportRestService extends RestService {
     return this.http.post<void>(url, importAnalyses, this.httpOptions);
   }
 
-  exportAnalyses(analysisIds: string[], filename: string): Observable<string> { // TODO remove filename?
+  exportAnalyses(analysisIds: string[], filename: string): Observable<Blob> {
     const url = this.exportAnalysesUrl + this.analysisIds + analysisIds.join(',') + '&' + this.filename + filename;
     this.logger.info(this, 'Http get to: ' + url);
-    return this.http.get<string>(url, this.httpOptions);
+    return this.http.get<Blob>(url, this.httpOptions);
   }
 }

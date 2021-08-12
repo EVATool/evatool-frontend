@@ -45,12 +45,11 @@ export class HomeComponent implements OnInit {
       this.updateData(this.analysisData.analyses);
     });
 
-    this.analysisData.exportedAnalysis.subscribe((exportedAnalyses: any) => {
-      console.log(exportedAnalyses);
-      // TODO save file dialog (no filename in backend required?) Does it happen automatically?
-      const blob = new Blob([exportedAnalyses.toString()]);
+    this.analysisData.exportedAnalysis.subscribe((data: Blob) => {
+      console.log(data);
+      console.log(data.type);
+      const blob = new Blob([data], {type: 'text/plain; charset=utf-8'});
       saveAs(blob, 'Analysis-Export.json');
-
       this.inSelectionMode = false;
     });
 
@@ -158,6 +157,6 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    this.analysisData.exportAnalyses(exportAnalyses.map(a => a.id), 'not-used');
+    this.analysisData.exportAnalyses(exportAnalyses.map(a => a.id), 'Analysis-Export');
   }
 }

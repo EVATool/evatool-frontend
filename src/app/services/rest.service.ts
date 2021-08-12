@@ -55,7 +55,7 @@ export abstract class RestService {
   public readonly byId = '?id=';
   public readonly byAnalysisId = '?analysisId=';
   public readonly analysisIds = '?analysisIds=';
-  public readonly filename = '?filename=';
+  public readonly filename = 'filename=';
 
   protected getAuthUrl(authRealm: string): string {
     return environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
