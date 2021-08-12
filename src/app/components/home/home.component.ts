@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.component';
 import {CrossUiEventService} from '../../services/cross-ui-event.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +27,8 @@ export class HomeComponent implements OnInit {
               public analysisData: AnalysisDataService,
               private crossUI: CrossUiEventService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private snackbar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -95,7 +97,11 @@ export class HomeComponent implements OnInit {
   }
 
   importAnalyses(): void {
+    // TODO open file dialog
 
+
+
+    // TODO rest call
   }
 
   exportAnalyses(): void {
@@ -107,10 +113,24 @@ export class HomeComponent implements OnInit {
   }
 
   abortExport(): void {
-
+    this.inSelectionMode = false;
   }
 
   commitExport(): void {
+    const exportAnalyses = [];
+    for (const analysis of this.analysisData.analyses) {
+      if (analysis.selected) {
+        exportAnalyses.push(analysis);
+      }
+    }
 
+    if (exportAnalyses.length === 0) {
+      this.snackbar.open('At least one analysis must be selected.', '', {duration: 5000});
+    }
+
+    // TODO rest call
+    // TODO save file
+
+    this.inSelectionMode = false; // TODO only call this on successful execution.
   }
 }
