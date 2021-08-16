@@ -24,6 +24,11 @@
     .toggle-button-active {
       background-color: #0074D9;
     }
+
+    .toggle-button-label {
+      background-color: transparent;
+      pointer-events: none;
+    }
   }
 
   mat-form-field {

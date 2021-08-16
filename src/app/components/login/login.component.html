@@ -3,12 +3,13 @@
   <div fxLayout="row" class="form-toggle-container">
     <button mat-button
             class="toggle-button sign-in-toggle-button"
-            [ngClass]="{'toggle-button-active': formMode === 'login'}"
+            [ngClass]="{'toggle-button-active': formMode === 'login', 'toggle-button-label': !registrationEnabled}"
             (click)="formMode='login'">
       Sign in
     </button>
 
     <button mat-button
+            *ngIf="registrationEnabled"
             class="toggle-button sign-up-toggle-button"
             [ngClass]="{'toggle-button-active': formMode === 'registration'}"
             (click)="formMode='registration'">
