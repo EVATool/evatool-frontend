@@ -141,7 +141,6 @@ export class AuthService extends RestService {
       // Change realm name.
       // @ts-ignore
       let createRealmJson = Constants.realmJson.replaceAll('evatool-realm', username); // TODO Why does replaceAll have to be ts-ignored?
-      console.log(createRealmJson);
 
       // Change ids.
       createRealmJson = this.reassignIds(createRealmJson);
@@ -156,7 +155,6 @@ export class AuthService extends RestService {
       // Post realm and login after insert.
       this.http.post(this.realmUrl, createRealmJson, options).subscribe(() => {
         console.log('REALM REQ SUCCESS');
-        // TODO auto login is too fast. Delay a bit?
         this.login(username, username, password);
       });
     });
@@ -169,12 +167,10 @@ export class AuthService extends RestService {
 
       // Check if id is in line.
       if (line.toLowerCase().includes('id" : ')) {
-        console.log(line);
 
         // Retrieve id from line.
         // @ts-ignore
         const oldId = line.split(':')[1].trim().replaceAll('"', '').replaceAll(',', '');
-        console.log(oldId);
 
         // Check if id is UUID
         if (uuid.validate(oldId)) {

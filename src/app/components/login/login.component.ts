@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     } else {
       // TODO input validation (passwords are equal, ...)
 
-      this.authService.register(this.username, this.email, this.password);
+      this.authService.register(this.username, this.password, this.email);
     }
   }
 }
