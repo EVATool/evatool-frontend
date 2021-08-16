@@ -123,18 +123,20 @@ export class AuthService extends RestService {
   }
 
   // TODO add first and last name?
-  // TODO add validation to username to not break json when replacing.
+  // TODO add validation to username + email to not break json when replacing and enforce valid email.
+  // TODO check if username already exists + good error message
   registration(username: string, password: string, email: string): void {
-    const adminUsername = '';
-    const adminPassword = '';
+    const adminUsername = 'admin';
+    const adminPassword = 'admin';
     const authRequest = this.getLoginRequest(adminUsername, adminPassword);
 
     this.http.post(this.getAuthUrl('master'), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       const adminToken = authResponse.access_token;
-      // TODO send real json with modified realm name...
+      // TODO send realm json with modified realm name...
       const realmJson = ''.replace('evatool-realm', username);
 
       // TODO Create realm http request
+
 
 
     });

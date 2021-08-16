@@ -11,5 +11,7 @@ export const environment = {
   authEnabled: AUTH_ENABLED,
   // @ts-ignore
   authMultiTenancyEnabled: AUTH_MULTI_TENANCY_ENABLED,
-  authPort: 'AUTH_PORT'
+  authPort: 'AUTH_PORT',
+  // @ts-ignore
+  authRegistrationEnabled: AUTH_REGISTRATION_ENABLED
 };

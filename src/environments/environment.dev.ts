@@ -8,5 +8,6 @@ export const environment = {
   useDefaultOverBrowserLang: true,
   authEnabled: false,
   authMultiTenancyEnabled: false,
-  authPort: ''
+  authPort: '',
+  authRegistrationEnabled: false
 };

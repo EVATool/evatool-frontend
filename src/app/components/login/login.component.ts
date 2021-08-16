@@ -15,7 +15,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
 
+  // TODO add buttons to go from login to registration and vice versa
+
   tenantSelectionEnabled = environment.authMultiTenancyEnabled;
+  registrationEnabled = environment.authRegistrationEnabled;
 
   showPassword = false;
   tenant = '';

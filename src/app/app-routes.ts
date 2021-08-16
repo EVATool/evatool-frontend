@@ -2,7 +2,6 @@ export const ROUTES = {
   home: '',
   title: 'title',
   login: 'login',
-  registration: 'registration',
   forgotPassword: 'forgot-password',
   termsAndConditions: 'terms-and-conditions',
   timeOut: 'time-out',

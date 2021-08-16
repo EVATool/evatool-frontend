@@ -8,5 +8,6 @@ export const environment = { // This is the test environment.
   useDefaultOverBrowserLang: true,
   authEnabled: false,
   authMultiTenancyEnabled: false,
-  authPort: ''
+  authPort: '',
+  authRegistrationEnabled: false
 };
