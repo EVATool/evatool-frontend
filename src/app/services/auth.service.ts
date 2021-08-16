@@ -126,6 +126,7 @@ export class AuthService extends RestService {
   // TODO add first and last name?
   // TODO add validation to username + email to not break json when replacing and enforce valid email.
   // TODO check if username already exists + good error message (if realm already exists, keycloak returns 409).
+  // TODO reimporting with different realm name also causes 409, but it shouldnt.
   // TODO easy way for admin to add realm for customer if registration is disabled (when masked in backend, send email with credentials to email).
   register(username: string, password: string, email: string): void {
     const adminUsername = 'admin';

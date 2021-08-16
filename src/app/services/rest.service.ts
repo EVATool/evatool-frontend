@@ -57,9 +57,9 @@ export abstract class RestService {
   public readonly analysisIds = '?analysisIds=';
   public readonly filename = 'filename=';
 
+  protected realmUrl = environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/admin/realms';
+
   protected getAuthUrl(authRealm: string): string {
     return environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
   }
-
-  protected realmUrl = environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/admin/realms';
 }
