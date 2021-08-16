@@ -39,12 +39,17 @@ export class AuthService extends RestService {
     return this.token;
   }
 
-  login(tenant: string, username: string, password: string): void {
-    const authRequest = 'grant_type=password' +
+  getLoginRequest(username: string, password: string): string {
+    return 'grant_type=password' +
       '&scope=openid' +
       '&client_id=evatool-app' +
       '&username=' + username +
       '&password=' + password;
+
+  }
+
+  login(tenant: string, username: string, password: string): void {
+    const authRequest = this.getLoginRequest(username, password);
 
     if (tenant === '') {
       tenant = 'evatool-realm';
@@ -115,5 +120,23 @@ export class AuthService extends RestService {
     this.username = '';
     this.password = '';
     this.router.navigate([ROUTES.login]);
+  }
+
+  // TODO add first and last name?
+  // TODO add validation to username to not break json when replacing.
+  registration(username: string, password: string, email: string): void {
+    const adminUsername = '';
+    const adminPassword = '';
+    const authRequest = this.getLoginRequest(adminUsername, adminPassword);
+
+    this.http.post(this.getAuthUrl('master'), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
+      const adminToken = authResponse.access_token;
+      // TODO send real json with modified realm name...
+      const realmJson = ''.replace('evatool-realm', username);
+
+      // TODO Create realm http request
+
+
+    });
   }
 }

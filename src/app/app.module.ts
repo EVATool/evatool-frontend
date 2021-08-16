@@ -76,6 +76,7 @@ import { TitlePageComponent } from './components/title-page/title-page.component
 import { TimeOutComponent } from './components/time-out/time-out.component';
 import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -136,7 +137,8 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     TitlePageComponent,
     TimeOutComponent,
     TermsAndConditionsComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

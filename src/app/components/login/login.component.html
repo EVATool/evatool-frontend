@@ -18,7 +18,8 @@
   <div>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput [type]="showPassword ? 'text' : 'password'"
+      <input matInput
+             [type]="showPassword ? 'text' : 'password'"
              [(ngModel)]="password"
              (keydown.enter)="onSubmit()">
     </mat-form-field>
