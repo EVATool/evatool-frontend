@@ -9,5 +9,5 @@ export const environment = { // This is the test environment.
   authEnabled: false,
   authMultiTenancyEnabled: false,
   authPort: '',
-  authRegistrationEnabled: false
+  authRegistrationEnabled: false // TODO add to docker env vars
 };

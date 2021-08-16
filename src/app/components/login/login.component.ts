@@ -15,7 +15,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
 
-  tenantSelectionEnabled = environment.authMultiTenancyEnabled;
+  tenantSelectionEnabled = environment.authMultiTenancyEnabled && !environment.authRegistrationEnabled;
   registrationEnabled = environment.authRegistrationEnabled;
 
   formMode = 'login';

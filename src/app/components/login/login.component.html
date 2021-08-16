@@ -24,17 +24,17 @@
            (keydown.enter)="onSubmit()">
   </mat-form-field>
 
-  <mat-form-field *ngIf="formMode === 'registration'">
-    <mat-label>Email</mat-label>
-    <input matInput
-           [(ngModel)]="email"
-           (keydown.enter)="onSubmit()">
-  </mat-form-field>
-
   <mat-form-field>
     <mat-label>Username</mat-label>
     <input matInput
            [(ngModel)]="username"
+           (keydown.enter)="onSubmit()">
+  </mat-form-field>
+
+  <mat-form-field *ngIf="formMode === 'registration'">
+    <mat-label>Email</mat-label>
+    <input matInput
+           [(ngModel)]="email"
            (keydown.enter)="onSubmit()">
   </mat-form-field>
 
