@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {LogService} from './log.service';
 import {RestService} from './rest.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SampleDataService} from './sample-data.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../app-routes';
+import {Constants} from './rest/app-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -134,10 +135,23 @@ export class AuthService extends RestService {
 
     this.http.post(this.getAuthUrl('master'), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       const adminToken = authResponse.access_token;
-      // TODO send realm json with modified realm name...
-      const realmJson = ''.replace('evatool-realm', username);
+      // @ts-ignore
+      const createRealmJson = Constants.realmJson.replaceAll('evatool-realm', username); // TODO Why does replaceAll have to be ts-ignored?
 
       // TODO Create realm http request
+      console.log(createRealmJson);
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + adminToken
+      });
+      const options = {headers};
+
+      this.http.post(this.realmUrl, createRealmJson, options).subscribe(() => {
+
+        console.log('REALM REQ SUCCESS');
+
+      });
 
 
     });

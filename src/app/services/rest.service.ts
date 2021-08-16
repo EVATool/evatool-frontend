@@ -60,4 +60,6 @@ export abstract class RestService {
   protected getAuthUrl(authRealm: string): string {
     return environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
   }
+
+  protected realmUrl = environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/admin/realms';
 }

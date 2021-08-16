@@ -36,6 +36,6 @@ export class AuthInterceptorService implements HttpInterceptor {
   }
 
   isAuthUrl(url: string): boolean {
-    return url.includes('/auth/realms/');
+    return url.includes('/auth/');
   }
 }
