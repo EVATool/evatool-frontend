@@ -129,6 +129,7 @@ export class AuthService extends RestService {
   // TODO check if username already exists + good error message (if realm already exists, keycloak returns 409).
   // TODO reimporting with different realm name also causes 409, but it shouldnt.
   // TODO easy way for admin to add realm for customer if registration is disabled (when masked in backend, send email with credentials to email).
+  // TODO forgot password and activate account with link in email (email features)
   register(username: string, password: string, email: string): void {
     const adminUsername = 'admin';
     const adminPassword = 'admin';
@@ -152,9 +153,14 @@ export class AuthService extends RestService {
       });
       const options = {headers};
 
+      // TODO Remove users from json.
+
       // Post realm and login after insert.
       this.http.post(this.realmUrl, createRealmJson, options).subscribe(() => {
         console.log('REALM REQ SUCCESS');
+
+        // TODO after realm is created, create user with reader and writer roles that has the just inputted username, email and password.
+
         this.login(username, username, password);
       });
     });

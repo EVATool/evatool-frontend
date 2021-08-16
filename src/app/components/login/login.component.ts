@@ -82,12 +82,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.snackBar.open('Please enter a username', '', {duration: 5000});
       } else if (this.password === '') {
         this.snackBar.open('Please enter a password', '', {duration: 5000});
-      } else {
-        this.authService.login(this.tenant, this.username, this.password);
+      } else { // Inputs valid.
+        if (this.registrationEnabled) {
+          this.authService.login(this.username, this.username, this.password);
+        } else {
+          this.authService.login(this.tenant, this.username, this.password);
+        }
       }
     } else {
       // TODO input validation (passwords are equal, ...)
-
       this.authService.register(this.username, this.password, this.email);
     }
   }
