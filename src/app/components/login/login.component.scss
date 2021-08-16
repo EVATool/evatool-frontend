@@ -4,10 +4,10 @@
 
   .form-toggle-container {
     margin-bottom: 50px;
-    width: 100%;
+    width: calc(100% + 20px);
 
     .sign-in-toggle-button {
-
+      margin-left: -20px;
     }
 
     .sign-up-toggle-button {
