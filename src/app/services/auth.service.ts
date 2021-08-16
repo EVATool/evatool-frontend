@@ -39,10 +39,10 @@ export class AuthService extends RestService {
     return this.token;
   }
 
-  getLoginRequest(username: string, password: string): string {
+  getLoginRequest(username: string, password: string, clientId: string = 'evatool-app'): string {
     return 'grant_type=password' +
       '&scope=openid' +
-      '&client_id=evatool-app' +
+      '&client_id=' + clientId +
       '&username=' + username +
       '&password=' + password;
 
@@ -124,11 +124,13 @@ export class AuthService extends RestService {
 
   // TODO add first and last name?
   // TODO add validation to username + email to not break json when replacing and enforce valid email.
-  // TODO check if username already exists + good error message
+  // TODO check if username already exists + good error message.
+  // TODO easy way for admin to add realm for customer if registration is disabled.
   register(username: string, password: string, email: string): void {
     const adminUsername = 'admin';
     const adminPassword = 'admin';
-    const authRequest = this.getLoginRequest(adminUsername, adminPassword);
+    const adminClientId = 'admin-cli';
+    const authRequest = this.getLoginRequest(adminUsername, adminPassword, adminClientId);
 
     this.http.post(this.getAuthUrl('master'), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       const adminToken = authResponse.access_token;
@@ -136,7 +138,6 @@ export class AuthService extends RestService {
       const realmJson = ''.replace('evatool-realm', username);
 
       // TODO Create realm http request
-
 
 
     });
