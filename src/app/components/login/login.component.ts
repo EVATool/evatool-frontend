@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   tenantSelectionEnabled = environment.authMultiTenancyEnabled;
   registrationEnabled = environment.authRegistrationEnabled;
 
+  formMode = 'login';
+
   showPassword = false;
   tenant = '';
   username = '';

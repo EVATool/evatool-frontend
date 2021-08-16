@@ -1,6 +1,21 @@
 <div fxLayout="column" class="login-form-container">
 
-  <h2> Sign in </h2>
+  <div fxLayout="row" class="form-toggle-container">
+    <button mat-button
+            class="toggle-button sign-in-toggle-button"
+            [ngClass]="{'toggle-button-active': formMode === 'login'}"
+            (click)="formMode='login'">
+      Sign in
+    </button>
+
+    <button mat-button
+            class="toggle-button sign-up-toggle-button"
+            [ngClass]="{'toggle-button-active': formMode === 'registration'}"
+            (click)="formMode='registration'">
+      Sign up
+    </button>
+  </div>
+
   <mat-form-field *ngIf="tenantSelectionEnabled">
     <mat-label>Tenant</mat-label>
     <input matInput

@@ -2,8 +2,28 @@
 
   margin: 150px 40% 0 40%;
 
-  h2 {
-    margin-bottom: 60px;
+  .form-toggle-container {
+    margin-bottom: 50px;
+    width: 100%;
+
+    .sign-in-toggle-button {
+
+    }
+
+    .sign-up-toggle-button {
+      margin-left: auto;
+    }
+
+    .toggle-button {
+      background-color: #7f7f7f;
+      width: 100px;
+      height: 50px;
+      font-size: 150%;
+    }
+
+    .toggle-button-active {
+      background-color: #0074D9;
+    }
   }
 
   mat-form-field {
