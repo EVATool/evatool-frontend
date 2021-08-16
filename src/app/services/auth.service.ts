@@ -125,8 +125,8 @@ export class AuthService extends RestService {
 
   // TODO add first and last name?
   // TODO add validation to username + email to not break json when replacing and enforce valid email.
-  // TODO check if username already exists + good error message.
-  // TODO easy way for admin to add realm for customer if registration is disabled.
+  // TODO check if username already exists + good error message (if realm already exists, keycloak returns 409).
+  // TODO easy way for admin to add realm for customer if registration is disabled (when masked in backend, send email with credentials to email).
   register(username: string, password: string, email: string): void {
     const adminUsername = 'admin';
     const adminPassword = 'admin';
@@ -138,9 +138,6 @@ export class AuthService extends RestService {
       // @ts-ignore
       const createRealmJson = Constants.realmJson.replaceAll('evatool-realm', username); // TODO Why does replaceAll have to be ts-ignored?
 
-      // TODO Create realm http request
-      console.log(createRealmJson);
-
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + adminToken
@@ -148,12 +145,10 @@ export class AuthService extends RestService {
       const options = {headers};
 
       this.http.post(this.realmUrl, createRealmJson, options).subscribe(() => {
-
         console.log('REALM REQ SUCCESS');
-
+        // TODO auto login is too fast. Delay a bit?
+        this.login(username, username, password);
       });
-
-
     });
   }
 }
