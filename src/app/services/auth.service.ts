@@ -130,6 +130,7 @@ export class AuthService extends RestService {
   // TODO reimporting with different realm name also causes 409, but it shouldnt.
   // TODO easy way for admin to add realm for customer if registration is disabled (when masked in backend, send email with credentials to email).
   // TODO forgot password and activate account with link in email (email features)
+  // TODO The standalone version of EvaTool MUST use users in evatool-realm as proxy for realms (keycloak cannot handle multiple hundred realms!).
   register(username: string, password: string, email: string): void {
     const adminUsername = 'admin';
     const adminPassword = 'admin';
