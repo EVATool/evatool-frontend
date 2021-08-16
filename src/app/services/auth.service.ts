@@ -6,6 +6,7 @@ import {SampleDataService} from './sample-data.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../app-routes';
 import {Constants} from './rest/app-constants';
+import * as uuid from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -136,20 +137,55 @@ export class AuthService extends RestService {
 
     this.http.post(this.getAuthUrl('master'), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
       const adminToken = authResponse.access_token;
-      // @ts-ignore
-      const createRealmJson = Constants.realmJson.replaceAll('evatool-realm', username); // TODO Why does replaceAll have to be ts-ignored?
 
+      // Change realm name.
+      // @ts-ignore
+      let createRealmJson = Constants.realmJson.replaceAll('evatool-realm', username); // TODO Why does replaceAll have to be ts-ignored?
+      console.log(createRealmJson);
+
+      // Change ids.
+      createRealmJson = this.reassignIds(createRealmJson);
+
+      // Http options.
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + adminToken
       });
       const options = {headers};
 
+      // Post realm and login after insert.
       this.http.post(this.realmUrl, createRealmJson, options).subscribe(() => {
         console.log('REALM REQ SUCCESS');
         // TODO auto login is too fast. Delay a bit?
         this.login(username, username, password);
       });
     });
+  }
+
+  reassignIds(json: string): string {
+    const lines = json.split('\n');
+
+    for (const line of lines) {
+
+      // Check if id is in line.
+      if (line.toLowerCase().includes('id" : ')) {
+        console.log(line);
+
+        // Retrieve id from line.
+        // @ts-ignore
+        const oldId = line.split(':')[1].trim().replaceAll('"', '').replaceAll(',', '');
+        console.log(oldId);
+
+        // Check if id is UUID
+        if (uuid.validate(oldId)) {
+          // Change id in whole json.
+          const newId = uuid.v4();
+          // @ts-ignore
+          json = json.replaceAll(oldId, newId);
+        }
+      }
+    }
+
+    return json;
   }
 }
