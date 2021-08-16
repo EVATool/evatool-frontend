@@ -24,8 +24,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   showPassword = false;
   tenant = '';
+  email = '';
   username = '';
   password = '';
+  passwordRepeat = '';
 
   constructor(private logger: LogService,
               private router: Router,
@@ -49,7 +51,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     if (isDevMode()) {
       this.tenant = 'evatool-realm';
       this.username = 'admin';
+      this.email = 'test@test.test';
       this.password = 'admin';
+      this.passwordRepeat = 'admin';
     }
 
     if (!this.tenantSelectionEnabled) {
