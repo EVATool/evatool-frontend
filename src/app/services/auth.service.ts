@@ -125,7 +125,7 @@ export class AuthService extends RestService {
   // TODO add first and last name?
   // TODO add validation to username + email to not break json when replacing and enforce valid email.
   // TODO check if username already exists + good error message
-  registration(username: string, password: string, email: string): void {
+  register(username: string, password: string, email: string): void {
     const adminUsername = 'admin';
     const adminPassword = 'admin';
     const authRequest = this.getLoginRequest(adminUsername, adminPassword);

@@ -77,14 +77,21 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(): void {
-    if (this.tenant === '') {
-      this.snackBar.open('Please enter a tenant', '', {duration: 5000});
-    } else if (this.username === '') {
-      this.snackBar.open('Please enter a username', '', {duration: 5000});
-    } else if (this.password === '') {
-      this.snackBar.open('Please enter a password', '', {duration: 5000});
+    if (this.formMode === 'login') {
+      if (this.tenant === '') {
+        this.snackBar.open('Please enter a tenant', '', {duration: 5000});
+      } else if (this.username === '') {
+        this.snackBar.open('Please enter a username', '', {duration: 5000});
+      } else if (this.password === '') {
+        this.snackBar.open('Please enter a password', '', {duration: 5000});
+      } else {
+        this.authService.login(this.tenant, this.username, this.password);
+      }
     } else {
-      this.authService.login(this.tenant, this.username, this.password);
+      // TODO input validation (passwords are equal, ...)
+
+      this.authService.register(this.username, this.email, this.password);
+
     }
   }
 }
