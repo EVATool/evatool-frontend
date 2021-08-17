@@ -143,29 +143,4 @@ export class AuthService extends RestService {
       this.isAutoRefreshing = false;
     }
   }
-
-  reassignIds(json: string): string {
-    const lines = json.split('\n');
-
-    for (const line of lines) {
-
-      // Check if id is in line.
-      if (line.toLowerCase().includes('id" : ')) {
-
-        // Retrieve id from line.
-        // @ts-ignore
-        const oldId = line.split(':')[1].trim().replaceAll('"', '').replaceAll(',', '');
-
-        // Check if id is UUID
-        if (uuid.validate(oldId)) {
-          // Change id in whole json.
-          const newId = uuid.v4();
-          // @ts-ignore
-          json = json.replaceAll(oldId, newId);
-        }
-      }
-    }
-
-    return json;
-  }
 }
