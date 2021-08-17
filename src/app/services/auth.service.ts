@@ -50,9 +50,14 @@ export class AuthService extends RestService {
 
   }
 
-  login(tenant: string, username: string, password: string): void {
+  login(realm: string, username: string, password: string): void {
+
+    if (realm === '') {
+      realm = 'evatool-realm';
+    }
+
     console.log(this.authLoginUrl);
-    this.http.post(this.authLoginUrl, null, this.httpOptions).subscribe((response: any) => {
+    this.http.post(this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions).subscribe((response: any) => {
       console.log(response);
     });
 
@@ -60,12 +65,8 @@ export class AuthService extends RestService {
 
     const authRequest = this.getLoginRequest(username, password);
 
-    if (tenant === '') {
-      tenant = 'evatool-realm';
-    }
-
-    this.http.post(this.getAuthUrl(tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
-      this.tenant = tenant;
+    this.http.post(this.getAuthUrl(realm), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
+      this.tenant = realm;
       this.username = username;
       this.password = password; // TODO do not save or purge password so its not in memory. It is not required for refreshing the token.
       this.takeInAuthResponse(authResponse);
