@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   formMode = 'login';
 
   showPassword = false;
-  tenant = '';
+  realm = '';
   email = '';
   username = '';
   password = '';
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
 
     if (isDevMode()) {
-      this.tenant = 'evatool-realm';
+      this.realm = 'evatool-realm';
       this.username = 'admin';
       this.email = 'test@test.test';
       this.password = 'admin';
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
 
     if (!this.tenantSelectionEnabled) {
-      this.tenant = 'evatool-realm';
+      this.realm = 'evatool-realm';
     }
   }
 
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   onSubmit(): void {
     if (this.formMode === 'login') {
-      if (this.tenant === '') {
+      if (this.realm === '') {
         this.snackBar.open('Please enter a tenant', '', {duration: 5000});
       } else if (this.username === '') {
         this.snackBar.open('Please enter a username', '', {duration: 5000});
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (this.registrationEnabled) {
           this.authService.login(this.username, this.username, this.password);
         } else {
-          this.authService.login(this.tenant, this.username, this.password);
+          this.authService.login(this.realm, this.username, this.password);
         }
       }
     } else {
