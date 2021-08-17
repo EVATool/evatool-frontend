@@ -88,12 +88,11 @@ export class AuthService extends RestService {
     this.router.navigate([ROUTES.login]);
   }
 
-  // TODO add first and last name?
-  // TODO add validation to username + email to not break json when replacing and enforce valid email.
-  // TODO check if username already exists + good error message (if realm already exists, keycloak returns 409).
-  // TODO forgot password and activate account with link in email (email features)
-  // TODO The standalone version of EvaTool MUST use users in evatool-realm as proxy for realms (keycloak cannot handle multiple hundred realms!).
-  register(username: string, password: string, email: string): void {
+  registerUser(username: string): void {
+    
+  }
+
+  registerRealm(username: string, password: string, email: string): void {
     const adminUsername = 'admin';
     const adminPassword = 'admin';
 
