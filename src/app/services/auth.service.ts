@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {ROUTES} from '../app-routes';
 import {Constants} from './rest/app-constants';
 import * as uuid from 'uuid';
+import {AuthTokenDto} from '../dto/AuthTokenDto';
 
 @Injectable({
   providedIn: 'root'
@@ -56,10 +57,11 @@ export class AuthService extends RestService {
       realm = 'evatool-realm';
     }
 
-    console.log(this.authLoginUrl);
-    this.http.post(this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions).subscribe((response: any) => {
-      console.log(response);
-    });
+    this.http.post<AuthTokenDto>(
+      this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions)
+      .subscribe((response: AuthTokenDto) => {
+        console.log(response);
+      });
 
     return;
 
