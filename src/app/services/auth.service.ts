@@ -88,8 +88,8 @@ export class AuthService extends RestService {
     this.router.navigate([ROUTES.login]);
   }
 
-  registerUser(username: string): void {
-    
+  registerUser(username: string, email: string, password: string): void {
+
   }
 
   registerRealm(username: string, password: string, email: string): void {
