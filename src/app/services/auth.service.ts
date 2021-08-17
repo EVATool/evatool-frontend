@@ -5,9 +5,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SampleDataService} from './sample-data.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../app-routes';
-import {Constants} from './rest/app-constants';
 import * as uuid from 'uuid';
 import {AuthTokenDto} from '../dto/AuthTokenDto';
+import {AuthRegisterRealmDto} from '../dto/AuthRegisterRealmDto';
 
 @Injectable({
   providedIn: 'root'
@@ -98,40 +98,16 @@ export class AuthService extends RestService {
   register(username: string, password: string, email: string): void {
     const adminUsername = 'admin';
     const adminPassword = 'admin';
-    const adminClientId = 'admin-cli';
-    const authRequest = this.getLoginRequest(adminUsername, adminPassword, adminClientId);
 
-    this.http.post(this.getAuthUrl('master'), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
-
-
-
-      const adminToken = authResponse.access_token;
-
-      // Change realm name.
-      // @ts-ignore
-      let createRealmJson = Constants.realmJson.replaceAll('evatool-realm', username); // TODO Why does replaceAll have to be ts-ignored?
-
-      // Change ids.
-      createRealmJson = this.reassignIds(createRealmJson);
-
-      // Http options.
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + adminToken
+    this.http.post<AuthRegisterRealmDto>(
+      this.authRegisterRealmUrl +
+      '?authAdminUsername=' + adminUsername +
+      '&authAdminPassword=' + adminPassword +
+      '&realm=' + username,
+      null, this.httpOptions)
+      .subscribe((response: AuthRegisterRealmDto) => {
+        this.login(response.realm, username, password);
       });
-      const options = {headers};
-
-      // TODO Remove users from json.
-
-      // Post realm and login after insert.
-      this.http.post(this.realmUrl, createRealmJson, options).subscribe(() => {
-        console.log('REALM REQ SUCCESS');
-
-        // TODO after realm is created, create user with reader and writer roles that has the just inputted username, email and password.
-
-        this.login(username, username, password);
-      });
-    });
   }
 
   startTimers(): void {
