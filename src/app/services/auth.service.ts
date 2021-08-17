@@ -33,6 +33,23 @@ export class AuthService extends RestService {
     super(logger, http, sampleData);
   }
 
+  login(realm: string, username: string, password: string): void {
+    if (realm === '') {
+      realm = 'evatool-realm';
+    }
+
+    this.http.post<AuthTokenDto>(
+      this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions)
+      .subscribe((response: AuthTokenDto) => {
+        this.realm = realm;
+        this.username = username;
+        this.password = password; // TODO do not save or purge password so its not in memory. It is not required for refreshing the token.
+        this.takeInAuthResponse(response);
+        this.startTimers();
+        this.router.navigate([ROUTES.home]);
+      });
+  }
+
   getToken(): string {
     if (!this.refreshTokenExpiresIn || this.refreshTokenExpiresIn <= 0) {
       this.login(this.realm, this.username, this.password);
@@ -51,76 +68,14 @@ export class AuthService extends RestService {
 
   }
 
-  login(realm: string, username: string, password: string): void {
-    if (realm === '') {
-      realm = 'evatool-realm';
-    }
-
-    this.http.post<AuthTokenDto>(
-      this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions)
-      .subscribe((response: AuthTokenDto) => {
-        this.realm = realm;
-        this.username = username;
-        this.password = password; // TODO do not save or purge password so its not in memory. It is not required for refreshing the token.
-        this.takeInNEWTEMPORARYAuthResponse(response);
-        this.startTimers();
-        this.router.navigate([ROUTES.home]);
-      });
-  }
-
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
     this.http.post<AuthTokenDto>(
       this.authRefreshLoginUrl + '?refreshToken=' + this.refreshToken + '&realm=' + this.realm, null, this.httpOptions)
       .subscribe((response: AuthTokenDto) => {
-        this.takeInNEWTEMPORARYAuthResponse(response, ignoreRefreshToken);
+        this.takeInAuthResponse(response, ignoreRefreshToken);
       });
   }
-
-  takeInAuthResponse(authResponse: any, ignoreRefreshToken: boolean = false): void {
-    this.token = authResponse.access_token;
-    this.tokenExpiresIn = authResponse.expires_in;
-    if (!ignoreRefreshToken) {
-      this.refreshToken = authResponse.refresh_token;
-      this.refreshTokenExpiresIn = authResponse.refresh_expires_in;
-    } else {
-      this.isAutoRefreshing = false;
-    }
-  }
-
-  takeInNEWTEMPORARYAuthResponse(authTokenDto: AuthTokenDto, ignoreRefreshToken: boolean = false): void {
-    this.token = authTokenDto.token;
-    this.tokenExpiresIn = authTokenDto.tokenExpiresIn;
-    if (!ignoreRefreshToken) {
-      this.refreshToken = authTokenDto.refreshToken;
-      this.refreshTokenExpiresIn = authTokenDto.refreshTokenExpiresIn;
-    } else {
-      this.isAutoRefreshing = false;
-    }
-  }
-
-  startTimers(): void {
-    this.authenticated = true;
-    const interval = setInterval(() => {
-      if (!this.authenticated) {
-        clearInterval(interval);
-      }
-
-      this.tokenExpiresIn -= 1;
-      this.refreshTokenExpiresIn -= 1;
-
-      // Try to get new token with refresh token if token expires soon.
-      if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing && this.authenticated) {
-        this.isAutoRefreshing = true;
-        this.logger.info(this, 'Refreshing Token...');
-        this.refreshExistingToken(true);
-      }
-
-      if (this.refreshTokenExpiresIn <= 0) {
-        this.logout();
-      }
-    }, 1000);
-  }
-
+  
   logout(): void {
     this.authenticated = false;
     this.token = 'null';
@@ -174,6 +129,40 @@ export class AuthService extends RestService {
         this.login(username, username, password);
       });
     });
+  }
+
+  startTimers(): void {
+    this.authenticated = true;
+    const interval = setInterval(() => {
+      if (!this.authenticated) {
+        clearInterval(interval);
+      }
+
+      this.tokenExpiresIn -= 1;
+      this.refreshTokenExpiresIn -= 1;
+
+      // Try to get new token with refresh token if token expires soon.
+      if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing && this.authenticated) {
+        this.isAutoRefreshing = true;
+        this.logger.info(this, 'Refreshing Token...');
+        this.refreshExistingToken(true);
+      }
+
+      if (this.refreshTokenExpiresIn <= 0) {
+        this.logout();
+      }
+    }, 1000);
+  }
+
+  takeInAuthResponse(authTokenDto: AuthTokenDto, ignoreRefreshToken: boolean = false): void {
+    this.token = authTokenDto.token;
+    this.tokenExpiresIn = authTokenDto.tokenExpiresIn;
+    if (!ignoreRefreshToken) {
+      this.refreshToken = authTokenDto.refreshToken;
+      this.refreshTokenExpiresIn = authTokenDto.refreshTokenExpiresIn;
+    } else {
+      this.isAutoRefreshing = false;
+    }
   }
 
   reassignIds(json: string): string {
