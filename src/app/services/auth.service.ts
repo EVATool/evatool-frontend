@@ -60,21 +60,13 @@ export class AuthService extends RestService {
     this.http.post<AuthTokenDto>(
       this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions)
       .subscribe((response: AuthTokenDto) => {
-        console.log(response);
+        this.tenant = realm;
+        this.username = username;
+        this.password = password; // TODO do not save or purge password so its not in memory. It is not required for refreshing the token.
+        this.takeInNEWTEMPORARYAuthResponse(response);
+        this.startTimers();
+        this.router.navigate([ROUTES.home]);
       });
-
-    return;
-
-    const authRequest = this.getLoginRequest(username, password);
-
-    this.http.post(this.getAuthUrl(realm), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
-      this.tenant = realm;
-      this.username = username;
-      this.password = password; // TODO do not save or purge password so its not in memory. It is not required for refreshing the token.
-      this.takeInAuthResponse(authResponse);
-      this.startTimers();
-      this.router.navigate([ROUTES.home]);
-    });
   }
 
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
@@ -94,6 +86,17 @@ export class AuthService extends RestService {
     if (!ignoreRefreshToken) {
       this.refreshToken = authResponse.refresh_token;
       this.refreshTokenExpiresIn = authResponse.refresh_expires_in;
+    } else {
+      this.isAutoRefreshing = false;
+    }
+  }
+
+  takeInNEWTEMPORARYAuthResponse(authTokenDto: AuthTokenDto, ignoreRefreshToken: boolean = false): void {
+    this.token = authTokenDto.token;
+    this.tokenExpiresIn = authTokenDto.tokenExpiresIn;
+    if (!ignoreRefreshToken) {
+      this.refreshToken = authTokenDto.refreshToken;
+      this.refreshTokenExpiresIn = authTokenDto.refreshTokenExpiresIn;
     } else {
       this.isAutoRefreshing = false;
     }
