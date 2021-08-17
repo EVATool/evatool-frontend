@@ -17,7 +17,7 @@ export abstract class RestService {
     })
   };
 
-  protected readonly httpAuthOptions = {
+  protected readonly httpAuthOptions = { // TODO remove
     headers: new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     })
@@ -56,6 +56,11 @@ export abstract class RestService {
   public readonly byAnalysisId = '?analysisId=';
   public readonly analysisIds = '?analysisIds=';
   public readonly filename = 'filename=';
+
+  public readonly authLoginUrl = this.backendUrl + 'auth/login/token';
+  public readonly authRefreshLoginUrl = this.backendUrl + 'auth/login/refresh-token';
+  public readonly authRegisterUserUrl = this.backendUrl + 'auth/register/user';
+  public readonly authRegisterRealmUrl = this.backendUrl + 'auth/register/realm';
 
   protected realmUrl = environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/admin/realms';
 

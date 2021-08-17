@@ -51,6 +51,13 @@ export class AuthService extends RestService {
   }
 
   login(tenant: string, username: string, password: string): void {
+    console.log(this.authLoginUrl);
+    this.http.post(this.authLoginUrl, null, this.httpOptions).subscribe((response: any) => {
+      console.log(response);
+    });
+
+    return;
+
     const authRequest = this.getLoginRequest(username, password);
 
     if (tenant === '') {
