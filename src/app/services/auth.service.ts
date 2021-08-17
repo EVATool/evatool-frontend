@@ -75,7 +75,7 @@ export class AuthService extends RestService {
         this.takeInAuthResponse(response, ignoreRefreshToken);
       });
   }
-  
+
   logout(): void {
     this.authenticated = false;
     this.token = 'null';
@@ -102,6 +102,9 @@ export class AuthService extends RestService {
     const authRequest = this.getLoginRequest(adminUsername, adminPassword, adminClientId);
 
     this.http.post(this.getAuthUrl('master'), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
+
+
+
       const adminToken = authResponse.access_token;
 
       // Change realm name.
