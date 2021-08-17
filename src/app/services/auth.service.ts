@@ -69,16 +69,11 @@ export class AuthService extends RestService {
   }
 
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
-    const authRequest = 'grant_type=refresh_token' +
-      '&scope=openid' +
-      '&client_id=evatool-app' +
-      '&refresh_token=' + this.refreshToken;
-
     this.http.post<AuthTokenDto>(
       this.authRefreshLoginUrl + '?refreshToken=' + this.refreshToken + '&realm=' + this.realm, null, this.httpOptions)
       .subscribe((response: AuthTokenDto) => {
-      this.takeInNEWTEMPORARYAuthResponse(response, ignoreRefreshToken);
-    });
+        this.takeInNEWTEMPORARYAuthResponse(response, ignoreRefreshToken);
+      });
   }
 
   takeInAuthResponse(authResponse: any, ignoreRefreshToken: boolean = false): void {
