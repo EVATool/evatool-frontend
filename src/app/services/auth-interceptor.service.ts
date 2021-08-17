@@ -18,7 +18,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     } else {
       let authReq = req;
       authReq = this.injectToken(authReq, this.authService.getToken());
-      authReq = this.injectRealm(authReq, this.authService.tenant);
+      authReq = this.injectRealm(authReq, this.authService.realm);
       return next.handle(authReq);
     }
   }

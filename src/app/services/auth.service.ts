@@ -22,7 +22,7 @@ export class AuthService extends RestService {
 
   isAutoRefreshing = false;
 
-  tenant = '';
+  realm = '';
   username = '';
   password = '';
 
@@ -35,7 +35,7 @@ export class AuthService extends RestService {
 
   getToken(): string {
     if (!this.refreshTokenExpiresIn || this.refreshTokenExpiresIn <= 0) {
-      this.login(this.tenant, this.username, this.password);
+      this.login(this.realm, this.username, this.password);
     } else {
       this.refreshExistingToken();
     }
@@ -52,7 +52,6 @@ export class AuthService extends RestService {
   }
 
   login(realm: string, username: string, password: string): void {
-
     if (realm === '') {
       realm = 'evatool-realm';
     }
@@ -60,7 +59,7 @@ export class AuthService extends RestService {
     this.http.post<AuthTokenDto>(
       this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions)
       .subscribe((response: AuthTokenDto) => {
-        this.tenant = realm;
+        this.realm = realm;
         this.username = username;
         this.password = password; // TODO do not save or purge password so its not in memory. It is not required for refreshing the token.
         this.takeInNEWTEMPORARYAuthResponse(response);
@@ -75,8 +74,10 @@ export class AuthService extends RestService {
       '&client_id=evatool-app' +
       '&refresh_token=' + this.refreshToken;
 
-    this.http.post<any>(this.getAuthUrl(this.tenant), authRequest, this.httpAuthOptions).subscribe((authResponse: any) => {
-      this.takeInAuthResponse(authResponse, ignoreRefreshToken);
+    this.http.post<AuthTokenDto>(
+      this.authRefreshLoginUrl + '?refreshToken=' + this.refreshToken + '&realm=' + this.realm, null, this.httpOptions)
+      .subscribe((response: AuthTokenDto) => {
+      this.takeInNEWTEMPORARYAuthResponse(response, ignoreRefreshToken);
     });
   }
 
@@ -131,7 +132,7 @@ export class AuthService extends RestService {
     this.tokenExpiresIn = 0;
     this.refreshToken = 'null';
     this.refreshTokenExpiresIn = 0;
-    this.tenant = '';
+    this.realm = '';
     this.username = '';
     this.password = '';
     this.router.navigate([ROUTES.login]);
