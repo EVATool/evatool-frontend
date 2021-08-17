@@ -17,12 +17,6 @@ export abstract class RestService {
     })
   };
 
-  protected readonly httpAuthOptions = { // TODO remove
-    headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    })
-  };
-
   protected constructor(protected logger: LogService,
                         protected http: HttpClient,
                         protected sampleData: SampleDataService) {
