@@ -48,7 +48,7 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log('fasdbhsdfajkbln');
-    if (!environment.authEnabled && !environment.testing) {
+    if (!environment.authEnabled) {
       const message = 'Authentication is disabled in this deployment.';
       this.snackBar.open(message, '', {duration: 5000});
     } else if (environment.authRegistrationEnabled) {

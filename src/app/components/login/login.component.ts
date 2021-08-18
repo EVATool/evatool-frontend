@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (!environment.authEnabled && !environment.testing) {
+    if (!environment.authEnabled) {
       const message = 'Authentication is disabled. You will not be able to login.';
       this.snackBar.open(message, '', {duration: 5000});
     }
