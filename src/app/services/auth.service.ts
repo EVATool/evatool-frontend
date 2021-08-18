@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
 import {LogService} from './log.service';
 import {RestService} from './rest.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -8,11 +8,13 @@ import {ROUTES} from '../app-routes';
 import * as uuid from 'uuid';
 import {AuthTokenDto} from '../dto/AuthTokenDto';
 import {AuthRegisterRealmDto} from '../dto/AuthRegisterRealmDto';
+import {Analysis} from '../model/Analysis';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService extends RestService {
+  @Output() realmRegistered: EventEmitter<string> = new EventEmitter();
 
   authenticated = false;
   private token = 'null'; // TODO sending an empty string causes a 500 return code. This should be handled in backend.
@@ -103,7 +105,7 @@ export class AuthService extends RestService {
       '&realm=' + realm,
       null, this.httpOptions)
       .subscribe((response: AuthRegisterRealmDto) => {
-
+        this.realmRegistered.emit(response.realm);
       });
   }
 

@@ -9,5 +9,5 @@ export const environment = {
   authEnabled: true,
   authMultiTenancyEnabled: true,
   authPort: '8081',
-  authRegistrationEnabled: false
+  authRegistrationEnabled: true
 };

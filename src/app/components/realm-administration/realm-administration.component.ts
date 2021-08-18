@@ -30,8 +30,17 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit {
       this.snackBar.open(message, '', {duration: 5000});
     });
 
+    this.authService.realmRegistered.subscribe((realm: string) => {
+      const message = 'Realm "' + realm + '" was successfully created.';
+      const action = 'Manage';
+      this.snackBar.open(message, action, {duration: 5000}).onAction().subscribe(() => {
+        const realmManageUrl = this.authService.getAuthManageRealmUrl(realm);
+        window.open(realmManageUrl);
+      });
+    });
+
     if (isDevMode()) {
-      this.realm = 'new realm';
+      this.realm = 'new-realm';
     }
   }
 
