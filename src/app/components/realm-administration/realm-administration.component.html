@@ -1,1 +1,18 @@
-<p>realm-administration works!</p>
+<div fxLayout="column" class="realm-administration-form-container">
+
+  <h2> Create Realm </h2>
+
+  <mat-form-field>
+    <mat-label>Realm</mat-label>
+    <input matInput
+           [(ngModel)]="realm"
+           (keydown.enter)="onSubmit()">
+  </mat-form-field>
+
+  <button class="submit-button"
+          mat-button
+          (click)="onSubmit()">
+    Create Realm
+  </button>
+
+</div>

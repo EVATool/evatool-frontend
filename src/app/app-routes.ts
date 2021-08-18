@@ -2,6 +2,7 @@ export const ROUTES = {
   home: '',
   title: 'title',
   login: 'login',
+  realmAdministration: 'admin/realm-administration',
   forgotPassword: 'forgot-password',
   termsAndConditions: 'terms-and-conditions',
   timeOut: 'time-out',

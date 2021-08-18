@@ -12,11 +12,13 @@ import {TitlePageComponent} from './components/title-page/title-page.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
 import {TimeOutComponent} from './components/time-out/time-out.component';
+import {RealmAdministrationComponent} from './components/realm-administration/realm-administration.component';
 
 const routes: Routes = [
   {path: ROUTES.home, component: HomeComponent},
   {path: ROUTES.title, component: TitlePageComponent},
   {path: ROUTES.login, component: LoginComponent},
+  {path: ROUTES.realmAdministration, component: RealmAdministrationComponent},
   {path: ROUTES.forgotPassword, component: ForgotPasswordComponent},
   {path: ROUTES.termsAndConditions, component: TermsAndConditionsComponent},
   {path: ROUTES.timeOut, component: TimeOutComponent},
