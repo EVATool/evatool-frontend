@@ -137,7 +137,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
 
     this.impactDataService.impacts.forEach((impact: Impact) => {
       if (!includeOnlyTheseImpacts || includeOnlyTheseImpacts.length === 0 || includeOnlyTheseImpacts.includes(impact.prefixSequenceId)) {
-        const index = displayedColumns.length - 2;
+        const index = displayedColumns.length - 1;
         displayedColumns.splice(index, 0, impact.prefixSequenceId);
       }
     });
