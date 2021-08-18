@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         this.snackBar.open('Please enter a password', '', {duration: 5000});
       } else { // Inputs valid.
         if (this.registrationEnabled) {
-          this.authService.login(this.username, this.username, this.password);
+          this.authService.login('evatool-realm', this.username, this.password);
         } else {
           this.authService.login(this.realm, this.username, this.password);
         }
