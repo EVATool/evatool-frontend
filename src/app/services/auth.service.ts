@@ -103,7 +103,7 @@ export class AuthService extends RestService {
       '&realm=' + username,
       null, this.httpOptions)
       .subscribe((response: AuthRegisterRealmDto) => {
-        this.login(response.realm, username, password);
+
       });
   }
 
