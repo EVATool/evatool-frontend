@@ -94,10 +94,7 @@ export class AuthService extends RestService {
 
   }
 
-  registerRealm(realm: string): void {
-    const adminUsername = 'admin';
-    const adminPassword = 'admin';
-
+  registerRealm(adminUsername: string, adminPassword: string, realm: string): void {
     this.http.post<AuthRegisterRealmDto>(
       this.authRegisterRealmUrl +
       '?authAdminUsername=' + adminUsername +

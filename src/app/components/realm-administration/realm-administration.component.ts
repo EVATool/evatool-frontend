@@ -16,6 +16,8 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit {
   realm = '';
   email = '';
   username = '';
+  password = '';
+  showPassword = false;
 
   constructor(private logger: LogService,
               private router: Router,
@@ -60,6 +62,6 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.authService.registerRealm(this.realm);
+    this.authService.registerRealm(this.username, this.password, this.realm);
   }
 }

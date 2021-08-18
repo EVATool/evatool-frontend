@@ -47,7 +47,9 @@ export class HttpLoaderComponent implements OnInit {
     });
 
     this.crossUI.authenticationFailed.subscribe(() => { // 401
-      this.router.navigate([ROUTES.login]);
+      if (!this.router.url.includes('/admin/')) {
+        this.router.navigate([ROUTES.login]);
+      }
     });
 
     this.crossUI.authorizationFailed.subscribe(() => { // 403

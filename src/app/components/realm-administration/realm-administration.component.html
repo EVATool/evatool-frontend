@@ -3,6 +3,29 @@
   <h2> Create Realm </h2>
 
   <mat-form-field>
+    <mat-label>Keycloak Admin Username</mat-label>
+    <input matInput
+           [(ngModel)]="username"
+           (keydown.enter)="onSubmit()">
+  </mat-form-field>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Keycloak Admin Password</mat-label>
+      <input matInput
+             [type]="showPassword ? 'text' : 'password'"
+             [(ngModel)]="password"
+             (keydown.enter)="onSubmit()">
+    </mat-form-field>
+
+    <button mat-icon-button
+            class="toggle-password-button"
+            (click)="showPassword = !showPassword">
+      <mat-icon>remove_red_eye</mat-icon>
+    </button>
+  </div>
+
+  <mat-form-field>
     <mat-label>Realm</mat-label>
     <input matInput
            [(ngModel)]="realm"
