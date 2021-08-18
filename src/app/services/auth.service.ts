@@ -5,10 +5,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SampleDataService} from './sample-data.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../app-routes';
-import * as uuid from 'uuid';
 import {AuthTokenDto} from '../dto/AuthTokenDto';
 import {AuthRegisterRealmDto} from '../dto/AuthRegisterRealmDto';
-import {Analysis} from '../model/Analysis';
 
 @Injectable({
   providedIn: 'root'
@@ -59,15 +57,6 @@ export class AuthService extends RestService {
       this.refreshExistingToken();
     }
     return this.token;
-  }
-
-  getLoginRequest(username: string, password: string, clientId: string = 'evatool-app'): string {
-    return 'grant_type=password' +
-      '&scope=openid' +
-      '&client_id=' + clientId +
-      '&username=' + username +
-      '&password=' + password;
-
   }
 
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
