@@ -88,7 +88,7 @@ export class AuthService extends RestService {
       '&password=' + password,
       null, this.httpOptions)
       .subscribe((response: AuthRegisterUserDto) => {
-        this.login(username, username, password);
+        this.login('evatool-realm', username, password);
       });
   }
 
