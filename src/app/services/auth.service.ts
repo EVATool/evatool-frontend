@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {ROUTES} from '../app-routes';
 import {AuthTokenDto} from '../dto/AuthTokenDto';
 import {AuthRegisterRealmDto} from '../dto/AuthRegisterRealmDto';
+import {AuthRegisterUserDto} from '../dto/AuthRegisterUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +81,15 @@ export class AuthService extends RestService {
   }
 
   registerUser(username: string, email: string, password: string): void {
-
+    this.http.post<AuthRegisterUserDto>(
+      this.authRegisterUserUrl +
+      '?username=' + username +
+      '&email=' + email +
+      '&password=' + password,
+      null, this.httpOptions)
+      .subscribe((response: AuthRegisterUserDto) => {
+        this.login(username, username, password);
+      });
   }
 
   registerRealm(adminUsername: string, adminPassword: string, realm: string): void {
