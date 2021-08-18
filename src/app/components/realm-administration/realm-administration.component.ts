@@ -46,6 +46,11 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(): void {
+    if (this.realm === '') {
+      this.snackBar.open('Please enter a realm', '', {duration: 5000});
+      return;
+    }
 
+    this.authService.registerRealm(this.realm);
   }
 }
