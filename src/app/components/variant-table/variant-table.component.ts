@@ -8,11 +8,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {RequirementDataService} from '../../services/data/requirement-data.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
-import {
-  CrossUiEventService,
-  RequirementDeletionFailedEvent, VariantDeletionFailedEvent,
-  VariantReferencedByRequirementsEvent
-} from '../../services/cross-ui-event.service';
+import {CrossUiEventService, VariantDeletionFailedEvent, VariantReferencedByRequirementsEvent} from '../../services/cross-ui-event.service';
 
 @Component({
   selector: 'app-variant-table',

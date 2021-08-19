@@ -3,7 +3,7 @@ import {RestService} from '../rest.service';
 import {LogService} from '../log.service';
 import {HttpClient} from '@angular/common/http';
 import {SampleDataService} from '../sample-data.service';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {AnalysisDto} from '../../dto/AnalysisDto';
 
 @Injectable({

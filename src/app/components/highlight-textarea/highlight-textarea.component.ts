@@ -27,7 +27,7 @@ export class HighlightTextareaComponent implements AfterViewInit {
     // using the innerText property instead of cleaning the HTML manually should also work, but it does not.
     this.text = this.removeHtml(event.target.innerHTML);
     this.textChange.emit(this.text);
-    const interval = setTimeout(() => {
+    setTimeout(() => {
       this.showPlaceholderIfEmpty();
     }, 1); // The method that changes the text to the placeholder again must not be executed synchronously.
   }

@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AnalysisDataService} from './data/analysis-data.service';
 import {StakeholderDataService} from './data/stakeholder-data.service';
 import {ValueDataService} from './data/value-data.service';

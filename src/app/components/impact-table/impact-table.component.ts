@@ -16,9 +16,10 @@ import {ValueDialogComponent} from '../value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {
-  CrossUiEventService, ImpactDeletionFailedEvent,
+  CrossUiEventService,
+  ImpactDeletionFailedEvent,
   ImpactReferencedByRequirementsEvent,
-  StakeholderReferencedByImpactsEvent, ValueDeletionFailedEvent,
+  StakeholderReferencedByImpactsEvent,
   ValueReferencedByImpactsEvent
 } from '../../services/cross-ui-event.service';
 
@@ -162,11 +163,11 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
     if (this.stakeholderDataService.stakeholders.length === 0) {
       const message = 'There must be at least one stakeholder for an impact to exist';
       const action = '';
-      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+      this.snackBar.open(message, action, {duration: 5000});
     } else if (this.valueDataService.values.length === 0) {
       const message = 'There must be at least one value for an impact to exist';
       const action = '';
-      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+      this.snackBar.open(message, action, {duration: 5000});
     }
     const impact = this.impactDataService.createDefaultImpact(
       this.analysisDataService.currentAnalysis,
@@ -193,10 +194,10 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   openValuesDialog(id?: string): void {
     this.logger.info(this, 'Opening Values Dialog');
 
-    const dialogRef = this.dialog.open(ValueDialogComponent, {
+    this.dialog.open(ValueDialogComponent, {
       height: '80%',
       width: '50%',
-      data: {id: id}
+      data: {id}
     });
   }
 

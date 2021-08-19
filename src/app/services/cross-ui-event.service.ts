@@ -16,7 +16,6 @@ import {StakeholderDataService} from './data/stakeholder-data.service';
 import {ValueDataService} from './data/value-data.service';
 import {Analysis} from '../model/Analysis';
 import {AnalysisDataService} from './data/analysis-data.service';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

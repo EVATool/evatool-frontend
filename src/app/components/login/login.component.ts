@@ -6,7 +6,6 @@ import {ROUTES} from '../../app-routes';
 import {CrossUiEventService, RealmNotFoundEvent} from '../../services/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from '../../../environments/environment';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-login',

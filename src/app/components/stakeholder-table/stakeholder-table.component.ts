@@ -14,8 +14,7 @@ import {ImpactDataService} from '../../services/data/impact-data.service';
 import {
   CrossUiEventService,
   StakeholderDeletionFailedEvent,
-  StakeholderReferencedByImpactsEvent,
-  ValueDeletionFailedEvent
+  StakeholderReferencedByImpactsEvent
 } from '../../services/cross-ui-event.service';
 
 @Component({

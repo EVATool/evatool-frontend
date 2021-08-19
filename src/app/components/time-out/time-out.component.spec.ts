@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TimeOutComponent } from './time-out.component';
+import {TimeOutComponent} from './time-out.component';
 
 describe('TimeOutComponent', () => {
   let component: TimeOutComponent;

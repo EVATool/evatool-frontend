@@ -69,14 +69,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {FlexModule} from '@angular/flex-layout';
 import {AuthInterceptorService} from './services/auth-interceptor.service';
-import { LoginComponent } from './components/login/login.component';
-import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
-import { AuthRemainingComponent } from './components/auth-remaining/auth-remaining.component';
-import { TitlePageComponent } from './components/title-page/title-page.component';
-import { TimeOutComponent } from './components/time-out/time-out.component';
-import { TermsAndConditionsComponent } from './components/terms-and-conditions/terms-and-conditions.component';
-import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { RealmAdministrationComponent } from './components/realm-administration/realm-administration.component';
+import {LoginComponent} from './components/login/login.component';
+import {AccessDeniedComponent} from './components/access-denied/access-denied.component';
+import {AuthRemainingComponent} from './components/auth-remaining/auth-remaining.component';
+import {TitlePageComponent} from './components/title-page/title-page.component';
+import {TimeOutComponent} from './components/time-out/time-out.component';
+import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {RealmAdministrationComponent} from './components/realm-administration/realm-administration.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',

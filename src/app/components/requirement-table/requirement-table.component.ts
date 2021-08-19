@@ -321,10 +321,10 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
   openVariantsDialog(ids?: string[]): void {
     this.logger.info(this, 'Opening Variants Dialog');
 
-    const dialogRef = this.dialog.open(VariantDialogComponent, {
+    this.dialog.open(VariantDialogComponent, {
       height: '60%',
       width: '50%',
-      data: {ids: ids}
+      data: {ids}
     });
   }
 

@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import {LogService} from './log.service';
 import {RestService} from './rest.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {SampleDataService} from './sample-data.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../app-routes';

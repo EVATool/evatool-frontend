@@ -12,10 +12,10 @@ export class StakeholderLevelComponent {
   @Input() public level = 'INDIVIDUAL';
   @Input() public editable = true;
   @Input() public showDescription = true;
-  @Input() public filtertext = '';
+  @Input() public filterText = '';
   @Output() levelChange = new EventEmitter<string | null>();
 
-  public shownlevels = [
+  public shownLevels = [
     {key: 'INDIVIDUAL', value: 'Individuell'},
     {key: 'ORGANIZATION', value: 'Organisation'},
     {key: 'SOCIETY', value: 'Gesellschaft'}

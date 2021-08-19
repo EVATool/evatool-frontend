@@ -40,7 +40,7 @@ export class HttpLoaderComponent implements OnInit {
       if (lastHttpEvent.type === HttpInfoType.Complete) {
         this.successIconShown = true;
 
-        const interval = setTimeout(() => {
+        setTimeout(() => {
           this.successIconShown = false;
         }, 1000);
       }

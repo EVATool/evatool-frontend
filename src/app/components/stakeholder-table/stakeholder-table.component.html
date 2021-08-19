@@ -35,9 +35,9 @@
         </th>
 
         <td mat-cell *matCellDef='let stakeholder'>
-          <app-stakeholder-level [filtertext]="highlightFilter"
-                                  [(level)]="stakeholder.level"
-                                  (levelChange)="updateStakeholder(stakeholder)"></app-stakeholder-level>
+          <app-stakeholder-level [filterText]="highlightFilter"
+                                 [(level)]="stakeholder.level"
+                                 (levelChange)="updateStakeholder(stakeholder)"></app-stakeholder-level>
         </td>
       </ng-container>
 

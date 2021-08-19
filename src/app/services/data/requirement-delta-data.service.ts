@@ -37,6 +37,7 @@ export class RequirementDeltaDataService extends DataService {
   init(): void {
     // Load Requirement Deltas.
     this.analysisData.loadedCurrentAnalysis.subscribe((analysis: Analysis) => {
+
     });
     this.impactData.loadedImpacts.subscribe(() => {
       this.impactsLoaded = true;

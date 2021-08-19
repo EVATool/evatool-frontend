@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TitlePageComponent } from './title-page.component';
+import {TitlePageComponent} from './title-page.component';
 
 describe('TitlePageComponent', () => {
   let component: TitlePageComponent;
