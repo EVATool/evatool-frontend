@@ -8,6 +8,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpLoaderFactory} from '../app.module';
 import {Router} from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export class SpecService {
 
@@ -15,6 +16,7 @@ export class SpecService {
     HttpClientModule,
     HttpClientTestingModule,
     RouterTestingModule,
+    BrowserAnimationsModule,
     MatDialogModule,
     MatSnackBarModule,
     MatMenuModule,

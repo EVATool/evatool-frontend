@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RealmAdministrationComponent } from './realm-administration.component';
+import {RealmAdministrationComponent} from './realm-administration.component';
+import {SpecService} from '../../services/spec.service';
 
 describe('RealmAdministrationComponent', () => {
   let component: RealmAdministrationComponent;
@@ -8,9 +9,11 @@ describe('RealmAdministrationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RealmAdministrationComponent ]
+      imports: SpecService.imports,
+      providers: SpecService.providers,
+      declarations: [RealmAdministrationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
