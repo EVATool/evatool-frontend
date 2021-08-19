@@ -26,7 +26,7 @@ describe('RequirementDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize', () => { // TODO
+  it('should initialize', () => {
     // given
 
     // when
@@ -64,7 +64,7 @@ describe('RequirementDataService', () => {
 
   it('should delete requirement', () => {
     // given
-    const deletedRequirement = service.requirements[0]; // TODO why does this test fail if the service. is replaced with data.
+    const deletedRequirement = service.requirements[0];
 
     // then
     service.deletedRequirement.subscribe((requirement: Requirement) => {

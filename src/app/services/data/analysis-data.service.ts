@@ -81,7 +81,7 @@ export class AnalysisDataService extends DataService {
   deleteAnalysis(analysis: Analysis): void {
     this.analysisRest.deleteAnalysis(analysis.id).subscribe(() => {
       const index: number = this.analyses.indexOf(analysis, 0);
-      this.analyses.splice(index, 1); // TODO make resistant against -1 if entity already deleted.
+      this.analyses.splice(index, 1);
       this.deletedAnalysis.emit(analysis);
       this.logger.info(this, 'Analysis deleted');
     });

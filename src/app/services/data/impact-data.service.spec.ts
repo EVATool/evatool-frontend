@@ -26,7 +26,7 @@ describe('ImpactDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize', () => { // TODO
+  it('should initialize', () => {
     // given
 
     // when
@@ -64,7 +64,7 @@ describe('ImpactDataService', () => {
 
   it('should delete impact', () => {
     // given
-    const deletedImpact = service.impacts[0]; // TODO why does this test fail if the service. is replaced with data.
+    const deletedImpact = service.impacts[0];
 
     // then
     service.deletedImpact.subscribe((impact: Impact) => {

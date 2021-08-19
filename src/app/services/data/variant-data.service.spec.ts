@@ -26,7 +26,7 @@ describe('VariantDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize', () => { // TODO
+  it('should initialize', () => {
     // given
 
     // when
@@ -64,7 +64,7 @@ describe('VariantDataService', () => {
 
   it('should delete variant', () => {
     // given
-    const deletedVariant = service.variants[0]; // TODO why does this test fail if the service. is replaced with data.
+    const deletedVariant = service.variants[0];
 
     // then
     service.deletedVariant.subscribe((variant: Variant) => {

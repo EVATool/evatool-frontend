@@ -125,7 +125,6 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
     });
     this.updateTableDataSource();
 
-    // TODO what about timing and the loading of RequirementDeltas?
     this.requirementDeltaDataService.createdRequirementDelta.subscribe((delta: RequirementDelta) => {
       this.showDeltaSlider(delta);
     });

@@ -34,7 +34,7 @@ describe('AnalysisDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize', () => { // TODO how to test router being read via subscribe in init method?
+  it('should initialize', () => {
     // given
 
     // when

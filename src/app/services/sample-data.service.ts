@@ -187,7 +187,7 @@ export class SampleDataService {
       originalMerit: 0.7,
       minOverwriteMerit: 0,
       maxOverwriteMerit: 0.7,
-      meritColorCode: '#00000', // TODO some properties must be updated even when updating!
+      meritColorCode: '#00000',
       analysisId: '1',
       requirementId: '1',
       impactId: '2'

@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
 
     this.crossUI.realmNotFound.subscribe((event: RealmNotFoundEvent) => {
-      // TODO consider using the same message as in the authenticationFailed method to prohibit checking for which tenants exist.
       const message = 'Tenant ' + event.realm + ' does not exist';
       this.snackBar.open(message, '', {duration: 5000});
     });
@@ -89,8 +88,15 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
       }
     } else {
-      // TODO input validation (passwords are equal, ...)
-      this.authService.registerUser(this.username, this.email, this.password);
+      if (this.username === '') {
+        this.snackBar.open('Please enter a username', '', {duration: 5000});
+      } else if (this.password === '') {
+        this.snackBar.open('Please enter a password', '', {duration: 5000});
+      } else if (this.password !== this.passwordRepeat) {
+        this.snackBar.open('The passwords must match', '', {duration: 5000});
+      } else {
+        this.authService.registerUser(this.username, this.email, this.password);
+      }
     }
   }
 }

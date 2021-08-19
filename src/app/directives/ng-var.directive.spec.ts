@@ -20,7 +20,7 @@ describe('NgVarDirective', () => {
     fixture.detectChanges();
   });
 
-  it('should create an instance', () => { // TODO how to test this?
+  it('should create an instance', () => {
 
   });
 

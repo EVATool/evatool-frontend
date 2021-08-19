@@ -26,7 +26,7 @@ describe('ValueDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize', () => { // TODO
+  it('should initialize', () => {
     // given
 
     // when
@@ -64,7 +64,7 @@ describe('ValueDataService', () => {
 
   it('should delete value', () => {
     // given
-    const deletedValue = service.values[0]; // TODO why does this test fail if the service. is replaced with data.
+    const deletedValue = service.values[0];
 
     // then
     service.deletedValue.subscribe((value: Value) => {
@@ -126,7 +126,5 @@ describe('ValueDataService', () => {
       // then
       expect(service.deletedValue.emit).toHaveBeenCalled();
     });
-
-    // TODO Values types loaded event.
   });
 });

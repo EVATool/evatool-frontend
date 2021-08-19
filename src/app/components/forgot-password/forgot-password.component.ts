@@ -7,8 +7,6 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  // TODO Enable/Disable based on registrationEnabled env var?
-
   constructor() {
   }
 

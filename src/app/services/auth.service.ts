@@ -16,7 +16,7 @@ export class AuthService extends RestService {
   @Output() realmRegistered: EventEmitter<string> = new EventEmitter();
 
   authenticated = false;
-  private token = 'null'; // TODO sending an empty string causes a 500 return code. This should be handled in backend.
+  private token = 'null';
   tokenExpiresIn = 0;
   private refreshToken = 'null';
   refreshTokenExpiresIn = 0;

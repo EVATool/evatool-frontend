@@ -20,7 +20,7 @@ import {AnalysisDataService} from './data/analysis-data.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CrossUiEventService { // TODO what should this be called? Its just masking http errors until now...
+export class CrossUiEventService {
   @Output() initComplete: EventEmitter<void> = new EventEmitter();
   initialized = false;
 
@@ -36,7 +36,6 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
   @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
-  // TODO: Consider moving the following events into the interceptor. They are technically all just http events/errors.
   @Output() analysisWithValidIdNotFound: EventEmitter<AnalysisWithIdNotFound> = new EventEmitter();
 
   @Output() realmNotFound: EventEmitter<RealmNotFoundEvent> = new EventEmitter();
@@ -99,7 +98,7 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
             break;
         }
       } else {
-        const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1); // TODO make this more resilient.
+        const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1);
         const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
         const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
         const notFound = httpInfo.httpStatusCode === 404;
@@ -112,7 +111,7 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
           this.analysisWithValidIdNotFound.emit(new AnalysisWithIdNotFound(id));
         } else if (httpInfo.path.includes('/auth/realms/') && notFound) {
           this.realmNotFound.emit(new RealmNotFoundEvent(httpInfo.path.split('/')[3]));
-        } else if (httpInfo.method === 'DELETE') { // TODO change this to DELETE || UPDATE? then remove entities in event subscriptions.
+        } else if (httpInfo.method === 'DELETE') {
           if (apiEndpoint === 'analyses') {
             const analysis = this.analysisData.analyses.find(a => a.id === id);
             if (analysis) {
@@ -155,7 +154,6 @@ export class CrossUiEventService { // TODO what should this be called? Its just 
   }
 }
 
-// TODO outsource events into file.
 export class ImpactReferencedByRequirementsEvent {
 
   impact!: Impact;
@@ -269,7 +267,7 @@ export class RequirementDeltaDeletionFailedEvent extends DeletionFailedEvent<Req
   }
 }
 
-export class AuthenticationFailedEvent { // TODO extend with information
+export class AuthenticationFailedEvent {
 }
 
 export class AuthorizationFailedEvent {

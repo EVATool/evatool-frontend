@@ -26,7 +26,7 @@ describe('StakeholderDataService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initialize', () => { // TODO
+  it('should initialize', () => {
     // given
 
     // when
@@ -64,7 +64,7 @@ describe('StakeholderDataService', () => {
 
   it('should delete stakeholder', () => {
     // given
-    const deletedStakeholder = service.stakeholders[0]; // TODO why does this test fail if the service. is replaced with data.
+    const deletedStakeholder = service.stakeholders[0];
 
     // then
     service.deletedStakeholder.subscribe((stakeholder: Stakeholder) => {
@@ -127,8 +127,5 @@ describe('StakeholderDataService', () => {
       // then
       expect(service.deletedStakeholder.emit).toHaveBeenCalled();
     });
-
-    // TODO Stakeholders prio loaded event.
-    // TODO Stakeholders level loaded event.
   });
 });
