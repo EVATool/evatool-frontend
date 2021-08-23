@@ -45,12 +45,14 @@ export class StakeholderDataService extends DataService {
 
       // Load Stakeholder Priorities.
       this.stakeholderRest.getStakeholderPriorities().subscribe((stakeholderPriorities: string[]) => {
+        this.stakeholderPriorities = [];
         stakeholderPriorities.forEach((stakeholderPriority: string) => this.stakeholderPriorities.push(stakeholderPriority));
         this.loadedStakeholderPriorities.emit(this.stakeholderPriorities);
       });
 
       // Load Stakeholder Levels.
       this.stakeholderRest.getStakeholderLevels().subscribe((stakeholderLevels: string[]) => {
+        this.stakeholderLevels = [];
         stakeholderLevels.forEach((stakeholderLevel: string) => this.stakeholderLevels.push(stakeholderLevel));
         this.loadedStakeholderLevels.emit(this.stakeholderLevels);
       });
