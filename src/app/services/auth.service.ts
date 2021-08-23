@@ -8,6 +8,7 @@ import {ROUTES} from '../app-routes';
 import {AuthTokenDto} from '../dto/AuthTokenDto';
 import {AuthRegisterRealmDto} from '../dto/AuthRegisterRealmDto';
 import {AuthRegisterUserDto} from '../dto/AuthRegisterUserDto';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -98,7 +99,9 @@ export class AuthService extends RestService {
       this._username = cachedUsername;
     }
 
-    this.startTimers();
+    if (!environment.testing) {
+      this.startTimers();
+    }
   }
 
   getToken(): string {
