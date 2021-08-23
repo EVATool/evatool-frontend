@@ -4,14 +4,14 @@
     <h1> ETHIK TOOL </h1>
   </a>
 
-  <div class="user-menu">
+  <div class="user-menu"
+       *ngIf="authService.authenticated">
     <div fxLayout="row">
       <div class="current-user">
         {{authService.username}}
       </div>
 
       <button mat-icon-button
-              *ngIf="authService.authenticated"
               [matMenuTriggerFor]="menu">
         <mat-icon>person</mat-icon>
       </button>
