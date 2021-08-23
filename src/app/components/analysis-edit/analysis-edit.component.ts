@@ -11,6 +11,8 @@ import {
 } from '../../services/cross-ui-event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
+import * as uuid from 'uuid';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -31,8 +33,8 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Load current analysis.
-    const analysisId = this.route.snapshot.params.id;
-    const analysisIdIsUUID = analysisId?.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
+    const analysisId = this.route.snapshot.params?.id;
+    const analysisIdIsUUID = uuid.validate(analysisId);
     if (analysisIdIsUUID) {
       this.analysisData.changeCurrentAnalysis(analysisId);
     } else {
