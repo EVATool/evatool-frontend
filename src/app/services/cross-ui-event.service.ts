@@ -72,95 +72,97 @@ export class CrossUiEventService implements OnDestroy {
   }
 
   init(): void {
-    this.httpLoader.httpError.pipe(takeUntil(this.ngUnsubscribe)).subscribe((httpInfo: HttpInfo) => {
-      if (httpInfo.functionalErrorCode) {
-        switch (httpInfo.functionalErrorCode) {
-          case FunctionalErrorCodeService.IMPACT_REFERENCED_BY_REQUIREMENT:
-            const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
-            const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
-            if (impact && deltas) {
-              this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementsEvent(impact, deltas));
-            }
-            break;
+    this.httpLoader.httpError
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((httpInfo: HttpInfo) => {
+        if (httpInfo.functionalErrorCode) {
+          switch (httpInfo.functionalErrorCode) {
+            case FunctionalErrorCodeService.IMPACT_REFERENCED_BY_REQUIREMENT:
+              const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
+              const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
+              if (impact && deltas) {
+                this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementsEvent(impact, deltas));
+              }
+              break;
 
-          case FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT:
-            const stakeholder = this.stakeholderData.stakeholders.find(s => s.id = httpInfo.tag.stakeholderId);
-            const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
-            if (stakeholder && impactsStakeholder) {
-              this.stakeholderReferencedByImpacts.emit(new StakeholderReferencedByImpactsEvent(stakeholder, impactsStakeholder));
-            }
-            break;
+            case FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT:
+              const stakeholder = this.stakeholderData.stakeholders.find(s => s.id = httpInfo.tag.stakeholderId);
+              const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
+              if (stakeholder && impactsStakeholder) {
+                this.stakeholderReferencedByImpacts.emit(new StakeholderReferencedByImpactsEvent(stakeholder, impactsStakeholder));
+              }
+              break;
 
-          case FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT:
-            const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
-            const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
-            if (value && impactsValue) {
-              this.valueReferencedByImpacts.emit(new ValueReferencedByImpactsEvent(value, impactsValue));
-            }
-            break;
+            case FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT:
+              const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
+              const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
+              if (value && impactsValue) {
+                this.valueReferencedByImpacts.emit(new ValueReferencedByImpactsEvent(value, impactsValue));
+              }
+              break;
 
-          case FunctionalErrorCodeService.VARIANT_REFERENCED_BY_REQUIREMENT:
-            const variant = this.variantData.variants.find(v => v.id = httpInfo.tag.variantId);
-            const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
-            if (variant && requirements) {
-              this.variantReferencedByRequirements.emit(new VariantReferencedByRequirementsEvent(variant, requirements));
-            }
-            break;
-        }
-      } else {
-        const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1);
-        const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
-        const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
-        const notFound = httpInfo.httpStatusCode === 404;
+            case FunctionalErrorCodeService.VARIANT_REFERENCED_BY_REQUIREMENT:
+              const variant = this.variantData.variants.find(v => v.id = httpInfo.tag.variantId);
+              const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
+              if (variant && requirements) {
+                this.variantReferencedByRequirements.emit(new VariantReferencedByRequirementsEvent(variant, requirements));
+              }
+              break;
+          }
+        } else {
+          const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1);
+          const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
+          const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
+          const notFound = httpInfo.httpStatusCode === 404;
 
-        if (httpInfo.httpStatusCode === 401) {
-          this.authenticationFailed.emit(new AuthenticationFailedEvent());
-        } else if (httpInfo.httpStatusCode === 403) {
-          this.authorizationFailed.emit(new AuthorizationFailedEvent());
-        } else if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
-          this.analysisWithValidIdNotFound.emit(new AnalysisWithIdNotFound(id));
-        } else if (httpInfo.path.includes('/auth/realms/') && notFound) {
-          this.realmNotFound.emit(new RealmNotFoundEvent(httpInfo.path.split('/')[3]));
-        } else if (httpInfo.method === 'DELETE') {
-          if (apiEndpoint === 'analyses') {
-            const analysis = this.analysisData.analyses.find(a => a.id === id);
-            if (analysis) {
-              this.analysisDeletionFailed.emit(new AnalysisDeletionFailedEvent(analysis, notFound));
-            }
-          } else if (apiEndpoint === 'stakeholders') {
-            const stakeholder = this.stakeholderData.stakeholders.find(s => s.id === id);
-            if (stakeholder) {
-              this.stakeholderDeletionFailed.emit(new StakeholderDeletionFailedEvent(stakeholder, notFound));
-            }
-          } else if (apiEndpoint === 'values') {
-            const value = this.valueData.values.find(v => v.id === id);
-            if (value) {
-              this.valueDeletionFailed.emit(new ValueDeletionFailedEvent(value, notFound));
-            }
-          } else if (apiEndpoint === 'impacts') {
-            const impact = this.impactData.impacts.find(i => i.id === id);
-            if (impact) {
-              this.impactDeletionFailed.emit(new ImpactDeletionFailedEvent(impact, notFound));
-            }
-          } else if (apiEndpoint === 'variants') {
-            const variant = this.variantData.variants.find(v => v.id === id);
-            if (variant) {
-              this.variantDeletionFailed.emit(new VariantDeletionFailedEvent(variant, notFound));
-            }
-          } else if (apiEndpoint === 'requirements') {
-            const requirement = this.requirementData.requirements.find(r => r.id === id);
-            if (requirement) {
-              this.requirementDeletionFailed.emit(new RequirementDeletionFailedEvent(requirement, notFound));
-            }
-          } else if (apiEndpoint === 'requirement-deltas') {
-            const requirementDelta = this.requirementDeltaData.requirementDeltas.find(rd => rd.id === id);
-            if (requirementDelta) {
-              this.requirementDeltaDeletionFailed.emit(new RequirementDeltaDeletionFailedEvent(requirementDelta, notFound));
+          if (httpInfo.httpStatusCode === 401) {
+            this.authenticationFailed.emit(new AuthenticationFailedEvent());
+          } else if (httpInfo.httpStatusCode === 403) {
+            this.authorizationFailed.emit(new AuthorizationFailedEvent());
+          } else if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
+            this.analysisWithValidIdNotFound.emit(new AnalysisWithIdNotFound(id));
+          } else if (httpInfo.path.includes('/auth/realms/') && notFound) {
+            this.realmNotFound.emit(new RealmNotFoundEvent(httpInfo.path.split('/')[3]));
+          } else if (httpInfo.method === 'DELETE') {
+            if (apiEndpoint === 'analyses') {
+              const analysis = this.analysisData.analyses.find(a => a.id === id);
+              if (analysis) {
+                this.analysisDeletionFailed.emit(new AnalysisDeletionFailedEvent(analysis, notFound));
+              }
+            } else if (apiEndpoint === 'stakeholders') {
+              const stakeholder = this.stakeholderData.stakeholders.find(s => s.id === id);
+              if (stakeholder) {
+                this.stakeholderDeletionFailed.emit(new StakeholderDeletionFailedEvent(stakeholder, notFound));
+              }
+            } else if (apiEndpoint === 'values') {
+              const value = this.valueData.values.find(v => v.id === id);
+              if (value) {
+                this.valueDeletionFailed.emit(new ValueDeletionFailedEvent(value, notFound));
+              }
+            } else if (apiEndpoint === 'impacts') {
+              const impact = this.impactData.impacts.find(i => i.id === id);
+              if (impact) {
+                this.impactDeletionFailed.emit(new ImpactDeletionFailedEvent(impact, notFound));
+              }
+            } else if (apiEndpoint === 'variants') {
+              const variant = this.variantData.variants.find(v => v.id === id);
+              if (variant) {
+                this.variantDeletionFailed.emit(new VariantDeletionFailedEvent(variant, notFound));
+              }
+            } else if (apiEndpoint === 'requirements') {
+              const requirement = this.requirementData.requirements.find(r => r.id === id);
+              if (requirement) {
+                this.requirementDeletionFailed.emit(new RequirementDeletionFailedEvent(requirement, notFound));
+              }
+            } else if (apiEndpoint === 'requirement-deltas') {
+              const requirementDelta = this.requirementDeltaData.requirementDeltas.find(rd => rd.id === id);
+              if (requirementDelta) {
+                this.requirementDeltaDeletionFailed.emit(new RequirementDeltaDeletionFailedEvent(requirementDelta, notFound));
+              }
             }
           }
         }
-      }
-    });
+      });
   }
 }
 

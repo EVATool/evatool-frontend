@@ -57,61 +57,71 @@ export class ImpactDataService extends DataService implements OnDestroy {
         this.stakeholdersLoaded = true;
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
-    this.valueData.loadedValues.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
-      this.valuesLoaded = true;
-      this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
-    });
+    this.valueData.loadedValues
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.valuesLoaded = true;
+        this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
+      });
   }
 
   private loadIfChildrenLoaded(analysisId: string): void {
     if (!this.stakeholdersLoaded || !this.valuesLoaded) {
       return;
     }
-    this.impactRest.getImpactsByAnalysisId(analysisId).pipe(takeUntil(this.ngUnsubscribe)).subscribe((impactDtoList: ImpactDto[]) => {
-      this.impacts = [];
-      impactDtoList.forEach(impactDto => {
-        this.impacts.push(this.impactMapper.fromDto(impactDto,
-          [this.analysisData.currentAnalysis],
-          this.valueData.values,
-          this.stakeholderData.stakeholders));
+    this.impactRest.getImpactsByAnalysisId(analysisId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impactDtoList: ImpactDto[]) => {
+        this.impacts = [];
+        impactDtoList.forEach(impactDto => {
+          this.impacts.push(this.impactMapper.fromDto(impactDto,
+            [this.analysisData.currentAnalysis],
+            this.valueData.values,
+            this.stakeholderData.stakeholders));
+        });
+        this.impacts = this.sortDefault(this.impacts);
+        this.loadedImpacts.emit(this.impacts);
+        this.logger.info(this, 'Impacts loaded');
       });
-      this.impacts = this.sortDefault(this.impacts);
-      this.loadedImpacts.emit(this.impacts);
-      this.logger.info(this, 'Impacts loaded');
-    });
   }
 
   createImpact(impact: Impact): void {
-    this.impactRest.createImpact(this.impactMapper.toDto(impact)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((impactDto: ImpactDto) => {
-      const createdImpact = this.impactMapper.fromDto(impactDto,
-        [this.analysisData.currentAnalysis],
-        this.valueData.values,
-        this.stakeholderData.stakeholders);
-      this.impacts.push(createdImpact);
-      this.createdImpact.emit(createdImpact);
-      this.logger.info(this, 'Impact created');
-    });
+    this.impactRest.createImpact(this.impactMapper.toDto(impact))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impactDto: ImpactDto) => {
+        const createdImpact = this.impactMapper.fromDto(impactDto,
+          [this.analysisData.currentAnalysis],
+          this.valueData.values,
+          this.stakeholderData.stakeholders);
+        this.impacts.push(createdImpact);
+        this.createdImpact.emit(createdImpact);
+        this.logger.info(this, 'Impact created');
+      });
   }
 
   updateImpact(impact: Impact): void {
-    this.impactRest.updateImpact(this.impactMapper.toDto(impact)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((impactDto: ImpactDto) => {
-      this.impactMapper.updateFromDto(impactDto,
-        impact,
-        [this.analysisData.currentAnalysis],
-        this.valueData.values,
-        this.stakeholderData.stakeholders);
-      this.updatedImpact.emit(impact);
-      this.logger.info(this, 'Impact updated');
-    });
+    this.impactRest.updateImpact(this.impactMapper.toDto(impact))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impactDto: ImpactDto) => {
+        this.impactMapper.updateFromDto(impactDto,
+          impact,
+          [this.analysisData.currentAnalysis],
+          this.valueData.values,
+          this.stakeholderData.stakeholders);
+        this.updatedImpact.emit(impact);
+        this.logger.info(this, 'Impact updated');
+      });
   }
 
   deleteImpact(impact: Impact): void {
-    this.impactRest.deleteImpact(impact.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
-      const index: number = this.impacts.indexOf(impact, 0);
-      this.impacts.splice(index, 1);
-      this.deletedImpact.emit(impact);
-      this.logger.info(this, 'Impact deleted');
-    });
+    this.impactRest.deleteImpact(impact.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        const index: number = this.impacts.indexOf(impact, 0);
+        this.impacts.splice(index, 1);
+        this.deletedImpact.emit(impact);
+        this.logger.info(this, 'Impact deleted');
+      });
   }
 
   createDefaultImpact(analysis: Analysis, stakeholder: Stakeholder, value: Value): Impact {
