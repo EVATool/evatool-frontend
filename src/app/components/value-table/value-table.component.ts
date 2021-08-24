@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -9,13 +9,18 @@ import {ImpactDataService} from '../../services/data/impact-data.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {CrossUiEventService, ValueDeletionFailedEvent, ValueReferencedByImpactsEvent} from '../../services/cross-ui-event.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-value-table',
   templateUrl: './value-table.component.html',
   styleUrls: ['./value-table.component.scss']
 })
-export class ValueTableComponent implements OnInit, AfterViewInit {
+export class ValueTableComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @Input() valueType!: string;
   @Input() id = '';
@@ -35,29 +40,29 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.crossUI.valueReferencedByImpacts.subscribe((event: ValueReferencedByImpactsEvent) => {
+    this.crossUI.valueReferencedByImpacts.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: ValueReferencedByImpactsEvent) => {
       const message = 'This value cannot be deleted. It is still being used by '
         + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
       const action = 'show';
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction().subscribe(() => {
+      snackBarRef.onAction().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
         this.crossUI.userWantsToSeeValueReferencedByImpacts.emit(event);
       });
     });
 
-    this.crossUI.valueDeletionFailed.subscribe((event: ValueDeletionFailedEvent) => {
+    this.crossUI.valueDeletionFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: ValueDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 
-    this.valueDataService.loadedValues.subscribe((values: Value[]) => {
+    this.valueDataService.loadedValues.pipe(takeUntil(this.ngUnsubscribe)).subscribe((values: Value[]) => {
       this.updateTableDataSource();
     });
 
-    this.valueDataService.createdValue.subscribe((value: Value) => {
+    this.valueDataService.createdValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Value) => {
       this.updateTableDataSource();
     });
 
-    this.valueDataService.deletedValue.subscribe((value: Value) => {
+    this.valueDataService.deletedValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Value) => {
       this.updateTableDataSource();
     });
 
@@ -66,6 +71,11 @@ export class ValueTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initSorting();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateTableDataSource(): void {
