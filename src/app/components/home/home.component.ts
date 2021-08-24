@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
     this.dialog.open(AnalysisDialogComponent, {
       height: '40%',
       width: '40%',
-      data: {analysis: analysis}
+      data: {analysis}
     });
   }
 
