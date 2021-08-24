@@ -99,8 +99,8 @@ export class AuthService extends RestService {
       this._username = cachedUsername;
     }
 
-    if (!environment.testing) {
-      this.startTimers();
+    if (environment.authEnabled) {
+      this.startTimer();
     }
   }
 
@@ -168,30 +168,7 @@ export class AuthService extends RestService {
       });
   }
 
-  startTimers(): void {
-    const interval = setInterval(() => {
-      if (!this.authenticated) {
-        clearInterval(interval);
-      }
-
-      this.tokenExpiresIn -= 1;
-      this.refreshTokenExpiresIn -= 1;
-
-      // Try to get new token with refresh token if token expires soon.
-      if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing && this.authenticated) {
-        this.isAutoRefreshing = true;
-        this.logger.info(this, 'Automatically refreshing existing token...');
-        this.refreshExistingToken(true);
-      }
-
-      if (this.refreshTokenExpiresIn <= 0) {
-        this.logout();
-      }
-    }, 1000);
-  }
-
   takeInAuthResponse(authTokenDto: AuthTokenDto, ignoreRefreshToken: boolean = false): void {
-    this.authenticated = true;
     this.token = authTokenDto.token;
     this.tokenExpiresIn = authTokenDto.tokenExpiresIn;
     if (!ignoreRefreshToken) {
@@ -200,5 +177,26 @@ export class AuthService extends RestService {
     } else {
       this.isAutoRefreshing = false;
     }
+    this.authenticated = true;
+  }
+
+  startTimer(): void {
+    const interval = setInterval(() => {
+      if (this.authenticated) { // TODO test new if clause
+        this.tokenExpiresIn -= 1;
+        this.refreshTokenExpiresIn -= 1;
+
+        // Try to get new token with refresh token if token expires soon.
+        if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing && this.authenticated) {
+          this.isAutoRefreshing = true;
+          this.logger.info(this, 'Automatically refreshing existing token...');
+          this.refreshExistingToken(true);
+        }
+
+        if (this.refreshTokenExpiresIn <= 0) {
+          this.logout();
+        }
+      }
+    }, 1000);
   }
 }
