@@ -29,7 +29,9 @@ export class VariantDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.crossUI.userWantsToSeeVariantReferencedByRequirements.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: VariantReferencedByRequirementsEvent) => {
+    this.crossUI.userWantsToSeeVariantReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: VariantReferencedByRequirementsEvent) => {
       this.closeClick();
     });
   }

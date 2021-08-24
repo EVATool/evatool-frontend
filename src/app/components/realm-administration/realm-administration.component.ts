@@ -31,15 +31,21 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnInit(): void {
-    this.crossUI.authenticationFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.crossUI.authenticationFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       const message = 'Invalid credentials';
       this.snackBar.open(message, '', {duration: 5000});
     });
 
-    this.authService.realmRegistered.pipe(takeUntil(this.ngUnsubscribe)).subscribe((realm: string) => {
+    this.authService.realmRegistered
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((realm: string) => {
       const message = 'Realm "' + realm + '" was successfully created.';
       const action = 'Manage';
-      this.snackBar.open(message, action, {duration: 5000}).onAction().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      this.snackBar.open(message, action, {duration: 5000}).onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
         const realmManageUrl = this.authService.getAuthManageRealmUrl(realm);
         window.open(realmManageUrl);
       });

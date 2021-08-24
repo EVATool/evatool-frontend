@@ -45,15 +45,21 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate([ROUTES.pageNotFound]);
     }
 
-    this.crossUI.analysisWithValidIdNotFound.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.crossUI.analysisWithValidIdNotFound
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       this.router.navigate([ROUTES.pageNotFound]);
     });
 
-    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: StakeholderReferencedByImpactsEvent) => {
+    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
       this.tabGroup.selectedIndex = 1;
     });
 
-    this.crossUI.userWantsToSeeImpactReferencedByRequirements.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: ImpactReferencedByRequirementsEvent) => {
+    this.crossUI.userWantsToSeeImpactReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ImpactReferencedByRequirementsEvent) => {
       this.tabGroup.selectedIndex = 2;
     });
   }

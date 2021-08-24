@@ -86,51 +86,73 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   ngOnInit(): void {
-    this.crossUI.userWantsToSeeVariantReferencedByRequirements.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: VariantReferencedByRequirementsEvent) => {
+    this.crossUI.userWantsToSeeVariantReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: VariantReferencedByRequirementsEvent) => {
       this.deletionFlaggedVariant = event.variant;
       event.requirements.forEach(requirement => {
         requirement.highlighted = true;
       });
     });
 
-    this.crossUI.userWantsToSeeImpactReferencedByRequirements.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: ImpactReferencedByRequirementsEvent) => {
+    this.crossUI.userWantsToSeeImpactReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ImpactReferencedByRequirementsEvent) => {
       this.deletionFlaggedImpact = event.impact;
       event.deltas.forEach((delta: RequirementDelta) => {
         delta.highlighted = true;
       });
     });
 
-    this.crossUI.requirementDeletionFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: RequirementDeletionFailedEvent) => {
+    this.crossUI.requirementDeletionFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: RequirementDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 
-    this.crossUI.requirementDeltaDeletionFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: RequirementDeltaDeletionFailedEvent) => {
+    this.crossUI.requirementDeltaDeletionFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: RequirementDeltaDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 
-    this.impactDataService.loadedImpacts.pipe(takeUntil(this.ngUnsubscribe)).subscribe((impacts: Impact[]) => {
+    this.impactDataService.loadedImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impacts: Impact[]) => {
       this.updateImpactColumns();
     });
-    this.impactDataService.createdImpact.pipe(takeUntil(this.ngUnsubscribe)).subscribe((impact: Impact) => {
+    this.impactDataService.createdImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
       this.updateImpactColumns();
     });
-    this.impactDataService.deletedImpact.pipe(takeUntil(this.ngUnsubscribe)).subscribe((impact: Impact) => {
+    this.impactDataService.deletedImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
       this.updateImpactColumns();
     });
     this.updateImpactColumns();
 
-    this.requirementDataService.loadedRequirements.pipe(takeUntil(this.ngUnsubscribe)).subscribe((requirements: Requirement[]) => {
+    this.requirementDataService.loadedRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirements: Requirement[]) => {
       this.updateTableDataSource();
     });
-    this.requirementDataService.createdRequirement.pipe(takeUntil(this.ngUnsubscribe)).subscribe((requirement: Requirement) => {
+    this.requirementDataService.createdRequirement
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirement: Requirement) => {
       this.updateTableDataSource();
     });
-    this.requirementDataService.deletedRequirement.pipe(takeUntil(this.ngUnsubscribe)).subscribe((requirement: Requirement) => {
+    this.requirementDataService.deletedRequirement
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirement: Requirement) => {
       this.updateTableDataSource();
     });
     this.updateTableDataSource();
 
-    this.requirementDeltaDataService.createdRequirementDelta.pipe(takeUntil(this.ngUnsubscribe)).subscribe((delta: RequirementDelta) => {
+    this.requirementDeltaDataService.createdRequirementDelta
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((delta: RequirementDelta) => {
       this.showDeltaSlider(delta);
     });
   }
@@ -159,7 +181,9 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled.pipe(takeUntil(this.ngUnsubscribe)).subscribe(e => {
+    this.scrollbarRef?.scrolled
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
     });
 

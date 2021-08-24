@@ -34,7 +34,9 @@ export class AnalysisDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.analysisData.createdAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
+    this.analysisData.createdAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysis: Analysis) => {
       this.submitButtonClick(analysis);
     });
   }

@@ -41,37 +41,53 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.stakeholderDataService.loadedStakeholders.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholders: Stakeholder[]) => {
+    this.stakeholderDataService.loadedStakeholders
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholders: Stakeholder[]) => {
       this.updateStakeholders();
     });
 
-    this.stakeholderDataService.createdStakeholder.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholder: Stakeholder) => {
+    this.stakeholderDataService.createdStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
       this.updateStakeholders();
     });
 
-    this.stakeholderDataService.updatedStakeholder.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholder: Stakeholder) => {
+    this.stakeholderDataService.updatedStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
       this.updateStakeholders();
     });
 
-    this.stakeholderDataService.deletedStakeholder.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholder: Stakeholder) => {
+    this.stakeholderDataService.deletedStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
       this.updateStakeholders();
     });
 
     this.updateStakeholders();
 
-    this.valueDataService.loadedValues.pipe(takeUntil(this.ngUnsubscribe)).subscribe((values: Value[]) => {
+    this.valueDataService.loadedValues
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value[]) => {
       this.updateValues();
     });
 
-    this.valueDataService.createdValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Value) => {
+    this.valueDataService.createdValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
       this.updateValues();
     });
 
-    this.valueDataService.updatedValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Value) => {
+    this.valueDataService.updatedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
       this.updateValues();
     });
 
-    this.valueDataService.deletedValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Value) => {
+    this.valueDataService.deletedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
       this.updateValues();
     });
 

@@ -39,33 +39,47 @@ export class VariantTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.crossUI.variantReferencedByRequirements.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: VariantReferencedByRequirementsEvent) => {
+    this.crossUI.variantReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: VariantReferencedByRequirementsEvent) => {
       const message = 'This variant cannot be deleted. It is still being used by '
         + event.requirements.length + ' requirement' + (event.requirements.length === 1 ? '' : 's') + '.';
       const action = 'show';
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      snackBarRef.onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
         this.crossUI.userWantsToSeeVariantReferencedByRequirements.emit(event);
       });
     });
 
-    this.crossUI.variantDeletionFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: VariantDeletionFailedEvent) => {
+    this.crossUI.variantDeletionFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: VariantDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 
-    this.variantDataService.loadedVariants.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variants: Variant[]) => {
+    this.variantDataService.loadedVariants
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variants: Variant[]) => {
       this.updateTableDataSource();
     });
 
-    this.variantDataService.createdVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
+    this.variantDataService.createdVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
       this.updateTableDataSource();
     });
 
-    this.variantDataService.updatedVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
+    this.variantDataService.updatedVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
       this.updateTableDataSource();
     });
 
-    this.variantDataService.deletedVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
+    this.variantDataService.deletedVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
       this.updateTableDataSource();
     });
 

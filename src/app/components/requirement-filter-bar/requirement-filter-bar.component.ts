@@ -46,55 +46,79 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.variantData.loadedVariants.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variants: Variant[]) => {
+    this.variantData.loadedVariants
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variants: Variant[]) => {
       this.updateVariants();
     });
 
-    this.variantData.createdVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
+    this.variantData.createdVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
       this.updateVariants();
     });
 
-    this.variantData.updatedVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
+    this.variantData.updatedVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
       this.updateVariants();
     });
 
-    this.variantData.deletedVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
+    this.variantData.deletedVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
       this.updateVariants();
     });
 
     this.updateVariants();
 
-    this.valueData.loadedValues.pipe(takeUntil(this.ngUnsubscribe)).subscribe((values: Value[]) => {
+    this.valueData.loadedValues
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value[]) => {
       this.updateValues();
     });
 
-    this.valueData.createdValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Value) => {
+    this.valueData.createdValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
       this.updateValues();
     });
 
-    this.valueData.updatedValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((values: Value) => {
+    this.valueData.updatedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value) => {
       this.updateValues();
     });
 
-    this.valueData.deletedValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((values: Value) => {
+    this.valueData.deletedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value) => {
       this.updateValues();
     });
 
     this.updateValues();
 
-    this.impactData.loadedImpacts.pipe(takeUntil(this.ngUnsubscribe)).subscribe((impacts: Impact[]) => {
+    this.impactData.loadedImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impacts: Impact[]) => {
       this.updateImpacts();
     });
 
-    this.impactData.createdImpact.pipe(takeUntil(this.ngUnsubscribe)).subscribe((impact: Impact) => {
+    this.impactData.createdImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
       this.updateImpacts();
     });
 
-    this.impactData.updatedImpact.pipe(takeUntil(this.ngUnsubscribe)).subscribe((impact: Impact) => {
+    this.impactData.updatedImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
       this.updateImpacts();
     });
 
-    this.impactData.deletedImpact.pipe(takeUntil(this.ngUnsubscribe)).subscribe((impact: Impact) => {
+    this.impactData.deletedImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
       this.updateImpacts();
     });
 

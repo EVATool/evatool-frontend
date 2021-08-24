@@ -48,31 +48,43 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   ngOnInit(): void {
-    this.crossUI.stakeholderReferencedByImpacts.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: StakeholderReferencedByImpactsEvent) => {
+    this.crossUI.stakeholderReferencedByImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
       this.logger.warn(this, 'This stakeholder is still being used by ' + event.impacts.length + ' impacts');
       const message = 'This stakeholder cannot be deleted. It is still being used by '
         + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
       const action = 'show';
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      snackBarRef.onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
         this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
         this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.emit(event);
       });
     });
 
-    this.crossUI.stakeholderDeletionFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: StakeholderDeletionFailedEvent) => {
+    this.crossUI.stakeholderDeletionFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: StakeholderDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 
-    this.stakeholderData.loadedStakeholders.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholders: Stakeholder[]) => {
+    this.stakeholderData.loadedStakeholders
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholders: Stakeholder[]) => {
       this.updateTableDataSource();
     });
 
-    this.stakeholderData.createdStakeholder.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholders: Stakeholder) => {
+    this.stakeholderData.createdStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholders: Stakeholder) => {
       this.updateTableDataSource();
     });
 
-    this.stakeholderData.deletedStakeholder.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholders: Stakeholder) => {
+    this.stakeholderData.deletedStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholders: Stakeholder) => {
       this.updateTableDataSource();
     });
 
@@ -80,7 +92,9 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled.pipe(takeUntil(this.ngUnsubscribe)).subscribe(e => {
+    this.scrollbarRef?.scrolled
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
     });
 

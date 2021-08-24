@@ -31,13 +31,17 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.httpLoaderService.httpActive.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.httpLoaderService.httpActive
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       this.logger.debug(this, 'There are active http requests');
       this.successIconShown = false;
       this.loadingSpinnerShown = true;
     });
 
-    this.httpLoaderService.httpNotActive.pipe(takeUntil(this.ngUnsubscribe)).subscribe((lastHttpEvent: HttpInfo) => {
+    this.httpLoaderService.httpNotActive
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((lastHttpEvent: HttpInfo) => {
       this.logger.debug(this, 'There are NO active http requests');
       this.loadingSpinnerShown = false;
 
@@ -50,18 +54,24 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.crossUI.authenticationFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => { // 401
+    this.crossUI.authenticationFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => { // 401
       if (!this.router.url.includes(ROUTES.realmAdministration)) {
         this.router.navigate([ROUTES.login]);
       }
     });
 
-    this.crossUI.authorizationFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => { // 403
+    this.crossUI.authorizationFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => { // 403
       this.router.navigate([ROUTES.accessDenied]);
     });
 
     // Generic http error display.
-    this.httpLoaderService.httpError.pipe(takeUntil(this.ngUnsubscribe)).subscribe((httpInfo: HttpInfo) => {
+    this.httpLoaderService.httpError
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((httpInfo: HttpInfo) => {
       if (!environment.production) {
         console.log(httpInfo); // This should stay here.
       }
@@ -75,7 +85,9 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
         const message = 'An http request failed (status ' + httpInfo.httpStatusCode + ')';
         const action = '';
         const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-        snackBarRef.afterDismissed().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+        snackBarRef.afterDismissed()
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe(() => {
           this.snackBarShown = false;
         });
       }

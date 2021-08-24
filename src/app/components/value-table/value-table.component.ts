@@ -40,29 +40,41 @@ export class ValueTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.crossUI.valueReferencedByImpacts.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: ValueReferencedByImpactsEvent) => {
+    this.crossUI.valueReferencedByImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ValueReferencedByImpactsEvent) => {
       const message = 'This value cannot be deleted. It is still being used by '
         + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
       const action = 'show';
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      snackBarRef.onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
         this.crossUI.userWantsToSeeValueReferencedByImpacts.emit(event);
       });
     });
 
-    this.crossUI.valueDeletionFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: ValueDeletionFailedEvent) => {
+    this.crossUI.valueDeletionFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ValueDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 
-    this.valueDataService.loadedValues.pipe(takeUntil(this.ngUnsubscribe)).subscribe((values: Value[]) => {
+    this.valueDataService.loadedValues
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value[]) => {
       this.updateTableDataSource();
     });
 
-    this.valueDataService.createdValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Value) => {
+    this.valueDataService.createdValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
       this.updateTableDataSource();
     });
 
-    this.valueDataService.deletedValue.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Value) => {
+    this.valueDataService.deletedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
       this.updateTableDataSource();
     });
 
