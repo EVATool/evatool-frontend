@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {StakeholderDataService} from '../../services/data/stakeholder-data.service';
 import {Stakeholder} from '../../model/Stakeholder';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
@@ -16,13 +16,18 @@ import {
   StakeholderDeletionFailedEvent,
   StakeholderReferencedByImpactsEvent
 } from '../../services/cross-ui-event.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-stakeholder-table',
   templateUrl: './stakeholder-table.component.html',
   styleUrls: ['./stakeholder-table.component.scss']
 })
-export class StakeholderTableComponent implements OnInit, AfterViewInit {
+export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Stakeholder>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -43,31 +48,31 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.crossUI.stakeholderReferencedByImpacts.subscribe((event: StakeholderReferencedByImpactsEvent) => {
+    this.crossUI.stakeholderReferencedByImpacts.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: StakeholderReferencedByImpactsEvent) => {
       this.logger.warn(this, 'This stakeholder is still being used by ' + event.impacts.length + ' impacts');
       const message = 'This stakeholder cannot be deleted. It is still being used by '
         + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
       const action = 'show';
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction().subscribe(() => {
+      snackBarRef.onAction().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
         this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
         this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.emit(event);
       });
     });
 
-    this.crossUI.stakeholderDeletionFailed.subscribe((event: StakeholderDeletionFailedEvent) => {
+    this.crossUI.stakeholderDeletionFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: StakeholderDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 
-    this.stakeholderData.loadedStakeholders.subscribe((stakeholders: Stakeholder[]) => {
+    this.stakeholderData.loadedStakeholders.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholders: Stakeholder[]) => {
       this.updateTableDataSource();
     });
 
-    this.stakeholderData.createdStakeholder.subscribe((stakeholders: Stakeholder) => {
+    this.stakeholderData.createdStakeholder.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholders: Stakeholder) => {
       this.updateTableDataSource();
     });
 
-    this.stakeholderData.deletedStakeholder.subscribe((stakeholders: Stakeholder) => {
+    this.stakeholderData.deletedStakeholder.pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholders: Stakeholder) => {
       this.updateTableDataSource();
     });
 
@@ -75,12 +80,17 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled.subscribe(e => {
+    this.scrollbarRef?.scrolled.pipe(takeUntil(this.ngUnsubscribe)).subscribe(e => {
       this.windowScrolled = e.target.scrollTop !== 0;
     });
 
     this.initSorting();
     this.initFiltering();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateTableDataSource(): void {
