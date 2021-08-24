@@ -1,7 +1,7 @@
 import {HttpLoaderService} from './http-loader.service';
 import {HttpInfo} from './HttpInfo';
 import {FunctionalErrorCodeService} from './functional-error-code.service';
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {Impact} from '../model/Impact';
 import {RequirementDelta} from '../model/RequirementDelta';
 import {ImpactDataService} from './data/impact-data.service';
@@ -16,11 +16,16 @@ import {StakeholderDataService} from './data/stakeholder-data.service';
 import {ValueDataService} from './data/value-data.service';
 import {Analysis} from '../model/Analysis';
 import {AnalysisDataService} from './data/analysis-data.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CrossUiEventService {
+export class CrossUiEventService implements OnDestroy{
+
+  private ngUnsubscribe = new Subject();
+
   @Output() initComplete: EventEmitter<void> = new EventEmitter();
   initialized = false;
 
@@ -61,8 +66,13 @@ export class CrossUiEventService {
               private requirementDeltaData: RequirementDeltaDataService) {
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   init(): void {
-    this.httpLoader.httpError.subscribe((httpInfo: HttpInfo) => {
+    this.httpLoader.httpError.pipe(takeUntil(this.ngUnsubscribe)).subscribe((httpInfo: HttpInfo) => {
       if (httpInfo.functionalErrorCode) {
         switch (httpInfo.functionalErrorCode) {
           case FunctionalErrorCodeService.IMPACT_REFERENCED_BY_REQUIREMENT:
