@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {LogService} from './log.service';
 import {RestService} from './rest.service';
 import {HttpClient} from '@angular/common/http';
@@ -9,11 +9,16 @@ import {AuthTokenDto} from '../dto/AuthTokenDto';
 import {AuthRegisterRealmDto} from '../dto/AuthRegisterRealmDto';
 import {AuthRegisterUserDto} from '../dto/AuthRegisterUserDto';
 import {environment} from '../../environments/environment';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends RestService {
+export class AuthService extends RestService implements OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @Output() realmRegistered: EventEmitter<string> = new EventEmitter();
 
   authenticated = false;
@@ -104,6 +109,11 @@ export class AuthService extends RestService {
     }
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   getToken(): string {
     this.refreshExistingToken();
     return this.token;
@@ -116,21 +126,21 @@ export class AuthService extends RestService {
 
     this.http.post<AuthTokenDto>(
       this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions)
-      .subscribe((response: AuthTokenDto) => {
-        this.realm = realm;
-        this.username = username;
-        this.takeInAuthResponse(response);
-        this.router.navigate([ROUTES.home]);
-      });
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthTokenDto) => {
+      this.realm = realm;
+      this.username = username;
+      this.takeInAuthResponse(response);
+      this.router.navigate([ROUTES.home]);
+    });
   }
 
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
     const url = this.authRefreshLoginUrl + '?refreshToken=' + this.refreshToken + '&realm=' + this.realm;
     this.logger.info(this, 'Http post to: ' + url);
     this.http.post<AuthTokenDto>(url, null, this.httpOptions)
-      .subscribe((response: AuthTokenDto) => {
-        this.takeInAuthResponse(response, ignoreRefreshToken);
-      });
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthTokenDto) => {
+      this.takeInAuthResponse(response, ignoreRefreshToken);
+    });
   }
 
   logout(): void {
@@ -151,9 +161,9 @@ export class AuthService extends RestService {
       '&password=' + password;
     this.logger.info(this, 'Http post to: ' + url);
     this.http.post<AuthRegisterUserDto>(url, null, this.httpOptions)
-      .subscribe((response: AuthRegisterUserDto) => {
-        this.login('evatool-realm', username, password);
-      });
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthRegisterUserDto) => {
+      this.login('evatool-realm', username, password);
+    });
   }
 
   registerRealm(adminUsername: string, adminPassword: string, realm: string): void {
@@ -163,9 +173,9 @@ export class AuthService extends RestService {
       '&realm=' + realm;
     this.logger.info(this, 'Http post to: ' + url);
     this.http.post<AuthRegisterRealmDto>(url, null, this.httpOptions)
-      .subscribe((response: AuthRegisterRealmDto) => {
-        this.realmRegistered.emit(response.realm);
-      });
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthRegisterRealmDto) => {
+      this.realmRegistered.emit(response.realm);
+    });
   }
 
   takeInAuthResponse(authTokenDto: AuthTokenDto, ignoreRefreshToken: boolean = false): void {
