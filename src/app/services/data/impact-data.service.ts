@@ -26,9 +26,8 @@ export class ImpactDataService extends DataService implements OnDestroy {
   @Output() updatedImpact: EventEmitter<Impact> = new EventEmitter();
   @Output() deletedImpact: EventEmitter<Impact> = new EventEmitter();
 
+  impactsLoaded = false;
   impacts: Impact[] = [];
-  stakeholdersLoaded = false;
-  valuesLoaded = false;
 
   constructor(protected logger: LogService,
               private impactRest: ImpactRestService,
@@ -49,25 +48,23 @@ export class ImpactDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.stakeholdersLoaded = false;
-        this.valuesLoaded = false;
+        this.impactsLoaded = false;
       });
     this.stakeholderData.loadedStakeholders
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        this.stakeholdersLoaded = true;
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
     this.valueData.loadedValues
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        this.valuesLoaded = true;
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
   }
 
-  private loadIfChildrenLoaded(analysisId: string): void {
-    if (!this.stakeholdersLoaded || !this.valuesLoaded) {
+  loadIfChildrenLoaded(analysisId: string): void {
+    if (!this.stakeholderData.stakeholdersLoaded || !this.valueData.valuesLoaded) {
+      this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
       return;
     }
     this.impactRest.getImpactsByAnalysisId(analysisId)
@@ -81,6 +78,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
             this.stakeholderData.stakeholders));
         });
         this.impacts = this.sortDefault(this.impacts);
+        this.impactsLoaded = true;
         this.loadedImpacts.emit(this.impacts);
         this.logger.info(this, 'Impacts loaded');
       });

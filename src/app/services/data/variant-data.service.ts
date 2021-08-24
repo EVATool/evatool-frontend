@@ -22,6 +22,7 @@ export class VariantDataService extends DataService implements OnDestroy {
   @Output() updatedVariant: EventEmitter<Variant> = new EventEmitter();
   @Output() deletedVariant: EventEmitter<Variant> = new EventEmitter();
 
+  variantsLoaded = false;
   variants: Variant[] = [];
 
   constructor(protected logger: LogService,
@@ -41,6 +42,7 @@ export class VariantDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
+        this.variantsLoaded = false;
         this.variantRest.getVariantsByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((variantDtoList: VariantDto[]) => {
@@ -49,6 +51,7 @@ export class VariantDataService extends DataService implements OnDestroy {
               this.variants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));
             });
             this.variants = this.sortDefault(this.variants);
+            this.variantsLoaded = true;
             this.loadedVariants.emit(this.variants);
             this.logger.info(this, 'Variants loaded');
           });

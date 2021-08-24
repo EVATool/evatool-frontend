@@ -23,6 +23,7 @@ export class ValueDataService extends DataService implements OnDestroy {
   @Output() updatedValue: EventEmitter<Value> = new EventEmitter();
   @Output() deletedValue: EventEmitter<Value> = new EventEmitter();
 
+  valuesLoaded = false;
   values: Value[] = [];
   valueTypes: string[] = [];
 
@@ -43,6 +44,7 @@ export class ValueDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
+        this.valuesLoaded = false;
         this.valueRest.getValuesByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((valueDtoList: ValueDto[]) => {
@@ -51,6 +53,7 @@ export class ValueDataService extends DataService implements OnDestroy {
               this.values.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
             });
             this.values = this.sortDefault(this.values);
+            this.valuesLoaded = true;
             this.loadedValues.emit(this.values);
             this.logger.info(this, 'Values loaded');
           });

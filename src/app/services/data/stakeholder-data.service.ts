@@ -24,6 +24,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
   @Output() updatedStakeholder: EventEmitter<Stakeholder> = new EventEmitter();
   @Output() deletedStakeholder: EventEmitter<Stakeholder> = new EventEmitter();
 
+  stakeholdersLoaded = false;
   stakeholders: Stakeholder[] = [];
   stakeholderPriorities: string[] = [];
   stakeholderLevels: string[] = [];
@@ -45,6 +46,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
+        this.stakeholdersLoaded = false;
         this.stakeholderRest.getStakeholdersByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((stakeholderDtoList: StakeholderDto[]) => {
@@ -53,6 +55,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
               this.stakeholders.push(this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]));
             });
             this.stakeholders = this.sortDefault(this.stakeholders);
+            this.stakeholdersLoaded = true;
             this.loadedStakeholders.emit(this.stakeholders);
             this.logger.info(this, 'Stakeholders loaded');
           });

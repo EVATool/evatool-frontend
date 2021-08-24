@@ -26,9 +26,8 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
   @Output() updatedRequirementDelta: EventEmitter<RequirementDelta> = new EventEmitter();
   @Output() deletedRequirementDelta: EventEmitter<RequirementDelta> = new EventEmitter();
 
+  requirementDeltasLoaded = false;
   requirementDeltas: RequirementDelta[] = [];
-  impactsLoaded = false;
-  requirementsLoaded = false;
 
   constructor(protected logger: LogService,
               private requirementDeltaRest: RequirementDeltaRestService,
@@ -49,25 +48,23 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.impactsLoaded = false;
-        this.requirementsLoaded = false;
+        this.requirementDeltasLoaded = false;
       });
     this.impactData.loadedImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        this.impactsLoaded = true;
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
     this.requirementData.loadedRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        this.requirementsLoaded = true;
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
   }
 
   loadIfChildrenLoaded(analysisId: string): void {
-    if (!this.impactsLoaded || !this.requirementsLoaded) {
+    if (!this.impactData.impactsLoaded || !this.requirementData.requirementsLoaded) {
+      this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
       return;
     }
     this.requirementDeltaRest.getRequirementDeltasByAnalysisId(analysisId)
@@ -81,6 +78,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
             this.impactData.impacts));
         });
         this.requirementDeltas = this.sortDefault(this.requirementDeltas);
+        this.requirementDeltasLoaded = true;
         this.loadedRequirementDeltas.emit(this.requirementDeltas);
         this.logger.info(this, 'RequirementDeltas loaded');
       });

@@ -23,8 +23,8 @@ export class RequirementDataService extends DataService implements OnDestroy {
   @Output() updatedRequirement: EventEmitter<Requirement> = new EventEmitter();
   @Output() deletedRequirement: EventEmitter<Requirement> = new EventEmitter();
 
+  requirementsLoaded = false;
   requirements: Requirement[] = [];
-  variantsLoaded = false;
 
   constructor(protected logger: LogService,
               private requirementRest: RequirementRestService,
@@ -44,18 +44,18 @@ export class RequirementDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.variantsLoaded = false;
+        this.requirementsLoaded = false;
       });
     this.variantData.loadedVariants
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        this.variantsLoaded = true;
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
   }
 
   loadIfChildrenLoaded(analysisId: string): void {
-    if (!this.variantsLoaded) {
+    if (!this.variantData.variantsLoaded) {
+      this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
       return;
     }
 
@@ -69,6 +69,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
             this.variantData.variants));
         });
         this.requirements = this.sortDefault(this.requirements);
+        this.requirementsLoaded = true;
         this.loadedRequirements.emit(this.requirements);
         this.logger.info(this, 'Requirements loaded');
       });
