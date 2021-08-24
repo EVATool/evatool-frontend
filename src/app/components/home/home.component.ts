@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
       // TODO the json is prettified on the server, but its all one line in the file.
       //  This is work-around in the next line, but should not be necessary, because it is already done on the backend (angular object loses that information).
       //  Also, the download should work without manually saving the object. Accessing the backend url via the browser directly instantly causes download to start (should also be like this here).
-      //  Now, all of a sudden the file is being downloaded two times  (services get injected multiple times? Or are called multiple times from multiple UI components?).
       const blob = new Blob([JSON.stringify(exportAnalyses, null, 4)]);
       saveAs(blob, 'Analysis-Export.json');
       this.inSelectionMode = false;
