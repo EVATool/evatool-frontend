@@ -12,7 +12,6 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
 import * as uuid from 'uuid';
-import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-analysis-edit',
