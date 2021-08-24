@@ -1,17 +1,21 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Analysis} from '../../model/Analysis';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-analysis-dialog',
   templateUrl: './analysis-dialog.component.html',
   styleUrls: ['./analysis-dialog.component.scss']
 })
-export class AnalysisDialogComponent implements OnInit {
+export class AnalysisDialogComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
 
   analysis!: Analysis;
   template!: Analysis;
@@ -30,9 +34,14 @@ export class AnalysisDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.analysisData.createdAnalysis.subscribe((analysis: Analysis) => {
+    this.analysisData.createdAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
       this.submitButtonClick(analysis);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   submitButtonClick(analysis: Analysis): void {
