@@ -40,8 +40,12 @@ export class ValueDataService extends DataService implements OnDestroy {
 
   init(): void {
     // Load Values.
-    this.analysisData.loadedCurrentAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
-      this.valueRest.getValuesByAnalysisId(analysis.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((valueDtoList: ValueDto[]) => {
+    this.analysisData.loadedCurrentAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysis: Analysis) => {
+      this.valueRest.getValuesByAnalysisId(analysis.id)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((valueDtoList: ValueDto[]) => {
         this.values = [];
         valueDtoList.forEach(valueDto => {
           this.values.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
@@ -52,7 +56,9 @@ export class ValueDataService extends DataService implements OnDestroy {
       });
 
       // Load Value Types.
-      this.valueRest.getValueTypes().pipe(takeUntil(this.ngUnsubscribe)).subscribe((valueTypes: string[]) => {
+      this.valueRest.getValueTypes()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((valueTypes: string[]) => {
         this.valueTypes = [];
         valueTypes.forEach((valueType: string) => this.valueTypes.push(valueType));
         this.loadedValueTypes.emit(this.valueTypes);
@@ -61,7 +67,9 @@ export class ValueDataService extends DataService implements OnDestroy {
   }
 
   createValue(value: Value): void {
-    this.valueRest.createValue(this.valueMapper.toDto(value)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((valueDto: ValueDto) => {
+    this.valueRest.createValue(this.valueMapper.toDto(value))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((valueDto: ValueDto) => {
       const createdValue = this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]);
       this.values.push(createdValue);
       this.createdValue.emit(createdValue);
@@ -70,7 +78,9 @@ export class ValueDataService extends DataService implements OnDestroy {
   }
 
   updateValue(value: Value): void {
-    this.valueRest.updateValue(this.valueMapper.toDto(value)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((valueDto: ValueDto) => {
+    this.valueRest.updateValue(this.valueMapper.toDto(value))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((valueDto: ValueDto) => {
       this.valueMapper.updateFromDto(valueDto, value, [this.analysisData.currentAnalysis]);
       this.updatedValue.emit(value);
       this.logger.info(this, 'Value updated');
@@ -78,7 +88,9 @@ export class ValueDataService extends DataService implements OnDestroy {
   }
 
   deleteValue(value: Value): void {
-    this.valueRest.deleteValue(value.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.valueRest.deleteValue(value.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       const index: number = this.values.indexOf(value, 0);
       this.values.splice(index, 1);
       this.deletedValue.emit(value);

@@ -42,8 +42,12 @@ export class StakeholderDataService extends DataService implements OnDestroy {
 
   init(): void {
     // Load Stakeholders.
-    this.analysisData.loadedCurrentAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
-      this.stakeholderRest.getStakeholdersByAnalysisId(analysis.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholderDtoList: StakeholderDto[]) => {
+    this.analysisData.loadedCurrentAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysis: Analysis) => {
+      this.stakeholderRest.getStakeholdersByAnalysisId(analysis.id)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((stakeholderDtoList: StakeholderDto[]) => {
         this.stakeholders = [];
         stakeholderDtoList.forEach(stakeholderDto => {
           this.stakeholders.push(this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]));
@@ -54,14 +58,18 @@ export class StakeholderDataService extends DataService implements OnDestroy {
       });
 
       // Load Stakeholder Priorities.
-      this.stakeholderRest.getStakeholderPriorities().pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholderPriorities: string[]) => {
+      this.stakeholderRest.getStakeholderPriorities()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((stakeholderPriorities: string[]) => {
         this.stakeholderPriorities = [];
         stakeholderPriorities.forEach((stakeholderPriority: string) => this.stakeholderPriorities.push(stakeholderPriority));
         this.loadedStakeholderPriorities.emit(this.stakeholderPriorities);
       });
 
       // Load Stakeholder Levels.
-      this.stakeholderRest.getStakeholderLevels().pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholderLevels: string[]) => {
+      this.stakeholderRest.getStakeholderLevels()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe((stakeholderLevels: string[]) => {
         this.stakeholderLevels = [];
         stakeholderLevels.forEach((stakeholderLevel: string) => this.stakeholderLevels.push(stakeholderLevel));
         this.loadedStakeholderLevels.emit(this.stakeholderLevels);
@@ -70,7 +78,9 @@ export class StakeholderDataService extends DataService implements OnDestroy {
   }
 
   createStakeholder(stakeholder: Stakeholder): void {
-    this.stakeholderRest.createStakeholder(this.stakeholderMapper.toDto(stakeholder)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholderDto: StakeholderDto) => {
+    this.stakeholderRest.createStakeholder(this.stakeholderMapper.toDto(stakeholder))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholderDto: StakeholderDto) => {
       const createdStakeholder = this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]);
       this.stakeholders.push(createdStakeholder);
       this.createdStakeholder.emit(createdStakeholder);
@@ -79,7 +89,9 @@ export class StakeholderDataService extends DataService implements OnDestroy {
   }
 
   updateStakeholder(stakeholder: Stakeholder): void {
-    this.stakeholderRest.updateStakeholder(this.stakeholderMapper.toDto(stakeholder)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((stakeholderDto: StakeholderDto) => {
+    this.stakeholderRest.updateStakeholder(this.stakeholderMapper.toDto(stakeholder))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholderDto: StakeholderDto) => {
       this.stakeholderMapper.updateFromDto(stakeholderDto, stakeholder, [this.analysisData.currentAnalysis]);
       this.updatedStakeholder.emit(stakeholder);
       this.logger.info(this, 'Stakeholder updated');
@@ -87,7 +99,9 @@ export class StakeholderDataService extends DataService implements OnDestroy {
   }
 
   deleteStakeholder(stakeholder: Stakeholder): void {
-    this.stakeholderRest.deleteStakeholder(stakeholder.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.stakeholderRest.deleteStakeholder(stakeholder.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       const index: number = this.stakeholders.indexOf(stakeholder, 0);
       this.stakeholders.splice(index, 1);
       this.deletedStakeholder.emit(stakeholder);

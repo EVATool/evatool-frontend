@@ -46,14 +46,20 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
 
   init(): void {
     // Load Requirement Deltas.
-    this.analysisData.loadedCurrentAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
+    this.analysisData.loadedCurrentAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysis: Analysis) => {
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
-    this.impactData.loadedImpacts.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.impactData.loadedImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       this.impactsLoaded = true;
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
-    this.requirementData.loadedRequirements.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.requirementData.loadedRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       this.requirementsLoaded = true;
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
@@ -63,7 +69,9 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
     if (!this.impactsLoaded || !this.requirementsLoaded) {
       return;
     }
-    this.requirementDeltaRest.getRequirementDeltasByAnalysisId(analysisId).pipe(takeUntil(this.ngUnsubscribe)).subscribe((deltaDtoList: RequirementDeltaDto[]) => {
+    this.requirementDeltaRest.getRequirementDeltasByAnalysisId(analysisId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((deltaDtoList: RequirementDeltaDto[]) => {
       this.requirementDeltas = [];
       deltaDtoList.forEach(requirementDeltaDto => {
         this.requirementDeltas.push(this.requirementDeltaMapper.fromDto(
@@ -78,8 +86,9 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
   }
 
   createRequirementDelta(requirementDelta: RequirementDelta): void {
-    this.requirementDeltaRest.createRequirementDelta(this.requirementDeltaMapper.toDto(requirementDelta)).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-      (requirementDeltaDto: RequirementDeltaDto) => {
+    this.requirementDeltaRest.createRequirementDelta(this.requirementDeltaMapper.toDto(requirementDelta))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(      (requirementDeltaDto: RequirementDeltaDto) => {
         const createdRequirementDelta = this.requirementDeltaMapper.fromDto(requirementDeltaDto,
           this.requirementData.requirements,
           this.impactData.impacts);
@@ -90,8 +99,9 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
   }
 
   updateRequirementDelta(requirementDelta: RequirementDelta): void {
-    this.requirementDeltaRest.updateRequirementDelta(this.requirementDeltaMapper.toDto(requirementDelta)).pipe(takeUntil(this.ngUnsubscribe)).subscribe(
-      (requirementDeltaDto: RequirementDeltaDto) => {
+    this.requirementDeltaRest.updateRequirementDelta(this.requirementDeltaMapper.toDto(requirementDelta))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(      (requirementDeltaDto: RequirementDeltaDto) => {
         this.requirementDeltaMapper.updateFromDto(requirementDeltaDto,
           requirementDelta,
           this.requirementData.requirements,
@@ -102,7 +112,9 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
   }
 
   deleteRequirementDelta(requirementDelta: RequirementDelta): void {
-    this.requirementDeltaRest.deleteRequirementDelta(requirementDelta.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.requirementDeltaRest.deleteRequirementDelta(requirementDelta.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       const index: number = this.requirementDeltas.indexOf(requirementDelta, 0);
       this.requirementDeltas.splice(index, 1);
       this.deletedRequirementDelta.emit(requirementDelta);

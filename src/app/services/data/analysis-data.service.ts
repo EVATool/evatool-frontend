@@ -43,15 +43,17 @@ export class AnalysisDataService extends DataService implements OnDestroy {
 
   loadAnalyses(): void {
     // Load all analyses.
-    this.analysisRest.getAnalyses().pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysisDtoList: AnalysisDto[]) => {
-      this.analyses = [];
-      analysisDtoList.forEach(analysisDto => {
-        this.analyses.push(this.analysisMapper.fromDto(analysisDto));
+    this.analysisRest.getAnalyses()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysisDtoList: AnalysisDto[]) => {
+        this.analyses = [];
+        analysisDtoList.forEach(analysisDto => {
+          this.analyses.push(this.analysisMapper.fromDto(analysisDto));
+        });
+        this.analyses = this.sortDefault(this.analyses);
+        this.loadedAnalyses.emit(this.analyses);
+        this.logger.info(this, 'Analyses loaded');
       });
-      this.analyses = this.sortDefault(this.analyses);
-      this.loadedAnalyses.emit(this.analyses);
-      this.logger.info(this, 'Analyses loaded');
-    });
   }
 
   changeCurrentAnalysis(id: string): void {
@@ -76,7 +78,9 @@ export class AnalysisDataService extends DataService implements OnDestroy {
   }
 
   createAnalysis(analysis: Analysis): void {
-    this.analysisRest.createAnalysis(this.analysisMapper.toDto(analysis)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysisDto: AnalysisDto) => {
+    this.analysisRest.createAnalysis(this.analysisMapper.toDto(analysis))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysisDto: AnalysisDto) => {
       const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
       this.analyses.push(createdAnalysis);
       this.createdAnalysis.emit(createdAnalysis);
@@ -85,7 +89,9 @@ export class AnalysisDataService extends DataService implements OnDestroy {
   }
 
   updateAnalysis(analysis: Analysis): void {
-    this.analysisRest.updateAnalysis(this.analysisMapper.toDto(analysis)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysisDto: AnalysisDto) => {
+    this.analysisRest.updateAnalysis(this.analysisMapper.toDto(analysis))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysisDto: AnalysisDto) => {
       this.analysisMapper.updateFromDto(analysisDto, analysis);
       this.updatedAnalysis.emit(analysis);
       this.logger.info(this, 'Analysis updated');
@@ -93,7 +99,9 @@ export class AnalysisDataService extends DataService implements OnDestroy {
   }
 
   deleteAnalysis(analysis: Analysis): void {
-    this.analysisRest.deleteAnalysis(analysis.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.analysisRest.deleteAnalysis(analysis.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       const index: number = this.analyses.indexOf(analysis, 0);
       this.analyses.splice(index, 1);
       this.deletedAnalysis.emit(analysis);
@@ -112,7 +120,9 @@ export class AnalysisDataService extends DataService implements OnDestroy {
   }
 
   importAnalyses(importAnalyses: string): void {
-    this.importExportRest.importAnalyses(importAnalyses).pipe(takeUntil(this.ngUnsubscribe)).subscribe((importedAnalysisDtoList: AnalysisDto[]) => {
+    this.importExportRest.importAnalyses(importAnalyses)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((importedAnalysisDtoList: AnalysisDto[]) => {
       for (const importedAnalysisDto of importedAnalysisDtoList) {
         const importedAnalysis = this.analysisMapper.fromDto(importedAnalysisDto);
         this.analyses.push(importedAnalysis);
@@ -121,7 +131,9 @@ export class AnalysisDataService extends DataService implements OnDestroy {
   }
 
   exportAnalyses(analysisIds: string[], filename: string): void {
-    this.importExportRest.exportAnalyses(analysisIds, filename).pipe(takeUntil(this.ngUnsubscribe)).subscribe((exportAnalyses: object) => {
+    this.importExportRest.exportAnalyses(analysisIds, filename)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((exportAnalyses: object) => {
       this.exportedAnalysis.emit(exportAnalyses);
     });
   }

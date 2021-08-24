@@ -41,10 +41,14 @@ export class RequirementDataService extends DataService implements OnDestroy {
 
   init(): void {
     // Load Requirements.
-    this.analysisData.loadedCurrentAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
+    this.analysisData.loadedCurrentAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysis: Analysis) => {
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
-    this.variantData.loadedVariants.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.variantData.loadedVariants
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       this.variantsLoaded = true;
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
@@ -55,7 +59,9 @@ export class RequirementDataService extends DataService implements OnDestroy {
       return;
     }
 
-    this.requirementRest.getRequirementsByAnalysisId(analysisId).pipe(takeUntil(this.ngUnsubscribe)).subscribe((requirementDtoList: RequirementDto[]) => {
+    this.requirementRest.getRequirementsByAnalysisId(analysisId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirementDtoList: RequirementDto[]) => {
       this.requirements = [];
       requirementDtoList.forEach(requirementDto => {
         this.requirements.push(this.requirementMapper.fromDto(requirementDto,
@@ -69,7 +75,9 @@ export class RequirementDataService extends DataService implements OnDestroy {
   }
 
   createRequirement(requirement: Requirement): void {
-    this.requirementRest.createRequirement(this.requirementMapper.toDto(requirement)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((requirementDto: RequirementDto) => {
+    this.requirementRest.createRequirement(this.requirementMapper.toDto(requirement))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirementDto: RequirementDto) => {
       const createdRequirement = this.requirementMapper.fromDto(requirementDto,
         [this.analysisData.currentAnalysis],
         this.variantData.variants);
@@ -80,7 +88,9 @@ export class RequirementDataService extends DataService implements OnDestroy {
   }
 
   updateRequirement(requirement: Requirement): void {
-    this.requirementRest.updateRequirement(this.requirementMapper.toDto(requirement)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((requirementDto: RequirementDto) => {
+    this.requirementRest.updateRequirement(this.requirementMapper.toDto(requirement))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirementDto: RequirementDto) => {
       this.requirementMapper.updateFromDto(requirementDto,
         requirement,
         [this.analysisData.currentAnalysis],
@@ -91,7 +101,9 @@ export class RequirementDataService extends DataService implements OnDestroy {
   }
 
   deleteRequirement(requirement: Requirement): void {
-    this.requirementRest.deleteRequirement(requirement.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+    this.requirementRest.deleteRequirement(requirement.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
       const index: number = this.requirements.indexOf(requirement, 0);
       this.requirements.splice(index, 1);
       this.deletedRequirement.emit(requirement);
