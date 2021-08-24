@@ -44,7 +44,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
+        this.variantsLoaded = false;
       });
     this.variantData.loadedVariants
       .pipe(takeUntil(this.ngUnsubscribe))
