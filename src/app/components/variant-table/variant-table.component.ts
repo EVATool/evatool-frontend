@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Variant} from '../../model/Variant';
 import {VariantDataService} from '../../services/data/variant-data.service';
@@ -9,13 +9,18 @@ import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {RequirementDataService} from '../../services/data/requirement-data.service';
 import {HttpLoaderService} from '../../services/http-loader.service';
 import {CrossUiEventService, VariantDeletionFailedEvent, VariantReferencedByRequirementsEvent} from '../../services/cross-ui-event.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-variant-table',
   templateUrl: './variant-table.component.html',
   styleUrls: ['./variant-table.component.scss']
 })
-export class VariantTableComponent implements OnInit, AfterViewInit {
+export class VariantTableComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @Input() archived!: boolean;
   @Input() ids: string[] = [];
@@ -34,33 +39,33 @@ export class VariantTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.crossUI.variantReferencedByRequirements.subscribe((event: VariantReferencedByRequirementsEvent) => {
+    this.crossUI.variantReferencedByRequirements.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: VariantReferencedByRequirementsEvent) => {
       const message = 'This variant cannot be deleted. It is still being used by '
         + event.requirements.length + ' requirement' + (event.requirements.length === 1 ? '' : 's') + '.';
       const action = 'show';
       const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction().subscribe(() => {
+      snackBarRef.onAction().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
         this.crossUI.userWantsToSeeVariantReferencedByRequirements.emit(event);
       });
     });
 
-    this.crossUI.variantDeletionFailed.subscribe((event: VariantDeletionFailedEvent) => {
+    this.crossUI.variantDeletionFailed.pipe(takeUntil(this.ngUnsubscribe)).subscribe((event: VariantDeletionFailedEvent) => {
       event.entity.deletionFlagged = false;
     });
 
-    this.variantDataService.loadedVariants.subscribe((variants: Variant[]) => {
+    this.variantDataService.loadedVariants.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variants: Variant[]) => {
       this.updateTableDataSource();
     });
 
-    this.variantDataService.createdVariant.subscribe((variant: Variant) => {
+    this.variantDataService.createdVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
       this.updateTableDataSource();
     });
 
-    this.variantDataService.updatedVariant.subscribe((variant: Variant) => {
+    this.variantDataService.updatedVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
       this.updateTableDataSource();
     });
 
-    this.variantDataService.deletedVariant.subscribe((variant: Variant) => {
+    this.variantDataService.deletedVariant.pipe(takeUntil(this.ngUnsubscribe)).subscribe((variant: Variant) => {
       this.updateTableDataSource();
     });
 
@@ -69,6 +74,11 @@ export class VariantTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initSorting();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateTableDataSource(): void {
