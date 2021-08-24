@@ -41,16 +41,16 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.crossUI.authenticationFailed
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-      const message = 'Invalid credentials';
-      this.snackBar.open(message, '', {duration: 5000});
-    });
+        const message = 'Invalid credentials';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
 
     this.crossUI.realmNotFound
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: RealmNotFoundEvent) => {
-      const message = 'Tenant ' + event.realm + ' does not exist';
-      this.snackBar.open(message, '', {duration: 5000});
-    });
+        const message = 'Tenant ' + event.realm + ' does not exist';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
 
     if (isDevMode()) {
       this.realm = 'evatool-realm';

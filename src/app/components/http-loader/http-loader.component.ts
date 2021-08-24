@@ -34,64 +34,64 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
     this.httpLoaderService.httpActive
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-      this.logger.debug(this, 'There are active http requests');
-      this.successIconShown = false;
-      this.loadingSpinnerShown = true;
-    });
+        this.logger.debug(this, 'There are active http requests');
+        this.successIconShown = false;
+        this.loadingSpinnerShown = true;
+      });
 
     this.httpLoaderService.httpNotActive
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((lastHttpEvent: HttpInfo) => {
-      this.logger.debug(this, 'There are NO active http requests');
-      this.loadingSpinnerShown = false;
+        this.logger.debug(this, 'There are NO active http requests');
+        this.loadingSpinnerShown = false;
 
-      if (lastHttpEvent.type === HttpInfoType.Complete) {
-        this.successIconShown = true;
+        if (lastHttpEvent.type === HttpInfoType.Complete) {
+          this.successIconShown = true;
 
-        setTimeout(() => {
-          this.successIconShown = false;
-        }, 1000);
-      }
-    });
+          setTimeout(() => {
+            this.successIconShown = false;
+          }, 1000);
+        }
+      });
 
     this.crossUI.authenticationFailed
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => { // 401
-      if (!this.router.url.includes(ROUTES.realmAdministration)) {
-        this.router.navigate([ROUTES.login]);
-      }
-    });
+        if (!this.router.url.includes(ROUTES.realmAdministration)) {
+          this.router.navigate([ROUTES.login]);
+        }
+      });
 
     this.crossUI.authorizationFailed
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => { // 403
-      this.router.navigate([ROUTES.accessDenied]);
-    });
+        this.router.navigate([ROUTES.accessDenied]);
+      });
 
     // Generic http error display.
     this.httpLoaderService.httpError
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((httpInfo: HttpInfo) => {
-      if (!environment.production) {
-        console.log(httpInfo); // This should stay here.
-      }
-      if (httpInfo.httpStatusCode !== 404
-        && httpInfo.httpStatusCode !== 403
-        && httpInfo.httpStatusCode !== 401
-        && !httpInfo.functionalErrorCode
-        && !this.snackBarShown) {
+        if (!environment.production) {
+          console.log(httpInfo); // This should stay here.
+        }
+        if (httpInfo.httpStatusCode !== 404
+          && httpInfo.httpStatusCode !== 403
+          && httpInfo.httpStatusCode !== 401
+          && !httpInfo.functionalErrorCode
+          && !this.snackBarShown) {
 
-        this.snackBarShown = true;
-        const message = 'An http request failed (status ' + httpInfo.httpStatusCode + ')';
-        const action = '';
-        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-        snackBarRef.afterDismissed()
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-          this.snackBarShown = false;
-        });
-      }
-    });
+          this.snackBarShown = true;
+          const message = 'An http request failed (status ' + httpInfo.httpStatusCode + ')';
+          const action = '';
+          const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+          snackBarRef.afterDismissed()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.snackBarShown = false;
+            });
+        }
+      });
   }
 
   ngOnDestroy(): void {

@@ -11,9 +11,9 @@ describe('ValuesTableComponent', () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [ ValueTableComponent ]
+      declarations: [ValueTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -8,9 +8,9 @@ describe('FilterPriorityComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FilterPriorityComponent ]
+      declarations: [FilterPriorityComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

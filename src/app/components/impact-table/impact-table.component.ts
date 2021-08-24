@@ -60,63 +60,63 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.crossUI.userWantsToSeeValueReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ValueReferencedByImpactsEvent) => {
-      this.deletionFlaggedValue = event.value;
-      event.impacts.forEach(impact => {
-        impact.highlighted = true;
+        this.deletionFlaggedValue = event.value;
+        event.impacts.forEach(impact => {
+          impact.highlighted = true;
+        });
       });
-    });
 
     this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: StakeholderReferencedByImpactsEvent) => {
-      this.deletionFlaggedStakeholder = event.stakeholder;
-      event.impacts.forEach((impact: Impact) => {
-        impact.highlighted = true;
+        this.deletionFlaggedStakeholder = event.stakeholder;
+        event.impacts.forEach((impact: Impact) => {
+          impact.highlighted = true;
+        });
       });
-    });
 
     this.crossUI.impactReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ImpactReferencedByRequirementsEvent) => {
-      const message = 'This impact cannot be deleted. It is still being used by '
-        + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
-      const action = 'show';
-      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction()
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(() => {
-        this.crossUI.userWantsToSeeImpactReferencedByRequirements.emit(event);
+        const message = 'This impact cannot be deleted. It is still being used by '
+          + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
+        const action = 'show';
+        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+        snackBarRef.onAction()
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe(() => {
+            this.crossUI.userWantsToSeeImpactReferencedByRequirements.emit(event);
+          });
       });
-    });
 
     this.crossUI.impactDeletionFailed
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ImpactDeletionFailedEvent) => {
-      if (event.notFound) {
-        // TODO: remove from data service array (ALL table components + analysis).
-        //  This should be done when concurrency is better understood, because child, parent entities also have to be deleted.
-      } else {
-        event.entity.deletionFlagged = false;
-      }
-    });
+        if (event.notFound) {
+          // TODO: remove from data service array (ALL table components + analysis).
+          //  This should be done when concurrency is better understood, because child, parent entities also have to be deleted.
+        } else {
+          event.entity.deletionFlagged = false;
+        }
+      });
 
     this.impactDataService.loadedImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((impacts: Impact[]) => {
-      this.updateTableDataSource();
-    });
+        this.updateTableDataSource();
+      });
 
     this.impactDataService.createdImpact
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((impact: Impact) => {
-      this.updateTableDataSource();
-    });
+        this.updateTableDataSource();
+      });
 
     this.impactDataService.deletedImpact
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((impact: Impact) => {
-      this.updateTableDataSource();
-    });
+        this.updateTableDataSource();
+      });
 
     this.updateTableDataSource();
   }
@@ -125,8 +125,8 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.scrollbarRef?.scrolled
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(e => {
-      this.windowScrolled = e.target.scrollTop !== 0;
-    });
+        this.windowScrolled = e.target.scrollTop !== 0;
+      });
 
     this.initSorting();
     this.initFiltering();

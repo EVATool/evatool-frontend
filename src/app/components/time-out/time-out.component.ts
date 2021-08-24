@@ -7,7 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TimeOutComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -81,32 +81,32 @@ export class AnalysisDataService extends DataService implements OnDestroy {
     this.analysisRest.createAnalysis(this.analysisMapper.toDto(analysis))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysisDto: AnalysisDto) => {
-      const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
-      this.analyses.push(createdAnalysis);
-      this.createdAnalysis.emit(createdAnalysis);
-      this.logger.info(this, 'Analysis created');
-    });
+        const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
+        this.analyses.push(createdAnalysis);
+        this.createdAnalysis.emit(createdAnalysis);
+        this.logger.info(this, 'Analysis created');
+      });
   }
 
   updateAnalysis(analysis: Analysis): void {
     this.analysisRest.updateAnalysis(this.analysisMapper.toDto(analysis))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysisDto: AnalysisDto) => {
-      this.analysisMapper.updateFromDto(analysisDto, analysis);
-      this.updatedAnalysis.emit(analysis);
-      this.logger.info(this, 'Analysis updated');
-    });
+        this.analysisMapper.updateFromDto(analysisDto, analysis);
+        this.updatedAnalysis.emit(analysis);
+        this.logger.info(this, 'Analysis updated');
+      });
   }
 
   deleteAnalysis(analysis: Analysis): void {
     this.analysisRest.deleteAnalysis(analysis.id)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-      const index: number = this.analyses.indexOf(analysis, 0);
-      this.analyses.splice(index, 1);
-      this.deletedAnalysis.emit(analysis);
-      this.logger.info(this, 'Analysis deleted');
-    });
+        const index: number = this.analyses.indexOf(analysis, 0);
+        this.analyses.splice(index, 1);
+        this.deletedAnalysis.emit(analysis);
+        this.logger.info(this, 'Analysis deleted');
+      });
   }
 
   createDefaultAnalysis(): Analysis {
@@ -123,18 +123,18 @@ export class AnalysisDataService extends DataService implements OnDestroy {
     this.importExportRest.importAnalyses(importAnalyses)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((importedAnalysisDtoList: AnalysisDto[]) => {
-      for (const importedAnalysisDto of importedAnalysisDtoList) {
-        const importedAnalysis = this.analysisMapper.fromDto(importedAnalysisDto);
-        this.analyses.push(importedAnalysis);
-      }
-    });
+        for (const importedAnalysisDto of importedAnalysisDtoList) {
+          const importedAnalysis = this.analysisMapper.fromDto(importedAnalysisDto);
+          this.analyses.push(importedAnalysis);
+        }
+      });
   }
 
   exportAnalyses(analysisIds: string[], filename: string): void {
     this.importExportRest.exportAnalyses(analysisIds, filename)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((exportAnalyses: object) => {
-      this.exportedAnalysis.emit(exportAnalyses);
-    });
+        this.exportedAnalysis.emit(exportAnalyses);
+      });
   }
 }

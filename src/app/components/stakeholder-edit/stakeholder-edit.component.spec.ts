@@ -8,9 +8,9 @@ describe('StakeholderEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StakeholderEditComponent ]
+      declarations: [StakeholderEditComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

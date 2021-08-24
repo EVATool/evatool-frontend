@@ -7,7 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TermsAndConditionsComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

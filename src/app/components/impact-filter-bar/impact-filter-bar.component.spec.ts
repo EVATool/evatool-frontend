@@ -10,9 +10,9 @@ describe('ImpactFilterBarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
-      declarations: [ ImpactFilterBarComponent ]
+      declarations: [ImpactFilterBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

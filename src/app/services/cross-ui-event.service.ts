@@ -22,7 +22,7 @@ import {takeUntil} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CrossUiEventService implements OnDestroy{
+export class CrossUiEventService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 

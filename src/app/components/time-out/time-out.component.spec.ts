@@ -8,9 +8,9 @@ describe('TimeOutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TimeOutComponent ]
+      declarations: [TimeOutComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

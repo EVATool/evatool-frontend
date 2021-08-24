@@ -12,9 +12,9 @@ describe('StakeholderLevelComponent', () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [ StakeholderLevelComponent, HighlightSearchPipe]
+      declarations: [StakeholderLevelComponent, HighlightSearchPipe]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

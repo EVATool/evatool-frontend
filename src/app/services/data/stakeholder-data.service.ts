@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, OnInit, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {DataService} from '../data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -45,68 +45,68 @@ export class StakeholderDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-      this.stakeholderRest.getStakeholdersByAnalysisId(analysis.id)
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe((stakeholderDtoList: StakeholderDto[]) => {
-        this.stakeholders = [];
-        stakeholderDtoList.forEach(stakeholderDto => {
-          this.stakeholders.push(this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]));
-        });
-        this.stakeholders = this.sortDefault(this.stakeholders);
-        this.loadedStakeholders.emit(this.stakeholders);
-        this.logger.info(this, 'Stakeholders loaded');
-      });
+        this.stakeholderRest.getStakeholdersByAnalysisId(analysis.id)
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe((stakeholderDtoList: StakeholderDto[]) => {
+            this.stakeholders = [];
+            stakeholderDtoList.forEach(stakeholderDto => {
+              this.stakeholders.push(this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]));
+            });
+            this.stakeholders = this.sortDefault(this.stakeholders);
+            this.loadedStakeholders.emit(this.stakeholders);
+            this.logger.info(this, 'Stakeholders loaded');
+          });
 
-      // Load Stakeholder Priorities.
-      this.stakeholderRest.getStakeholderPriorities()
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe((stakeholderPriorities: string[]) => {
-        this.stakeholderPriorities = [];
-        stakeholderPriorities.forEach((stakeholderPriority: string) => this.stakeholderPriorities.push(stakeholderPriority));
-        this.loadedStakeholderPriorities.emit(this.stakeholderPriorities);
-      });
+        // Load Stakeholder Priorities.
+        this.stakeholderRest.getStakeholderPriorities()
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe((stakeholderPriorities: string[]) => {
+            this.stakeholderPriorities = [];
+            stakeholderPriorities.forEach((stakeholderPriority: string) => this.stakeholderPriorities.push(stakeholderPriority));
+            this.loadedStakeholderPriorities.emit(this.stakeholderPriorities);
+          });
 
-      // Load Stakeholder Levels.
-      this.stakeholderRest.getStakeholderLevels()
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe((stakeholderLevels: string[]) => {
-        this.stakeholderLevels = [];
-        stakeholderLevels.forEach((stakeholderLevel: string) => this.stakeholderLevels.push(stakeholderLevel));
-        this.loadedStakeholderLevels.emit(this.stakeholderLevels);
+        // Load Stakeholder Levels.
+        this.stakeholderRest.getStakeholderLevels()
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe((stakeholderLevels: string[]) => {
+            this.stakeholderLevels = [];
+            stakeholderLevels.forEach((stakeholderLevel: string) => this.stakeholderLevels.push(stakeholderLevel));
+            this.loadedStakeholderLevels.emit(this.stakeholderLevels);
+          });
       });
-    });
   }
 
   createStakeholder(stakeholder: Stakeholder): void {
     this.stakeholderRest.createStakeholder(this.stakeholderMapper.toDto(stakeholder))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((stakeholderDto: StakeholderDto) => {
-      const createdStakeholder = this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]);
-      this.stakeholders.push(createdStakeholder);
-      this.createdStakeholder.emit(createdStakeholder);
-      this.logger.info(this, 'Stakeholder created');
-    });
+        const createdStakeholder = this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]);
+        this.stakeholders.push(createdStakeholder);
+        this.createdStakeholder.emit(createdStakeholder);
+        this.logger.info(this, 'Stakeholder created');
+      });
   }
 
   updateStakeholder(stakeholder: Stakeholder): void {
     this.stakeholderRest.updateStakeholder(this.stakeholderMapper.toDto(stakeholder))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((stakeholderDto: StakeholderDto) => {
-      this.stakeholderMapper.updateFromDto(stakeholderDto, stakeholder, [this.analysisData.currentAnalysis]);
-      this.updatedStakeholder.emit(stakeholder);
-      this.logger.info(this, 'Stakeholder updated');
-    });
+        this.stakeholderMapper.updateFromDto(stakeholderDto, stakeholder, [this.analysisData.currentAnalysis]);
+        this.updatedStakeholder.emit(stakeholder);
+        this.logger.info(this, 'Stakeholder updated');
+      });
   }
 
   deleteStakeholder(stakeholder: Stakeholder): void {
     this.stakeholderRest.deleteStakeholder(stakeholder.id)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-      const index: number = this.stakeholders.indexOf(stakeholder, 0);
-      this.stakeholders.splice(index, 1);
-      this.deletedStakeholder.emit(stakeholder);
-      this.logger.info(this, 'Stakeholder deleted');
-    });
+        const index: number = this.stakeholders.indexOf(stakeholder, 0);
+        this.stakeholders.splice(index, 1);
+        this.deletedStakeholder.emit(stakeholder);
+        this.logger.info(this, 'Stakeholder deleted');
+      });
   }
 
   createDefaultStakeholder(analysis: Analysis): Stakeholder {

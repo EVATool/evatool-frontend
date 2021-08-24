@@ -10,9 +10,9 @@ describe('RequirementFilterBarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
-      declarations: [ RequirementFilterBarComponent ]
+      declarations: [RequirementFilterBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -32,8 +32,8 @@ export class ValueDialogComponent implements OnInit, OnDestroy {
     this.crossUI.userWantsToSeeValueReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ValueReferencedByImpactsEvent) => {
-      this.closeClick();
-    });
+        this.closeClick();
+      });
   }
 
   ngOnDestroy(): void {

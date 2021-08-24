@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, OnInit, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {DataService} from '../data.service';
 import {LogService} from '../log.service';
 import {ValueRestService} from '../rest/value-rest.service';
@@ -43,59 +43,59 @@ export class ValueDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-      this.valueRest.getValuesByAnalysisId(analysis.id)
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe((valueDtoList: ValueDto[]) => {
-        this.values = [];
-        valueDtoList.forEach(valueDto => {
-          this.values.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
-        });
-        this.values = this.sortDefault(this.values);
-        this.loadedValues.emit(this.values);
-        this.logger.info(this, 'Values loaded');
-      });
+        this.valueRest.getValuesByAnalysisId(analysis.id)
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe((valueDtoList: ValueDto[]) => {
+            this.values = [];
+            valueDtoList.forEach(valueDto => {
+              this.values.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
+            });
+            this.values = this.sortDefault(this.values);
+            this.loadedValues.emit(this.values);
+            this.logger.info(this, 'Values loaded');
+          });
 
-      // Load Value Types.
-      this.valueRest.getValueTypes()
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe((valueTypes: string[]) => {
-        this.valueTypes = [];
-        valueTypes.forEach((valueType: string) => this.valueTypes.push(valueType));
-        this.loadedValueTypes.emit(this.valueTypes);
+        // Load Value Types.
+        this.valueRest.getValueTypes()
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe((valueTypes: string[]) => {
+            this.valueTypes = [];
+            valueTypes.forEach((valueType: string) => this.valueTypes.push(valueType));
+            this.loadedValueTypes.emit(this.valueTypes);
+          });
       });
-    });
   }
 
   createValue(value: Value): void {
     this.valueRest.createValue(this.valueMapper.toDto(value))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((valueDto: ValueDto) => {
-      const createdValue = this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]);
-      this.values.push(createdValue);
-      this.createdValue.emit(createdValue);
-      this.logger.info(this, 'Value created');
-    });
+        const createdValue = this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]);
+        this.values.push(createdValue);
+        this.createdValue.emit(createdValue);
+        this.logger.info(this, 'Value created');
+      });
   }
 
   updateValue(value: Value): void {
     this.valueRest.updateValue(this.valueMapper.toDto(value))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((valueDto: ValueDto) => {
-      this.valueMapper.updateFromDto(valueDto, value, [this.analysisData.currentAnalysis]);
-      this.updatedValue.emit(value);
-      this.logger.info(this, 'Value updated');
-    });
+        this.valueMapper.updateFromDto(valueDto, value, [this.analysisData.currentAnalysis]);
+        this.updatedValue.emit(value);
+        this.logger.info(this, 'Value updated');
+      });
   }
 
   deleteValue(value: Value): void {
     this.valueRest.deleteValue(value.id)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-      const index: number = this.values.indexOf(value, 0);
-      this.values.splice(index, 1);
-      this.deletedValue.emit(value);
-      this.logger.info(this, 'Value deleted');
-    });
+        const index: number = this.values.indexOf(value, 0);
+        this.values.splice(index, 1);
+        this.deletedValue.emit(value);
+        this.logger.info(this, 'Value deleted');
+      });
   }
 
   createDefaultValue(analysis: Analysis): Value {

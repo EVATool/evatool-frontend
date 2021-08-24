@@ -34,8 +34,8 @@ export class AnalysisTileComponent implements OnInit, OnDestroy {
     this.crossUI.analysisDeletionFailed
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: AnalysisDeletionFailedEvent) => {
-      event.entity.deletionFlagged = false;
-    });
+        event.entity.deletionFlagged = false;
+      });
   }
 
   ngOnDestroy(): void {
@@ -60,11 +60,11 @@ export class AnalysisTileComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(dialogResult => {
-      if (dialogResult) {
-        analysis.deletionFlagged = true;
-        this.analysisData.deleteAnalysis(analysis);
-      }
-    });
+        if (dialogResult) {
+          analysis.deletionFlagged = true;
+          this.analysisData.deleteAnalysis(analysis);
+        }
+      });
   }
 
   clickAnalysisTile(analysis: Analysis): void {

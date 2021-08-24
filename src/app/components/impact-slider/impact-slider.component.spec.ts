@@ -8,9 +8,9 @@ describe('ImpactSliderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImpactSliderComponent ]
+      declarations: [ImpactSliderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

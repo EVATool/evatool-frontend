@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, OnInit, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {DataService} from '../data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -49,14 +49,14 @@ export class ImpactDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-      this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
-    });
+        this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
+      });
     this.stakeholderData.loadedStakeholders
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-      this.stakeholdersLoaded = true;
-      this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
-    });
+        this.stakeholdersLoaded = true;
+        this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
+      });
     this.valueData.loadedValues.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.valuesLoaded = true;
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
