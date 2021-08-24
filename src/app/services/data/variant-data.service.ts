@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, OnInit, Output} from '@angular/core';
 import {DataService} from '../data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -7,11 +7,16 @@ import {VariantRestService} from '../rest/variant-rest.service';
 import {VariantMapperService} from '../mapper/variant-mapper.service';
 import {Analysis} from '../../model/Analysis';
 import {VariantDto} from '../../dto/VariantDto';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VariantDataService extends DataService {
+export class VariantDataService extends DataService implements OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @Output() loadedVariants: EventEmitter<Variant[]> = new EventEmitter();
   @Output() createdVariant: EventEmitter<Variant> = new EventEmitter();
   @Output() updatedVariant: EventEmitter<Variant> = new EventEmitter();
@@ -26,10 +31,15 @@ export class VariantDataService extends DataService {
     super(logger);
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   init(): void {
     // Load Variants.
-    this.analysisData.loadedCurrentAnalysis.subscribe((analysis: Analysis) => {
-      this.variantRest.getVariantsByAnalysisId(analysis.id).subscribe((variantDtoList: VariantDto[]) => {
+    this.analysisData.loadedCurrentAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
+      this.variantRest.getVariantsByAnalysisId(analysis.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((variantDtoList: VariantDto[]) => {
         this.variants = [];
         variantDtoList.forEach(variantDto => {
           this.variants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));
@@ -42,7 +52,7 @@ export class VariantDataService extends DataService {
   }
 
   createVariant(variant: Variant): void {
-    this.variantRest.createVariant(this.variantMapper.toDto(variant)).subscribe((variantDto: VariantDto) => {
+    this.variantRest.createVariant(this.variantMapper.toDto(variant)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((variantDto: VariantDto) => {
       const createdVariant = this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]);
       this.variants.push(createdVariant);
       this.createdVariant.emit(createdVariant);
@@ -51,7 +61,7 @@ export class VariantDataService extends DataService {
   }
 
   updateVariant(variant: Variant): void {
-    this.variantRest.updateVariant(this.variantMapper.toDto(variant)).subscribe((variantDto: VariantDto) => {
+    this.variantRest.updateVariant(this.variantMapper.toDto(variant)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((variantDto: VariantDto) => {
       this.variantMapper.updateFromDto(variantDto, variant, [this.analysisData.currentAnalysis]);
       this.updatedVariant.emit(variant);
       this.logger.info(this, 'Variant updated');
@@ -59,7 +69,7 @@ export class VariantDataService extends DataService {
   }
 
   deleteVariant(variant: Variant): void {
-    this.variantRest.deleteVariant(variant.id).subscribe(() => {
+    this.variantRest.deleteVariant(variant.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       const index: number = this.variants.indexOf(variant, 0);
       this.variants.splice(index, 1);
       this.deletedVariant.emit(variant);

@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, OnInit, Output} from '@angular/core';
 import {DataService} from '../data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -11,11 +11,16 @@ import {ImpactDto} from '../../dto/ImpactDto';
 import {Impact} from '../../model/Impact';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ImpactDataService extends DataService {
+export class ImpactDataService extends DataService implements OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @Output() loadedImpacts: EventEmitter<Impact[]> = new EventEmitter();
   @Output() createdImpact: EventEmitter<Impact> = new EventEmitter();
   @Output() updatedImpact: EventEmitter<Impact> = new EventEmitter();
@@ -34,16 +39,21 @@ export class ImpactDataService extends DataService {
     super(logger);
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   init(): void {
     // Load Impacts.
-    this.analysisData.loadedCurrentAnalysis.subscribe((analysis: Analysis) => {
+    this.analysisData.loadedCurrentAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
-    this.stakeholderData.loadedStakeholders.subscribe(() => {
+    this.stakeholderData.loadedStakeholders.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.stakeholdersLoaded = true;
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
-    this.valueData.loadedValues.subscribe(() => {
+    this.valueData.loadedValues.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.valuesLoaded = true;
       this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
     });
@@ -53,7 +63,7 @@ export class ImpactDataService extends DataService {
     if (!this.stakeholdersLoaded || !this.valuesLoaded) {
       return;
     }
-    this.impactRest.getImpactsByAnalysisId(analysisId).subscribe((impactDtoList: ImpactDto[]) => {
+    this.impactRest.getImpactsByAnalysisId(analysisId).pipe(takeUntil(this.ngUnsubscribe)).subscribe((impactDtoList: ImpactDto[]) => {
       this.impacts = [];
       impactDtoList.forEach(impactDto => {
         this.impacts.push(this.impactMapper.fromDto(impactDto,
@@ -68,7 +78,7 @@ export class ImpactDataService extends DataService {
   }
 
   createImpact(impact: Impact): void {
-    this.impactRest.createImpact(this.impactMapper.toDto(impact)).subscribe((impactDto: ImpactDto) => {
+    this.impactRest.createImpact(this.impactMapper.toDto(impact)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((impactDto: ImpactDto) => {
       const createdImpact = this.impactMapper.fromDto(impactDto,
         [this.analysisData.currentAnalysis],
         this.valueData.values,
@@ -80,7 +90,7 @@ export class ImpactDataService extends DataService {
   }
 
   updateImpact(impact: Impact): void {
-    this.impactRest.updateImpact(this.impactMapper.toDto(impact)).subscribe((impactDto: ImpactDto) => {
+    this.impactRest.updateImpact(this.impactMapper.toDto(impact)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((impactDto: ImpactDto) => {
       this.impactMapper.updateFromDto(impactDto,
         impact,
         [this.analysisData.currentAnalysis],
@@ -92,7 +102,7 @@ export class ImpactDataService extends DataService {
   }
 
   deleteImpact(impact: Impact): void {
-    this.impactRest.deleteImpact(impact.id).subscribe(() => {
+    this.impactRest.deleteImpact(impact.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       const index: number = this.impacts.indexOf(impact, 0);
       this.impacts.splice(index, 1);
       this.deletedImpact.emit(impact);
