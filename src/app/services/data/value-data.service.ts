@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, OnInit, Output} from '@angular/core';
 import {DataService} from '../data.service';
 import {LogService} from '../log.service';
 import {ValueRestService} from '../rest/value-rest.service';
@@ -7,11 +7,16 @@ import {AnalysisDataService} from './analysis-data.service';
 import {Analysis} from '../../model/Analysis';
 import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ValueDataService extends DataService {
+export class ValueDataService extends DataService implements OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @Output() loadedValues: EventEmitter<Value[]> = new EventEmitter();
   @Output() loadedValueTypes: EventEmitter<string[]> = new EventEmitter();
   @Output() createdValue: EventEmitter<Value> = new EventEmitter();
@@ -28,10 +33,15 @@ export class ValueDataService extends DataService {
     super(logger);
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   init(): void {
     // Load Values.
-    this.analysisData.loadedCurrentAnalysis.subscribe((analysis: Analysis) => {
-      this.valueRest.getValuesByAnalysisId(analysis.id).subscribe((valueDtoList: ValueDto[]) => {
+    this.analysisData.loadedCurrentAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysis: Analysis) => {
+      this.valueRest.getValuesByAnalysisId(analysis.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((valueDtoList: ValueDto[]) => {
         this.values = [];
         valueDtoList.forEach(valueDto => {
           this.values.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
@@ -42,7 +52,7 @@ export class ValueDataService extends DataService {
       });
 
       // Load Value Types.
-      this.valueRest.getValueTypes().subscribe((valueTypes: string[]) => {
+      this.valueRest.getValueTypes().pipe(takeUntil(this.ngUnsubscribe)).subscribe((valueTypes: string[]) => {
         this.valueTypes = [];
         valueTypes.forEach((valueType: string) => this.valueTypes.push(valueType));
         this.loadedValueTypes.emit(this.valueTypes);
@@ -51,7 +61,7 @@ export class ValueDataService extends DataService {
   }
 
   createValue(value: Value): void {
-    this.valueRest.createValue(this.valueMapper.toDto(value)).subscribe((valueDto: ValueDto) => {
+    this.valueRest.createValue(this.valueMapper.toDto(value)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((valueDto: ValueDto) => {
       const createdValue = this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]);
       this.values.push(createdValue);
       this.createdValue.emit(createdValue);
@@ -60,7 +70,7 @@ export class ValueDataService extends DataService {
   }
 
   updateValue(value: Value): void {
-    this.valueRest.updateValue(this.valueMapper.toDto(value)).subscribe((valueDto: ValueDto) => {
+    this.valueRest.updateValue(this.valueMapper.toDto(value)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((valueDto: ValueDto) => {
       this.valueMapper.updateFromDto(valueDto, value, [this.analysisData.currentAnalysis]);
       this.updatedValue.emit(value);
       this.logger.info(this, 'Value updated');
@@ -68,7 +78,7 @@ export class ValueDataService extends DataService {
   }
 
   deleteValue(value: Value): void {
-    this.valueRest.deleteValue(value.id).subscribe(() => {
+    this.valueRest.deleteValue(value.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       const index: number = this.values.indexOf(value, 0);
       this.values.splice(index, 1);
       this.deletedValue.emit(value);
