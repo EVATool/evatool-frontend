@@ -45,7 +45,6 @@ export class AppComponent implements OnDestroy {
       });
 
     // Master service init.
-    console.log('MASTER INIT');
     this.master.init();
   }
 

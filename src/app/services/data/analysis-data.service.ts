@@ -55,11 +55,13 @@ export class AnalysisDataService extends DataService implements OnDestroy {
   }
 
   changeCurrentAnalysis(id: string): void {
-    this.analysisRest.getAnalysisById(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysisDto: AnalysisDto) => {
-      this.currentAnalysis = this.analysisMapper.fromDto(analysisDto);
-      this.loadedCurrentAnalysis.emit(this.currentAnalysis);
-      this.logger.info(this, 'Current analysis loaded');
-    });
+    this.analysisRest.getAnalysisById(id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysisDto: AnalysisDto) => {
+        this.currentAnalysis = this.analysisMapper.fromDto(analysisDto);
+        this.loadedCurrentAnalysis.emit(this.currentAnalysis);
+        this.logger.info(this, 'Current analysis loaded');
+      });
   }
 
   deepCopy(templateAnalysis: Analysis, analysis: Analysis): void {

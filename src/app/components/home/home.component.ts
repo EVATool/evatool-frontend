@@ -132,7 +132,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       const reader = new FileReader();
       reader.onloadend = () => {
         const importString = reader.result as string;
-        console.log(importString);
+        //console.log(importString);
         this.importAnalyses(importString);
       };
       reader.readAsText(files[0]);
