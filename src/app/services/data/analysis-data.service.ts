@@ -65,12 +65,14 @@ export class AnalysisDataService extends DataService implements OnDestroy {
   }
 
   deepCopy(templateAnalysis: Analysis, analysis: Analysis): void {
-    this.analysisRest.deepCopy(templateAnalysis.id, this.analysisMapper.toDto(analysis)).pipe(takeUntil(this.ngUnsubscribe)).subscribe((analysisDto: AnalysisDto) => {
-      const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
-      this.analyses.push(createdAnalysis);
-      this.createdAnalysis.emit(createdAnalysis);
-      this.logger.info(this, 'Analysis deep copied');
-    });
+    this.analysisRest.deepCopy(templateAnalysis.id, this.analysisMapper.toDto(analysis))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysisDto: AnalysisDto) => {
+        const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
+        this.analyses.push(createdAnalysis);
+        this.createdAnalysis.emit(createdAnalysis);
+        this.logger.info(this, 'Analysis deep copied');
+      });
   }
 
   createAnalysis(analysis: Analysis): void {
