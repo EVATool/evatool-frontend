@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {Router} from '@angular/router';
@@ -8,13 +8,17 @@ import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.compon
 import {CrossUiEventService} from '../../services/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {saveAs} from 'file-saver';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
 
   analyses: Analysis[] = [];
   analysisNameFilter = '';
@@ -33,19 +37,19 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.analysisData.loadedAnalyses.subscribe(() => {
+    this.analysisData.loadedAnalyses.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.updateData(this.analysisData.analyses);
     });
 
-    this.analysisData.createdAnalysis.subscribe(() => {
+    this.analysisData.createdAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.updateData(this.analysisData.analyses);
     });
 
-    this.analysisData.deletedAnalysis.subscribe(() => {
+    this.analysisData.deletedAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.updateData(this.analysisData.analyses);
     });
 
-    this.analysisData.exportedAnalysis.subscribe((exportAnalyses: object) => {
+    this.analysisData.exportedAnalysis.pipe(takeUntil(this.ngUnsubscribe)).subscribe((exportAnalyses: object) => {
       // TODO the json is prettified on the server, but its all one line in the file.
       //  This is work-around in the next line, but should not be necessary, because it is already done on the backend (angular object loses that information).
       //  Also, the download should work without manually saving the object. Accessing the backend url via the browser directly instantly causes download to start (should also be like this here).
@@ -54,13 +58,18 @@ export class HomeComponent implements OnInit {
       this.inSelectionMode = false;
     });
 
-    this.crossUI.initComplete.subscribe(() => {
+    this.crossUI.initComplete.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.analysisData.loadAnalyses();
     });
 
     if (this.crossUI.initialized) {
       this.analysisData.loadAnalyses();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateData(analyses: Analysis[]): void {
