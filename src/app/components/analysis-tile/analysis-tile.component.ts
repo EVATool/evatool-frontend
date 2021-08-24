@@ -67,11 +67,29 @@ export class AnalysisTileComponent implements OnInit, OnDestroy {
       });
   }
 
-  clickAnalysisTile(analysis: Analysis): void {
+  clickAnalysisTile(analysis: Analysis, event: MouseEvent): void {
     if (this.inSelectionMode) {
       this.analysis.selected = !this.analysis.selected;
     } else { // Open analysis.
-      this.router.navigate([ROUTES.analysis, analysis.id]);
+      const commands = [ROUTES.analysis, analysis.id];
+      if (event.ctrlKey) {
+        this.openAnalysisInNewTab(commands);
+      } else {
+        this.router.navigate(commands);
+      }
     }
+  }
+
+  auxClickAnalysisTile(analysis: Analysis, event: MouseEvent): void {
+    if (event.button === 1) { // Middle Mouse Button.
+      const commands = [ROUTES.analysis, analysis.id];
+      this.openAnalysisInNewTab(commands);
+    }
+  }
+
+  openAnalysisInNewTab(commands: string[]): void {
+    const url = this.router.serializeUrl(this.router.createUrlTree(commands));
+    console.log(url);
+    window.open(url, '_blank');
   }
 }

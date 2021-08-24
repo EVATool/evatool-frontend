@@ -1,4 +1,4 @@
-<div class="analysis-tile" (click)="clickAnalysisTile(analysis)">
+<div class="analysis-tile" (click)="clickAnalysisTile(analysis, $event)" (auxclick)="auxClickAnalysisTile(analysis, $event)">
   <img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" alt="" class="analysis-image">
   <div class="interactive-panel">
     <div class="analysis-actions">
