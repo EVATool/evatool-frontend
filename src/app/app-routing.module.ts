@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: ROUTES.imprint, component: ImprintComponent},
   {path: ROUTES.privacy, component: PrivacyComponent},
   {path: ROUTES.pageNotFound, component: PageNotFoundComponent},
-  {path: ROUTES.any, redirectTo: ROUTES.pageNotFound}
+  //{path: ROUTES.any, redirectTo: ROUTES.pageNotFound}
 ];
 
 @NgModule({
