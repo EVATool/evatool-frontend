@@ -9,5 +9,6 @@ export const environment = {
   authEnabled: false,
   authMultiTenancyEnabled: false,
   authPort: '',
-  authRegistrationEnabled: false
+  authRegistrationEnabled: false,
+  logLevel: 'INFO'
 };

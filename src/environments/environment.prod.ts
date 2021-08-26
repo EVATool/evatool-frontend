@@ -13,5 +13,6 @@ export const environment = {
   authMultiTenancyEnabled: AUTH_MULTI_TENANCY_ENABLED,
   authPort: 'AUTH_PORT',
   // @ts-ignore
-  authRegistrationEnabled: AUTH_REGISTRATION_ENABLED
+  authRegistrationEnabled: AUTH_REGISTRATION_ENABLED,
+  logLevel: 'LOG_LEVEL'
 };

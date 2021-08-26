@@ -3,13 +3,13 @@ import {environment} from '../../environments/environment';
 import {DatePipe} from '@angular/common';
 
 export enum LogLevel {
-  Trace = 0,
-  Debug = 1,
-  Info = 2,
-  Warn = 3,
-  Error = 4,
-  Fatal = 5,
-  Off = 6
+  TRACE = 0,
+  DEBUG = 1,
+  INFO = 2,
+  WARN = 3,
+  ERROR = 4,
+  FATAL = 5,
+  OFF = 6
 }
 
 @Injectable({
@@ -17,7 +17,7 @@ export enum LogLevel {
 })
 export class LogService {
 
-  public static readonly logLevel: LogLevel = environment.production ? LogLevel.Error : LogLevel.Info;
+  public static readonly logLevel: LogLevel = (LogLevel as any)[environment.logLevel];
 
   datePipe = new DatePipe('en-US');
 
@@ -45,42 +45,42 @@ export class LogService {
   }
 
   trace(sender: any, msg: string): void {
-    const logLevel = LogLevel.Trace;
+    const logLevel = LogLevel.TRACE;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
   debug(sender: any, msg: string): void {
-    const logLevel = LogLevel.Debug;
+    const logLevel = LogLevel.DEBUG;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
   info(sender: any, msg: string): void {
-    const logLevel = LogLevel.Info;
+    const logLevel = LogLevel.INFO;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
   warn(sender: any, msg: string): void {
-    const logLevel = LogLevel.Warn;
+    const logLevel = LogLevel.WARN;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
   error(sender: any, msg: string): void {
-    const logLevel = LogLevel.Error;
+    const logLevel = LogLevel.ERROR;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
   }
 
   fatal(sender: any, msg: string): void {
-    const logLevel = LogLevel.Fatal;
+    const logLevel = LogLevel.FATAL;
     if (this.shouldLog(logLevel)) {
       console.log(this.formatMessage(sender, msg, logLevel));
     }
