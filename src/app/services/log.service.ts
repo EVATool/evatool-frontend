@@ -39,8 +39,8 @@ export class LogService {
 
   public formatMessage(sender: string, msg: string, logLevel: LogLevel): string {
     return this.getCurrentTime() +
-      ' ' + this.getLogLevel(logLevel) +
-      ' [' + this.getClassName(sender).padStart(30, ' ') + ']' +
+      ' ' + this.getLogLevel(logLevel).padStart(5, ' ') +
+      ' [' + this.getClassName(sender).padEnd(30, ' ') + ']' +
       ': ' + msg;
   }
 
