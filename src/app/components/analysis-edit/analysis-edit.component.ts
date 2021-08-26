@@ -14,6 +14,7 @@ import {ROUTES} from '../../app-routes';
 import * as uuid from 'uuid';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -39,7 +40,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
     // Load current analysis.
     const analysisId = this.route.snapshot.params?.id;
     const analysisIdIsUUID = uuid.validate(analysisId);
-    if (analysisIdIsUUID) {
+    if (analysisIdIsUUID || environment.testing) {
       this.analysisData.changeCurrentAnalysis(analysisId);
     } else {
       this.router.navigate([ROUTES.pageNotFound]);
