@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, OnInit} from '@angular/core';
+import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
@@ -6,13 +6,17 @@ import {ROUTES} from '../../app-routes';
 import {CrossUiEventService, RealmNotFoundEvent} from '../../services/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from '../../../environments/environment';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
 
   tenantSelectionEnabled = environment.authMultiTenancyEnabled && !environment.authRegistrationEnabled;
   registrationEnabled = environment.authRegistrationEnabled;
@@ -34,15 +38,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.crossUI.authenticationFailed.subscribe(() => {
-      const message = 'Invalid credentials';
-      this.snackBar.open(message, '', {duration: 5000});
-    });
+    this.crossUI.authenticationFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        const message = 'Invalid credentials';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
 
-    this.crossUI.realmNotFound.subscribe((event: RealmNotFoundEvent) => {
-      const message = 'Tenant ' + event.realm + ' does not exist';
-      this.snackBar.open(message, '', {duration: 5000});
-    });
+    this.crossUI.realmNotFound
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: RealmNotFoundEvent) => {
+        const message = 'Tenant ' + event.realm + ' does not exist';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
 
     if (isDevMode()) {
       this.realm = 'evatool-realm';
@@ -62,6 +70,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
       const message = 'Authentication is disabled. You will not be able to login.';
       this.snackBar.open(message, '', {duration: 5000});
     }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   termsAndConditions(): void {

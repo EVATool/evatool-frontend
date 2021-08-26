@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
+import {DatePipe} from '@angular/common';
 
 export enum LogLevel {
   Trace = 0,
@@ -18,8 +19,14 @@ export class LogService {
 
   public static readonly logLevel: LogLevel = environment.production ? LogLevel.Error : LogLevel.Info;
 
+  datePipe = new DatePipe('en-US');
+
   public shouldLog(logLevel: LogLevel): boolean {
     return LogService.logLevel <= logLevel;
+  }
+
+  public getCurrentTime(): string {
+    return this.datePipe.transform(new Date(), 'HH:mm:ss') || '';
   }
 
   public getClassName(object: any): string {
@@ -31,7 +38,10 @@ export class LogService {
   }
 
   public formatMessage(sender: string, msg: string, logLevel: LogLevel): string {
-    return '[' + this.getLogLevel(logLevel) + '] ' + this.getClassName(sender) + ': ' + msg;
+    return this.getCurrentTime() +
+      ' ' + this.getLogLevel(logLevel) +
+      ' [' + this.getClassName(sender).padStart(30, ' ') + ']' +
+      ': ' + msg;
   }
 
   trace(sender: any, msg: string): void {

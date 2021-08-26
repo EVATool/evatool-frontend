@@ -8,9 +8,9 @@ describe('HighlightSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HighlightSearchComponent ]
+      declarations: [HighlightSearchComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

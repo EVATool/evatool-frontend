@@ -10,9 +10,9 @@ describe('StakeholderTableComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
-      declarations: [ StakeholderTableComponent ]
+      declarations: [StakeholderTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

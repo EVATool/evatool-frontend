@@ -7,18 +7,16 @@
   height: 40px;
 
   .container {
-    width: 100%;
-    text-align: right;
+    div {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-right: 4px;
 
-    ul {
-      li {
-        display: inline;
+      span {
         padding-left: 1.5vw;
-        padding-bottom: 1.5vw;
-        vertical-align: middle;
 
-        a { // TODO why is this ignoring any margin (top and bottom) put in?
-          margin-bottom: 10px;
+        a {
           color: rgb(155, 155, 155);
           text-decoration: none;
         }
@@ -26,8 +24,9 @@
         .mat-icon {
           cursor: default;
           color: rgb(155, 155, 155);
-          margin-right: 8px;
-          margin-top: 10px;
+          // margin-right: 8px;
+          // margin-top: 10px;
+          margin: 4px;
         }
       }
     }

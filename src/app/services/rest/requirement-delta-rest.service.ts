@@ -49,7 +49,7 @@ export class RequirementDeltaRestService extends RestService {
 
   deleteRequirementDelta(id: string): Observable<void> {
     const url = this.requirementDeltasUrl + '/' + id;
-    this.logger.info(this, "Http delete to: " + url);
+    this.logger.info(this, 'Http delete to: ' + url);
     if (this.testing) {
       return of(void 0);
     } else {

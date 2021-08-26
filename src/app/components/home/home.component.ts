@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {Router} from '@angular/router';
@@ -8,13 +8,17 @@ import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.compon
 import {CrossUiEventService} from '../../services/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {saveAs} from 'file-saver';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
 
   analyses: Analysis[] = [];
   analysisNameFilter = '';
@@ -33,35 +37,49 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.analysisData.loadedAnalyses.subscribe(() => {
-      this.updateData(this.analysisData.analyses);
-    });
+    this.analysisData.loadedAnalyses
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.updateData(this.analysisData.analyses);
+      });
 
-    this.analysisData.createdAnalysis.subscribe(() => {
-      this.updateData(this.analysisData.analyses);
-    });
+    this.analysisData.createdAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.updateData(this.analysisData.analyses);
+      });
 
-    this.analysisData.deletedAnalysis.subscribe(() => {
-      this.updateData(this.analysisData.analyses);
-    });
+    this.analysisData.deletedAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.updateData(this.analysisData.analyses);
+      });
 
-    this.analysisData.exportedAnalysis.subscribe((exportAnalyses: object) => {
-      // TODO the json is prettified on the server, but its all one line in the file.
-      //  This is work-around in the next line, but should not be necessary, because it is already done on the backend (angular object loses that information).
-      //  Also, the download should work without manually saving the object. Accessing the backend url via the browser directly instantly causes download to start (should also be like this here).
-      //  Now, all of a sudden the file is being downloaded two times  (services get injected multiple times? Or are called multiple times from multiple UI components?).
-      const blob = new Blob([JSON.stringify(exportAnalyses, null, 4)]);
-      saveAs(blob, 'Analysis-Export.json');
-      this.inSelectionMode = false;
-    });
+    this.analysisData.exportedAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((exportAnalyses: object) => {
+        // TODO the json is prettified on the server, but its all one line in the file.
+        //  This is work-around in the next line, but should not be necessary, because it is already done on the backend (angular object loses that information).
+        //  Also, the download should work without manually saving the object. Accessing the backend url via the browser directly instantly causes download to start (should also be like this here).
+        const blob = new Blob([JSON.stringify(exportAnalyses, null, 4)]);
+        saveAs(blob, 'Analysis-Export.json');
+        this.inSelectionMode = false;
+      });
 
-    this.crossUI.initComplete.subscribe(() => {
-      this.analysisData.loadAnalyses();
-    });
+    this.crossUI.initComplete
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.analysisData.loadAnalyses();
+      });
 
     if (this.crossUI.initialized) {
       this.analysisData.loadAnalyses();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateData(analyses: Analysis[]): void {
@@ -103,7 +121,7 @@ export class HomeComponent implements OnInit {
     this.dialog.open(AnalysisDialogComponent, {
       height: '40%',
       width: '40%',
-      data: {analysis: analysis}
+      data: {analysis}
     });
   }
 
@@ -114,7 +132,7 @@ export class HomeComponent implements OnInit {
       const reader = new FileReader();
       reader.onloadend = () => {
         const importString = reader.result as string;
-        console.log(importString);
+        //console.log(importString);
         this.importAnalyses(importString);
       };
       reader.readAsText(files[0]);

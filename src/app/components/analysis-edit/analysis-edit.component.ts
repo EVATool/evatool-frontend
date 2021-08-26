@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
@@ -11,13 +11,19 @@ import {
 } from '../../services/cross-ui-event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
+import * as uuid from 'uuid';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-analysis-edit',
   templateUrl: './analysis-edit.component.html',
   styleUrls: ['./analysis-edit.component.scss']
 })
-export class AnalysisEditComponent implements OnInit, AfterViewInit {
+export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
   @ViewChild(StakeholderEditComponent) stakeholdersComponent!: StakeholderEditComponent;
   @ViewChild(ImpactEditComponent) impactsComponent!: ImpactEditComponent;
@@ -31,31 +37,42 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Load current analysis.
-    const analysisId = this.route.snapshot.params.id;
-    const analysisIdIsUUID = analysisId?.match('^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$');
+    const analysisId = this.route.snapshot.params?.id;
+    const analysisIdIsUUID = uuid.validate(analysisId);
     if (analysisIdIsUUID) {
       this.analysisData.changeCurrentAnalysis(analysisId);
     } else {
       this.router.navigate([ROUTES.pageNotFound]);
     }
 
-    this.crossUI.analysisWithValidIdNotFound.subscribe(() => {
-      this.router.navigate([ROUTES.pageNotFound]);
-    });
+    this.crossUI.analysisWithValidIdNotFound
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.router.navigate([ROUTES.pageNotFound]);
+      });
 
-    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.subscribe((event: StakeholderReferencedByImpactsEvent) => {
-      this.tabGroup.selectedIndex = 1;
-    });
+    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
+        this.tabGroup.selectedIndex = 1;
+      });
 
-    this.crossUI.userWantsToSeeImpactReferencedByRequirements.subscribe((event: ImpactReferencedByRequirementsEvent) => {
-      this.tabGroup.selectedIndex = 2;
-    });
+    this.crossUI.userWantsToSeeImpactReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ImpactReferencedByRequirementsEvent) => {
+        this.tabGroup.selectedIndex = 2;
+      });
   }
 
   ngAfterViewInit(): void {
     if (isDevMode()) {
       this.tabGroup.selectedIndex = 0;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   tabChanged(event: number): void {

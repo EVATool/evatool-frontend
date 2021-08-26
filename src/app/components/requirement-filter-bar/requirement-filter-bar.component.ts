@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
 import {FilterCategoryComponent} from '../filter-category/filter-category.component';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
@@ -11,13 +11,18 @@ import {VariantDataService} from '../../services/data/variant-data.service';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {Impact} from '../../model/Impact';
 import {LogService} from '../../services/log.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-requirement-filter-bar',
   templateUrl: './requirement-filter-bar.component.html',
   styleUrls: ['./requirement-filter-bar.component.scss']
 })
-export class RequirementFilterBarComponent implements OnInit {
+export class RequirementFilterBarComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @ViewChild(FilterSliderComponent) sliderFilter!: FilterSliderComponent;
   @ViewChild('variantsFilter') variantsFilter!: FilterCategoryComponent;
   @ViewChild('valueSystemFilter') valueSystemFilter!: FilterCategoryComponent;
@@ -41,59 +46,88 @@ export class RequirementFilterBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.variantData.loadedVariants.subscribe((variants: Variant[]) => {
-      this.updateVariants();
-    });
+    this.variantData.loadedVariants
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variants: Variant[]) => {
+        this.updateVariants();
+      });
 
-    this.variantData.createdVariant.subscribe((variant: Variant) => {
-      this.updateVariants();
-    });
+    this.variantData.createdVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
+        this.updateVariants();
+      });
 
-    this.variantData.updatedVariant.subscribe((variant: Variant) => {
-      this.updateVariants();
-    });
+    this.variantData.updatedVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
+        this.updateVariants();
+      });
 
-    this.variantData.deletedVariant.subscribe((variant: Variant) => {
-      this.updateVariants();
-    });
+    this.variantData.deletedVariant
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variant: Variant) => {
+        this.updateVariants();
+      });
 
     this.updateVariants();
 
-    this.valueData.loadedValues.subscribe((values: Value[]) => {
-      this.updateValues();
-    });
+    this.valueData.loadedValues
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value[]) => {
+        this.updateValues();
+      });
 
-    this.valueData.createdValue.subscribe((value: Value) => {
-      this.updateValues();
-    });
+    this.valueData.createdValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
+        this.updateValues();
+      });
 
-    this.valueData.updatedValue.subscribe((values: Value) => {
-      this.updateValues();
-    });
+    this.valueData.updatedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value) => {
+        this.updateValues();
+      });
 
-    this.valueData.deletedValue.subscribe((values: Value) => {
-      this.updateValues();
-    });
+    this.valueData.deletedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value) => {
+        this.updateValues();
+      });
 
     this.updateValues();
 
-    this.impactData.loadedImpacts.subscribe((impacts: Impact[]) => {
-      this.updateImpacts();
-    });
+    this.impactData.loadedImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impacts: Impact[]) => {
+        this.updateImpacts();
+      });
 
-    this.impactData.createdImpact.subscribe((impact: Impact) => {
-      this.updateImpacts();
-    });
+    this.impactData.createdImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
+        this.updateImpacts();
+      });
 
-    this.impactData.updatedImpact.subscribe((impact: Impact) => {
-      this.updateImpacts();
-    });
+    this.impactData.updatedImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
+        this.updateImpacts();
+      });
 
-    this.impactData.deletedImpact.subscribe((impact: Impact) => {
-      this.updateImpacts();
-    });
+    this.impactData.deletedImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
+        this.updateImpacts();
+      });
 
     this.updateImpacts();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateVariants(): void {

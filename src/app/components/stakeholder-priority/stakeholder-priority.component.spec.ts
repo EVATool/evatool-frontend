@@ -10,9 +10,9 @@ describe('StakeholderPriorityComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
-      declarations: [ StakeholderPriorityComponent ]
+      declarations: [StakeholderPriorityComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

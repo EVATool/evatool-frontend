@@ -11,9 +11,9 @@ describe('ImpactTableComponent', () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [ ImpactTableComponent ]
+      declarations: [ImpactTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {LogService} from './log.service';
 import {RestService} from './rest.service';
 import {HttpClient} from '@angular/common/http';
@@ -8,30 +8,115 @@ import {ROUTES} from '../app-routes';
 import {AuthTokenDto} from '../dto/AuthTokenDto';
 import {AuthRegisterRealmDto} from '../dto/AuthRegisterRealmDto';
 import {AuthRegisterUserDto} from '../dto/AuthRegisterUserDto';
+import {environment} from '../../environments/environment';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends RestService {
+export class AuthService extends RestService implements OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @Output() realmRegistered: EventEmitter<string> = new EventEmitter();
 
   authenticated = false;
-  private token = 'null';
-  tokenExpiresIn = 0;
-  private refreshToken = 'null';
-  refreshTokenExpiresIn = 0;
-
   isAutoRefreshing = false;
 
-  realm = '';
-  username = '';
-  password = '';
+  private _token = 'null';
+  tokenExpiresIn = 0;
+  readonly TOKEN_LOCAL_STORAGE_KEY = 'auth_token';
+
+  public get token(): string {
+    return this._token;
+  }
+
+  public set token(token: string) {
+    this._token = token;
+    localStorage.setItem(this.TOKEN_LOCAL_STORAGE_KEY, this.token);
+  }
+
+
+  private _refreshToken = 'null';
+  refreshTokenExpiresIn = 0;
+  readonly REFRESH_TOKEN_LOCAL_STORAGE_KEY = 'auth_refresh_token';
+
+  public get refreshToken(): string {
+    return this._refreshToken;
+  }
+
+  public set refreshToken(refreshToken: string) {
+    this._refreshToken = refreshToken;
+    localStorage.setItem(this.REFRESH_TOKEN_LOCAL_STORAGE_KEY, this.refreshToken);
+  }
+
+
+  private _realm = '';
+  readonly REALM_LOCAL_STORAGE_KEY = 'auth_realm';
+
+  public get realm(): string {
+    return this._realm;
+  }
+
+  public set realm(realm: string) {
+    this._realm = realm;
+    localStorage.setItem(this.REALM_LOCAL_STORAGE_KEY, this.realm);
+  }
+
+
+  _username = '';
+  readonly USERNAME_LOCAL_STORAGE_KEY = 'auth_username';
+
+  public get username(): string {
+    return this._username;
+  }
+
+  public set username(username: string) {
+    this._username = username;
+    localStorage.setItem(this.USERNAME_LOCAL_STORAGE_KEY, this.username);
+  }
+
 
   constructor(protected logger: LogService,
               protected http: HttpClient,
               protected sampleData: SampleDataService,
               private router: Router) {
     super(logger, http, sampleData);
+
+    const cachedToken = localStorage.getItem(this.TOKEN_LOCAL_STORAGE_KEY);
+    if (cachedToken) {
+      this._token = cachedToken;
+    }
+
+    const cachedRefreshToken = localStorage.getItem(this.REFRESH_TOKEN_LOCAL_STORAGE_KEY);
+    if (cachedRefreshToken) {
+      this._refreshToken = cachedRefreshToken;
+    }
+
+    const cachedRealm = localStorage.getItem(this.REALM_LOCAL_STORAGE_KEY);
+    if (cachedRealm) {
+      this._realm = cachedRealm;
+    }
+
+    const cachedUsername = localStorage.getItem(this.USERNAME_LOCAL_STORAGE_KEY);
+    if (cachedUsername) {
+      this._username = cachedUsername;
+    }
+
+    if (environment.authEnabled) {
+      this.startTimer();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  getToken(): string {
+    this.refreshExistingToken();
+    return this.token;
   }
 
   login(realm: string, username: string, password: string): void {
@@ -41,31 +126,21 @@ export class AuthService extends RestService {
 
     this.http.post<AuthTokenDto>(
       this.authLoginUrl + '?username=' + username + '&password=' + password + '&realm=' + realm, null, this.httpOptions)
-      .subscribe((response: AuthTokenDto) => {
-        this.realm = realm;
-        this.username = username;
-        this.password = password; // TODO do not save or purge password so its not in memory. It is not required for refreshing the token.
-        this.takeInAuthResponse(response);
-        this.startTimers();
-        this.router.navigate([ROUTES.home]);
-      });
-  }
-
-  getToken(): string {
-    if (!this.refreshTokenExpiresIn || this.refreshTokenExpiresIn <= 0) {
-      this.login(this.realm, this.username, this.password);
-    } else {
-      this.refreshExistingToken();
-    }
-    return this.token;
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthTokenDto) => {
+      this.realm = realm;
+      this.username = username;
+      this.takeInAuthResponse(response);
+      this.router.navigate([ROUTES.home]);
+    });
   }
 
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
-    this.http.post<AuthTokenDto>(
-      this.authRefreshLoginUrl + '?refreshToken=' + this.refreshToken + '&realm=' + this.realm, null, this.httpOptions)
-      .subscribe((response: AuthTokenDto) => {
-        this.takeInAuthResponse(response, ignoreRefreshToken);
-      });
+    const url = this.authRefreshLoginUrl + '?refreshToken=' + this.refreshToken + '&realm=' + this.realm;
+    this.logger.info(this, 'Http post to: ' + url);
+    this.http.post<AuthTokenDto>(url, null, this.httpOptions)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthTokenDto) => {
+      this.takeInAuthResponse(response, ignoreRefreshToken);
+    });
   }
 
   logout(): void {
@@ -76,55 +151,31 @@ export class AuthService extends RestService {
     this.refreshTokenExpiresIn = 0;
     this.realm = '';
     this.username = '';
-    this.password = '';
     this.router.navigate([ROUTES.login]);
   }
 
   registerUser(username: string, email: string, password: string): void {
-    this.http.post<AuthRegisterUserDto>(
-      this.authRegisterUserUrl +
+    const url = this.authRegisterUserUrl +
       '?username=' + username +
       '&email=' + email +
-      '&password=' + password,
-      null, this.httpOptions)
-      .subscribe((response: AuthRegisterUserDto) => {
-        this.login('evatool-realm', username, password);
-      });
+      '&password=' + password;
+    this.logger.info(this, 'Http post to: ' + url);
+    this.http.post<AuthRegisterUserDto>(url, null, this.httpOptions)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthRegisterUserDto) => {
+      this.login('evatool-realm', username, password);
+    });
   }
 
   registerRealm(adminUsername: string, adminPassword: string, realm: string): void {
-    this.http.post<AuthRegisterRealmDto>(
-      this.authRegisterRealmUrl +
+    const url = this.authRegisterRealmUrl +
       '?authAdminUsername=' + adminUsername +
       '&authAdminPassword=' + adminPassword +
-      '&realm=' + realm,
-      null, this.httpOptions)
-      .subscribe((response: AuthRegisterRealmDto) => {
-        this.realmRegistered.emit(response.realm);
-      });
-  }
-
-  startTimers(): void {
-    this.authenticated = true;
-    const interval = setInterval(() => {
-      if (!this.authenticated) {
-        clearInterval(interval);
-      }
-
-      this.tokenExpiresIn -= 1;
-      this.refreshTokenExpiresIn -= 1;
-
-      // Try to get new token with refresh token if token expires soon.
-      if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing && this.authenticated) {
-        this.isAutoRefreshing = true;
-        this.logger.info(this, 'Refreshing Token...');
-        this.refreshExistingToken(true);
-      }
-
-      if (this.refreshTokenExpiresIn <= 0) {
-        this.logout();
-      }
-    }, 1000);
+      '&realm=' + realm;
+    this.logger.info(this, 'Http post to: ' + url);
+    this.http.post<AuthRegisterRealmDto>(url, null, this.httpOptions)
+      .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthRegisterRealmDto) => {
+      this.realmRegistered.emit(response.realm);
+    });
   }
 
   takeInAuthResponse(authTokenDto: AuthTokenDto, ignoreRefreshToken: boolean = false): void {
@@ -136,5 +187,26 @@ export class AuthService extends RestService {
     } else {
       this.isAutoRefreshing = false;
     }
+    this.authenticated = true;
+  }
+
+  startTimer(): void {
+    const interval = setInterval(() => {
+      if (this.authenticated) { // TODO test new if clause
+        this.tokenExpiresIn -= 1;
+        this.refreshTokenExpiresIn -= 1;
+
+        // Try to get new token with refresh token if token expires soon.
+        if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing && this.authenticated) {
+          this.isAutoRefreshing = true;
+          this.logger.info(this, 'Automatically refreshing existing token...');
+          this.refreshExistingToken(true);
+        }
+
+        if (this.refreshTokenExpiresIn <= 0) {
+          this.logout();
+        }
+      }
+    }, 1000);
   }
 }

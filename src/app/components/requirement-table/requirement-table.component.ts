@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
 import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
@@ -26,6 +26,8 @@ import {
   RequirementDeltaDeletionFailedEvent,
   VariantReferencedByRequirementsEvent
 } from '../../services/cross-ui-event.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-requirement-table',
@@ -55,7 +57,10 @@ import {
     )
   ]
 })
-export class RequirementTableComponent implements OnInit, AfterViewInit {
+export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Impact>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -81,53 +86,80 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.crossUI.userWantsToSeeVariantReferencedByRequirements.subscribe((event: VariantReferencedByRequirementsEvent) => {
-      this.deletionFlaggedVariant = event.variant;
-      event.requirements.forEach(requirement => {
-        requirement.highlighted = true;
+    this.crossUI.userWantsToSeeVariantReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: VariantReferencedByRequirementsEvent) => {
+        this.deletionFlaggedVariant = event.variant;
+        event.requirements.forEach(requirement => {
+          requirement.highlighted = true;
+        });
       });
-    });
 
-    this.crossUI.userWantsToSeeImpactReferencedByRequirements.subscribe((event: ImpactReferencedByRequirementsEvent) => {
-      this.deletionFlaggedImpact = event.impact;
-      event.deltas.forEach((delta: RequirementDelta) => {
-        delta.highlighted = true;
+    this.crossUI.userWantsToSeeImpactReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ImpactReferencedByRequirementsEvent) => {
+        this.deletionFlaggedImpact = event.impact;
+        event.deltas.forEach((delta: RequirementDelta) => {
+          delta.highlighted = true;
+        });
       });
-    });
 
-    this.crossUI.requirementDeletionFailed.subscribe((event: RequirementDeletionFailedEvent) => {
-      event.entity.deletionFlagged = false;
-    });
+    this.crossUI.requirementDeletionFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: RequirementDeletionFailedEvent) => {
+        event.entity.deletionFlagged = false;
+      });
 
-    this.crossUI.requirementDeltaDeletionFailed.subscribe((event: RequirementDeltaDeletionFailedEvent) => {
-      event.entity.deletionFlagged = false;
-    });
+    this.crossUI.requirementDeltaDeletionFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: RequirementDeltaDeletionFailedEvent) => {
+        event.entity.deletionFlagged = false;
+      });
 
-    this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
-      this.updateImpactColumns();
-    });
-    this.impactDataService.createdImpact.subscribe((impact: Impact) => {
-      this.updateImpactColumns();
-    });
-    this.impactDataService.deletedImpact.subscribe((impact: Impact) => {
-      this.updateImpactColumns();
-    });
+    this.impactDataService.loadedImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impacts: Impact[]) => {
+        this.updateImpactColumns();
+      });
+    this.impactDataService.createdImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
+        this.updateImpactColumns();
+      });
+    this.impactDataService.deletedImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
+        this.updateImpactColumns();
+      });
     this.updateImpactColumns();
 
-    this.requirementDataService.loadedRequirements.subscribe((requirements: Requirement[]) => {
-      this.updateTableDataSource();
-    });
-    this.requirementDataService.createdRequirement.subscribe((requirement: Requirement) => {
-      this.updateTableDataSource();
-    });
-    this.requirementDataService.deletedRequirement.subscribe((requirement: Requirement) => {
-      this.updateTableDataSource();
-    });
+    this.requirementDataService.loadedRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirements: Requirement[]) => {
+        this.updateTableDataSource();
+      });
+    this.requirementDataService.createdRequirement
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirement: Requirement) => {
+        this.updateTableDataSource();
+      });
+    this.requirementDataService.deletedRequirement
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirement: Requirement) => {
+        this.updateTableDataSource();
+      });
     this.updateTableDataSource();
 
-    this.requirementDeltaDataService.createdRequirementDelta.subscribe((delta: RequirementDelta) => {
-      this.showDeltaSlider(delta);
-    });
+    this.requirementDeltaDataService.createdRequirementDelta
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((delta: RequirementDelta) => {
+        this.showDeltaSlider(delta);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateImpactColumns(includeOnlyTheseImpacts?: string[]): void {
@@ -149,9 +181,11 @@ export class RequirementTableComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled.subscribe(e => {
-      this.windowScrolled = e.target.scrollTop !== 0;
-    });
+    this.scrollbarRef?.scrolled
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(e => {
+        this.windowScrolled = e.target.scrollTop !== 0;
+      });
 
     this.initSorting();
     this.initFiltering();

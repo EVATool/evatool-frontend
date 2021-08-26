@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {MatSort} from '@angular/material/sort';
@@ -22,13 +22,18 @@ import {
   StakeholderReferencedByImpactsEvent,
   ValueReferencedByImpactsEvent
 } from '../../services/cross-ui-event.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-impact-table',
   templateUrl: './impact-table.component.html',
   styleUrls: ['./impact-table.component.scss']
 })
-export class ImpactTableComponent implements OnInit, AfterViewInit {
+export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Impact>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -52,61 +57,84 @@ export class ImpactTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.crossUI.userWantsToSeeValueReferencedByImpacts.subscribe((event: ValueReferencedByImpactsEvent) => {
-      this.deletionFlaggedValue = event.value;
-      event.impacts.forEach(impact => {
-        impact.highlighted = true;
+    this.crossUI.userWantsToSeeValueReferencedByImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ValueReferencedByImpactsEvent) => {
+        this.deletionFlaggedValue = event.value;
+        event.impacts.forEach(impact => {
+          impact.highlighted = true;
+        });
       });
-    });
 
-    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.subscribe((event: StakeholderReferencedByImpactsEvent) => {
-      this.deletionFlaggedStakeholder = event.stakeholder;
-      event.impacts.forEach((impact: Impact) => {
-        impact.highlighted = true;
+    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
+        this.deletionFlaggedStakeholder = event.stakeholder;
+        event.impacts.forEach((impact: Impact) => {
+          impact.highlighted = true;
+        });
       });
-    });
 
-    this.crossUI.impactReferencedByRequirements.subscribe((event: ImpactReferencedByRequirementsEvent) => {
-      const message = 'This impact cannot be deleted. It is still being used by '
-        + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
-      const action = 'show';
-      const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-      snackBarRef.onAction().subscribe(() => {
-        this.crossUI.userWantsToSeeImpactReferencedByRequirements.emit(event);
+    this.crossUI.impactReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ImpactReferencedByRequirementsEvent) => {
+        const message = 'This impact cannot be deleted. It is still being used by '
+          + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
+        const action = 'show';
+        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
+        snackBarRef.onAction()
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe(() => {
+            this.crossUI.userWantsToSeeImpactReferencedByRequirements.emit(event);
+          });
       });
-    });
 
-    this.crossUI.impactDeletionFailed.subscribe((event: ImpactDeletionFailedEvent) => {
-      if (event.notFound) {
-        // TODO: remove from data service array (ALL table components + analysis).
-        //  This should be done when concurrency is better understood, because child, parent entities also have to be deleted.
-      } else {
-        event.entity.deletionFlagged = false;
-      }
-    });
+    this.crossUI.impactDeletionFailed
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ImpactDeletionFailedEvent) => {
+        if (event.notFound) {
+          // TODO: remove from data service array (ALL table components + analysis).
+          //  This should be done when concurrency is better understood, because child, parent entities also have to be deleted.
+        } else {
+          event.entity.deletionFlagged = false;
+        }
+      });
 
-    this.impactDataService.loadedImpacts.subscribe((impacts: Impact[]) => {
-      this.updateTableDataSource();
-    });
+    this.impactDataService.loadedImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impacts: Impact[]) => {
+        this.updateTableDataSource();
+      });
 
-    this.impactDataService.createdImpact.subscribe((impact: Impact) => {
-      this.updateTableDataSource();
-    });
+    this.impactDataService.createdImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
+        this.updateTableDataSource();
+      });
 
-    this.impactDataService.deletedImpact.subscribe((impact: Impact) => {
-      this.updateTableDataSource();
-    });
+    this.impactDataService.deletedImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((impact: Impact) => {
+        this.updateTableDataSource();
+      });
 
     this.updateTableDataSource();
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled.subscribe(e => {
-      this.windowScrolled = e.target.scrollTop !== 0;
-    });
+    this.scrollbarRef?.scrolled
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(e => {
+        this.windowScrolled = e.target.scrollTop !== 0;
+      });
 
     this.initSorting();
     this.initFiltering();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateTableDataSource(): void {

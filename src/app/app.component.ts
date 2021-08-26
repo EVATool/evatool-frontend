@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {MasterService} from './services/master.service';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../environments/environment';
@@ -6,13 +6,18 @@ import {Title} from '@angular/platform-browser';
 import enLanguage from './../assets/i18n/en.json';
 import deLanguage from './../assets/i18n/de.json';
 import {LogService} from './services/log.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   constructor(private titleService: Title,
               private master: MasterService,
               public translate: TranslateService,
@@ -33,12 +38,19 @@ export class AppComponent {
       translate.setDefaultLang(browserLang);
     }
 
-    this.translate.get('TITLE').subscribe((title: string) => {
-      this.titleService.setTitle(title);
-    });
+    this.translate.get('TITLE')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((title: string) => {
+        this.titleService.setTitle(title);
+      });
 
     // Master service init.
     this.master.init();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   private getLangJson(lang: string): any {

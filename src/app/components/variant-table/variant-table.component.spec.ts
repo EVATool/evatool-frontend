@@ -11,9 +11,9 @@ describe('VariantTableComponent', () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [ VariantTableComponent ]
+      declarations: [VariantTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -10,9 +10,9 @@ describe('StakeholderFilterBarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
-      declarations: [ StakeholderFilterBarComponent ]
+      declarations: [StakeholderFilterBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

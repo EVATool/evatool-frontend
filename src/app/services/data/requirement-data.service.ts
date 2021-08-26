@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
 import {DataService} from '../data.service';
@@ -8,18 +8,23 @@ import {Requirement} from '../../model/Requirement';
 import {Analysis} from '../../model/Analysis';
 import {RequirementDto} from '../../dto/RequirementDto';
 import {VariantDataService} from './variant-data.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RequirementDataService extends DataService {
+export class RequirementDataService extends DataService implements OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @Output() loadedRequirements: EventEmitter<Requirement[]> = new EventEmitter();
   @Output() createdRequirement: EventEmitter<Requirement> = new EventEmitter();
   @Output() updatedRequirement: EventEmitter<Requirement> = new EventEmitter();
   @Output() deletedRequirement: EventEmitter<Requirement> = new EventEmitter();
 
+  requirementsLoaded = false;
   requirements: Requirement[] = [];
-  variantsLoaded = false;
 
   constructor(protected logger: LogService,
               private requirementRest: RequirementRestService,
@@ -29,64 +34,82 @@ export class RequirementDataService extends DataService {
     super(logger);
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   init(): void {
     // Load Requirements.
-    this.analysisData.loadedCurrentAnalysis.subscribe((analysis: Analysis) => {
-      this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
-    });
-    this.variantData.loadedVariants.subscribe(() => {
-      this.variantsLoaded = true;
-      this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
-    });
+    this.analysisData.loadedCurrentAnalysis
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((analysis: Analysis) => {
+        this.requirementsLoaded = false;
+      });
+    this.variantData.loadedVariants
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
+      });
   }
 
   loadIfChildrenLoaded(analysisId: string): void {
-    if (!this.variantsLoaded) {
+    if (!this.variantData.variantsLoaded) {
+      this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
       return;
     }
 
-    this.requirementRest.getRequirementsByAnalysisId(analysisId).subscribe((requirementDtoList: RequirementDto[]) => {
-      this.requirements = [];
-      requirementDtoList.forEach(requirementDto => {
-        this.requirements.push(this.requirementMapper.fromDto(requirementDto,
-          [this.analysisData.currentAnalysis],
-          this.variantData.variants));
+    this.requirementRest.getRequirementsByAnalysisId(analysisId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirementDtoList: RequirementDto[]) => {
+        this.requirements = [];
+        requirementDtoList.forEach(requirementDto => {
+          this.requirements.push(this.requirementMapper.fromDto(requirementDto,
+            [this.analysisData.currentAnalysis],
+            this.variantData.variants));
+        });
+        this.requirements = this.sortDefault(this.requirements);
+        this.requirementsLoaded = true;
+        this.loadedRequirements.emit(this.requirements);
+        this.logger.info(this, 'Requirements loaded');
       });
-      this.requirements = this.sortDefault(this.requirements);
-      this.loadedRequirements.emit(this.requirements);
-      this.logger.info(this, 'Requirements loaded');
-    });
   }
 
   createRequirement(requirement: Requirement): void {
-    this.requirementRest.createRequirement(this.requirementMapper.toDto(requirement)).subscribe((requirementDto: RequirementDto) => {
-      const createdRequirement = this.requirementMapper.fromDto(requirementDto,
-        [this.analysisData.currentAnalysis],
-        this.variantData.variants);
-      this.requirements.push(createdRequirement);
-      this.createdRequirement.emit(createdRequirement);
-      this.logger.info(this, 'Requirement created');
-    });
+    this.requirementRest.createRequirement(this.requirementMapper.toDto(requirement))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirementDto: RequirementDto) => {
+        const createdRequirement = this.requirementMapper.fromDto(requirementDto,
+          [this.analysisData.currentAnalysis],
+          this.variantData.variants);
+        this.requirements.push(createdRequirement);
+        this.createdRequirement.emit(createdRequirement);
+        this.logger.info(this, 'Requirement created');
+      });
   }
 
   updateRequirement(requirement: Requirement): void {
-    this.requirementRest.updateRequirement(this.requirementMapper.toDto(requirement)).subscribe((requirementDto: RequirementDto) => {
-      this.requirementMapper.updateFromDto(requirementDto,
-        requirement,
-        [this.analysisData.currentAnalysis],
-        this.variantData.variants);
-      this.updatedRequirement.emit(requirement);
-      this.logger.info(this, 'Requirement updated');
-    });
+    this.requirementRest.updateRequirement(this.requirementMapper.toDto(requirement))
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((requirementDto: RequirementDto) => {
+        this.requirementMapper.updateFromDto(requirementDto,
+          requirement,
+          [this.analysisData.currentAnalysis],
+          this.variantData.variants);
+        this.updatedRequirement.emit(requirement);
+        this.logger.info(this, 'Requirement updated');
+      });
   }
 
   deleteRequirement(requirement: Requirement): void {
-    this.requirementRest.deleteRequirement(requirement.id).subscribe(() => {
-      const index: number = this.requirements.indexOf(requirement, 0);
-      this.requirements.splice(index, 1);
-      this.deletedRequirement.emit(requirement);
-      this.logger.info(this, 'Requirement deleted');
-    });
+    this.requirementRest.deleteRequirement(requirement.id)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        const index: number = this.requirements.indexOf(requirement, 0);
+        this.requirements.splice(index, 1);
+        this.deletedRequirement.emit(requirement);
+        this.logger.info(this, 'Requirement deleted');
+      });
   }
 
   createDefaultRequirement(analysis: Analysis): Requirement {

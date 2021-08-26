@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
 import {FilterCategoryComponent} from '../filter-category/filter-category.component';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
@@ -9,13 +9,18 @@ import {ValueDataService} from '../../services/data/value-data.service';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-impact-filter-bar',
   templateUrl: './impact-filter-bar.component.html',
   styleUrls: ['./impact-filter-bar.component.scss']
 })
-export class ImpactFilterBarComponent implements OnInit {
+export class ImpactFilterBarComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
+
   @ViewChild(FilterSliderComponent) meritFilter!: FilterSliderComponent;
   @ViewChild('stakeholderFilter') stakeholderFilter!: FilterCategoryComponent;
   @ViewChild('valuesFilter') valuesFilter!: FilterCategoryComponent;
@@ -36,41 +41,62 @@ export class ImpactFilterBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stakeholderDataService.loadedStakeholders.subscribe((stakeholders: Stakeholder[]) => {
-      this.updateStakeholders();
-    });
+    this.stakeholderDataService.loadedStakeholders
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholders: Stakeholder[]) => {
+        this.updateStakeholders();
+      });
 
-    this.stakeholderDataService.createdStakeholder.subscribe((stakeholder: Stakeholder) => {
-      this.updateStakeholders();
-    });
+    this.stakeholderDataService.createdStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
+        this.updateStakeholders();
+      });
 
-    this.stakeholderDataService.updatedStakeholder.subscribe((stakeholder: Stakeholder) => {
-      this.updateStakeholders();
-    });
+    this.stakeholderDataService.updatedStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
+        this.updateStakeholders();
+      });
 
-    this.stakeholderDataService.deletedStakeholder.subscribe((stakeholder: Stakeholder) => {
-      this.updateStakeholders();
-    });
+    this.stakeholderDataService.deletedStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
+        this.updateStakeholders();
+      });
 
     this.updateStakeholders();
 
-    this.valueDataService.loadedValues.subscribe((values: Value[]) => {
-      this.updateValues();
-    });
+    this.valueDataService.loadedValues
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((values: Value[]) => {
+        this.updateValues();
+      });
 
-    this.valueDataService.createdValue.subscribe((value: Value) => {
-      this.updateValues();
-    });
+    this.valueDataService.createdValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
+        this.updateValues();
+      });
 
-    this.valueDataService.updatedValue.subscribe((value: Value) => {
-      this.updateValues();
-    });
+    this.valueDataService.updatedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
+        this.updateValues();
+      });
 
-    this.valueDataService.deletedValue.subscribe((value: Value) => {
-      this.updateValues();
-    });
+    this.valueDataService.deletedValue
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value: Value) => {
+        this.updateValues();
+      });
 
     this.updateValues();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateStakeholders(): void {
@@ -81,7 +107,7 @@ export class ImpactFilterBarComponent implements OnInit {
   updateValues(): void {
     this.valueNames = this.valueDataService.values.filter(
       value => !value.archived).map(
-        value => value.name);
+      value => value.name);
   }
 
   highlightTextChange(event: string): void {

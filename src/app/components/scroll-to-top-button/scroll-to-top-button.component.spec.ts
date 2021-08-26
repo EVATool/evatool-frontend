@@ -8,9 +8,9 @@ describe('ScrollToTopButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ScrollToTopButtonComponent ]
+      declarations: [ScrollToTopButtonComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

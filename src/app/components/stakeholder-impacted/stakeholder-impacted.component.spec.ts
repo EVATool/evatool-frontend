@@ -8,9 +8,9 @@ describe('StakeholderImpactedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StakeholderImpactedComponent ]
+      declarations: [StakeholderImpactedComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

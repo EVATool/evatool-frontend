@@ -8,9 +8,9 @@ describe('FilterSliderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FilterSliderComponent ]
+      declarations: [FilterSliderComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

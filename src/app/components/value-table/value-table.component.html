@@ -29,9 +29,9 @@
     </th>
     <td mat-cell *matCellDef='let value'>
       <app-highlight-textarea [(text)]="value.name"
-                         (textChange)="updateValue(value)"
-                         [highlightFilter]="''"
-                         [placeholder]="'Name...'"></app-highlight-textarea>
+                              (textChange)="updateValue(value)"
+                              [highlightFilter]="''"
+                              [placeholder]="'Name...'"></app-highlight-textarea>
     </td>
   </ng-container>
 
@@ -47,9 +47,9 @@
       <div class="description-wrapper">
         <div class="description-container">
           <app-highlight-textarea [(text)]="value.description"
-                             (textChange)="updateValue(value)"
-                             [highlightFilter]="''"
-                             [placeholder]="'Describe the value...'"></app-highlight-textarea>
+                                  (textChange)="updateValue(value)"
+                                  [highlightFilter]="''"
+                                  [placeholder]="'Describe the value...'"></app-highlight-textarea>
         </div>
         <div class="options">
           <div class="option">

@@ -1,16 +1,20 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {VariantDataService} from '../../services/data/variant-data.service';
 import {LogService} from '../../services/log.service';
 import {CrossUiEventService, VariantReferencedByRequirementsEvent} from '../../services/cross-ui-event.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-variant-dialog',
   templateUrl: './variant-dialog.component.html',
   styleUrls: ['./variant-dialog.component.scss']
 })
-export class VariantDialogComponent implements OnInit {
+export class VariantDialogComponent implements OnInit, OnDestroy {
+
+  private ngUnsubscribe = new Subject();
 
   ids!: string[];
 
@@ -25,9 +29,16 @@ export class VariantDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.crossUI.userWantsToSeeVariantReferencedByRequirements.subscribe((event: VariantReferencedByRequirementsEvent) => {
-      this.closeClick();
-    });
+    this.crossUI.userWantsToSeeVariantReferencedByRequirements
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: VariantReferencedByRequirementsEvent) => {
+        this.closeClick();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   closeClick(): void {
