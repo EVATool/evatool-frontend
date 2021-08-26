@@ -40,7 +40,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
     // Load current analysis.
     const analysisId = this.route.snapshot.params?.id;
     const analysisIdIsUUID = uuid.validate(analysisId);
-    if (analysisIdIsUUID || environment.testing) {
+    if (analysisIdIsUUID || (environment.testing && analysisId != null)) {
       this.analysisData.changeCurrentAnalysis(analysisId);
     } else {
       this.router.navigate([ROUTES.pageNotFound]);
