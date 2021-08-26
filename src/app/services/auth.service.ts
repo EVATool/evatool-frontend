@@ -192,7 +192,7 @@ export class AuthService extends RestService implements OnDestroy {
 
   startTimer(): void {
     const interval = setInterval(() => {
-      if (this.authenticated) { // TODO test new if clause
+      if (this.authenticated) {
         this.tokenExpiresIn -= 1;
         this.refreshTokenExpiresIn -= 1;
 
