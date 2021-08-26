@@ -56,12 +56,6 @@ export abstract class RestService {
   public readonly authRegisterUserUrl = this.backendUrl + 'auth/register/user';
   public readonly authRegisterRealmUrl = this.backendUrl + 'auth/register/realm';
 
-  protected realmUrl = environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/admin/realms';
-
-  protected getAuthUrl(authRealm: string): string {
-    return environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/realms/' + authRealm + '/protocol/openid-connect/token';
-  }
-
   public getAuthManageRealmUrl(realm: string): string {
     return environment.serverProtocol + '://' + environment.serverAddr + ':' + environment.authPort + '/auth/admin/master/console/#/realms/' + realm;
   }
