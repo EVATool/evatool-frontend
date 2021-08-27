@@ -25,7 +25,7 @@ export class HttpMarshallService {
     this.logger.info(this, 'An http request started.');
     const httpInfo = this.buildHttpInfo(request, HttpInfoType.Next);
     this.httpNext.emit(httpInfo);
-    this.httpRequest(request, httpInfo);
+    this.processHttpRequest(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
@@ -45,7 +45,7 @@ export class HttpMarshallService {
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
 
-  private httpRequest(request: HttpRequest<any>, httpInfo: HttpInfo): void {
+  private processHttpRequest(request: HttpRequest<any>, httpInfo: HttpInfo): void {
     if (!this.activeRequests.includes(request)) {
       this.activeRequests.push(request);
 
