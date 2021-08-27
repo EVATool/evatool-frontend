@@ -7,7 +7,7 @@ import {LogService} from '../../services/log.service';
 import {ValueDataService} from '../../services/data/value-data.service';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
-import {HttpLoaderService} from '../../services/http-loader.service';
+import {HttpMarshallService} from '../../services/http-marshall.service';
 import {CrossUiEventService, ValueDeletionFailedEvent, ValueReferencedByImpactsEvent} from '../../services/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';

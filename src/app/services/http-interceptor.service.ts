@@ -3,7 +3,7 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable, throwError} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {LogService} from './log.service';
-import {HttpLoaderService} from './http-loader.service';
+import {HttpMarshallService} from './http-marshall.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   private retryCount = 2;
 
   constructor(private logger: LogService,
-              private httpLoader: HttpLoaderService) {
+              private httpMarshall: HttpMarshallService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -24,7 +24,7 @@ export class HttpInterceptorService implements HttpInterceptor {
           // Request.
           (data: any) => {
             this.logger.info(this, 'NEXT');
-            this.httpLoader.next(request);
+            this.httpMarshall.next(request);
           },
           // Response error.
           (error: HttpErrorResponse) => {
@@ -42,13 +42,13 @@ export class HttpInterceptorService implements HttpInterceptor {
             }
             this.logger.error(this, errorMsg);
             const httpStatus = error.error?.status || error.error?.httpStatusCode || error.status;
-            this.httpLoader.error(request, httpStatus, functionalErrorCode, tag);
+            this.httpMarshall.error(request, httpStatus, functionalErrorCode, tag);
             return throwError(errorMsg);
           },
           // Response complete.
           () => {
             this.logger.info(this, 'COMPLETE');
-            this.httpLoader.complete(request);
+            this.httpMarshall.complete(request);
           })
       );
   }

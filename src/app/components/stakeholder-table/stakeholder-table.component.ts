@@ -8,7 +8,7 @@ import {LogService} from '../../services/log.service';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {MatSort} from '@angular/material/sort';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
-import {HttpLoaderService} from '../../services/http-loader.service';
+import {HttpMarshallService} from '../../services/http-marshall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
-import {HttpLoaderService} from '../../services/http-loader.service';
+import {HttpMarshallService} from '../../services/http-marshall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpInfo, HttpInfoType} from '../../services/HttpInfo';
 import {CrossUiEventService} from '../../services/cross-ui-event.service';
@@ -24,7 +24,7 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
   successIconShown = false;
 
   constructor(private logger: LogService,
-              private httpLoaderService: HttpLoaderService,
+              private httpLoaderService: HttpMarshallService,
               private crossUI: CrossUiEventService,
               private router: Router,
               private snackBar: MatSnackBar) {

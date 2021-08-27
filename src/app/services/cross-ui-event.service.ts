@@ -1,4 +1,4 @@
-import {HttpLoaderService} from './http-loader.service';
+import {HttpMarshallService} from './http-marshall.service';
 import {HttpInfo} from './HttpInfo';
 import {FunctionalErrorCodeService} from './functional-error-code.service';
 import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
@@ -56,7 +56,7 @@ export class CrossUiEventService implements OnDestroy {
   @Output() authenticationFailed: EventEmitter<AuthenticationFailedEvent> = new EventEmitter();
   @Output() authorizationFailed: EventEmitter<AuthorizationFailedEvent> = new EventEmitter();
 
-  constructor(private httpLoader: HttpLoaderService,
+  constructor(private httpMarshall: HttpMarshallService,
               private analysisData: AnalysisDataService,
               private valueData: ValueDataService,
               private stakeholderData: StakeholderDataService,
@@ -72,7 +72,7 @@ export class CrossUiEventService implements OnDestroy {
   }
 
   init(): void {
-    this.httpLoader.httpError
+    this.httpMarshall.httpError
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((httpInfo: HttpInfo) => {
         if (httpInfo.functionalErrorCode) {

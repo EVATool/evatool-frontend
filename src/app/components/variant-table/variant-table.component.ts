@@ -7,7 +7,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {RequirementDataService} from '../../services/data/requirement-data.service';
-import {HttpLoaderService} from '../../services/http-loader.service';
+import {HttpMarshallService} from '../../services/http-marshall.service';
 import {CrossUiEventService, VariantDeletionFailedEvent, VariantReferencedByRequirementsEvent} from '../../services/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';

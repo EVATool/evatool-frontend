@@ -6,7 +6,7 @@ import {HttpRequest} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpLoaderService {
+export class HttpMarshallService {
   @Output() httpNext: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() httpError: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() httpComplete: EventEmitter<HttpInfo> = new EventEmitter();
