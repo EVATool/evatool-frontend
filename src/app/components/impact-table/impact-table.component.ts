@@ -94,7 +94,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((event: ImpactDeletionFailedEvent) => {
         if (event.notFound) {
           // TODO: remove from data service array (ALL table components + analysis).
-          //  This should be done when concurrency is better understood, because child, parent entities also have to be deleted.
+          //  This should be done when concurrency is better understood, because child/parent entities also have to be deleted.
         } else {
           event.entity.deletionFlagged = false;
         }

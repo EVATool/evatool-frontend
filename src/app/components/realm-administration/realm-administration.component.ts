@@ -61,7 +61,7 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit, OnDe
       const message = 'Authentication is disabled in this deployment.';
       this.snackBar.open(message, '', {duration: 5000});
     } else if (environment.authRegistrationEnabled) {
-      const message = 'User registration is enabled in this deployment. Nobody will be able to log into created realms.';
+      const message = 'User registration is enabled in this deployment.';
       this.snackBar.open(message, '', {duration: 5000});
     }
   }
