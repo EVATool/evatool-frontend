@@ -24,7 +24,7 @@ export class AuthService extends RestService implements OnDestroy {
   authenticated = false;
   isAutoRefreshing = false;
 
-  private _token = 'null';
+  private _token = '';
   tokenExpiresIn = 0;
   readonly TOKEN_LOCAL_STORAGE_KEY = 'auth_token';
 
@@ -38,7 +38,7 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
 
-  private _refreshToken = 'null';
+  private _refreshToken = '';
   refreshTokenExpiresIn = 0;
   readonly REFRESH_TOKEN_LOCAL_STORAGE_KEY = 'auth_refresh_token';
 
@@ -145,9 +145,9 @@ export class AuthService extends RestService implements OnDestroy {
 
   logout(): void {
     this.authenticated = false;
-    this.token = 'null';
+    this.token = '';
     this.tokenExpiresIn = 0;
-    this.refreshToken = 'null';
+    this.refreshToken = '';
     this.refreshTokenExpiresIn = 0;
     this.realm = '';
     this.username = '';
