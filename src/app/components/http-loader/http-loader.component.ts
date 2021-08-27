@@ -24,14 +24,14 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
   successIconShown = false;
 
   constructor(private logger: LogService,
-              private httpLoaderService: HttpMarshallService,
+              private httpMarshall: HttpMarshallService,
               private crossUI: CrossUiEventService,
               private router: Router,
               private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.httpLoaderService.httpActive
+    this.httpMarshall.httpActive
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.logger.debug(this, 'There are active http requests');
@@ -39,7 +39,7 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
         this.loadingSpinnerShown = true;
       });
 
-    this.httpLoaderService.httpNotActive
+    this.httpMarshall.httpNotActive
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((lastHttpEvent: HttpInfo) => {
         this.logger.debug(this, 'There are NO active http requests');
@@ -69,7 +69,7 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
       });
 
     // Generic http error display.
-    this.httpLoaderService.httpError
+    this.httpMarshall.httpError
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((httpInfo: HttpInfo) => {
         if (!environment.production) {
