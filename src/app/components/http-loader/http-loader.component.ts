@@ -69,7 +69,7 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
       });
 
     // Generic http error display.
-    this.httpMarshall.httpError
+    this.httpMarshall.httpError // TODO Instead of handling "httpMarshall.httpError", an event from crossUIEventService should be handled that means an unexpected error occured.
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((httpInfo: HttpInfo) => {
         if (!environment.production) {
