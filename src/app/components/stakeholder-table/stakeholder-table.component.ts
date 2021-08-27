@@ -42,7 +42,6 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
               public stakeholderData: StakeholderDataService,
               private analysisData: AnalysisDataService,
               private impactData: ImpactDataService,
-              private httpLoader: HttpLoaderService,
               private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar) {
   }

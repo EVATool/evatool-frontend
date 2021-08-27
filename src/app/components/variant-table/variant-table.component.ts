@@ -33,7 +33,6 @@ export class VariantTableComponent implements OnInit, AfterViewInit, OnDestroy {
               private requirementDataService: RequirementDataService,
               public variantDataService: VariantDataService,
               private analysisDataService: AnalysisDataService,
-              private httpLoader: HttpLoaderService,
               private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar) {
   }

@@ -9,9 +9,6 @@ import {HttpLoaderService} from './http-loader.service';
   providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
-  @Output() httpNext: EventEmitter<HttpRequest<any>> = new EventEmitter();
-  @Output() httpError: EventEmitter<HttpRequest<any>> = new EventEmitter();
-  @Output() httpComplete: EventEmitter<HttpRequest<any>> = new EventEmitter();
 
   private retryCount = 2;
 

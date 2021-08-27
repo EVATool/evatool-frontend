@@ -6,13 +6,11 @@ import {HttpRequest} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpLoaderService { // TODO remove this class
-  // TODO Move these into interceptor
+export class HttpLoaderService {
   @Output() httpNext: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() httpError: EventEmitter<HttpInfo> = new EventEmitter();
   @Output() httpComplete: EventEmitter<HttpInfo> = new EventEmitter();
 
-  // TODO Move these into crossUI
   @Output() numHttpChanges: EventEmitter<number> = new EventEmitter();
   @Output() httpActive: EventEmitter<void> = new EventEmitter();
   @Output() httpNotActive: EventEmitter<HttpInfo> = new EventEmitter();

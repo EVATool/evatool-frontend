@@ -34,7 +34,6 @@ export class ValueTableComponent implements OnInit, AfterViewInit, OnDestroy {
     private valueDataService: ValueDataService,
     private impactDataService: ImpactDataService,
     private analysisDataService: AnalysisDataService,
-    private httpLoader: HttpLoaderService,
     private crossUI: CrossUiEventService,
     private snackBar: MatSnackBar) {
   }
