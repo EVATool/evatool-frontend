@@ -109,6 +109,8 @@ export class CrossUiEventService implements OnDestroy {
               }
               break;
           }
+          // TODO this else clause should only contain a case for 403 and one case for 401 for requests to /auth/realms/
+          //  All other cases should be functional errors!
         } else {
           const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1);
           const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
