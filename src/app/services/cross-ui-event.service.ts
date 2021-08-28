@@ -77,7 +77,7 @@ export class CrossUiEventService implements OnDestroy {
       .subscribe((httpInfo: HttpInfo) => {
         if (httpInfo.functionalErrorCode) {
           switch (httpInfo.functionalErrorCode) {
-            case FunctionalErrorCodeService.IMPACT_REFERENCED_BY_REQUIREMENT:
+            case FunctionalErrorCodeService.IMPACT_REFERENCED_BY_REQUIREMENT_DELTA:
               const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
               const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
               if (impact && deltas) {
