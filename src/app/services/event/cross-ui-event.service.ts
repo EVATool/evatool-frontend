@@ -14,15 +14,11 @@ import {takeUntil} from 'rxjs/operators';
 import {
   AnalysisDeletionFailedEvent,
   ImpactDeletionFailedEvent,
-  ImpactReferencedByRequirementDeltasEvent,
   RequirementDeletionFailedEvent,
   RequirementDeltaDeletionFailedEvent,
   StakeholderDeletionFailedEvent,
-  StakeholderReferencedByImpactsEvent,
   ValueDeletionFailedEvent,
-  ValueReferencedByImpactsEvent,
   VariantDeletionFailedEvent,
-  VariantReferencedByRequirementsEvent
 } from './CrossUIEvents';
 import {LogService} from '../log.service';
 import {ImportExportJsonInvalidEvent} from './events/http400/ImportExportJsonInvalidEvent';
@@ -39,6 +35,10 @@ import {AuthorizationFailedEvent} from './events/http403/AuthorizationFailedEven
 import {UsernameAlreadyExistsEvent} from './events/http409/UsernameAlreadyExistsEvent';
 import {EmailAlreadyExistsEvent} from './events/http409/EmailAlreadyExistsEvent';
 import {RealmAlreadyExistsEvent} from './events/http409/RealmAlreadyExists';
+import {ImpactReferencedByRequirementDeltasEvent} from './events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {StakeholderReferencedByImpactsEvent} from './events/http409/StakeholderReferencedByImpactsEvent';
+import {ValueReferencedByImpactsEvent} from './events/http409/ValueReferencedByImpactsEvent';
+import {VariantReferencedByRequirementsEvent} from './events/http409/VariantReferencedByRequirementsEvent';
 
 @Injectable({
   providedIn: 'root'
@@ -127,6 +127,7 @@ export class CrossUiEventService implements OnDestroy {
         if (httpInfo.functionalErrorCode) {
           switch (httpInfo.functionalErrorCode) {
 
+            // 400.
             case FunctionalErrorCodes.IMPORT_EXPORT_JSON_INVALID:
               break;
 
@@ -145,12 +146,15 @@ export class CrossUiEventService implements OnDestroy {
             case FunctionalErrorCodes.PASSWORD_NOT_SECURE_ENOUGH:
               break;
 
+            // 401.
             case FunctionalErrorCodes.INVALID_CREDENTIALS:
               break;
 
+            // 403.
             case FunctionalErrorCodes.CROSS_REALM_ACCESS:
               break;
 
+            // 404.
             case FunctionalErrorCodes.LOGIN_REALM_NOT_FOUND:
               break;
 
@@ -220,6 +224,7 @@ export class CrossUiEventService implements OnDestroy {
             case FunctionalErrorCodes.REQUIREMENT_DELTA_DELETION_FAILED_NOT_FOUND:
               break;
 
+            // 409.
             case FunctionalErrorCodes.IMPACT_REFERENCED_BY_REQUIREMENT_DELTA:
               const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
               const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));

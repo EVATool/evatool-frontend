@@ -8,7 +8,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {RealmNotFoundEvent} from '../../services/event/CrossUIEvents';
+import {LoginRealmNotFoundEvent} from '../../services/event/events/http404/LoginRealmNotFoundEvent';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.crossUI.realmNotFound
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: RealmNotFoundEvent) => {
+      .subscribe((event: LoginRealmNotFoundEvent) => {
         const message = 'Tenant ' + event.realm + ' does not exist';
         this.snackBar.open(message, '', {duration: 5000});
       });

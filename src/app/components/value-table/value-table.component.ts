@@ -7,10 +7,11 @@ import {LogService} from '../../services/log.service';
 import {ValueDataService} from '../../services/data/value-data.service';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
-import {HttpMarshallService} from '../../services/http/http-marshall.service';
-import {CrossUiEventService, ValueDeletionFailedEvent, ValueReferencedByImpactsEvent} from '../../services/event/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
+import {ValueDeletionFailedEvent} from '../../services/event/CrossUIEvents';
 
 @Component({
   selector: 'app-value-table',

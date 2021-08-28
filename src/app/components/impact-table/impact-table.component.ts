@@ -16,14 +16,14 @@ import {ValueDialogComponent} from '../value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {
-  CrossUiEventService,
-  ImpactDeletionFailedEvent,
-  ImpactReferencedByRequirementDeltasEvent,
-  StakeholderReferencedByImpactsEvent,
-  ValueReferencedByImpactsEvent
+  CrossUiEventService
 } from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
+import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
+import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {ImpactDeletionFailedEvent} from '../../services/event/CrossUIEvents';
 
 @Component({
   selector: 'app-impact-table',
@@ -77,7 +77,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.crossUI.impactReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementsEvent) => {
+      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
         const message = 'This impact cannot be deleted. It is still being used by '
           + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
         const action = 'show';

@@ -5,9 +5,7 @@ import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {StakeholderEditComponent} from '../stakeholder-edit/stakeholder-edit.component';
 import {ImpactEditComponent} from '../impact-edit/impact-edit.component';
 import {
-  CrossUiEventService,
-  ImpactReferencedByRequirementDeltasEvent,
-  StakeholderReferencedByImpactsEvent
+  CrossUiEventService
 } from '../../services/event/cross-ui-event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
@@ -15,6 +13,8 @@ import * as uuid from 'uuid';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
+import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -46,7 +46,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate([ROUTES.pageNotFound]);
     }
 
-    this.crossUI.analysisWithValidIdNotFound
+    this.crossUI.analysisNotFound
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         this.router.navigate([ROUTES.pageNotFound]);
@@ -60,7 +60,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.crossUI.userWantsToSeeImpactReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementsEvent) => {
+      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
         this.tabGroup.selectedIndex = 2;
       });
   }

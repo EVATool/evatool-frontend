@@ -1,6 +1,6 @@
 export class LoginRealmNotFoundEvent {
 
-  private realm;
+  realm;
 
   constructor(realm: string) {
     this.realm = realm;

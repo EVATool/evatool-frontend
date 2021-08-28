@@ -20,14 +20,13 @@ import {Variant} from '../../model/Variant';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {
-  CrossUiEventService,
-  ImpactReferencedByRequirementDeltasEvent,
-  RequirementDeletionFailedEvent,
-  RequirementDeltaDeletionFailedEvent,
-  VariantReferencedByRequirementsEvent
+  CrossUiEventService
 } from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
+import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/CrossUIEvents';
 
 @Component({
   selector: 'app-requirement-table',
@@ -97,7 +96,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
 
     this.crossUI.userWantsToSeeImpactReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementsEvent) => {
+      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
         this.deletionFlaggedImpact = event.impact;
         event.deltas.forEach((delta: RequirementDelta) => {
           delta.highlighted = true;

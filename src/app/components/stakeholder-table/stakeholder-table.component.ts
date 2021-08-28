@@ -12,12 +12,12 @@ import {HttpMarshallService} from '../../services/http/http-marshall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {
-  CrossUiEventService,
-  StakeholderDeletionFailedEvent,
-  StakeholderReferencedByImpactsEvent
+  CrossUiEventService
 } from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
+import {StakeholderDeletionFailedEvent} from '../../services/event/CrossUIEvents';
 
 @Component({
   selector: 'app-stakeholder-table',

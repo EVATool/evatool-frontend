@@ -1,6 +1,6 @@
 export class LoginUsernameNotFoundEvent {
 
-  private username;
+  username;
 
   constructor(username: string) {
     this.username = username;
