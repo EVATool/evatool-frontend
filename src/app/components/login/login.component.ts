@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   onSubmit(): void {
     if (this.formMode === 'login') {
       if (this.realm === '') {
-        this.snackBar.open('Please enter a tenant', '', {duration: 5000});
+        this.snackBar.open('Please enter a realm', '', {duration: 5000});
       } else if (this.username === '') {
         this.snackBar.open('Please enter a username', '', {duration: 5000});
       } else if (this.password === '') {

@@ -18,7 +18,7 @@
   </div>
 
   <mat-form-field *ngIf="formMode === 'login' && tenantSelectionEnabled">
-    <mat-label>Tenant</mat-label>
+    <mat-label>Realm</mat-label>
     <input matInput
            [(ngModel)]="realm"
            (keydown.enter)="onSubmit()">
