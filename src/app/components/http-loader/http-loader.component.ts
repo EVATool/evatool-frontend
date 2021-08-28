@@ -68,6 +68,12 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
         this.router.navigate([ROUTES.accessDenied]);
       });
 
+    this.crossUI.crossRealmAccess // Special case of authorization failed (functional error case).
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => { // 403
+        this.router.navigate([ROUTES.accessDenied]);
+      });
+
     // Generic http error display.
     this.httpMarshall.httpError // TODO Instead of handling "httpMarshall.httpError", an event from crossUIEventService should be handled that means an unexpected error occured.
       .pipe(takeUntil(this.ngUnsubscribe))
