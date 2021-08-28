@@ -129,15 +129,19 @@ export class CrossUiEventService implements OnDestroy {
 
             // 400.
             case FunctionalErrorCodes.IMPORT_EXPORT_JSON_INVALID:
+              this.importExportJsonInvalid.emit(new ImportExportJsonInvalidEvent());
               break;
 
             case FunctionalErrorCodes.USERNAME_INVALID:
+              this.usernameInvalid.emit(new UsernameInvalidEvent(httpInfo.tag.username));
               break;
 
             case FunctionalErrorCodes.REALM_INVALID:
+              this.realmInvalid.emit(new RealmInvalidEvent(httpInfo.tag.realm));
               break;
 
             case FunctionalErrorCodes.EMAIL_INVALID:
+              this.emailInvalid.emit(new EmailInvalidEvent(httpInfo.tag.email));
               break;
 
             case FunctionalErrorCodes.PASSWORD_EMPTY_OR_NULL:
@@ -148,20 +152,25 @@ export class CrossUiEventService implements OnDestroy {
 
             // 401.
             case FunctionalErrorCodes.INVALID_CREDENTIALS:
+              this.invalidCredentials.emit(new InvalidCredentialsEvent());
               break;
 
             // 403.
             case FunctionalErrorCodes.CROSS_REALM_ACCESS:
+              this.crossRealmAccess.emit(new CrossRealmAccessEvent());
               break;
 
             // 404.
             case FunctionalErrorCodes.LOGIN_REALM_NOT_FOUND:
+              this.realmNotFound.emit(new LoginRealmNotFoundEvent(httpInfo.tag.realm));
               break;
 
             case FunctionalErrorCodes.LOGIN_USERNAME_NOT_FOUND:
+              this.usernameNotFound.emit(new LoginUsernameNotFoundEvent(httpInfo.tag.username));
               break;
 
             case FunctionalErrorCodes.ANALYSIS_FIND_FAILED_NOT_FOUND:
+              this.analysisNotFound.emit(new AnalysisNotFoundEvent(httpInfo.tag.id));
               break;
 
             case FunctionalErrorCodes.STAKEHOLDER_FIND_FAILED_NOT_FOUND:
@@ -258,12 +267,15 @@ export class CrossUiEventService implements OnDestroy {
               break;
 
             case FunctionalErrorCodes.REGISTER_USERNAME_ALREADY_EXISTS:
+              this.usernameAlreadyExists.emit(new UsernameAlreadyExistsEvent(httpInfo.tag.username));
               break;
 
             case FunctionalErrorCodes.REGISTER_EMAIL_ALREADY_EXISTS:
+              this.emailAlreadyExists.emit(new EmailAlreadyExistsEvent(httpInfo.tag.email));
               break;
 
             case FunctionalErrorCodes.REGISTER_REALM_ALREADY_EXISTS:
+              this.realmAlreadyExists.emit(new RealmAlreadyExistsEvent(httpInfo.tag.realm));
               break;
 
             default:
