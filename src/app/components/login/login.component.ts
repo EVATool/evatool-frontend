@@ -9,7 +9,6 @@ import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {LoginRealmNotFoundEvent} from '../../services/event/events/http404/LoginRealmNotFoundEvent';
-import {LoginUsernameNotFoundEvent} from '../../services/event/events/http404/LoginUsernameNotFoundEvent';
 
 @Component({
   selector: 'app-login',
@@ -40,13 +39,6 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.crossUI.usernameNotFound
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: LoginUsernameNotFoundEvent) => {
-        const message = 'User ' + event.username + ' does not exist';
-        this.snackBar.open(message, '', {duration: 5000});
-      });
-
     this.crossUI.invalidCredentials
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
@@ -72,6 +64,13 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         const message = 'Email already exists';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.emailInvalid
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        const message = 'Please enter a valid email';
         this.snackBar.open(message, '', {duration: 5000});
       });
 

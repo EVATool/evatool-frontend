@@ -6,9 +6,9 @@ import {HttpInfo, HttpInfoType} from '../../services/http/HttpInfo';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
-import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-http-loader',
@@ -78,10 +78,10 @@ export class HttpLoaderComponent implements OnInit, OnDestroy {
     this.httpMarshall.httpError // TODO Instead of handling "httpMarshall.httpError", an event from crossUIEventService should be handled that means an unexpected error occured.
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((httpInfo: HttpInfo) => {
-        if (!environment.production) {
-          console.log(httpInfo); // This should stay here.
-        }
-        if (httpInfo.httpStatusCode !== 404
+        console.log(httpInfo); // This should stay here.
+
+        if (!environment.production
+          && httpInfo.httpStatusCode !== 404
           && httpInfo.httpStatusCode !== 403
           && httpInfo.httpStatusCode !== 401
           && !httpInfo.functionalErrorCode
