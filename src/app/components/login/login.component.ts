@@ -9,6 +9,8 @@ import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {LoginRealmNotFoundEvent} from '../../services/event/events/http404/LoginRealmNotFoundEvent';
+import {LoginUsernameNotFoundEvent} from '../../services/event/events/http404/LoginUsernameNotFoundEvent';
+import {UsernameInvalidEvent} from '../../services/event/events/http400/UsernameInvalidEvent';
 
 @Component({
   selector: 'app-login',
@@ -39,10 +41,10 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.crossUI.invalidCredentials
+    this.crossUI.usernameNotFound
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(() => {
-        const message = 'Invalid credentials';
+      .subscribe((event: LoginUsernameNotFoundEvent) => {
+        const message = 'Realm ' + event.username + ' does not exist';
         this.snackBar.open(message, '', {duration: 5000});
       });
 
@@ -53,6 +55,21 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.snackBar.open(message, '', {duration: 5000});
       });
 
+    this.crossUI.usernameInvalid
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: UsernameInvalidEvent) => {
+        const message = 'Username ' + event.username + ' contains illegal symbols (use alphanumeric)';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.invalidCredentials
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        const message = 'Invalid credentials';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    // User registration.
     this.crossUI.usernameAlreadyExists
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
