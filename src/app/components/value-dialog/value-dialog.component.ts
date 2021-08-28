@@ -3,7 +3,7 @@ import {LogService} from '../../services/log.service';
 import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ValueDataService} from '../../services/data/value-data.service';
-import {CrossUiEventService, ValueReferencedByImpactsEvent} from '../../services/cross-ui-event.service';
+import {CrossUiEventService, ValueReferencedByImpactsEvent} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 

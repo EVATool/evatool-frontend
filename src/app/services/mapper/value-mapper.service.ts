@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {LogService} from '../log.service';
-import {MapperService} from '../mapper.service';
+import {MapperService} from './mapper.service';
 import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
 import {Analysis} from '../../model/Analysis';

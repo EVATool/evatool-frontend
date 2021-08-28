@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
-import {DataService} from '../data.service';
+import {DataService} from './data.service';
 import {RequirementRestService} from '../rest/requirement-rest.service';
 import {RequirementMapperService} from '../mapper/requirement-mapper.service';
 import {Requirement} from '../../model/Requirement';

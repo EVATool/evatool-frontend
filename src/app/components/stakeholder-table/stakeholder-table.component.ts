@@ -8,14 +8,14 @@ import {LogService} from '../../services/log.service';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {MatSort} from '@angular/material/sort';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
-import {HttpMarshallService} from '../../services/http-marshall.service';
+import {HttpMarshallService} from '../../services/http/http-marshall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {
   CrossUiEventService,
   StakeholderDeletionFailedEvent,
   StakeholderReferencedByImpactsEvent
-} from '../../services/cross-ui-event.service';
+} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 

@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
-import {DataService} from '../data.service';
+import {DataService} from './data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
 import {RequirementDelta} from '../../model/RequirementDelta';

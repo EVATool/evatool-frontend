@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
-import {HttpMarshallService} from '../../services/http-marshall.service';
+import {HttpMarshallService} from '../../services/http/http-marshall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttpInfo, HttpInfoType} from '../../services/HttpInfo';
-import {CrossUiEventService} from '../../services/cross-ui-event.service';
+import {HttpInfo, HttpInfoType} from '../../services/http/HttpInfo';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
 import {environment} from '../../../environments/environment';

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {LogService} from '../log.service';
 import {HttpClient} from '@angular/common/http';
-import {RestService} from '../rest.service';
+import {RestService} from './rest.service';
 import {Observable, of} from 'rxjs';
 import {RequirementDto} from '../../dto/RequirementDto';
 import {SampleDataService} from '../sample-data.service';

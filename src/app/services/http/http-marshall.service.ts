@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {LogService} from './log.service';
+import {LogService} from '../log.service';
 import {HttpInfo, HttpInfoType} from './HttpInfo';
 import {HttpRequest} from '@angular/common/http';
 

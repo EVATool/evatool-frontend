@@ -25,7 +25,7 @@ import {
   RequirementDeletionFailedEvent,
   RequirementDeltaDeletionFailedEvent,
   VariantReferencedByRequirementsEvent
-} from '../../services/cross-ui-event.service';
+} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 

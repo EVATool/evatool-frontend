@@ -2,9 +2,9 @@ import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit} from '@angular/c
 import {environment} from '../../../environments/environment';
 import {LogService} from '../../services/log.service';
 import {Router} from '@angular/router';
-import {CrossUiEventService} from '../../services/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 

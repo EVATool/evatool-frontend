@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {Analysis} from '../../model/Analysis';
 import {AnalysisDialogComponent} from '../analysis-dialog/analysis-dialog.component';
-import {CrossUiEventService} from '../../services/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {saveAs} from 'file-saver';
 import {Subject} from 'rxjs';

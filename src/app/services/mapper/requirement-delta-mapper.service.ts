@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MapperService} from '../mapper.service';
+import {MapperService} from './mapper.service';
 import {LogService} from '../log.service';
 import {RequirementDelta} from '../../model/RequirementDelta';
 import {RequirementDeltaDto} from '../../dto/RequirementDeltaDto';

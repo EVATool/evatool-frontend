@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {RestService} from '../rest.service';
+import {RestService} from './rest.service';
 import {LogService} from '../log.service';
 import {HttpClient} from '@angular/common/http';
 import {SampleDataService} from '../sample-data.service';

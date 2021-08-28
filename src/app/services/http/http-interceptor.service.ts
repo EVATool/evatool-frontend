@@ -2,7 +2,7 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {LogService} from './log.service';
+import {LogService} from '../log.service';
 import {HttpMarshallService} from './http-marshall.service';
 
 @Injectable({

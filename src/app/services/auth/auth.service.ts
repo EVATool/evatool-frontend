@@ -1,14 +1,14 @@
 import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
-import {LogService} from './log.service';
-import {RestService} from './rest.service';
+import {LogService} from '../log.service';
+import {RestService} from '../rest/rest.service';
 import {HttpClient} from '@angular/common/http';
-import {SampleDataService} from './sample-data.service';
+import {SampleDataService} from '../sample-data.service';
 import {Router} from '@angular/router';
-import {ROUTES} from '../app-routes';
-import {AuthTokenDto} from '../dto/AuthTokenDto';
-import {AuthRegisterRealmDto} from '../dto/AuthRegisterRealmDto';
-import {AuthRegisterUserDto} from '../dto/AuthRegisterUserDto';
-import {environment} from '../../environments/environment';
+import {ROUTES} from '../../app-routes';
+import {AuthTokenDto} from '../../dto/AuthTokenDto';
+import {AuthRegisterRealmDto} from '../../dto/AuthRegisterRealmDto';
+import {AuthRegisterUserDto} from '../../dto/AuthRegisterUserDto';
+import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 

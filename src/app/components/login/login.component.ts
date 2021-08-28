@@ -1,9 +1,9 @@
 import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
-import {CrossUiEventService, RealmNotFoundEvent} from '../../services/cross-ui-event.service';
+import {CrossUiEventService, RealmNotFoundEvent} from '../../services/event/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';

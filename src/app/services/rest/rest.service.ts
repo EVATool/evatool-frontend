@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
-import {LogService} from './log.service';
+import {environment} from '../../../environments/environment';
+import {LogService} from '../log.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {SampleDataService} from './sample-data.service';
+import {SampleDataService} from '../sample-data.service';
 
 @Injectable({
   providedIn: 'root'

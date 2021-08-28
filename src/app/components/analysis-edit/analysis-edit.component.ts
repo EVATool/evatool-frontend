@@ -8,7 +8,7 @@ import {
   CrossUiEventService,
   ImpactReferencedByRequirementsEvent,
   StakeholderReferencedByImpactsEvent
-} from '../../services/cross-ui-event.service';
+} from '../../services/event/cross-ui-event.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
 import * as uuid from 'uuid';
