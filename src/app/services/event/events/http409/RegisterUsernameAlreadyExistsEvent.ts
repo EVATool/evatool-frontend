@@ -1,4 +1,4 @@
-export class UsernameAlreadyExistsEvent {
+export class RegisterUsernameAlreadyExistsEvent {
 
   username: string;
 

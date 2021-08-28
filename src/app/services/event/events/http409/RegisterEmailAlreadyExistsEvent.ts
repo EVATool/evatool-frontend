@@ -1,4 +1,4 @@
-export class EmailAlreadyExistsEvent {
+export class RegisterEmailAlreadyExistsEvent {
 
   email: string;
 

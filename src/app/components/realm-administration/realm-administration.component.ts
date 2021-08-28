@@ -46,7 +46,7 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit, OnDe
         this.snackBar.open(message, '', {duration: 5000});
       });
 
-    this.crossUI.realmAlreadyExists
+    this.crossUI.registerRealmAlreadyExists
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         const message = 'Realm already exists';

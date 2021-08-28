@@ -70,14 +70,14 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
     // User registration.
-    this.crossUI.usernameAlreadyExists
+    this.crossUI.registerUsernameAlreadyExists
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         const message = 'Username already exists';
         this.snackBar.open(message, '', {duration: 5000});
       });
 
-    this.crossUI.emailAlreadyExists
+    this.crossUI.registerEmailAlreadyExists
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         const message = 'Email already exists';

@@ -32,9 +32,9 @@ import {LoginUsernameNotFoundEvent} from './events/http404/LoginUsernameNotFound
 import {AnalysisNotFoundEvent} from './events/http404/AnalysisNotFoundEvent';
 import {AuthenticationFailedEvent} from './events/http401/AuthenticationFailedEvent';
 import {AuthorizationFailedEvent} from './events/http403/AuthorizationFailedEvent';
-import {UsernameAlreadyExistsEvent} from './events/http409/UsernameAlreadyExistsEvent';
-import {EmailAlreadyExistsEvent} from './events/http409/EmailAlreadyExistsEvent';
-import {RealmAlreadyExistsEvent} from './events/http409/RealmAlreadyExists';
+import {RegisterUsernameAlreadyExistsEvent} from './events/http409/RegisterUsernameAlreadyExistsEvent';
+import {RegisterEmailAlreadyExistsEvent} from './events/http409/RegisterEmailAlreadyExistsEvent';
+import {RegisterRealmAlreadyExistsEvent} from './events/http409/RegisterRealmAlreadyExistsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from './events/http409/ImpactReferencedByRequirementDeltasEvent';
 import {StakeholderReferencedByImpactsEvent} from './events/http409/StakeholderReferencedByImpactsEvent';
 import {ValueReferencedByImpactsEvent} from './events/http409/ValueReferencedByImpactsEvent';
@@ -86,9 +86,9 @@ export class CrossUiEventService implements OnDestroy {
   @Output() valueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
   @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
-  @Output() usernameAlreadyExists: EventEmitter<UsernameAlreadyExistsEvent> = new EventEmitter();
-  @Output() emailAlreadyExists: EventEmitter<EmailAlreadyExistsEvent> = new EventEmitter();
-  @Output() realmAlreadyExists: EventEmitter<RealmAlreadyExistsEvent> = new EventEmitter();
+  @Output() registerUsernameAlreadyExists: EventEmitter<RegisterUsernameAlreadyExistsEvent> = new EventEmitter();
+  @Output() registerEmailAlreadyExists: EventEmitter<RegisterEmailAlreadyExistsEvent> = new EventEmitter();
+  @Output() registerRealmAlreadyExists: EventEmitter<RegisterRealmAlreadyExistsEvent> = new EventEmitter();
 
   // #####################
   // Non-functional errors.
@@ -267,15 +267,15 @@ export class CrossUiEventService implements OnDestroy {
               break;
 
             case FunctionalErrorCodes.REGISTER_USERNAME_ALREADY_EXISTS:
-              this.usernameAlreadyExists.emit(new UsernameAlreadyExistsEvent(httpInfo.tag.username));
+              this.registerUsernameAlreadyExists.emit(new RegisterUsernameAlreadyExistsEvent(httpInfo.tag.username));
               break;
 
             case FunctionalErrorCodes.REGISTER_EMAIL_ALREADY_EXISTS:
-              this.emailAlreadyExists.emit(new EmailAlreadyExistsEvent(httpInfo.tag.email));
+              this.registerEmailAlreadyExists.emit(new RegisterEmailAlreadyExistsEvent(httpInfo.tag.email));
               break;
 
             case FunctionalErrorCodes.REGISTER_REALM_ALREADY_EXISTS:
-              this.realmAlreadyExists.emit(new RealmAlreadyExistsEvent(httpInfo.tag.realm));
+              this.registerRealmAlreadyExists.emit(new RegisterRealmAlreadyExistsEvent(httpInfo.tag.realm));
               break;
 
             default:

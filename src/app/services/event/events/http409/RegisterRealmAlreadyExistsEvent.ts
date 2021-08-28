@@ -1,4 +1,4 @@
-export class RealmAlreadyExistsEvent {
+export class RegisterRealmAlreadyExistsEvent {
 
   realm: string;
 
