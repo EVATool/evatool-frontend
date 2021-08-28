@@ -1,20 +1,13 @@
 import {HttpMarshallService} from '../http/http-marshall.service';
 import {HttpInfo} from '../http/HttpInfo';
-import {FunctionalErrorCodeService} from './functional-error-code.service';
+import {FunctionalErrorCodes} from './functional-error-codes';
 import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
-import {Impact} from '../../model/Impact';
-import {RequirementDelta} from '../../model/RequirementDelta';
 import {ImpactDataService} from '../data/impact-data.service';
 import {RequirementDeltaDataService} from '../data/requirement-delta-data.service';
-import {Stakeholder} from '../../model/Stakeholder';
-import {Value} from '../../model/Value';
-import {Variant} from '../../model/Variant';
-import {Requirement} from '../../model/Requirement';
 import {VariantDataService} from '../data/variant-data.service';
 import {RequirementDataService} from '../data/requirement-data.service';
 import {StakeholderDataService} from '../data/stakeholder-data.service';
 import {ValueDataService} from '../data/value-data.service';
-import {Analysis} from '../../model/Analysis';
 import {AnalysisDataService} from '../data/analysis-data.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -23,7 +16,8 @@ import {
   AnalysisWithIdNotFound,
   AuthenticationFailedEvent,
   AuthorizationFailedEvent,
-  ImpactDeletionFailedEvent, ImpactReferencedByRequirementDeltasEvent,
+  ImpactDeletionFailedEvent,
+  ImpactReferencedByRequirementDeltasEvent,
   RealmNotFoundEvent,
   RequirementDeletionFailedEvent,
   RequirementDeltaDeletionFailedEvent,
@@ -34,6 +28,7 @@ import {
   VariantDeletionFailedEvent,
   VariantReferencedByRequirementsEvent
 } from './CrossUIEvents';
+import {LogService} from '../log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -79,7 +74,8 @@ export class CrossUiEventService implements OnDestroy {
               private impactData: ImpactDataService,
               private variantData: VariantDataService,
               private requirementData: RequirementDataService,
-              private requirementDeltaData: RequirementDeltaDataService) {
+              private requirementDeltaData: RequirementDeltaDataService,
+              private  logger: LogService) {
   }
 
   ngOnDestroy(): void {
@@ -93,7 +89,101 @@ export class CrossUiEventService implements OnDestroy {
       .subscribe((httpInfo: HttpInfo) => {
         if (httpInfo.functionalErrorCode) {
           switch (httpInfo.functionalErrorCode) {
-            case FunctionalErrorCodeService.IMPACT_REFERENCED_BY_REQUIREMENT_DELTA:
+
+            case FunctionalErrorCodes.IMPORT_EXPORT_JSON_INVALID:
+              break;
+
+            case FunctionalErrorCodes.USERNAME_INVALID:
+              break;
+
+            case FunctionalErrorCodes.REALM_INVALID:
+              break;
+
+            case FunctionalErrorCodes.EMAIL_INVALID:
+              break;
+
+            case FunctionalErrorCodes.PASSWORD_EMPTY_OR_NULL:
+              break;
+
+            case FunctionalErrorCodes.PASSWORD_NOT_SECURE_ENOUGH:
+              break;
+
+            case FunctionalErrorCodes.INVALID_CREDENTIALS:
+              break;
+
+            case FunctionalErrorCodes.CROSS_REALM_ACCESS:
+              break;
+
+            case FunctionalErrorCodes.LOGIN_REALM_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.LOGIN_USERNAME_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.ANALYSIS_FIND_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.STAKEHOLDER_FIND_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.VALUE_FIND_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.IMPACT_FIND_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.VARIANT_FIND_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.REQUIREMENT_FIND_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.REQUIREMENT_DELTA_FIND_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.ANALYSIS_UPDATE_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.STAKEHOLDER_UPDATE_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.VALUE_UPDATE_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.IMPACT_UPDATE_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.VARIANT_UPDATE_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.REQUIREMENT_UPDATE_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.REQUIREMENT_DELTA_UPDATE_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.ANALYSIS_DELETION_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.STAKEHOLDER_DELETION_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.VALUE_DELETION_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.IMPACT_DELETION_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.VARIANT_DELETION_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.REQUIREMENT_DELETION_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.REQUIREMENT_DELTA_DELETION_FAILED_NOT_FOUND:
+              break;
+
+            case FunctionalErrorCodes.IMPACT_REFERENCED_BY_REQUIREMENT_DELTA:
               const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
               const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
               if (impact && deltas) {
@@ -101,7 +191,7 @@ export class CrossUiEventService implements OnDestroy {
               }
               break;
 
-            case FunctionalErrorCodeService.STAKEHOLDER_REFERENCED_BY_IMPACT:
+            case FunctionalErrorCodes.STAKEHOLDER_REFERENCED_BY_IMPACT:
               const stakeholder = this.stakeholderData.stakeholders.find(s => s.id = httpInfo.tag.stakeholderId);
               const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (stakeholder && impactsStakeholder) {
@@ -109,7 +199,7 @@ export class CrossUiEventService implements OnDestroy {
               }
               break;
 
-            case FunctionalErrorCodeService.VALUE_REFERENCED_BY_IMPACT:
+            case FunctionalErrorCodes.VALUE_REFERENCED_BY_IMPACT:
               const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
               const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (value && impactsValue) {
@@ -117,14 +207,28 @@ export class CrossUiEventService implements OnDestroy {
               }
               break;
 
-            case FunctionalErrorCodeService.VARIANT_REFERENCED_BY_REQUIREMENT:
+            case FunctionalErrorCodes.VARIANT_REFERENCED_BY_REQUIREMENT:
               const variant = this.variantData.variants.find(v => v.id = httpInfo.tag.variantId);
               const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
               if (variant && requirements) {
                 this.variantReferencedByRequirements.emit(new VariantReferencedByRequirementsEvent(variant, requirements));
               }
               break;
+
+            case FunctionalErrorCodes.REGISTER_USERNAME_ALREADY_EXISTS:
+              break;
+
+            case FunctionalErrorCodes.REGISTER_EMAIL_ALREADY_EXISTS:
+              break;
+
+            case FunctionalErrorCodes.REGISTER_REALM_ALREADY_EXISTS:
+              break;
+
+            default:
+              this.logger.warn(this, 'Unknown functional error code: ' + httpInfo.functionalErrorCode);
+              break;
           }
+
           // TODO this else clause should only contain a case for 403 and one case for 401 for requests to /auth/realms/
           //  All other cases should be functional errors!
         } else {

@@ -1,4 +1,4 @@
-export class FunctionalErrorCodeService {
+export class FunctionalErrorCodes {
 
   // 400 Not found codes.
   public static readonly IMPORT_EXPORT_JSON_INVALID = 400_001;
