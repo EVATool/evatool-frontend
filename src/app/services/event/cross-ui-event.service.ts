@@ -18,6 +18,22 @@ import {Analysis} from '../../model/Analysis';
 import {AnalysisDataService} from '../data/analysis-data.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {
+  AnalysisDeletionFailedEvent,
+  AnalysisWithIdNotFound,
+  AuthenticationFailedEvent,
+  AuthorizationFailedEvent,
+  ImpactDeletionFailedEvent, ImpactReferencedByRequirementDeltasEvent,
+  RealmNotFoundEvent,
+  RequirementDeletionFailedEvent,
+  RequirementDeltaDeletionFailedEvent,
+  StakeholderDeletionFailedEvent,
+  StakeholderReferencedByImpactsEvent,
+  ValueDeletionFailedEvent,
+  ValueReferencedByImpactsEvent,
+  VariantDeletionFailedEvent,
+  VariantReferencedByRequirementsEvent
+} from './CrossUIEvents';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +45,8 @@ export class CrossUiEventService implements OnDestroy {
   @Output() initComplete: EventEmitter<void> = new EventEmitter();
   initialized = false;
 
-  @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
-  @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementsEvent> = new EventEmitter();
+  @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementDeltasEvent> = new EventEmitter();
+  @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementDeltasEvent> = new EventEmitter();
 
   @Output() stakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
   @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
@@ -81,7 +97,7 @@ export class CrossUiEventService implements OnDestroy {
               const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
               const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
               if (impact && deltas) {
-                this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementsEvent(impact, deltas));
+                this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementDeltasEvent(impact, deltas));
               }
               break;
 
@@ -166,123 +182,4 @@ export class CrossUiEventService implements OnDestroy {
         }
       });
   }
-}
-
-export class ImpactReferencedByRequirementsEvent {
-
-  impact!: Impact;
-  deltas!: RequirementDelta[];
-
-  constructor(impact: Impact, deltas: RequirementDelta[]) {
-    this.impact = impact;
-    this.deltas = deltas;
-  }
-}
-
-export class StakeholderReferencedByImpactsEvent {
-
-  stakeholder!: Stakeholder;
-  impacts!: Impact[];
-
-  constructor(stakeholder: Stakeholder, impacts: Impact[]) {
-    this.stakeholder = stakeholder;
-    this.impacts = impacts;
-  }
-}
-
-export class ValueReferencedByImpactsEvent {
-
-  value!: Value;
-  impacts!: Impact[];
-
-  constructor(value: Value, impacts: Impact[]) {
-    this.value = value;
-    this.impacts = impacts;
-  }
-}
-
-export class VariantReferencedByRequirementsEvent {
-
-  variant!: Variant;
-  requirements!: Requirement[];
-
-  constructor(variant: Variant, requirements: Requirement[]) {
-    this.variant = variant;
-    this.requirements = requirements;
-  }
-}
-
-
-export class AnalysisWithIdNotFound {
-  id!: string;
-
-  constructor(id: string) {
-    this.id = id;
-  }
-}
-
-export class RealmNotFoundEvent {
-  realm!: string;
-
-  constructor(realm: string) {
-    this.realm = realm;
-  }
-}
-
-export abstract class DeletionFailedEvent<T> {
-  entity!: T;
-  notFound!: boolean;
-
-  protected constructor(entity: T, notFound: boolean) {
-    this.entity = entity;
-    this.notFound = notFound;
-  }
-}
-
-export class AnalysisDeletionFailedEvent extends DeletionFailedEvent<Analysis> {
-  constructor(analysis: Analysis, notFound: boolean) {
-    super(analysis, notFound);
-  }
-}
-
-export class StakeholderDeletionFailedEvent extends DeletionFailedEvent<Stakeholder> {
-  constructor(stakeholder: Stakeholder, notFound: boolean) {
-    super(stakeholder, notFound);
-  }
-}
-
-export class ValueDeletionFailedEvent extends DeletionFailedEvent<Value> {
-  constructor(value: Value, notFound: boolean) {
-    super(value, notFound);
-  }
-}
-
-export class ImpactDeletionFailedEvent extends DeletionFailedEvent<Impact> {
-  constructor(impact: Impact, notFound: boolean) {
-    super(impact, notFound);
-  }
-}
-
-export class VariantDeletionFailedEvent extends DeletionFailedEvent<Variant> {
-  constructor(variant: Variant, notFound: boolean) {
-    super(variant, notFound);
-  }
-}
-
-export class RequirementDeletionFailedEvent extends DeletionFailedEvent<Requirement> {
-  constructor(requirement: Requirement, notFound: boolean) {
-    super(requirement, notFound);
-  }
-}
-
-export class RequirementDeltaDeletionFailedEvent extends DeletionFailedEvent<RequirementDelta> {
-  constructor(requirementDelta: RequirementDelta, notFound: boolean) {
-    super(requirementDelta, notFound);
-  }
-}
-
-export class AuthenticationFailedEvent {
-}
-
-export class AuthorizationFailedEvent {
 }

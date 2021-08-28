@@ -6,7 +6,7 @@ import {StakeholderEditComponent} from '../stakeholder-edit/stakeholder-edit.com
 import {ImpactEditComponent} from '../impact-edit/impact-edit.component';
 import {
   CrossUiEventService,
-  ImpactReferencedByRequirementsEvent,
+  ImpactReferencedByRequirementDeltasEvent,
   StakeholderReferencedByImpactsEvent
 } from '../../services/event/cross-ui-event.service';
 import {ActivatedRoute, Router} from '@angular/router';

@@ -21,7 +21,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {
   CrossUiEventService,
-  ImpactReferencedByRequirementsEvent,
+  ImpactReferencedByRequirementDeltasEvent,
   RequirementDeletionFailedEvent,
   RequirementDeltaDeletionFailedEvent,
   VariantReferencedByRequirementsEvent

@@ -18,7 +18,7 @@ import {Stakeholder} from '../../model/Stakeholder';
 import {
   CrossUiEventService,
   ImpactDeletionFailedEvent,
-  ImpactReferencedByRequirementsEvent,
+  ImpactReferencedByRequirementDeltasEvent,
   StakeholderReferencedByImpactsEvent,
   ValueReferencedByImpactsEvent
 } from '../../services/event/cross-ui-event.service';
