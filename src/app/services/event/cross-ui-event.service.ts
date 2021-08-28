@@ -228,60 +228,15 @@ export class CrossUiEventService implements OnDestroy {
               this.logger.warn(this, 'Unknown functional error code: ' + httpInfo.functionalErrorCode);
               break;
           }
-
-          // TODO this else clause should only contain a case for 403 and one case for 401 for requests to /auth/realms/
-          //  All other cases should be functional errors!
-        } else {
-          const id = httpInfo.path.substr(httpInfo.path.lastIndexOf('/') + 1);
-          const pathWithoutSlashId = httpInfo.path.replace('/' + id, '');
-          const apiEndpoint = pathWithoutSlashId.substr(pathWithoutSlashId.lastIndexOf('/') + 1);
-          const notFound = httpInfo.httpStatusCode === 404;
-
+        } else { // Events fired in this else clause must have an explanation for not being a functional error case.
           if (httpInfo.httpStatusCode === 401) {
+            // A 401 is returned by the backend if keycloak cannot login properly.
+            // This is done by keycloak if a rest call to a normal API endpoint is made (e.g. /stakeholders).
             this.authenticationFailed.emit(new AuthenticationFailedEvent());
           } else if (httpInfo.httpStatusCode === 403) {
+            // A 403 is returned by the backend if the user is not properly authorized.
+            // This is done by keycloak and cannot be made into an functional error.
             this.authorizationFailed.emit(new AuthorizationFailedEvent());
-          } else if (httpInfo.method === 'GET' && apiEndpoint === 'analyses' && notFound) {
-            this.analysisWithValidIdNotFound.emit(new AnalysisWithIdNotFound(id));
-          } else if (httpInfo.path.includes('/auth/realms/') && notFound) {
-            this.realmNotFound.emit(new RealmNotFoundEvent(httpInfo.path.split('/')[3]));
-          } else if (httpInfo.method === 'DELETE') {
-            if (apiEndpoint === 'analyses') {
-              const analysis = this.analysisData.analyses.find(a => a.id === id);
-              if (analysis) {
-                this.analysisDeletionFailed.emit(new AnalysisDeletionFailedEvent(analysis, notFound));
-              }
-            } else if (apiEndpoint === 'stakeholders') {
-              const stakeholder = this.stakeholderData.stakeholders.find(s => s.id === id);
-              if (stakeholder) {
-                this.stakeholderDeletionFailed.emit(new StakeholderDeletionFailedEvent(stakeholder, notFound));
-              }
-            } else if (apiEndpoint === 'values') {
-              const value = this.valueData.values.find(v => v.id === id);
-              if (value) {
-                this.valueDeletionFailed.emit(new ValueDeletionFailedEvent(value, notFound));
-              }
-            } else if (apiEndpoint === 'impacts') {
-              const impact = this.impactData.impacts.find(i => i.id === id);
-              if (impact) {
-                this.impactDeletionFailed.emit(new ImpactDeletionFailedEvent(impact, notFound));
-              }
-            } else if (apiEndpoint === 'variants') {
-              const variant = this.variantData.variants.find(v => v.id === id);
-              if (variant) {
-                this.variantDeletionFailed.emit(new VariantDeletionFailedEvent(variant, notFound));
-              }
-            } else if (apiEndpoint === 'requirements') {
-              const requirement = this.requirementData.requirements.find(r => r.id === id);
-              if (requirement) {
-                this.requirementDeletionFailed.emit(new RequirementDeletionFailedEvent(requirement, notFound));
-              }
-            } else if (apiEndpoint === 'requirement-deltas') {
-              const requirementDelta = this.requirementDeltaData.requirementDeltas.find(rd => rd.id === id);
-              if (requirementDelta) {
-                this.requirementDeltaDeletionFailed.emit(new RequirementDeltaDeletionFailedEvent(requirementDelta, notFound));
-              }
-            }
           }
         }
       });
