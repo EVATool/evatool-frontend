@@ -93,9 +93,8 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit, OnDe
       this.snackBar.open('Please enter a password', '', {duration: 5000});
     } else if (this.realm === '') {
       this.snackBar.open('Please enter a realm', '', {duration: 5000});
-      return;
+    } else {
+      this.authService.registerRealm(this.username, this.password, this.realm);
     }
-
-    this.authService.registerRealm(this.username, this.password, this.realm);
   }
 }
