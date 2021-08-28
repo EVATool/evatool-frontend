@@ -13,12 +13,8 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {
   AnalysisDeletionFailedEvent,
-  AnalysisWithIdNotFound,
-  AuthenticationFailedEvent,
-  AuthorizationFailedEvent,
   ImpactDeletionFailedEvent,
   ImpactReferencedByRequirementDeltasEvent,
-  RealmNotFoundEvent,
   RequirementDeletionFailedEvent,
   RequirementDeltaDeletionFailedEvent,
   StakeholderDeletionFailedEvent,
@@ -29,6 +25,20 @@ import {
   VariantReferencedByRequirementsEvent
 } from './CrossUIEvents';
 import {LogService} from '../log.service';
+import {ImportExportJsonInvalidEvent} from './events/http400/ImportExportJsonInvalidEvent';
+import {UsernameInvalidEvent} from './events/http400/UsernameInvalidEvent';
+import {RealmInvalidEvent} from './events/http400/RealmInvalidEvent';
+import {EmailInvalidEvent} from './events/http400/EmailInvalidEvent';
+import {InvalidCredentialsEvent} from './events/http401/InvalidCredentialsEvent';
+import {CrossRealmAccessEvent} from './events/http403/CrossRealmAccessEvent';
+import {LoginRealmNotFoundEvent} from './events/http404/LoginRealmNotFoundEvent';
+import {LoginUsernameNotFoundEvent} from './events/http404/LoginUsernameNotFoundEvent';
+import {AnalysisNotFoundEvent} from './events/http404/AnalysisNotFoundEvent';
+import {AuthenticationFailedEvent} from './events/http401/AuthenticationFailedEvent';
+import {AuthorizationFailedEvent} from './events/http403/AuthorizationFailedEvent';
+import {UsernameAlreadyExistsEvent} from './events/http409/UsernameAlreadyExistsEvent';
+import {EmailAlreadyExistsEvent} from './events/http409/EmailAlreadyExistsEvent';
+import {RealmAlreadyExistsEvent} from './events/http409/RealmAlreadyExists';
 
 @Injectable({
   providedIn: 'root'
@@ -40,22 +50,28 @@ export class CrossUiEventService implements OnDestroy {
   @Output() initComplete: EventEmitter<void> = new EventEmitter();
   initialized = false;
 
-  @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementDeltasEvent> = new EventEmitter();
-  @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementDeltasEvent> = new EventEmitter();
+  // #####################
+  // Functional error.
+  // #####################
 
-  @Output() stakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
-  @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
+  // 404.
+  @Output() importExportJsonInvalid: EventEmitter<ImportExportJsonInvalidEvent> = new EventEmitter();
+  @Output() usernameInvalid: EventEmitter<UsernameInvalidEvent> = new EventEmitter();
+  @Output() realmInvalid: EventEmitter<RealmInvalidEvent> = new EventEmitter();
+  @Output() emailInvalid: EventEmitter<EmailInvalidEvent> = new EventEmitter();
 
-  @Output() valueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
-  @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
+  // 401.
+  @Output() invalidCredentials: EventEmitter<InvalidCredentialsEvent> = new EventEmitter();
 
-  @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
-  @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
+  // 403.
+  @Output() crossRealmAccess: EventEmitter<CrossRealmAccessEvent> = new EventEmitter();
 
-  @Output() analysisWithValidIdNotFound: EventEmitter<AnalysisWithIdNotFound> = new EventEmitter();
+  // 404.
+  @Output() realmNotFound: EventEmitter<LoginRealmNotFoundEvent> = new EventEmitter();
+  @Output() usernameNotFound: EventEmitter<LoginUsernameNotFoundEvent> = new EventEmitter();
+  @Output() analysisNotFound: EventEmitter<AnalysisNotFoundEvent> = new EventEmitter();
 
-  @Output() realmNotFound: EventEmitter<RealmNotFoundEvent> = new EventEmitter();
-
+  // TODO redo
   @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
   @Output() stakeholderDeletionFailed: EventEmitter<StakeholderDeletionFailedEvent> = new EventEmitter();
   @Output() valueDeletionFailed: EventEmitter<ValueDeletionFailedEvent> = new EventEmitter();
@@ -64,8 +80,29 @@ export class CrossUiEventService implements OnDestroy {
   @Output() requirementDeletionFailed: EventEmitter<RequirementDeletionFailedEvent> = new EventEmitter();
   @Output() requirementDeltaDeletionFailed: EventEmitter<RequirementDeltaDeletionFailedEvent> = new EventEmitter();
 
+  // 409.
+  @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementDeltasEvent> = new EventEmitter();
+  @Output() stakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
+  @Output() valueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
+  @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
+
+  @Output() usernameAlreadyExists: EventEmitter<UsernameAlreadyExistsEvent> = new EventEmitter();
+  @Output() emailAlreadyExists: EventEmitter<EmailAlreadyExistsEvent> = new EventEmitter();
+  @Output() realmAlreadyExists: EventEmitter<RealmAlreadyExistsEvent> = new EventEmitter();
+
+  // #####################
+  // Non-functional errors.
+  // #####################
   @Output() authenticationFailed: EventEmitter<AuthenticationFailedEvent> = new EventEmitter();
   @Output() authorizationFailed: EventEmitter<AuthorizationFailedEvent> = new EventEmitter();
+
+  // #####################
+  // Other events.
+  // #####################
+  @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementDeltasEvent> = new EventEmitter();
+  @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
+  @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
+  @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
   constructor(private httpMarshall: HttpMarshallService,
               private analysisData: AnalysisDataService,

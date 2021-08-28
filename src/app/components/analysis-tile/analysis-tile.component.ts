@@ -7,9 +7,10 @@ import {MatDialog} from '@angular/material/dialog';
 import {LogService} from '../../services/log.service';
 import {Router} from '@angular/router';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
-import {AnalysisDeletionFailedEvent, CrossUiEventService} from '../../services/event/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {AnalysisDeletionFailedEvent} from '../../services/event/CrossUIEvents';
 
 @Component({
   selector: 'app-analysis-tile',
