@@ -1,4 +1,4 @@
-export class HttpInfo {
+export class HttpInfo { // TODO Split into 3 events for: next, complete, error?
 
   timestamp = 0;
   path!: string;
