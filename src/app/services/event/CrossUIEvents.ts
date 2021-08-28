@@ -50,7 +50,6 @@ export class VariantReferencedByRequirementsEvent {
   }
 }
 
-
 export class AnalysisWithIdNotFound {
   id!: string;
 

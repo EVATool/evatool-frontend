@@ -230,12 +230,12 @@ export class CrossUiEventService implements OnDestroy {
           }
         } else { // Events fired in this else clause must have an explanation for not being a functional error case.
           if (httpInfo.httpStatusCode === 401) {
-            // A 401 is returned by the backend if keycloak cannot login properly.
+            // A 401 is returned by the backend if keycloak cannot login properly with the provided token.
             // This is done by keycloak if a rest call to a normal API endpoint is made (e.g. /stakeholders).
             this.authenticationFailed.emit(new AuthenticationFailedEvent());
           } else if (httpInfo.httpStatusCode === 403) {
-            // A 403 is returned by the backend if the user is not properly authorized.
-            // This is done by keycloak and cannot be made into an functional error.
+            // A 403 is returned by the backend if the user's token is not properly authorized.
+            // This is done by keycloak if a rest call to a normal API endpoint is made (e.g. /stakeholders).
             this.authorizationFailed.emit(new AuthorizationFailedEvent());
           }
         }
