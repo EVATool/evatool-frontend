@@ -9,6 +9,7 @@ import {environment} from '../../../environments/environment';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {LoginRealmNotFoundEvent} from '../../services/event/events/http404/LoginRealmNotFoundEvent';
+import {LoginUsernameNotFoundEvent} from '../../services/event/events/http404/LoginUsernameNotFoundEvent';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,14 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.crossUI.authenticationFailed
+    this.crossUI.usernameNotFound
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: LoginUsernameNotFoundEvent) => {
+        const message = 'User ' + event.username + ' does not exist';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.invalidCredentials
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         const message = 'Invalid credentials';
@@ -49,7 +57,21 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.crossUI.realmNotFound
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: LoginRealmNotFoundEvent) => {
-        const message = 'Tenant ' + event.realm + ' does not exist';
+        const message = 'Realm ' + event.realm + ' does not exist';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.usernameAlreadyExists
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        const message = 'Username already exists';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.emailAlreadyExists
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        const message = 'Email already exists';
         this.snackBar.open(message, '', {duration: 5000});
       });
 
@@ -104,6 +126,8 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       if (this.username === '') {
         this.snackBar.open('Please enter a username', '', {duration: 5000});
+      } else if (this.email === '') {
+        this.snackBar.open('Please enter an email address', '', {duration: 5000});
       } else if (this.password === '') {
         this.snackBar.open('Please enter a password', '', {duration: 5000});
       } else if (this.password !== this.passwordRepeat) {

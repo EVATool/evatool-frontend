@@ -7,6 +7,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../../services/auth/auth.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {LoginUsernameNotFoundEvent} from '../../services/event/events/http404/LoginUsernameNotFoundEvent';
 
 @Component({
   selector: 'app-realm-administration',
@@ -31,10 +32,24 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit, OnDe
   }
 
   ngOnInit(): void {
-    this.crossUI.authenticationFailed
+    this.crossUI.usernameNotFound
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: LoginUsernameNotFoundEvent) => {
+        const message = 'User ' + event.username + ' does not exist';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.invalidCredentials
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
         const message = 'Invalid credentials';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.realmAlreadyExists
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        const message = 'Realm already exists';
         this.snackBar.open(message, '', {duration: 5000});
       });
 

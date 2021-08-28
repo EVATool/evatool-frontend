@@ -135,6 +135,11 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
+    if (this.refreshToken === '') {
+      this.router.navigate([ROUTES.login]);
+      return;
+    }
+
     const url = this.authRefreshLoginUrl + '?refreshToken=' + this.refreshToken + '&realm=' + this.realm;
     this.logger.info(this, 'Http post to: ' + url);
     this.http.post<AuthTokenDto>(url, null, this.httpOptions)
