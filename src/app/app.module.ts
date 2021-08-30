@@ -11,7 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatMenuModule} from '@angular/material/menu';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AnalysisTileComponent} from './components/analysis-tile/analysis-tile.component';
 import {AnalysisEditComponent} from './components/analysis-edit/analysis-edit.component';
@@ -139,7 +139,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     TimeOutComponent,
     TermsAndConditionsComponent,
     ForgotPasswordComponent,
-    RealmAdministrationComponent
+    RealmAdministrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -173,7 +173,11 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
       }
     }),
     MatProgressSpinnerModule,
-    FlexModule
+    FlexModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'X-CSRF-TOKEN'
+    }),
   ],
   providers: [
     {
