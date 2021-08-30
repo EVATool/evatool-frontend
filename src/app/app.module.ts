@@ -176,7 +176,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     FlexModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'XSRF-TOKEN',
-      headerName: 'X-CSRF-TOKEN'
+      headerName: 'X-XSRF-TOKEN'
     }),
   ],
   providers: [
