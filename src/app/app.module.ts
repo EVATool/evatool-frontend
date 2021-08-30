@@ -63,12 +63,10 @@ import {} from 'jasmine'; // Because we are using jest and karma + jasmine
 import {ConfirmationDialogComponent} from './components/confirmation-dialog/confirmation-dialog.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpInterceptorService} from './services/http/http-interceptor.service';
 import {HttpLoaderComponent} from './components/http-loader/http-loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {FlexModule} from '@angular/flex-layout';
-import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 import {LoginComponent} from './components/login/login.component';
 import {AccessDeniedComponent} from './components/access-denied/access-denied.component';
 import {AuthRemainingComponent} from './components/auth-remaining/auth-remaining.component';
@@ -77,6 +75,9 @@ import {TimeOutComponent} from './components/time-out/time-out.component';
 import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {RealmAdministrationComponent} from './components/realm-administration/realm-administration.component';
+import {XsrfInterceptor} from './services/auth/xsrf-interceptor.service';
+import {HttpInterceptorService} from './services/http/http-interceptor.service';
+import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -187,6 +188,11 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: XsrfInterceptor,
       multi: true
     }
   ],
