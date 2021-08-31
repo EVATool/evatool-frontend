@@ -25,6 +25,22 @@ body {
   overflow: hidden;
 }
 
+.mat-tab-group {
+  .mat-tab-header {
+    padding-left: 37px;
+
+    .mat-tab-label-active {
+      .mat-tab-label-content {
+        color: darkblue;
+      }
+    }
+
+    .mat-ink-bar {
+      background-color: darkblue !important;
+    }
+  }
+}
+
 @import 'app/components/stakeholder-impacted/stakeholder-impacted.component';
 @include stakeholder-impact-slider-theme();
 
