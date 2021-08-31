@@ -3,15 +3,19 @@
   margin: 150px 40% 0 40%;
 
   .form-toggle-container {
+    position: relative;
     margin-bottom: 50px;
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: calc(100% + 20px);
+    left: -10px;
 
     .sign-in-toggle-button {
-      margin-left: -20px;
+      margin: 5px;
     }
 
     .sign-up-toggle-button {
-      margin-left: auto;
+      margin: 5px;
     }
 
     .toggle-button {
@@ -37,7 +41,7 @@
   }
 
   .toggle-password-button {
-    position: fixed;
+    position: absolute;
     margin-left: -32px;
   }
 
@@ -55,18 +59,25 @@
   .aux-actions {
     margin-top: 40px;
     width: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    height: auto;
+    padding-bottom: 10px;
+    justify-content: space-between;
 
     .terms-and-conditions {
       font-size: 90%;
       cursor: pointer;
       text-transform: uppercase;
+      white-space: nowrap;
+      margin-right: 10px;
     }
 
     .forgot-password {
       font-size: 90%;
       cursor: pointer;
-      margin-top: -20px;
-      float: right;
+      white-space: nowrap;
     }
   }
 }
