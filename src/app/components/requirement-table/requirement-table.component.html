@@ -51,7 +51,8 @@
                 </div>
               </mat-select-trigger>
               <ng-container *ngFor="let variant of variantDataService.variants">
-                <mat-option *ngIf="!variant.archived || requirement.variants.includes(variant)"
+                <mat-option [ngClass]="{'archived-variant-checkbox':variant.archived}"
+                            *ngIf="!variant.archived || requirement.variants.includes(variant)"
                             [value]="variant">
                   {{variant.name}}
                 </mat-option>
