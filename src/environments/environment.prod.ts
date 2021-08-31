@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   testing: false,
   serverProtocol: 'SERVER_PROTOCOL',
-  serverAddr: 'SERVER_ADDR',
+  serverAddr: 'SERVER_DOMAIN',
   backendPort: 'BACKEND_PORT',
   defaultLang: 'DEFAULT_LANGUAGE',
   // @ts-ignore
