@@ -80,7 +80,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
         this.impacts = this.sortDefault(this.impacts);
         this.impactsLoaded = true;
         this.loadedImpacts.emit(this.impacts);
-        this.logger.info(this, 'Impacts loaded');
+        this.logger.debug(this, 'Impacts loaded');
       });
   }
 
@@ -94,7 +94,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
           this.stakeholderData.stakeholders);
         this.impacts.push(createdImpact);
         this.createdImpact.emit(createdImpact);
-        this.logger.info(this, 'Impact created');
+        this.logger.debug(this, 'Impact created');
       });
   }
 
@@ -108,7 +108,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
           this.valueData.values,
           this.stakeholderData.stakeholders);
         this.updatedImpact.emit(impact);
-        this.logger.info(this, 'Impact updated');
+        this.logger.debug(this, 'Impact updated');
       });
   }
 
@@ -119,7 +119,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
         const index: number = this.impacts.indexOf(impact, 0);
         this.impacts.splice(index, 1);
         this.deletedImpact.emit(impact);
-        this.logger.info(this, 'Impact deleted');
+        this.logger.debug(this, 'Impact deleted');
       });
   }
 

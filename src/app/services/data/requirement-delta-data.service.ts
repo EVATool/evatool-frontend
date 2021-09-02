@@ -80,7 +80,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
         this.requirementDeltas = this.sortDefault(this.requirementDeltas);
         this.requirementDeltasLoaded = true;
         this.loadedRequirementDeltas.emit(this.requirementDeltas);
-        this.logger.info(this, 'RequirementDeltas loaded');
+        this.logger.debug(this, 'RequirementDeltas loaded');
       });
   }
 
@@ -93,7 +93,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
           this.impactData.impacts);
         this.requirementDeltas.push(createdRequirementDelta);
         this.createdRequirementDelta.emit(createdRequirementDelta);
-        this.logger.info(this, 'RequirementDelta created');
+        this.logger.debug(this, 'RequirementDelta created');
       });
   }
 
@@ -106,7 +106,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
           this.requirementData.requirements,
           this.impactData.impacts);
         this.updatedRequirementDelta.emit(requirementDelta);
-        this.logger.info(this, 'RequirementDelta updated');
+        this.logger.debug(this, 'RequirementDelta updated');
       });
   }
 
@@ -117,7 +117,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
         const index: number = this.requirementDeltas.indexOf(requirementDelta, 0);
         this.requirementDeltas.splice(index, 1);
         this.deletedRequirementDelta.emit(requirementDelta);
-        this.logger.info(this, 'RequirementDelta deleted');
+        this.logger.debug(this, 'RequirementDelta deleted');
       });
   }
 

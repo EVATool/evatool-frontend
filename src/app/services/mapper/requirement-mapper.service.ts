@@ -16,7 +16,7 @@ export class RequirementMapperService extends MapperService {
   }
 
   toDto(requirement: Requirement): RequirementDto {
-    this.logger.info(this, 'Mapping Requirement to RequirementDto');
+    this.logger.debug(this, 'Mapping Requirement to RequirementDto');
     const requirementDto = new RequirementDto();
 
     requirementDto.id = requirement.id;
@@ -29,7 +29,7 @@ export class RequirementMapperService extends MapperService {
   }
 
   fromDto(requirementDto: RequirementDto, analyses: Analysis[], variants: Variant[]): Requirement {
-    this.logger.info(this, 'Mapping RequirementDto to Requirement');
+    this.logger.debug(this, 'Mapping RequirementDto to Requirement');
     const requirement = new Requirement();
     this.updateFromDto(requirementDto, requirement, analyses, variants);
     return requirement;

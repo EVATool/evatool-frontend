@@ -22,7 +22,7 @@ export class HttpMarshallService {
   }
 
   next(request: HttpRequest<any>): void {
-    this.logger.info(this, 'An http request started.');
+    this.logger.debug(this, 'An http request started.');
     const httpInfo = this.buildHttpInfo(request, HttpInfoType.Next);
     this.httpNext.emit(httpInfo);
     this.processHttpRequest(request, httpInfo);
@@ -30,7 +30,7 @@ export class HttpMarshallService {
   }
 
   error(request: HttpRequest<any>, httpStatusCode: number, functionalErrorCode: number, tag: any): void {
-    this.logger.info(this, 'An http response failed.');
+    this.logger.debug(this, 'An http response failed.');
     const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error, functionalErrorCode, tag, httpStatusCode);
     this.httpError.emit(httpInfo);
     this.processHttpResponse(request, httpInfo);
@@ -38,7 +38,7 @@ export class HttpMarshallService {
   }
 
   complete(request: HttpRequest<any>): void {
-    this.logger.info(this, 'An http response was successful.');
+    this.logger.debug(this, 'An http response was successful.');
     const httpInfo = this.buildHttpInfo(request, HttpInfoType.Complete);
     this.httpComplete.emit(httpInfo);
     this.processHttpResponse(request, httpInfo);
@@ -46,6 +46,7 @@ export class HttpMarshallService {
   }
 
   private processHttpRequest(request: HttpRequest<any>, httpInfo: HttpInfo): void {
+    this.logger.trace(this, 'Process Http Request');
     if (!this.activeRequests.includes(request)) {
       this.activeRequests.push(request);
 
@@ -58,6 +59,7 @@ export class HttpMarshallService {
   }
 
   private processHttpResponse(request: HttpRequest<any>, httpInfo: HttpInfo): void {
+    this.logger.trace(this, 'Process Http Response');
     if (this.activeRequests.includes(request)) {
       const index: number = this.activeRequests.indexOf(request, 0);
       this.activeRequests.splice(index, 1);
@@ -71,6 +73,7 @@ export class HttpMarshallService {
   }
 
   private buildHttpInfo(request: HttpRequest<any>, httpInfoType: HttpInfoType, functionalErrorCode?: number, tag?: any, httpStatusCode?: number): HttpInfo {
+    this.logger.trace(this, 'Build Http Info');
     const httpInfo = new HttpInfo();
     httpInfo.timestamp = Date.now().valueOf();
     httpInfo.path = request.url;

@@ -26,7 +26,7 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
-import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-requirement-table',

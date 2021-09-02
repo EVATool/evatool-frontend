@@ -19,13 +19,13 @@ export class ImportExportRestService extends RestService {
 
   importAnalyses(importAnalyses: string): Observable<AnalysisDto[]> {
     const url = this.importAnalysesUrl;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     return this.http.post<AnalysisDto[]>(url, importAnalyses, this.httpOptions);
   }
 
   exportAnalyses(analysisIds: string[], filename: string): Observable<object> {
     const url = this.exportAnalysesUrl + this.analysisIds + analysisIds.join(',') + '&' + this.filename + filename;
-    this.logger.info(this, 'Http get to: ' + url);
+    this.logger.debug(this, 'Http get to: ' + url);
     return this.http.get<object>(url, this.httpOptions);
   }
 }

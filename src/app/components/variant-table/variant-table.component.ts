@@ -12,7 +12,7 @@ import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
-import {VariantDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {VariantDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-variant-table',

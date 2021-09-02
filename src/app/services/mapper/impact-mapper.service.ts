@@ -17,7 +17,7 @@ export class ImpactMapperService extends MapperService {
   }
 
   toDto(impact: Impact): ImpactDto {
-    this.logger.info(this, 'Mapping Impact to ImpactDto');
+    this.logger.debug(this, 'Mapping Impact to ImpactDto');
     const impactDto = new ImpactDto();
 
     impactDto.id = impact.id;
@@ -33,7 +33,7 @@ export class ImpactMapperService extends MapperService {
   }
 
   fromDto(impactDto: ImpactDto, analyses: Analysis[], values: Value[], stakeholders: Stakeholder[]): Impact {
-    this.logger.info(this, 'Mapping ImpactDto to Impact');
+    this.logger.debug(this, 'Mapping ImpactDto to Impact');
     const impact = new Impact();
     this.updateFromDto(impactDto, impact, analyses, values, stakeholders);
     return impact;

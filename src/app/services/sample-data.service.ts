@@ -39,6 +39,7 @@ export class SampleDataService {
     private variantMapper: VariantMapperService) {
 
     if (!environment.testing) {
+      this.logger.debug(this, 'Not in testing mode, returning');
       return;
     }
 

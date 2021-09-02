@@ -19,7 +19,7 @@ export class RequirementDeltaRestService extends RestService {
 
   getRequirementDeltasByAnalysisId(analysisId: string): Observable<RequirementDeltaDto[]> {
     const url = this.requirementDeltasUrl + this.byAnalysisId + analysisId;
-    this.logger.info(this, 'Http get to: ' + url);
+    this.logger.debug(this, 'Http get to: ' + url);
     if (this.testing) {
       return of(this.sampleData.requirementDeltaDtoList);
     } else {
@@ -29,7 +29,7 @@ export class RequirementDeltaRestService extends RestService {
 
   createRequirementDelta(requirementDeltaDto: RequirementDeltaDto): Observable<RequirementDeltaDto> {
     const url = this.requirementDeltasUrl;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     if (this.testing) {
       return of(requirementDeltaDto);
     } else {
@@ -39,7 +39,7 @@ export class RequirementDeltaRestService extends RestService {
 
   updateRequirementDelta(requirementDeltaDto: RequirementDeltaDto): Observable<RequirementDeltaDto> {
     const url = this.requirementDeltasUrl;
-    this.logger.info(this, 'Http put to: ' + url);
+    this.logger.debug(this, 'Http put to: ' + url);
     if (this.testing) {
       return of(requirementDeltaDto);
     } else {
@@ -49,7 +49,7 @@ export class RequirementDeltaRestService extends RestService {
 
   deleteRequirementDelta(id: string): Observable<void> {
     const url = this.requirementDeltasUrl + '/' + id;
-    this.logger.info(this, 'Http delete to: ' + url);
+    this.logger.debug(this, 'Http delete to: ' + url);
     if (this.testing) {
       return of(void 0);
     } else {

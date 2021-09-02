@@ -14,7 +14,7 @@ export class AnalysisMapperService extends MapperService {
   }
 
   toDto(analysis: Analysis): AnalysisDto {
-    this.logger.info(this, 'Mapping Analysis to AnalysisDto');
+    this.logger.debug(this, 'Mapping Analysis to AnalysisDto');
     const analysisDto = new AnalysisDto();
 
     analysisDto.id = analysis.id;
@@ -29,14 +29,14 @@ export class AnalysisMapperService extends MapperService {
   }
 
   fromDto(analysisDto: AnalysisDto): Analysis {
-    this.logger.info(this, 'Mapping AnalysisDto to Analysis');
+    this.logger.debug(this, 'Mapping AnalysisDto to Analysis');
     const analysis = new Analysis();
     this.updateFromDto(analysisDto, analysis);
     return analysis;
   }
 
   updateFromDto(analysisDto: AnalysisDto, analysis: Analysis): void {
-    this.logger.info(this, 'Updating Analysis from AnalysisDto');
+    this.logger.debug(this, 'Updating Analysis from AnalysisDto');
     analysis.id = analysisDto.id;
     analysis.prefixSequenceId = analysisDto.prefixSequenceId;
     analysis.name = analysisDto.name;

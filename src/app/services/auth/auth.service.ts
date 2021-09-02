@@ -120,6 +120,7 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
   login(realm: string, username: string, password: string): void {
+    this.logger.trace(this, 'Login');
     if (realm === '') {
       realm = 'evatool-realm';
     }
@@ -135,13 +136,14 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
   refreshExistingToken(ignoreRefreshToken: boolean = false): void {
+    this.logger.trace(this, 'Refresh Existing Token');
     if (this.refreshToken === '') {
       this.router.navigate([ROUTES.login]);
       return;
     }
 
     const url = this.authRefreshLoginUrl + '?refreshToken=' + this.refreshToken + '&realm=' + this.realm;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     this.http.post<AuthTokenDto>(url, null, this.httpOptions)
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthTokenDto) => {
       this.takeInAuthResponse(response, ignoreRefreshToken);
@@ -149,6 +151,7 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
   logout(): void {
+    this.logger.trace(this, 'Logout');
     this.authenticated = false;
     this.token = '';
     this.tokenExpiresIn = 0;
@@ -160,11 +163,12 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
   registerUser(username: string, email: string, password: string): void {
+    this.logger.trace(this, 'Register User');
     const url = this.authRegisterUserUrl +
       '?username=' + username +
       '&email=' + email +
       '&password=' + password;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     this.http.post<AuthRegisterUserDto>(url, null, this.httpOptions)
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthRegisterUserDto) => {
       this.login('evatool-realm', username, password);
@@ -172,11 +176,12 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
   registerRealm(adminUsername: string, adminPassword: string, realm: string): void {
+    this.logger.trace(this, 'Register Realm');
     const url = this.authRegisterRealmUrl +
       '?authAdminUsername=' + adminUsername +
       '&authAdminPassword=' + adminPassword +
       '&realm=' + realm;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     this.http.post<AuthRegisterRealmDto>(url, null, this.httpOptions)
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthRegisterRealmDto) => {
       this.realmRegistered.emit(response.realm);
@@ -184,6 +189,7 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
   takeInAuthResponse(authTokenDto: AuthTokenDto, ignoreRefreshToken: boolean = false): void {
+    this.logger.trace(this, 'Take In Auth Response');
     this.token = authTokenDto.token;
     this.tokenExpiresIn = authTokenDto.tokenExpiresIn;
     if (!ignoreRefreshToken) {
@@ -196,6 +202,7 @@ export class AuthService extends RestService implements OnDestroy {
   }
 
   startTimer(): void {
+    this.logger.trace(this, 'Start Timer');
     const interval = setInterval(() => {
       if (this.authenticated) {
         this.tokenExpiresIn -= 1;
@@ -204,7 +211,7 @@ export class AuthService extends RestService implements OnDestroy {
         // Try to get new token with refresh token if token expires soon.
         if (this.tokenExpiresIn <= 15 && !this.isAutoRefreshing && this.authenticated) {
           this.isAutoRefreshing = true;
-          this.logger.info(this, 'Automatically refreshing existing token...');
+          this.logger.debug(this, 'Automatically refreshing existing token...');
           this.refreshExistingToken(true);
         }
 

@@ -19,7 +19,7 @@ import {
   StakeholderDeletionFailedEvent,
   ValueDeletionFailedEvent,
   VariantDeletionFailedEvent,
-} from './CrossUIEvents';
+} from './events/DeletionFailedEvents';
 import {LogService} from '../log.service';
 import {ImportExportJsonInvalidEvent} from './events/http400/ImportExportJsonInvalidEvent';
 import {UsernameInvalidEvent} from './events/http400/UsernameInvalidEvent';

@@ -11,7 +11,7 @@ import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
-import {ValueDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {ValueDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-value-table',

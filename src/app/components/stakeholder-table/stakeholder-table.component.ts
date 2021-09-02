@@ -17,7 +17,7 @@ import {
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
-import {StakeholderDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {StakeholderDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-stakeholder-table',

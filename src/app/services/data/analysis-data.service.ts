@@ -52,7 +52,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
         });
         this.analyses = this.sortDefault(this.analyses);
         this.loadedAnalyses.emit(this.analyses);
-        this.logger.info(this, 'Analyses loaded');
+        this.logger.debug(this, 'Analyses loaded');
       });
   }
 
@@ -62,7 +62,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
       .subscribe((analysisDto: AnalysisDto) => {
         this.currentAnalysis = this.analysisMapper.fromDto(analysisDto);
         this.loadedCurrentAnalysis.emit(this.currentAnalysis);
-        this.logger.info(this, 'Current analysis loaded');
+        this.logger.debug(this, 'Current analysis loaded');
       });
   }
 
@@ -73,7 +73,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
         const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
         this.analyses.push(createdAnalysis);
         this.createdAnalysis.emit(createdAnalysis);
-        this.logger.info(this, 'Analysis deep copied');
+        this.logger.debug(this, 'Analysis deep copied');
       });
   }
 
@@ -84,7 +84,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
         const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
         this.analyses.push(createdAnalysis);
         this.createdAnalysis.emit(createdAnalysis);
-        this.logger.info(this, 'Analysis created');
+        this.logger.debug(this, 'Analysis created');
       });
   }
 
@@ -94,7 +94,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
       .subscribe((analysisDto: AnalysisDto) => {
         this.analysisMapper.updateFromDto(analysisDto, analysis);
         this.updatedAnalysis.emit(analysis);
-        this.logger.info(this, 'Analysis updated');
+        this.logger.debug(this, 'Analysis updated');
       });
   }
 
@@ -105,7 +105,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
         const index: number = this.analyses.indexOf(analysis, 0);
         this.analyses.splice(index, 1);
         this.deletedAnalysis.emit(analysis);
-        this.logger.info(this, 'Analysis deleted');
+        this.logger.debug(this, 'Analysis deleted');
       });
   }
 

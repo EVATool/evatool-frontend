@@ -15,7 +15,7 @@ export class ValueMapperService extends MapperService {
   }
 
   toDto(value: Value): ValueDto {
-    this.logger.info(this, 'Mapping Value to ValueDto');
+    this.logger.debug(this, 'Mapping Value to ValueDto');
     const valueDto = new ValueDto();
 
     valueDto.id = value.id;
@@ -29,7 +29,7 @@ export class ValueMapperService extends MapperService {
   }
 
   fromDto(valueDto: ValueDto, analyses: Analysis[]): Value {
-    this.logger.info(this, 'Mapping ValueDto to Value');
+    this.logger.debug(this, 'Mapping ValueDto to Value');
     const value = new Value();
     this.updateFromDto(valueDto, value, analyses);
     return value;

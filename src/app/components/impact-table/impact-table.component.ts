@@ -23,7 +23,7 @@ import {takeUntil} from 'rxjs/operators';
 import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
-import {ImpactDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {ImpactDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-impact-table',

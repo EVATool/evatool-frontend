@@ -71,7 +71,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
         this.requirements = this.sortDefault(this.requirements);
         this.requirementsLoaded = true;
         this.loadedRequirements.emit(this.requirements);
-        this.logger.info(this, 'Requirements loaded');
+        this.logger.debug(this, 'Requirements loaded');
       });
   }
 
@@ -84,7 +84,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
           this.variantData.variants);
         this.requirements.push(createdRequirement);
         this.createdRequirement.emit(createdRequirement);
-        this.logger.info(this, 'Requirement created');
+        this.logger.debug(this, 'Requirement created');
       });
   }
 
@@ -97,7 +97,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
           [this.analysisData.currentAnalysis],
           this.variantData.variants);
         this.updatedRequirement.emit(requirement);
-        this.logger.info(this, 'Requirement updated');
+        this.logger.debug(this, 'Requirement updated');
       });
   }
 
@@ -108,7 +108,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
         const index: number = this.requirements.indexOf(requirement, 0);
         this.requirements.splice(index, 1);
         this.deletedRequirement.emit(requirement);
-        this.logger.info(this, 'Requirement deleted');
+        this.logger.debug(this, 'Requirement deleted');
       });
   }
 

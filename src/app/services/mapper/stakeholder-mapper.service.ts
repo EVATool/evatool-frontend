@@ -15,7 +15,7 @@ export class StakeholderMapperService extends MapperService {
   }
 
   toDto(stakeholder: Stakeholder): StakeholderDto {
-    this.logger.info(this, 'Mapping Stakeholder to StakeholderDto');
+    this.logger.debug(this, 'Mapping Stakeholder to StakeholderDto');
     const stakeholderDto = new StakeholderDto();
 
     stakeholderDto.id = stakeholder.id;
@@ -30,7 +30,7 @@ export class StakeholderMapperService extends MapperService {
   }
 
   fromDto(stakeholderDto: StakeholderDto, analyses: Analysis[]): Stakeholder {
-    this.logger.info(this, 'Mapping StakeholderDto to Stakeholder');
+    this.logger.debug(this, 'Mapping StakeholderDto to Stakeholder');
     const stakeholder = new Stakeholder();
     this.updateFromDto(stakeholderDto, stakeholder, analyses);
     return stakeholder;
