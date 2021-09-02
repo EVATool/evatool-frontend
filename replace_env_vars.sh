@@ -7,5 +7,5 @@ find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,AUTH_ENABLED,'"$AUT
 find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,AUTH_MULTI_TENANCY_ENABLED,'"$AUTH_MULTI_TENANCY_ENABLED"',g' {} \;
 find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,AUTH_REGISTRATION_ENABLED,'"$AUTH_REGISTRATION_ENABLED"',g' {} \;
 find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,AUTH_PORT,'"$AUTH_PORT"',g' {} \;
-find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,LOG_LEVEL,'"$LOG_LEVEL"',g' {} \;
+find '/usr/share/nginx/html' -name '*.js' -exec sed -i -e 's,FRONTEND_LOG_LEVEL,'"$FRONTEND_LOG_LEVEL"',g' {} \;
 nginx -g "daemon off;"

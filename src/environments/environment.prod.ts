@@ -14,5 +14,5 @@ export const environment = {
   authPort: 'AUTH_PORT',
   // @ts-ignore
   authRegistrationEnabled: AUTH_REGISTRATION_ENABLED,
-  logLevel: 'LOG_LEVEL'
+  logLevel: 'FRONTEND_LOG_LEVEL'
 };
