@@ -50,6 +50,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit, OnDestroy {
         snackBarRef.onAction()
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(() => {
+            this.logger.info(this, 'User wants to see the impacts referencing the value');
             this.crossUI.userWantsToSeeValueReferencedByImpacts.emit(event);
           });
       });
@@ -106,7 +107,7 @@ export class ValueTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updateValue(value: Value): void {
-    this.logger.info(this, 'Update Value');
+    this.logger.trace(this, 'Update Value');
     this.valueDataService.updateValue(value);
   }
 

@@ -25,7 +25,7 @@ export class ImpactEditComponent {
   }
 
   tabActivated() {
-    this.logger.info(this, 'Tab activated');
+    this.logger.debug(this, 'Tab activated');
     //this.table?.reload();
   }
 }

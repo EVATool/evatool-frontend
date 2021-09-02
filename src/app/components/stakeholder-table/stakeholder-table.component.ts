@@ -111,13 +111,13 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   scrollToTop(): void {
-    this.logger.info(this, 'Scroll To Top');
+    this.logger.trace(this, 'Scroll To Top');
     const options = {top: 0, duration: 250};
     this.scrollbarRef.scrollTo(options);
   }
 
   initSorting(): void {
-    this.logger.info(this, 'Init Sorting');
+    this.logger.trace(this, 'Init Sorting');
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (stakeholder, property) => {
       return stakeholder[property];
@@ -125,7 +125,7 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   initFiltering(): void {
-    this.logger.info(this, 'Init Filtering');
+    this.logger.trace(this, 'Init Filtering');
     this.tableDataSource.filterPredicate = this.createFilterPredicate();
   }
 
@@ -157,7 +157,7 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   updateFilter(event: StakeholderTableFilterEvent): void {
-    this.logger.info(this, 'Filter Changed');
+    this.logger.trace(this, 'Filter Changed');
     this.highlightFilter = event.highlight;
     this.tableDataSource.filter = JSON.stringify(event);
   }

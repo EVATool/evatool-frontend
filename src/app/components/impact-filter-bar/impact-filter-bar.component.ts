@@ -111,7 +111,7 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
   }
 
   highlightTextChange(event: string): void {
-    this.logger.info(this, 'Highlight Text Changed');
+    this.logger.debug(this, 'Highlight Text Changed');
     this.impactTableFilterEvent.highlight = event;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.impactTableFilterEvent);
@@ -119,7 +119,7 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
   }
 
   stakeholderFilterChanged(event: string[]): void {
-    this.logger.info(this, 'Slider Filter Changed (Stakeholder)');
+    this.logger.trace(this, 'Slider Filter Changed (Stakeholder)');
     this.impactTableFilterEvent.stakeholder = event;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.impactTableFilterEvent);
@@ -127,7 +127,7 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
   }
 
   valueFilterChanged(event: string[]): void {
-    this.logger.info(this, 'Slider Filter Changed (Value)');
+    this.logger.trace(this, 'Slider Filter Changed (Value)');
     this.impactTableFilterEvent.value = event;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.impactTableFilterEvent);
@@ -135,7 +135,7 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
   }
 
   meritFilterChanged(event: SliderFilterSettings): void {
-    this.logger.info(this, 'Slider Filter Changed');
+    this.logger.trace(this, 'Slider Filter Changed');
     this.impactTableFilterEvent.merit = event;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.impactTableFilterEvent);
@@ -143,7 +143,7 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
   }
 
   clearFilter(): void {
-    this.logger.info(this, 'Clearing Filtering');
+    this.logger.trace(this, 'Clearing Filtering');
     this.suppressChildEvent = true;
 
     this.highlightFilter.clearFilter();

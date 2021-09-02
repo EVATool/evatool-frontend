@@ -77,7 +77,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   tabChanged(event: number): void {
-    this.logger.info(this, 'Selected Tab Changed to ' + event);
+    this.logger.debug(this, 'Selected Tab Changed to ' + event);
 
     switch (event) {
       case 0:

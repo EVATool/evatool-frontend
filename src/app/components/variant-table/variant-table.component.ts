@@ -50,6 +50,7 @@ export class VariantTableComponent implements OnInit, AfterViewInit, OnDestroy {
         snackBarRef.onAction()
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(() => {
+            this.logger.info(this, 'User wants to see the requirements referencing the variant');
             this.crossUI.userWantsToSeeVariantReferencedByRequirements.emit(event);
           });
       });

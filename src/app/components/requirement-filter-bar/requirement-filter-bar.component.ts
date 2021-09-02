@@ -148,7 +148,7 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
   }
 
   highlightTextChange(event: string): void {
-    this.logger.info(this, 'Highlight Text Changed');
+    this.logger.trace(this, 'Highlight Text Changed');
     this.requirementTableFilterEvent.highlight = event;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.requirementTableFilterEvent);

@@ -84,7 +84,7 @@
 
         <td mat-cell *matCellDef='let impact'>
           <div class="impact-slider-container">
-            <app-impact-slider [deadzone]='0.3' [(value)]="impact.merit"
+            <app-impact-slider [deadZone]="0.3" [(value)]="impact.merit"
                                (sliderValueChange)="updateImpact(impact)">
             </app-impact-slider>
           </div>
