@@ -1,8 +1,6 @@
 {
-  "TITLE": "EvaTool",
   "HOME": {
-    "NEW_ANALYSIS_BUTTON_TEXT": "New"
+    "NEW_ANALYSIS_BUTTON": "New"
   },
-  "ERROR": {
-  }
+  "TITLE": "EvaTool"
 }

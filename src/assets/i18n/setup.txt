@@ -1,0 +1,2 @@
+Software used to manage translation files:
+https://github.com/jcbvm/i18n-editor
