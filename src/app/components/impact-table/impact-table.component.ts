@@ -15,9 +15,7 @@ import {ImpactTableFilterEvent} from '../impact-filter-bar/ImpactTableFilterEven
 import {ValueDialogComponent} from '../value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
-import {
-  CrossUiEventService
-} from '../../services/event/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
@@ -195,14 +193,19 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.snackBar.open(message, action, {duration: 5000});
     } else if (this.valueDataService.values.length === 0) {
       const message = 'There must be at least one value for an impact to exist';
-      const action = '';
-      this.snackBar.open(message, action, {duration: 5000});
+      const action = 'Create';
+      this.snackBar.open(message, action, {duration: 5000}).onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.openValuesDialog();
+        });
+    } else {
+      const impact = this.impactDataService.createDefaultImpact(
+        this.analysisDataService.currentAnalysis,
+        this.stakeholderDataService.stakeholders[0],
+        this.valueDataService.values[0]);
+      this.impactDataService.createImpact(impact);
     }
-    const impact = this.impactDataService.createDefaultImpact(
-      this.analysisDataService.currentAnalysis,
-      this.stakeholderDataService.stakeholders[0],
-      this.valueDataService.values[0]);
-    this.impactDataService.createImpact(impact);
   }
 
   updateImpact(impact: Impact): void {

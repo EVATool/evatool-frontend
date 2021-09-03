@@ -71,7 +71,6 @@ export class CrossUiEventService implements OnDestroy {
   @Output() usernameNotFound: EventEmitter<LoginUsernameNotFoundEvent> = new EventEmitter();
   @Output() analysisNotFound: EventEmitter<AnalysisNotFoundEvent> = new EventEmitter();
 
-  // TODO redo
   @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
   @Output() stakeholderDeletionFailed: EventEmitter<StakeholderDeletionFailedEvent> = new EventEmitter();
   @Output() valueDeletionFailed: EventEmitter<ValueDeletionFailedEvent> = new EventEmitter();
@@ -239,6 +238,7 @@ export class CrossUiEventService implements OnDestroy {
               const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
               if (impact && deltas) {
                 this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementDeltasEvent(impact, deltas));
+                this.impactDeletionFailed.emit(new ImpactDeletionFailedEvent(impact, false));
               }
               break;
 
@@ -247,6 +247,7 @@ export class CrossUiEventService implements OnDestroy {
               const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (stakeholder && impactsStakeholder) {
                 this.stakeholderReferencedByImpacts.emit(new StakeholderReferencedByImpactsEvent(stakeholder, impactsStakeholder));
+                this.stakeholderDeletionFailed.emit(new StakeholderDeletionFailedEvent(stakeholder, false));
               }
               break;
 
@@ -255,6 +256,7 @@ export class CrossUiEventService implements OnDestroy {
               const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (value && impactsValue) {
                 this.valueReferencedByImpacts.emit(new ValueReferencedByImpactsEvent(value, impactsValue));
+                this.valueDeletionFailed.emit(new ValueDeletionFailedEvent(value, false));
               }
               break;
 
@@ -263,6 +265,7 @@ export class CrossUiEventService implements OnDestroy {
               const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
               if (variant && requirements) {
                 this.variantReferencedByRequirements.emit(new VariantReferencedByRequirementsEvent(variant, requirements));
+                this.variantDeletionFailed.emit(new VariantDeletionFailedEvent(variant, false));
               }
               break;
 
