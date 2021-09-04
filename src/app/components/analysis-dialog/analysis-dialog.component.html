@@ -53,6 +53,7 @@
           <div>
             <mat-checkbox *ngIf="!isEditingAnalysis"
                           [(ngModel)]="useTemplate"
+                          [matTooltip]="'Copies the values and stakeholders from the template to the new analysis'"
                           name="useTemplate">
               Use Template
             </mat-checkbox>
