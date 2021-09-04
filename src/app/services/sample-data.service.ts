@@ -212,7 +212,7 @@ export class SampleDataService {
       id: '1',
       prefixSequenceId: 'IND1',
       name: 'Retep Groß',
-      priority: 'LOW',
+      priority: 'ONE',
       level: 'INDIVIDUAL',
       impacted: 0.4,
       analysisId: '1'
@@ -221,13 +221,13 @@ export class SampleDataService {
       id: '2',
       prefixSequenceId: 'IND2',
       name: 'Leinad Lang',
-      priority: 'HIGH',
+      priority: 'THREE',
       level: 'INDIVIDUAL',
       impacted: -0.7,
       analysisId: '1'
     }
   ];
-  public readonly stakeholderPriorities: string[] = ['LOW', 'MEDIUM', 'HIGH', 'VERY HIGH'];
+  public readonly stakeholderPriorities: string[] = ['ONE', 'TWO', 'THREE', 'FOUR'];
   public readonly stakeholderLevels: string[] = ['INDIVIDUAL', 'ORGANIZATION', 'SOCIETY'];
 
   public readonly values: Value[] = [];

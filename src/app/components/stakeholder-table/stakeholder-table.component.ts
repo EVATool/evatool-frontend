@@ -8,12 +8,9 @@ import {LogService} from '../../services/log.service';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {MatSort} from '@angular/material/sort';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
-import {HttpMarshallService} from '../../services/http/http-marshall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
-import {
-  CrossUiEventService
-} from '../../services/event/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
@@ -120,7 +117,16 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
     this.logger.trace(this, 'Init Sorting');
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (stakeholder, property) => {
-      return stakeholder[property];
+      switch (property) {
+        case 'priority':
+          const stakeholderPriority = stakeholder[property];
+          return -this.stakeholderData.stakeholderPriorities.indexOf(stakeholderPriority);
+        case 'level':
+          const stakeholderLevel = stakeholder[property];
+          return -this.stakeholderData.stakeholderLevels.indexOf(stakeholderLevel);
+        default:
+          return stakeholder[property];
+      }
     };
   }
 
