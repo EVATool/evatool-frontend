@@ -4,10 +4,8 @@ import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {StakeholderEditComponent} from '../stakeholder-edit/stakeholder-edit.component';
 import {ImpactEditComponent} from '../impact-edit/impact-edit.component';
-import {
-  CrossUiEventService
-} from '../../services/event/cross-ui-event.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
 import * as uuid from 'uuid';
 import {Subject} from 'rxjs';
@@ -69,6 +67,8 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
     if (isDevMode()) {
       this.tabGroup.selectedIndex = 0;
     }
+
+    this.activateTabFromUrl();
   }
 
   ngOnDestroy(): void {
@@ -78,27 +78,49 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   tabChanged(event: number): void {
     this.logger.debug(this, 'Selected Tab Changed to ' + event);
-
+    this.putTabInUrl(event);
     switch (event) {
       case 0:
-
         break;
 
       case 1:
-
         break;
 
       case 2:
-
         break;
 
       case 3:
-
         break;
 
       default:
         this.logger.warn(this, 'Unknown tab');
         break;
     }
+  }
+
+  activateTabFromUrl(): void {
+    const tab = this.route.snapshot.queryParams?.tab;
+    if (!tab) {
+      return;
+    }
+
+    for (let i = 0; i < this.tabGroup._allTabs.length; i++) {
+      const tabName = this.tabGroup._allTabs.get(i)?.textLabel;
+      if (tabName === tab) {
+        this.tabGroup.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  putTabInUrl(index: number): void {
+    const currentTabParams: Params = {tab: this.tabGroup._allTabs.get(index)?.textLabel};
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: currentTabParams,
+        queryParamsHandling: 'merge',
+      });
   }
 }
