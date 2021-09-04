@@ -19,9 +19,7 @@ import {VariantDataService} from '../../services/data/variant-data.service';
 import {Variant} from '../../model/Variant';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
-import {
-  CrossUiEventService
-} from '../../services/event/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';

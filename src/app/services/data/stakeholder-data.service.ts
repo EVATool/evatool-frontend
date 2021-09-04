@@ -9,7 +9,6 @@ import {Analysis} from '../../model/Analysis';
 import {StakeholderDto} from '../../dto/StakeholderDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {RequirementDelta} from '../../model/RequirementDelta';
 
 @Injectable({
   providedIn: 'root'

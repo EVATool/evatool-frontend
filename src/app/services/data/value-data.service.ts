@@ -9,7 +9,6 @@ import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {Stakeholder} from '../../model/Stakeholder';
 
 @Injectable({
   providedIn: 'root'

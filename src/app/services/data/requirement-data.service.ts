@@ -10,7 +10,6 @@ import {RequirementDto} from '../../dto/RequirementDto';
 import {VariantDataService} from './variant-data.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {Impact} from '../../model/Impact';
 
 @Injectable({
   providedIn: 'root'

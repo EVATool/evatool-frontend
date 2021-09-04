@@ -7,7 +7,6 @@ import {ImpactDataService} from './data/impact-data.service';
 import {RequirementDeltaDataService} from './data/requirement-delta-data.service';
 import {VariantDataService} from './data/variant-data.service';
 import {CrossUiEventService} from './event/cross-ui-event.service';
-import {AuthService} from './auth/auth.service';
 import {LogService} from './log.service';
 
 @Injectable({
