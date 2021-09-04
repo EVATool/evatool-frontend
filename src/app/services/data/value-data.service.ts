@@ -49,7 +49,6 @@ export class ValueDataService extends DataService implements OnDestroy {
         this.valueRest.getValuesByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((valueDtoList: ValueDto[]) => {
-            this.values = [];
             const tempValues: Value[] = [];
             valueDtoList.forEach(valueDto => {
               tempValues.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));

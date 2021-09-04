@@ -47,7 +47,6 @@ export class VariantDataService extends DataService implements OnDestroy {
         this.variantRest.getVariantsByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((variantDtoList: VariantDto[]) => {
-            this.variants = [];
             const tempVariants: Value[] = [];
             variantDtoList.forEach(variantDto => {
               tempVariants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));

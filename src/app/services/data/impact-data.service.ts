@@ -70,7 +70,6 @@ export class ImpactDataService extends DataService implements OnDestroy {
     this.impactRest.getImpactsByAnalysisId(analysisId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((impactDtoList: ImpactDto[]) => {
-        this.impacts = [];
         const tempImpacts: Impact[] = [];
         impactDtoList.forEach(impactDto => {
           tempImpacts.push(this.impactMapper.fromDto(impactDto,

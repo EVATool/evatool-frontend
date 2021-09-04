@@ -46,7 +46,6 @@ export class AnalysisDataService extends DataService implements OnDestroy {
     this.analysisRest.getAnalyses()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysisDtoList: AnalysisDto[]) => {
-        this.analyses = [];
         const tempAnalyses: Analysis[] = [];
         analysisDtoList.forEach(analysisDto => {
           tempAnalyses.push(this.analysisMapper.fromDto(analysisDto));

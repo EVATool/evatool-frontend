@@ -70,7 +70,6 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
     this.requirementDeltaRest.getRequirementDeltasByAnalysisId(analysisId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((deltaDtoList: RequirementDeltaDto[]) => {
-        this.requirementDeltas = [];
         const tempDeltas: RequirementDelta[] = [];
         deltaDtoList.forEach(requirementDeltaDto => {
           tempDeltas.push(this.requirementDeltaMapper.fromDto(

@@ -63,7 +63,6 @@ export class RequirementDataService extends DataService implements OnDestroy {
     this.requirementRest.getRequirementsByAnalysisId(analysisId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((requirementDtoList: RequirementDto[]) => {
-        this.requirements = [];
         const tempRequirements: Requirement[] = [];
         requirementDtoList.forEach(requirementDto => {
           tempRequirements.push(this.requirementMapper.fromDto(requirementDto,
