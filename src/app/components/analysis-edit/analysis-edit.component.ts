@@ -98,6 +98,8 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  // TODO Use another nested/auxiliary router outlet for the tabs
+  //  Url should look like this: /analysis/UUID/Stakeholders
   activateTabFromUrl(): void {
     const tab = this.route.snapshot.queryParams?.tab;
     if (!tab) {
