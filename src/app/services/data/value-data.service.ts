@@ -9,6 +9,7 @@ import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {Stakeholder} from '../../model/Stakeholder';
 
 @Injectable({
   providedIn: 'root'
@@ -49,10 +50,11 @@ export class ValueDataService extends DataService implements OnDestroy {
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((valueDtoList: ValueDto[]) => {
             this.values = [];
+            const tempValues: Value[] = [];
             valueDtoList.forEach(valueDto => {
-              this.values.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
+              tempValues.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
             });
-            this.values = this.sortDefault(this.values);
+            this.values = this.sortDefault(tempValues);
             this.valuesLoaded = true;
             this.loadedValues.emit(this.values);
             this.logger.debug(this, 'Values loaded');

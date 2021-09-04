@@ -9,6 +9,7 @@ import {Analysis} from '../../model/Analysis';
 import {VariantDto} from '../../dto/VariantDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {Value} from '../../model/Value';
 
 @Injectable({
   providedIn: 'root'
@@ -47,10 +48,11 @@ export class VariantDataService extends DataService implements OnDestroy {
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((variantDtoList: VariantDto[]) => {
             this.variants = [];
+            const tempVariants: Value[] = [];
             variantDtoList.forEach(variantDto => {
-              this.variants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));
+              tempVariants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));
             });
-            this.variants = this.sortDefault(this.variants);
+            this.variants = this.sortDefault(tempVariants);
             this.variantsLoaded = true;
             this.loadedVariants.emit(this.variants);
             this.logger.debug(this, 'Variants loaded');

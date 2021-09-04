@@ -71,13 +71,14 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((deltaDtoList: RequirementDeltaDto[]) => {
         this.requirementDeltas = [];
+        const tempDeltas: RequirementDelta[] = [];
         deltaDtoList.forEach(requirementDeltaDto => {
-          this.requirementDeltas.push(this.requirementDeltaMapper.fromDto(
+          tempDeltas.push(this.requirementDeltaMapper.fromDto(
             requirementDeltaDto,
             this.requirementData.requirements,
             this.impactData.impacts));
         });
-        this.requirementDeltas = this.sortDefault(this.requirementDeltas);
+        this.requirementDeltas = this.sortDefault(tempDeltas);
         this.requirementDeltasLoaded = true;
         this.loadedRequirementDeltas.emit(this.requirementDeltas);
         this.logger.debug(this, 'RequirementDeltas loaded');

@@ -9,6 +9,7 @@ import {Analysis} from '../../model/Analysis';
 import {StakeholderDto} from '../../dto/StakeholderDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {RequirementDelta} from '../../model/RequirementDelta';
 
 @Injectable({
   providedIn: 'root'
@@ -51,10 +52,11 @@ export class StakeholderDataService extends DataService implements OnDestroy {
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((stakeholderDtoList: StakeholderDto[]) => {
             this.stakeholders = [];
+            const tempStakeholders: Stakeholder[] = [];
             stakeholderDtoList.forEach(stakeholderDto => {
-              this.stakeholders.push(this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]));
+              tempStakeholders.push(this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]));
             });
-            this.stakeholders = this.sortDefault(this.stakeholders);
+            this.stakeholders = this.sortDefault(tempStakeholders);
             this.stakeholdersLoaded = true;
             this.loadedStakeholders.emit(this.stakeholders);
             this.logger.debug(this, 'Stakeholders loaded');

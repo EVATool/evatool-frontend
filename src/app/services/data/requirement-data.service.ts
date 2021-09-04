@@ -10,6 +10,7 @@ import {RequirementDto} from '../../dto/RequirementDto';
 import {VariantDataService} from './variant-data.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {Impact} from '../../model/Impact';
 
 @Injectable({
   providedIn: 'root'
@@ -63,12 +64,13 @@ export class RequirementDataService extends DataService implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((requirementDtoList: RequirementDto[]) => {
         this.requirements = [];
+        const tempRequirements: Requirement[] = [];
         requirementDtoList.forEach(requirementDto => {
-          this.requirements.push(this.requirementMapper.fromDto(requirementDto,
+          tempRequirements.push(this.requirementMapper.fromDto(requirementDto,
             [this.analysisData.currentAnalysis],
             this.variantData.variants));
         });
-        this.requirements = this.sortDefault(this.requirements);
+        this.requirements = this.sortDefault(tempRequirements);
         this.requirementsLoaded = true;
         this.loadedRequirements.emit(this.requirements);
         this.logger.debug(this, 'Requirements loaded');

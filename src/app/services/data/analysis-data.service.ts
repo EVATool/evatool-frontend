@@ -47,10 +47,11 @@ export class AnalysisDataService extends DataService implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysisDtoList: AnalysisDto[]) => {
         this.analyses = [];
+        const tempAnalyses: Analysis[] = [];
         analysisDtoList.forEach(analysisDto => {
-          this.analyses.push(this.analysisMapper.fromDto(analysisDto));
+          tempAnalyses.push(this.analysisMapper.fromDto(analysisDto));
         });
-        this.analyses = this.sortDefault(this.analyses);
+        this.analyses = this.sortDefault(tempAnalyses);
         this.loadedAnalyses.emit(this.analyses);
         this.logger.debug(this, 'Analyses loaded');
       });
