@@ -10,6 +10,7 @@ import {RequirementDto} from '../../dto/RequirementDto';
 import {VariantDataService} from './variant-data.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,11 @@ export class RequirementDataService extends DataService implements OnDestroy {
       .subscribe(() => {
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
+  }
+
+  clearData(): void {
+    this.requirementsLoaded = false;
+    this.requirements = [];
   }
 
   loadIfChildrenLoaded(analysisId: string): void {

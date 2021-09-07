@@ -59,6 +59,11 @@ export class VariantDataService extends DataService implements OnDestroy {
       });
   }
 
+  clearData(): void {
+    this.variantsLoaded = false;
+    this.variants = [];
+  }
+
   createVariant(variant: Variant): void {
     this.variantRest.createVariant(this.variantMapper.toDto(variant))
       .pipe(takeUntil(this.ngUnsubscribe))

@@ -9,6 +9,7 @@ import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,11 @@ export class ValueDataService extends DataService implements OnDestroy {
             this.loadedValueTypes.emit(this.valueTypes);
           });
       });
+  }
+
+  clearData(): void {
+    this.valuesLoaded = false;
+    this.values = [];
   }
 
   createValue(value: Value): void {

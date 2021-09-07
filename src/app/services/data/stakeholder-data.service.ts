@@ -9,6 +9,7 @@ import {Analysis} from '../../model/Analysis';
 import {StakeholderDto} from '../../dto/StakeholderDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,11 @@ export class StakeholderDataService extends DataService implements OnDestroy {
             this.loadedStakeholderLevels.emit(this.stakeholderLevels);
           });
       });
+  }
+
+  clearData(): void {
+    this.stakeholdersLoaded = false;
+    this.stakeholders = [];
   }
 
   createStakeholder(stakeholder: Stakeholder): void {

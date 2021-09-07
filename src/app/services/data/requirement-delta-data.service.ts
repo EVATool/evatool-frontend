@@ -13,6 +13,7 @@ import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,11 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
       .subscribe(() => {
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
+  }
+
+  clearData(): void {
+    this.requirementDeltasLoaded = false;
+    this.requirementDeltas = [];
   }
 
   loadIfChildrenLoaded(analysisId: string): void {

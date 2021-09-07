@@ -13,6 +13,7 @@ import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,11 @@ export class ImpactDataService extends DataService implements OnDestroy {
       .subscribe(() => {
         this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
+  }
+
+  clearData(): void {
+    this.impactsLoaded = false;
+    this.impacts = [];
   }
 
   loadIfChildrenLoaded(analysisId: string): void {

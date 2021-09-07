@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
@@ -20,6 +20,8 @@ import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/eve
   styleUrls: ['./analysis-edit.component.scss']
 })
 export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @Output()
 
   private ngUnsubscribe = new Subject();
 
@@ -72,6 +74,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.crossUI.userLeftCurrentAnalysisEdit.emit();
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
@@ -100,6 +103,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // TODO Use another nested/auxiliary router outlet for the tabs
   //  Url should look like this: /analysis/UUID/Stakeholders
+  // TODO Tab change on reload causes tabs to be briefly shown when the tab change animation plays
   activateTabFromUrl(): void {
     const tab = this.route.snapshot.queryParams?.tab;
     if (!tab) {

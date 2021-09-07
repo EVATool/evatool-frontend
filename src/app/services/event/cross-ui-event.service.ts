@@ -54,7 +54,7 @@ export class CrossUiEventService implements OnDestroy {
   // Functional error.
   // #####################
 
-  // 404.
+  // 400.
   @Output() importExportJsonInvalid: EventEmitter<ImportExportJsonInvalidEvent> = new EventEmitter();
   @Output() usernameInvalid: EventEmitter<UsernameInvalidEvent> = new EventEmitter();
   @Output() realmInvalid: EventEmitter<RealmInvalidEvent> = new EventEmitter();
@@ -102,6 +102,8 @@ export class CrossUiEventService implements OnDestroy {
   @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
   @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
+
+  @Output() userLeftCurrentAnalysisEdit: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private httpMarshall: HttpMarshallService,
               private analysisData: AnalysisDataService,
@@ -297,5 +299,15 @@ export class CrossUiEventService implements OnDestroy {
           }
         }
       });
+
+    // Subscribe to own events that might be fired by UI components.
+    this.userLeftCurrentAnalysisEdit.subscribe(() => {
+      this.requirementDeltaData.clearData();
+      this.requirementData.clearData();
+      this.impactData.clearData();
+      this.stakeholderData.clearData();
+      this.valueData.clearData();
+      this.variantData.clearData();
+    });
   }
 }
