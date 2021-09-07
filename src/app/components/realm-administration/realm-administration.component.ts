@@ -8,6 +8,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {LoginUsernameNotFoundEvent} from '../../services/event/events/http404/LoginUsernameNotFoundEvent';
+import {InvalidCredentialsEvent} from '../../services/event/events/http401/InvalidCredentialsEvent';
 
 @Component({
   selector: 'app-realm-administration',
@@ -41,8 +42,15 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit, OnDe
 
     this.crossUI.invalidCredentials
       .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((invalidCredentialsEvent: InvalidCredentialsEvent) => {
+        const message = 'Invalid credentials (remaining login attempts: ' + invalidCredentialsEvent.remainingLoginAttempts + ')';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.remoteIpBlocked
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        const message = 'Invalid credentials';
+        const message = 'You are blocked from further login attempts';
         this.snackBar.open(message, '', {duration: 5000});
       });
 

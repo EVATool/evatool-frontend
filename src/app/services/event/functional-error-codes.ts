@@ -13,6 +13,7 @@ export class FunctionalErrorCodes {
 
   // 403 Forbidden codes.
   public static readonly CROSS_REALM_ACCESS = 403_001;
+  public static readonly REMOTE_IP_BLOCKED = 403_002;
 
   // 404 Not found codes.
   public static readonly LOGIN_REALM_NOT_FOUND = 404_001;

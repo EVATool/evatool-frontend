@@ -11,6 +11,7 @@ import {takeUntil} from 'rxjs/operators';
 import {LoginRealmNotFoundEvent} from '../../services/event/events/http404/LoginRealmNotFoundEvent';
 import {LoginUsernameNotFoundEvent} from '../../services/event/events/http404/LoginUsernameNotFoundEvent';
 import {UsernameInvalidEvent} from '../../services/event/events/http400/UsernameInvalidEvent';
+import {InvalidCredentialsEvent} from '../../services/event/events/http401/InvalidCredentialsEvent';
 
 @Component({
   selector: 'app-login',
@@ -64,8 +65,15 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.crossUI.invalidCredentials
       .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((invalidCredentialsEvent: InvalidCredentialsEvent) => {
+        const message = 'Invalid credentials (remaining login attempts: ' + invalidCredentialsEvent.remainingLoginAttempts + ')';
+        this.snackBar.open(message, '', {duration: 5000});
+      });
+
+    this.crossUI.remoteIpBlocked
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        const message = 'Invalid credentials';
+        const message = 'You are blocked from further login attempts';
         this.snackBar.open(message, '', {duration: 5000});
       });
 

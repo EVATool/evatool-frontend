@@ -65,6 +65,7 @@ export class CrossUiEventService implements OnDestroy {
 
   // 403.
   @Output() crossRealmAccess: EventEmitter<CrossRealmAccessEvent> = new EventEmitter();
+  @Output() remoteIpBlocked: EventEmitter<void> = new EventEmitter();
 
   // 404.
   @Output() realmNotFound: EventEmitter<LoginRealmNotFoundEvent> = new EventEmitter();
@@ -153,12 +154,17 @@ export class CrossUiEventService implements OnDestroy {
 
             // 401.
             case FunctionalErrorCodes.INVALID_CREDENTIALS:
-              this.invalidCredentials.emit(new InvalidCredentialsEvent());
+              const remainingLoginAttempts = httpInfo.tag.remainingLoginAttempts;
+              this.invalidCredentials.emit(new InvalidCredentialsEvent(remainingLoginAttempts));
               break;
 
             // 403.
             case FunctionalErrorCodes.CROSS_REALM_ACCESS:
               this.crossRealmAccess.emit(new CrossRealmAccessEvent());
+              break;
+
+            case FunctionalErrorCodes.REMOTE_IP_BLOCKED:
+              this.remoteIpBlocked.emit();
               break;
 
             // 404.
