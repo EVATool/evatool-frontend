@@ -8,16 +8,13 @@ import {LogService} from '../../services/log.service';
 import {NgScrollbar} from 'ngx-scrollbar';
 import {MatSort} from '@angular/material/sort';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
-import {HttpMarshallService} from '../../services/http/http-marshall.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
-import {
-  CrossUiEventService
-} from '../../services/event/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
-import {StakeholderDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {StakeholderDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-stakeholder-table',
@@ -111,21 +108,30 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   scrollToTop(): void {
-    this.logger.info(this, 'Scroll To Top');
+    this.logger.trace(this, 'Scroll To Top');
     const options = {top: 0, duration: 250};
     this.scrollbarRef.scrollTo(options);
   }
 
   initSorting(): void {
-    this.logger.info(this, 'Init Sorting');
+    this.logger.trace(this, 'Init Sorting');
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (stakeholder, property) => {
-      return stakeholder[property];
+      switch (property) {
+        case 'priority':
+          const stakeholderPriority = stakeholder[property];
+          return -this.stakeholderData.stakeholderPriorities.indexOf(stakeholderPriority);
+        case 'level':
+          const stakeholderLevel = stakeholder[property];
+          return -this.stakeholderData.stakeholderLevels.indexOf(stakeholderLevel);
+        default:
+          return stakeholder[property];
+      }
     };
   }
 
   initFiltering(): void {
-    this.logger.info(this, 'Init Filtering');
+    this.logger.trace(this, 'Init Filtering');
     this.tableDataSource.filterPredicate = this.createFilterPredicate();
   }
 
@@ -157,7 +163,7 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   updateFilter(event: StakeholderTableFilterEvent): void {
-    this.logger.info(this, 'Filter Changed');
+    this.logger.trace(this, 'Filter Changed');
     this.highlightFilter = event.highlight;
     this.tableDataSource.filter = JSON.stringify(event);
   }

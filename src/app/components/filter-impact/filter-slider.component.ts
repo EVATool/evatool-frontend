@@ -23,12 +23,12 @@ export class FilterSliderComponent {
   }
 
   sliderFilterValueChanged(event: MatSliderChange): void {
-    this.logger.info(this, 'Filter Slider Changed: ' + event.value);
+    this.logger.debug(this, 'Filter Slider Changed: ' + event.value);
     this.filteringChanged();
   }
 
   filteringChanged(): void {
-    this.logger.info(this, 'Filtering Changed');
+    this.logger.debug(this, 'Filtering Changed');
     this.slider.sliderFilterSettings.sliderFilterType = this.filterType;
     this.slider.sliderFilterSettings.sliderFilterBoundary = this.filterBoundary;
     this.slider.sliderFilterSettings.sliderFilterValues = [this.slider.value, this.slider.valueSecond];
@@ -37,7 +37,7 @@ export class FilterSliderComponent {
   }
 
   public clearFilter(): void {
-    this.logger.info(this, 'Clearing Filtering');
+    this.logger.debug(this, 'Clearing Filtering');
     this.filterType = SliderFilterType.Between;
     this.filterBoundary = SliderFilterBoundary.Include;
     this.slider.value = 1;

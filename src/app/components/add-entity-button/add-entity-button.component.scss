@@ -6,6 +6,11 @@
   margin-left: 10px;
   margin-bottom: 10px;
 
+  button{
+    transition: none !important;
+    box-shadow: none !important;
+  }
+
   .add-entity-text-container {
     margin-left: 70px;
     margin-top: -35px;

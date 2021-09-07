@@ -3,17 +3,21 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
+import {LogService} from '../log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {
+  constructor(private logger: LogService,
+              private authService: AuthService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.logger.trace(this, 'intercept');
     if (!environment.authEnabled || this.isAuthUrl(req.url)) { // Leave requests to auth server alone.
+      this.logger.debug(this, 'Leaving request alone');
       return next.handle(req);
     } else {
       let authReq = req;

@@ -1,10 +1,10 @@
-import {Impact} from '../../model/Impact';
-import {RequirementDelta} from '../../model/RequirementDelta';
-import {Stakeholder} from '../../model/Stakeholder';
-import {Value} from '../../model/Value';
-import {Variant} from '../../model/Variant';
-import {Requirement} from '../../model/Requirement';
-import {Analysis} from '../../model/Analysis';
+import {Impact} from '../../../model/Impact';
+import {RequirementDelta} from '../../../model/RequirementDelta';
+import {Stakeholder} from '../../../model/Stakeholder';
+import {Value} from '../../../model/Value';
+import {Variant} from '../../../model/Variant';
+import {Requirement} from '../../../model/Requirement';
+import {Analysis} from '../../../model/Analysis';
 
 export abstract class DeletionFailedEvent<T> {
   entity!: T;

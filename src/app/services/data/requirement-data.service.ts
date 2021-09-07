@@ -10,6 +10,7 @@ import {RequirementDto} from '../../dto/RequirementDto';
 import {VariantDataService} from './variant-data.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,11 @@ export class RequirementDataService extends DataService implements OnDestroy {
       });
   }
 
+  clearData(): void {
+    this.requirementsLoaded = false;
+    this.requirements = [];
+  }
+
   loadIfChildrenLoaded(analysisId: string): void {
     if (!this.variantData.variantsLoaded) {
       this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
@@ -62,16 +68,16 @@ export class RequirementDataService extends DataService implements OnDestroy {
     this.requirementRest.getRequirementsByAnalysisId(analysisId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((requirementDtoList: RequirementDto[]) => {
-        this.requirements = [];
+        const tempRequirements: Requirement[] = [];
         requirementDtoList.forEach(requirementDto => {
-          this.requirements.push(this.requirementMapper.fromDto(requirementDto,
+          tempRequirements.push(this.requirementMapper.fromDto(requirementDto,
             [this.analysisData.currentAnalysis],
             this.variantData.variants));
         });
-        this.requirements = this.sortDefault(this.requirements);
+        this.requirements = this.sortDefault(tempRequirements);
         this.requirementsLoaded = true;
         this.loadedRequirements.emit(this.requirements);
-        this.logger.info(this, 'Requirements loaded');
+        this.logger.debug(this, 'Requirements loaded');
       });
   }
 
@@ -84,7 +90,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
           this.variantData.variants);
         this.requirements.push(createdRequirement);
         this.createdRequirement.emit(createdRequirement);
-        this.logger.info(this, 'Requirement created');
+        this.logger.debug(this, 'Requirement created');
       });
   }
 
@@ -97,7 +103,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
           [this.analysisData.currentAnalysis],
           this.variantData.variants);
         this.updatedRequirement.emit(requirement);
-        this.logger.info(this, 'Requirement updated');
+        this.logger.debug(this, 'Requirement updated');
       });
   }
 
@@ -108,7 +114,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
         const index: number = this.requirements.indexOf(requirement, 0);
         this.requirements.splice(index, 1);
         this.deletedRequirement.emit(requirement);
-        this.logger.info(this, 'Requirement deleted');
+        this.logger.debug(this, 'Requirement deleted');
       });
   }
 

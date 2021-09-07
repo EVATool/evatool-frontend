@@ -19,7 +19,7 @@ export class ValueRestService extends RestService {
 
   getValuesByAnalysisId(analysisId: string): Observable<ValueDto[]> {
     const url = this.valuesUrl + this.byAnalysisId + analysisId;
-    this.logger.info(this, 'Http get to: ' + url);
+    this.logger.debug(this, 'Http get to: ' + url);
     if (this.testing) {
       return of(this.sampleData.valueDtoList);
     } else {
@@ -29,7 +29,7 @@ export class ValueRestService extends RestService {
 
   createValue(valueDto: ValueDto): Observable<ValueDto> {
     const url = this.valuesUrl;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     if (this.testing) {
       return of(valueDto);
     } else {
@@ -39,7 +39,7 @@ export class ValueRestService extends RestService {
 
   updateValue(valueDto: ValueDto): Observable<ValueDto> {
     const url = this.valuesUrl;
-    this.logger.info(this, 'Http put to: ' + url);
+    this.logger.debug(this, 'Http put to: ' + url);
     if (this.testing) {
       return of(valueDto);
     } else {
@@ -49,7 +49,7 @@ export class ValueRestService extends RestService {
 
   deleteValue(id: string): Observable<void> {
     const url = this.valuesUrl + '/' + id;
-    this.logger.info(this, 'Http delete to: ' + url);
+    this.logger.debug(this, 'Http delete to: ' + url);
     if (this.testing) {
       return of(void 0);
     } else {
@@ -59,7 +59,7 @@ export class ValueRestService extends RestService {
 
   getValueTypes(): Observable<string[]> {
     const url = this.valuesTypesUrl;
-    this.logger.info(this, 'Http get to: ' + url);
+    this.logger.debug(this, 'Http get to: ' + url);
     if (this.testing) {
       return of(this.sampleData.valueTypes);
     } else {

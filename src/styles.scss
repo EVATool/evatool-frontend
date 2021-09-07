@@ -25,6 +25,22 @@ body {
   overflow: hidden;
 }
 
+.mat-tab-group {
+  .mat-tab-header {
+    padding-left: 37px;
+
+    .mat-tab-label-active {
+      .mat-tab-label-content {
+        color: darkblue;
+      }
+    }
+
+    .mat-ink-bar {
+      background-color: darkblue !important;
+    }
+  }
+}
+
 @import 'app/components/stakeholder-impacted/stakeholder-impacted.component';
 @include stakeholder-impact-slider-theme();
 
@@ -67,13 +83,13 @@ body {
     height: 85vh; // Setting the height to 100% makes the mat-table vanish. Using flex with a mat-table seems impossible.
 
     .filter-bar-container {
-      margin: 2% 2% 2% 3%;
+      margin: 2% 2% 2% 20px;
       flex: 0 0 auto;
       width: 100%;
     }
 
     .table-container {
-      margin-left: 5%;
+      margin-left: 35px;
       margin-right: 3%;
       flex: 1 1 auto;
     }
@@ -90,7 +106,7 @@ body {
       width: auto;
       //margin-right: -20px;
 
-      app-search-bar {
+      app-highlight-search {
         width: 15vw;
       }
 
@@ -108,7 +124,10 @@ body {
 
       button {
         margin-bottom: 8px;
+        margin-left: -2px;
         width: 90px;
+        transition: none !important;
+        box-shadow: none !important;
       }
     }
   }
@@ -206,8 +225,8 @@ body {
   .add-entity-button {
     margin-bottom: 25px;
     margin-top: 5px;
-    margin-left: 5px;
     display: inline-block;
+    margin-left: -8px;
   }
 
   .delete-button-container {

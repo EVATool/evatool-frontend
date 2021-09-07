@@ -13,6 +13,7 @@ import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,11 @@ export class ImpactDataService extends DataService implements OnDestroy {
       });
   }
 
+  clearData(): void {
+    this.impactsLoaded = false;
+    this.impacts = [];
+  }
+
   loadIfChildrenLoaded(analysisId: string): void {
     if (!this.stakeholderData.stakeholdersLoaded || !this.valueData.valuesLoaded) {
       this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
@@ -70,17 +76,17 @@ export class ImpactDataService extends DataService implements OnDestroy {
     this.impactRest.getImpactsByAnalysisId(analysisId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((impactDtoList: ImpactDto[]) => {
-        this.impacts = [];
+        const tempImpacts: Impact[] = [];
         impactDtoList.forEach(impactDto => {
-          this.impacts.push(this.impactMapper.fromDto(impactDto,
+          tempImpacts.push(this.impactMapper.fromDto(impactDto,
             [this.analysisData.currentAnalysis],
             this.valueData.values,
             this.stakeholderData.stakeholders));
         });
-        this.impacts = this.sortDefault(this.impacts);
+        this.impacts = this.sortDefault(tempImpacts);
         this.impactsLoaded = true;
         this.loadedImpacts.emit(this.impacts);
-        this.logger.info(this, 'Impacts loaded');
+        this.logger.debug(this, 'Impacts loaded');
       });
   }
 
@@ -94,7 +100,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
           this.stakeholderData.stakeholders);
         this.impacts.push(createdImpact);
         this.createdImpact.emit(createdImpact);
-        this.logger.info(this, 'Impact created');
+        this.logger.debug(this, 'Impact created');
       });
   }
 
@@ -108,7 +114,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
           this.valueData.values,
           this.stakeholderData.stakeholders);
         this.updatedImpact.emit(impact);
-        this.logger.info(this, 'Impact updated');
+        this.logger.debug(this, 'Impact updated');
       });
   }
 
@@ -119,7 +125,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
         const index: number = this.impacts.indexOf(impact, 0);
         this.impacts.splice(index, 1);
         this.deletedImpact.emit(impact);
-        this.logger.info(this, 'Impact deleted');
+        this.logger.debug(this, 'Impact deleted');
       });
   }
 

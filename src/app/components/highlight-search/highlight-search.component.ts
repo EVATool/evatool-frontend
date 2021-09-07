@@ -15,7 +15,7 @@ export class HighlightSearchComponent {
   }
 
   searchTextChange(event: any): void {
-    this.logger.info(this, `Search Bar Text Changed: ${event.target.value}`);
+    this.logger.debug(this, `Search Bar Text Changed: ${event.target.value}`);
     this.highlightTextChanged.emit(event.target.value);
   }
 

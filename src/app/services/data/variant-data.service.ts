@@ -9,6 +9,7 @@ import {Analysis} from '../../model/Analysis';
 import {VariantDto} from '../../dto/VariantDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {Value} from '../../model/Value';
 
 @Injectable({
   providedIn: 'root'
@@ -46,16 +47,21 @@ export class VariantDataService extends DataService implements OnDestroy {
         this.variantRest.getVariantsByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((variantDtoList: VariantDto[]) => {
-            this.variants = [];
+            const tempVariants: Value[] = [];
             variantDtoList.forEach(variantDto => {
-              this.variants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));
+              tempVariants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));
             });
-            this.variants = this.sortDefault(this.variants);
+            this.variants = this.sortDefault(tempVariants);
             this.variantsLoaded = true;
             this.loadedVariants.emit(this.variants);
-            this.logger.info(this, 'Variants loaded');
+            this.logger.debug(this, 'Variants loaded');
           });
       });
+  }
+
+  clearData(): void {
+    this.variantsLoaded = false;
+    this.variants = [];
   }
 
   createVariant(variant: Variant): void {
@@ -65,7 +71,7 @@ export class VariantDataService extends DataService implements OnDestroy {
         const createdVariant = this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]);
         this.variants.push(createdVariant);
         this.createdVariant.emit(createdVariant);
-        this.logger.info(this, 'Variant created');
+        this.logger.debug(this, 'Variant created');
       });
   }
 
@@ -75,7 +81,7 @@ export class VariantDataService extends DataService implements OnDestroy {
       .subscribe((variantDto: VariantDto) => {
         this.variantMapper.updateFromDto(variantDto, variant, [this.analysisData.currentAnalysis]);
         this.updatedVariant.emit(variant);
-        this.logger.info(this, 'Variant updated');
+        this.logger.debug(this, 'Variant updated');
       });
   }
 
@@ -86,7 +92,7 @@ export class VariantDataService extends DataService implements OnDestroy {
         const index: number = this.variants.indexOf(variant, 0);
         this.variants.splice(index, 1);
         this.deletedVariant.emit(variant);
-        this.logger.info(this, 'Variant deleted');
+        this.logger.debug(this, 'Variant deleted');
       });
   }
 

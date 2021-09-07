@@ -10,7 +10,7 @@ import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {AnalysisDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {AnalysisDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-analysis-tile',

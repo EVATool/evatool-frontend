@@ -15,7 +15,7 @@ export class VariantMapperService extends MapperService {
   }
 
   toDto(variant: Variant): VariantDto {
-    this.logger.info(this, 'Mapping Variant to VariantDto');
+    this.logger.debug(this, 'Mapping Variant to VariantDto');
     const variantDto = new VariantDto();
 
     variantDto.id = variant.id;
@@ -30,7 +30,7 @@ export class VariantMapperService extends MapperService {
   }
 
   fromDto(variantDto: any, analyses: Analysis[]): any {
-    this.logger.info(this, 'Mapping VariantDto to Variant');
+    this.logger.debug(this, 'Mapping VariantDto to Variant');
     const variant = new Variant();
     this.updateFromDto(variantDto, variant, analyses);
     return variant;

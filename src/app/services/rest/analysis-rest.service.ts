@@ -19,7 +19,7 @@ export class AnalysisRestService extends RestService {
 
   getAnalysisById(id: string): Observable<AnalysisDto> {
     const url = this.analysesUrl + '/' + id;
-    this.logger.info(this, 'Http get to: ' + url);
+    this.logger.debug(this, 'Http get to: ' + url);
     if (this.testing) {
       return of(this.sampleData.analysesDtoList[+id - 1]);
     } else {
@@ -29,7 +29,7 @@ export class AnalysisRestService extends RestService {
 
   getAnalyses(): Observable<AnalysisDto[]> {
     const url = this.analysesUrl;
-    this.logger.info(this, 'Http get to: ' + url);
+    this.logger.debug(this, 'Http get to: ' + url);
     if (this.testing) {
       return of(this.sampleData.analysesDtoList);
     } else {
@@ -39,7 +39,7 @@ export class AnalysisRestService extends RestService {
 
   deepCopy(templateAnalysisId: string, analysisDto: AnalysisDto): Observable<AnalysisDto> {
     const url = this.analysesDeepCopyUrl + '/' + templateAnalysisId;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     if (this.testing) {
       this.logger.error(this, 'OPERATION NOT SUPPORTED IN TEST MODE');
       return of(this.sampleData.analysesDtoList[0]);
@@ -50,7 +50,7 @@ export class AnalysisRestService extends RestService {
 
   createAnalysis(analysisDto: AnalysisDto): Observable<AnalysisDto> {
     const url = this.analysesUrl;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     if (this.testing) {
       return of(analysisDto);
     } else {
@@ -60,7 +60,7 @@ export class AnalysisRestService extends RestService {
 
   updateAnalysis(analysisDto: AnalysisDto): Observable<AnalysisDto> {
     const url = this.analysesUrl;
-    this.logger.info(this, 'Http put to: ' + url);
+    this.logger.debug(this, 'Http put to: ' + url);
     if (this.testing) {
       return of(analysisDto);
     } else {
@@ -70,7 +70,7 @@ export class AnalysisRestService extends RestService {
 
   deleteAnalysis(id: string): Observable<void> {
     const url = this.analysesUrl + '/' + id;
-    this.logger.info(this, 'Http delete to: ' + url);
+    this.logger.debug(this, 'Http delete to: ' + url);
     if (this.testing) {
       return of(void 0);
     } else {

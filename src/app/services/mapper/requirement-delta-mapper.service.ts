@@ -16,7 +16,7 @@ export class RequirementDeltaMapperService extends MapperService {
   }
 
   toDto(requirementDelta: RequirementDelta): RequirementDeltaDto {
-    this.logger.info(this, 'Mapping RequirementDelta to RequirementDeltaDto');
+    this.logger.debug(this, 'Mapping RequirementDelta to RequirementDeltaDto');
     const requirementDeltaDto = new RequirementDeltaDto();
 
     requirementDeltaDto.id = requirementDelta.id;
@@ -32,7 +32,7 @@ export class RequirementDeltaMapperService extends MapperService {
   }
 
   fromDto(requirementDeltaDto: RequirementDeltaDto, requirements: Requirement[], impacts: Impact[]): RequirementDelta {
-    this.logger.info(this, 'Mapping RequirementDeltaDto to RequirementDelta');
+    this.logger.debug(this, 'Mapping RequirementDeltaDto to RequirementDelta');
     const requirementDelta = new RequirementDelta();
     this.updateFromDto(requirementDeltaDto, requirementDelta, requirements, impacts);
     return requirementDelta;

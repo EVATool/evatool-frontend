@@ -9,6 +9,7 @@ import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,14 +49,14 @@ export class ValueDataService extends DataService implements OnDestroy {
         this.valueRest.getValuesByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((valueDtoList: ValueDto[]) => {
-            this.values = [];
+            const tempValues: Value[] = [];
             valueDtoList.forEach(valueDto => {
-              this.values.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
+              tempValues.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
             });
-            this.values = this.sortDefault(this.values);
+            this.values = this.sortDefault(tempValues);
             this.valuesLoaded = true;
             this.loadedValues.emit(this.values);
-            this.logger.info(this, 'Values loaded');
+            this.logger.debug(this, 'Values loaded');
           });
 
         // Load Value Types.
@@ -69,6 +70,11 @@ export class ValueDataService extends DataService implements OnDestroy {
       });
   }
 
+  clearData(): void {
+    this.valuesLoaded = false;
+    this.values = [];
+  }
+
   createValue(value: Value): void {
     this.valueRest.createValue(this.valueMapper.toDto(value))
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -76,7 +82,7 @@ export class ValueDataService extends DataService implements OnDestroy {
         const createdValue = this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]);
         this.values.push(createdValue);
         this.createdValue.emit(createdValue);
-        this.logger.info(this, 'Value created');
+        this.logger.debug(this, 'Value created');
       });
   }
 
@@ -86,7 +92,7 @@ export class ValueDataService extends DataService implements OnDestroy {
       .subscribe((valueDto: ValueDto) => {
         this.valueMapper.updateFromDto(valueDto, value, [this.analysisData.currentAnalysis]);
         this.updatedValue.emit(value);
-        this.logger.info(this, 'Value updated');
+        this.logger.debug(this, 'Value updated');
       });
   }
 
@@ -97,7 +103,7 @@ export class ValueDataService extends DataService implements OnDestroy {
         const index: number = this.values.indexOf(value, 0);
         this.values.splice(index, 1);
         this.deletedValue.emit(value);
-        this.logger.info(this, 'Value deleted');
+        this.logger.debug(this, 'Value deleted');
       });
   }
 

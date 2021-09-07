@@ -8,7 +8,7 @@
 }
 
 .mat-column-description {
-  width: 150px;
+  min-width: 500px;
   text-overflow: ellipsis;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .mat-row {
-  height: auto;
+  height: 80px;
 }
 
 .mat-cell {
@@ -77,4 +77,8 @@
   position: absolute;
   bottom: -4px;
   right: -4px;
+}
+
+.archived-variant-checkbox {
+  background-color: orange;
 }

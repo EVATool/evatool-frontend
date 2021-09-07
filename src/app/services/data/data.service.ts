@@ -20,7 +20,9 @@ export abstract class DataService {
   }
 
   private comparePrefixId(a: any, b: any): number {
-    if (a.prefixId > b.prefixId) {
+    const aSequenceId = +a.prefixSequenceId.replace(/[^0-9]/g, '');
+    const bSequenceId = +b.prefixSequenceId.replace(/[^0-9]/g, '');
+    if (aSequenceId > bSequenceId) {
       return 1;
     } else if (a.prefixSequenceId < b.prefixSequenceId) {
       return -1;

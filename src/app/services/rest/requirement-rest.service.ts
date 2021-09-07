@@ -19,7 +19,7 @@ export class RequirementRestService extends RestService {
 
   getRequirementsByAnalysisId(analysisId: string): Observable<RequirementDto[]> {
     const url = this.requirementsUrl + this.byAnalysisId + analysisId;
-    this.logger.info(this, 'Http get to: ' + url);
+    this.logger.debug(this, 'Http get to: ' + url);
     if (this.testing) {
       return of(this.sampleData.requirementDtoList);
     } else {
@@ -29,7 +29,7 @@ export class RequirementRestService extends RestService {
 
   createRequirement(requirementDto: RequirementDto): Observable<RequirementDto> {
     const url = this.requirementsUrl;
-    this.logger.info(this, 'Http post to: ' + url);
+    this.logger.debug(this, 'Http post to: ' + url);
     if (this.testing) {
       return of(requirementDto);
     } else {
@@ -39,7 +39,7 @@ export class RequirementRestService extends RestService {
 
   updateRequirement(requirementDto: RequirementDto): Observable<RequirementDto> {
     const url = this.requirementsUrl;
-    this.logger.info(this, 'Http put to: ' + url);
+    this.logger.debug(this, 'Http put to: ' + url);
     if (this.testing) {
       return of(requirementDto);
     } else {
@@ -49,7 +49,7 @@ export class RequirementRestService extends RestService {
 
   deleteRequirement(id: string): Observable<void> {
     const url = this.requirementsUrl + '/' + id;
-    this.logger.info(this, 'Http delete to: ' + url);
+    this.logger.debug(this, 'Http delete to: ' + url);
     if (this.testing) {
       return of(void 0);
     } else {

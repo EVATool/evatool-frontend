@@ -9,17 +9,17 @@ import {LogService} from '../../services/log.service';
   styleUrls: ['./impact-slider.component.scss']
 })
 export class ImpactSliderComponent implements AfterViewInit {
-  @Input() value: number = 1;
+  @Input() value = 1;
   @Output() valueChange = new EventEmitter<number>();
 
-  @Input() valueSecond: number = -1;
-  @Input() deadzone: number = 0.0;
-  @Input() isFilter: boolean = false;
-  @Input() minvalue: number = -1.0;
-  @Input() maxvalue: number = 1.0;
+  @Input() valueSecond = -1;
+  @Input() deadZone = 0.0;
+  @Input() isFilter = false;
+  @Input() minvalue = -1.0;
+  @Input() maxvalue = 1.0;
 
-  @Input() isRisk: boolean = false;
-  @Input() isGoal: boolean = false;
+  @Input() isRisk = false;
+  @Input() isGoal = false;
 
   @Output() sliderValueChange = new EventEmitter<MatSliderChange>();
   @ViewChild(MatSlider) slider!: MatSlider;
@@ -41,24 +41,24 @@ export class ImpactSliderComponent implements AfterViewInit {
   }
 
   invalidate(): void {
-    this.logger.info(this, 'Invalidating');
+    this.logger.trace(this, 'Invalidating');
     this.drawSlider();
   }
 
   sliderValueChanged(event: MatSliderChange): void {
     if (event.value !== null) {
-      if (-this.deadzone < event.value && event.value < this.deadzone && event.value !== 0) {
-        this.logger.info(this, 'Slider Deadzone Around Zero');
+      if (-this.deadZone < event.value && event.value < this.deadZone && event.value !== 0) {
+        this.logger.debug(this, 'Slider Deadzone Around Zero');
       } else if (this.isRisk && event.value > 0) {
-        this.logger.info(this, 'Risk Slider Cropping Value');
+        this.logger.debug(this, 'Risk Slider Cropping Value');
       } else if (this.isGoal && event.value < 0) {
-        this.logger.info(this, 'Goal Slider Cropping Value');
+        this.logger.debug(this, 'Goal Slider Cropping Value');
       } else if (this.minvalue > event.value) {
-        this.logger.info(this, 'Below min Cropping Value');
+        this.logger.debug(this, 'Below min Cropping Value');
       } else if (this.maxvalue < event.value) {
-        this.logger.info(this, 'Above max Cropping Value');
+        this.logger.debug(this, 'Above max Cropping Value');
       } else {
-        this.logger.info(this, `Slider Value Changed: ${event.value}`);
+        this.logger.debug(this, `Slider Value Changed: ${event.value}`);
         this.value = event.value;
         this.valueChange.emit(this.value);
         this.legalValue = event.value;
@@ -69,10 +69,10 @@ export class ImpactSliderComponent implements AfterViewInit {
 
   sliderSecondValueChanged(event: MatSliderChange): void {
     if (event.value !== null) {
-      if (-this.deadzone < event.value && event.value < this.deadzone && event.value !== 0) {
-        this.logger.info(this, 'Slider Deadzone Around Zero');
+      if (-this.deadZone < event.value && event.value < this.deadZone && event.value !== 0) {
+        this.logger.debug(this, 'Slider Deadzone Around Zero');
       } else {
-        this.logger.info(this, `Slider Value Changed: ${event.value}`);
+        this.logger.debug(this, `Slider Value Changed: ${event.value}`);
         this.valueSecond = event.value;
         this.drawSlider();
       }
@@ -80,14 +80,14 @@ export class ImpactSliderComponent implements AfterViewInit {
   }
 
   sliderValueChangedFinal(event: MatSliderChange): void {
-    this.logger.info(this, `Slider Value Changed Final: ${this.legalValue}`);
+    this.logger.debug(this, `Slider Value Changed Final: ${this.legalValue}`);
     this.slider.value = this.legalValue;
     event.value = this.legalValue;
     this.sliderValueChange.emit(event);
   }
 
   drawSlider(): void {
-    this.logger.info(this, 'Draw Slider');
+    this.logger.trace(this, 'Draw Slider');
 
     // Default bar settings.
     this.goalBar.nativeElement.style.display = 'block';
@@ -240,22 +240,22 @@ export class ImpactSliderComponent implements AfterViewInit {
     }
   }
 
-  drawThumb(value: number, thumb: any) {
+  drawThumb(value: number, thumb: any): void {
     const map = (mapValue: number, x1: number, y1: number, x2: number, y2: number) => (mapValue - x1) * (y2 - x2) / (y1 - x1) + x2;
     const val = map(value, -1, 1, 1, 99);
     thumb.nativeElement.style.left = 'calc(' + val + '% - 5px)';
   }
 
-  mouseEnter() {
-    //this.logger.info(this, 'Mouse Enter Event')
+  mouseEnter(): void {
+    this.logger.trace(this, 'Mouse Enter Event');
     if (!this.isFilter) {
       this.thumb.nativeElement.style.transition = '250ms ease-out 100ms';
       this.thumb.nativeElement.style.opacity = 1.0;
     }
   }
 
-  mouseLeave() {
-    //this.logger.info(this, 'Mouse Leave Event')
+  mouseLeave(): void {
+    this.logger.trace(this, 'Mouse Leave Event');
     if (!this.isFilter) {
       this.thumb.nativeElement.style.transition = '250ms ease-out 100ms';
       this.thumb.nativeElement.style.opacity = 0.0;

@@ -7,7 +7,7 @@ import {ImpactDataService} from './data/impact-data.service';
 import {RequirementDeltaDataService} from './data/requirement-delta-data.service';
 import {VariantDataService} from './data/variant-data.service';
 import {CrossUiEventService} from './event/cross-ui-event.service';
-import {AuthService} from './auth/auth.service';
+import {LogService} from './log.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +22,12 @@ export class MasterService {
               public impactData: ImpactDataService,
               public requirementDeltaData: RequirementDeltaDataService,
               public variantData: VariantDataService,
-              private authService: AuthService) {
+              private logger: LogService) {
   }
 
   init(): void {
+    this.logger.trace(this, 'init');
+
     this.crossUI.init();
 
     this.requirementDeltaData.init();

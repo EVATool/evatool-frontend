@@ -26,7 +26,7 @@ export class LogService {
   }
 
   public getCurrentTime(): string {
-    return this.datePipe.transform(new Date(), 'HH:mm:ss') || '';
+    return this.datePipe.transform(new Date(), 'HH:mm:ss') || 'TIME FORMATTING ERROR';
   }
 
   public getClassName(object: any): string {

@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {tap} from 'rxjs/operators';
@@ -17,13 +17,14 @@ export class HttpInterceptorService implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.logger.trace(this, 'intercept');
     return next.handle(request)
       .pipe(
         // retry(this.retryCount);
         tap(
           // Request.
           (data: any) => {
-            this.logger.info(this, 'NEXT');
+            this.logger.debug(this, 'NEXT');
             this.httpMarshall.next(request);
           },
           // Response error.
@@ -32,22 +33,21 @@ export class HttpInterceptorService implements HttpInterceptor {
             let functionalErrorCode = null;
             let tag = null;
             if (error.error instanceof ErrorEvent) {
-              this.logger.error(this, 'ERROR: This is a client side error');
               errorMsg = `Error: ${error.error.message}`;
+              this.logger.error(this, 'ERROR: This is a client side error (' + errorMsg + ')');
             } else {
               functionalErrorCode = error.error?.functionalErrorCode;
               tag = error.error?.tag;
-              this.logger.error(this, 'ERROR: This is a server side error');
               errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+              this.logger.error(this, 'ERROR: This is a server side error  (' + errorMsg + ')');
             }
-            this.logger.error(this, errorMsg);
             const httpStatus = error.error?.status || error.error?.httpStatusCode || error.status;
             this.httpMarshall.error(request, httpStatus, functionalErrorCode, tag);
             return throwError(errorMsg);
           },
           // Response complete.
           () => {
-            this.logger.info(this, 'COMPLETE');
+            this.logger.debug(this, 'COMPLETE');
             this.httpMarshall.complete(request);
           })
       );

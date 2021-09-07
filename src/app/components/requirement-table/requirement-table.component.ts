@@ -19,14 +19,12 @@ import {VariantDataService} from '../../services/data/variant-data.service';
 import {Variant} from '../../model/Variant';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
-import {
-  CrossUiEventService
-} from '../../services/event/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
-import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-requirement-table',
@@ -191,13 +189,13 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   scrollToTop(): void {
-    this.logger.info(this, 'Scroll To Top');
+    this.logger.trace(this, 'Scroll To Top');
     const options = {top: 0, duration: 250};
     this.scrollbarRef.scrollTo(options);
   }
 
   initSorting(): void {
-    this.logger.info(this, 'Init Sorting');
+    this.logger.trace(this, 'Init Sorting');
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (requirement, property) => {
       if (property.includes('IMP')) { // Return impact merit or delta overwrite merit (if it exists) for impact columns
@@ -266,7 +264,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   updateRequirement(requirement: Requirement): void {
-    this.logger.info(this, 'Update Requirement');
+    this.logger.trace(this, 'Update Requirement');
     if (requirement.highlighted) {
       requirement.highlighted = requirement.variants.includes(this.deletionFlaggedVariant);
     }
@@ -351,7 +349,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   openVariantsDialog(ids?: string[]): void {
-    this.logger.info(this, 'Opening Variants Dialog');
+    this.logger.trace(this, 'Opening Variants Dialog');
 
     this.dialog.open(VariantDialogComponent, {
       height: '60%',

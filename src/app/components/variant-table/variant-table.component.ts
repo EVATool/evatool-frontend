@@ -7,12 +7,11 @@ import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {RequirementDataService} from '../../services/data/requirement-data.service';
-import {HttpMarshallService} from '../../services/http/http-marshall.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
-import {VariantDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {VariantDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-variant-table',
@@ -50,6 +49,7 @@ export class VariantTableComponent implements OnInit, AfterViewInit, OnDestroy {
         snackBarRef.onAction()
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(() => {
+            this.logger.info(this, 'User wants to see the requirements referencing the variant');
             this.crossUI.userWantsToSeeVariantReferencedByRequirements.emit(event);
           });
       });

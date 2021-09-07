@@ -15,15 +15,13 @@ import {ImpactTableFilterEvent} from '../impact-filter-bar/ImpactTableFilterEven
 import {ValueDialogComponent} from '../value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
-import {
-  CrossUiEventService
-} from '../../services/event/cross-ui-event.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
-import {ImpactDeletionFailedEvent} from '../../services/event/CrossUIEvents';
+import {ImpactDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-impact-table',
@@ -85,6 +83,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
         snackBarRef.onAction()
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(() => {
+            this.logger.info(this, 'User wants to see the requirements referencing the impact');
             this.crossUI.userWantsToSeeImpactReferencedByRequirements.emit(event);
           });
       });
@@ -142,13 +141,13 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   scrollToTop(): void {
-    this.logger.info(this, 'Scroll To Top');
+    this.logger.trace(this, 'Scroll To Top');
     const options = {top: 0, duration: 250};
     this.scrollbarRef.scrollTo(options);
   }
 
   initSorting(): void {
-    this.logger.info(this, 'Init Sorting');
+    this.logger.trace(this, 'Init Sorting');
     this.tableDataSource.sort = this.sort;
     this.tableDataSource.sortingDataAccessor = (impact, property) => {
       switch (property) {
@@ -163,7 +162,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   initFiltering(): void {
-    this.logger.info(this, 'Init Filtering');
+    this.logger.trace(this, 'Init Filtering');
     this.tableDataSource.filterPredicate = this.createFilterPredicate();
   }
 
@@ -182,7 +181,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updateFilter(event: ImpactTableFilterEvent): void {
-    this.logger.info(this, 'Filter Changed');
+    this.logger.trace(this, 'Filter Changed');
     this.highlightFilter = event.highlight;
     this.tableDataSource.filter = JSON.stringify(event);
   }
@@ -194,18 +193,23 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.snackBar.open(message, action, {duration: 5000});
     } else if (this.valueDataService.values.length === 0) {
       const message = 'There must be at least one value for an impact to exist';
-      const action = '';
-      this.snackBar.open(message, action, {duration: 5000});
+      const action = 'Create';
+      this.snackBar.open(message, action, {duration: 5000}).onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.openValuesDialog();
+        });
+    } else {
+      const impact = this.impactDataService.createDefaultImpact(
+        this.analysisDataService.currentAnalysis,
+        this.stakeholderDataService.stakeholders[0],
+        this.valueDataService.values[0]);
+      this.impactDataService.createImpact(impact);
     }
-    const impact = this.impactDataService.createDefaultImpact(
-      this.analysisDataService.currentAnalysis,
-      this.stakeholderDataService.stakeholders[0],
-      this.valueDataService.values[0]);
-    this.impactDataService.createImpact(impact);
   }
 
   updateImpact(impact: Impact): void {
-    this.logger.info(this, 'Update Impact');
+    this.logger.trace(this, 'Update Impact');
     if (impact.highlighted) {
       impact.highlighted = impact.value === this.deletionFlaggedValue
         || impact.stakeholder === this.deletionFlaggedStakeholder;
@@ -220,7 +224,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openValuesDialog(id?: string): void {
-    this.logger.info(this, 'Opening Values Dialog');
+    this.logger.trace(this, 'Opening Values Dialog');
 
     this.dialog.open(ValueDialogComponent, {
       height: '80%',

@@ -38,6 +38,7 @@ export class AppComponent implements OnDestroy {
       translate.setDefaultLang(browserLang);
     }
 
+    this.titleService.setTitle('EvaTool');
     this.translate.get('TITLE')
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((title: string) => {
