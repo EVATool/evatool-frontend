@@ -15,7 +15,7 @@
     "test:unit": "ng test --browsers=ChromeHeadless --watch=false",
     "test:integration": "ng test --browsers=ChromeHeadless --watch=false",
 		"sonar": "sonar-scanner",
-		"test:ci": "ng test --browsers ChromeHeadlessCI --code-coverage true --watch false"
+		"test:coverage": "ng test --browsers ChromeHeadlessCI --code-coverage true --watch false"
 	},
 	"private": true,
 	"dependencies": {

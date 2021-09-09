@@ -16,7 +16,7 @@ jobs:
       - name: Analyze with Sonarcloud
         run: |
           npm ci
-          npm run test:ci
+          npm run test:coverage
           npm run sonar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
