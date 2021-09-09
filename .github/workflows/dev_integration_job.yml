@@ -23,6 +23,7 @@ jobs:
           docker run --name evatool-test-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=evatooldb -d mysql:8.0.24
           git clone --branch dev https://github.com/EVATool/evatool-backend
           docker run --name evatool-test-auth -p 8081:8080 -v ${PWD}/evatool-backend/src/main/resources/auth/keycloak:/opt/jboss/keycloak/imports -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -e KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/evatool-realm.json -d quay.io/keycloak/keycloak:13.0.0
+          sleep 15
 
       - name: Set up JDK 11
         uses: actions/setup-java@v1
