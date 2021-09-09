@@ -8,7 +8,11 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should just work', async () => {
+  it('should register', async () => { // TODO
+    await page.navigateTo();
+  });
+
+  it('should login', async () => { // TODO
     await page.navigateTo();
   });
 
