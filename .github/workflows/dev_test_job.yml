@@ -1,4 +1,4 @@
-name: Testing (dev)
+name: Unit Testing (dev)
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Test
+      - name: Unit Test
         run: |
           npm ci
-          npm run test:prod
+          npm run test:unit
