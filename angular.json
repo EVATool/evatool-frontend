@@ -67,6 +67,14 @@
                 }
               ]
             },
+            "integration": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.integration.ts"
+                }
+              ]
+            },
             "development": {
               "fileReplacements": [
                 {
@@ -96,6 +104,9 @@
             },
             "development": {
               "browserTarget": "evatool-frontend:build:development"
+            },
+            "integration": {
+              "browserTarget": "evatool-frontend:build:integration"
             },
             "keycloak": {
               "browserTarget": "evatool-frontend:build:keycloak"
