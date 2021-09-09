@@ -29,8 +29,7 @@ jobs:
         run: |
           cd evatool-backend
           mvn clean install -P integration -Dmaven.test.skip=true --file pom.xml
-          docker build -t evatool-backend:frontend-ci .
-          docker run -p 8080:8080 evatool-backend:frontend-ci #-d
+          java -jar ./target/evatool-0.0.1-SNAPSHOT.jar &
           sleep 15
 
       - name: Use Node.js ${{ matrix.node-version }}
