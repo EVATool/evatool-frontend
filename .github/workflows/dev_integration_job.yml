@@ -13,11 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-
       - name: Setup auxillary systems
         run: |
           docker run --name evatool-test-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -e MYSQL_DATABASE=evatooldb -d mysql:8.0.24
@@ -37,6 +32,11 @@ jobs:
           docker build -t evatool-backend:frontend-ci .
           docker run -p 8080:8080 evatool-backend:frontend-ci #-d
           sleep 15
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Integration Test
         run: |
