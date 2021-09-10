@@ -10,12 +10,12 @@ describe('workspace-project App', () => {
 
   it('should register', async () => {
     await page.navigateTo('/login');
-    await page.clickSignUpFormButton();
-    await page.fillInUsernameFormInput('username');
-    await page.fillInEmailFormInput('test@test.test');
-    await page.fillInPasswordFormInput('password');
-    await page.fillInRepeatPasswordFormInput('password');
-    await page.clickSubmitFormButton();
+    // await page.clickSignUpFormButton();
+    // await page.fillInUsernameFormInput('username');
+    // await page.fillInEmailFormInput('test@test.test');
+    // await page.fillInPasswordFormInput('password');
+    // await page.fillInRepeatPasswordFormInput('password');
+    // await page.clickSubmitFormButton();
   });
 
   it('should login', async () => {

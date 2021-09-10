@@ -1,4 +1,4 @@
-import {browser, by, element} from 'protractor';
+import {browser, by, element, ExpectedConditions} from 'protractor';
 
 export class AppPage {
   async navigateTo(route?: string): Promise<unknown> {
@@ -7,11 +7,17 @@ export class AppPage {
 
   // Login page.
   async clickSignInFormButton(): Promise<void> {
-    await element(by.css('sign-in-toggle-button')).click();
+    await element(by.css('.sign-in-toggle-button')).click();
   }
 
   async clickSignUpFormButton(): Promise<void> {
-    await element(by.css('sign-up-toggle-button')).click();
+    const signUpFormButton = element(by.className('sign-up-toggle-button'));
+    browser.wait(
+      ExpectedConditions.presenceOf(signUpFormButton),
+      5000,
+      'Sign up button not found'
+    );
+    await signUpFormButton.click();
   }
 
   async fillInUsernameFormInput(username: string): Promise<void> {
@@ -39,6 +45,6 @@ export class AppPage {
   }
 
   async clickSubmitFormButton(): Promise<void> {
-    await element(by.css('submit-button')).click();
+    await element(by.css('.submit-button')).click();
   }
 }
