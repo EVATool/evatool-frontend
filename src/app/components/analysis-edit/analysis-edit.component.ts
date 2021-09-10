@@ -66,10 +66,6 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    if (isDevMode()) {
-      this.tabGroup.selectedIndex = 0;
-    }
-
     this.activateTabFromUrl();
   }
 
