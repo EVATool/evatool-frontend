@@ -8,14 +8,17 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should register', async () => { // TODO
+  it('should register', async () => {
     await page.navigateTo('/login');
-    const signUpToggleButton = page.getSignUpFormButton();
-    signUpToggleButton.click();
-
+    await page.clickSignUpFormButton();
+    await page.fillInUsernameFormInput('username');
+    await page.fillInEmailFormInput('test@test.test');
+    await page.fillInPasswordFormInput('password');
+    await page.fillInRepeatPasswordFormInput('password');
+    await page.clickSubmitFormButton();
   });
 
-  it('should login', async () => { // TODO
+  it('should login', async () => {
     await page.navigateTo('/login');
   });
 

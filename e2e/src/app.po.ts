@@ -6,27 +6,39 @@ export class AppPage {
   }
 
   // Login page.
-  getSignInFormButton() {
-    return element(by.css('sign-in-toggle-button'));
+  async clickSignInFormButton(): Promise<void> {
+    await element(by.css('sign-in-toggle-button')).click();
   }
 
-  getSignUpFormButton() {
-    return element(by.css('sign-up-toggle-button'));
+  async clickSignUpFormButton(): Promise<void> {
+    await element(by.css('sign-up-toggle-button')).click();
   }
 
-  getUsernameFormInput() {
-
+  async fillInUsernameFormInput(username: string): Promise<void> {
+    const usernameFormInput = element(by.binding('username'));
+    await usernameFormInput.clear();
+    await usernameFormInput.sendKeys(username);
   }
 
-  getEmailFormInput() {
-
+  async fillInEmailFormInput(email: string): Promise<void> {
+    const usernameFormInput = element(by.binding('email'));
+    await usernameFormInput.clear();
+    await usernameFormInput.sendKeys(email);
   }
 
-  getPasswordFormInput() {
-
+  async fillInPasswordFormInput(password: string): Promise<void> {
+    const usernameFormInput = element(by.binding('password'));
+    await usernameFormInput.clear();
+    await usernameFormInput.sendKeys(password);
   }
 
-  getRepeatPasswordFormInput() {
+  async fillInRepeatPasswordFormInput(repeatPassword: string): Promise<void> {
+    const usernameFormInput = element(by.binding('passwordRepeat'));
+    await usernameFormInput.clear();
+    await usernameFormInput.sendKeys(repeatPassword);
+  }
 
+  async clickSubmitFormButton(): Promise<void> {
+    await element(by.css('submit-button')).click();
   }
 }
