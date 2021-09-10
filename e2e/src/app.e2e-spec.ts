@@ -9,11 +9,14 @@ describe('workspace-project App', () => {
   });
 
   it('should register', async () => { // TODO
-    await page.navigateTo();
+    await page.navigateTo('/login');
+    const signUpToggleButton = page.getSignUpFormButton();
+    signUpToggleButton.click();
+
   });
 
   it('should login', async () => { // TODO
-    await page.navigateTo();
+    await page.navigateTo('/login');
   });
 
   afterEach(async () => {
