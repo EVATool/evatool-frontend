@@ -2,8 +2,11 @@
   "ADD_ENTITY_BUTTON": {
     "ADD_ENTITY": "${0} hinzufügen"
   },
+  "ANALYSIS_DIALOG": {
+    "TEMPLATE_NOT_SELECTED": "Bitte wählen Sie eine Vorlage aus"
+  },
   "HOME": {
-    "NEW_ANALYSIS_BUTTON": "Neu"
+    "NEW_ANALYSIS": "Neu"
   },
   "LOGIN": {
     "EMAIL": "E-Mail",

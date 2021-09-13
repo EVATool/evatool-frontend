@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {ROUTES} from '../../app-routes';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-analysis-dialog',
@@ -27,6 +28,7 @@ export class AnalysisDialogComponent implements OnInit, OnDestroy {
               private router: Router,
               private dialogRef: MatDialogRef<AnalysisDialogComponent>,
               private snackBar: MatSnackBar,
+              private translate: TranslateService,
               @Inject(MAT_DIALOG_DATA) public data: any) {
     this.analysis = data.analysis;
     this.isEditingAnalysis = this.analysis.id != null;
@@ -65,9 +67,9 @@ export class AnalysisDialogComponent implements OnInit, OnDestroy {
     } else {
       if (this.useTemplate) {
         if (this.template === undefined) {
-          const message = 'You have to select a template';
-          const action = '';
-          this.snackBar.open(message, action, {duration: 5000});
+          this.translate.get('ANALYSIS_DIALOG.TEMPLATE_NOT_SELECTED', {value: 'world'}).subscribe((res: string) => {
+            this.snackBar.open(res, '', {duration: 5000});
+          });
         } else {
           this.analysisData.deepCopy(this.template, this.analysis);
         }

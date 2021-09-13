@@ -2,8 +2,24 @@
   "ADD_ENTITY_BUTTON": {
     "ADD_ENTITY": "Add a new ${0}"
   },
+  "ANALYSIS_DIALOG": {
+    "ANALYSIS_DESCRIPTION": "Description",
+    "ANALYSIS_IMAGE_URL": "Image Url",
+    "ANALYSIS_NAME": "Name",
+    "CREATE_ANALYSIS": "Create Analysis",
+    "CREATE_TEMPLATE": "Create Template",
+    "DEEP_COPY_INFO": "Copies the values and stakeholders from the template to the new analysis",
+    "DONE_EDITING": "Done",
+    "EDIT_ANALYSIS": "Edit Analysis",
+    "EDIT_TEMPLATE": "Edit Template",
+    "IS_TEMPLATE": "This is a Template",
+    "OPEN_WHEN_DONE": "Open when I'm done",
+    "TEMPLATE": "Template",
+    "TEMPLATE_NOT_SELECTED": "Please select a template",
+    "USE_TEMPLATE": "Use Template"
+  },
   "HOME": {
-    "NEW_ANALYSIS_BUTTON": "New"
+    "NEW_ANALYSIS": "New"
   },
   "LOGIN": {
     "EMAIL": "Email",
@@ -15,7 +31,7 @@
       "IP_BLOCKED": "You are blocked from any further login attempts",
       "PASSWORDS_NOT_MATCHING": "The passwords do not match",
       "PASSWORD_EMPTY": "Please enter a password",
-      "PASSWORD_NOT_SECURE": "Password nto secure enough",
+      "PASSWORD_NOT_SECURE": "Password not secure enough",
       "REALM_DOES_NOT_EXIST": "Realm does not exist",
       "REALM_INVALID": "Invalid Realm",
       "USERNAME_ALREADY_EXISTS": "Username already exists",
