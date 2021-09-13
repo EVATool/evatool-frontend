@@ -13,7 +13,7 @@ import {LoginUsernameNotFoundEvent} from '../../services/event/events/http404/Lo
 import {UsernameInvalidEvent} from '../../services/event/events/http400/UsernameInvalidEvent';
 import {InvalidCredentialsEvent} from '../../services/event/events/http401/InvalidCredentialsEvent';
 import {TranslateService} from '@ngx-translate/core';
-import {stringf} from '../../extensions/string.extensions';
+import {stringFormat} from '../../extensions/string.extensions';
 
 @Component({
   selector: 'app-login',
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((invalidCredentialsEvent: InvalidCredentialsEvent) => {
         this.translate.get('LOGIN.ERROR.INVALID_CREDENTIALS', {value: 'world'}).subscribe((res: string) => {
-          this.snackBar.open(stringf(res, String(invalidCredentialsEvent.remainingLoginAttempts)), '', {duration: 5000});
+          this.snackBar.open(stringFormat(res, String(invalidCredentialsEvent.remainingLoginAttempts)), '', {duration: 5000});
         });
       });
 
@@ -151,7 +151,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       } else if (this.username === '') {
         this.translate.get('LOGIN.ERROR.EMPTY_USERNAME', {value: 'world'}).subscribe((res: string) => {
-          this.snackBar.open(stringf(res), '', {duration: 5000});
+          this.snackBar.open(stringFormat(res), '', {duration: 5000});
         });
       } else if (this.password === '') {
         this.translate.get('LOGIN.ERROR.EMPTY_PASSWORD', {value: 'world'}).subscribe((res: string) => {

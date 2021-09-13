@@ -1,4 +1,4 @@
-export function stringf(s: string, ...args: string[]): string {
+export function stringFormat(s: string, ...args: string[]): string {
 
   for (let i = 0; i <= args.length; i++) {
     s = s.replace('${' + i + '}', args[i]);
