@@ -6,7 +6,7 @@ export const environment = {
   serverAddr: 'localhost',
   backendPort: '8080',
   defaultLang: 'en',
-  useDefaultOverBrowserLang: true,
+  useDefaultOverBrowserLang: false,
   authEnabled: true,
   authMultiTenancyEnabled: true,
   authPort: '8081',
