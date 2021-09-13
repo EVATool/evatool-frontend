@@ -1,4 +1,4 @@
-import {browser, by, element, ExpectedConditions} from 'protractor';
+import {browser, by, element} from 'protractor';
 
 export class AppPage {
   async navigateTo(route?: string): Promise<unknown> {
@@ -11,12 +11,7 @@ export class AppPage {
   }
 
   async clickSignUpFormButton(): Promise<void> {
-    const signUpFormButton = element(by.className('sign-up-toggle-button'));
-    browser.wait(
-      ExpectedConditions.presenceOf(signUpFormButton),
-      5000,
-      'Sign up button not found'
-    );
+    const signUpFormButton = element(by.css('.sign-up-toggle-button'));
     await signUpFormButton.click();
   }
 

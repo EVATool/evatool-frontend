@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should register', async () => {
     await page.navigateTo('/login');
-    // await page.clickSignUpFormButton();
+    await page.clickSignUpFormButton();
     // await page.fillInUsernameFormInput('username');
     // await page.fillInEmailFormInput('test@test.test');
     // await page.fillInPasswordFormInput('password');
