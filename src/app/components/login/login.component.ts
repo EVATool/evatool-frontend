@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.crossUI.usernameInvalid
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: UsernameInvalidEvent) => {
-        this.translate.get('LOGIN.ERROR.INVALID_USERNAME', {value: 'world'}).subscribe((res: string) => {
+        this.translate.get('LOGIN.ERROR.USERNAME_INVALID', {value: 'world'}).subscribe((res: string) => {
           this.snackBar.open(res, '', {duration: 5000});
         });
       });
@@ -105,7 +105,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.crossUI.emailInvalid
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        this.translate.get('LOGIN.ERROR.INVALID_EMAIL', {value: 'world'}).subscribe((res: string) => {
+        this.translate.get('LOGIN.ERROR.EMAIL_INVALID', {value: 'world'}).subscribe((res: string) => {
           this.snackBar.open(res, '', {duration: 5000});
         });
       });
@@ -150,11 +150,11 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
           this.snackBar.open(res, '', {duration: 5000});
         });
       } else if (this.username === '') {
-        this.translate.get('LOGIN.ERROR.EMPTY_USERNAME', {value: 'world'}).subscribe((res: string) => {
+        this.translate.get('LOGIN.ERROR.USERNAME_EMPTY', {value: 'world'}).subscribe((res: string) => {
           this.snackBar.open(stringFormat(res), '', {duration: 5000});
         });
       } else if (this.password === '') {
-        this.translate.get('LOGIN.ERROR.EMPTY_PASSWORD', {value: 'world'}).subscribe((res: string) => {
+        this.translate.get('LOGIN.ERROR.PASSWORD_EMPTY', {value: 'world'}).subscribe((res: string) => {
           this.snackBar.open(res, '', {duration: 5000});
         });
       } else { // Inputs valid.
@@ -166,15 +166,15 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     } else {
       if (this.username === '') {
-        this.translate.get('LOGIN.ERROR.EMPTY_USERNAME', {value: 'world'}).subscribe((res: string) => {
+        this.translate.get('LOGIN.ERROR.USERNAME_EMPTY', {value: 'world'}).subscribe((res: string) => {
           this.snackBar.open(res, '', {duration: 5000});
         });
       } else if (this.email === '') {
-        this.translate.get('LOGIN.ERROR.EMPTY_EMAIL', {value: 'world'}).subscribe((res: string) => {
+        this.translate.get('LOGIN.ERROR.EMAIL_EMPTY', {value: 'world'}).subscribe((res: string) => {
           this.snackBar.open(res, '', {duration: 5000});
         });
       } else if (this.password === '') {
-        this.translate.get('LOGIN.ERROR.EMPTY_PASSWORD', {value: 'world'}).subscribe((res: string) => {
+        this.translate.get('LOGIN.ERROR.PASSWORD_EMPTY', {value: 'world'}).subscribe((res: string) => {
           this.snackBar.open(res, '', {duration: 5000});
         });
       } else if (this.password !== this.passwordRepeat) {

@@ -1,18 +1,18 @@
 {
   "HOME": {
-    "NEW_ANALYSIS_BUTTON": "New"
+    "NEW_ANALYSIS": "New"
   },
   "LOGIN": {
     "EMAIL": "Email",
     "ERROR": {
       "EMAIL_ALREADY_EXISTS": "Email address already exists",
-      "EMPTY_EMAIL": "Please enter an email address",
-      "EMPTY_PASSWORD": "Please enter a password",
-      "EMPTY_USERNAME": "Please enter a username",
+      "EMAIL_EMPTY": "Please enter an email address",
+      "PASSWORD_EMPTY": "Please enter a password",
+      "USERNAME_EMPTY": "Please enter a username",
       "INVALID_CREDENTIALS": "Invalid Credentials (remaining login attemps: ${0})",
-      "INVALID_EMAIL": "Please enter a valid email address",
-      "INVALID_REALM": "Invalid Realm",
-      "INVALID_USERNAME": "Invalid Username (use alphanumeric symbols)",
+      "EMAIL_INVALID": "Please enter a valid email address",
+      "REALM_INVALID": "Invalid Realm",
+      "USERNAME_INVALID": "Invalid Username (use alphanumeric symbols)",
       "IP_BLOCKED": "You are blocked from any further login attempts",
       "PASSWORDS_NOT_MATCHING": "The passwords do not match",
       "PASSWORD_NOT_SECURE": "Password nto secure enough",
