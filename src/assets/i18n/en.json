@@ -2,6 +2,32 @@
   "HOME": {
     "NEW_ANALYSIS_BUTTON": "New"
   },
-  "TEST": "En",
+  "LOGIN": {
+    "EMAIL": "Email",
+    "ERROR": {
+      "EMAIL_ALREADY_EXISTS": "Email address already exists",
+      "EMPTY_EMAIL": "Please enter an email address",
+      "EMPTY_PASSWORD": "Please enter a password",
+      "EMPTY_USERNAME": "Please enter a username",
+      "INVALID_CREDENTIALS": "Invalid Credentials (remaining login attemps: ${remainingAttempts})",
+      "INVALID_EMAIL": "Please enter a valid email address",
+      "INVALID_REALM": "Invalid Realm",
+      "INVALID_USERNAME": "Invalid Username (use alphanumeric symbols)",
+      "IP_BLOCKED": "You are blocked from any further login attempts",
+      "PASSWORDS_NOT_MATCHING": "The passwords do not match",
+      "PASSWORD_NOT_SECURE": "Password nto secure enough",
+      "REALM_DOES_NOT_EXIST": "Realm does not exist",
+      "USERNAME_ALREADY_EXISTS": "Username already exists",
+      "USERNAME_DOES_NOT_EXIST": "Realm does not exist"
+    },
+    "FORGOT_PASSWORD": "Forgot Password",
+    "PASSWORD": "Password",
+    "REALM": "Realm",
+    "REPEAT_PASSWORD": "Repeat Password",
+    "SIGN_IN": "Sign In",
+    "SIGN_UP": "Sign Up",
+    "TERMS_AND_CONDITIONS": "Terms & Conditions",
+    "USERNAME": "Username"
+  },
   "TITLE": "EvaTool"
 }

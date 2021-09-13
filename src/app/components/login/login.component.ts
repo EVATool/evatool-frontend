@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
@@ -12,6 +12,7 @@ import {LoginRealmNotFoundEvent} from '../../services/event/events/http404/Login
 import {LoginUsernameNotFoundEvent} from '../../services/event/events/http404/LoginUsernameNotFoundEvent';
 import {UsernameInvalidEvent} from '../../services/event/events/http400/UsernameInvalidEvent';
 import {InvalidCredentialsEvent} from '../../services/event/events/http401/InvalidCredentialsEvent';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -38,65 +39,75 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
               private router: Router,
               private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
     this.crossUI.usernameNotFound
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: LoginUsernameNotFoundEvent) => {
-        const message = 'Realm ' + event.username + ' does not exist';
-        this.snackBar.open(message, '', {duration: 5000});
+        this.translate.get('LOGIN.USERNAME_DOES_NOT_EXIST', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       });
 
     this.crossUI.realmNotFound
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: LoginRealmNotFoundEvent) => {
-        const message = 'Realm ' + event.realm + ' does not exist';
-        this.snackBar.open(message, '', {duration: 5000});
+        this.translate.get('LOGIN.REALM_DOES_NOT_EXIST', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       });
 
     this.crossUI.usernameInvalid
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: UsernameInvalidEvent) => {
-        const message = 'Username ' + event.username + ' contains illegal symbols (use alphanumeric)';
-        this.snackBar.open(message, '', {duration: 5000});
+        this.translate.get('LOGIN.INVALID_USERNAME', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       });
 
     this.crossUI.invalidCredentials
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((invalidCredentialsEvent: InvalidCredentialsEvent) => {
-        const message = 'Invalid credentials (remaining login attempts: ' + invalidCredentialsEvent.remainingLoginAttempts + ')';
-        this.snackBar.open(message, '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.INVALID_CREDENTIALS', {value: 'world'}).subscribe((res: string) => {
+          const remainingAttempts = invalidCredentialsEvent.remainingLoginAttempts;
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       });
 
     this.crossUI.remoteIpBlocked
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        const message = 'You are blocked from further login attempts';
-        this.snackBar.open(message, '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.IP_BLOCKED', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       });
 
     // User registration.
     this.crossUI.registerUsernameAlreadyExists
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        const message = 'Username already exists';
-        this.snackBar.open(message, '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.USERNAME_ALREADY_EXISTS', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       });
 
     this.crossUI.registerEmailAlreadyExists
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        const message = 'Email already exists';
-        this.snackBar.open(message, '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.EMAIL_ALREADY_EXISTS', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       });
 
     this.crossUI.emailInvalid
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => {
-        const message = 'Please enter a valid email';
-        this.snackBar.open(message, '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.INVALID_EMAIL', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       });
 
     if (environment.developing) {
@@ -135,11 +146,17 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   onSubmit(): void {
     if (this.formMode === 'login') {
       if (this.realm === '') {
-        this.snackBar.open('Please enter a realm', '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.EMPTY_REALM', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       } else if (this.username === '') {
-        this.snackBar.open('Please enter a username', '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.EMPTY_USERNAME', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       } else if (this.password === '') {
-        this.snackBar.open('Please enter a password', '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.EMPTY_PASSWORD', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       } else { // Inputs valid.
         if (this.registrationEnabled) {
           this.authService.login('evatool-realm', this.username, this.password);
@@ -149,13 +166,21 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     } else {
       if (this.username === '') {
-        this.snackBar.open('Please enter a username', '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.EMPTY_USERNAME', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       } else if (this.email === '') {
-        this.snackBar.open('Please enter an email address', '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.EMPTY_EMAIL', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       } else if (this.password === '') {
-        this.snackBar.open('Please enter a password', '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.EMPTY_PASSWORD', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       } else if (this.password !== this.passwordRepeat) {
-        this.snackBar.open('The passwords must match', '', {duration: 5000});
+        this.translate.get('LOGIN.ERROR.PASSWORDS_NOT_MATCHING', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+        });
       } else {
         this.authService.registerUser(this.username, this.email, this.password);
       }

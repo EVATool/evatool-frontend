@@ -5,7 +5,7 @@
             class="toggle-button sign-in-toggle-button"
             [ngClass]="{'toggle-button-active': formMode === 'login', 'toggle-button-label': !registrationEnabled}"
             (click)="formMode='login'">
-      {{ 'TEST' | translate }}
+      {{ 'LOGIN.SIGN_IN' | translate }}
     </button>
 
     <button mat-button
@@ -13,26 +13,32 @@
             class="toggle-button sign-up-toggle-button"
             [ngClass]="{'toggle-button-active': formMode === 'registration'}"
             (click)="formMode='registration'">
-      Sign up
+      {{ 'LOGIN.SIGN_UP' | translate }}
     </button>
   </div>
 
   <mat-form-field *ngIf="formMode === 'login' && tenantSelectionEnabled">
-    <mat-label>Realm</mat-label>
+    <mat-label>
+      {{ 'LOGIN.REALM' | translate }}
+    </mat-label>
     <input matInput
            [(ngModel)]="realm"
            (keydown.enter)="onSubmit()">
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Username</mat-label>
+    <mat-label>
+      {{ 'LOGIN.USERNAME' | translate }}
+    </mat-label>
     <input matInput
            [(ngModel)]="username"
            (keydown.enter)="onSubmit()">
   </mat-form-field>
 
   <mat-form-field *ngIf="formMode === 'registration'">
-    <mat-label>Email</mat-label>
+    <mat-label>
+      {{ 'LOGIN.EMAIL' | translate }}
+    </mat-label>
     <input matInput
            [(ngModel)]="email"
            (keydown.enter)="onSubmit()">
@@ -40,7 +46,9 @@
 
   <div>
     <mat-form-field>
-      <mat-label>Password</mat-label>
+      <mat-label>
+        {{ 'LOGIN.PASSWORD' | translate }}
+      </mat-label>
       <input matInput
              [type]="showPassword ? 'text' : 'password'"
              [(ngModel)]="password"
@@ -54,7 +62,9 @@
     </button>
 
     <mat-form-field *ngIf="formMode === 'registration'">
-      <mat-label>Repeat Password</mat-label>
+      <mat-label>
+        {{ 'LOGIN.REPEAT_PASSWORD' | translate }}
+      </mat-label>
       <input matInput
              [type]="showPassword ? 'text' : 'password'"
              [(ngModel)]="passwordRepeat"
@@ -72,18 +82,18 @@
   <button class="submit-button"
           mat-button
           (click)="onSubmit()">
-    {{ formMode == 'login' ? 'Sign in' : 'Sign up' }}
+    {{ (formMode == 'login' ? 'LOGIN.SIGN_IN' : 'LOGIN.SIGN_UP') | translate }}
   </button>
 
   <div class="aux-actions">
     <div class="terms-and-conditions"
          (click)="termsAndConditions()">
-      Terms & condition
+      {{ 'LOGIN.TERMS_AND_CONDITIONS' | translate }}
     </div>
     <div *ngIf="registrationEnabled"
          class="forgot-password"
          (click)="forgotPassword()">
-      Forgot password
+      {{ 'LOGIN.FORGOT_PASSWORD' | translate }}
     </div>
   </div>
 </div>
