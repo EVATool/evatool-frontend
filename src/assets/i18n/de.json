@@ -9,7 +9,7 @@
       "EMPTY_EMAIL": "Bitte geben Sie eine Emailadresse an",
       "EMPTY_PASSWORD": "Bitte geben Sie ein Passwort an",
       "EMPTY_USERNAME": "Bitte geben Sie einen Benutzernamen an",
-      "INVALID_CREDENTIALS": "Falsche Anmeldedaten (verbleibende Versuche: ${remainingAttempts})",
+      "INVALID_CREDENTIALS": "Falsche Anmeldedaten (verbleibende Versuche: ${0})",
       "INVALID_EMAIL": "Bitte geben Sie eine gültige E-Mail an",
       "INVALID_REALM": "Ungültiger Realm",
       "INVALID_USERNAME": "Ungültiger Benutzername (verwenden Sie alphanumerische Symbole)",
