@@ -152,7 +152,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       } else if (this.username === '') {
         this.translate.get('LOGIN.ERROR.EMPTY_USERNAME', {value: 'world'}).subscribe((res: string) => {
-          this.snackBar.open(stringf(res, 'TEST'), '', {duration: 5000});
+          this.snackBar.open(stringf(res), '', {duration: 5000});
         });
       } else if (this.password === '') {
         this.translate.get('LOGIN.ERROR.EMPTY_PASSWORD', {value: 'world'}).subscribe((res: string) => {
