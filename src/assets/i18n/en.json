@@ -1,24 +1,27 @@
 {
+  "ADD_ENTITY_BUTTON": {
+    "ADD_ENTITY": "Add a new ${0}"
+  },
   "HOME": {
-    "NEW_ANALYSIS": "New"
+    "NEW_ANALYSIS_BUTTON": "New"
   },
   "LOGIN": {
     "EMAIL": "Email",
     "ERROR": {
       "EMAIL_ALREADY_EXISTS": "Email address already exists",
       "EMAIL_EMPTY": "Please enter an email address",
-      "PASSWORD_EMPTY": "Please enter a password",
-      "USERNAME_EMPTY": "Please enter a username",
-      "INVALID_CREDENTIALS": "Invalid Credentials (remaining login attemps: ${0})",
       "EMAIL_INVALID": "Please enter a valid email address",
-      "REALM_INVALID": "Invalid Realm",
-      "USERNAME_INVALID": "Invalid Username (use alphanumeric symbols)",
+      "INVALID_CREDENTIALS": "Invalid Credentials (remaining login attemps: ${0})",
       "IP_BLOCKED": "You are blocked from any further login attempts",
       "PASSWORDS_NOT_MATCHING": "The passwords do not match",
+      "PASSWORD_EMPTY": "Please enter a password",
       "PASSWORD_NOT_SECURE": "Password nto secure enough",
       "REALM_DOES_NOT_EXIST": "Realm does not exist",
+      "REALM_INVALID": "Invalid Realm",
       "USERNAME_ALREADY_EXISTS": "Username already exists",
-      "USERNAME_DOES_NOT_EXIST": "Realm does not exist"
+      "USERNAME_DOES_NOT_EXIST": "Realm does not exist",
+      "USERNAME_EMPTY": "Please enter a username",
+      "USERNAME_INVALID": "Invalid Username (use alphanumeric symbols)"
     },
     "FORGOT_PASSWORD": "Forgot Password",
     "PASSWORD": "Password",
