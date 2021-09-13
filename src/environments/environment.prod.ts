@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   testing: false,
+  developing: false,
   serverProtocol: 'SERVER_PROTOCOL',
   serverAddr: 'SERVER_ADDR',
   backendPort: 'BACKEND_PORT',

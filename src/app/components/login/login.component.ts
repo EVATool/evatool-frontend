@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
         this.snackBar.open(message, '', {duration: 5000});
       });
 
-    if (environment.testing) {
+    if (environment.developing) {
       this.realm = 'evatool-realm';
       this.username = 'admin';
       this.email = 'test@test.test';

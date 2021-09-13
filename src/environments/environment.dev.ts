@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   testing: false,
+  developing: true,
   serverProtocol: 'http',
   serverAddr: 'localhost',
   backendPort: '8080',

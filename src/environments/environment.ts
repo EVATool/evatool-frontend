@@ -1,6 +1,7 @@
 export const environment = { // This is the test environment.
   production: false,
   testing: true,
+  developing: true,
   serverProtocol: '',
   serverAddr: '',
   backendPort: '',

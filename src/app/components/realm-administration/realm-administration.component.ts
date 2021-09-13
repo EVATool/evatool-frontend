@@ -74,7 +74,7 @@ export class RealmAdministrationComponent implements OnInit, AfterViewInit, OnDe
           });
       });
 
-    if (environment.testing) {
+    if (environment.developing) {
       this.realm = 'new-realm';
     }
   }
