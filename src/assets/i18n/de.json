@@ -18,7 +18,7 @@
       "PASSWORD_NOT_SECURE": "Das Passwort ist zu unsicher",
       "REALM_DOES_NOT_EXIST": "Realm wurde nicht gefunden",
       "USERNAME_ALREADY_EXISTS": "Benutzername bereits vergeben",
-      "USERNAME_DOES_NOT_EXIST": "s"
+      "USERNAME_DOES_NOT_EXIST": "Realm existiert nicht"
     },
     "FORGOT_PASSWORD": "Password Vergessen",
     "PASSWORD": "Passwort",

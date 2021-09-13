@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     this.crossUI.usernameInvalid
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: UsernameInvalidEvent) => {
-        this.translate.get('LOGIN.INVALID_USERNAME', {value: 'world'}).subscribe((res: string) => {
+        this.translate.get('LOGIN.ERROR.INVALID_USERNAME', {value: 'world'}).subscribe((res: string) => {
           this.snackBar.open(res, '', {duration: 5000});
         });
       });
@@ -73,8 +73,7 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((invalidCredentialsEvent: InvalidCredentialsEvent) => {
         this.translate.get('LOGIN.ERROR.INVALID_CREDENTIALS', {value: 'world'}).subscribe((res: string) => {
-          const remainingAttempts = invalidCredentialsEvent.remainingLoginAttempts;
-          this.snackBar.open(res, '', {duration: 5000});
+          this.snackBar.open(stringf(res, String(invalidCredentialsEvent.remainingLoginAttempts)), '', {duration: 5000});
         });
       });
 
