@@ -38,24 +38,29 @@ export class ResizeColumnDirective implements OnInit {
     this.pressed = true;
     this.startX = event.pageX;
     this.startWidth = this.column.offsetWidth;
-  }
+    console.log('Initial X: ' + this.startX); // Absolute from left screen border.
+    console.log('Initial W: ' + this.startWidth); // Actual width (is always 34 bigger than X).
+  };
 
   onMouseMove = (event: MouseEvent) => {
-    const offset = 130;
+    const offset = 33; // TODO
     if (this.pressed && event.buttons) {
       this.renderer.addClass(this.table, 'resizing');
 
       // Calculate width of column
       const width = this.startWidth + (event.pageX - this.startX - offset);
 
+      console.log('Moving X: ' + event.pageX); //
+      console.log('Moving W: ' + width); //
+
       const tableCells = Array.from(this.table.querySelectorAll('.mat-row')).map(
         (row: any) => row.querySelectorAll('.mat-cell').item(this.index)
       );
 
-      // Set table header width
+      // Set table header width.
       this.renderer.setStyle(this.column, 'width', `${width}px`);
 
-      // Set table cells width
+      // Set table cells width.
       for (const cell of tableCells) {
         this.renderer.setStyle(cell, 'width', `${width}px`);
       }
