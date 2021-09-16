@@ -1,14 +1,14 @@
-import {StringFormatPipe} from './string-format.pipe';
+import {FormatPipe} from './format.pipe';
 
 describe('StringFormatPipe', () => {
   it('create an instance', () => {
-    const pipe = new StringFormatPipe();
+    const pipe = new FormatPipe();
     expect(pipe).toBeTruthy();
   });
 
   it('should puck values from a list of objects by the name of the property', () => {
     // given
-    const pipe = new StringFormatPipe();
+    const pipe = new FormatPipe();
     const formatString = 'A ${1} B ${0} C';
     const args = ['X', 'y'];
 

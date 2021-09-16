@@ -78,7 +78,7 @@ import {RealmAdministrationComponent} from './components/realm-administration/re
 import {XsrfInterceptor} from './services/auth/xsrf-interceptor.service';
 import {HttpInterceptorService} from './services/http/http-interceptor.service';
 import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
-import { StringFormatPipe } from './pipes/string-format.pipe';
+import {FormatPipe} from './pipes/format.pipe';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -141,7 +141,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     TermsAndConditionsComponent,
     ForgotPasswordComponent,
     RealmAdministrationComponent,
-    StringFormatPipe,
+    FormatPipe,
   ],
   imports: [
     BrowserModule,
