@@ -48,7 +48,7 @@ export class ResizeColumnDirective implements OnInit {
       this.renderer.addClass(this.table, 'resizing');
 
       // Calculate width of column.
-      const width = this.startWidth + (event.pageX - this.startX - offset);
+      let width = this.startWidth + (event.pageX - this.startX - offset);
 
       // Calculate index of column.
       const index = this.getColumnIndex();
@@ -58,11 +58,10 @@ export class ResizeColumnDirective implements OnInit {
       }
 
       // Abort when cs property min-width is undershot.
-      const minWidth = this.getColumnMinWidth(index);
+      const minWidth = 150;//this.getColumnMinWidth(index);
       console.log(minWidth);
       if (width + offset < minWidth) {
-        console.log('sdfhujsdfhjkl');
-        return;
+        width = minWidth - offset;
       }
 
       // Get all cells that need to be resized.
