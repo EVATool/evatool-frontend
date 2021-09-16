@@ -57,9 +57,9 @@ export class ResizeColumnDirective implements OnInit {
         return;
       }
 
-      // Abort when cs property min-width is undershot.
-      const minWidth = 150;//this.getColumnMinWidth(index);
-      console.log(minWidth);
+      // Abort when css property min-width is undershot.
+      const minWidth = this.getColumnMinWidth(index);
+      //console.log(minWidth);
       if (width + offset < minWidth) {
         width = minWidth - offset;
       }
