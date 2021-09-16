@@ -39,8 +39,6 @@ export class ResizeColumnDirective implements OnInit {
     this.pressed = true;
     this.startX = event.pageX;
     this.startWidth = this.column.offsetWidth;
-    console.log('Initial X: ' + this.startX); // Absolute from left screen border.
-    console.log('Initial W: ' + this.startWidth); // Actual width (is always 34 bigger than X).
   };
 
   onMouseMove = (event: MouseEvent) => {
@@ -53,9 +51,22 @@ export class ResizeColumnDirective implements OnInit {
       // Calculate width of column.
       const width = this.startWidth + (event.pageX - this.startX - offset);
 
-      console.log('Moving X: ' + event.pageX); //
-      console.log('Moving W: ' + width); //
+      // Calculate index of column.
+      let index = -1;
+      const columns = this.table.querySelectorAll('.mat-header-cell');
+      columns.forEach(column => {
+        index++;
+        if (column === this.column) {
+          this.index = index;
+        }
+      });
 
+      if (this.index === -1) {
+        console.log('Unknown column (index is -1).');
+        return;
+      }
+
+      // Get all cells that need to be resized.
       const tableCells = Array.from(this.table.querySelectorAll('.mat-row')).map(
         (row: any) => row.querySelectorAll('.mat-cell').item(this.index)
       );
