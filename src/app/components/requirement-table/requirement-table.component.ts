@@ -139,6 +139,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((requirement: Requirement) => {
         this.updateTableDataSource();
+        this.scrollToBottom();
       });
     this.requirementDataService.deletedRequirement
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -191,6 +192,12 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   scrollToTop(): void {
     this.logger.trace(this, 'Scroll To Top');
     const options = {top: 0, duration: 250};
+    this.scrollbarRef.scrollTo(options);
+  }
+
+  scrollToBottom(): void {
+    this.logger.trace(this, 'Scroll To Bottom');
+    const options = {bottom: -100, duration: 250};
     this.scrollbarRef.scrollTo(options);
   }
 

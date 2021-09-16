@@ -109,6 +109,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((impact: Impact) => {
         this.updateTableDataSource();
+        this.scrollToBottom();
       });
 
     this.impactDataService.deletedImpact
@@ -143,6 +144,12 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
   scrollToTop(): void {
     this.logger.trace(this, 'Scroll To Top');
     const options = {top: 0, duration: 250};
+    this.scrollbarRef.scrollTo(options);
+  }
+
+  scrollToBottom(): void {
+    this.logger.trace(this, 'Scroll To Bottom');
+    const options = {bottom: -100, duration: 250};
     this.scrollbarRef.scrollTo(options);
   }
 
