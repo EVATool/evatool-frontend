@@ -4,7 +4,9 @@
       <caption class="screen-reader-only">List of Stakeholders</caption>
 
       <ng-container matColumnDef='prefixSequenceId'>
-        <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+        <!-- TODO mat-sort-header interferes with column resizing (hides the draggable control underneath) -->
+        <!-- TODO The resizing skips when initially selected -->
+        <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header [resizeColumn]="true">
           <div matTooltip="An artificial ID">ID</div>
         </th>
 
