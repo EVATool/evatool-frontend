@@ -5,7 +5,8 @@
 
       <ng-container matColumnDef='prefixSequenceId'>
         <!-- TODO mat-sort-header interferes with column resizing (hides the draggable control underneath) -->
-        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+        <th scope="col" mat-header-cell *matHeaderCellDef
+            [resizeColumn]="true" [resizeColumnIndex]="0" [resizeColumnOffset]="33">
           <div mat-sort-header>
             <div matTooltip="An artificial ID">
               ID
@@ -19,7 +20,8 @@
       </ng-container>
 
       <ng-container matColumnDef='name'>
-        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="200">
+        <th scope="col" mat-header-cell *matHeaderCellDef
+            [resizeColumn]="true" [resizeColumnIndex]="1" [resizeColumnOffset]="20">
           <div mat-sort-header>
             <div matTooltip="The stakeholder name">
               Stakeholder
@@ -35,7 +37,8 @@
       </ng-container>
 
       <ng-container matColumnDef='level'>
-        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+        <th scope="col" mat-header-cell *matHeaderCellDef
+            [resizeColumn]="true" [resizeColumnIndex]="2" [resizeColumnOffset]="20">
           <div mat-sort-header>
             <div matTooltip="The stakeholder level">
               Level
@@ -51,7 +54,8 @@
       </ng-container>
 
       <ng-container matColumnDef='priority'>
-        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+        <th scope="col" mat-header-cell *matHeaderCellDef
+            [resizeColumn]="true" [resizeColumnIndex]="3" [resizeColumnOffset]="15">
           <div mat-sort-header>
             <div matTooltip="The stakeholder priority">
               Priority

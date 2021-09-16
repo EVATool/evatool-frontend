@@ -7,8 +7,8 @@ import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 export class ResizeColumnDirective implements OnInit {
   @Input('resizeColumn') resizable!: boolean;
   @Input('resizeColumnOffset') offset!: number;
+  @Input('resizeColumnIndex') index!: number;
 
-  @Input() index!: number;
   private startX!: number;
   private startWidth!: number;
   private readonly column: HTMLElement;
