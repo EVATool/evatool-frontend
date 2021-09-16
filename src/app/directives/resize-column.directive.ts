@@ -6,6 +6,7 @@ import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 })
 export class ResizeColumnDirective implements OnInit {
   @Input('resizeColumn') resizable!: boolean;
+  @Input('resizeColumnOffset') offset!: number;
 
   @Input() index!: number;
   private startX!: number;
@@ -43,7 +44,9 @@ export class ResizeColumnDirective implements OnInit {
   };
 
   onMouseMove = (event: MouseEvent) => {
-    const offset = 33; // TODO
+    // TODO This offset is column specific and needs to be adjusted when the min-width of any column is changed
+    //  it should be calculated automatically.
+    const offset = this.offset;
     if (this.pressed && event.buttons) {
       this.renderer.addClass(this.table, 'resizing');
 
