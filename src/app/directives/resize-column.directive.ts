@@ -61,7 +61,7 @@ export class ResizeColumnDirective implements OnInit {
       const minWidth = this.getColumnMinWidth(index);
       //console.log(minWidth);
       if (width + offset < minWidth) {
-        //width = minWidth - offset;
+        width = minWidth - offset;
       }
 
       // Get all cells that need to be resized.
@@ -105,7 +105,7 @@ export class ResizeColumnDirective implements OnInit {
     if (minWidthCss) {
       return +minWidthCss;
     } else {
-      return 999999;
+      return 0;
     }
   }
 }
