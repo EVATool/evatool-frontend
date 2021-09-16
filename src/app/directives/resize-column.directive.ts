@@ -7,7 +7,6 @@ import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 export class ResizeColumnDirective implements OnInit {
   @Input('resizeColumn') resizable!: boolean;
   @Input('resizeColumnOffset') offset!: number;
-  @Input('resizeColumnIndex') index!: number;
 
   private startX!: number;
   private startWidth!: number;
@@ -51,24 +50,28 @@ export class ResizeColumnDirective implements OnInit {
       // Calculate width of column.
       const width = this.startWidth + (event.pageX - this.startX - offset);
 
+      // Abort when cs property min-width is undershot.
+      // TODO
+
       // Calculate index of column.
       let index = -1;
+      let i = -1;
       const columns = this.table.querySelectorAll('.mat-header-cell');
       columns.forEach(column => {
-        index++;
+        i++;
         if (column === this.column) {
-          this.index = index;
+          index = i;
         }
       });
 
-      if (this.index === -1) {
+      if (index === -1) {
         console.log('Unknown column (index is -1).');
         return;
       }
 
       // Get all cells that need to be resized.
       const tableCells = Array.from(this.table.querySelectorAll('.mat-row')).map(
-        (row: any) => row.querySelectorAll('.mat-cell').item(this.index)
+        (row: any) => row.querySelectorAll('.mat-cell').item(index)
       );
 
       // Set table header width.
