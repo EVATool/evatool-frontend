@@ -45,7 +45,7 @@ export class ResizeColumnDirective implements OnInit {
 
   onMouseMove = (event: MouseEvent) => {
     // TODO This offset is column specific and needs to be adjusted when the min-width of any column is changed
-    //  it should be calculated automatically.
+    //  it should be calculated automatically. But how?
     const offset = this.offset;
     if (this.pressed && event.buttons) {
       this.renderer.addClass(this.table, 'resizing');
