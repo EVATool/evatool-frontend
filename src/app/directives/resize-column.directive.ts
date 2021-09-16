@@ -50,7 +50,7 @@ export class ResizeColumnDirective implements OnInit {
     if (this.pressed && event.buttons) {
       this.renderer.addClass(this.table, 'resizing');
 
-      // Calculate width of column
+      // Calculate width of column.
       const width = this.startWidth + (event.pageX - this.startX - offset);
 
       console.log('Moving X: ' + event.pageX); //
