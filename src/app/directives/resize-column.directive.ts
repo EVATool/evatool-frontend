@@ -37,10 +37,10 @@ export class ResizeColumnDirective implements OnInit {
     this.pressed = true;
     this.startX = event.pageX;
     this.startWidth = this.column.offsetWidth;
-  };
+  }
 
   onMouseMove = (event: MouseEvent) => {
-    const offset = 35;
+    const offset = 130;
     if (this.pressed && event.buttons) {
       this.renderer.addClass(this.table, 'resizing');
 
