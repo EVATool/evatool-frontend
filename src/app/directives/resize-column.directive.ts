@@ -50,22 +50,18 @@ export class ResizeColumnDirective implements OnInit {
       // Calculate width of column.
       const width = this.startWidth + (event.pageX - this.startX - offset);
 
-      // Abort when cs property min-width is undershot.
-      // TODO
-
       // Calculate index of column.
-      let index = -1;
-      let i = -1;
-      const columns = this.table.querySelectorAll('.mat-header-cell');
-      columns.forEach(column => {
-        i++;
-        if (column === this.column) {
-          index = i;
-        }
-      });
-
+      const index = this.getColumnIndex();
       if (index === -1) {
         console.log('Unknown column (index is -1).');
+        return;
+      }
+
+      // Abort when cs property min-width is undershot.
+      const minWidth = this.getColumnMinWidth(index);
+      console.log(minWidth);
+      if (width + offset < minWidth) {
+        console.log('sdfhujsdfhjkl');
         return;
       }
 
@@ -90,4 +86,27 @@ export class ResizeColumnDirective implements OnInit {
       this.renderer.removeClass(this.table, 'resizing');
     }
   };
+
+  getColumnIndex(): number {
+    let index = -1;
+    let i = -1;
+    const columns = this.table.querySelectorAll('.mat-header-cell');
+    columns.forEach(column => {
+      i++;
+      if (column === this.column) {
+        index = i;
+      }
+    });
+    return index;
+  }
+
+  getColumnMinWidth(columnIndex: number): number {
+    const columns = this.table.querySelectorAll('.mat-header-cell');
+    const minWidthCss = columns.item(columnIndex).getAttribute('min-width'); // TODO this does not work.
+    if (minWidthCss) {
+      return +minWidthCss;
+    } else {
+      return 999999;
+    }
+  }
 }
