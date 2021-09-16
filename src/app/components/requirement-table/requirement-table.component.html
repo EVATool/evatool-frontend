@@ -41,9 +41,11 @@
         <td mat-cell *matCellDef='let requirement'
             [ngClass]="{'references-archived' : referencesArchivedVariant(requirement)}">
           <mat-form-field class="dropdown-reference">
+            <!-- TODO disable animation of placeholder (like in filter category component) -->
             <mat-select [(ngModel)]="requirement.variants"
                         (selectionChange)="updateRequirement(requirement)"
                         [matTooltip]="getVariantNamesOfRequirement(requirement)"
+                        [placeholder]="requirement.variants.length === 0 ? 'All' : ''"
                         multiple>
               <mat-select-trigger>
                 <div

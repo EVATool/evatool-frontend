@@ -278,6 +278,10 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   getVariantNamesOfRequirement(requirement: Requirement): string {
+    if (requirement.variants.length === 0) {
+      return 'Applies to all variants';
+    }
+
     // TODO this shows a requirement to have twice the actual variants.
     const uniqueVariants: Variant[] = [];
     for (const variant of requirement.variants) {
