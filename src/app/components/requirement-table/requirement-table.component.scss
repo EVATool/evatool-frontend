@@ -4,21 +4,21 @@
 @include main-table-theme();
 
 .mat-column-prefixSequenceId {
-  width: 80px;
+  min-width: 80px;
 }
 
 .mat-column-description {
-  min-width: 500px;
+  min-width: 250px;
   text-overflow: ellipsis;
 }
 
 .mat-column-variants {
-  width: 200px;
+  min-width: 200px;
 }
 
 .mat-column-values {
   min-width: 100px;
-  width: 100px;
+  //width: 100px;
   text-overflow: ellipsis;
   word-wrap: anywhere;
   overflow-wrap: anywhere;
@@ -26,11 +26,11 @@
 }
 
 .mat-column-impact {
-  width: 50px;
+  min-width: 50px;
 }
 
 .mat-column-delete-button {
-  width: 50px;
+  min-width: 50px;
 }
 
 .mat-row {

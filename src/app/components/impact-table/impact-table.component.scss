@@ -4,19 +4,19 @@
 @include main-table-theme();
 
 .mat-column-prefixSequenceId {
-  width: 80px;
+  min-width: 80px;
 }
 
 .mat-column-stakeholder {
-  width: 300px;
+  min-width: 300px;
 }
 
 .mat-column-value {
-  width: 200px;
+  min-width: 200px;
 }
 
 .mat-column-merit {
-  width: 150px;
+  min-width: 150px;
 }
 
 .mat-column-description {
