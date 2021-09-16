@@ -53,11 +53,11 @@
             <div matTooltip="The affected value">
               Value
             </div>
+            <mat-icon id="value-modal"
+                      (click)="$event.stopPropagation(); openValuesDialog();"
+                      [matTooltip]="'Edit the available values'">edit
+            </mat-icon>
           </div>
-          <mat-icon id="value-modal"
-                    (click)="$event.stopPropagation(); openValuesDialog();"
-                    [matTooltip]="'Edit the available values'">edit
-          </mat-icon>
         </th>
 
         <td mat-cell *matCellDef='let impact'
