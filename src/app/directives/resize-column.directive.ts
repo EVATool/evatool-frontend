@@ -1,5 +1,6 @@
 import {Directive, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
 
+// https://stackblitz.com/edit/angular-table-resize?file=src%2Fapp%2Fresizable-table.component.scss
 @Directive({
   selector: '[resizeColumn]'
 })
