@@ -1,9 +1,4 @@
-.git
-.firebase
-.editorconfig
-/node_modules
-/e2e
-/docs
-.gitignore
-*.zip
-*.md
+**
+!default.conf
+!dist
+!replace_env_vars.sh
