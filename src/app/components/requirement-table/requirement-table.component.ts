@@ -17,7 +17,6 @@ import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {RequirementDeltaDataService} from '../../services/data/requirement-delta-data.service';
 import {VariantDataService} from '../../services/data/variant-data.service';
 import {Variant} from '../../model/Variant';
-import {animate, style, transition, trigger} from '@angular/animations';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
@@ -25,34 +24,13 @@ import {takeUntil} from 'rxjs/operators';
 import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
 import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {mouseInOutAnimation} from '../../animations/MouseInOutAnimation';
 
 @Component({
   selector: 'app-requirement-table',
   templateUrl: './requirement-table.component.html',
   styleUrls: ['./requirement-table.component.scss'],
-  animations: [
-    trigger(
-      'inOutAnimation',
-      [
-        transition(
-          ':enter',
-          [
-            style({opacity: 0}),
-            animate('250ms ease-out',
-              style({opacity: 1}))
-          ]
-        ),
-        transition(
-          ':leave',
-          [
-            style({opacity: 1}),
-            animate('250ms ease-out',
-              style({opacity: 0}))
-          ]
-        )
-      ]
-    )
-  ]
+  animations: [mouseInOutAnimation]
 })
 export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestroy {
 

@@ -91,7 +91,7 @@
       </ng-container>
 
       <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row [@rowsAnimation]="" *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row [@newRowAnimation]="" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
   </ng-scrollbar>

@@ -126,7 +126,7 @@
             </div>
 
             <div class="delete-delta-button"
-                 [@inOutAnimation]
+                 [@mouseInOutAnimation]
                  *ngIf="delta?.hover && !delta?.visible">
               <button mat-icon-button
                       [disabled]="delta.deletionFlagged"
