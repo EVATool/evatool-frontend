@@ -27,7 +27,6 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
   @ViewChild('variantsFilter') variantsFilter!: FilterCategoryComponent;
   @ViewChild('valueSystemFilter') valueSystemFilter!: FilterCategoryComponent;
   @ViewChild('impactFilter') impactFilter!: FilterCategoryComponent;
-  @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<RequirementTableFilterEvent>();
 
   variantNames: string[] = [];
@@ -178,7 +177,6 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
   clearFilter(): void {
     this.suppressChildEvent = true;
 
-    this.highlightFilter.clearFilter();
     this.sliderFilter.clearFilter();
     this.variantsFilter.clearFilter();
     this.valueSystemFilter.clearFilter();

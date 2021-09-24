@@ -24,7 +24,6 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
   @ViewChild(FilterSliderComponent) meritFilter!: FilterSliderComponent;
   @ViewChild('stakeholderFilter') stakeholderFilter!: FilterCategoryComponent;
   @ViewChild('valuesFilter') valuesFilter!: FilterCategoryComponent;
-  @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<ImpactTableFilterEvent>();
 
   stakeholderNames: string[] = [];
@@ -138,7 +137,6 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
     this.logger.trace(this, 'Clearing Filtering');
     this.suppressChildEvent = true;
 
-    this.highlightFilter.clearFilter();
     this.stakeholderFilter.clearFilter();
     this.valuesFilter.clearFilter();
     this.meritFilter.clearFilter();

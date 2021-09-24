@@ -16,7 +16,6 @@ export class StakeholderFilterBarComponent {
   @ViewChild('levelFilter') levelFilter!: FilterCategoryComponent;
   @ViewChild(FilterPriorityComponent) priorityFilter!: FilterPriorityComponent;
   @ViewChild(FilterSliderComponent) impactedFilter!: FilterSliderComponent;
-  @ViewChild(HighlightSearchComponent) highlightFilter!: HighlightSearchComponent;
   @Output() filterChanged = new EventEmitter<StakeholderTableFilterEvent>();
 
   stakeholderTableFilterEvent: StakeholderTableFilterEvent;
@@ -51,7 +50,6 @@ export class StakeholderFilterBarComponent {
   clearFilter(): void {
     this.suppressChildEvent = true;
 
-    this.highlightFilter.clearFilter();
     this.levelFilter.clearFilter();
     this.priorityFilter.clearFilter();
     this.impactedFilter.clearFilter();
