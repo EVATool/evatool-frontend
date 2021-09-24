@@ -30,7 +30,7 @@ export class SliderFilterSettings {
     return new SliderFilterSettings(2, 0, [1, -1]);
   }
 
-  static filter(settings: any, value: number): boolean {
+  static filter(settings: SliderFilterSettings, value: number): boolean {
     let filtered: boolean;
 
     switch (settings.sliderFilterType) {
