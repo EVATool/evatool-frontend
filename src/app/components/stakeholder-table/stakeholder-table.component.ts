@@ -34,6 +34,7 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   tableDataSource = new MatTableDataSource<Stakeholder>();
   windowScrolled = false;
   highlightFilter = '';
+  filterEvent!: StakeholderTableFilterEvent;
 
   constructor(private logger: LogService,
               public stakeholderData: StakeholderDataService,
@@ -163,7 +164,20 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   createStakeholder(): void {
-    this.stakeholderData.createStakeholder(this.stakeholderData.createDefaultStakeholder(this.analysisData.currentAnalysis));
+    // Get valid default stakeholder.
+    const newStakeholder = this.stakeholderData.createDefaultStakeholder(this.analysisData.currentAnalysis);
+
+    // Ensure visibility with current filter settings.
+    if (this.filterEvent) {
+      if (this.filterEvent.level.length !== 0) {
+        newStakeholder.level = this.filterEvent.level[0];
+      }
+      if (this.filterEvent.priority.length !== 0) {
+        newStakeholder.priority = this.filterEvent.priority[0];
+      }
+    }
+
+    this.stakeholderData.createStakeholder(newStakeholder);
   }
 
   updateStakeholder(stakeholder: Stakeholder): void {
@@ -177,6 +191,7 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
 
   updateFilter(event: StakeholderTableFilterEvent): void {
     this.logger.trace(this, 'Filter Changed');
+    this.filterEvent = event;
     this.tableDataSource.filter = JSON.stringify(event);
   }
 }
