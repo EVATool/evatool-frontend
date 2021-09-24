@@ -35,6 +35,6 @@ export class SpecService {
     MatSnackBarModule,
     FormBuilder,
     MatMenuModule,
-    TranslateService
+    TranslateService,
   ];
 }
