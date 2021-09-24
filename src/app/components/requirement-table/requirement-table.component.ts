@@ -67,6 +67,7 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   tableDataSource = new MatTableDataSource<Requirement>();
   windowScrolled = false;
   highlightFilter = '';
+  filterEvent!: RequirementTableFilterEvent;
   deletionFlaggedVariant!: Variant;
   deletionFlaggedImpact!: Impact;
 
@@ -268,12 +269,21 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
 
   updateFilter(event: RequirementTableFilterEvent): void {
     this.updateImpactColumns(event.impact);
+    this.filterEvent = event;
     this.tableDataSource.filter = JSON.stringify(event);
   }
 
   createRequirement(): void {
     const requirement = this.requirementDataService.createDefaultRequirement(
       this.analysisDataService.currentAnalysis);
+
+    // Ensure visibility with current filter settings.
+    if (this.filterEvent) {
+      if (this.filterEvent.variant.length !== 0) {
+        requirement.variants = this.variantDataService.variants.filter(v => this.filterEvent.variant.includes(v.name));
+      }
+    }
+
     this.requirementDataService.createRequirement(requirement);
   }
 
