@@ -27,10 +27,24 @@ import {takeUntil} from 'rxjs/operators';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
 import {StakeholderDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 
+import {animate, sequence, style, transition, trigger} from '@angular/animations';
+
+export const rowsAnimation =
+  trigger('rowsAnimation', [
+    transition('void => *', [
+      style({height: '*', opacity: '0', transform: 'translateX(-550px)', 'box-shadow': 'none'}),
+      sequence([
+        animate('.35s ease', style({height: '*', opacity: '.2', transform: 'translateX(0)', 'box-shadow': 'none'})),
+        animate('.35s ease', style({height: '*', opacity: 1, transform: 'translateX(0)'}))
+      ])
+    ])
+  ]);
+
 @Component({
   selector: 'app-stakeholder-table',
   templateUrl: './stakeholder-table.component.html',
-  styleUrls: ['./stakeholder-table.component.scss']
+  styleUrls: ['./stakeholder-table.component.scss'],
+  animations: [rowsAnimation]
 })
 export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
