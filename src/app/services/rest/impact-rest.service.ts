@@ -31,8 +31,7 @@ export class ImpactRestService extends RestService {
     const url = this.impactsUrl;
     this.logger.debug(this, 'Http post to: ' + url);
     if (this.testing) {
-      impactDto.id = '1337';
-      impactDto.prefixSequenceId = '12388u';
+      impactDto.prefixSequenceId = 'IMP' + Math.floor(Math.random() * 1000);
       return of(impactDto);
     } else {
       return this.http.post<ImpactDto>(url, impactDto, this.httpOptions);
