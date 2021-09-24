@@ -3,6 +3,12 @@
 @include misc-theme();
 @include main-table-theme();
 
+.mat-table {
+  .mat-cell:nth-last-child(2), .mat-header-cell:nth-last-child(2) {
+    border-right: 1px solid rgba(0, 0, 0, 0);
+  }
+}
+
 .mat-column-prefixSequenceId {
   min-width: 80px;
 }
@@ -30,7 +36,7 @@
 }
 
 .mat-column-delete-button {
-  min-width: 50px;
+  min-width: 10px;
 }
 
 .mat-row {
