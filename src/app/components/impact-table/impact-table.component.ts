@@ -40,6 +40,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
   tableDataSource = new MatTableDataSource<Impact>();
   windowScrolled = false;
   highlightFilter = '';
+  filterEvent!: ImpactTableFilterEvent;
   deletionFlaggedValue!: Value;
   deletionFlaggedStakeholder!: Stakeholder;
 
@@ -195,6 +196,7 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   updateFilter(event: ImpactTableFilterEvent): void {
     this.logger.trace(this, 'Filter Changed');
+    this.filterEvent = event;
     this.tableDataSource.filter = JSON.stringify(event);
   }
 
@@ -216,6 +218,29 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.analysisDataService.currentAnalysis,
         this.stakeholderDataService.stakeholders[0],
         this.valueDataService.values[0]);
+
+      // Ensure visibility with current filter settings.
+      if (this.filterEvent) {
+        if (this.filterEvent.stakeholder.length !== 0) {
+          const stakeholder = this.stakeholderDataService.stakeholders.find(s => s.name === this.filterEvent.stakeholder[0]);
+          if (stakeholder) {
+            impact.stakeholder = stakeholder;
+          }
+        }
+        if (this.filterEvent.value.length !== 0) {
+          const value = this.valueDataService.values.find(v => v.name === this.filterEvent.value[0]);
+          if (value) {
+            impact.value = value;
+          }
+        }
+        if (!SliderFilterSettings.filter(this.filterEvent.merit, impact.merit)) {
+          const minValue = Math.min(this.filterEvent.merit.sliderFilterValues[0], this.filterEvent.merit.sliderFilterValues[1]);
+          const maxValue = Math.max(this.filterEvent.merit.sliderFilterValues[0], this.filterEvent.merit.sliderFilterValues[1]);
+          const defaultMerit = minValue < 0 ? maxValue : minValue;
+          impact.merit = defaultMerit;
+        }
+      }
+
       this.impactDataService.createImpact(impact);
     }
   }
@@ -242,13 +267,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
       height: '80%',
       width: '50%',
       data: {id}
-    });
-  }
-
-  highlightImpactsByStakeholder(stakeholder: Stakeholder): void {
-    this.deletionFlaggedStakeholder = stakeholder;
-    this.impactDataService.impacts.forEach(impact => {
-      impact.highlighted = impact.stakeholder === stakeholder;
     });
   }
 }
