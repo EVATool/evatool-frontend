@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {LogService} from '../../services/log.service';
 import {Router} from '@angular/router';

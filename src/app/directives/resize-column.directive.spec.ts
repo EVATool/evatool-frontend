@@ -1,4 +1,4 @@
-import { ResizeColumnDirective } from './resize-column.directive';
+import {ResizeColumnDirective} from './resize-column.directive';
 
 describe('ResizeColumnDirective', () => {
   it('should create an instance', () => {

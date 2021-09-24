@@ -9,7 +9,6 @@ import {Analysis} from '../../model/Analysis';
 import {StakeholderDto} from '../../dto/StakeholderDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'

@@ -79,7 +79,7 @@ import {XsrfInterceptor} from './services/auth/xsrf-interceptor.service';
 import {HttpInterceptorService} from './services/http/http-interceptor.service';
 import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 import {FormatPipe} from './pipes/format.pipe';
-import { ResizeColumnDirective } from './directives/resize-column.directive';
+import {ResizeColumnDirective} from './directives/resize-column.directive';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',

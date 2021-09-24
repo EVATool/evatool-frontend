@@ -13,7 +13,6 @@ import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {CrossUiEventService} from '../event/cross-ui-event.service';
 
 @Injectable({
   providedIn: 'root'
