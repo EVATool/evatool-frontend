@@ -165,19 +165,19 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
 
   createStakeholder(): void {
     // Get valid default stakeholder.
-    const newStakeholder = this.stakeholderData.createDefaultStakeholder(this.analysisData.currentAnalysis);
+    const stakeholder = this.stakeholderData.createDefaultStakeholder(this.analysisData.currentAnalysis);
 
     // Ensure visibility with current filter settings.
     if (this.filterEvent) {
       if (this.filterEvent.level.length !== 0) {
-        newStakeholder.level = this.filterEvent.level[0];
+        stakeholder.level = this.filterEvent.level[0];
       }
       if (this.filterEvent.priority.length !== 0) {
-        newStakeholder.priority = this.filterEvent.priority[0];
+        stakeholder.priority = this.filterEvent.priority[0];
       }
     }
 
-    this.stakeholderData.createStakeholder(newStakeholder);
+    this.stakeholderData.createStakeholder(stakeholder);
   }
 
   updateStakeholder(stakeholder: Stakeholder): void {
