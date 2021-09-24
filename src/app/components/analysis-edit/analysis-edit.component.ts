@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, isDevMode, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
@@ -63,6 +63,8 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
         this.tabGroup.selectedIndex = 2;
       });
+
+    this.crossUI.userNavigatedToAnalysis.emit();
   }
 
   ngAfterViewInit(): void {

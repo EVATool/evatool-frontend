@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {LogService} from '../../services/log.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
+import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 
 @Component({
   selector: 'app-header',
@@ -10,6 +11,10 @@ import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 })
 export class HeaderComponent implements OnInit {
 
+  @ViewChild(HighlightSearchComponent) highlightSearchComponent!: HighlightSearchComponent;
+
+  showHighlightSearch = false;
+
   constructor(public authService: AuthService,
               private logger: LogService,
               public crossUI: CrossUiEventService) {
@@ -17,7 +22,15 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.crossUI.userNavigatedToAnalysis.subscribe(() => {
+      this.showHighlightSearch = true;
+      this.highlightSearchComponent?.clearFilter();
+    });
 
+    this.crossUI.userLeftCurrentAnalysisEdit.subscribe(() => {
+      this.showHighlightSearch = false;
+      this.highlightSearchComponent?.clearFilter();
+    });
   }
 
   highlightTextChange(event: string): void {
