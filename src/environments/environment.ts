@@ -11,5 +11,5 @@ export const environment = { // This is the test environment.
   authMultiTenancyEnabled: false,
   authPort: '',
   authRegistrationEnabled: false,
-  logLevel: 'INFO'
+  logLevel: 'DEBUG'
 };

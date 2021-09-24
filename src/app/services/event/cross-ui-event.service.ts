@@ -106,6 +106,8 @@ export class CrossUiEventService implements OnDestroy {
 
   @Output() userLeftCurrentAnalysisEdit: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output() highlightTextChanged: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(private httpMarshall: HttpMarshallService,
               private analysisData: AnalysisDataService,
               private valueData: ValueDataService,
