@@ -1,7 +1,5 @@
 <mat-list class="list-horizontal">
-  <mat-list-item>
-    <app-highlight-search (highlightTextChanged)="highlightTextChange($event)"></app-highlight-search>
-  </mat-list-item>
+
   <mat-list-item>
     <app-filter-category #levelFilter
                          [categories]="this.stakeholderDataService.stakeholderLevels"

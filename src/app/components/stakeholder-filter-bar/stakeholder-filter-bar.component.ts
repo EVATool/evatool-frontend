@@ -27,13 +27,6 @@ export class StakeholderFilterBarComponent {
     this.stakeholderTableFilterEvent = StakeholderTableFilterEvent.getDefault();
   }
 
-  highlightTextChange(event: string): void {
-    this.stakeholderTableFilterEvent.highlight = event;
-    if (!this.suppressChildEvent) {
-      this.filterChanged.emit(this.stakeholderTableFilterEvent);
-    }
-  }
-
   levelFilterChange(event: any): void {
     this.stakeholderTableFilterEvent.level = event;
     if (!this.suppressChildEvent) {

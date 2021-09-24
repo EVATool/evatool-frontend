@@ -118,6 +118,12 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.updateTableDataSource();
       });
 
+    this.crossUI.highlightTextChanged
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((highlightText: string) => {
+        this.highlightFilter = highlightText;
+      });
+
     this.updateTableDataSource();
   }
 
@@ -189,7 +195,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   updateFilter(event: ImpactTableFilterEvent): void {
     this.logger.trace(this, 'Filter Changed');
-    this.highlightFilter = event.highlight;
     this.tableDataSource.filter = JSON.stringify(event);
   }
 

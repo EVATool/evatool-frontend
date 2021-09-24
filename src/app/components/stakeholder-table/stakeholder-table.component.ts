@@ -85,6 +85,12 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
         this.updateTableDataSource();
       });
 
+    this.crossUI.highlightTextChanged
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((highlightText: string) => {
+        this.highlightFilter = highlightText;
+      });
+
     this.updateTableDataSource();
   }
 
@@ -171,7 +177,6 @@ export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestr
 
   updateFilter(event: StakeholderTableFilterEvent): void {
     this.logger.trace(this, 'Filter Changed');
-    this.highlightFilter = event.highlight;
     this.tableDataSource.filter = JSON.stringify(event);
   }
 }

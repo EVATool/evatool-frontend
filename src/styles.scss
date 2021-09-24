@@ -104,11 +104,6 @@ body {
       display: inline-block;
       height: auto;
       width: auto;
-      //margin-right: -20px;
-
-      app-highlight-search {
-        width: 15vw;
-      }
 
       app-filter-category { // use custom UI components for level filter instead of column category filter
         width: 15vw;

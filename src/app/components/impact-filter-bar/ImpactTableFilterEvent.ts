@@ -5,20 +5,17 @@ export class ImpactTableFilterEvent {
   stakeholder: string[];
   value: string[];
   merit: SliderFilterSettings;
-  highlight: string;
 
   constructor(
     stakeholder: string[],
     value: string[],
-    merit: SliderFilterSettings,
-    highlight: string) {
+    merit: SliderFilterSettings) {
     this.stakeholder = stakeholder;
     this.value = value;
     this.merit = merit;
-    this.highlight = highlight;
   }
 
   static getDefault(): ImpactTableFilterEvent {
-    return new ImpactTableFilterEvent([], [], SliderFilterSettings.getDefault(), '');
+    return new ImpactTableFilterEvent([], [], SliderFilterSettings.getDefault());
   }
 }

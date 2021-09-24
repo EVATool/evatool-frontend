@@ -6,22 +6,19 @@ export class RequirementTableFilterEvent {
   value: string[];
   impact: string[];
   merit: SliderFilterSettings;
-  highlight: string;
 
   constructor(
     variant: string[],
     value: string[],
     impact: string[],
-    merit: SliderFilterSettings,
-    highlight: string) {
+    merit: SliderFilterSettings) {
     this.variant = variant;
     this.value = value;
     this.impact = impact;
     this.merit = merit;
-    this.highlight = highlight;
   }
 
   static getDefault(): RequirementTableFilterEvent {
-    return new RequirementTableFilterEvent([], [], [], SliderFilterSettings.getDefault(), '');
+    return new RequirementTableFilterEvent([], [], [], SliderFilterSettings.getDefault());
   }
 }

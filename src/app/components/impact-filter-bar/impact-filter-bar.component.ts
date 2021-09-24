@@ -110,14 +110,6 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
       value => value.name);
   }
 
-  highlightTextChange(event: string): void {
-    this.logger.debug(this, 'Highlight Text Changed');
-    this.impactTableFilterEvent.highlight = event;
-    if (!this.suppressChildEvent) {
-      this.filterChanged.emit(this.impactTableFilterEvent);
-    }
-  }
-
   stakeholderFilterChanged(event: string[]): void {
     this.logger.trace(this, 'Slider Filter Changed (Stakeholder)');
     this.impactTableFilterEvent.stakeholder = event;

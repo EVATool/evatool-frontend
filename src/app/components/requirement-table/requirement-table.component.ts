@@ -153,6 +153,14 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
       .subscribe((delta: RequirementDelta) => {
         this.showDeltaSlider(delta);
       });
+
+    this.crossUI.highlightTextChanged
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((highlightText: string) => {
+        this.highlightFilter = highlightText;
+      });
+
+    this.updateTableDataSource();
   }
 
   ngOnDestroy(): void {
@@ -259,7 +267,6 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   updateFilter(event: RequirementTableFilterEvent): void {
-    this.highlightFilter = event.highlight;
     this.updateImpactColumns(event.impact);
     this.tableDataSource.filter = JSON.stringify(event);
   }
@@ -296,7 +303,6 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
         uniqueVariants.push(variant);
       }
     }
-    //return requirement.variants.map(v => v.name).join(', ');
     return uniqueVariants.map(v => v.name).join(', ');
   }
 
