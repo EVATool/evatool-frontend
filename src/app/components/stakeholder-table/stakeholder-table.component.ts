@@ -1,15 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-  ViewContainerRef
-} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, ViewContainerRef} from '@angular/core';
 import {StakeholderDataService} from '../../services/data/stakeholder-data.service';
 import {Stakeholder} from '../../model/Stakeholder';
 import {MatRow, MatTable, MatTableDataSource} from '@angular/material/table';
@@ -22,7 +11,6 @@ import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
-import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
 import {StakeholderDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
@@ -41,7 +29,6 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
   @ViewChild(MatTable) table!: MatTable<Stakeholder>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChildren(MatRow, {read: ViewContainerRef}) rows!: QueryList<ViewContainerRef>;
-  @Output() userWantsToSeeReferencedImpacts: EventEmitter<Stakeholder> = new EventEmitter();
 
   displayedColumns = ['prefixSequenceId', 'name', 'level', 'priority', 'impacted'];
   tableDataSource = new MatTableDataSource<Stakeholder>();
