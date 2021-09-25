@@ -1,12 +1,10 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {StakeholderDataService} from '../../services/data/stakeholder-data.service';
 import {Stakeholder} from '../../model/Stakeholder';
-import {MatRow, MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {StakeholderTableFilterEvent} from '../stakeholder-filter-bar/StakeholderTableFilterEvent';
 import {LogService} from '../../services/log.service';
-import {NgScrollbar} from 'ngx-scrollbar';
-import {MatSort} from '@angular/material/sort';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
@@ -24,10 +22,6 @@ import {EntityTableComponent} from '../abstract/entity-table/entity-table.compon
   animations: [newRowAnimation]
 })
 export class StakeholderTableComponent extends EntityTableComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  @ViewChild(MatTable) table!: MatTable<Stakeholder>;
-  @ViewChild(MatSort) sort: MatSort = new MatSort();
-  @ViewChildren(MatRow, {read: ViewContainerRef}) rows!: QueryList<ViewContainerRef>;
 
   displayedColumns = ['prefixSequenceId', 'name', 'level', 'priority', 'impacted'];
   tableDataSource = new MatTableDataSource<Stakeholder>();
@@ -106,51 +100,15 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    super.onDestroy();
   }
 
   updateTableDataSource(): void {
     this.tableDataSource.data = this.stakeholderData.stakeholders;
   }
 
-  scrollToTop(): void {
-    this.logger.trace(this, 'Scroll To Top');
-    const options = {top: 0, duration: 250};
-    this.scrollbarRef.scrollTo(options);
-  }
-
-  scrollToBottom(): void {
-    this.logger.trace(this, 'Scroll To Bottom');
-    const options = {bottom: -100, duration: 250};
-    this.scrollbarRef.scrollTo(options);
-  }
-
-  scrollToIndex(index: number): void {
-    index--;
-    const row = this.rows.find(r => r.element.nativeElement.rowIndex === index);
-    if (row) {
-      const options = {duration: 250}; // TODO get options into scroll call.
-      row.element.nativeElement.scrollIntoView(true);
-    } else {
-      console.log('Row at index ' + (index) + ' not found');
-    }
-  }
-
-  // TODO return index more reliable. This sometimes fails to scroll (when changing the sorting and adding a new row).
-  getRowIndex(stakeholder: Stakeholder): number {
-    const row = this.rows.get(this.rows.length - 1);
-    if (row) {
-      return row.element.nativeElement.sectionRowIndex;
-    } else {
-      return 0;
-    }
-  }
-
-  initSorting(): void {
-    this.logger.trace(this, 'Init Sorting');
-    this.tableDataSource.sort = this.sort;
-    this.tableDataSource.sortingDataAccessor = (stakeholder, property) => {
+  createDataAccessor(): (stakeholder: Stakeholder, property: string) => any {
+    return (stakeholder, property) => {
       switch (property) {
         case 'priority':
           const stakeholderPriority = stakeholder[property];
@@ -162,11 +120,6 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
           return stakeholder[property];
       }
     };
-  }
-
-  initFiltering(): void {
-    this.logger.trace(this, 'Init Filtering');
-    this.tableDataSource.filterPredicate = this.createFilterPredicate();
   }
 
   createFilterPredicate(): (data: any, filter: string) => boolean {
