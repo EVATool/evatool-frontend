@@ -1,15 +1,13 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
 import {VariantDialogComponent} from '../variant-dialog/variant-dialog.component';
 import {Value} from '../../model/Value';
 import {RequirementDelta} from '../../model/RequirementDelta';
 import {RequirementTableFilterEvent} from '../requirement-filter-bar/RequirementTableFilterEvent';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {RequirementDataService} from '../../services/data/requirement-data.service';
-import {MatSort} from '@angular/material/sort';
-import {NgScrollbar} from 'ngx-scrollbar';
 import {LogService} from '../../services/log.service';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {ValueDataService} from '../../services/data/value-data.service';
@@ -19,12 +17,12 @@ import {VariantDataService} from '../../services/data/variant-data.service';
 import {Variant} from '../../model/Variant';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
-import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
 import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {mouseInOutAnimation} from '../../animations/MouseInOutAnimation';
+import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
 
 @Component({
   selector: 'app-requirement-table',
@@ -32,25 +30,18 @@ import {mouseInOutAnimation} from '../../animations/MouseInOutAnimation';
   styleUrls: ['./requirement-table.component.scss'],
   animations: [mouseInOutAnimation]
 })
-export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  private ngUnsubscribe = new Subject();
-
-  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
-  @ViewChild(MatTable) table!: MatTable<Impact>;
-  @ViewChild(MatSort) sort: MatSort = new MatSort();
+export class RequirementTableComponent extends EntityTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   staticDisplayedColumns = ['prefixSequenceId', 'description', 'variants', 'values', 'delete-button'];
   displayedColumns: string[] = [];
   tableDataSource = new MatTableDataSource<Requirement>();
-  windowScrolled = false;
-  highlightFilter = '';
   filterEvent!: RequirementTableFilterEvent;
+
   deletionFlaggedVariant!: Variant;
   deletionFlaggedImpact!: Impact;
 
   constructor(
-    private logger: LogService,
+    protected logger: LogService,
     public requirementDataService: RequirementDataService,
     public requirementDeltaDataService: RequirementDeltaDataService,
     public impactDataService: ImpactDataService,
@@ -59,9 +50,12 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
     public variantDataService: VariantDataService,
     private crossUI: CrossUiEventService,
     private dialog: MatDialog) {
+    super(logger);
   }
 
   ngOnInit(): void {
+    super.onInit();
+
     this.crossUI.userWantsToSeeVariantReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: VariantReferencedByRequirementsEvent) => {
@@ -142,56 +136,20 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
     this.updateTableDataSource();
   }
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+  ngAfterViewInit(): void {
+    super.afterViewInit();
   }
 
-  updateImpactColumns(includeOnlyTheseImpacts?: string[]): void {
-    const displayedColumns: string[] = [];
-    this.staticDisplayedColumns.forEach((col: string) => displayedColumns.push(col));
-
-    this.impactDataService.impacts.forEach((impact: Impact) => {
-      if (!includeOnlyTheseImpacts || includeOnlyTheseImpacts.length === 0 || includeOnlyTheseImpacts.includes(impact.prefixSequenceId)) {
-        const index = displayedColumns.length - 1;
-        displayedColumns.splice(index, 0, impact.prefixSequenceId);
-      }
-    });
-
-    this.displayedColumns = displayedColumns;
+  ngOnDestroy(): void {
+    super.onDestroy();
   }
 
   updateTableDataSource(): void {
     this.tableDataSource.data = this.requirementDataService.requirements;
   }
 
-  ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(e => {
-        this.windowScrolled = e.target.scrollTop !== 0;
-      });
-
-    this.initSorting();
-    this.initFiltering();
-  }
-
-  scrollToTop(): void {
-    this.logger.trace(this, 'Scroll To Top');
-    const options = {top: 0, duration: 250};
-    this.scrollbarRef.scrollTo(options);
-  }
-
-  scrollToBottom(): void {
-    this.logger.trace(this, 'Scroll To Bottom');
-    const options = {bottom: -100, duration: 250};
-    this.scrollbarRef.scrollTo(options);
-  }
-
-  initSorting(): void {
-    this.logger.trace(this, 'Init Sorting');
-    this.tableDataSource.sort = this.sort;
-    this.tableDataSource.sortingDataAccessor = (requirement, property) => {
+  createDataAccessor(): (requirement: Requirement, property: string) => any {
+    return (requirement, property) => {
       if (property.includes('IMP')) { // Return impact merit or delta overwrite merit (if it exists) for impact columns
         const impact = this.impactDataService.impacts.find(imp => imp.prefixSequenceId === property);
         let val = -10;
@@ -215,10 +173,6 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
           return requirement[property];
       }
     };
-  }
-
-  initFiltering(): void {
-    this.tableDataSource.filterPredicate = this.createFilterPredicate();
   }
 
   createFilterPredicate(): (data: any, filter: string) => boolean {
@@ -246,9 +200,9 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   updateFilter(event: RequirementTableFilterEvent): void {
+    this.logger.debug(this, 'Overwritten updateFilter');
     this.updateImpactColumns(event.impact);
-    this.filterEvent = event;
-    this.tableDataSource.filter = JSON.stringify(event);
+    super.updateFilter(event);
   }
 
   createRequirement(): void {
@@ -361,6 +315,20 @@ export class RequirementTableComponent implements OnInit, AfterViewInit, OnDestr
       width: '50%',
       data: {ids}
     });
+  }
+
+  updateImpactColumns(includeOnlyTheseImpacts?: string[]): void {
+    const displayedColumns: string[] = [];
+    this.staticDisplayedColumns.forEach((col: string) => displayedColumns.push(col));
+
+    this.impactDataService.impacts.forEach((impact: Impact) => {
+      if (!includeOnlyTheseImpacts || includeOnlyTheseImpacts.length === 0 || includeOnlyTheseImpacts.includes(impact.prefixSequenceId)) {
+        const index = displayedColumns.length - 1;
+        displayedColumns.splice(index, 0, impact.prefixSequenceId);
+      }
+    });
+
+    this.displayedColumns = displayedColumns;
   }
 
   referencesArchivedVariant(requirement: Requirement): boolean {

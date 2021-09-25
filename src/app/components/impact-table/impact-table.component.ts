@@ -1,7 +1,5 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
-import {NgScrollbar} from 'ngx-scrollbar';
-import {MatSort} from '@angular/material/sort';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
 import {Impact} from '../../model/Impact';
 import {LogService} from '../../services/log.service';
 import {ImpactDataService} from '../../services/data/impact-data.service';
@@ -16,36 +14,29 @@ import {ValueDialogComponent} from '../value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
-import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
 import {ImpactDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
 
 @Component({
   selector: 'app-impact-table',
   templateUrl: './impact-table.component.html',
   styleUrls: ['./impact-table.component.scss']
 })
-export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  private ngUnsubscribe = new Subject();
-
-  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
-  @ViewChild(MatTable) table!: MatTable<Impact>;
-  @ViewChild(MatSort) sort: MatSort = new MatSort();
+export class ImpactTableComponent extends EntityTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   displayedColumns = ['prefixSequenceId', 'stakeholder', 'value', 'merit', 'description'];
   tableDataSource = new MatTableDataSource<Impact>();
-  windowScrolled = false;
-  highlightFilter = '';
   filterEvent!: ImpactTableFilterEvent;
+
   deletionFlaggedValue!: Value;
   deletionFlaggedStakeholder!: Stakeholder;
 
   constructor(
-    private logger: LogService,
+    protected logger: LogService,
     public impactDataService: ImpactDataService,
     public valueDataService: ValueDataService,
     public stakeholderDataService: StakeholderDataService,
@@ -53,9 +44,12 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
     private crossUI: CrossUiEventService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) {
+    super(logger);
   }
 
   ngOnInit(): void {
+    super.onInit();
+
     this.crossUI.userWantsToSeeValueReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ValueReferencedByImpactsEvent) => {
@@ -129,41 +123,19 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(e => {
-        this.windowScrolled = e.target.scrollTop !== 0;
-      });
-
-    this.initSorting();
-    this.initFiltering();
+    super.afterViewInit();
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    super.onDestroy();
   }
 
   updateTableDataSource(): void {
     this.tableDataSource.data = this.impactDataService.impacts;
   }
 
-  scrollToTop(): void {
-    this.logger.trace(this, 'Scroll To Top');
-    const options = {top: 0, duration: 250};
-    this.scrollbarRef.scrollTo(options);
-  }
-
-  scrollToBottom(): void {
-    this.logger.trace(this, 'Scroll To Bottom');
-    const options = {bottom: -100, duration: 250};
-    this.scrollbarRef.scrollTo(options);
-  }
-
-  initSorting(): void {
-    this.logger.trace(this, 'Init Sorting');
-    this.tableDataSource.sort = this.sort;
-    this.tableDataSource.sortingDataAccessor = (impact, property) => {
+  createDataAccessor(): (impact: Impact, property: string) => any {
+    return (impact, property) => {
       switch (property) {
         case 'stakeholder':
           return impact.stakeholder.name;
@@ -173,11 +145,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
           return impact[property];
       }
     };
-  }
-
-  initFiltering(): void {
-    this.logger.trace(this, 'Init Filtering');
-    this.tableDataSource.filterPredicate = this.createFilterPredicate();
   }
 
   createFilterPredicate(): (data: any, filter: string) => boolean {
@@ -192,12 +159,6 @@ export class ImpactTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
       return stakeholderFilter && valueFilter && meritFilter;
     };
-  }
-
-  updateFilter(event: ImpactTableFilterEvent): void {
-    this.logger.trace(this, 'Filter Changed');
-    this.filterEvent = event;
-    this.tableDataSource.filter = JSON.stringify(event);
   }
 
   createImpact(): void {
