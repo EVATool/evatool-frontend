@@ -94,9 +94,6 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
 
   ngAfterViewInit(): void {
     super.afterViewInit();
-
-    this.initSorting();
-    this.initFiltering();
   }
 
   ngOnDestroy(): void {
@@ -160,11 +157,5 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
   deleteStakeholder(stakeholder: Stakeholder): void {
     stakeholder.deletionFlagged = true;
     this.stakeholderData.deleteStakeholder(stakeholder);
-  }
-
-  updateFilter(event: StakeholderTableFilterEvent): void {
-    this.logger.trace(this, 'Filter Changed');
-    this.filterEvent = event;
-    this.tableDataSource.filter = JSON.stringify(event);
   }
 }

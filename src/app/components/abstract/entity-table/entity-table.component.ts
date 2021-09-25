@@ -47,8 +47,8 @@ export class EntityTableComponent {
         this.windowScrolled = e.target.scrollTop !== 0;
       });
 
-    //this.initSorting();
-    //this.initFiltering();
+    this.initSorting();
+    this.initFiltering();
   }
 
   onDestroy(): void {
@@ -112,5 +112,11 @@ export class EntityTableComponent {
     } else {
       return 0;
     }
+  }
+
+  updateFilter(event: any): void {
+    this.logger.trace(this, 'Filter Changed');
+    this.filterEvent = event;
+    this.tableDataSource.filter = JSON.stringify(event);
   }
 }
