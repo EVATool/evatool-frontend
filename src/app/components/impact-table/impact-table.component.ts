@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {ImpactTableFilterEvent} from '../impact-filter-bar/ImpactTableFilterEvent';
-import {ValueDialogComponent} from '../value-dialog/value-dialog.component';
+import {ValueDialogComponent} from '../deprecated/value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';

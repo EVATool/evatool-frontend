@@ -1,17 +1,17 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
-import {Variant} from '../../model/Variant';
-import {VariantDataService} from '../../services/data/variant-data.service';
-import {LogService} from '../../services/log.service';
+import {Variant} from '../../../model/Variant';
+import {VariantDataService} from '../../../services/data/variant-data.service';
+import {LogService} from '../../../services/log.service';
 import {MatSort} from '@angular/material/sort';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {AnalysisDataService} from '../../services/data/analysis-data.service';
-import {RequirementDataService} from '../../services/data/requirement-data.service';
-import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
+import {AnalysisDataService} from '../../../services/data/analysis-data.service';
+import {RequirementDataService} from '../../../services/data/requirement-data.service';
+import {CrossUiEventService} from '../../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
-import {VariantDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {VariantReferencedByRequirementsEvent} from '../../../services/event/events/http409/VariantReferencedByRequirementsEvent';
+import {VariantDeletionFailedEvent} from '../../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-variant-table',

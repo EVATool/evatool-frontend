@@ -37,10 +37,10 @@ import {FilterSliderComponent} from './components/filter-impact/filter-slider.co
 import {FilterCategoryComponent} from './components/filter-category/filter-category.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
-import {ValueDialogComponent} from './components/value-dialog/value-dialog.component';
+import {ValueDialogComponent} from './components/deprecated/value-dialog/value-dialog.component';
 import {ImpactFilterBarComponent} from './components/impact-filter-bar/impact-filter-bar.component';
 import {ImpactTableComponent} from './components/impact-table/impact-table.component';
-import {ValueTableComponent} from './components/value-table/value-table.component';
+import {ValueTableComponent} from './components/deprecated/value-table/value-table.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {MatSortModule} from '@angular/material/sort';
@@ -48,8 +48,8 @@ import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions, MatTooltipModule}
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {RequirementFilterBarComponent} from './components/requirement-filter-bar/requirement-filter-bar.component';
 import {RequirementTableComponent} from './components/requirement-table/requirement-table.component';
-import {VariantDialogComponent} from './components/variant-dialog/variant-dialog.component';
-import {VariantTableComponent} from './components/variant-table/variant-table.component';
+import {VariantDialogComponent} from './components/deprecated/variant-dialog/variant-dialog.component';
+import {VariantTableComponent} from './components/deprecated/variant-table/variant-table.component';
 import {AddEntityButtonComponent} from './components/add-entity-button/add-entity-button.component';
 import {ScrollToTopButtonComponent} from './components/scroll-to-top-button/scroll-to-top-button.component';
 import {HighlightTextareaComponent} from './components/highlight-textarea/highlight-textarea.component';

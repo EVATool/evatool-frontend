@@ -1,12 +1,12 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {VariantDataService} from '../../services/data/variant-data.service';
-import {LogService} from '../../services/log.service';
-import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
+import {VariantDataService} from '../../../services/data/variant-data.service';
+import {LogService} from '../../../services/log.service';
+import {CrossUiEventService} from '../../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
+import {VariantReferencedByRequirementsEvent} from '../../../services/event/events/http409/VariantReferencedByRequirementsEvent';
 
 @Component({
   selector: 'app-variant-dialog',

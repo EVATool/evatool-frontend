@@ -1,12 +1,12 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {VariantDialogComponent} from './variant-dialog.component';
-import {SpecService} from '../../services/spec.service';
+import {ValueDialogComponent} from './value-dialog.component';
+import {SpecService} from '../../../services/spec.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-describe('VariantDialogComponent', () => {
-  let component: VariantDialogComponent;
-  let fixture: ComponentFixture<VariantDialogComponent>;
+describe('ValueDialogComponent', () => {
+  let component: ValueDialogComponent;
+  let fixture: ComponentFixture<ValueDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,13 +22,13 @@ describe('VariantDialogComponent', () => {
           }
         ]
       ),
-      declarations: [VariantDialogComponent]
+      declarations: [ValueDialogComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VariantDialogComponent);
+    fixture = TestBed.createComponent(ValueDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

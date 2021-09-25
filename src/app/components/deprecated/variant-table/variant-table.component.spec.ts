@@ -1,23 +1,23 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {ValueTableComponent} from './value-table.component';
-import {SpecService} from '../../services/spec.service';
+import {VariantTableComponent} from './variant-table.component';
+import {SpecService} from '../../../services/spec.service';
 
-describe('ValuesTableComponent', () => {
-  let component: ValueTableComponent;
-  let fixture: ComponentFixture<ValueTableComponent>;
+describe('VariantTableComponent', () => {
+  let component: VariantTableComponent;
+  let fixture: ComponentFixture<VariantTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: SpecService.imports,
       providers: SpecService.providers,
-      declarations: [ValueTableComponent]
+      declarations: [VariantTableComponent]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ValueTableComponent);
+    fixture = TestBed.createComponent(VariantTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

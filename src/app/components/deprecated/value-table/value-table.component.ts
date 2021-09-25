@@ -2,16 +2,16 @@ import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Value} from '../../model/Value';
-import {LogService} from '../../services/log.service';
-import {ValueDataService} from '../../services/data/value-data.service';
-import {ImpactDataService} from '../../services/data/impact-data.service';
-import {AnalysisDataService} from '../../services/data/analysis-data.service';
-import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
+import {Value} from '../../../model/Value';
+import {LogService} from '../../../services/log.service';
+import {ValueDataService} from '../../../services/data/value-data.service';
+import {ImpactDataService} from '../../../services/data/impact-data.service';
+import {AnalysisDataService} from '../../../services/data/analysis-data.service';
+import {CrossUiEventService} from '../../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
-import {ValueDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {ValueReferencedByImpactsEvent} from '../../../services/event/events/http409/ValueReferencedByImpactsEvent';
+import {ValueDeletionFailedEvent} from '../../../services/event/events/DeletionFailedEvents';
 
 @Component({
   selector: 'app-value-table',

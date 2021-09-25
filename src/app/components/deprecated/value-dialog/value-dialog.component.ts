@@ -1,12 +1,12 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {LogService} from '../../services/log.service';
+import {LogService} from '../../../services/log.service';
 import {FormBuilder} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ValueDataService} from '../../services/data/value-data.service';
-import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
+import {ValueDataService} from '../../../services/data/value-data.service';
+import {CrossUiEventService} from '../../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
+import {ValueReferencedByImpactsEvent} from '../../../services/event/events/http409/ValueReferencedByImpactsEvent';
 
 @Component({
   selector: 'app-value-dialog',
