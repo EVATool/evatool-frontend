@@ -37,8 +37,6 @@ import {EntityTableComponent} from '../abstract/entity-table/entity-table.compon
 })
 export class StakeholderTableComponent extends EntityTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  private ngUnsubscribe = new Subject();
-
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Stakeholder>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -48,9 +46,6 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
   displayedColumns = ['prefixSequenceId', 'name', 'level', 'priority', 'impacted'];
   tableDataSource = new MatTableDataSource<Stakeholder>();
   filterEvent!: StakeholderTableFilterEvent;
-
-  windowScrolled = false;
-  highlightFilter = '';
 
   constructor(public stakeholderData: StakeholderDataService,
               private analysisData: AnalysisDataService,
