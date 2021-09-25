@@ -25,7 +25,6 @@ import {EntityTableComponent} from '../abstract/entity-table/entity-table.compon
 })
 export class StakeholderTableComponent extends EntityTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Stakeholder>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChildren(MatRow, {read: ViewContainerRef}) rows!: QueryList<ViewContainerRef>;
@@ -44,6 +43,8 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
   }
 
   ngOnInit(): void {
+    super.onInit();
+
     this.crossUI.stakeholderReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: StakeholderReferencedByImpactsEvent) => {
@@ -98,11 +99,7 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
   }
 
   ngAfterViewInit(): void {
-    this.scrollbarRef?.scrolled
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(e => {
-        this.windowScrolled = e.target.scrollTop !== 0;
-      });
+    super.afterViewInit();
 
     this.initSorting();
     this.initFiltering();
