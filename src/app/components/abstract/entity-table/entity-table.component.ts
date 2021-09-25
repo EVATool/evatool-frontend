@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LogService} from '../../../services/log.service';
 
 @Component({
@@ -6,13 +6,17 @@ import {LogService} from '../../../services/log.service';
   templateUrl: './entity-table.component.html',
   styleUrls: ['./entity-table.component.scss']
 })
-export abstract class EntityTableComponent implements OnInit {
+export class EntityTableComponent implements OnInit, AfterViewInit {
 
-  protected constructor(protected logger: LogService) {
+  constructor(protected logger: LogService) {
 
   }
 
   ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit(): void {
 
   }
 }

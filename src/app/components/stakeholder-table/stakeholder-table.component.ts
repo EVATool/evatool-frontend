@@ -27,6 +27,7 @@ import {takeUntil} from 'rxjs/operators';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
 import {StakeholderDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {newRowAnimation} from '../../animations/NewRowAnimation';
+import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
 
 @Component({
   selector: 'app-stakeholder-table',
@@ -34,28 +35,30 @@ import {newRowAnimation} from '../../animations/NewRowAnimation';
   styleUrls: ['./stakeholder-table.component.scss'],
   animations: [newRowAnimation]
 })
-export class StakeholderTableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class StakeholderTableComponent extends EntityTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Stakeholder>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
-  @Output() userWantsToSeeReferencedImpacts: EventEmitter<Stakeholder> = new EventEmitter();
   @ViewChildren(MatRow, {read: ViewContainerRef}) rows!: QueryList<ViewContainerRef>;
+  @Output() userWantsToSeeReferencedImpacts: EventEmitter<Stakeholder> = new EventEmitter();
 
   displayedColumns = ['prefixSequenceId', 'name', 'level', 'priority', 'impacted'];
   tableDataSource = new MatTableDataSource<Stakeholder>();
-  windowScrolled = false;
-  highlightFilter = '';
   filterEvent!: StakeholderTableFilterEvent;
 
-  constructor(private logger: LogService,
-              public stakeholderData: StakeholderDataService,
+  windowScrolled = false;
+  highlightFilter = '';
+
+  constructor(public stakeholderData: StakeholderDataService,
               private analysisData: AnalysisDataService,
               private impactData: ImpactDataService,
               private crossUI: CrossUiEventService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              protected logger: LogService) {
+    super(logger);
   }
 
   ngOnInit(): void {
