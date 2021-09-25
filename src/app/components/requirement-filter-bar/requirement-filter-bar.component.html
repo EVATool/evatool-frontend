@@ -17,6 +17,14 @@
   </mat-list-item>
 
   <mat-list-item>
+    <app-filter-category #stakeholderFilter
+                         [categories]="this.stakeholderNames"
+                         [name]="'Stakeholders'"
+                         (filterChanged)="stakeholderFilterChanged($event)">
+    </app-filter-category>
+  </mat-list-item>
+
+  <mat-list-item>
     <app-filter-category #impactFilter
                          [categories]="impactPrefixIds"
                          [name]="'Impacts'"

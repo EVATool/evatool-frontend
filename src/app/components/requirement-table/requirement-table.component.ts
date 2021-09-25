@@ -23,6 +23,7 @@ import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/eve
 import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {mouseInOutAnimation} from '../../animations/MouseInOutAnimation';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
+import {Stakeholder} from '../../model/Stakeholder';
 
 @Component({
   selector: 'app-requirement-table',
@@ -185,6 +186,9 @@ export class RequirementTableComponent extends EntityTableComponent implements O
       const valueNames = this.getAffectedValues(data);
       const valueFilter = searchTerms.value.length === 0 || searchTerms.value.every((s: string) => valueNames.includes(s));
 
+      const stakeholderNames = this.getAffectedStakeholders(data);
+      const stakeholderFilter = searchTerms.stakeholder.length === 0 || searchTerms.stakeholder.every((s: string) => stakeholderNames.includes(s));
+
       let meritFilter = true;
       const deltas = this.getRequirementDeltas(data);
       deltas.forEach((delta: RequirementDelta) => {
@@ -195,7 +199,7 @@ export class RequirementTableComponent extends EntityTableComponent implements O
         }
       });
 
-      return variantFilter && valueFilter && meritFilter;
+      return variantFilter && valueFilter && stakeholderFilter && meritFilter;
     };
   }
 
@@ -355,6 +359,20 @@ export class RequirementTableComponent extends EntityTableComponent implements O
     });
 
     return values.map(value => value.name);
+  }
+
+  getAffectedStakeholders(requirement: Requirement): string[] {
+    const stakeholders: Stakeholder[] = [];
+
+    this.requirementDeltaDataService.requirementDeltas.forEach((delta: RequirementDelta) => {
+      if (delta.requirement === requirement) {
+        if (!stakeholders.includes(delta.impact.stakeholder)) {
+          stakeholders.push(delta.impact.stakeholder);
+        }
+      }
+    });
+
+    return stakeholders.map(value => value.name);
   }
 
   getRequirementDelta(requirement: Requirement, impact: Impact): RequirementDelta | null {

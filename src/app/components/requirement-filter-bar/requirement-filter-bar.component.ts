@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
 import {FilterCategoryComponent} from '../filter-category/filter-category.component';
-import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {Variant} from '../../model/Variant';
 import {ValueDataService} from '../../services/data/value-data.service';
 import {Value} from '../../model/Value';
@@ -13,6 +12,8 @@ import {Impact} from '../../model/Impact';
 import {LogService} from '../../services/log.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {StakeholderDataService} from '../../services/data/stakeholder-data.service';
+import {Stakeholder} from '../../model/Stakeholder';
 
 @Component({
   selector: 'app-requirement-filter-bar',
@@ -26,11 +27,13 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
   @ViewChild(FilterSliderComponent) sliderFilter!: FilterSliderComponent;
   @ViewChild('variantsFilter') variantsFilter!: FilterCategoryComponent;
   @ViewChild('valueSystemFilter') valueSystemFilter!: FilterCategoryComponent;
+  @ViewChild('stakeholderFilter') stakeholderFilter!: FilterCategoryComponent;
   @ViewChild('impactFilter') impactFilter!: FilterCategoryComponent;
   @Output() filterChanged = new EventEmitter<RequirementTableFilterEvent>();
 
   variantNames: string[] = [];
   valueNames: string[] = [];
+  stakeholderNames: string[] = [];
   impactPrefixIds: string[] = [];
 
   requirementTableFilterEvent!: RequirementTableFilterEvent;
@@ -39,6 +42,7 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
   constructor(
     private logger: LogService,
     private variantData: VariantDataService,
+    private stakeholderData: StakeholderDataService,
     private valueData: ValueDataService,
     private impactData: ImpactDataService) {
     this.requirementTableFilterEvent = RequirementTableFilterEvent.getDefault();
@@ -68,7 +72,6 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
       .subscribe((variant: Variant) => {
         this.updateVariants();
       });
-
     this.updateVariants();
 
     this.valueData.loadedValues
@@ -94,8 +97,32 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
       .subscribe((values: Value) => {
         this.updateValues();
       });
-
     this.updateValues();
+
+    this.stakeholderData.loadedStakeholders
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholders: Stakeholder[]) => {
+        this.updateStakeholders();
+      });
+
+    this.stakeholderData.createdStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
+        this.updateStakeholders();
+      });
+
+    this.stakeholderData.updatedStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
+        this.updateStakeholders();
+      });
+
+    this.stakeholderData.deletedStakeholder
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((stakeholder: Stakeholder) => {
+        this.updateStakeholders();
+      });
+    this.updateStakeholders();
 
     this.impactData.loadedImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -120,7 +147,6 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
       .subscribe((impact: Impact) => {
         this.updateImpacts();
       });
-
     this.updateImpacts();
   }
 
@@ -141,6 +167,11 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
       value => value.name);
   }
 
+  updateStakeholders(): void {
+    this.stakeholderNames = this.stakeholderData.stakeholders.map(
+      stakeholder => stakeholder.name);
+  }
+
   updateImpacts(): void {
     this.impactPrefixIds = this.impactData.impacts.map(
       impact => impact.prefixSequenceId);
@@ -155,6 +186,14 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
 
   valueFilterChanged(event: string[]): void {
     this.requirementTableFilterEvent.value = event;
+    if (!this.suppressChildEvent) {
+      this.filterChanged.emit(this.requirementTableFilterEvent);
+    }
+  }
+
+  stakeholderFilterChanged(event: string[]): void {
+    this.logger.trace(this, 'Slider Filter Changed (Stakeholder)');
+    this.requirementTableFilterEvent.stakeholder = event;
     if (!this.suppressChildEvent) {
       this.filterChanged.emit(this.requirementTableFilterEvent);
     }
@@ -180,6 +219,7 @@ export class RequirementFilterBarComponent implements OnInit, OnDestroy {
     this.sliderFilter.clearFilter();
     this.variantsFilter.clearFilter();
     this.valueSystemFilter.clearFilter();
+    this.stakeholderFilter.clearFilter();
     this.impactFilter.clearFilter();
 
     this.suppressChildEvent = false;
