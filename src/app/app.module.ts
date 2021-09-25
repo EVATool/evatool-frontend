@@ -80,6 +80,7 @@ import {HttpInterceptorService} from './services/http/http-interceptor.service';
 import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 import {FormatPipe} from './pipes/format.pipe';
 import {ResizeColumnDirective} from './directives/resize-column.directive';
+import { EntityTableComponent } from './components/abstract/entity-table/entity-table.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -144,6 +145,7 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     RealmAdministrationComponent,
     FormatPipe,
     ResizeColumnDirective,
+    EntityTableComponent,
   ],
   imports: [
     BrowserModule,
