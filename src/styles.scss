@@ -173,6 +173,8 @@ body {
     }
 
     .mat-cell {
+      padding: 8px;
+      height: auto;
       overflow: hidden;
       text-overflow: ellipsis;
     }
