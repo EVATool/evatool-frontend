@@ -24,7 +24,9 @@ jobs:
           cache: 'npm'
 
       - name: Build
-        run: npm run build:prod
+        run: |
+          npm ci
+          npm run build:prod
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
