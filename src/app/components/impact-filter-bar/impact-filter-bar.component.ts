@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
 import {FilterCategoryComponent} from '../filter-category/filter-category.component';
-import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {ImpactTableFilterEvent} from './ImpactTableFilterEvent';
 import {LogService} from '../../services/log.service';
 import {StakeholderDataService} from '../../services/data/stakeholder-data.service';

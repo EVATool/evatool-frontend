@@ -3,7 +3,6 @@ import {StakeholderDataService} from '../../services/data/stakeholder-data.servi
 import {LogService} from '../../services/log.service';
 import {StakeholderTableFilterEvent} from './StakeholderTableFilterEvent';
 import {FilterCategoryComponent} from '../filter-category/filter-category.component';
-import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {FilterPriorityComponent} from '../filter-priority/filter-priority.component';
 import {FilterSliderComponent} from '../filter-impact/filter-slider.component';
 
