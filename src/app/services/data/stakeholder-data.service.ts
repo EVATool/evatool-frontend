@@ -123,6 +123,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
     stakeholder.name = '';
     stakeholder.priority = this.stakeholderPriorities[0];
     stakeholder.level = this.stakeholderLevels[0];
+    stakeholder.description = '';
     stakeholder.impacted = null;
     stakeholder.analysis = analysis;
 
