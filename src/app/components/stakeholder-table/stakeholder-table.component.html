@@ -64,6 +64,22 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="description">
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+          <div mat-sort-header>
+            <div matTooltip="The stakeholder description">
+              Description
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let stakeholder'>
+          <app-highlight-textarea [(text)]="stakeholder.description"
+                                  (textChange)="updateStakeholder(stakeholder)"
+                                  [highlightFilter]="highlightFilter"
+                                  [placeholder]="'Describe the stakeholder...'"></app-highlight-textarea>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="impacted">
         <th scope="col" mat-header-cell *matHeaderCellDef>
           <div mat-sort-header>

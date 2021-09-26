@@ -23,7 +23,7 @@ import {EntityTableComponent} from '../abstract/entity-table/entity-table.compon
 })
 export class StakeholderTableComponent extends EntityTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  displayedColumns = ['prefixSequenceId', 'name', 'level', 'priority', 'impacted'];
+  displayedColumns = ['prefixSequenceId', 'name', 'level', 'priority', 'description', 'impacted'];
   tableDataSource = new MatTableDataSource<Stakeholder>();
   filterEvent!: StakeholderTableFilterEvent;
 

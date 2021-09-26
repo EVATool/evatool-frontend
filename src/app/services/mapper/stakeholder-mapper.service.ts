@@ -25,6 +25,7 @@ export class StakeholderMapperService extends MapperService {
     stakeholderDto.level = stakeholder.level;
     stakeholderDto.impacted = stakeholder.impacted;
     stakeholderDto.analysisId = stakeholder.analysis.id;
+    stakeholderDto.description = stakeholder.description;
 
     return stakeholderDto;
   }
@@ -49,5 +50,6 @@ export class StakeholderMapperService extends MapperService {
         break;
       }
     }
+    stakeholder.description = stakeholderDto.description;
   }
 }

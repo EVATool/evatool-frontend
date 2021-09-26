@@ -11,6 +11,7 @@
 
 .mat-column-prefixSequenceId {
   min-width: 80px;
+  width: 80px;
 }
 
 .mat-column-description {
@@ -20,11 +21,12 @@
 
 .mat-column-variants {
   min-width: 200px;
+  width: 200px;
 }
 
 .mat-column-values {
   min-width: 100px;
-  //width: 100px;
+  width: 100px;
   text-overflow: ellipsis;
   word-wrap: anywhere;
   overflow-wrap: anywhere;
@@ -33,10 +35,12 @@
 
 .mat-column-impact {
   min-width: 50px;
+  width: 50px;
 }
 
 .mat-column-delete-button {
   min-width: 10px;
+  width: 10px;
 }
 
 .mat-row {
