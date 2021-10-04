@@ -9,9 +9,9 @@
         Name
       </div>
     </th>
-    <td mat-cell *matCellDef='let value'>
-      <app-highlight-textarea [(text)]="value.name"
-                              (textChange)="updateValueType(value)"
+    <td mat-cell *matCellDef='let valueType'>
+      <app-highlight-textarea [(text)]="valueType.name"
+                              (textChange)="updateValueType(valueType)"
                               [highlightFilter]="''"
                               [placeholder]="'Name...'"></app-highlight-textarea>
     </td>
