@@ -105,7 +105,8 @@ export class EntityTableComponent {
   }
 
   // TODO return index more reliable. This sometimes fails to scroll (when changing the sorting and adding a new row).
-  getRowIndex(stakeholder: Stakeholder): number {
+  //  Add method that scrolls to entity passed.
+  getLastRowIndex(): number {
     const row = this.rows.get(this.rows.length - 1);
     if (row) {
       return row.element.nativeElement.sectionRowIndex;

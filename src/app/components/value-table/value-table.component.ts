@@ -80,12 +80,8 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
 
     this.valueData.createdValue
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((values: Value) => {
+      .subscribe((value: Value) => {
         this.updateTableDataSource();
-        setTimeout(() => {
-          const index = this.getRowIndex(values[-1]);
-          this.scrollToIndex(index);
-        }, 10);
       });
 
     this.valueData.deletedValue
@@ -156,9 +152,7 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
   updateValue(value: Value): void {
     this.logger.trace(this, 'Update Value');
 
-    console.log('AAAAAAAAAAAAAAA');
     if (value.highlighted && !value.archived) {
-      console.log('BBBBBBBBBBBBBB');
       value.highlighted = false;
     }
 
