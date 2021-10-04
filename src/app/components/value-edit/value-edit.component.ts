@@ -17,5 +17,4 @@ export class ValueEditComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

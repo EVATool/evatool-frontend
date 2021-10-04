@@ -1,0 +1,11 @@
+<div class="entity-main-container">
+  <div class="filter-bar-container">
+    <app-variant-filter-bar (filterChanged)="table.updateFilter($event)">
+    </app-variant-filter-bar>
+  </div>
+
+  <div class="table-container">
+    <app-variant-table #table>
+    </app-variant-table>
+  </div>
+</div>
