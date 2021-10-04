@@ -41,6 +41,8 @@ import {ValueReferencedByImpactsEvent} from './events/http409/ValueReferencedByI
 import {VariantReferencedByRequirementsEvent} from './events/http409/VariantReferencedByRequirementsEvent';
 import {VariantTypeDataService} from '../data/variant-type-data.service';
 import {ValueTypeDataService} from '../data/value-type-data.service';
+import {ArchivedValueReferencedByImpact} from './events/local/ArchivedValueReferencedByImpact';
+import {ArchivedVariantReferencedByRequirement} from './events/local/ArchivedVariantReferencedByRequirement';
 
 @Injectable({
   providedIn: 'root'
@@ -106,17 +108,16 @@ export class CrossUiEventService implements OnDestroy {
   @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
 
-  @Output() userWantsToSeeArchivedValueReferencedByImpact: EventEmitter<void> = new EventEmitter();
-  @Output() userWantsToSeeArchivedVariantReferencedByRequirement: EventEmitter<void> = new EventEmitter();
+  @Output() userWantsToSeeArchivedValueReferencedByImpact: EventEmitter<ArchivedValueReferencedByImpact> = new EventEmitter();
+  @Output() userWantsToSeeArchivedVariantReferencedByRequirement: EventEmitter<ArchivedVariantReferencedByRequirement> = new EventEmitter();
 
   @Output() userWantsToNavigateToValueTab: EventEmitter<void> = new EventEmitter();
   @Output() userWantsToNavigateToVariantTab: EventEmitter<void> = new EventEmitter();
 
-  @Output() userNavigatedToAnalysis: EventEmitter<void> = new EventEmitter<void>();
-  @Output() userLeftCurrentAnalysisEdit: EventEmitter<void> = new EventEmitter<void>();
+  @Output() userNavigatedToAnalysis: EventEmitter<void> = new EventEmitter();
+  @Output() userLeftCurrentAnalysisEdit: EventEmitter<void> = new EventEmitter();
 
   @Output() highlightTextChanged: EventEmitter<string> = new EventEmitter<string>();
-
 
   constructor(private httpMarshall: HttpMarshallService,
               private analysisData: AnalysisDataService,

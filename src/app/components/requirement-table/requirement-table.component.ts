@@ -23,6 +23,7 @@ import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} fro
 import {mouseInOutAnimation} from '../../animations/MouseInOutAnimation';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
 import {Stakeholder} from '../../model/Stakeholder';
+import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 
 @Component({
   selector: 'app-requirement-table',
@@ -48,7 +49,7 @@ export class RequirementTableComponent extends EntityTableComponent implements O
     public valueDataService: ValueDataService,
     public analysisDataService: AnalysisDataService,
     public variantDataService: VariantDataService,
-    public crossUI: CrossUiEventService,
+    private crossUI: CrossUiEventService,
     private dialog: MatDialog) {
     super(logger);
   }
@@ -388,5 +389,10 @@ export class RequirementTableComponent extends EntityTableComponent implements O
     return this.requirementDeltaDataService.requirementDeltas.filter(
       delta => delta.requirement === requirement
     );
+  }
+
+  emitArchivedReferenced(variants: Variant[], requirement: Requirement): void {
+    const event = new ArchivedVariantReferencedByRequirement(variants, requirement);
+    this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement.emit(event);
   }
 }

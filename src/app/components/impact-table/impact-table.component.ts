@@ -19,6 +19,7 @@ import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/h
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
 import {ImpactDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
+import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
 
 @Component({
   selector: 'app-impact-table',
@@ -40,7 +41,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
     public valueDataService: ValueDataService,
     public stakeholderDataService: StakeholderDataService,
     public analysisDataService: AnalysisDataService,
-    public crossUI: CrossUiEventService,
+    private crossUI: CrossUiEventService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) {
     super(logger);
@@ -218,5 +219,10 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
   deleteImpact(impact: Impact): void {
     impact.deletionFlagged = true;
     this.impactDataService.deleteImpact(impact);
+  }
+
+  emitArchivedReferenced(value: Value, impact: Impact): void {
+    const event = new ArchivedValueReferencedByImpact(value, impact);
+    this.crossUI.userWantsToSeeArchivedValueReferencedByImpact.emit(event);
   }
 }

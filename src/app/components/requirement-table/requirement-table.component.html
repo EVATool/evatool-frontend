@@ -40,10 +40,10 @@
               Variants
             </div>
 
-          <mat-icon id="variant-modal"
-                    (click)="$event.stopPropagation(); openVariantsDialog();"
-                    [matTooltip]="'Edit the available variants'">edit
-          </mat-icon>
+            <mat-icon id="variant-modal"
+                      (click)="$event.stopPropagation(); openVariantsDialog();"
+                      [matTooltip]="'Edit the available variants'">edit
+            </mat-icon>
           </div>
         </th>
 
@@ -74,7 +74,7 @@
           <button mat-icon-button
                   *ngIf="referencesArchivedVariant(requirement)"
                   class="warning-icon-button"
-                  (click)="crossUI.userWantsToSeeArchivedVariantReferencedByRequirement.emit()"
+                  (click)="emitArchivedReferenced(getReferencedArchivedVariants(requirement), requirement)"
                   matTooltip="This requirement references an archived variant"
                   matTooltipClass="multi-line-tooltip">
             <mat-icon>warning icon</mat-icon>

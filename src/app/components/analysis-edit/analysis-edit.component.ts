@@ -13,6 +13,8 @@ import {takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
 import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
+import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -62,6 +64,18 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
         this.navigateToTabByName('Requirement');
+      });
+
+    this.crossUI.userWantsToSeeArchivedValueReferencedByImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ArchivedValueReferencedByImpact) => {
+        this.navigateToTabByName('Value');
+      });
+
+    this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ArchivedVariantReferencedByRequirement) => {
+        this.navigateToTabByName('Variant');
       });
 
     this.crossUI.userWantsToNavigateToValueTab
@@ -128,6 +142,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
     }
+    this.logger.warn(this, 'Tab with name ' + tab + ' not found');
   }
 
   putTabInUrl(index: number): void {
