@@ -76,6 +76,8 @@ export class SampleDataService {
       this.variantTypes.push(this.variantTypeMapper.fromDto(variantTypeDto, this.analyses));
     });
 
+    console.log(this.variantTypes);
+
     // Prepare Variant Data.
     this.variantDtoList.forEach((variantDto: VariantDto) => {
       this.variants.push(this.variantMapper.fromDto(variantDto, this.analyses, this.variantTypes));
@@ -312,7 +314,6 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       archived: false,
       analysisId: '1',
-      subVariantIds: [],
       variantTypeId: '1'
     },
     {
@@ -322,7 +323,6 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       archived: false,
       analysisId: '1',
-      subVariantIds: [],
       variantTypeId: '2'
     },
     {
@@ -332,7 +332,6 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       archived: true,
       analysisId: '1',
-      subVariantIds: [],
       variantTypeId: '1'
     }
   ];

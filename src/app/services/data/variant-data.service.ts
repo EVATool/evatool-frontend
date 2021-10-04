@@ -9,8 +9,8 @@ import {Analysis} from '../../model/Analysis';
 import {VariantDto} from '../../dto/VariantDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {Value} from '../../model/Value';
 import {VariantTypeDataService} from './variant-type-data.service';
+import {VariantType} from '../../model/VariantType';
 
 @Injectable({
   providedIn: 'root'
@@ -67,7 +67,7 @@ export class VariantDataService extends DataService implements OnDestroy {
     this.variantRest.getVariantsByAnalysisId(analysisId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((variantDtoList: VariantDto[]) => {
-        const tempVariants: Value[] = [];
+        const tempVariants: Variant[] = [];
         variantDtoList.forEach(variantDto => {
           tempVariants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis], this.variantTypeData.variantTypes));
         });
@@ -110,15 +110,14 @@ export class VariantDataService extends DataService implements OnDestroy {
       });
   }
 
-  createDefaultVariant(analysis: Analysis): Variant {
+  createDefaultVariant(analysis: Analysis, variantType: VariantType): Variant {
     const variant = new Variant();
 
     variant.name = '';
     variant.description = '';
     variant.archived = false;
     variant.analysis = analysis;
-    variant.subVariants = [];
-    variant.variantType = this.variantTypeData.variantTypes[0];
+    variant.variantType = variantType;
 
     return variant;
   }

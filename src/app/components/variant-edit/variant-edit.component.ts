@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
+import {VariantTableComponent} from '../variant-table/variant-table.component';
+import {VariantFilterBarComponent} from '../variant-filter-bar/variant-filter-bar.component';
 
 @Component({
   selector: 'app-variant-edit',

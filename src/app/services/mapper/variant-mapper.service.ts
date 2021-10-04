@@ -25,7 +25,7 @@ export class VariantMapperService extends MapperService {
     variantDto.description = variant.description;
     variantDto.archived = variant.archived;
     variantDto.analysisId = variant.analysis.id;
-    variantDto.subVariantIds = variant.subVariants.map(subVariant => subVariant.id);
+    variantDto.variantTypeId = variant.variantType.id;
 
     return variantDto;
   }
@@ -55,6 +55,5 @@ export class VariantMapperService extends MapperService {
         break;
       }
     }
-    //variant.subVariantIds = variantDto.subVariants.map(subVar => subVar.id);
   }
 }

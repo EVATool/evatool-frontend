@@ -138,7 +138,7 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
 
   createValue(): void {
     // Get valid default value.
-    const value = this.valueData.createDefaultValue(this.analysisData.currentAnalysis);
+    const value = this.valueData.createDefaultValue(this.analysisData.currentAnalysis, this.valueTypeData.valueTypes[0]);
 
     // Ensure visibility with current filter settings.
     if (this.filterEvent) {

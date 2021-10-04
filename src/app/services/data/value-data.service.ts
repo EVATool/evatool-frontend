@@ -10,6 +10,7 @@ import {ValueDto} from '../../dto/ValueDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {ValueTypeDataService} from './value-type-data.service';
+import {ValueType} from '../../model/ValueType';
 
 @Injectable({
   providedIn: 'root'
@@ -109,14 +110,14 @@ export class ValueDataService extends DataService implements OnDestroy {
       });
   }
 
-  createDefaultValue(analysis: Analysis): Value {
+  createDefaultValue(analysis: Analysis, valueType: ValueType): Value {
     const value = new Value();
 
     value.name = '';
     value.description = '';
     value.archived = false;
     value.analysis = analysis;
-    value.valueType = this.valueTypeData.valueTypes[0];
+    value.valueType = valueType;
 
     return value;
   }

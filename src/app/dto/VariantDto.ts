@@ -6,6 +6,5 @@ export class VariantDto {
   archived!: boolean;
 
   analysisId!: string;
-  subVariantIds!: string[];
   variantTypeId!: string;
 }

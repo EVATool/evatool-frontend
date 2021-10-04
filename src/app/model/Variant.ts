@@ -11,7 +11,6 @@ export class Variant {
   archived!: boolean;
 
   analysis!: Analysis;
-  subVariants: Variant[] = [];
   variantType!: VariantType;
 
   // UI

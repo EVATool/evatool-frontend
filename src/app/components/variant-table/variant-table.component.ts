@@ -28,7 +28,7 @@ export class VariantTableComponent extends EntityTableComponent implements OnIni
   tableDataSource = new MatTableDataSource<Variant>();
   filterEvent!: VariantTableFilterEvent;
 
-  archivedFlaggedVariant!: Variant;
+  archivedFlaggedVariants!: Variant[];
 
   constructor(public variantTypeData: VariantTypeDataService,
               public variantData: VariantDataService,
@@ -63,8 +63,10 @@ export class VariantTableComponent extends EntityTableComponent implements OnIni
     this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ArchivedVariantReferencedByRequirement) => {
-        this.archivedFlaggedVariant = event.variant;
-        this.archivedFlaggedVariant.highlighted = true;
+        this.archivedFlaggedVariants = event.variants;
+        for (const variant of this.archivedFlaggedVariants) {
+          variant.highlighted = true;
+        }
       });
 
     this.crossUI.variantDeletionFailed
@@ -136,7 +138,7 @@ export class VariantTableComponent extends EntityTableComponent implements OnIni
 
   createVariant(): void {
     // Get valid default variant.
-    const variant = this.variantData.createDefaultVariant(this.analysisData.currentAnalysis);
+    const variant = this.variantData.createDefaultVariant(this.analysisData.currentAnalysis, this.variantTypeData.variantTypes[0]);
 
     // Ensure visibility with current filter settings.
     if (this.filterEvent) {
