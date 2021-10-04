@@ -44,7 +44,7 @@ export class ValueDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.valuesLoaded = false;
+        //this.valuesLoaded = false;
       });
     this.valueTypeData.loadedValueTypes
       .pipe(takeUntil(this.ngUnsubscribe))

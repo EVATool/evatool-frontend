@@ -44,7 +44,7 @@ export class VariantTypeDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.variantTypesLoaded = false;
+        //this.variantTypesLoaded = false;
         this.variantTypeRest.getVariantTypesByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((variantTypeDtoList: VariantTypeDto[]) => {

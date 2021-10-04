@@ -48,7 +48,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.impactsLoaded = false;
+        //this.impactsLoaded = false;
       });
     this.stakeholderData.loadedStakeholders
       .pipe(takeUntil(this.ngUnsubscribe))

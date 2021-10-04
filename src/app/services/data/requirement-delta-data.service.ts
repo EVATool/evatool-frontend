@@ -48,7 +48,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.requirementDeltasLoaded = false;
+        //this.requirementDeltasLoaded = false;
       });
     this.impactData.loadedImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
