@@ -24,7 +24,7 @@ export class ImpactEditComponent {
     private analysisDataService: AnalysisDataService) {
   }
 
-  tabActivated() {
+  tabActivated(): void {
     this.logger.debug(this, 'Tab activated');
     //this.table?.reload();
   }
