@@ -3,7 +3,7 @@
 @include misc-theme();
 @include main-table-theme();
 
-.mat-column-prefixSequenceId {
+.mat-column-archived {
   min-width: 80px;
   width: 80px;
 }
@@ -14,14 +14,9 @@
   text-overflow: ellipsis;
 }
 
-.mat-column-level {
-  min-width: 150px;
-  width: 150px;
-}
-
-.mat-column-priority {
-  min-width: 150px;
-  width: 150px;
+.mat-column-description {
+  min-width: 250px;
+  text-overflow: ellipsis;
 }
 
 .mat-column-description {
@@ -29,23 +24,8 @@
   text-overflow: ellipsis;
 }
 
-.mat-column-impacted {
-  min-width: 250px;
-  width: 250px;
-}
-
-#value-modal {
+#value-type-modal {
   margin-left: 5%;
-}
-
-.impact-slider-container {
-  margin-top: 2%;
-}
-
-.value-percentage {
-  text-align: center;
-  margin-top: 5%;
-  margin-bottom: -5%;
 }
 
 /* Delete row button */
@@ -55,7 +35,7 @@
   width: 100%;
 }
 
-.impacted-container {
+.description-container {
   display: table-cell;
   text-align: left;
   padding: 2px;
