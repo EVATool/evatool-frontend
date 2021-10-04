@@ -7,4 +7,5 @@ export class VariantDto {
 
   analysisId!: string;
   subVariantIds!: string[];
+  variantTypeId!: string;
 }

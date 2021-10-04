@@ -6,4 +6,5 @@ export class ValueDto {
   archived!: boolean;
 
   analysisId!: string;
+  valueTypeId!: string;
 }
