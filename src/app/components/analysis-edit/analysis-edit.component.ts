@@ -55,13 +55,19 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: StakeholderReferencedByImpactsEvent) => {
-        this.tabGroup.selectedIndex = 1;
+        this.navigateToTabByName('Impact');
       });
 
     this.crossUI.userWantsToSeeImpactReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
-        this.tabGroup.selectedIndex = 2;
+        this.navigateToTabByName('Requirement');
+      });
+
+    this.crossUI.userWantsToNavigateToValueTab
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.navigateToTabByName('Value');
       });
 
     this.crossUI.userNavigatedToAnalysis.emit();
@@ -93,6 +99,9 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
       case 3:
         break;
 
+      case 4:
+        break;
+
       default:
         this.logger.warn(this, 'Unknown tab');
         break;
@@ -108,6 +117,10 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
+    this.navigateToTabByName(tab);
+  }
+
+  private navigateToTabByName(tab: string): void {
     for (let i = 0; i < this.tabGroup._allTabs.length; i++) {
       const tabName = this.tabGroup._allTabs.get(i)?.textLabel;
       if (tabName === tab) {

@@ -40,7 +40,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
     public valueDataService: ValueDataService,
     public stakeholderDataService: StakeholderDataService,
     public analysisDataService: AnalysisDataService,
-    private crossUI: CrossUiEventService,
+    public crossUI: CrossUiEventService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar) {
     super(logger);
@@ -171,7 +171,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
       this.snackBar.open(message, action, {duration: 5000}).onAction()
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(() => {
-          this.openValuesDialog();
+          this.crossUI.userWantsToNavigateToValueTab.emit();
         });
     } else {
       const impact = this.impactDataService.createDefaultImpact(
@@ -218,16 +218,5 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
   deleteImpact(impact: Impact): void {
     impact.deletionFlagged = true;
     this.impactDataService.deleteImpact(impact);
-  }
-
-  openValuesDialog(id?: string): void {
-    this.logger.trace(this, 'Opening Values Dialog');
-
-    // TODO
-    // this.dialog.open(ValueDialogComponent, {
-    //   height: '80%',
-    //   width: '50%',
-    //   data: {id}
-    // });
   }
 }
