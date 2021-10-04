@@ -15,6 +15,7 @@ import {takeUntil} from 'rxjs/operators';
 import {RequirementsReferencingVariantEvent} from '../../services/event/events/http409/RequirementsReferencingVariantEvent';
 import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 import {VariantDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {VariantTypeDialogComponent} from '../variant-type-dialog/variant-type-dialog.component';
 
 @Component({
   selector: 'app-variant-table',

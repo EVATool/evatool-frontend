@@ -85,6 +85,8 @@ import { ValueTypeTableComponent } from './components/value-type-table/value-typ
 import { VariantEditComponent } from './components/variant-edit/variant-edit.component';
 import { VariantFilterBarComponent } from './components/variant-filter-bar/variant-filter-bar.component';
 import { VariantTableComponent } from './components/variant-table/variant-table.component';
+import { VariantTypeDialogComponent } from './components/variant-type-dialog/variant-type-dialog.component';
+import { VariantTypeTableComponent } from './components/variant-type-table/variant-type-table.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -154,6 +156,8 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     VariantEditComponent,
     VariantFilterBarComponent,
     VariantTableComponent,
+    VariantTypeDialogComponent,
+    VariantTypeTableComponent,
   ],
   imports: [
     BrowserModule,
