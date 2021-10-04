@@ -7,7 +7,6 @@ import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LogService} from '../../services/log.service';
 import {takeUntil} from 'rxjs/operators';
-import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {Value} from '../../model/Value';
 import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
 import {ValueDataService} from '../../services/data/value-data.service';
@@ -121,13 +120,9 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
     return (data: Value, filter: string): boolean => {
       const searchTerms = JSON.parse(filter);
 
-      const levelFilter = searchTerms.level.length === 0 || searchTerms.level.indexOf(data.level) !== -1;
+      const valueTypeFilter = searchTerms.valueType.length === 0 || searchTerms.valueType.indexOf(data.valueType.name) !== -1;
 
-      const priorityFilter = searchTerms.priority.length === 0 || searchTerms.priority.indexOf(data.priority) !== -1;
-
-      const impactedFilter = data.impacted === null || SliderFilterSettings.filter(searchTerms.impacted, data.impacted * -1);
-
-      return levelFilter && priorityFilter && impactedFilter;
+      return valueTypeFilter;
     };
   }
 
@@ -136,10 +131,13 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
     const value = this.valueData.createDefaultValue(this.analysisData.currentAnalysis);
 
     // Ensure visibility with current filter settings.
-    if (this.filterEvent) { // TODO ValueType
-      //if (this.filterEvent.priority.length !== 0) {
-      // value.priority = this.filterEvent.priority[0];
-      //}
+    if (this.filterEvent) {
+      if (this.filterEvent.valueType.length !== 0) {
+        const valueType = this.valueTypeData.valueTypes.find(s => s.name === this.filterEvent.valueType[0]);
+        if (valueType) {
+          value.valueType = valueType;
+        }
+      }
     }
 
     this.valueData.createValue(value);
