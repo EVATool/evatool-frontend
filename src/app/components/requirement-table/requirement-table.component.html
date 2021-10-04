@@ -155,9 +155,9 @@
 
       <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          [ngClass]="{'highlight' : row.highlighted}"
           (mouseleave)="hideDeltaSliders(row)"
-          (focusout)="hideDeltaSliders(row)"
-          [ngClass]="{'highlight' : row.highlighted}"></tr>
+          (focusout)="hideDeltaSliders(row)"></tr>
     </table>
   </ng-scrollbar>
 

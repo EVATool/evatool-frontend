@@ -13,5 +13,6 @@ export class Value {
   valueType!: ValueType;
 
   // UI
+  highlighted = false;
   deletionFlagged = false;
 }
