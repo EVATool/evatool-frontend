@@ -123,6 +123,7 @@ export class CrossUiEventService implements OnDestroy {
   @Output() userWantsToSeeArchivedVariantReferencedByRequirement: EventEmitter<ArchivedVariantReferencedByRequirement> = new EventEmitter();
 
   @Output() userWantsToNavigateToValueTab: EventEmitter<void> = new EventEmitter();
+  @Output() userWantsToNavigateToStakeholderTab: EventEmitter<void> = new EventEmitter();
 
   @Output() userNavigatedToAnalysis: EventEmitter<void> = new EventEmitter();
   @Output() userLeftCurrentAnalysisEdit: EventEmitter<void> = new EventEmitter();

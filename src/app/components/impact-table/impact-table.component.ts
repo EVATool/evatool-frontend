@@ -164,8 +164,12 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
   createImpact(): void {
     if (this.stakeholderDataService.stakeholders.length === 0) {
       const message = 'There must be at least one stakeholder for an impact to exist';
-      const action = '';
-      this.snackBar.open(message, action, {duration: 5000});
+      const action = 'Create';
+      this.snackBar.open(message, action, {duration: 5000}).onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.crossUI.userWantsToNavigateToStakeholderTab.emit();
+        });
     } else if (this.valueDataService.values.length === 0) {
       const message = 'There must be at least one value for an impact to exist';
       const action = 'Create';
@@ -175,6 +179,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
           this.crossUI.userWantsToNavigateToValueTab.emit();
         });
     } else {
+      // Get valid default impact.
       const impact = this.impactDataService.createDefaultImpact(
         this.analysisDataService.currentAnalysis,
         this.stakeholderDataService.stakeholders[0],

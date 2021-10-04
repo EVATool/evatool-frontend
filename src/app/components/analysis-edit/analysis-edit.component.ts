@@ -84,6 +84,12 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.navigateToTabByName('Value');
       });
 
+    this.crossUI.userWantsToNavigateToStakeholderTab
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.navigateToTabByName('Stakeholder');
+      });
+
     this.crossUI.userNavigatedToAnalysis.emit();
   }
 

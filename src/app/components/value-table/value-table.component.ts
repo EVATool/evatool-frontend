@@ -137,20 +137,30 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
   }
 
   createValue(): void {
-    // Get valid default value.
-    const value = this.valueData.createDefaultValue(this.analysisData.currentAnalysis, this.valueTypeData.valueTypes[0]);
+    if (this.valueTypeData.valueTypes.length === 0) {
+      const message = 'There must be at least one value type for a value to exist';
+      const action = 'Create';
+      this.snackBar.open(message, action, {duration: 5000}).onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.openValueTypesDialog();
+        });
+    } else {
+      // Get valid default value.
+      const value = this.valueData.createDefaultValue(this.analysisData.currentAnalysis, this.valueTypeData.valueTypes[0]);
 
-    // Ensure visibility with current filter settings.
-    if (this.filterEvent) {
-      if (this.filterEvent.valueType.length !== 0) {
-        const valueType = this.valueTypeData.valueTypes.find(s => s.name === this.filterEvent.valueType[0]);
-        if (valueType) {
-          value.valueType = valueType;
+      // Ensure visibility with current filter settings.
+      if (this.filterEvent) {
+        if (this.filterEvent.valueType.length !== 0) {
+          const valueType = this.valueTypeData.valueTypes.find(s => s.name === this.filterEvent.valueType[0]);
+          if (valueType) {
+            value.valueType = valueType;
+          }
         }
       }
-    }
 
-    this.valueData.createValue(value);
+      this.valueData.createValue(value);
+    }
   }
 
   updateValue(value: Value): void {

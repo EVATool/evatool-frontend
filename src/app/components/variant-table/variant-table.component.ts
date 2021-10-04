@@ -137,20 +137,30 @@ export class VariantTableComponent extends EntityTableComponent implements OnIni
   }
 
   createVariant(): void {
-    // Get valid default variant.
-    const variant = this.variantData.createDefaultVariant(this.analysisData.currentAnalysis, this.variantTypeData.variantTypes[0]);
+    if (this.variantTypeData.variantTypes.length === 0) {
+      const message = 'There must be at least one variant type for a variant to exist';
+      const action = 'Create';
+      this.snackBar.open(message, action, {duration: 5000}).onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.openVariantTypesDialog();
+        });
+    } else {
+      // Get valid default variant.
+      const variant = this.variantData.createDefaultVariant(this.analysisData.currentAnalysis, this.variantTypeData.variantTypes[0]);
 
-    // Ensure visibility with current filter settings.
-    if (this.filterEvent) {
-      if (this.filterEvent.variantType.length !== 0) {
-        const variantType = this.variantTypeData.variantTypes.find(s => s.name === this.filterEvent.variantType[0]);
-        if (variantType) {
-          variant.variantType = variantType;
+      // Ensure visibility with current filter settings.
+      if (this.filterEvent) {
+        if (this.filterEvent.variantType.length !== 0) {
+          const variantType = this.variantTypeData.variantTypes.find(s => s.name === this.filterEvent.variantType[0]);
+          if (variantType) {
+            variant.variantType = variantType;
+          }
         }
       }
-    }
 
-    this.variantData.createVariant(variant);
+      this.variantData.createVariant(variant);
+    }
   }
 
   updateVariant(variant: Variant): void {
