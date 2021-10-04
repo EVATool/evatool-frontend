@@ -13,19 +13,23 @@ import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409
 import {ValueDataService} from '../../services/data/value-data.service';
 import {ValueTableFilterEvent} from '../value-filter-bar/ValueTableFilterEvent';
 import {ValueDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {ValueTypeDataService} from '../../services/data/value-type-data.service';
+import {newRowAnimation} from '../../animations/NewRowAnimation';
 
 @Component({
   selector: 'app-value-table',
   templateUrl: './value-table.component.html',
-  styleUrls: ['./value-table.component.scss']
+  styleUrls: ['./value-table.component.scss'],
+  animations: [newRowAnimation]
 })
 export class ValueTableComponent extends EntityTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  displayedColumns = ['name', 'valueType', 'description'];
+  displayedColumns = ['archived', 'name', 'valueType', 'description'];
   tableDataSource = new MatTableDataSource<Value>();
   filterEvent!: ValueTableFilterEvent;
 
-  constructor(public valueData: ValueDataService,
+  constructor(public valueTypeData: ValueTypeDataService,
+              public valueData: ValueDataService,
               private analysisData: AnalysisDataService,
               private impactData: ImpactDataService,
               private crossUI: CrossUiEventService,
@@ -132,13 +136,10 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
     const value = this.valueData.createDefaultValue(this.analysisData.currentAnalysis);
 
     // Ensure visibility with current filter settings.
-    if (this.filterEvent) {
-      // if (this.filterEvent.level.length !== 0) {
-      //   value.level = this.filterEvent.level[0];
-      // }
-      // if (this.filterEvent.priority.length !== 0) {
-      //   value.priority = this.filterEvent.priority[0];
-      // }
+    if (this.filterEvent) { // TODO ValueType
+      //if (this.filterEvent.priority.length !== 0) {
+      // value.priority = this.filterEvent.priority[0];
+      //}
     }
 
     this.valueData.createValue(value);
@@ -151,5 +152,9 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
   deleteValue(value: Value): void {
     value.deletionFlagged = true;
     this.valueData.deleteValue(value);
+  }
+
+  openValueTypesDialog(): void {
+
   }
 }

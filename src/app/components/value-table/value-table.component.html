@@ -1,1 +1,100 @@
-<p>value-table works!</p>
+<div class="table-container">
+  <ng-scrollbar>
+    <table mat-table [dataSource]="tableDataSource" matSort>
+      <caption class="screen-reader-only">List of Values</caption>
+
+      <ng-container matColumnDef='archived'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="15">
+          <div mat-sort-header>
+            <div matTooltip="Whether to include the value in the table selection">
+              Include
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let value'>
+          <button mat-icon-button class="archived-value-button" (click)="value.archived=!value.archived">
+            <mat-icon *ngIf="value.archived" matTooltip="This value is not available for selection">
+              add
+            </mat-icon>
+            <mat-icon *ngIf="!value.archived" matTooltip="This value is available for selection">
+              done
+            </mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef='name'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="20">
+          <div mat-sort-header>
+            <div matTooltip="The value name">
+              Value
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let value'>
+          <app-highlight-textarea [(text)]="value.name"
+                                  (textChange)="updateValue(value)"
+                                  [highlightFilter]="highlightFilter"
+                                  [placeholder]="'Value name...'"></app-highlight-textarea>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef='valueType'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+          <div mat-sort-header>
+            <div matTooltip="The type of the value">
+              Value
+            </div>
+            <mat-icon id="value-modal"
+                      (click)="$event.stopPropagation(); openValueTypesDialog();"
+                      [matTooltip]="'Edit the available value types'">edit
+            </mat-icon>
+          </div>
+        </th>
+
+        <td mat-cell *matCellDef='let value'
+            [ngClass]="{'references-archived' : value.valueType.archived}">
+          <mat-form-field class="dropdown-reference">
+            <mat-select [(ngModel)]="value.valueType" (selectionChange)="updateValue(value)">
+              <mat-select-trigger [matTooltip]="value.valueType.description">
+                <div [innerHTML]="value.valueType.name | highlightSearch: highlightFilter"></div>
+              </mat-select-trigger>
+              <ng-container *ngFor="let val of valueTypeData.valueTypes">
+                <mat-option *ngIf="!val.archived || value.valueType === val"
+                            [value]="val">
+                  {{val.name}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+          <div mat-sort-header>
+            <div matTooltip="The value description">
+              Description
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let value'>
+          <app-highlight-textarea [(text)]="value.description"
+                                  (textChange)="updateValue(value)"
+                                  [highlightFilter]="highlightFilter"
+                                  [placeholder]="'Describe the value...'"></app-highlight-textarea>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row [@newRowAnimation]="" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </ng-scrollbar>
+
+  <app-add-entity-button class="add-entity-button" (clicked)="createValue()"
+                         [text]="'Value'"></app-add-entity-button>
+</div>
+
+<app-scroll-to-top-button class="scroll-to-top-button" [windowScrolled]="windowScrolled"
+                          (clicked)="scrollToTop()"></app-scroll-to-top-button>
