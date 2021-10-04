@@ -52,8 +52,7 @@
           </div>
         </th>
 
-        <td mat-cell *matCellDef='let value'
-            [ngClass]="{'references-archived' : value.valueType.archived}">
+        <td mat-cell *matCellDef='let value'>
           <mat-form-field class="dropdown-reference">
             <mat-select [(ngModel)]="value.valueType" (selectionChange)="updateValue(value)">
               <mat-select-trigger [matTooltip]="value.valueType.description">
