@@ -74,7 +74,7 @@
           <button mat-icon-button
                   *ngIf="referencesArchivedVariant(requirement)"
                   class="warning-icon-button"
-                  (click)="openVariantsDialog(getReferencedArchivedVariantIds(requirement))"
+                  (click)="crossUI.userWantsToSeeArchivedVariantReferencedByRequirement.emit()"
                   matTooltip="This requirement references an archived variant"
                   matTooltipClass="multi-line-tooltip">
             <mat-icon>warning icon</mat-icon>

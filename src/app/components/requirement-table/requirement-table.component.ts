@@ -48,7 +48,7 @@ export class RequirementTableComponent extends EntityTableComponent implements O
     public valueDataService: ValueDataService,
     public analysisDataService: AnalysisDataService,
     public variantDataService: VariantDataService,
-    private crossUI: CrossUiEventService,
+    public crossUI: CrossUiEventService,
     private dialog: MatDialog) {
     super(logger);
   }
