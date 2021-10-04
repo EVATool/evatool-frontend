@@ -1,1 +1,57 @@
-<p>variant-type-table works!</p>
+<table mat-table [dataSource]='tableDataSource' matSort>
+  <caption class="screen-reader-only">List of Variants</caption>
+
+  <ng-container matColumnDef='name'>
+    <th scope="col" mat-header-cell *matHeaderCellDef>
+      <div [hidden]="true"
+           mat-sort-header
+           matTooltip="The variant type name">
+        Name
+      </div>
+    </th>
+    <td mat-cell *matCellDef='let variantType'>
+      <app-highlight-textarea [(text)]="variantType.name"
+                              (textChange)="updateVariantType(variantType)"
+                              [highlightFilter]="''"
+                              [placeholder]="'Name...'"></app-highlight-textarea>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef='description'>
+    <th scope="col" mat-header-cell *matHeaderCellDef>
+      <div [hidden]="true"
+           mat-sort-header
+           matTooltip="The variant description">
+        Description
+      </div>
+    </th>
+    <td mat-cell *matCellDef='let variantType'>
+      <div class="description-wrapper">
+        <div class="description-container">
+          <app-highlight-textarea [(text)]="variantType.description"
+                                  (textChange)="updateVariantType(variantType)"
+                                  [highlightFilter]="''"
+                                  [placeholder]="'Describe the variant type...'"></app-highlight-textarea>
+        </div>
+        <div class="options">
+          <div class="option">
+            <button mat-icon-button
+                    [disabled]="variantType.deletionFlagged"
+                    (click)="deleteVariantType(variantType)"
+                    matTooltip="Delete Variant Type">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight' : row.highlighted}"></tr>
+</table>
+
+<button mat-raised-button class="add-button" (click)="createVariantType()">
+  <mat-icon>add</mat-icon>
+  Variant Type
+</button>

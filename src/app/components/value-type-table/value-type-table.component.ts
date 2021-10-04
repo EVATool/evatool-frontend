@@ -7,7 +7,6 @@ import {takeUntil} from 'rxjs/operators';
 import {ValueType} from '../../model/ValueType';
 import {LogService} from '../../services/log.service';
 import {ValueTypeDataService} from '../../services/data/value-type-data.service';
-import {ValueDataService} from '../../services/data/value-data.service';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {ValuesReferencingValueType} from '../../services/event/events/http409/ValuesReferencingValueType';
