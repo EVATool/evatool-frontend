@@ -35,14 +35,16 @@ import {AuthorizationFailedEvent} from './events/http403/AuthorizationFailedEven
 import {RegisterUsernameAlreadyExistsEvent} from './events/http409/RegisterUsernameAlreadyExistsEvent';
 import {RegisterEmailAlreadyExistsEvent} from './events/http409/RegisterEmailAlreadyExistsEvent';
 import {RegisterRealmAlreadyExistsEvent} from './events/http409/RegisterRealmAlreadyExistsEvent';
-import {ImpactReferencedByRequirementDeltasEvent} from './events/http409/ImpactReferencedByRequirementDeltasEvent';
-import {StakeholderReferencedByImpactsEvent} from './events/http409/StakeholderReferencedByImpactsEvent';
-import {ValueReferencedByImpactsEvent} from './events/http409/ValueReferencedByImpactsEvent';
-import {VariantReferencedByRequirementsEvent} from './events/http409/VariantReferencedByRequirementsEvent';
+import {RequirementDeltasReferencingImpactEvent} from './events/http409/RequirementDeltasReferencingImpactEvent';
+import {ImpactsReferencingStakeholderEvent} from './events/http409/ImpactsReferencingStakeholderEvent';
+import {ImpactsReferencingValueEvent} from './events/http409/ImpactsReferencingValueEvent';
+import {RequirementsReferencingVariantEvent} from './events/http409/RequirementsReferencingVariantEvent';
 import {VariantTypeDataService} from '../data/variant-type-data.service';
 import {ValueTypeDataService} from '../data/value-type-data.service';
 import {ArchivedValueReferencedByImpact} from './events/local/ArchivedValueReferencedByImpact';
 import {ArchivedVariantReferencedByRequirement} from './events/local/ArchivedVariantReferencedByRequirement';
+import {ValuesReferencingValueType} from './events/http409/ValuesReferencingValueType';
+import {VariantsReferencingVariantType} from './events/http409/VariantsReferencingVariantType';
 
 @Injectable({
   providedIn: 'root'
@@ -85,10 +87,10 @@ export class CrossUiEventService implements OnDestroy {
   @Output() requirementDeltaDeletionFailed: EventEmitter<RequirementDeltaDeletionFailedEvent> = new EventEmitter();
 
   // 409.
-  @Output() impactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementDeltasEvent> = new EventEmitter();
-  @Output() stakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
-  @Output() valueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
-  @Output() variantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
+  @Output() impactReferencedByRequirements: EventEmitter<RequirementDeltasReferencingImpactEvent> = new EventEmitter();
+  @Output() stakeholderReferencedByImpacts: EventEmitter<ImpactsReferencingStakeholderEvent> = new EventEmitter();
+  @Output() valueReferencedByImpacts: EventEmitter<ImpactsReferencingValueEvent> = new EventEmitter();
+  @Output() variantReferencedByRequirements: EventEmitter<RequirementsReferencingVariantEvent> = new EventEmitter();
 
   @Output() registerUsernameAlreadyExists: EventEmitter<RegisterUsernameAlreadyExistsEvent> = new EventEmitter();
   @Output() registerEmailAlreadyExists: EventEmitter<RegisterEmailAlreadyExistsEvent> = new EventEmitter();
@@ -103,18 +105,17 @@ export class CrossUiEventService implements OnDestroy {
   // #####################
   // Other events.
   // #####################
-  @Output() userWantsToSeeImpactReferencedByRequirements: EventEmitter<ImpactReferencedByRequirementDeltasEvent> = new EventEmitter();
-  @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
-  @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
-  @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
-  @Output() userWantsToSeeValuesReferencedByValueType: EventEmitter<any> = new EventEmitter();
-  @Output() userWantsToSeeVariantsReferencedByVariantType: EventEmitter<any> = new EventEmitter();
+  @Output() userWantsToSeeRequirementsReferencingImpact: EventEmitter<RequirementDeltasReferencingImpactEvent> = new EventEmitter();
+  @Output() userWantsToSeeImpactsReferencingStakeholder: EventEmitter<ImpactsReferencingStakeholderEvent> = new EventEmitter();
+  @Output() userWantsToSeeImpactsReferencingValue: EventEmitter<ImpactsReferencingValueEvent> = new EventEmitter();
+  @Output() userWantsToSeeRequirementsReferencingVariant: EventEmitter<RequirementsReferencingVariantEvent> = new EventEmitter();
+  @Output() userWantsToSeeValuesReferencingValueType: EventEmitter<ValuesReferencingValueType> = new EventEmitter();
+  @Output() userWantsToSeeVariantsReferencingVariantType: EventEmitter<VariantsReferencingVariantType> = new EventEmitter();
 
   @Output() userWantsToSeeArchivedValueReferencedByImpact: EventEmitter<ArchivedValueReferencedByImpact> = new EventEmitter();
   @Output() userWantsToSeeArchivedVariantReferencedByRequirement: EventEmitter<ArchivedVariantReferencedByRequirement> = new EventEmitter();
 
   @Output() userWantsToNavigateToValueTab: EventEmitter<void> = new EventEmitter();
-  @Output() userWantsToNavigateToVariantTab: EventEmitter<void> = new EventEmitter();
 
   @Output() userNavigatedToAnalysis: EventEmitter<void> = new EventEmitter();
   @Output() userLeftCurrentAnalysisEdit: EventEmitter<void> = new EventEmitter();
@@ -262,7 +263,7 @@ export class CrossUiEventService implements OnDestroy {
               const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
               const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
               if (impact && deltas) {
-                this.impactReferencedByRequirements.emit(new ImpactReferencedByRequirementDeltasEvent(impact, deltas));
+                this.impactReferencedByRequirements.emit(new RequirementDeltasReferencingImpactEvent(impact, deltas));
                 this.impactDeletionFailed.emit(new ImpactDeletionFailedEvent(impact, false));
               }
               break;
@@ -271,7 +272,7 @@ export class CrossUiEventService implements OnDestroy {
               const stakeholder = this.stakeholderData.stakeholders.find(s => s.id = httpInfo.tag.stakeholderId);
               const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (stakeholder && impactsStakeholder) {
-                this.stakeholderReferencedByImpacts.emit(new StakeholderReferencedByImpactsEvent(stakeholder, impactsStakeholder));
+                this.stakeholderReferencedByImpacts.emit(new ImpactsReferencingStakeholderEvent(stakeholder, impactsStakeholder));
                 this.stakeholderDeletionFailed.emit(new StakeholderDeletionFailedEvent(stakeholder, false));
               }
               break;
@@ -280,7 +281,7 @@ export class CrossUiEventService implements OnDestroy {
               const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
               const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (value && impactsValue) {
-                this.valueReferencedByImpacts.emit(new ValueReferencedByImpactsEvent(value, impactsValue));
+                this.valueReferencedByImpacts.emit(new ImpactsReferencingValueEvent(value, impactsValue));
                 this.valueDeletionFailed.emit(new ValueDeletionFailedEvent(value, false));
               }
               break;
@@ -289,7 +290,7 @@ export class CrossUiEventService implements OnDestroy {
               const variant = this.variantData.variants.find(v => v.id = httpInfo.tag.variantId);
               const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
               if (variant && requirements) {
-                this.variantReferencedByRequirements.emit(new VariantReferencedByRequirementsEvent(variant, requirements));
+                this.variantReferencedByRequirements.emit(new RequirementsReferencingVariantEvent(variant, requirements));
                 this.variantDeletionFailed.emit(new VariantDeletionFailedEvent(variant, false));
               }
               break;

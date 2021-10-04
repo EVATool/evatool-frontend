@@ -1,7 +1,7 @@
 import {VariantType} from '../../../../model/VariantType';
 import {Variant} from '../../../../model/Variant';
 
-export class VariantTypeReferencedByVariants {
+export class VariantsReferencingVariantType {
 
   variantType!: VariantType;
   variants!: Variant[];

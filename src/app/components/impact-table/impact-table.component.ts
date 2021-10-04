@@ -14,9 +14,9 @@ import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {takeUntil} from 'rxjs/operators';
-import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
-import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
-import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {ImpactsReferencingValueEvent} from '../../services/event/events/http409/ImpactsReferencingValueEvent';
+import {ImpactsReferencingStakeholderEvent} from '../../services/event/events/http409/ImpactsReferencingStakeholderEvent';
+import {RequirementDeltasReferencingImpactEvent} from '../../services/event/events/http409/RequirementDeltasReferencingImpactEvent';
 import {ImpactDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
 import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
@@ -50,18 +50,18 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
   ngOnInit(): void {
     super.onInit();
 
-    this.crossUI.userWantsToSeeValueReferencedByImpacts
+    this.crossUI.userWantsToSeeImpactsReferencingValue
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ValueReferencedByImpactsEvent) => {
+      .subscribe((event: ImpactsReferencingValueEvent) => {
         this.deletionFlaggedValue = event.value;
         event.impacts.forEach(impact => {
           impact.highlighted = true;
         });
       });
 
-    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
+    this.crossUI.userWantsToSeeImpactsReferencingStakeholder
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
+      .subscribe((event: ImpactsReferencingStakeholderEvent) => {
         this.deletionFlaggedStakeholder = event.stakeholder;
         event.impacts.forEach((impact: Impact) => {
           impact.highlighted = true;
@@ -70,7 +70,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
 
     this.crossUI.impactReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
+      .subscribe((event: RequirementDeltasReferencingImpactEvent) => {
         const message = 'This impact cannot be deleted. It is still being used by '
           + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
         const action = 'show';
@@ -79,7 +79,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(() => {
             this.logger.info(this, 'User wants to see the requirements referencing the impact');
-            this.crossUI.userWantsToSeeImpactReferencedByRequirements.emit(event);
+            this.crossUI.userWantsToSeeRequirementsReferencingImpact.emit(event);
           });
       });
 

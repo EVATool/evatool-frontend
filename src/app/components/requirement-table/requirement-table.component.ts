@@ -17,8 +17,8 @@ import {Variant} from '../../model/Variant';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {takeUntil} from 'rxjs/operators';
-import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
-import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {RequirementsReferencingVariantEvent} from '../../services/event/events/http409/RequirementsReferencingVariantEvent';
+import {RequirementDeltasReferencingImpactEvent} from '../../services/event/events/http409/RequirementDeltasReferencingImpactEvent';
 import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {mouseInOutAnimation} from '../../animations/MouseInOutAnimation';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
@@ -57,18 +57,18 @@ export class RequirementTableComponent extends EntityTableComponent implements O
   ngOnInit(): void {
     super.onInit();
 
-    this.crossUI.userWantsToSeeVariantReferencedByRequirements
+    this.crossUI.userWantsToSeeRequirementsReferencingVariant
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: VariantReferencedByRequirementsEvent) => {
+      .subscribe((event: RequirementsReferencingVariantEvent) => {
         this.deletionFlaggedVariant = event.variant;
         event.requirements.forEach(requirement => {
           requirement.highlighted = true;
         });
       });
 
-    this.crossUI.userWantsToSeeImpactReferencedByRequirements
+    this.crossUI.userWantsToSeeRequirementsReferencingImpact
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
+      .subscribe((event: RequirementDeltasReferencingImpactEvent) => {
         this.deletionFlaggedImpact = event.impact;
         event.deltas.forEach((delta: RequirementDelta) => {
           delta.highlighted = true;

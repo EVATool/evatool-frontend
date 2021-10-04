@@ -1,7 +1,7 @@
 import {Impact} from '../../../../model/Impact';
 import {RequirementDelta} from '../../../../model/RequirementDelta';
 
-export class ImpactReferencedByRequirementDeltasEvent {
+export class RequirementDeltasReferencingImpactEvent {
 
   impact!: Impact;
   deltas!: RequirementDelta[];

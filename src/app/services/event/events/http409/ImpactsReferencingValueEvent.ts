@@ -1,7 +1,7 @@
 import {Value} from '../../../../model/Value';
 import {Impact} from '../../../../model/Impact';
 
-export class ValueReferencedByImpactsEvent {
+export class ImpactsReferencingValueEvent {
 
   value!: Value;
   impacts!: Impact[];

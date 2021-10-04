@@ -6,6 +6,7 @@ import {FormBuilder} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {ValueTypeDataService} from '../../services/data/value-type-data.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
+import {ValuesReferencingValueType} from '../../services/event/events/http409/ValuesReferencingValueType';
 
 @Component({
   selector: 'app-value-type-dialog',
@@ -25,13 +26,12 @@ export class ValueTypeDialogComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public valueDataService: ValueTypeDataService,
     private crossUI: CrossUiEventService) {
-    //this.id = data.id;
   }
 
   ngOnInit(): void {
-    this.crossUI.userWantsToSeeValueReferencedByImpacts
+    this.crossUI.userWantsToSeeValuesReferencingValueType
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ValueReferencedByImpactsEvent) => {
+      .subscribe((event: ValuesReferencingValueType) => {
         this.closeClick();
       });
   }

@@ -1,7 +1,7 @@
 import {Variant} from '../../../../model/Variant';
 import {Requirement} from '../../../../model/Requirement';
 
-export class VariantReferencedByRequirementsEvent {
+export class RequirementsReferencingVariantEvent {
 
   variant!: Variant;
   requirements!: Requirement[];

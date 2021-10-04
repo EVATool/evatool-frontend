@@ -1,7 +1,7 @@
 import {Stakeholder} from '../../../../model/Stakeholder';
 import {Impact} from '../../../../model/Impact';
 
-export class StakeholderReferencedByImpactsEvent {
+export class ImpactsReferencingStakeholderEvent {
 
   stakeholder!: Stakeholder;
   impacts!: Impact[];

@@ -11,8 +11,8 @@ import * as uuid from 'uuid';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
-import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {ImpactsReferencingStakeholderEvent} from '../../services/event/events/http409/ImpactsReferencingStakeholderEvent';
+import {RequirementDeltasReferencingImpactEvent} from '../../services/event/events/http409/RequirementDeltasReferencingImpactEvent';
 import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
 import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 
@@ -54,15 +54,15 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.navigate([ROUTES.pageNotFound]);
       });
 
-    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
+    this.crossUI.userWantsToSeeImpactsReferencingStakeholder
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
+      .subscribe((event: ImpactsReferencingStakeholderEvent) => {
         this.navigateToTabByName('Impact');
       });
 
-    this.crossUI.userWantsToSeeImpactReferencedByRequirements
+    this.crossUI.userWantsToSeeRequirementsReferencingImpact
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
+      .subscribe((event: RequirementDeltasReferencingImpactEvent) => {
         this.navigateToTabByName('Requirement');
       });
 

@@ -10,7 +10,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {ImpactDataService} from '../../services/data/impact-data.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {takeUntil} from 'rxjs/operators';
-import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
+import {ImpactsReferencingStakeholderEvent} from '../../services/event/events/http409/ImpactsReferencingStakeholderEvent';
 import {StakeholderDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {newRowAnimation} from '../../animations/NewRowAnimation';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
@@ -41,7 +41,7 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
 
     this.crossUI.stakeholderReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
+      .subscribe((event: ImpactsReferencingStakeholderEvent) => {
         this.logger.warn(this, 'This stakeholder is still being used by ' + event.impacts.length + ' impacts');
         const message = 'This stakeholder cannot be deleted. It is still being used by '
           + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
@@ -51,7 +51,7 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(() => {
             this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
-            this.crossUI.userWantsToSeeStakeholderReferencedByImpacts.emit(event);
+            this.crossUI.userWantsToSeeImpactsReferencingStakeholder.emit(event);
           });
       });
 

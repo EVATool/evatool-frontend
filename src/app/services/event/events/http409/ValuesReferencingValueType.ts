@@ -1,7 +1,7 @@
 import {Value} from '../../../../model/Value';
 import {ValueType} from '../../../../model/ValueType';
 
-export class ValueTypeReferencedByValues {
+export class ValuesReferencingValueType {
 
   valueType!: ValueType;
   values!: Value[];

@@ -8,7 +8,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {LogService} from '../../services/log.service';
 import {takeUntil} from 'rxjs/operators';
 import {Value} from '../../model/Value';
-import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
+import {ImpactsReferencingValueEvent} from '../../services/event/events/http409/ImpactsReferencingValueEvent';
 import {ValueDataService} from '../../services/data/value-data.service';
 import {ValueTableFilterEvent} from '../value-filter-bar/ValueTableFilterEvent';
 import {ValueDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
@@ -48,7 +48,7 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
 
     this.crossUI.valueReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ValueReferencedByImpactsEvent) => {
+      .subscribe((event: ImpactsReferencingValueEvent) => {
         this.logger.warn(this, 'This value is still being used by ' + event.impacts.length + ' impacts');
         const message = 'This value cannot be deleted. It is still being used by '
           + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
@@ -58,7 +58,7 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(() => {
             this.logger.info(this, 'User wants to see the impacts referencing the value');
-            this.crossUI.userWantsToSeeValueReferencedByImpacts.emit(event);
+            this.crossUI.userWantsToSeeImpactsReferencingValue.emit(event);
           });
       });
 
