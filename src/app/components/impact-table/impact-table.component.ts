@@ -10,7 +10,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {ImpactTableFilterEvent} from '../impact-filter-bar/ImpactTableFilterEvent';
-import {ValueDialogComponent} from '../deprecated/value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
@@ -224,10 +223,11 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
   openValuesDialog(id?: string): void {
     this.logger.trace(this, 'Opening Values Dialog');
 
-    this.dialog.open(ValueDialogComponent, {
-      height: '80%',
-      width: '50%',
-      data: {id}
-    });
+    // TODO
+    // this.dialog.open(ValueDialogComponent, {
+    //   height: '80%',
+    //   width: '50%',
+    //   data: {id}
+    // });
   }
 }

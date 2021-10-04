@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
-import {VariantDialogComponent} from '../deprecated/variant-dialog/variant-dialog.component';
 import {Value} from '../../model/Value';
 import {RequirementDelta} from '../../model/RequirementDelta';
 import {RequirementTableFilterEvent} from '../requirement-filter-bar/RequirementTableFilterEvent';
@@ -314,11 +313,12 @@ export class RequirementTableComponent extends EntityTableComponent implements O
   openVariantsDialog(ids?: string[]): void {
     this.logger.trace(this, 'Opening Variants Dialog');
 
-    this.dialog.open(VariantDialogComponent, {
-      height: '60%',
-      width: '50%',
-      data: {ids}
-    });
+    // TODO
+    // this.dialog.open(VariantDialogComponent, {
+    //   height: '60%',
+    //   width: '50%',
+    //   data: {ids}
+    // });
   }
 
   updateImpactColumns(includeOnlyTheseImpacts?: string[]): void {
