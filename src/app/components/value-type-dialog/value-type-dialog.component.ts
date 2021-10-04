@@ -24,7 +24,7 @@ export class ValueTypeDialogComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<ValueTypeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public valueDataService: ValueTypeDataService,
+    public valueTypeDataService: ValueTypeDataService,
     private crossUI: CrossUiEventService) {
   }
 
