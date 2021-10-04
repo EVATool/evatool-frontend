@@ -22,6 +22,12 @@ import {ValueDto} from '../dto/ValueDto';
 import {VariantDto} from '../dto/VariantDto';
 import {Variant} from '../model/Variant';
 import {environment} from '../../environments/environment';
+import {VariantType} from '../model/VariantType';
+import {VariantTypeDto} from '../dto/VariantTypeDto';
+import {ValueTypeDto} from '../dto/ValueTypeDto';
+import {ValueType} from '../model/ValueType';
+import {ValueTypeMapperService} from './mapper/value-type-mapper.service';
+import {VariantTypeMapperService} from './mapper/variant-type-mapper.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +41,9 @@ export class SampleDataService {
     private requirementMapper: RequirementMapperService,
     private requirementDeltaMapper: RequirementDeltaMapperService,
     private stakeholderMapper: StakeholderMapperService,
+    private valueTypeMapper: ValueTypeMapperService,
     private valueMapper: ValueMapperService,
+    private variantTypeMapper: VariantTypeMapperService,
     private variantMapper: VariantMapperService) {
 
     if (!environment.testing) {
@@ -53,14 +61,24 @@ export class SampleDataService {
       this.stakeholders.push(this.stakeholderMapper.fromDto(stakeholderDto, this.analyses));
     });
 
+    // Prepare ValueType Data.
+    this.valueTypeDtoList.forEach((valueTypeDto: ValueTypeDto) => {
+      this.valueTypes.push(this.valueTypeMapper.fromDto(valueTypeDto, this.analyses));
+    });
+
     // Prepare Value Data.
     this.valueDtoList.forEach((valueDto: ValueDto) => {
-      this.values.push(this.valueMapper.fromDto(valueDto, this.analyses));
+      this.values.push(this.valueMapper.fromDto(valueDto, this.analyses, this.valueTypes));
+    });
+
+    // Prepare VariantType Data.
+    this.variantTypeDtoList.forEach((variantTypeDto: VariantTypeDto) => {
+      this.variantTypes.push(this.variantTypeMapper.fromDto(variantTypeDto, this.analyses));
     });
 
     // Prepare Variant Data.
     this.variantDtoList.forEach((variantDto: VariantDto) => {
-      this.variants.push(this.variantMapper.fromDto(variantDto, this.analyses));
+      this.variants.push(this.variantMapper.fromDto(variantDto, this.analyses, this.variantTypes));
     });
 
     // Prepare Impact Data.
@@ -232,26 +250,58 @@ export class SampleDataService {
   public readonly stakeholderPriorities: string[] = ['ONE', 'TWO', 'THREE', 'FOUR'];
   public readonly stakeholderLevels: string[] = ['INDIVIDUAL', 'ORGANIZATION', 'SOCIETY'];
 
+  public readonly valueTypes: ValueType[] = [];
+  public readonly valueTypeDtoList: ValueTypeDto[] = [
+    {
+      id: '1',
+      name: 'Social',
+      description: 'Lorem Ipsum',
+      analysisId: '1',
+    },
+    {
+      id: '2',
+      name: 'Economic',
+      description: 'Lorem Ipsum',
+      analysisId: '1',
+    }
+  ];
+
+
   public readonly values: Value[] = [];
   public readonly valueDtoList: ValueDto[] = [
     {
       id: '1',
       name: 'Moneeeeey',
-      type: 'ECONOMIC',
       description: 'Lorem Ipsum',
       archived: false,
-      analysisId: '1'
+      analysisId: '1',
+      valueTypeId: '1'
     },
     {
       id: '2',
       name: 'Edigg :DD',
-      type: 'SOCIAL',
       description: 'Lorem Ipsum',
       archived: true,
-      analysisId: '1'
+      analysisId: '1',
+      valueTypeId: '2'
     }
   ];
-  public readonly valueTypes: string[] = ['SOCIAL', 'ECONOMIC'];
+
+  public readonly variantTypes: VariantType[] = [];
+  public readonly variantTypeDtoList: VariantTypeDto[] = [
+    {
+      id: '1',
+      name: 'Default',
+      description: 'Lorem Ipsum',
+      analysisId: '1',
+    },
+    {
+      id: '2',
+      name: 'Extra',
+      description: 'Lorem Ipsum',
+      analysisId: '1',
+    }
+  ];
 
   public readonly variants: Variant[] = [];
   public readonly variantDtoList: VariantDto[] = [
@@ -262,7 +312,8 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       archived: false,
       analysisId: '1',
-      subVariantIds: []
+      subVariantIds: [],
+      variantTypeId: '1'
     },
     {
       id: '2',
@@ -271,7 +322,8 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       archived: false,
       analysisId: '1',
-      subVariantIds: []
+      subVariantIds: [],
+      variantTypeId: '2'
     },
     {
       id: '3',
@@ -280,7 +332,8 @@ export class SampleDataService {
       description: 'Lorem Ipsum',
       archived: true,
       analysisId: '1',
-      subVariantIds: []
+      subVariantIds: [],
+      variantTypeId: '1'
     }
   ];
 }
