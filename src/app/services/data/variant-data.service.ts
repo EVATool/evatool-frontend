@@ -60,6 +60,10 @@ export class VariantDataService extends DataService implements OnDestroy {
   }
 
   loadIfChildrenLoaded(analysisId: string): void {
+    if (!this.variantTypeData.variantTypesLoaded) {
+      this.logger.debug(this, 'A child entity collection has not yet been loaded');
+      return;
+    }
     this.variantRest.getVariantsByAnalysisId(analysisId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((variantDtoList: VariantDto[]) => {

@@ -68,8 +68,11 @@ export class ImpactDataService extends DataService implements OnDestroy {
   }
 
   loadIfChildrenLoaded(analysisId: string): void {
+    console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+    console.log(this.stakeholderData.stakeholdersLoaded);
+    console.log(this.valueData.valuesLoaded);
     if (!this.stakeholderData.stakeholdersLoaded || !this.valueData.valuesLoaded) {
-      this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
+      this.logger.debug(this, 'A child entity collection has not yet been loaded');
       return;
     }
     this.impactRest.getImpactsByAnalysisId(analysisId)

@@ -19,7 +19,6 @@ export class ValueDataService extends DataService implements OnDestroy {
   private ngUnsubscribe = new Subject();
 
   @Output() loadedValues: EventEmitter<Value[]> = new EventEmitter();
-  @Output() loadedValueTypes: EventEmitter<string[]> = new EventEmitter();
   @Output() createdValue: EventEmitter<Value> = new EventEmitter();
   @Output() updatedValue: EventEmitter<Value> = new EventEmitter();
   @Output() deletedValue: EventEmitter<Value> = new EventEmitter();
@@ -60,6 +59,10 @@ export class ValueDataService extends DataService implements OnDestroy {
   }
 
   loadIfChildrenLoaded(analysisId: string): void {
+    if (!this.valueTypeData.valueTypesLoaded) {
+      this.logger.debug(this, 'A child entity collection has not yet been loaded');
+      return;
+    }
     this.valueRest.getValuesByAnalysisId(analysisId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((valueDtoList: ValueDto[]) => {

@@ -60,7 +60,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
 
   loadIfChildrenLoaded(analysisId: string): void {
     if (!this.variantData.variantsLoaded) {
-      this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
+      this.logger.debug(this, 'A child entity collection has not yet been loaded');
       return;
     }
 

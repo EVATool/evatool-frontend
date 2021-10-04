@@ -39,6 +39,8 @@ import {ImpactReferencedByRequirementDeltasEvent} from './events/http409/ImpactR
 import {StakeholderReferencedByImpactsEvent} from './events/http409/StakeholderReferencedByImpactsEvent';
 import {ValueReferencedByImpactsEvent} from './events/http409/ValueReferencedByImpactsEvent';
 import {VariantReferencedByRequirementsEvent} from './events/http409/VariantReferencedByRequirementsEvent';
+import {VariantTypeDataService} from '../data/variant-type-data.service';
+import {ValueTypeDataService} from '../data/value-type-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -112,13 +114,15 @@ export class CrossUiEventService implements OnDestroy {
 
   constructor(private httpMarshall: HttpMarshallService,
               private analysisData: AnalysisDataService,
+              private valueTypeData: ValueTypeDataService,
               private valueData: ValueDataService,
               private stakeholderData: StakeholderDataService,
               private impactData: ImpactDataService,
+              private variantTypeData: VariantTypeDataService,
               private variantData: VariantDataService,
               private requirementData: RequirementDataService,
               private requirementDeltaData: RequirementDeltaDataService,
-              private  logger: LogService) {
+              private logger: LogService) {
   }
 
   ngOnDestroy(): void {
@@ -316,7 +320,9 @@ export class CrossUiEventService implements OnDestroy {
       this.requirementData.clearData();
       this.impactData.clearData();
       this.stakeholderData.clearData();
+      this.valueTypeData.clearData();
       this.valueData.clearData();
+      this.variantTypeData.clearData();
       this.variantData.clearData();
     });
   }
