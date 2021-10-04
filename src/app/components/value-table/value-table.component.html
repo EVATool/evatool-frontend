@@ -12,7 +12,8 @@
           </div>
         </th>
         <td mat-cell *matCellDef='let value'>
-          <button mat-icon-button class="archived-value-button" (click)="value.archived=!value.archived">
+          <button mat-icon-button class="archived-value-button"
+                  (click)="value.archived=!value.archived;updateValue(value);">
             <mat-icon *ngIf="value.archived" matTooltip="This value is not available for selection">
               add
             </mat-icon>

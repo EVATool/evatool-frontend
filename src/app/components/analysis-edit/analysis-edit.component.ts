@@ -69,16 +69,12 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.crossUI.userWantsToSeeArchivedValueReferencedByImpact
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ArchivedValueReferencedByImpact) => {
-        event.value.highlighted = true;
         this.navigateToTabByName('Value');
       });
 
     this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ArchivedVariantReferencedByRequirement) => {
-
-        //event.value.highlighted = true;
-
         this.navigateToTabByName('Variant');
       });
 

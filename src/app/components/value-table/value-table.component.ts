@@ -14,6 +14,7 @@ import {ValueTableFilterEvent} from '../value-filter-bar/ValueTableFilterEvent';
 import {ValueDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {ValueTypeDataService} from '../../services/data/value-type-data.service';
 import {newRowAnimation} from '../../animations/NewRowAnimation';
+import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
 
 @Component({
   selector: 'app-value-table',
@@ -26,6 +27,8 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
   displayedColumns = ['archived', 'name', 'valueType', 'description'];
   tableDataSource = new MatTableDataSource<Value>();
   filterEvent!: ValueTableFilterEvent;
+
+  archivedFlaggedValue!: Value;
 
   constructor(public valueTypeData: ValueTypeDataService,
               public valueData: ValueDataService,
@@ -54,6 +57,13 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
             this.logger.info(this, 'User wants to see the impacts referencing the value');
             this.crossUI.userWantsToSeeValueReferencedByImpacts.emit(event);
           });
+      });
+
+    this.crossUI.userWantsToSeeArchivedValueReferencedByImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ArchivedValueReferencedByImpact) => {
+        this.archivedFlaggedValue = event.value;
+        this.archivedFlaggedValue.highlighted = true;
       });
 
     this.crossUI.valueDeletionFailed
@@ -144,6 +154,14 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
   }
 
   updateValue(value: Value): void {
+    this.logger.trace(this, 'Update Value');
+
+    console.log('AAAAAAAAAAAAAAA');
+    if (value.highlighted && !value.archived) {
+      console.log('BBBBBBBBBBBBBB');
+      value.highlighted = false;
+    }
+
     this.valueData.updateValue(value);
   }
 
