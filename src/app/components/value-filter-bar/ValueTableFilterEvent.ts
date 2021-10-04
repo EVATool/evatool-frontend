@@ -1,10 +1,12 @@
 export class ValueTableFilterEvent {
 
-  constructor() {
+  valueType: string[];
 
+  constructor(valueType: string[]) {
+    this.valueType = valueType;
   }
 
   static getDefault(): ValueTableFilterEvent {
-    return new ValueTableFilterEvent();
+    return new ValueTableFilterEvent([]);
   }
 }
