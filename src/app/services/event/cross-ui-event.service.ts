@@ -18,7 +18,9 @@ import {
   RequirementDeltaDeletionFailedEvent,
   StakeholderDeletionFailedEvent,
   ValueDeletionFailedEvent,
+  ValueTypeDeletionFailedEvent,
   VariantDeletionFailedEvent,
+  VariantTypeDeletionFailedEvent,
 } from './events/DeletionFailedEvents';
 import {LogService} from '../log.service';
 import {ImportExportJsonInvalidEvent} from './events/http400/ImportExportJsonInvalidEvent';
@@ -80,8 +82,10 @@ export class CrossUiEventService implements OnDestroy {
 
   @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
   @Output() stakeholderDeletionFailed: EventEmitter<StakeholderDeletionFailedEvent> = new EventEmitter();
+  @Output() valueTypeDeletionFailed: EventEmitter<ValueTypeDeletionFailedEvent> = new EventEmitter();
   @Output() valueDeletionFailed: EventEmitter<ValueDeletionFailedEvent> = new EventEmitter();
   @Output() impactDeletionFailed: EventEmitter<ImpactDeletionFailedEvent> = new EventEmitter();
+  @Output() variantTypeDeletionFailed: EventEmitter<VariantTypeDeletionFailedEvent> = new EventEmitter();
   @Output() variantDeletionFailed: EventEmitter<VariantDeletionFailedEvent> = new EventEmitter();
   @Output() requirementDeletionFailed: EventEmitter<RequirementDeletionFailedEvent> = new EventEmitter();
   @Output() requirementDeltaDeletionFailed: EventEmitter<RequirementDeltaDeletionFailedEvent> = new EventEmitter();
@@ -91,6 +95,9 @@ export class CrossUiEventService implements OnDestroy {
   @Output() stakeholderReferencedByImpacts: EventEmitter<ImpactsReferencingStakeholderEvent> = new EventEmitter();
   @Output() valueReferencedByImpacts: EventEmitter<ImpactsReferencingValueEvent> = new EventEmitter();
   @Output() variantReferencedByRequirements: EventEmitter<RequirementsReferencingVariantEvent> = new EventEmitter();
+  @Output() valueTypeReferencedByValues: EventEmitter<ValuesReferencingValueType> = new EventEmitter();
+  @Output() variantTypeReferencedByVariants: EventEmitter<VariantsReferencingVariantType> = new EventEmitter();
+
 
   @Output() registerUsernameAlreadyExists: EventEmitter<RegisterUsernameAlreadyExistsEvent> = new EventEmitter();
   @Output() registerEmailAlreadyExists: EventEmitter<RegisterEmailAlreadyExistsEvent> = new EventEmitter();
@@ -277,12 +284,30 @@ export class CrossUiEventService implements OnDestroy {
               }
               break;
 
+            case FunctionalErrorCodes.VALUE_TYPE_REFERENCED_BY_VALUE:
+              const valueType = this.valueTypeData.valueTypes.find(v => v.id = httpInfo.tag.valueTypeId);
+              const valuesValueType = this.valueData.values.filter(i => httpInfo.tag.valueIds.includes(i.id));
+              if (valueType && valuesValueType) {
+                this.valueTypeReferencedByValues.emit(new ValuesReferencingValueType(valueType, valuesValueType));
+                this.valueTypeDeletionFailed.emit(new ValueTypeDeletionFailedEvent(valueType, false));
+              }
+              break;
+
             case FunctionalErrorCodes.VALUE_REFERENCED_BY_IMPACT:
               const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
               const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (value && impactsValue) {
                 this.valueReferencedByImpacts.emit(new ImpactsReferencingValueEvent(value, impactsValue));
                 this.valueDeletionFailed.emit(new ValueDeletionFailedEvent(value, false));
+              }
+              break;
+
+            case FunctionalErrorCodes.VARIANT_TYPE_REFERENCED_BY_VARIANT:
+              const variantType = this.variantTypeData.variantTypes.find(v => v.id = httpInfo.tag.variantTypeId);
+              const variantsVariantType = this.variantData.variants.filter(i => httpInfo.tag.variantIds.includes(i.id));
+              if (variantType && variantsVariantType) {
+                this.variantTypeReferencedByVariants.emit(new VariantsReferencingVariantType(variantType, variantsVariantType));
+                this.variantTypeDeletionFailed.emit(new VariantTypeDeletionFailedEvent(variantType, false));
               }
               break;
 
