@@ -1,1 +1,113 @@
-<p>variant-table works!</p>
+<div class="table-container">
+  <ng-scrollbar>
+    <table mat-table [dataSource]="tableDataSource" matSort>
+      <caption class="screen-reader-only">List of Variants</caption>
+
+      <ng-container matColumnDef='archived'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="15">
+          <div mat-sort-header>
+            <div matTooltip="Whether to include the variant in the table selection">
+              Include
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let variant'>
+          <button mat-icon-button class="archived-variant-button"
+                  (click)="variant.archived=!variant.archived;updateVariant(variant);">
+            <mat-icon *ngIf="variant.archived" matTooltip="This variant is not available for selection">
+              add
+            </mat-icon>
+            <mat-icon *ngIf="!variant.archived" matTooltip="This variant is available for selection">
+              done
+            </mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef='name'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="20">
+          <div mat-sort-header>
+            <div matTooltip="The variant name">
+              Variant
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let variant'>
+          <app-highlight-textarea [(text)]="variant.name"
+                                  (textChange)="updateVariant(variant)"
+                                  [highlightFilter]="highlightFilter"
+                                  [placeholder]="'Variant name...'"></app-highlight-textarea>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef='variantType'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+          <div mat-sort-header>
+            <div matTooltip="The type of the variant">
+              Type
+            </div>
+            <mat-icon id="variant-type-modal-icon"
+                      (click)="$event.stopPropagation(); openVariantTypesDialog();"
+                      [matTooltip]="'Edit the available variant types'">edit
+            </mat-icon>
+          </div>
+        </th>
+
+        <td mat-cell *matCellDef='let variant'>
+          <mat-form-field class="dropdown-reference">
+            <mat-select [(ngModel)]="variant.variantType" (selectionChange)="updateVariant(variant)">
+              <mat-select-trigger [matTooltip]="variant.variantType.description">
+                <div [innerHTML]="variant.variantType.name | highlightSearch: highlightFilter"></div>
+              </mat-select-trigger>
+              <ng-container *ngFor="let variantType of variantTypeData.variantTypes">
+                <mat-option *ngIf="!variantType.archived || variant.variantType === variantType"
+                            [value]="variantType">
+                  {{variantType.name}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+          <div mat-sort-header>
+            <div matTooltip="The variant description">
+              Description
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let variant'>
+          <div class="delete-button-wrapper">
+            <div class="description-container">
+              <app-highlight-textarea [(text)]="variant.description"
+                                      (textChange)="updateVariant(variant)"
+                                      [highlightFilter]="highlightFilter"
+                                      [placeholder]="'Describe the impact...'"></app-highlight-textarea>
+            </div>
+            <div class="delete-button-container">
+              <button mat-icon-button
+                      matTooltip="Delete Impact"
+                      [disabled]="variant.deletionFlagged"
+                      (click)="deleteVariant(variant)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          [ngClass]="{'highlight' : row.highlighted}"></tr>
+    </table>
+
+  </ng-scrollbar>
+
+  <app-add-entity-button class="add-entity-button" (clicked)="createVariant()"
+                         [text]="'Variant'"></app-add-entity-button>
+</div>
+
+<app-scroll-to-top-button class="scroll-to-top-button" [windowScrolled]="windowScrolled"
+                          (clicked)="scrollToTop()"></app-scroll-to-top-button>

@@ -59,10 +59,10 @@
               <mat-select-trigger [matTooltip]="value.valueType.description">
                 <div [innerHTML]="value.valueType.name | highlightSearch: highlightFilter"></div>
               </mat-select-trigger>
-              <ng-container *ngFor="let val of valueTypeData.valueTypes">
-                <mat-option *ngIf="!val.archived || value.valueType === val"
-                            [value]="val">
-                  {{val.name}}
+              <ng-container *ngFor="let valueType of valueTypeData.valueTypes">
+                <mat-option *ngIf="!valueType.archived || value.valueType === valueType"
+                            [value]="valueType">
+                  {{valueType.name}}
                 </mat-option>
               </ng-container>
             </mat-select>

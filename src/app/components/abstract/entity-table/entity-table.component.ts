@@ -16,7 +16,7 @@ export class EntityTableComponent {
 
   protected ngUnsubscribe = new Subject();
 
-  // Properties that must be in the template of the child
+  // Properties that must be in the template of the child.
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Stakeholder>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
