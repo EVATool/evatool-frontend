@@ -80,6 +80,8 @@ import {EntityTableComponent} from './components/abstract/entity-table/entity-ta
 import { ValueEditComponent } from './components/value-edit/value-edit.component';
 import { ValueFilterBarComponent } from './components/value-filter-bar/value-filter-bar.component';
 import { ValueTableComponent } from './components/value-table/value-table.component';
+import { ValueTypeDialogComponent } from './components/value-type-dialog/value-type-dialog.component';
+import { ValueTypeTableComponent } from './components/value-type-table/value-type-table.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -144,6 +146,8 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     ValueEditComponent,
     ValueFilterBarComponent,
     ValueTableComponent,
+    ValueTypeDialogComponent,
+    ValueTypeTableComponent,
   ],
   imports: [
     BrowserModule,
