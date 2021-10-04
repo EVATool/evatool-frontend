@@ -113,7 +113,7 @@ export class RequirementTableComponent extends EntityTableComponent implements O
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((requirement: Requirement) => {
         this.updateTableDataSource();
-        this.scrollToBottom();
+        // TODO scroll to newly created row.
       });
     this.requirementDataService.deletedRequirement
       .pipe(takeUntil(this.ngUnsubscribe))

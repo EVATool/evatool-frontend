@@ -71,6 +71,7 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((stakeholder: Stakeholder) => {
         this.updateTableDataSource();
+        // TODO scroll to newly created row.
       });
 
     this.stakeholderData.deletedStakeholder

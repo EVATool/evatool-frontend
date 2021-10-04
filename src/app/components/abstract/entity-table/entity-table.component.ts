@@ -80,7 +80,6 @@ export class EntityTableComponent {
     this.tableDataSource.filterPredicate = this.createFilterPredicate();
   }
 
-
   scrollToTop(): void {
     this.logger.trace(this, 'Scroll To Top');
     const options = {top: 0, duration: 250};

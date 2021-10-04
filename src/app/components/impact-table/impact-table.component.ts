@@ -104,7 +104,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((impact: Impact) => {
         this.updateTableDataSource();
-        this.scrollToBottom();
+        // TODO scroll to newly created row.
       });
 
     this.impactDataService.deletedImpact

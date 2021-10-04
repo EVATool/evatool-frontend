@@ -82,6 +82,7 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((value: Value) => {
         this.updateTableDataSource();
+        // TODO scroll to newly created row.
       });
 
     this.valueData.deletedValue
