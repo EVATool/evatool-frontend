@@ -77,6 +77,9 @@ import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 import {FormatPipe} from './pipes/format.pipe';
 import {ResizeColumnDirective} from './directives/resize-column.directive';
 import {EntityTableComponent} from './components/abstract/entity-table/entity-table.component';
+import { ValueEditComponent } from './components/value-edit/value-edit.component';
+import { ValueFilterBarComponent } from './components/value-filter-bar/value-filter-bar.component';
+import { ValueTableComponent } from './components/value-table/value-table.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -138,6 +141,9 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     FormatPipe,
     ResizeColumnDirective,
     EntityTableComponent,
+    ValueEditComponent,
+    ValueFilterBarComponent,
+    ValueTableComponent,
   ],
   imports: [
     BrowserModule,
