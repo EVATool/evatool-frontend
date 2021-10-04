@@ -311,10 +311,10 @@ export class RequirementTableComponent extends EntityTableComponent implements O
     }
   }
 
+  // TODO Delete
   openVariantsDialog(ids?: string[]): void {
     this.logger.trace(this, 'Opening Variants Dialog');
 
-    // TODO
     // this.dialog.open(VariantDialogComponent, {
     //   height: '60%',
     //   width: '50%',

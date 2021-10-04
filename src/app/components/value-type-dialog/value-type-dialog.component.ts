@@ -1,15 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {takeUntil} from 'rxjs/operators';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {LogService} from '../../services/log.service';
+import {FormBuilder} from '@angular/forms';
+import {Subject} from 'rxjs';
+import {ValueTypeDataService} from '../../services/data/value-type-data.service';
+import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 
 @Component({
   selector: 'app-value-type-dialog',
   templateUrl: './value-type-dialog.component.html',
   styleUrls: ['./value-type-dialog.component.scss']
 })
-export class ValueTypeDialogComponent implements OnInit {
+export class ValueTypeDialogComponent implements OnInit, OnDestroy {
 
-  constructor() { }
+  private ngUnsubscribe = new Subject();
 
-  ngOnInit(): void {
+  id!: string;
+
+  constructor(
+    private logger: LogService,
+    private formBuilder: FormBuilder,
+    private dialogRef: MatDialogRef<ValueTypeDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public valueDataService: ValueTypeDataService,
+    private crossUI: CrossUiEventService) {
+    //this.id = data.id;
   }
 
+  ngOnInit(): void {
+    this.crossUI.userWantsToSeeValueReferencedByImpacts
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ValueReferencedByImpactsEvent) => {
+        this.closeClick();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  closeClick(): void {
+    this.dialogRef.close();
+  }
 }

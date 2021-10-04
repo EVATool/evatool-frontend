@@ -15,6 +15,8 @@ import {ValueDeletionFailedEvent} from '../../services/event/events/DeletionFail
 import {ValueTypeDataService} from '../../services/data/value-type-data.service';
 import {newRowAnimation} from '../../animations/NewRowAnimation';
 import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
+import {ValueTypeDialogComponent} from '../value-type-dialog/value-type-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-value-table',
@@ -36,7 +38,8 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
               private impactData: ImpactDataService,
               private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar,
-              protected logger: LogService) {
+              protected logger: LogService,
+              private dialog: MatDialog) {
     super(logger);
   }
 
@@ -166,6 +169,11 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
   }
 
   openValueTypesDialog(): void {
+    this.logger.trace(this, 'Opening Value Types Dialog');
 
+    this.dialog.open(ValueTypeDialogComponent, {
+      height: '80%',
+      width: '50%'
+    });
   }
 }

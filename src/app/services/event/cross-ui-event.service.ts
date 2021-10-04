@@ -107,6 +107,8 @@ export class CrossUiEventService implements OnDestroy {
   @Output() userWantsToSeeStakeholderReferencedByImpacts: EventEmitter<StakeholderReferencedByImpactsEvent> = new EventEmitter();
   @Output() userWantsToSeeValueReferencedByImpacts: EventEmitter<ValueReferencedByImpactsEvent> = new EventEmitter();
   @Output() userWantsToSeeVariantReferencedByRequirements: EventEmitter<VariantReferencedByRequirementsEvent> = new EventEmitter();
+  @Output() userWantsToSeeValuesReferencedByValueType: EventEmitter<any> = new EventEmitter();
+  @Output() userWantsToSeeVariantsReferencedByVariantType: EventEmitter<any> = new EventEmitter();
 
   @Output() userWantsToSeeArchivedValueReferencedByImpact: EventEmitter<ArchivedValueReferencedByImpact> = new EventEmitter();
   @Output() userWantsToSeeArchivedVariantReferencedByRequirement: EventEmitter<ArchivedVariantReferencedByRequirement> = new EventEmitter();
