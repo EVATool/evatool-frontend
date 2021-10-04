@@ -9,6 +9,7 @@ import {Value} from '../../model/Value';
 import {ValueDto} from '../../dto/ValueDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {ValueTypeDataService} from './value-type-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,12 @@ export class ValueDataService extends DataService implements OnDestroy {
 
   valuesLoaded = false;
   values: Value[] = [];
-  valueTypes: string[] = [];
 
   constructor(protected logger: LogService,
               private valueRest: ValueRestService,
               private valueMapper: ValueMapperService,
-              private analysisData: AnalysisDataService) {
+              private analysisData: AnalysisDataService,
+              private valueTypeData: ValueTypeDataService) {
     super(logger);
   }
 
@@ -45,27 +46,11 @@ export class ValueDataService extends DataService implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
         this.valuesLoaded = false;
-        this.valueRest.getValuesByAnalysisId(analysis.id)
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe((valueDtoList: ValueDto[]) => {
-            const tempValues: Value[] = [];
-            valueDtoList.forEach(valueDto => {
-              tempValues.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]));
-            });
-            this.values = this.sortDefault(tempValues);
-            this.valuesLoaded = true;
-            this.loadedValues.emit(this.values);
-            this.logger.debug(this, 'Values loaded');
-          });
-
-        // Load Value Types.
-        this.valueRest.getValueTypes()
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe((valueTypes: string[]) => {
-            this.valueTypes = [];
-            valueTypes.forEach((valueType: string) => this.valueTypes.push(valueType));
-            this.loadedValueTypes.emit(this.valueTypes);
-          });
+      });
+    this.valueTypeData.loadedValueTypes
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
   }
 
@@ -74,11 +59,26 @@ export class ValueDataService extends DataService implements OnDestroy {
     this.values = [];
   }
 
+  loadIfChildrenLoaded(analysisId: string): void {
+    this.valueRest.getValuesByAnalysisId(analysisId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((valueDtoList: ValueDto[]) => {
+        const tempValues: Value[] = [];
+        valueDtoList.forEach(valueDto => {
+          tempValues.push(this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis], this.valueTypeData.valueTypes));
+        });
+        this.values = this.sortDefault(tempValues);
+        this.valuesLoaded = true;
+        this.loadedValues.emit(this.values);
+        this.logger.debug(this, 'Values loaded');
+      });
+  }
+
   createValue(value: Value): void {
     this.valueRest.createValue(this.valueMapper.toDto(value))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((valueDto: ValueDto) => {
-        const createdValue = this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis]);
+        const createdValue = this.valueMapper.fromDto(valueDto, [this.analysisData.currentAnalysis], this.valueTypeData.valueTypes);
         this.values.push(createdValue);
         this.createdValue.emit(createdValue);
         this.logger.debug(this, 'Value created');
@@ -89,7 +89,7 @@ export class ValueDataService extends DataService implements OnDestroy {
     this.valueRest.updateValue(this.valueMapper.toDto(value))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((valueDto: ValueDto) => {
-        this.valueMapper.updateFromDto(valueDto, value, [this.analysisData.currentAnalysis]);
+        this.valueMapper.updateFromDto(valueDto, value, [this.analysisData.currentAnalysis], this.valueTypeData.valueTypes);
         this.updatedValue.emit(value);
         this.logger.debug(this, 'Value updated');
       });
@@ -110,10 +110,10 @@ export class ValueDataService extends DataService implements OnDestroy {
     const value = new Value();
 
     value.name = '';
-    value.type = this.valueTypes[0];
     value.description = '';
     value.archived = false;
     value.analysis = analysis;
+    value.valueType = this.valueTypeData.valueTypes[0];
 
     return value;
   }
