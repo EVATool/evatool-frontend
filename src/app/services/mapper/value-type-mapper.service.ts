@@ -21,6 +21,7 @@ export class ValueTypeMapperService extends MapperService {
     valueTypeDto.id = valueType.id;
     valueTypeDto.name = valueType.name;
     valueTypeDto.description = valueType.description;
+    valueTypeDto.analysisId = valueType.analysis.id;
 
     return valueTypeDto;
   }

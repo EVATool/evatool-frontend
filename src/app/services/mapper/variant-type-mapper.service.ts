@@ -21,6 +21,7 @@ export class VariantTypeMapperService extends MapperService {
     variantTypeDto.id = variantType.id;
     variantTypeDto.name = variantType.name;
     variantTypeDto.description = variantType.description;
+    variantTypeDto.analysisId = variantType.analysis.id;
 
     return variantTypeDto;
   }
