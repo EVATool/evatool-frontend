@@ -75,16 +75,5 @@ describe('ValueRestService', () => {
       const req = httpMock.expectOne(service.valuesUrl + '/' + valueDto.id);
       expect(req.request.method).toBe('DELETE');
     });
-
-    it('should find value types', () => {
-      // given
-
-      // when
-      service.getValueTypes().subscribe();
-
-      // then
-      const req = httpMock.expectOne(service.valuesTypesUrl);
-      expect(req.request.method).toBe('GET');
-    });
   });
 });

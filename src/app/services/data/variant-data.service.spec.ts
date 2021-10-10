@@ -79,12 +79,13 @@ describe('VariantDataService', () => {
     // given
 
     // when
-    const defaultVariant = service.createDefaultVariant(data.analyses[0]);
+    const defaultVariant = service.createDefaultVariant(data.analyses[0], data.variantTypes[0]);
 
     // then
     expect(defaultVariant.id).toBeUndefined();
     expect(defaultVariant.prefixSequenceId).toBeUndefined();
     expect(defaultVariant.name).toEqual('');
+    expect(defaultVariant.variantType).toEqual(data.variantTypes[0]);
     expect(defaultVariant.description).toEqual('');
     expect(defaultVariant.archived).toEqual(false);
     expect(defaultVariant.analysis).toBeDefined();

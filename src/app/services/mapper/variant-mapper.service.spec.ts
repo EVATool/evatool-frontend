@@ -23,7 +23,7 @@ describe('VariantMapperService', () => {
 
     // when
     const dto = service.toDto(entity);
-    const recreatedEntity = service.fromDto(dto, data.analyses);
+    const recreatedEntity = service.fromDto(dto, data.analyses, data.variantTypes);
 
     // then
     expect(entity).toEqual(recreatedEntity);

@@ -79,12 +79,12 @@ describe('ValueDataService', () => {
     // given
 
     // when
-    const defaultValue = service.createDefaultValue(data.analyses[0]);
+    const defaultValue = service.createDefaultValue(data.analyses[0], data.valueTypes[0]);
 
     // then
     expect(defaultValue.id).toBeUndefined();
     expect(defaultValue.name).toEqual('');
-    expect(defaultValue.type).toEqual(service.valueTypes[0]);
+    expect(defaultValue.valueType).toEqual(data.valueTypes[0]);
     expect(defaultValue.description).toEqual('');
     expect(defaultValue.archived).toEqual(false);
     expect(defaultValue.analysis).toBeDefined();
