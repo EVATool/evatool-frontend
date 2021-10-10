@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ValueFilterBarComponent } from './value-filter-bar.component';
+import {ValueFilterBarComponent} from './value-filter-bar.component';
+import {SpecService} from '../../services/spec.service';
 
 describe('ValueFilterBarComponent', () => {
   let component: ValueFilterBarComponent;
@@ -8,9 +9,10 @@ describe('ValueFilterBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ValueFilterBarComponent ]
+      imports: SpecService.imports,
+      declarations: [ValueFilterBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValueTypeTableComponent } from './value-type-table.component';
+import {SpecService} from '../../services/spec.service';
 
 describe('ValueTypeTableComponent', () => {
   let component: ValueTypeTableComponent;
@@ -8,6 +9,7 @@ describe('ValueTypeTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [ ValueTypeTableComponent ]
     })
     .compileComponents();

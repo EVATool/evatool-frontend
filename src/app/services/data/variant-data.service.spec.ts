@@ -89,7 +89,6 @@ describe('VariantDataService', () => {
     expect(defaultVariant.description).toEqual('');
     expect(defaultVariant.archived).toEqual(false);
     expect(defaultVariant.analysis).toBeDefined();
-    expect(defaultVariant.subVariants.length).toBe(0);
   });
 
   describe('event emitter', () => {

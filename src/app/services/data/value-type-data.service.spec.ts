@@ -1,12 +1,15 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ValueTypeDataService } from './value-type-data.service';
+import {ValueTypeDataService} from './value-type-data.service';
+import {SpecService} from '../spec.service';
 
 describe('ValueTypeDataService', () => {
   let service: ValueTypeDataService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: SpecService.imports,
+    });
     service = TestBed.inject(ValueTypeDataService);
   });
 
