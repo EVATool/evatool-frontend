@@ -14,5 +14,6 @@ export class Stakeholder {
   analysis!: Analysis;
 
   // UI
+  highlighted = false;
   deletionFlagged = false;
 }

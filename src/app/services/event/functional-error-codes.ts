@@ -26,6 +26,8 @@ export class FunctionalErrorCodes {
   public static readonly VARIANT_FIND_FAILED_NOT_FOUND = 404_105;
   public static readonly REQUIREMENT_FIND_FAILED_NOT_FOUND = 404_106;
   public static readonly REQUIREMENT_DELTA_FIND_FAILED_NOT_FOUND = 404_107;
+  public static readonly VALUE_TYPE_UPDATE_FAILED_NOT_FOUND = 404_208;
+  public static readonly VARIANT_TYPE_UPDATE_FAILED_NOT_FOUND = 404_209;
 
   public static readonly ANALYSIS_UPDATE_FAILED_NOT_FOUND = 404_201;
   public static readonly STAKEHOLDER_UPDATE_FAILED_NOT_FOUND = 404_202;
@@ -42,6 +44,8 @@ export class FunctionalErrorCodes {
   public static readonly VARIANT_DELETION_FAILED_NOT_FOUND = 404_305;
   public static readonly REQUIREMENT_DELETION_FAILED_NOT_FOUND = 404_306;
   public static readonly REQUIREMENT_DELTA_DELETION_FAILED_NOT_FOUND = 404_307;
+  public static readonly VALUE_TYPE_DELETION_FAILED_NOT_FOUND = 404_308;
+  public static readonly VARIANT_TYPE_DELETION_FAILED_NOT_FOUND = 404_309;
 
   // 409 Conflict codes.
   public static readonly VALUE_REFERENCED_BY_IMPACT = 409_001;
@@ -51,5 +55,6 @@ export class FunctionalErrorCodes {
   public static readonly REGISTER_USERNAME_ALREADY_EXISTS = 409_005;
   public static readonly REGISTER_EMAIL_ALREADY_EXISTS = 409_006;
   public static readonly REGISTER_REALM_ALREADY_EXISTS = 409_007;
-
+  public static readonly VALUE_TYPE_REFERENCED_BY_VALUE = 409_008;
+  public static readonly VARIANT_TYPE_REFERENCED_BY_VARIANT = 409_009;
 }

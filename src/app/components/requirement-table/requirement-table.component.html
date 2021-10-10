@@ -40,10 +40,10 @@
               Variants
             </div>
 
-          <mat-icon id="variant-modal"
-                    (click)="$event.stopPropagation(); openVariantsDialog();"
-                    [matTooltip]="'Edit the available variants'">edit
-          </mat-icon>
+            <mat-icon id="variant-type-modal-icon"
+                      (click)="$event.stopPropagation(); openVariantsDialog();"
+                      [matTooltip]="'Edit the available variants'">edit
+            </mat-icon>
           </div>
         </th>
 
@@ -74,7 +74,7 @@
           <button mat-icon-button
                   *ngIf="referencesArchivedVariant(requirement)"
                   class="warning-icon-button"
-                  (click)="openVariantsDialog(getReferencedArchivedVariantIds(requirement))"
+                  (click)="emitArchivedReferenced(getReferencedArchivedVariants(requirement), requirement)"
                   matTooltip="This requirement references an archived variant"
                   matTooltipClass="multi-line-tooltip">
             <mat-icon>warning icon</mat-icon>
@@ -155,9 +155,9 @@
 
       <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          [ngClass]="{'highlight' : row.highlighted}"
           (mouseleave)="hideDeltaSliders(row)"
-          (focusout)="hideDeltaSliders(row)"
-          [ngClass]="{'highlight' : row.highlighted}"></tr>
+          (focusout)="hideDeltaSliders(row)"></tr>
     </table>
   </ng-scrollbar>
 

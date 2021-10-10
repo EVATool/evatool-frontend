@@ -1,0 +1,113 @@
+<div class="table-container">
+  <ng-scrollbar>
+    <table mat-table [dataSource]="tableDataSource" matSort>
+      <caption class="screen-reader-only">List of Values</caption>
+
+      <ng-container matColumnDef='archived'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="15">
+          <div mat-sort-header>
+            <div matTooltip="Whether to include the value in the table selection">
+              Include
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let value'>
+          <button mat-icon-button class="archived-value-button"
+                  (click)="value.archived=!value.archived;updateValue(value);">
+            <mat-icon *ngIf="value.archived" matTooltip="This value is not available for selection">
+              add
+            </mat-icon>
+            <mat-icon *ngIf="!value.archived" matTooltip="This value is available for selection">
+              done
+            </mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef='name'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="20">
+          <div mat-sort-header>
+            <div matTooltip="The value name">
+              Value
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let value'>
+          <app-highlight-textarea [(text)]="value.name"
+                                  (textChange)="updateValue(value)"
+                                  [highlightFilter]="highlightFilter"
+                                  [placeholder]="'Value name...'"></app-highlight-textarea>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef='valueType'>
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+          <div mat-sort-header>
+            <div matTooltip="The type of the value">
+              Type
+            </div>
+            <mat-icon id="value-type-modal-icon"
+                      (click)="$event.stopPropagation(); openValueTypesDialog();"
+                      [matTooltip]="'Edit the available value types'">edit
+            </mat-icon>
+          </div>
+        </th>
+
+        <td mat-cell *matCellDef='let value'>
+          <mat-form-field class="dropdown-reference">
+            <mat-select [(ngModel)]="value.valueType" (selectionChange)="updateValue(value)">
+              <mat-select-trigger [matTooltip]="value.valueType.description">
+                <div [innerHTML]="value.valueType.name | highlightSearch: highlightFilter"></div>
+              </mat-select-trigger>
+              <ng-container *ngFor="let valueType of valueTypeData.valueTypes">
+                <mat-option *ngIf="!valueType.archived || value.valueType === valueType"
+                            [value]="valueType">
+                  {{valueType.name}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
+          <div mat-sort-header>
+            <div matTooltip="The value description">
+              Description
+            </div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef='let value'>
+          <div class="delete-button-wrapper">
+            <div class="description-container">
+              <app-highlight-textarea [(text)]="value.description"
+                                      (textChange)="updateValue(value)"
+                                      [highlightFilter]="highlightFilter"
+                                      [placeholder]="'Describe the impact...'"></app-highlight-textarea>
+            </div>
+            <div class="delete-button-container">
+              <button mat-icon-button
+                      matTooltip="Delete Impact"
+                      [disabled]="value.deletionFlagged"
+                      (click)="deleteValue(value)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row [style.min-height]="0" *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          [ngClass]="{'highlight' : row.highlighted}"></tr>
+    </table>
+
+  </ng-scrollbar>
+
+  <app-add-entity-button class="add-entity-button" (clicked)="createValue()"
+                         [text]="'Value'"></app-add-entity-button>
+</div>
+
+<app-scroll-to-top-button class="scroll-to-top-button" [windowScrolled]="windowScrolled"
+                          (clicked)="scrollToTop()"></app-scroll-to-top-button>

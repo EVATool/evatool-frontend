@@ -1,4 +1,5 @@
 import {Analysis} from './Analysis';
+import {VariantType} from './VariantType';
 
 export class Variant {
   [k: string]: any;
@@ -10,7 +11,7 @@ export class Variant {
   archived!: boolean;
 
   analysis!: Analysis;
-  subVariants: Variant[] = [];
+  variantType!: VariantType;
 
   // UI
   deletionFlagged = false;

@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
-import {VariantDialogComponent} from '../deprecated/variant-dialog/variant-dialog.component';
 import {Value} from '../../model/Value';
 import {RequirementDelta} from '../../model/RequirementDelta';
 import {RequirementTableFilterEvent} from '../requirement-filter-bar/RequirementTableFilterEvent';
@@ -18,12 +17,13 @@ import {Variant} from '../../model/Variant';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {takeUntil} from 'rxjs/operators';
-import {VariantReferencedByRequirementsEvent} from '../../services/event/events/http409/VariantReferencedByRequirementsEvent';
-import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {RequirementsReferencingVariantEvent} from '../../services/event/events/http409/RequirementsReferencingVariantEvent';
+import {RequirementDeltasReferencingImpactEvent} from '../../services/event/events/http409/RequirementDeltasReferencingImpactEvent';
 import {RequirementDeletionFailedEvent, RequirementDeltaDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {mouseInOutAnimation} from '../../animations/MouseInOutAnimation';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
 import {Stakeholder} from '../../model/Stakeholder';
+import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 
 @Component({
   selector: 'app-requirement-table',
@@ -57,18 +57,18 @@ export class RequirementTableComponent extends EntityTableComponent implements O
   ngOnInit(): void {
     super.onInit();
 
-    this.crossUI.userWantsToSeeVariantReferencedByRequirements
+    this.crossUI.userWantsToSeeRequirementsReferencingVariant
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: VariantReferencedByRequirementsEvent) => {
+      .subscribe((event: RequirementsReferencingVariantEvent) => {
         this.deletionFlaggedVariant = event.variant;
         event.requirements.forEach(requirement => {
           requirement.highlighted = true;
         });
       });
 
-    this.crossUI.userWantsToSeeImpactReferencedByRequirements
+    this.crossUI.userWantsToSeeRequirementsReferencingImpact
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
+      .subscribe((event: RequirementDeltasReferencingImpactEvent) => {
         this.deletionFlaggedImpact = event.impact;
         event.deltas.forEach((delta: RequirementDelta) => {
           delta.highlighted = true;
@@ -113,7 +113,7 @@ export class RequirementTableComponent extends EntityTableComponent implements O
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((requirement: Requirement) => {
         this.updateTableDataSource();
-        this.scrollToBottom();
+        // TODO scroll to newly created row.
       });
     this.requirementDataService.deletedRequirement
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -311,14 +311,15 @@ export class RequirementTableComponent extends EntityTableComponent implements O
     }
   }
 
+  // TODO Delete
   openVariantsDialog(ids?: string[]): void {
     this.logger.trace(this, 'Opening Variants Dialog');
 
-    this.dialog.open(VariantDialogComponent, {
-      height: '60%',
-      width: '50%',
-      data: {ids}
-    });
+    // this.dialog.open(VariantDialogComponent, {
+    //   height: '60%',
+    //   width: '50%',
+    //   data: {ids}
+    // });
   }
 
   updateImpactColumns(includeOnlyTheseImpacts?: string[]): void {
@@ -388,5 +389,10 @@ export class RequirementTableComponent extends EntityTableComponent implements O
     return this.requirementDeltaDataService.requirementDeltas.filter(
       delta => delta.requirement === requirement
     );
+  }
+
+  emitArchivedReferenced(variants: Variant[], requirement: Requirement): void {
+    const event = new ArchivedVariantReferencedByRequirement(variants, requirement);
+    this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement.emit(event);
   }
 }

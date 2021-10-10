@@ -10,16 +10,16 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SliderFilterSettings} from '../impact-slider/SliderFilterSettings';
 import {ImpactTableFilterEvent} from '../impact-filter-bar/ImpactTableFilterEvent';
-import {ValueDialogComponent} from '../deprecated/value-dialog/value-dialog.component';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {takeUntil} from 'rxjs/operators';
-import {ValueReferencedByImpactsEvent} from '../../services/event/events/http409/ValueReferencedByImpactsEvent';
-import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
-import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {ImpactsReferencingValueEvent} from '../../services/event/events/http409/ImpactsReferencingValueEvent';
+import {ImpactsReferencingStakeholderEvent} from '../../services/event/events/http409/ImpactsReferencingStakeholderEvent';
+import {RequirementDeltasReferencingImpactEvent} from '../../services/event/events/http409/RequirementDeltasReferencingImpactEvent';
 import {ImpactDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
+import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
 
 @Component({
   selector: 'app-impact-table',
@@ -50,18 +50,18 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
   ngOnInit(): void {
     super.onInit();
 
-    this.crossUI.userWantsToSeeValueReferencedByImpacts
+    this.crossUI.userWantsToSeeImpactsReferencingValue
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ValueReferencedByImpactsEvent) => {
+      .subscribe((event: ImpactsReferencingValueEvent) => {
         this.deletionFlaggedValue = event.value;
         event.impacts.forEach(impact => {
           impact.highlighted = true;
         });
       });
 
-    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
+    this.crossUI.userWantsToSeeImpactsReferencingStakeholder
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
+      .subscribe((event: ImpactsReferencingStakeholderEvent) => {
         this.deletionFlaggedStakeholder = event.stakeholder;
         event.impacts.forEach((impact: Impact) => {
           impact.highlighted = true;
@@ -70,7 +70,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
 
     this.crossUI.impactReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
+      .subscribe((event: RequirementDeltasReferencingImpactEvent) => {
         const message = 'This impact cannot be deleted. It is still being used by '
           + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
         const action = 'show';
@@ -79,7 +79,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe(() => {
             this.logger.info(this, 'User wants to see the requirements referencing the impact');
-            this.crossUI.userWantsToSeeImpactReferencedByRequirements.emit(event);
+            this.crossUI.userWantsToSeeRequirementsReferencingImpact.emit(event);
           });
       });
 
@@ -104,7 +104,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((impact: Impact) => {
         this.updateTableDataSource();
-        this.scrollToBottom();
+        // TODO scroll to newly created row.
       });
 
     this.impactDataService.deletedImpact
@@ -164,17 +164,22 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
   createImpact(): void {
     if (this.stakeholderDataService.stakeholders.length === 0) {
       const message = 'There must be at least one stakeholder for an impact to exist';
-      const action = '';
-      this.snackBar.open(message, action, {duration: 5000});
+      const action = 'Create';
+      this.snackBar.open(message, action, {duration: 5000}).onAction()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(() => {
+          this.crossUI.userWantsToNavigateToStakeholderTab.emit();
+        });
     } else if (this.valueDataService.values.length === 0) {
       const message = 'There must be at least one value for an impact to exist';
       const action = 'Create';
       this.snackBar.open(message, action, {duration: 5000}).onAction()
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(() => {
-          this.openValuesDialog();
+          this.crossUI.userWantsToNavigateToValueTab.emit();
         });
     } else {
+      // Get valid default impact.
       const impact = this.impactDataService.createDefaultImpact(
         this.analysisDataService.currentAnalysis,
         this.stakeholderDataService.stakeholders[0],
@@ -221,13 +226,8 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
     this.impactDataService.deleteImpact(impact);
   }
 
-  openValuesDialog(id?: string): void {
-    this.logger.trace(this, 'Opening Values Dialog');
-
-    this.dialog.open(ValueDialogComponent, {
-      height: '80%',
-      width: '50%',
-      data: {id}
-    });
+  emitArchivedReferenced(value: Value, impact: Impact): void {
+    const event = new ArchivedValueReferencedByImpact(value, impact);
+    this.crossUI.userWantsToSeeArchivedValueReferencedByImpact.emit(event);
   }
 }

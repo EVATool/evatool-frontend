@@ -46,7 +46,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.stakeholdersLoaded = false;
+        //this.stakeholdersLoaded = false;
         this.stakeholderRest.getStakeholdersByAnalysisId(analysis.id)
           .pipe(takeUntil(this.ngUnsubscribe))
           .subscribe((stakeholderDtoList: StakeholderDto[]) => {

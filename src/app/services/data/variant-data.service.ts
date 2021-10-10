@@ -9,7 +9,8 @@ import {Analysis} from '../../model/Analysis';
 import {VariantDto} from '../../dto/VariantDto';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {Value} from '../../model/Value';
+import {VariantTypeDataService} from './variant-type-data.service';
+import {VariantType} from '../../model/VariantType';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class VariantDataService extends DataService implements OnDestroy {
   constructor(protected logger: LogService,
               private variantRest: VariantRestService,
               private variantMapper: VariantMapperService,
-              private analysisData: AnalysisDataService) {
+              private analysisData: AnalysisDataService,
+              private variantTypeData: VariantTypeDataService) {
     super(logger);
   }
 
@@ -43,19 +45,12 @@ export class VariantDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.variantsLoaded = false;
-        this.variantRest.getVariantsByAnalysisId(analysis.id)
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe((variantDtoList: VariantDto[]) => {
-            const tempVariants: Value[] = [];
-            variantDtoList.forEach(variantDto => {
-              tempVariants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]));
-            });
-            this.variants = this.sortDefault(tempVariants);
-            this.variantsLoaded = true;
-            this.loadedVariants.emit(this.variants);
-            this.logger.debug(this, 'Variants loaded');
-          });
+        //this.variantsLoaded = false;
+      });
+    this.variantTypeData.loadedVariantTypes
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.loadIfChildrenLoaded(this.analysisData.currentAnalysis.id);
       });
   }
 
@@ -64,11 +59,30 @@ export class VariantDataService extends DataService implements OnDestroy {
     this.variants = [];
   }
 
+  loadIfChildrenLoaded(analysisId: string): void {
+    if (!this.variantTypeData.variantTypesLoaded) {
+      this.logger.debug(this, 'A child entity collection has not yet been loaded');
+      return;
+    }
+    this.variantRest.getVariantsByAnalysisId(analysisId)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((variantDtoList: VariantDto[]) => {
+        const tempVariants: Variant[] = [];
+        variantDtoList.forEach(variantDto => {
+          tempVariants.push(this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis], this.variantTypeData.variantTypes));
+        });
+        this.variants = this.sortDefault(tempVariants);
+        this.variantsLoaded = true;
+        this.loadedVariants.emit(this.variants);
+        this.logger.debug(this, 'Variants loaded');
+      });
+  }
+
   createVariant(variant: Variant): void {
     this.variantRest.createVariant(this.variantMapper.toDto(variant))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((variantDto: VariantDto) => {
-        const createdVariant = this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis]);
+        const createdVariant = this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis], this.variantTypeData.variantTypes);
         this.variants.push(createdVariant);
         this.createdVariant.emit(createdVariant);
         this.logger.debug(this, 'Variant created');
@@ -79,7 +93,7 @@ export class VariantDataService extends DataService implements OnDestroy {
     this.variantRest.updateVariant(this.variantMapper.toDto(variant))
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((variantDto: VariantDto) => {
-        this.variantMapper.updateFromDto(variantDto, variant, [this.analysisData.currentAnalysis]);
+        this.variantMapper.updateFromDto(variantDto, variant, [this.analysisData.currentAnalysis], this.variantTypeData.variantTypes);
         this.updatedVariant.emit(variant);
         this.logger.debug(this, 'Variant updated');
       });
@@ -96,14 +110,14 @@ export class VariantDataService extends DataService implements OnDestroy {
       });
   }
 
-  createDefaultVariant(analysis: Analysis): Variant {
+  createDefaultVariant(analysis: Analysis, variantType: VariantType): Variant {
     const variant = new Variant();
 
     variant.name = '';
     variant.description = '';
     variant.archived = false;
     variant.analysis = analysis;
-    variant.subVariants = [];
+    variant.variantType = variantType;
 
     return variant;
   }

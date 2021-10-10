@@ -48,7 +48,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.requirementDeltasLoaded = false;
+        //this.requirementDeltasLoaded = false;
       });
     this.impactData.loadedImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -69,7 +69,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
 
   loadIfChildrenLoaded(analysisId: string): void {
     if (!this.impactData.impactsLoaded || !this.requirementData.requirementsLoaded) {
-      this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
+      this.logger.debug(this, 'A child entity collection has not yet been loaded');
       return;
     }
     this.requirementDeltaRest.getRequirementDeltasByAnalysisId(analysisId)

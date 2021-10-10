@@ -56,14 +56,4 @@ export class ValueRestService extends RestService {
       return this.http.delete<void>(url);
     }
   }
-
-  getValueTypes(): Observable<string[]> {
-    const url = this.valuesTypesUrl;
-    this.logger.debug(this, 'Http get to: ' + url);
-    if (this.testing) {
-      return of(this.sampleData.valueTypes);
-    } else {
-      return this.http.get<string[]>(url);
-    }
-  }
 }

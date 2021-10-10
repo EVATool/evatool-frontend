@@ -16,7 +16,7 @@ export class EntityTableComponent {
 
   protected ngUnsubscribe = new Subject();
 
-  // Properties that must be in the template of the child
+  // Properties that must be in the template of the child.
   @ViewChild(NgScrollbar) scrollbarRef!: NgScrollbar;
   @ViewChild(MatTable) table!: MatTable<Stakeholder>;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
@@ -80,7 +80,6 @@ export class EntityTableComponent {
     this.tableDataSource.filterPredicate = this.createFilterPredicate();
   }
 
-
   scrollToTop(): void {
     this.logger.trace(this, 'Scroll To Top');
     const options = {top: 0, duration: 250};
@@ -105,7 +104,8 @@ export class EntityTableComponent {
   }
 
   // TODO return index more reliable. This sometimes fails to scroll (when changing the sorting and adding a new row).
-  getRowIndex(stakeholder: Stakeholder): number {
+  //  Add method that scrolls to entity passed.
+  getLastRowIndex(): number {
     const row = this.rows.get(this.rows.length - 1);
     if (row) {
       return row.element.nativeElement.sectionRowIndex;

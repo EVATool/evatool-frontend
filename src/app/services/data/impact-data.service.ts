@@ -48,7 +48,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
     this.analysisData.loadedCurrentAnalysis
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysis: Analysis) => {
-        this.impactsLoaded = false;
+        //this.impactsLoaded = false;
       });
     this.stakeholderData.loadedStakeholders
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -69,7 +69,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
 
   loadIfChildrenLoaded(analysisId: string): void {
     if (!this.stakeholderData.stakeholdersLoaded || !this.valueData.valuesLoaded) {
-      this.logger.debug(this, 'A child has finished loading but I am still waiting for another child');
+      this.logger.debug(this, 'A child entity collection has not yet been loaded');
       return;
     }
     this.impactRest.getImpactsByAnalysisId(analysisId)

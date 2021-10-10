@@ -11,8 +11,10 @@ import * as uuid from 'uuid';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {StakeholderReferencedByImpactsEvent} from '../../services/event/events/http409/StakeholderReferencedByImpactsEvent';
-import {ImpactReferencedByRequirementDeltasEvent} from '../../services/event/events/http409/ImpactReferencedByRequirementDeltasEvent';
+import {ImpactsReferencingStakeholderEvent} from '../../services/event/events/http409/ImpactsReferencingStakeholderEvent';
+import {RequirementDeltasReferencingImpactEvent} from '../../services/event/events/http409/RequirementDeltasReferencingImpactEvent';
+import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
+import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -52,16 +54,40 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.navigate([ROUTES.pageNotFound]);
       });
 
-    this.crossUI.userWantsToSeeStakeholderReferencedByImpacts
+    this.crossUI.userWantsToSeeImpactsReferencingStakeholder
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: StakeholderReferencedByImpactsEvent) => {
-        this.tabGroup.selectedIndex = 1;
+      .subscribe((event: ImpactsReferencingStakeholderEvent) => {
+        this.navigateToTabByName('Impact');
       });
 
-    this.crossUI.userWantsToSeeImpactReferencedByRequirements
+    this.crossUI.userWantsToSeeRequirementsReferencingImpact
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((event: ImpactReferencedByRequirementDeltasEvent) => {
-        this.tabGroup.selectedIndex = 2;
+      .subscribe((event: RequirementDeltasReferencingImpactEvent) => {
+        this.navigateToTabByName('Requirement');
+      });
+
+    this.crossUI.userWantsToSeeArchivedValueReferencedByImpact
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ArchivedValueReferencedByImpact) => {
+        this.navigateToTabByName('Value');
+      });
+
+    this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((event: ArchivedVariantReferencedByRequirement) => {
+        this.navigateToTabByName('Variant');
+      });
+
+    this.crossUI.userWantsToNavigateToValueTab
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.navigateToTabByName('Value');
+      });
+
+    this.crossUI.userWantsToNavigateToStakeholderTab
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.navigateToTabByName('Stakeholder');
       });
 
     this.crossUI.userNavigatedToAnalysis.emit();
@@ -93,6 +119,9 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
       case 3:
         break;
 
+      case 4:
+        break;
+
       default:
         this.logger.warn(this, 'Unknown tab');
         break;
@@ -108,6 +137,10 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
+    this.navigateToTabByName(tab);
+  }
+
+  private navigateToTabByName(tab: string): void {
     for (let i = 0; i < this.tabGroup._allTabs.length; i++) {
       const tabName = this.tabGroup._allTabs.get(i)?.textLabel;
       if (tabName === tab) {
@@ -115,6 +148,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
       }
     }
+    this.logger.warn(this, 'Tab with name ' + tab + ' not found');
   }
 
   putTabInUrl(index: number): void {

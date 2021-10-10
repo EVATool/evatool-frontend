@@ -37,10 +37,8 @@ import {FilterSliderComponent} from './components/filter-impact/filter-slider.co
 import {FilterCategoryComponent} from './components/filter-category/filter-category.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
-import {ValueDialogComponent} from './components/deprecated/value-dialog/value-dialog.component';
 import {ImpactFilterBarComponent} from './components/impact-filter-bar/impact-filter-bar.component';
 import {ImpactTableComponent} from './components/impact-table/impact-table.component';
-import {ValueTableComponent} from './components/deprecated/value-table/value-table.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NgScrollbarModule} from 'ngx-scrollbar';
 import {MatSortModule} from '@angular/material/sort';
@@ -48,8 +46,6 @@ import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions, MatTooltipModule}
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {RequirementFilterBarComponent} from './components/requirement-filter-bar/requirement-filter-bar.component';
 import {RequirementTableComponent} from './components/requirement-table/requirement-table.component';
-import {VariantDialogComponent} from './components/deprecated/variant-dialog/variant-dialog.component';
-import {VariantTableComponent} from './components/deprecated/variant-table/variant-table.component';
 import {AddEntityButtonComponent} from './components/add-entity-button/add-entity-button.component';
 import {ScrollToTopButtonComponent} from './components/scroll-to-top-button/scroll-to-top-button.component';
 import {HighlightTextareaComponent} from './components/highlight-textarea/highlight-textarea.component';
@@ -81,6 +77,16 @@ import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 import {FormatPipe} from './pipes/format.pipe';
 import {ResizeColumnDirective} from './directives/resize-column.directive';
 import {EntityTableComponent} from './components/abstract/entity-table/entity-table.component';
+import { ValueEditComponent } from './components/value-edit/value-edit.component';
+import { ValueFilterBarComponent } from './components/value-filter-bar/value-filter-bar.component';
+import { ValueTableComponent } from './components/value-table/value-table.component';
+import { ValueTypeDialogComponent } from './components/value-type-dialog/value-type-dialog.component';
+import { ValueTypeTableComponent } from './components/value-type-table/value-type-table.component';
+import { VariantEditComponent } from './components/variant-edit/variant-edit.component';
+import { VariantFilterBarComponent } from './components/variant-filter-bar/variant-filter-bar.component';
+import { VariantTableComponent } from './components/variant-table/variant-table.component';
+import { VariantTypeDialogComponent } from './components/variant-type-dialog/variant-type-dialog.component';
+import { VariantTypeTableComponent } from './components/variant-type-table/variant-type-table.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',
@@ -119,14 +125,10 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     FilterSliderComponent,
     FilterCategoryComponent,
     ImpactSliderComponent,
-    ValueDialogComponent,
     ImpactFilterBarComponent,
     ImpactTableComponent,
-    ValueTableComponent,
     RequirementFilterBarComponent,
     RequirementTableComponent,
-    VariantDialogComponent,
-    VariantTableComponent,
     AddEntityButtonComponent,
     ScrollToTopButtonComponent,
     HighlightTextareaComponent,
@@ -146,6 +148,16 @@ export function HttpLoaderFactory(httpClient: HttpClient): TranslateHttpLoader {
     FormatPipe,
     ResizeColumnDirective,
     EntityTableComponent,
+    ValueEditComponent,
+    ValueFilterBarComponent,
+    ValueTableComponent,
+    ValueTypeDialogComponent,
+    ValueTypeTableComponent,
+    VariantEditComponent,
+    VariantFilterBarComponent,
+    VariantTableComponent,
+    VariantTypeDialogComponent,
+    VariantTypeTableComponent,
   ],
   imports: [
     BrowserModule,

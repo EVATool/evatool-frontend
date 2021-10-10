@@ -12,7 +12,6 @@ import {Stakeholder} from '../../model/Stakeholder';
 export class StakeholderEditComponent {
   @ViewChild(StakeholderTableComponent) table!: StakeholderTableComponent;
   @ViewChild(StakeholderFilterBarComponent) filterBar!: StakeholderFilterBarComponent;
-  @Output() userWantsToSeeReferencedImpacts: EventEmitter<Stakeholder> = new EventEmitter();
 
   constructor(private logger: LogService) {
   }

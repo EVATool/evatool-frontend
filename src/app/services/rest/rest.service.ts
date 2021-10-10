@@ -29,6 +29,8 @@ export abstract class RestService {
 
   public readonly stakeholdersUrl = this.backendUrl + 'stakeholders';
 
+  public readonly valueTypesUrl = this.backendUrl + 'value-types';
+
   public readonly valuesUrl = this.backendUrl + 'values';
 
   public readonly impactsUrl = this.backendUrl + 'impacts';
@@ -37,9 +39,10 @@ export abstract class RestService {
 
   public readonly requirementDeltasUrl = this.backendUrl + 'requirement-deltas';
 
+  public readonly variantTypesUrl = this.backendUrl + 'variant-types';
+
   public readonly variantsUrl = this.backendUrl + 'variants';
 
-  public readonly valuesTypesUrl = this.backendUrl + 'values/types';
   public readonly stakeholderPriorityUrl = this.backendUrl + 'stakeholders/priorities';
   public readonly stakeholderLevelsUrl = this.backendUrl + 'stakeholders/levels';
 

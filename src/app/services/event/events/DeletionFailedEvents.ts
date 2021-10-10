@@ -5,6 +5,8 @@ import {Value} from '../../../model/Value';
 import {Variant} from '../../../model/Variant';
 import {Requirement} from '../../../model/Requirement';
 import {Analysis} from '../../../model/Analysis';
+import {ValueType} from '../../../model/ValueType';
+import {VariantType} from '../../../model/VariantType';
 
 export abstract class DeletionFailedEvent<T> {
   entity!: T;
@@ -28,6 +30,12 @@ export class StakeholderDeletionFailedEvent extends DeletionFailedEvent<Stakehol
   }
 }
 
+export class ValueTypeDeletionFailedEvent extends DeletionFailedEvent<ValueType> {
+  constructor(valueType: ValueType, notFound: boolean) {
+    super(valueType, notFound);
+  }
+}
+
 export class ValueDeletionFailedEvent extends DeletionFailedEvent<Value> {
   constructor(value: Value, notFound: boolean) {
     super(value, notFound);
@@ -37,6 +45,12 @@ export class ValueDeletionFailedEvent extends DeletionFailedEvent<Value> {
 export class ImpactDeletionFailedEvent extends DeletionFailedEvent<Impact> {
   constructor(impact: Impact, notFound: boolean) {
     super(impact, notFound);
+  }
+}
+
+export class VariantTypeDeletionFailedEvent extends DeletionFailedEvent<VariantType> {
+  constructor(variantType: VariantType, notFound: boolean) {
+    super(variantType, notFound);
   }
 }
 

@@ -53,10 +53,6 @@
             <div matTooltip="The affected value">
               Value
             </div>
-            <mat-icon id="value-modal"
-                      (click)="$event.stopPropagation(); openValuesDialog();"
-                      [matTooltip]="'Edit the available values'">edit
-            </mat-icon>
           </div>
         </th>
 
@@ -79,7 +75,7 @@
           <button mat-icon-button
                   *ngIf="impact.value.archived"
                   class="warning-icon-button"
-                  (click)="openValuesDialog(impact.value.id)"
+                  (click)="emitArchivedReferenced(impact.value, impact)"
                   matTooltip="This impact references an archived value"
                   matTooltipClass="multi-line-tooltip">
             <mat-icon>warning icon</mat-icon>

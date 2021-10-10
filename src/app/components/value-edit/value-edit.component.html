@@ -1,0 +1,11 @@
+<div class="entity-main-container">
+  <div class="filter-bar-container">
+    <app-value-filter-bar (filterChanged)="table.updateFilter($event)">
+    </app-value-filter-bar>
+  </div>
+
+  <div class="table-container">
+    <app-value-table #table>
+    </app-value-table>
+  </div>
+</div>
