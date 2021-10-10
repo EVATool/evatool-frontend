@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {StakeholderFilterBarComponent} from '../stakeholder-filter-bar/stakeholder-filter-bar.component';
 import {StakeholderTableComponent} from '../stakeholder-table/stakeholder-table.component';
 import {LogService} from '../../services/log.service';
-import {Stakeholder} from '../../model/Stakeholder';
 
 @Component({
   selector: 'app-stakeholder-edit',

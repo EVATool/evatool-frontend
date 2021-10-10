@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ValueTypeMapperService } from './value-type-mapper.service';
+import {ValueTypeMapperService} from './value-type-mapper.service';
 
 describe('ValueTypeMapperService', () => {
   let service: ValueTypeMapperService;

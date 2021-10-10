@@ -77,16 +77,16 @@ import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 import {FormatPipe} from './pipes/format.pipe';
 import {ResizeColumnDirective} from './directives/resize-column.directive';
 import {EntityTableComponent} from './components/abstract/entity-table/entity-table.component';
-import { ValueEditComponent } from './components/value-edit/value-edit.component';
-import { ValueFilterBarComponent } from './components/value-filter-bar/value-filter-bar.component';
-import { ValueTableComponent } from './components/value-table/value-table.component';
-import { ValueTypeDialogComponent } from './components/value-type-dialog/value-type-dialog.component';
-import { ValueTypeTableComponent } from './components/value-type-table/value-type-table.component';
-import { VariantEditComponent } from './components/variant-edit/variant-edit.component';
-import { VariantFilterBarComponent } from './components/variant-filter-bar/variant-filter-bar.component';
-import { VariantTableComponent } from './components/variant-table/variant-table.component';
-import { VariantTypeDialogComponent } from './components/variant-type-dialog/variant-type-dialog.component';
-import { VariantTypeTableComponent } from './components/variant-type-table/variant-type-table.component';
+import {ValueEditComponent} from './components/value-edit/value-edit.component';
+import {ValueFilterBarComponent} from './components/value-filter-bar/value-filter-bar.component';
+import {ValueTableComponent} from './components/value-table/value-table.component';
+import {ValueTypeDialogComponent} from './components/value-type-dialog/value-type-dialog.component';
+import {ValueTypeTableComponent} from './components/value-type-table/value-type-table.component';
+import {VariantEditComponent} from './components/variant-edit/variant-edit.component';
+import {VariantFilterBarComponent} from './components/variant-filter-bar/variant-filter-bar.component';
+import {VariantTableComponent} from './components/variant-table/variant-table.component';
+import {VariantTypeDialogComponent} from './components/variant-type-dialog/variant-type-dialog.component';
+import {VariantTypeTableComponent} from './components/variant-type-table/variant-type-table.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',

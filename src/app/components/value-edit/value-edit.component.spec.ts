@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ValueEditComponent } from './value-edit.component';
+import {ValueEditComponent} from './value-edit.component';
 
 describe('ValueEditComponent', () => {
   let component: ValueEditComponent;

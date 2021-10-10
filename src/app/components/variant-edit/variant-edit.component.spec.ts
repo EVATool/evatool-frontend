@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { VariantEditComponent } from './variant-edit.component';
+import {VariantEditComponent} from './variant-edit.component';
 
 describe('VariantEditComponent', () => {
   let component: VariantEditComponent;

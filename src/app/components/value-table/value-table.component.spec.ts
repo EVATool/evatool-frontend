@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ValueTableComponent } from './value-table.component';
+import {ValueTableComponent} from './value-table.component';
 import {SpecService} from '../../services/spec.service';
 
 describe('ValueTableComponent', () => {
