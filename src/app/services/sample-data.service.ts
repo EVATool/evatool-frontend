@@ -76,8 +76,6 @@ export class SampleDataService {
       this.variantTypes.push(this.variantTypeMapper.fromDto(variantTypeDto, this.analyses));
     });
 
-    console.log(this.variantTypes);
-
     // Prepare Variant Data.
     this.variantDtoList.forEach((variantDto: VariantDto) => {
       this.variants.push(this.variantMapper.fromDto(variantDto, this.analyses, this.variantTypes));
