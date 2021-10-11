@@ -3,7 +3,7 @@
   <mat-list-item>
     <app-filter-category #stakeholderFilter
                          [categories]="this.stakeholderNames"
-                         [name]="'Stakeholders'"
+                         name="{{ 'COMMON.ENTITY.STAKEHOLDERS' | translate }}"
                          (filterChanged)="stakeholderFilterChanged($event)">
     </app-filter-category>
   </mat-list-item>
@@ -11,7 +11,7 @@
   <mat-list-item>
     <app-filter-category #valuesFilter
                          [categories]="valueNames"
-                         [name]="'Values'"
+                         name="{{ 'COMMON.ENTITY.VALUES' | translate }}"
                          (filterChanged)="valueFilterChanged($event)">
     </app-filter-category>
   </mat-list-item>

@@ -3,7 +3,7 @@
   <mat-list-item>
     <app-filter-category #valueTypeFilter
                          [categories]="this.valueTypeNames"
-                         [name]="'Types'"
+                         name="{{ 'COMMON.ENTITY.VALUE_TYPES' | translate }}"
                          (filterChanged)="valueTypeFilterChanged($event)">
     </app-filter-category>
   </mat-list-item>

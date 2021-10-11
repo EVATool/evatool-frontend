@@ -3,7 +3,7 @@
   <mat-list-item>
     <app-filter-category #levelFilter
                          [categories]="this.stakeholderDataService.stakeholderLevels"
-                         [name]="'Level'"
+                         name="{{ 'COMMON.PROPERTY.STAKEHOLDER_LEVEL' | translate }}"
                          (filterChanged)="levelFilterChange($event)">
     </app-filter-category>
   </mat-list-item>
