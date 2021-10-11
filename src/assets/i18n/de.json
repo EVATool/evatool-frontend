@@ -27,6 +27,13 @@
     "VALUE_TAB_LABEL": "Wert",
     "VARIANT_TAB_LABEL": "Variante"
   },
+  "ANALYSIS_TILE": {
+    "DELETE": "Löschen",
+    "DELETE_ANALYSIS_CONFIRMATION": "Sind Sie sicher, dass Sie diese Analyse löschen wollen?",
+    "EDIT": "Bearbeiten",
+    "IS_TEMPLATE": "Das ist eine Vorlage",
+    "LAST_EDITED": "Zuletzt bearbeitet"
+  },
   "HOME": {
     "NEW_ANALYSIS": "Neu"
   },

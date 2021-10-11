@@ -11,6 +11,7 @@ import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {AnalysisDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-analysis-tile',
@@ -28,7 +29,8 @@ export class AnalysisTileComponent implements OnInit, OnDestroy {
               public analysisData: AnalysisDataService,
               private crossUI: CrossUiEventService,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -56,7 +58,9 @@ export class AnalysisTileComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
-    dialogRef.componentInstance.confirmMessage = 'Are you sure you want to delete this analysis?';
+    this.translate.get('ANALYSIS_TILE.DELETE_ANALYSIS_CONFIRMATION', {value: 'world'}).subscribe((res: string) => {
+      dialogRef.componentInstance.confirmMessage = res;
+    });
 
     dialogRef.afterClosed()
       .pipe(takeUntil(this.ngUnsubscribe))

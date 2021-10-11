@@ -1,24 +1,26 @@
-<div class="analysis-tile" (click)="clickAnalysisTile(analysis, $event)" (auxclick)="auxClickAnalysisTile(analysis, $event)">
+<div class="analysis-tile" (click)="clickAnalysisTile(analysis, $event)"
+     (auxclick)="auxClickAnalysisTile(analysis, $event)">
   <img src="{{analysis.imageUrl || 'assets/img/default_analysis.png'}}" alt="" class="analysis-image">
   <div class="interactive-panel">
     <div class="analysis-actions">
       <button mat-icon-button
               class="action-button"
-              [matTooltip]="'Edit'"
+              matTooltip="{{ 'ANALYSIS_TILE.EDIT' | translate }}"
               [disabled]="analysis.deletionFlagged"
               (click)="$event.stopPropagation(); openAnalysisDialog(analysis)">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button
               class="action-button"
-              [matTooltip]="'Delete'"
+              matTooltip="{{ 'ANALYSIS_TILE.DELETE' | translate }}"
               [disabled]="analysis.deletionFlagged"
               (click)="$event.stopPropagation(); deleteAnalysis(analysis)">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
     <h2 class="analysis-name">{{analysis.name}}</h2>
-    <div class="analysis-last-updated">Last edit: {{analysis.lastUpdated | date:"dd.MM.yyyy - HH:mm"}}</div>
+    <div class="analysis-last-updated">{{ 'ANALYSIS_TILE.LAST_EDITED' | translate }}:
+      {{analysis.lastUpdated | date:"dd.MM.yyyy - HH:mm"}}</div>
     <div class="details-wrapper">
       <p class="analysis-description">{{analysis.description}}</p>
     </div>
@@ -26,7 +28,7 @@
 
   <mat-icon *ngIf="analysis.isTemplate"
             class="template-info"
-            [matTooltip]="'This is a template'">
+            matTooltip="{{ 'ANALYSIS_TILE.IS_TEMPLATE' | translate }}">
     sticky_note_2
   </mat-icon>
 
