@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LogService} from '../../services/log.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-filter-category',
@@ -13,7 +14,8 @@ export class FilterCategoryComponent {
 
   public filterValues: string[] = [];
 
-  constructor(private logger: LogService) {
+  constructor(private logger: LogService,
+              private translate: TranslateService) {
   }
 
   updateFilter(): void {

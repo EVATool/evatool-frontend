@@ -37,6 +37,11 @@
   "CONFIRMATION_DIALOG": {
     "CONFIRMATION": "Bestätigung"
   },
+  "FILTER_CATEGORY": {
+    "ALL": "Alle",
+    "CLEAR": "Zurücksetzen",
+    "INVERT": "Invertieren"
+  },
   "HOME": {
     "NEW_ANALYSIS": "Neu"
   },
