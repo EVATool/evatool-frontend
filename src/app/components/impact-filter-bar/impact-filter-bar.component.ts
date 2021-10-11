@@ -10,6 +10,7 @@ import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-impact-filter-bar',
@@ -34,7 +35,8 @@ export class ImpactFilterBarComponent implements OnInit, OnDestroy {
   constructor(
     private logger: LogService,
     private stakeholderDataService: StakeholderDataService,
-    private valueDataService: ValueDataService) {
+    private valueDataService: ValueDataService,
+    private translate: TranslateService) {
     this.impactTableFilterEvent = ImpactTableFilterEvent.getDefault();
   }
 

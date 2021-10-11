@@ -26,7 +26,8 @@
     <button mat-raised-button
             color="accent"
             (click)='clearFilter();'
-            matTooltip="Clear all filters">Clear
+            matTooltip="{{ 'COMMON.CLEAR_TOOLTIP' | translate }}">
+      {{ 'COMMON.CLEAR' | translate }}
       <mat-icon>filter_alt</mat-icon>
     </button>
   </mat-list-item>

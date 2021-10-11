@@ -34,6 +34,10 @@
     "IS_TEMPLATE": "This is a template",
     "LAST_EDITED": "Last edited"
   },
+  "COMMON": {
+    "CLEAR": "Clear",
+    "CLEAR_TOOLTIP": "Clear all filters"
+  },
   "CONFIRMATION_DIALOG": {
     "CONFIRMATION": "Confirmation"
   },

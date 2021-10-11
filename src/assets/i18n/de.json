@@ -34,6 +34,10 @@
     "IS_TEMPLATE": "Das ist eine Vorlage",
     "LAST_EDITED": "Zuletzt bearbeitet"
   },
+  "COMMON": {
+    "CLEAR": "Zurücksetzen",
+    "CLEAR_TOOLTIP": "Alle Filter zurücksetzen"
+  },
   "CONFIRMATION_DIALOG": {
     "CONFIRMATION": "Bestätigung"
   },
