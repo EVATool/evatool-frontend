@@ -29,6 +29,7 @@
   "COMMON.CLEAR": "Clear",
   "COMMON.CLEAR_TOOLTIP": "Clear all filters",
   "COMMON.CLOSE": "Close",
+  "COMMON.CREATE": "Create",
   "COMMON.ENTITY.ANALYSES": "Analyses",
   "COMMON.ENTITY.ANALYSIS": "Analysis",
   "COMMON.ENTITY.IMPACT": "Impact",
@@ -75,6 +76,9 @@
   "HOME.SHOW_TEMPLATES_THEN_ANALYSES": "Show templates, then analyses",
   "HOME.TEMPLATES": "Templates",
   "HOME.TEMPLATE_ANALYSES_ORDER": "Templates/Analyses",
+  "IMPACT_TABLE.STAKEHOLDER_REQUIRED": "There must be at least one stakeholder for an impact to exist",
+  "IMPACT_TABLE.STILL_REFERENCED_BY_REQUIREMENTS": "This impact cannot be deleted. It is still being used by ${0} requirement(s)",
+  "IMPACT_TABLE.VALUE_REQUIRED": "There must be at least one value for an impact to exist",
   "LOGIN.EMAIL": "Email",
   "LOGIN.ERROR.AUTH_DISABLED": "Authentication is disabled. You will not be able to login",
   "LOGIN.ERROR.EMAIL_ALREADY_EXISTS": "Email address already exists",
@@ -99,5 +103,11 @@
   "LOGIN.SIGN_UP": "Sign Up",
   "LOGIN.TERMS_AND_CONDITIONS": "Terms & Conditions",
   "LOGIN.USERNAME": "Username",
-  "TITLE": "EvaTool"
+  "STAKEHOLDER_TABLE.STILL_REFERENCED_BY_IMPACTS": "This stakeholder cannot be deleted. It is still being used by ${0} impact(s)",
+  "TITLE": "EvaTool",
+  "VALUE_TABLE.STILL_REFERENCED_BY_IMPACTS": "This value cannot be deleted. It is still being used by ${0} impact(s)",
+  "VALUE_TABLE.VALUE_TYPE_REQUIRED": "There must be at least one value type for a value to exist",
+  "VALUE_TYPE_TABLE.STILL_REFERENCED_BY_VALUES": "This value type cannot be deleted. It is still being used by ${0} value(s)",
+  "VARIANT_TABLE.STILL_REFERENCED_BY_REQUIREMENTS": "This value cannot be deleted. It is still being used by ${0} requirement(s)",
+  "VARIANT_TABLE.VARIANT_TYPE_REQUIRED": "There must be at least one variant type for a variant to exist"
 }

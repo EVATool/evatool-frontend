@@ -20,6 +20,8 @@ import {RequirementDeltasReferencingImpactEvent} from '../../services/event/even
 import {ImpactDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
 import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
+import {TranslateService} from '@ngx-translate/core';
+import {stringFormat} from '../../extensions/string.extensions';
 
 @Component({
   selector: 'app-impact-table',
@@ -43,7 +45,8 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
     public analysisDataService: AnalysisDataService,
     private crossUI: CrossUiEventService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private translate: TranslateService) {
     super(logger);
   }
 
@@ -71,16 +74,16 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
     this.crossUI.impactReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: RequirementDeltasReferencingImpactEvent) => {
-        const message = 'This impact cannot be deleted. It is still being used by '
-          + event.deltas.length + ' requirement' + (event.deltas.length === 1 ? '' : 's') + '.';
-        const action = 'show';
-        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-        snackBarRef.onAction()
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.logger.info(this, 'User wants to see the requirements referencing the impact');
-            this.crossUI.userWantsToSeeRequirementsReferencingImpact.emit(event);
-          });
+        this.translate.get('IMPACT_TYPE_TABLE.STILL_REFERENCED_BY_REQUIREMENTS', {value: 'world'}).subscribe((res: string) => {
+          const action = 'show';
+          const snackBarRef = this.snackBar.open(stringFormat(res, String(event.deltas.length)), action, {duration: 5000});
+          snackBarRef.onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.logger.info(this, 'User wants to see the requirements referencing the impact');
+              this.crossUI.userWantsToSeeRequirementsReferencingImpact.emit(event);
+            });
+        });
       });
 
     this.crossUI.impactDeletionFailed
@@ -163,21 +166,25 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
 
   createImpact(): void {
     if (this.stakeholderDataService.stakeholders.length === 0) {
-      const message = 'There must be at least one stakeholder for an impact to exist';
-      const action = 'Create';
-      this.snackBar.open(message, action, {duration: 5000}).onAction()
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(() => {
-          this.crossUI.userWantsToNavigateToStakeholderTab.emit();
+      this.translate.get('IMPACT_TABLE.STAKEHOLDER_REQUIRED', {value: 'world'}).subscribe((message: string) => {
+        this.translate.get('COMMON.CREATE', {value: 'world'}).subscribe((action: string) => {
+          this.snackBar.open(message, action, {duration: 5000}).onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.crossUI.userWantsToNavigateToStakeholderTab.emit();
+            });
         });
+      });
     } else if (this.valueDataService.values.length === 0) {
-      const message = 'There must be at least one value for an impact to exist';
-      const action = 'Create';
-      this.snackBar.open(message, action, {duration: 5000}).onAction()
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(() => {
-          this.crossUI.userWantsToNavigateToValueTab.emit();
+      this.translate.get('IMPACT_TABLE.VALUE_REQUIRED', {value: 'world'}).subscribe((message: string) => {
+        this.translate.get('COMMON.CREATE', {value: 'world'}).subscribe((action: string) => {
+          this.snackBar.open(message, action, {duration: 5000}).onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.crossUI.userWantsToNavigateToValueTab.emit();
+            });
         });
+      });
     } else {
       // Get valid default impact.
       const impact = this.impactDataService.createDefaultImpact(

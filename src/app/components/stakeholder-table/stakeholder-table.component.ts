@@ -14,6 +14,8 @@ import {ImpactsReferencingStakeholderEvent} from '../../services/event/events/ht
 import {StakeholderDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {newRowAnimation} from '../../animations/NewRowAnimation';
 import {EntityTableComponent} from '../abstract/entity-table/entity-table.component';
+import {TranslateService} from '@ngx-translate/core';
+import {stringFormat} from '../../extensions/string.extensions';
 
 @Component({
   selector: 'app-stakeholder-table',
@@ -32,7 +34,8 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
               private impactData: ImpactDataService,
               private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar,
-              protected logger: LogService) {
+              protected logger: LogService,
+              private translate: TranslateService) {
     super(logger);
   }
 
@@ -42,17 +45,16 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
     this.crossUI.stakeholderReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ImpactsReferencingStakeholderEvent) => {
-        this.logger.warn(this, 'This stakeholder is still being used by ' + event.impacts.length + ' impacts');
-        const message = 'This stakeholder cannot be deleted. It is still being used by '
-          + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
-        const action = 'show';
-        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-        snackBarRef.onAction()
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
-            this.crossUI.userWantsToSeeImpactsReferencingStakeholder.emit(event);
-          });
+        this.translate.get('STAKEHOLDER_TYPE_TABLE.STILL_REFERENCED_BY_IMPACTS', {value: 'world'}).subscribe((res: string) => {
+          const action = 'show';
+          const snackBarRef = this.snackBar.open(stringFormat(res, String(event.impacts.length)), action, {duration: 5000});
+          snackBarRef.onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
+              this.crossUI.userWantsToSeeImpactsReferencingStakeholder.emit(event);
+            });
+        });
       });
 
     this.crossUI.stakeholderDeletionFailed

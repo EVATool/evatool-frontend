@@ -16,6 +16,8 @@ import {RequirementsReferencingVariantEvent} from '../../services/event/events/h
 import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 import {VariantDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
 import {VariantTypeDialogComponent} from '../variant-type-dialog/variant-type-dialog.component';
+import {TranslateService} from '@ngx-translate/core';
+import {stringFormat} from '../../extensions/string.extensions';
 
 @Component({
   selector: 'app-variant-table',
@@ -37,7 +39,8 @@ export class VariantTableComponent extends EntityTableComponent implements OnIni
               private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar,
               protected logger: LogService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private translate: TranslateService) {
     super(logger);
   }
 
@@ -47,17 +50,15 @@ export class VariantTableComponent extends EntityTableComponent implements OnIni
     this.crossUI.variantReferencedByRequirements
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: RequirementsReferencingVariantEvent) => {
-        this.logger.warn(this, 'This variant is still being used by ' + event.requirements.length + ' requirements');
-        const message = 'This variant cannot be deleted. It is still being used by '
-          + event.requirements.length + ' requirement' + (event.requirements.length === 1 ? '' : 's') + '.';
-        const action = 'show';
-        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-        snackBarRef.onAction()
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.logger.info(this, 'User wants to see the requirements referencing the variant');
-            this.crossUI.userWantsToSeeRequirementsReferencingVariant.emit(event);
-          });
+        this.translate.get('VARIANT_TYPE_TABLE.STILL_REFERENCED_BY_REQUIREMENTS', {value: 'world'}).subscribe((res: string) => {
+          const snackBarRef = this.snackBar.open(stringFormat(res, String(event.requirements.length)), 'show', {duration: 5000});
+          snackBarRef.onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.logger.info(this, 'User wants to see the requirements referencing the variant');
+              this.crossUI.userWantsToSeeRequirementsReferencingVariant.emit(event);
+            });
+        });
       });
 
     this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement
@@ -138,13 +139,15 @@ export class VariantTableComponent extends EntityTableComponent implements OnIni
 
   createVariant(): void {
     if (this.variantTypeData.variantTypes.length === 0) {
-      const message = 'There must be at least one variant type for a variant to exist';
-      const action = 'Create';
-      this.snackBar.open(message, action, {duration: 5000}).onAction()
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(() => {
-          this.openVariantTypesDialog();
+      this.translate.get('VARIANT_TABLE.VARIANT_TYPE_REQUIRED', {value: 'world'}).subscribe((message: string) => {
+        this.translate.get('COMMON.CREATE', {value: 'world'}).subscribe((action: string) => {
+          this.snackBar.open(message, action, {duration: 5000}).onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.openVariantTypesDialog();
+            });
         });
+      });
     } else {
       // Get valid default variant.
       const variant = this.variantData.createDefaultVariant(this.analysisData.currentAnalysis, this.variantTypeData.variantTypes[0]);

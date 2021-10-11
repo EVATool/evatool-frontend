@@ -17,6 +17,8 @@ import {newRowAnimation} from '../../animations/NewRowAnimation';
 import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
 import {ValueTypeDialogComponent} from '../value-type-dialog/value-type-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {TranslateService} from '@ngx-translate/core';
+import {stringFormat} from '../../extensions/string.extensions';
 
 @Component({
   selector: 'app-value-table',
@@ -39,7 +41,8 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
               private crossUI: CrossUiEventService,
               private snackBar: MatSnackBar,
               protected logger: LogService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private translate: TranslateService) {
     super(logger);
   }
 
@@ -49,17 +52,15 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
     this.crossUI.valueReferencedByImpacts
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ImpactsReferencingValueEvent) => {
-        this.logger.warn(this, 'This value is still being used by ' + event.impacts.length + ' impacts');
-        const message = 'This value cannot be deleted. It is still being used by '
-          + event.impacts.length + ' impact' + (event.impacts.length === 1 ? '' : 's') + '.';
-        const action = 'show';
-        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-        snackBarRef.onAction()
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.logger.info(this, 'User wants to see the impacts referencing the value');
-            this.crossUI.userWantsToSeeImpactsReferencingValue.emit(event);
-          });
+        this.translate.get('VALUE_TYPE_TABLE.STILL_REFERENCED_BY_IMPACTS', {value: 'world'}).subscribe((res: string) => {
+          const snackBarRef = this.snackBar.open(stringFormat(res, String(event.impacts.length)), 'show', {duration: 5000});
+          snackBarRef.onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.logger.info(this, 'User wants to see the impacts referencing the value');
+              this.crossUI.userWantsToSeeImpactsReferencingValue.emit(event);
+            });
+        });
       });
 
     this.crossUI.userWantsToSeeArchivedValueReferencedByImpact
@@ -138,13 +139,15 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
 
   createValue(): void {
     if (this.valueTypeData.valueTypes.length === 0) {
-      const message = 'There must be at least one value type for a value to exist';
-      const action = 'Create';
-      this.snackBar.open(message, action, {duration: 5000}).onAction()
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(() => {
-          this.openValueTypesDialog();
+      this.translate.get('VALUE_TABLE.VALUE_TYPE_REQUIRED', {value: 'world'}).subscribe((message: string) => {
+        this.translate.get('COMMON.CREATE', {value: 'world'}).subscribe((action: string) => {
+          this.snackBar.open(message, action, {duration: 5000}).onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.openValueTypesDialog();
+            });
         });
+      });
     } else {
       // Get valid default value.
       const value = this.valueData.createDefaultValue(this.analysisData.currentAnalysis, this.valueTypeData.valueTypes[0]);

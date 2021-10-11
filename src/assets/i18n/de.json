@@ -29,6 +29,7 @@
   "COMMON.CLEAR": "Zurücksetzen",
   "COMMON.CLEAR_TOOLTIP": "Alle Filter zurücksetzen",
   "COMMON.CLOSE": "Schließen",
+  "COMMON.CREATE": "Erstellen",
   "COMMON.ENTITY.ANALYSES": "Analysen",
   "COMMON.ENTITY.ANALYSIS": "Analyse",
   "COMMON.ENTITY.IMPACT": "Einfluss",
@@ -75,6 +76,9 @@
   "HOME.SHOW_TEMPLATES_THEN_ANALYSES": "Zeige Vorlagen, dann Analysen",
   "HOME.TEMPLATES": "Vorlagen",
   "HOME.TEMPLATE_ANALYSES_ORDER": "Vorlagen/Analysen",
+  "IMPACT_TABLE.STAKEHOLDER_REQUIRED": "Es muss mindestens ein Stakeholder existieren um einen Einfluss anzulegen",
+  "IMPACT_TABLE.STILL_REFERENCED_BY_REQUIREMENTS": "Dieser Einfluss kann nicht gelöscht werden. Sie wird von ${0} Anforderung(en) verwendet.",
+  "IMPACT_TABLE.VALUE_REQUIRED": "Es muss mindestens ein Wert existieren um einen Einfluss anzulegen",
   "LOGIN.EMAIL": "E-Mail",
   "LOGIN.ERROR.AUTH_DISABLED": "Das Anmelden ist ausgeschaltet. Sie werden sich nicht einloggen können",
   "LOGIN.ERROR.EMAIL_ALREADY_EXISTS": "Email bereits vergeben",
@@ -99,5 +103,11 @@
   "LOGIN.SIGN_UP": "Registrieren",
   "LOGIN.TERMS_AND_CONDITIONS": "Geschäftsbedingungen",
   "LOGIN.USERNAME": "Benutzername",
-  "TITLE": "EvaTool"
+  "STAKEHOLDER_TABLE.STILL_REFERENCED_BY_IMPACTS": "Dieser Stakeholder kann nicht gelöscht werden. Er wird von ${0} Einfluss/Einflüssen verwendet.",
+  "TITLE": "EvaTool",
+  "VALUE_TABLE.STILL_REFERENCED_BY_IMPACTS": "Dieser Wert kann nicht gelöscht werden. Er wird von ${0} Einfluss/Einflüssen verwendet.",
+  "VALUE_TABLE.VALUE_TYPE_REQUIRED": "Es muss mindestens ein Wertetyp existieren um einen Wert anzulegen",
+  "VALUE_TYPE_TABLE.STILL_REFERENCED_BY_VALUES": "Dieser Wertetyp kann nicht gelöscht werden. Er wird von ${0} Wert(en) verwendet.",
+  "VARIANT_TABLE.STILL_REFERENCED_BY_REQUIREMENTS": "Diese Variante kann nicht gelöscht werden. Sie wird von ${0} Anforderung(en) verwendet.",
+  "VARIANT_TABLE.VARIANT_TYPE_REQUIRED": "Es muss mindestens ein Varianttyp existieren um eine Variante anzulegen"
 }

@@ -11,6 +11,8 @@ import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {ValuesReferencingValueType} from '../../services/event/events/http409/ValuesReferencingValueType';
 import {ValueTypeDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {TranslateService} from '@ngx-translate/core';
+import {stringFormat} from '../../extensions/string.extensions';
 
 
 @Component({
@@ -32,23 +34,25 @@ export class ValueTypeTableComponent implements OnInit, AfterViewInit, OnDestroy
     private valueTypeDataService: ValueTypeDataService,
     private analysisDataService: AnalysisDataService,
     private crossUI: CrossUiEventService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private translate: TranslateService) {
   }
 
   ngOnInit(): void {
     this.crossUI.valueTypeReferencedByValues
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: ValuesReferencingValueType) => {
-        const message = 'This value type cannot be deleted. It is still being used by '
-          + event.values.length + ' value' + (event.values.length === 1 ? '' : 's') + '.';
-        const action = 'show';
-        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-        snackBarRef.onAction()
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.logger.info(this, 'User wants to see the impacts referencing the value');
-            this.crossUI.userWantsToSeeValuesReferencingValueType.emit(event);
-          });
+        this.translate.get('VALUE_TYPE_TABLE.STILL_REFERENCED_BY_VALUES', {value: 'world'}).subscribe((res: string) => {
+          this.snackBar.open(res, '', {duration: 5000});
+          const action = 'show';
+          const snackBarRef = this.snackBar.open(stringFormat(res, String(event.values.length)), action, {duration: 5000});
+          snackBarRef.onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.logger.info(this, 'User wants to see the impacts referencing the value');
+              this.crossUI.userWantsToSeeValuesReferencingValueType.emit(event);
+            });
+        });
       });
 
     this.crossUI.valueTypeDeletionFailed
