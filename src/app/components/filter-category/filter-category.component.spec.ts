@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FilterCategoryComponent} from './filter-category.component';
+import {SpecService} from '../../services/spec.service';
 
 describe('FilterCategoryComponent', () => {
   let component: FilterCategoryComponent;
@@ -8,6 +9,7 @@ describe('FilterCategoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: SpecService.imports,
       declarations: [FilterCategoryComponent]
     })
       .compileComponents();
