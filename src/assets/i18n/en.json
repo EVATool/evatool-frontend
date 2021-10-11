@@ -53,6 +53,7 @@
   "HOME.TEMPLATES": "Templates",
   "HOME.TEMPLATE_ANALYSES_ORDER": "Templates/Analyses",
   "LOGIN.EMAIL": "Email",
+  "LOGIN.ERROR.AUTH_DISABLED": "Authentication is disabled. You will not be able to login",
   "LOGIN.ERROR.EMAIL_ALREADY_EXISTS": "Email address already exists",
   "LOGIN.ERROR.EMAIL_EMPTY": "Please enter an email address",
   "LOGIN.ERROR.EMAIL_INVALID": "Please enter a valid email address",

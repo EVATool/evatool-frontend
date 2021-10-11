@@ -53,6 +53,7 @@
   "HOME.TEMPLATES": "Vorlagen",
   "HOME.TEMPLATE_ANALYSES_ORDER": "Vorlagen/Analysen",
   "LOGIN.EMAIL": "E-Mail",
+  "LOGIN.ERROR.AUTH_DISABLED": "Das Anmelden ist ausgeschaltet. Sie werden sich nicht einloggen können",
   "LOGIN.ERROR.EMAIL_ALREADY_EXISTS": "Email bereits vergeben",
   "LOGIN.ERROR.EMAIL_EMPTY": "Bitte geben Sie eine Emailadresse an",
   "LOGIN.ERROR.EMAIL_INVALID": "Bitte geben Sie eine gültige E-Mail an",

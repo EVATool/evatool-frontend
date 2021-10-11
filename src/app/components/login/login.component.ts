@@ -125,8 +125,9 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (!environment.authEnabled) {
-      const message = 'Authentication is disabled. You will not be able to login.';
-      this.snackBar.open(message, '', {duration: 5000});
+      this.translate.get('LOGIN.ERROR.AUTH_DISABLED', {value: 'world'}).subscribe((res: string) => {
+        this.snackBar.open(res, '', {duration: 5000});
+      });
     }
   }
 
