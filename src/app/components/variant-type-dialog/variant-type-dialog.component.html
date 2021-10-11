@@ -5,7 +5,7 @@
     </button>
 
     <div class="title-container" mat-dialog-title>
-      <h2 mat-dialog-title>Variant Types</h2>
+      <h2 mat-dialog-title>{{ 'COMMON.ENTITY.VARIANT_TYPES' | translate }}</h2>
     </div>
   </div>
 
@@ -17,7 +17,9 @@
 
   <div class="action-container">
     <mat-dialog-actions>
-      <button mat-button mat-dialog-close (click)="closeClick()">Close</button>
+      <button mat-button mat-dialog-close (click)="closeClick()">
+        {{ 'COMMON.CLOSE' | translate }}
+      </button>
     </mat-dialog-actions>
   </div>
 </div>
