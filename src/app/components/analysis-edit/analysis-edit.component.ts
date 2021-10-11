@@ -144,8 +144,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private navigateToTabByName(tab: string): void {
     const nameLookup = ['Stakeholder', 'Value', 'Impact', 'Variant', 'Requirement', 'Dashboard'];
-    const index = nameLookup.indexOf(tab);
-    this.tabGroup.selectedIndex = index;
+    this.tabGroup.selectedIndex = nameLookup.indexOf(tab);
   }
 
   putTabInUrl(index: number): void {
