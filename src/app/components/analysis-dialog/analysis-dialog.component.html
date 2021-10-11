@@ -17,7 +17,7 @@
       <div fxLayout="row">
         <div fxLayout="column" class="column" [ngClass]="{'sole-column' : isEditingAnalysis}">
           <mat-form-field>
-            <mat-label>{{ 'ANALYSIS_DIALOG.ANALYSIS_NAME' | translate }}</mat-label>
+            <mat-label>{{ 'COMMON.PROPERTY.NAME' | translate }}</mat-label>
             <input matInput
                    [(ngModel)]="analysis.name"
                    (change)="updateAnalysis(analysis)"
@@ -25,7 +25,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>{{ 'ANALYSIS_DIALOG.ANALYSIS_DESCRIPTION' | translate }}</mat-label>
+            <mat-label>{{ 'COMMON.PROPERTY.DESCRIPTION' | translate }}</mat-label>
             <input matInput
                    [(ngModel)]="analysis.description"
                    (change)="updateAnalysis(analysis)"

@@ -5,14 +5,14 @@
     <div class="analysis-actions">
       <button mat-icon-button
               class="action-button"
-              matTooltip="{{ 'ANALYSIS_TILE.EDIT' | translate }}"
+              matTooltip="{{ 'COMMON.EDIT' | translate }}"
               [disabled]="analysis.deletionFlagged"
               (click)="$event.stopPropagation(); openAnalysisDialog(analysis)">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button
               class="action-button"
-              matTooltip="{{ 'ANALYSIS_TILE.DELETE' | translate }}"
+              matTooltip="{{ 'COMMON.DELETE' | translate }}"
               [disabled]="analysis.deletionFlagged"
               (click)="$event.stopPropagation(); deleteAnalysis(analysis)">
         <mat-icon>delete</mat-icon>
