@@ -6,18 +6,16 @@
       <ng-container matColumnDef='archived'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="15">
           <div mat-sort-header>
-            <div matTooltip="Whether to include the value in the table selection">
-              Include
-            </div>
+            Include
           </div>
         </th>
         <td mat-cell *matCellDef='let value'>
           <button mat-icon-button class="archived-value-button"
                   (click)="value.archived=!value.archived;updateValue(value);">
-            <mat-icon *ngIf="value.archived" matTooltip="This value is not available for selection">
+            <mat-icon *ngIf="value.archived" matTooltip="{{ 'COMMON.TABLE.SELECTION_EXCLUDED' | translate }}">
               add
             </mat-icon>
-            <mat-icon *ngIf="!value.archived" matTooltip="This value is available for selection">
+            <mat-icon *ngIf="!value.archived" matTooltip="{{ 'COMMON.TABLE.SELECTION_INCLUDED' | translate }}">
               done
             </mat-icon>
           </button>
@@ -27,28 +25,24 @@
       <ng-container matColumnDef='name'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="20">
           <div mat-sort-header>
-            <div matTooltip="The value name">
-              Value
-            </div>
+            Value
           </div>
         </th>
         <td mat-cell *matCellDef='let value'>
           <app-highlight-textarea [(text)]="value.name"
                                   (textChange)="updateValue(value)"
                                   [highlightFilter]="highlightFilter"
-                                  [placeholder]="'Value name...'"></app-highlight-textarea>
+                                  placeholder="{{ 'COMMON.PROPERTY.NAME' | translate }}..."></app-highlight-textarea>
         </td>
       </ng-container>
 
       <ng-container matColumnDef='valueType'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The type of the value">
-              Type
-            </div>
+            Type
             <mat-icon id="value-type-modal-icon"
                       (click)="$event.stopPropagation(); openValueTypesDialog();"
-                      [matTooltip]="'Edit the available value types'">edit
+                      matTooltip="{{ 'VALUE_TABLE.VALUE_TYPE_DIALOG_TOOLTIP' | translate }}">edit
             </mat-icon>
           </div>
         </th>
@@ -73,9 +67,7 @@
       <ng-container matColumnDef="description">
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The value description">
-              Description
-            </div>
+            Description
           </div>
         </th>
         <td mat-cell *matCellDef='let value'>
@@ -84,11 +76,11 @@
               <app-highlight-textarea [(text)]="value.description"
                                       (textChange)="updateValue(value)"
                                       [highlightFilter]="highlightFilter"
-                                      [placeholder]="'Describe the impact...'"></app-highlight-textarea>
+                                      placeholder="{{ 'COMMON.PROPERTY.DESCRIPTION' | translate }}..."></app-highlight-textarea>
             </div>
             <div class="delete-button-container">
               <button mat-icon-button
-                      matTooltip="Delete Impact"
+                      matTooltip="{{ 'COMMON.DELETE' | translate }}"
                       [disabled]="value.deletionFlagged"
                       (click)="deleteValue(value)">
                 <mat-icon>delete</mat-icon>
@@ -106,7 +98,7 @@
   </ng-scrollbar>
 
   <app-add-entity-button class="add-entity-button" (clicked)="createValue()"
-                         [text]="'Value'"></app-add-entity-button>
+                         text="{{ 'COMMON.ENTITY.VALUE' | translate }}"></app-add-entity-button>
 </div>
 
 <app-scroll-to-top-button class="scroll-to-top-button" [windowScrolled]="windowScrolled"

@@ -4,8 +4,7 @@
   <ng-container matColumnDef='name'>
     <th scope="col" mat-header-cell *matHeaderCellDef>
       <div [hidden]="true"
-           mat-sort-header
-           matTooltip="The value type name">
+           mat-sort-header>
         Name
       </div>
     </th>
@@ -13,15 +12,14 @@
       <app-highlight-textarea [(text)]="valueType.name"
                               (textChange)="updateValueType(valueType)"
                               [highlightFilter]="''"
-                              [placeholder]="'Name...'"></app-highlight-textarea>
+                              placeholder="{{ 'COMMON.PROPERTY.NAME' | translate }}..."></app-highlight-textarea>
     </td>
   </ng-container>
 
   <ng-container matColumnDef='description'>
     <th scope="col" mat-header-cell *matHeaderCellDef>
       <div [hidden]="true"
-           mat-sort-header
-           matTooltip="The value description">
+           mat-sort-header>
         Description
       </div>
     </th>
@@ -31,14 +29,14 @@
           <app-highlight-textarea [(text)]="valueType.description"
                                   (textChange)="updateValueType(valueType)"
                                   [highlightFilter]="''"
-                                  [placeholder]="'Describe the value type...'"></app-highlight-textarea>
+                                  placeholder="{{ 'COMMON.PROPERTY.DESCRIPTION' | translate }}..."></app-highlight-textarea>
         </div>
         <div class="options">
           <div class="option">
             <button mat-icon-button
                     [disabled]="valueType.deletionFlagged"
                     (click)="deleteValueType(valueType)"
-                    matTooltip="Delete Value Type">
+                    matTooltip="{{ 'COMMON.DELETE' | translate }}">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
