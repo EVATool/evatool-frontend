@@ -8,7 +8,7 @@
     "ANALYSIS_NAME": "Name",
     "CREATE_ANALYSIS": "Create Analysis",
     "CREATE_TEMPLATE": "Create Template",
-    "DEEP_COPY_INFO": "Copies the values and stakeholders from the template to the new analysis",
+    "DEEP_COPY_INFO": "Copies the value types, variant types, values, variants and stakeholders from the template to the new analysis",
     "DONE_EDITING": "Done",
     "EDIT_ANALYSIS": "Edit Analysis",
     "EDIT_TEMPLATE": "Edit Template",

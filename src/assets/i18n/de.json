@@ -3,7 +3,20 @@
     "ADD_ENTITY": "${0} hinzufügen"
   },
   "ANALYSIS_DIALOG": {
-    "TEMPLATE_NOT_SELECTED": "Bitte wählen Sie eine Vorlage aus"
+    "ANALYSIS_DESCRIPTION": "Beschreibung",
+    "ANALYSIS_IMAGE_URL": "Bildquelle",
+    "ANALYSIS_NAME": "Name",
+    "CREATE_ANALYSIS": "Analyse erstellen",
+    "CREATE_TEMPLATE": "Vorlage erstellen",
+    "DEEP_COPY_INFO": "Kopiert Wertetypen, Varianttypen, Werte, Varianten und Stakeholder von der Vorlage in die neue Analyse",
+    "DONE_EDITING": "Fertig",
+    "EDIT_ANALYSIS": "Analyse bearbeiten",
+    "EDIT_TEMPLATE": "Vorlage bearbeiten",
+    "IS_TEMPLATE": "Das ist eine Vorlage",
+    "OPEN_WHEN_DONE": "Öffnen wenn ich fertig bin",
+    "TEMPLATE": "Vorlage",
+    "TEMPLATE_NOT_SELECTED": "Bitte wählen Sie eine Vorlage aus",
+    "USE_TEMPLATE": "Voralge verwenden"
   },
   "HOME": {
     "NEW_ANALYSIS": "Neu"
