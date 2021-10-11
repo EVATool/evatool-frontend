@@ -42,6 +42,10 @@
     "CLEAR": "Clear",
     "INVERT": "Invert"
   },
+  "FOOTER": {
+    "IMPRINT": "Imprint",
+    "PRIVACY": "Privacy"
+  },
   "HOME": {
     "NEW_ANALYSIS": "New"
   },
