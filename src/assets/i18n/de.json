@@ -18,6 +18,15 @@
     "TEMPLATE_NOT_SELECTED": "Bitte wählen Sie eine Vorlage aus",
     "USE_TEMPLATE": "Voralge verwenden"
   },
+  "ANALYSIS_EDIT": {
+    "DASHBOARD_TAB_LABEL": "Dashboard",
+    "IMPACT_TAB_LABEL": "Einfluss",
+    "IS_TEMPLATE": "Diese Analysis ist eine Vorlage",
+    "REQUIREMENT_TAB_LABEL": "Anforderung",
+    "STAKEHOLDER_TAB_LABEL": "Stakeholder",
+    "VALUE_TAB_LABEL": "Wert",
+    "VARIANT_TAB_LABEL": "Variante"
+  },
   "HOME": {
     "NEW_ANALYSIS": "Neu"
   },

@@ -18,6 +18,15 @@
     "TEMPLATE_NOT_SELECTED": "Please select a template",
     "USE_TEMPLATE": "Use Template"
   },
+  "ANALYSIS_EDIT": {
+    "DASHBOARD_TAB_LABEL": "Dashboard",
+    "IMPACT_TAB_LABEL": "Impact",
+    "IS_TEMPLATE": "This analysis is a template",
+    "REQUIREMENT_TAB_LABEL": "Requirement",
+    "STAKEHOLDER_TAB_LABEL": "Stakeholder",
+    "VALUE_TAB_LABEL": "Value",
+    "VARIANT_TAB_LABEL": "Variant"
+  },
   "HOME": {
     "NEW_ANALYSIS": "New"
   },
