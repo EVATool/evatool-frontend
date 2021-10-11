@@ -15,6 +15,7 @@ import {ImpactsReferencingStakeholderEvent} from '../../services/event/events/ht
 import {RequirementDeltasReferencingImpactEvent} from '../../services/event/events/http409/RequirementDeltasReferencingImpactEvent';
 import {ArchivedValueReferencedByImpact} from '../../services/event/events/local/ArchivedValueReferencedByImpact';
 import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -35,7 +36,8 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
               public analysisData: AnalysisDataService,
               private crossUI: CrossUiEventService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -141,14 +143,9 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private navigateToTabByName(tab: string): void {
-    for (let i = 0; i < this.tabGroup._allTabs.length; i++) {
-      const tabName = this.tabGroup._allTabs.get(i)?.textLabel;
-      if (tabName === tab) {
-        this.tabGroup.selectedIndex = i;
-        break;
-      }
-    }
-    this.logger.warn(this, 'Tab with name ' + tab + ' not found');
+    const nameLookup = ['Stakeholder', 'Value', 'Impact', 'Variant', 'Requirement', 'Dashboard'];
+    const index = nameLookup.indexOf(tab);
+    this.tabGroup.selectedIndex = index;
   }
 
   putTabInUrl(index: number): void {
