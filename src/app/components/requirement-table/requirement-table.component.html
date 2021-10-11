@@ -6,9 +6,7 @@
       <ng-container matColumnDef="prefixSequenceId">
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="An artificial ID">
-              ID
-            </div>
+            {{ 'COMMON.TABLE.ID' | translate }}
           </div>
         </th>
 
@@ -20,25 +18,21 @@
       <ng-container matColumnDef="description">
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The requirement description">
-              Requirement
-            </div>
+            {{ 'COMMON.ENTITY.REQUIREMENT' | translate }}
           </div>
         </th>
         <td mat-cell *matCellDef='let requirement'>
           <app-highlight-textarea [(text)]="requirement.description"
                                   (textChange)="updateRequirement(requirement)"
                                   [highlightFilter]="highlightFilter"
-                                  [placeholder]="'Describe the requirement...'"></app-highlight-textarea>
+                                  placeholder="{{ 'COMMON.PROPERTY.DESCRIPTION' | translate }}..."></app-highlight-textarea>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="variants">
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The affected variants">
-              Variants
-            </div>
+            {{ 'COMMON.ENTITY.VARIANTS' | translate }}
           </div>
         </th>
 
@@ -49,7 +43,7 @@
             <mat-select [(ngModel)]="requirement.variants"
                         (selectionChange)="updateRequirement(requirement)"
                         [matTooltip]="getVariantNamesOfRequirement(requirement)"
-                        [placeholder]="requirement.variants.length === 0 ? 'All' : ''"
+                        placeholder="{{requirement.variants.length === 0 ? ('COMMON.ALL' | translate) : ''}}"
                         multiple>
               <mat-select-trigger>
                 <div
@@ -70,7 +64,7 @@
                   *ngIf="referencesArchivedVariant(requirement)"
                   class="warning-icon-button"
                   (click)="emitArchivedReferenced(getReferencedArchivedVariants(requirement), requirement)"
-                  matTooltip="This requirement references an archived variant"
+                  matTooltip="{{ 'REQUIREMENT_TABLE.REFERENCES_ARCHIVED_VARIANT' | translate }}"
                   matTooltipClass="multi-line-tooltip">
             <mat-icon>warning icon</mat-icon>
           </button>
@@ -80,9 +74,7 @@
       <ng-container matColumnDef="values">
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The affected values">
-              Values
-            </div>
+            {{ 'COMMON.ENTITY.VALUES' | translate }}
           </div>
         </th>
         <td mat-cell *matCellDef='let requirement'>
@@ -95,7 +87,7 @@
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
             <div class="mat-column-impact"
-                 matTooltip="{{impact.description + '&#13;' + 'Stakeholder: ' + impact.stakeholder.name + '&#13;' + 'Value: ' + impact.value.name}}"
+                 matTooltip="{{impact.description + '&#13;' + ('COMMON.ENTITY.STAKEHOLDER' | translate) + ': ' + impact.stakeholder.name + '&#13;' + ('COMMON.ENTITY.VALUE' | translate) + ': ' + impact.value.name}}"
                  matTooltipClass="multi-line-tooltip">
               {{impact.prefixSequenceId}}
             </div>
@@ -125,7 +117,8 @@
                  *ngIf="delta?.hover && !delta?.visible">
               <button mat-icon-button
                       [disabled]="delta.deletionFlagged"
-                      (click)="deleteRequirementDelta(delta)">
+                      (click)="deleteRequirementDelta(delta)"
+                      matTooltip="{{ 'COMMON.DELETE' | translate }}">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -141,7 +134,7 @@
             <button mat-icon-button
                     [disabled]="requirement.deletionFlagged"
                     (click)="deleteRequirement(requirement)"
-                    matTooltip="Delete Requirement">
+                    matTooltip="{{ 'COMMON.DELETE' | translate }}">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -157,7 +150,7 @@
   </ng-scrollbar>
 
   <app-add-entity-button class="add-entity-button" (clicked)="createRequirement()"
-                         [text]="'Requirement'"></app-add-entity-button>
+                         text="{{ 'COMMON.ENTITY.REQUIREMENT' | translate }}"></app-add-entity-button>
 </div>
 
 <app-scroll-to-top-button class="scroll-to-top-button" [windowScrolled]="windowScrolled"

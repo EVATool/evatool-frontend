@@ -6,9 +6,7 @@
       <ng-container matColumnDef='prefixSequenceId'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="An artificial ID">
-              ID
-            </div>
+            {{ 'COMMON.TABLE.ID' | translate }}
           </div>
         </th>
 
@@ -20,25 +18,21 @@
       <ng-container matColumnDef='name'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="20">
           <div mat-sort-header>
-            <div matTooltip="The stakeholder name">
-              Stakeholder
-            </div>
+            {{ 'COMMON.PROPERTY.NAME' | translate }}
           </div>
         </th>
         <td mat-cell *matCellDef='let stakeholder'>
           <app-highlight-textarea [(text)]="stakeholder.name"
                                   (textChange)="updateStakeholder(stakeholder)"
                                   [highlightFilter]="highlightFilter"
-                                  [placeholder]="'Stakeholder name...'"></app-highlight-textarea>
+                                  placeholder="{{ 'COMMON.PROPERTY.NAME' | translate }}..."></app-highlight-textarea>
         </td>
       </ng-container>
 
       <ng-container matColumnDef='level'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="20">
           <div mat-sort-header>
-            <div matTooltip="The stakeholder level">
-              Level
-            </div>
+            {{ 'COMMON.PROPERTY.STAKEHOLDER.LEVEL' | translate }}
           </div>
         </th>
 
@@ -52,9 +46,7 @@
       <ng-container matColumnDef='priority'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="20">
           <div mat-sort-header>
-            <div matTooltip="The stakeholder priority">
-              Priority
-            </div>
+            {{ 'COMMON.PROPERTY.STAKEHOLDER.PRIORITY' | translate }}
           </div>
         </th>
 
@@ -67,24 +59,22 @@
       <ng-container matColumnDef="description">
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The stakeholder description">
-              Description
-            </div>
+            {{ 'COMMON.PROPERTY.DESCRIPTION' | translate }}
           </div>
         </th>
         <td mat-cell *matCellDef='let stakeholder'>
           <app-highlight-textarea [(text)]="stakeholder.description"
                                   (textChange)="updateStakeholder(stakeholder)"
                                   [highlightFilter]="highlightFilter"
-                                  [placeholder]="'Describe the stakeholder...'"></app-highlight-textarea>
+                                  placeholder="{{ 'COMMON.PROPERTY.DESCRIPTION' | translate }}..."></app-highlight-textarea>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="impacted">
         <th scope="col" mat-header-cell *matHeaderCellDef>
           <div mat-sort-header>
-            <div matTooltip="How the stakeholder is impacted">
-              Impacted
+            <div matTooltip="{{ 'STAKEHOLDER_TABLE.IMPACTED_TOOLTIP' | translate }}">
+              {{ 'STAKEHOLDER_TABLE.IMPACTED' | translate }}
             </div>
           </div>
         </th>
@@ -96,7 +86,7 @@
             </div>
             <div class="delete-button-container">
               <button mat-icon-button
-                      matTooltip="Delete Stakeholder"
+                      matTooltip="{{ 'COMMON.DELETE' | translate }}"
                       [disabled]="stakeholder.deletionFlagged"
                       (click)="deleteStakeholder(stakeholder)">
                 <mat-icon>delete</mat-icon>
@@ -113,7 +103,7 @@
   </ng-scrollbar>
 
   <app-add-entity-button class="add-entity-button" (clicked)="createStakeholder()"
-                         [text]="'Stakeholder'"></app-add-entity-button>
+                         text="{{ 'COMMON.ENTITY.STAKEHOLDER' | translate }}"></app-add-entity-button>
 </div>
 
 <app-scroll-to-top-button class="scroll-to-top-button" [windowScrolled]="windowScrolled"

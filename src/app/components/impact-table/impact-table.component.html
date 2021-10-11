@@ -6,9 +6,7 @@
       <ng-container matColumnDef='prefixSequenceId'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="An artificial ID">
-              ID
-            </div>
+            {{ 'COMMON.TABLE.ID' | translate }}
           </div>
         </th>
 
@@ -20,9 +18,7 @@
       <ng-container matColumnDef='stakeholder'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The affected stakeholder">
-              Stakeholder
-            </div>
+            {{ 'COMMON.ENTITY.STAKEHOLDER' | translate }}
           </div>
         </th>
 
@@ -50,9 +46,7 @@
       <ng-container matColumnDef='value'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The affected value">
-              Value
-            </div>
+            {{ 'COMMON.ENTITY.VALUE' | translate }}
           </div>
         </th>
 
@@ -76,7 +70,7 @@
                   *ngIf="impact.value.archived"
                   class="warning-icon-button"
                   (click)="emitArchivedReferenced(impact.value, impact)"
-                  matTooltip="This impact references an archived value"
+                  matTooltip="{{ 'IMPACT_TABLE.REFERENCES_ARCHIVED_VALUE' | translate }}"
                   matTooltipClass="multi-line-tooltip">
             <mat-icon>warning icon</mat-icon>
           </button>
@@ -86,8 +80,8 @@
       <ng-container matColumnDef='merit'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The impact (Goal or Risk)">
-              Impact
+            <div matTooltip="{{ 'IMPACT_TABLE.IMPACT_TOOLTIP' | translate }}">
+              {{ 'COMMON.ENTITY.IMPACT' | translate }}
             </div>
           </div>
         </th>
@@ -104,9 +98,7 @@
       <ng-container matColumnDef='description'>
         <th scope="col" mat-header-cell *matHeaderCellDef [resizeColumn]="true" [resizeColumnOffset]="33">
           <div mat-sort-header>
-            <div matTooltip="The impact description">
-              Description
-            </div>
+            {{ 'COMMON.PROPERTY.DESCRIPTION' | translate }}
           </div>
         </th>
         <td mat-cell *matCellDef='let impact'>
@@ -115,11 +107,11 @@
               <app-highlight-textarea [(text)]="impact.description"
                                       (textChange)="updateImpact(impact)"
                                       [highlightFilter]="highlightFilter"
-                                      [placeholder]="'Describe the impact...'"></app-highlight-textarea>
+                                      placeholder="{{ 'COMMON.PROPERTY.DESCRIPTION' | translate }}..."></app-highlight-textarea>
             </div>
             <div class="delete-button-container">
               <button mat-icon-button
-                      matTooltip="Delete Impact"
+                      matTooltip="{{ 'COMMON.DELETE' | translate }}"
                       [disabled]="impact.deletionFlagged"
                       (click)="deleteImpact(impact)">
                 <mat-icon>delete</mat-icon>
@@ -134,7 +126,8 @@
     </table>
   </ng-scrollbar>
 
-  <app-add-entity-button class="add-entity-button" (clicked)="createImpact()" [text]="'Impact'"></app-add-entity-button>
+  <app-add-entity-button class="add-entity-button" (clicked)="createImpact()"
+                         text="{{ 'COMMON.ENTITY.IMPACT' | translate }}"></app-add-entity-button>
 </div>
 
 <app-scroll-to-top-button class="scroll-to-top-button" [windowScrolled]="windowScrolled"
