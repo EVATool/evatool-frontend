@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -8,7 +9,8 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class ConfirmationDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>) {
+  constructor(public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
+              private translate: TranslateService) {
   }
 
   public confirmMessage!: string;

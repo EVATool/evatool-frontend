@@ -34,6 +34,9 @@
     "IS_TEMPLATE": "This is a template",
     "LAST_EDITED": "Last edited"
   },
+  "CONFIRMATION_DIALOG": {
+    "CONFIRMATION": "Confirmation"
+  },
   "HOME": {
     "NEW_ANALYSIS": "New"
   },

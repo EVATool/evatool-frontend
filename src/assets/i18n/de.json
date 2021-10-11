@@ -34,6 +34,9 @@
     "IS_TEMPLATE": "Das ist eine Vorlage",
     "LAST_EDITED": "Zuletzt bearbeitet"
   },
+  "CONFIRMATION_DIALOG": {
+    "CONFIRMATION": "Bestätigung"
+  },
   "HOME": {
     "NEW_ANALYSIS": "Neu"
   },
