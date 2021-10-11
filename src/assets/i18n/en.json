@@ -46,8 +46,28 @@
     "IMPRINT": "Imprint",
     "PRIVACY": "Privacy"
   },
+  "HEADER": {},
+  "HIGHLIGHT_SEARCH": {
+    "PLACEHOLDER": "Highlight..."
+  },
   "HOME": {
-    "NEW_ANALYSIS": "New"
+    "ANALYSES": "Analyses",
+    "EXPORT": "Export",
+    "EXPORT_ABORT": "Abort",
+    "EXPORT_TOOLTIP": "Export analyses to a file",
+    "IMPORT": "Import",
+    "IMPORT_TOOLTIP": "Import analyses from a file",
+    "LAST_EDITED_ORDER": "Last edited",
+    "NEW_ANALYSIS": "New",
+    "SEARCH_ANALYSIS_NAME_INCLUDES": "Name includes",
+    "SHOW_ANALYSES": "Whether to show analyses",
+    "SHOW_ANALYSES_THEN_TEMPLATES": "Show analyses, then templates",
+    "SHOW_RECENTLY_EDITED_ANALYSES_FIRST": "Show recently edited analyses first",
+    "SHOW_RECENTLY_EDITED_ANALYSES_LAST": "Show recently edited analyses last",
+    "SHOW_TEMPLATES": "Whether to show templates",
+    "SHOW_TEMPLATES_THEN_ANALYSES": "Show templates, then analyses",
+    "TEMPLATES": "Templates",
+    "TEMPLATE_ANALYSES_ORDER": "Templates/Analyses"
   },
   "LOGIN": {
     "EMAIL": "Email",

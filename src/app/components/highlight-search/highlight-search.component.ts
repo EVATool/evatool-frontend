@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatInput} from '@angular/material/input';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-highlight-search',
@@ -11,7 +12,8 @@ export class HighlightSearchComponent {
   @ViewChild(MatInput) textField!: MatInput;
   @Output() highlightTextChanged = new EventEmitter<string>();
 
-  constructor(private logger: LogService) {
+  constructor(private logger: LogService,
+              private translate: TranslateService) {
   }
 
   searchTextChange(event: any): void {

@@ -3,5 +3,8 @@
   "ANALYSIS_TILE": {},
   "CONFIRMATION_DIALOG": {},
   "FILTER_CATEGORY": {},
-  "FOOTER": {}
+  "FOOTER": {},
+  "HEADER": {},
+  "HIGHLIGHT_SEARCH": {},
+  "HOME": {}
 }

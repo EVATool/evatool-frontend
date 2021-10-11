@@ -46,8 +46,28 @@
     "IMPRINT": "Impressum",
     "PRIVACY": "Datenschutz"
   },
+  "HEADER": {},
+  "HIGHLIGHT_SEARCH": {
+    "PLACEHOLDER": "Hervorheben..."
+  },
   "HOME": {
-    "NEW_ANALYSIS": "Neu"
+    "ANALYSES": "Analysen",
+    "EXPORT": "Export",
+    "EXPORT_ABORT": "Abbrechen",
+    "EXPORT_TOOLTIP": "Exportiere Analysen als Datei",
+    "IMPORT": "Import",
+    "IMPORT_TOOLTIP": "Importiere Analysen aus Datei",
+    "LAST_EDITED_ORDER": "Zuletzt bearbeitet",
+    "NEW_ANALYSIS": "Neu",
+    "SEARCH_ANALYSIS_NAME_INCLUDES": "Name enthält",
+    "SHOW_ANALYSES": "Zeige Analysen",
+    "SHOW_ANALYSES_THEN_TEMPLATES": "Zeige Analysen, dann Vorlagen",
+    "SHOW_RECENTLY_EDITED_ANALYSES_FIRST": "Zeige frisch bearbeitete Analysen zuerst",
+    "SHOW_RECENTLY_EDITED_ANALYSES_LAST": "Zeige frisch bearbeitete Analysen zuletzt",
+    "SHOW_TEMPLATES": "Zeige Vorlagen",
+    "SHOW_TEMPLATES_THEN_ANALYSES": "Zeige Vorlagen, dann Analysen",
+    "TEMPLATES": "Vorlagen",
+    "TEMPLATE_ANALYSES_ORDER": "Vorlagen/Analysen"
   },
   "LOGIN": {
     "EMAIL": "E-Mail",

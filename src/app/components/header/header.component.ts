@@ -3,6 +3,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {LogService} from '../../services/log.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -17,8 +18,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(public authService: AuthService,
               private logger: LogService,
-              public crossUI: CrossUiEventService) {
-
+              public crossUI: CrossUiEventService,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {

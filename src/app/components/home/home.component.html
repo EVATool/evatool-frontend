@@ -2,11 +2,11 @@
   <div fxLayout="column" class="analysis-ui">
     <button mat-raised-button
             (click)="openAnalysisDialog(analysisData.createDefaultAnalysis())"
-            class="new-analysis-button">{{'HOME.NEW_ANALYSIS' | translate}}
+            class="new-analysis-button">{{ 'HOME.NEW_ANALYSIS' | translate }}
     </button>
 
     <mat-form-field class="analysis-name-filter">
-      <mat-label>Name Includes</mat-label>
+      <mat-label>{{ 'HOME.SEARCH_ANALYSIS_NAME_INCLUDES' | translate }}</mat-label>
       <input matInput
              [(ngModel)]="analysisNameFilter"
              (change)="updateData(analysisData.analyses)"/>
@@ -15,30 +15,30 @@
     <div fxLayout="row" class="analysis-is-template-filter">
       <mat-checkbox id="show-analyses"
                     [(ngModel)]="showAnalyses"
-                    [matTooltip]="'Whether to show analyses'">
-        Analyses
+                    matTooltip="{{ 'HOME.SHOW_ANALYSES' | translate }}">
+        {{ 'HOME.ANALYSES' | translate }}
       </mat-checkbox>
 
       <mat-checkbox id="show-templates"
                     [(ngModel)]="showTemplates"
-                    [matTooltip]="'Whether to show templates'">
-        Templates
+                    matTooltip="{{ 'HOME.SHOW_TEMPLATES' | translate }}">
+        {{ 'HOME.TEMPLATES' | translate }}
       </mat-checkbox>
     </div>
 
     <div fxLayout="row" class="analysis-sort-by-container">
       <div class="analysis-sort-by-text">
-        Template/Analysis
+        {{ 'HOME.TEMPLATE_ANALYSES_ORDER' | translate }}
       </div>
       <mat-button-toggle-group class="analysis-sort-by-buttons" name="fontStyle" aria-label="Font Style">
         <mat-button-toggle value="desc"
-                           [matTooltip]="'Show templates, then analyses'"
+                           matTooltip="{{ 'HOME.SHOW_TEMPLATES_THEN_ANALYSES' | translate }}"
                            (change)="sortByIsTemplateAsc=false; updateData(analysisData.analyses)"
                            [checked]="!sortByIsTemplateAsc">
           <mat-icon>arrow_upward</mat-icon>
         </mat-button-toggle>
         <mat-button-toggle value="asc"
-                           [matTooltip]="'Show analyses, then templates'"
+                           matTooltip="{{ 'HOME.SHOW_ANALYSES_THEN_TEMPLATES' | translate }}"
                            (change)="sortByIsTemplateAsc=true; updateData(analysisData.analyses)"
                            [checked]="sortByIsTemplateAsc">
           <mat-icon>arrow_downward</mat-icon>
@@ -48,17 +48,17 @@
 
     <div fxLayout="row" class="analysis-sort-by-container">
       <div class="analysis-sort-by-text">
-        Last Edited
+        {{ 'HOME.LAST_EDITED_ORDER' | translate }}
       </div>
       <mat-button-toggle-group class="analysis-sort-by-buttons" name="fontStyle" aria-label="Font Style">
         <mat-button-toggle value="desc"
-                           [matTooltip]="'Show recently edited analyses last'"
+                           matTooltip="{{ 'HOME.SHOW_RECENTLY_EDITED_ANALYSES_FIRST' | translate }}"
                            (change)="sortByLastEditedAsc=false; updateData(analysisData.analyses)"
                            [checked]="!sortByLastEditedAsc">
           <mat-icon>arrow_upward</mat-icon>
         </mat-button-toggle>
         <mat-button-toggle value="asc"
-                           [matTooltip]="'Show recently edited analyses first'"
+                           matTooltip="{{ 'HOME.SHOW_RECENTLY_EDITED_ANALYSES_LAST' | translate }}"
                            (change)="sortByLastEditedAsc=true; updateData(analysisData.analyses)"
                            [checked]="sortByLastEditedAsc">
           <mat-icon>arrow_downward</mat-icon>
@@ -69,14 +69,16 @@
     <div fxLayout="row" class="analysis-import-export-container">
       <button mat-raised-button
               class="import-analyses-button"
-              matTooltip="Import analyses from a file"
-              (click)="openImportDialog($event.target)">Import
+              matTooltip="{{ 'HOME.IMPORT_TOOLTIP' | translate }}"
+              (click)="openImportDialog($event.target)">
+        {{ 'HOME.IMPORT' | translate }}
       </button>
       <button mat-raised-button
               class="export-analyses-button"
               [ngClass]="{'click-again-to-confirm' : inSelectionMode}"
-              matTooltip="Export analyses to a file"
-              (click)="exportAnalyses()">Export
+              matTooltip="{{ 'HOME.EXPORT_TOOLTIP' | translate }}"
+              (click)="exportAnalyses()">
+        {{ 'HOME.EXPORT' | translate }}
       </button>
       <input id="select-file"
              type="file"
@@ -89,7 +91,7 @@
            class="analysis-export-sub-actions">
         <button mat-icon-button
                 class="export-abort-button"
-                matTooltip="Abort"
+                matTooltip="{{ 'HOME.EXPORT_ABORT' | translate }}"
                 (click)="abortExport()">
           <mat-icon>cancel</mat-icon>
         </button>
