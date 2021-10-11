@@ -32,6 +32,8 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(StakeholderEditComponent) stakeholdersComponent!: StakeholderEditComponent;
   @ViewChild(ImpactEditComponent) impactsComponent!: ImpactEditComponent;
 
+  private tabNames = ['Stakeholder', 'Value', 'Impact', 'Variant', 'Requirement', 'Dashboard'];
+
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
               private crossUI: CrossUiEventService,
@@ -143,12 +145,11 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private navigateToTabByName(tab: string): void {
-    const nameLookup = ['Stakeholder', 'Value', 'Impact', 'Variant', 'Requirement', 'Dashboard'];
-    this.tabGroup.selectedIndex = nameLookup.indexOf(tab);
+    this.tabGroup.selectedIndex = this.tabNames.indexOf(tab);
   }
 
   putTabInUrl(index: number): void {
-    const currentTabParams: Params = {tab: this.tabGroup._allTabs.get(index)?.textLabel};
+    const currentTabParams: Params = {tab: this.tabNames[index]};
     this.router.navigate(
       [],
       {
