@@ -1,4 +1,4 @@
-flatten_json=0
+flatten_json=1
 minify_resources=0
 resource_definition={LOCALE}
 resource_directories=0
