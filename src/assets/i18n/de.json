@@ -30,6 +30,7 @@
   "COMMON.CLEAR_TOOLTIP": "Alle Filter zurücksetzen",
   "COMMON.CLOSE": "Schließen",
   "COMMON.CREATE": "Erstellen",
+  "COMMON.DELETE": "Löschen",
   "COMMON.ENTITY.ANALYSES": "Analysen",
   "COMMON.ENTITY.ANALYSIS": "Analyse",
   "COMMON.ENTITY.IMPACT": "Einfluss",
@@ -109,5 +110,6 @@
   "VALUE_TABLE.VALUE_TYPE_REQUIRED": "Es muss mindestens ein Wertetyp existieren um einen Wert anzulegen",
   "VALUE_TYPE_TABLE.STILL_REFERENCED_BY_VALUES": "Dieser Wertetyp kann nicht gelöscht werden. Er wird von ${0} Wert(en) verwendet.",
   "VARIANT_TABLE.STILL_REFERENCED_BY_REQUIREMENTS": "Diese Variante kann nicht gelöscht werden. Sie wird von ${0} Anforderung(en) verwendet.",
-  "VARIANT_TABLE.VARIANT_TYPE_REQUIRED": "Es muss mindestens ein Varianttyp existieren um eine Variante anzulegen"
+  "VARIANT_TABLE.VARIANT_TYPE_REQUIRED": "Es muss mindestens ein Varianttyp existieren um eine Variante anzulegen",
+  "VARIANT_TYPE_TABLE.STILL_REFERENCED_BY_VARIANT": "Dieser Varianttyp kann nicht gelöscht werden. Er wird von ${0} Variante(n) verwendet."
 }

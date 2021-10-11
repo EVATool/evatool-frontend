@@ -11,6 +11,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {takeUntil} from 'rxjs/operators';
 import {VariantsReferencingVariantType} from '../../services/event/events/http409/VariantsReferencingVariantType';
 import {VariantTypeDeletionFailedEvent} from '../../services/event/events/DeletionFailedEvents';
+import {TranslateService} from '@ngx-translate/core';
+import {stringFormat} from '../../extensions/string.extensions';
 
 @Component({
   selector: 'app-variant-type-table',
@@ -31,23 +33,23 @@ export class VariantTypeTableComponent implements OnInit, AfterViewInit, OnDestr
     private variantTypeDataService: VariantTypeDataService,
     private analysisDataService: AnalysisDataService,
     private crossUI: CrossUiEventService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private translate: TranslateService) {
   }
 
   ngOnInit(): void {
     this.crossUI.variantTypeReferencedByVariants
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: VariantsReferencingVariantType) => {
-        const message = 'This variant type cannot be deleted. It is still being used by '
-          + event.variants.length + ' variant' + (event.variants.length === 1 ? '' : 's') + '.';
-        const action = 'show';
-        const snackBarRef = this.snackBar.open(message, action, {duration: 5000});
-        snackBarRef.onAction()
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.logger.info(this, 'User wants to see the impacts referencing the variant');
-            this.crossUI.userWantsToSeeVariantsReferencingVariantType.emit(event);
-          });
+        this.translate.get('VARIANT_TYPE_TABLE.STILL_REFERENCED_BY_VARIANT', {value: 'world'}).subscribe((res: string) => {
+          const snackBarRef = this.snackBar.open(stringFormat(res, String(event.variants.length)), 'show', {duration: 5000});
+          snackBarRef.onAction()
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe(() => {
+              this.logger.info(this, 'User wants to see the impacts referencing the variant');
+              this.crossUI.userWantsToSeeVariantsReferencingVariantType.emit(event);
+            });
+        });
       });
 
     this.crossUI.variantTypeDeletionFailed
