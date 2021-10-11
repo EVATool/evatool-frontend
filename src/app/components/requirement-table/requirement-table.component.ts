@@ -311,17 +311,6 @@ export class RequirementTableComponent extends EntityTableComponent implements O
     }
   }
 
-  // TODO Delete
-  openVariantsDialog(ids?: string[]): void {
-    this.logger.trace(this, 'Opening Variants Dialog');
-
-    // this.dialog.open(VariantDialogComponent, {
-    //   height: '60%',
-    //   width: '50%',
-    //   data: {ids}
-    // });
-  }
-
   updateImpactColumns(includeOnlyTheseImpacts?: string[]): void {
     const displayedColumns: string[] = [];
     this.staticDisplayedColumns.forEach((col: string) => displayedColumns.push(col));
