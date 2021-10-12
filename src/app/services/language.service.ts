@@ -11,6 +11,8 @@ import {LogService} from './log.service';
 })
 export class LanguageService {
 
+  readonly USER_LANGUAGE_LOCAL_STORAGE_KEY = 'user_setting_preferred_language';
+
   public languages = ['en', 'de'];
 
   constructor(public translate: TranslateService,
@@ -27,12 +29,13 @@ export class LanguageService {
     const defaultLang = environment.defaultLang;
     const useDefaultOverBrowserLang = environment.useDefaultOverBrowserLang;
 
-    if (useDefaultOverBrowserLang) {
-      this.translate.setTranslation(defaultLang, this.getLangJson(defaultLang));
-      this.translate.setDefaultLang(defaultLang);
+    const preferredLanguage = localStorage.getItem(this.USER_LANGUAGE_LOCAL_STORAGE_KEY);
+    if (preferredLanguage) {
+      this.changeLanguage(preferredLanguage);
+    } else if (useDefaultOverBrowserLang) {
+      this.changeLanguage(defaultLang);
     } else {
-      this.translate.setTranslation(browserLang, this.getLangJson(browserLang));
-      this.translate.setDefaultLang(browserLang);
+      this.changeLanguage(browserLang);
     }
 
     this.titleService.setTitle('EvaTool');
@@ -67,9 +70,12 @@ export class LanguageService {
     }
   }
 
-  public changeLanguage(lang: string): void {
+  public changeLanguage(lang: string, persistToLocalStorage?: boolean): void {
     this.translate.setTranslation(lang, this.getLangJson(lang));
     this.translate.setDefaultLang(lang);
+    if (persistToLocalStorage) {
+      localStorage.setItem(this.USER_LANGUAGE_LOCAL_STORAGE_KEY, lang);
+    }
     this.logger.info(this, 'Changed language to ' + lang);
   }
 }

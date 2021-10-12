@@ -40,7 +40,7 @@
 
         <mat-menu #language="matMenu">
           <ng-container *ngFor="let lang of languageService.languages; let i = index">
-            <button mat-menu-item (click)="languageService.changeLanguage(lang)">{{languageService.getLanguageName(lang)}}</button>
+            <button mat-menu-item (click)="languageService.changeLanguage(lang, true)">{{languageService.getLanguageName(lang)}}</button>
           </ng-container>
         </mat-menu>
 
