@@ -12,5 +12,6 @@ export const ROUTES = {
   imprint: 'imprint',
   privacy: 'privacy',
   pageNotFound: '404',
+  settings: 'settings',
   any: '**'
 };

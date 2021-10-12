@@ -13,6 +13,7 @@ import {ForgotPasswordComponent} from './components/forgot-password/forgot-passw
 import {TermsAndConditionsComponent} from './components/terms-and-conditions/terms-and-conditions.component';
 import {TimeOutComponent} from './components/time-out/time-out.component';
 import {RealmAdministrationComponent} from './components/realm-administration/realm-administration.component';
+import {UserSettingsComponent} from './components/user-settings/user-settings.component';
 
 const routes: Routes = [
   {path: ROUTES.home, component: HomeComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: ROUTES.imprint, component: ImprintComponent},
   {path: ROUTES.privacy, component: PrivacyComponent},
   {path: ROUTES.pageNotFound, component: PageNotFoundComponent},
+  {path: ROUTES.settings, component: UserSettingsComponent},
   {path: ROUTES.any, redirectTo: ROUTES.pageNotFound}
 ];
 

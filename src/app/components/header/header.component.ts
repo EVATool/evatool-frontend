@@ -43,6 +43,6 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToSettings(): void {
-    //this.router.navigate([ROUTES.settings]);
+    this.router.navigate([ROUTES.settings]);
   }
 }
