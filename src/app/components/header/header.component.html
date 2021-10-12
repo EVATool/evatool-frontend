@@ -11,8 +11,7 @@
       <app-highlight-search (highlightTextChanged)="highlightTextChange($event)"></app-highlight-search>
     </div>
 
-    <div class="user-menu"
-         *ngIf="authService.authenticated">
+    <div class="user-menu">
       <div fxLayout="row">
         <div class="current-user">
           {{authService.username}}
@@ -26,9 +25,16 @@
 
       <mat-menu #menu="matMenu">
         <button mat-menu-item
+                *ngIf="authService.authenticated"
                 (click)="authService.logout()">
           <mat-icon>power_settings_new</mat-icon>
           <span>{{ 'HEADER.LOGOUT' | translate }}</span>
+        </button>
+
+        <button mat-menu-item
+                (click)="navigateToSettings()">
+          <mat-icon>settings</mat-icon>
+          <span>{{ 'HEADER.SETTINGS' | translate }}</span>
         </button>
       </mat-menu>
     </div>

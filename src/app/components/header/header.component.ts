@@ -4,6 +4,8 @@ import {LogService} from '../../services/log.service';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
 import {HighlightSearchComponent} from '../highlight-search/highlight-search.component';
 import {TranslateService} from '@ngx-translate/core';
+import {ROUTES} from '../../app-routes';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +21,8 @@ export class HeaderComponent implements OnInit {
   constructor(public authService: AuthService,
               private logger: LogService,
               public crossUI: CrossUiEventService,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -37,5 +40,9 @@ export class HeaderComponent implements OnInit {
   highlightTextChange(event: string): void {
     this.logger.debug(this, 'Highlight Text Changed');
     this.crossUI.highlightTextChanged.emit(event);
+  }
+
+  navigateToSettings(): void {
+    //this.router.navigate([ROUTES.settings]);
   }
 }

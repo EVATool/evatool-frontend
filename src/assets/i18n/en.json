@@ -57,6 +57,8 @@
   "FILTER_CATEGORY.INVERT": "Invert",
   "FOOTER.IMPRINT": "Imprint",
   "FOOTER.PRIVACY": "Privacy",
+  "HEADER.LOGOUT": "Logout",
+  "HEADER.SETTINGS": "Settings",
   "HIGHLIGHT_SEARCH.PLACEHOLDER": "Highlight...",
   "HOME.EXPORT": "Export",
   "HOME.EXPORT_ABORT": "Abort",

@@ -57,6 +57,8 @@
   "FILTER_CATEGORY.INVERT": "Invertieren",
   "FOOTER.IMPRINT": "Impressum",
   "FOOTER.PRIVACY": "Datenschutz",
+  "HEADER.LOGOUT": "Abmelden",
+  "HEADER.SETTINGS": "Einstellungen",
   "HIGHLIGHT_SEARCH.PLACEHOLDER": "Hervorheben...",
   "HOME.EXPORT": "Export",
   "HOME.EXPORT_ABORT": "Abbrechen",
