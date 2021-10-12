@@ -31,11 +31,26 @@
           <span>{{ 'HEADER.LOGOUT' | translate }}</span>
         </button>
 
+        <button [matMenuTriggerFor]="language"
+                mat-menu-item
+                (click)="navigateToSettings()">
+          <mat-icon>language</mat-icon>
+          <span>{{ 'HEADER.LANGUAGE' | translate }}</span>
+        </button>
+
+        <mat-menu #language="matMenu">
+          <ng-container *ngFor="let lang of languageService.languages; let i = index">
+            <button mat-menu-item (click)="languageService.changeLanguage(lang)">{{languageService.getLanguageName(lang)}}</button>
+          </ng-container>
+        </mat-menu>
+
+        <!--
         <button mat-menu-item
                 (click)="navigateToSettings()">
           <mat-icon>settings</mat-icon>
           <span>{{ 'HEADER.SETTINGS' | translate }}</span>
         </button>
+        -->
       </mat-menu>
     </div>
 

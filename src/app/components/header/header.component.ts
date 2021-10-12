@@ -6,6 +6,7 @@ import {HighlightSearchComponent} from '../highlight-search/highlight-search.com
 import {TranslateService} from '@ngx-translate/core';
 import {ROUTES} from '../../app-routes';
 import {Router} from '@angular/router';
+import {LanguageService} from '../../services/language.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +23,8 @@ export class HeaderComponent implements OnInit {
               private logger: LogService,
               public crossUI: CrossUiEventService,
               private translate: TranslateService,
-              private router: Router) {
+              private router: Router,
+              public languageService: LanguageService) {
   }
 
   ngOnInit(): void {
