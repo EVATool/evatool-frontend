@@ -1,14 +1,15 @@
-<nav mat-tab-nav-bar mat-align-tabs="center">
+<nav mat-tab-nav-bar mat-align-tabs="left">
   <a mat-tab-link
      *ngFor="let link of links"
-     (click)="navigateToTabRoute(link.path)">
-    {{link.label}}
+     (click)="navigateToTabByName(link.name)">
+    {{link.translation | translate}}
   </a>
 </nav>
 
 <router-outlet name="tabs"></router-outlet>
 
-<mat-tab-group #tabGroup (selectedIndexChange)="tabChanged($event)" mat-align-tabs="left" animationDuration="500ms">
+
+<mat-tab-group #tabGroup mat-align-tabs="left" animationDuration="500ms">
   <mat-tab label="{{ 'COMMON.ENTITY.STAKEHOLDER' | translate }}">
     <app-stakeholder-edit></app-stakeholder-edit>
   </mat-tab>
@@ -28,6 +29,7 @@
     <app-dashboard></app-dashboard>
   </mat-tab>
 </mat-tab-group>
+
 
 <div class="current-analysis-info">
   <div class="is-template"

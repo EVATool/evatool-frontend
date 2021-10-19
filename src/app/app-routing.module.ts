@@ -59,6 +59,11 @@ const routes: Routes = [
     path: ROUTES.analysisWithId,
     component: AnalysisEditComponent,
     children: [
+      // {
+      //   path: '', // TODO default
+      //   redirectTo: ROUTES.analysisWithId + '/(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.stakeholder + ')',
+      //   pathMatch: 'prefix'
+      // },
       {
         path: TAB_ROUTES.stakeholder,
         component: StakeholderEditComponent,

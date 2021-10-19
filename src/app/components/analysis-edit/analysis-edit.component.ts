@@ -4,7 +4,7 @@ import {AnalysisDataService} from '../../services/data/analysis-data.service';
 import {StakeholderEditComponent} from '../stakeholder-edit/stakeholder-edit.component';
 import {ImpactEditComponent} from '../impact-edit/impact-edit.component';
 import {CrossUiEventService} from '../../services/event/cross-ui-event.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ROUTES, TAB_ROUTES} from '../../app-routes';
 import * as uuid from 'uuid';
 import {Subject} from 'rxjs';
@@ -27,11 +27,8 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   links: any[];
-  //@ViewChild('tabGroup') tabGroup!: MatTabGroup;
   @ViewChild(StakeholderEditComponent) stakeholdersComponent!: StakeholderEditComponent;
   @ViewChild(ImpactEditComponent) impactsComponent!: ImpactEditComponent;
-
-  private tabNames = ['Stakeholder', 'Value', 'Impact', 'Variant', 'Requirement', 'Dashboard'];
 
   constructor(private logger: LogService,
               public analysisData: AnalysisDataService,
@@ -40,8 +37,16 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
               private route: ActivatedRoute,
               private translate: TranslateService) {
     this.links = [
-      {path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.stakeholder + ')', label: 'TR'},
-      {path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.value + ')', label: 'DSDTR'},
+      {
+        name: 'Stakeholder',
+        path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.stakeholder + ')',
+        translation: 'COMMON.ENTITY.STAKEHOLDER'
+      },
+      {
+        name: 'Value',
+        path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.value + ')',
+        translation: 'COMMON.ENTITY.VALUE'
+      },
     ];
   }
 
@@ -101,7 +106,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.activateTabFromUrl();
+
   }
 
   ngOnDestroy(): void {
@@ -110,57 +115,16 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  navigateToTabRoute(tab: string): void {
-    console.log('TEST');
-    this.router.navigateByUrl(ROUTES.analysisWithId + '/' + tab);
-  }
-
-  tabChanged(event: number): void {
-    this.logger.debug(this, 'Selected Tab Changed to ' + event);
-    this.putTabInUrl(event);
-    switch (event) {
-      case 0:
-        break;
-
-      case 1:
-        break;
-
-      case 2:
-        break;
-
-      case 3:
-        break;
-
-      case 4:
-        break;
-
-      default:
-        this.logger.warn(this, 'Unknown tab');
-        break;
+  navigateToTabByName(name: string): void {
+    const link = this.links.find(l => l.name === name);
+    if (link) {
+      this.navigateToSubRouteTab(link.path);
+    } else {
+      this.logger.error(this, 'Not tab found by name ' + name);
     }
   }
 
-  activateTabFromUrl(): void {
-    const tab = this.route.snapshot.queryParams?.tab;
-    if (!tab) {
-      return;
-    }
-
-    this.navigateToTabByName(tab);
-  }
-
-  private navigateToTabByName(tab: string): void {
-    //this.tabGroup.selectedIndex = this.tabNames.indexOf(tab);
-  }
-
-  putTabInUrl(index: number): void {
-    const currentTabParams: Params = {tab: this.tabNames[index]};
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: currentTabParams,
-        queryParamsHandling: 'merge',
-      });
+  navigateToSubRouteTab(path: string): void {
+    this.router.navigate([{outlets: {tabs: [path]}}]);
   }
 }
