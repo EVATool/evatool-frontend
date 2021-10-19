@@ -16,11 +16,12 @@ import {ArchivedValueReferencedByImpact} from '../../services/event/events/local
 import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 import {TranslateService} from '@ngx-translate/core';
 import {OUTLETS} from '../../app-outlets';
+import {outletTabAnimation} from '../../animations/OutletTabAnimation';
 
 @Component({
   selector: 'app-analysis-edit',
   templateUrl: './analysis-edit.component.html',
-  styleUrls: ['./analysis-edit.component.scss']
+  styleUrls: ['./analysis-edit.component.scss'],
 })
 export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -46,6 +47,26 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
         name: 'Value',
         path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.value + ')',
         translation: 'COMMON.ENTITY.VALUE'
+      },
+      {
+        name: 'Impact',
+        path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.impact + ')',
+        translation: 'COMMON.ENTITY.IMPACT'
+      },
+      {
+        name: 'Variant',
+        path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.variant + ')',
+        translation: 'COMMON.ENTITY.VARIANT'
+      },
+      {
+        name: 'Requirement',
+        path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.requirement + ')',
+        translation: 'COMMON.ENTITY.REQUIREMENT'
+      },
+      {
+        name: 'Dashboard',
+        path: '(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.dashboard + ')',
+        translation: 'ANALYSIS_EDIT.DASHBOARD_TAB_LABEL'
       },
     ];
   }

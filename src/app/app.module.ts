@@ -87,7 +87,7 @@ import {VariantFilterBarComponent} from './components/variant-filter-bar/variant
 import {VariantTableComponent} from './components/variant-table/variant-table.component';
 import {VariantTypeDialogComponent} from './components/variant-type-dialog/variant-type-dialog.component';
 import {VariantTypeTableComponent} from './components/variant-type-table/variant-type-table.component';
-import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import {UserSettingsComponent} from './components/user-settings/user-settings.component';
 
 export const customTooltipDefaults: MatTooltipDefaultOptions = {
   position: 'above',

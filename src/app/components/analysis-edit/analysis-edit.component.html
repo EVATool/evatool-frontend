@@ -8,29 +8,6 @@
 
 <router-outlet name="tabs"></router-outlet>
 
-
-<mat-tab-group #tabGroup mat-align-tabs="left" animationDuration="500ms">
-  <mat-tab label="{{ 'COMMON.ENTITY.STAKEHOLDER' | translate }}">
-    <app-stakeholder-edit></app-stakeholder-edit>
-  </mat-tab>
-  <mat-tab label="{{ 'COMMON.ENTITY.VALUE' | translate }}">
-    <app-value-edit></app-value-edit>
-  </mat-tab>
-  <mat-tab label="{{ 'COMMON.ENTITY.IMPACT' | translate }}">
-    <app-impact-edit></app-impact-edit>
-  </mat-tab>
-  <mat-tab label="{{ 'COMMON.ENTITY.VARIANT' | translate }}">
-    <app-variant-edit></app-variant-edit>
-  </mat-tab>
-  <mat-tab label="{{ 'COMMON.ENTITY.REQUIREMENT' | translate }}">
-    <app-requirement-edit></app-requirement-edit>
-  </mat-tab>
-  <mat-tab label="{{ 'ANALYSIS_EDIT.DASHBOARD_TAB_LABEL' | translate }}">
-    <app-dashboard></app-dashboard>
-  </mat-tab>
-</mat-tab-group>
-
-
 <div class="current-analysis-info">
   <div class="is-template"
        matTooltip="{{ 'ANALYSIS_EDIT.IS_TEMPLATE' | translate }}"

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {MasterService} from './services/master.service';
 import {LogService} from './services/log.service';
 import {LanguageService} from './services/language.service';
+import {outletTabAnimation} from './animations/OutletTabAnimation';
 
 @Component({
   selector: 'app-root',

@@ -59,11 +59,11 @@ const routes: Routes = [
     path: ROUTES.analysisWithId,
     component: AnalysisEditComponent,
     children: [
-      // {
-      //   path: '', // TODO default
-      //   redirectTo: ROUTES.analysisWithId + '/(' + OUTLETS.TAB_OUTLET + ':' + TAB_ROUTES.stakeholder + ')',
-      //   pathMatch: 'prefix'
-      // },
+      { // This empty path is used to route to the Stakeholders by default.
+        path: '',
+        component: StakeholderEditComponent,
+        outlet: OUTLETS.TAB_OUTLET
+      },
       {
         path: TAB_ROUTES.stakeholder,
         component: StakeholderEditComponent,
@@ -113,7 +113,7 @@ const routes: Routes = [
     component: UserSettingsComponent
   },
 
-  //{path: ROUTES.any, redirectTo: ROUTES.pageNotFound}, TODO reenable
+  {path: ROUTES.any, redirectTo: ROUTES.pageNotFound}
 ];
 
 @NgModule({
