@@ -95,37 +95,37 @@ describe('StakeholderDataService', () => {
     it('should fire created stakeholders event', () => {
       // given
       const createStakeholders = data.stakeholders[0];
-      spyOn(service.createdStakeholder, 'emit');
+      spyOn(service.createdStakeholder, 'next');
 
       // when
       service.createStakeholder(createStakeholders);
 
       // then
-      expect(service.createdStakeholder.emit).toHaveBeenCalled();
+      expect(service.createdStakeholder.next).toHaveBeenCalled();
     });
 
     it('should fire updated stakeholders event', () => {
       // given
       const updateStakeholders = data.stakeholders[0];
-      spyOn(service.updatedStakeholder, 'emit');
+      spyOn(service.updatedStakeholder, 'next');
 
       // when
       service.updateStakeholder(updateStakeholders);
 
       // then
-      expect(service.updatedStakeholder.emit).toHaveBeenCalled();
+      expect(service.updatedStakeholder.next).toHaveBeenCalled();
     });
 
     it('should fire deleted stakeholders event', () => {
       // given
       const deleteStakeholders = data.stakeholders[0];
-      spyOn(service.deletedStakeholder, 'emit');
+      spyOn(service.deletedStakeholder, 'next');
 
       // when
       service.deleteStakeholder(deleteStakeholders);
 
       // then
-      expect(service.deletedStakeholder.emit).toHaveBeenCalled();
+      expect(service.deletedStakeholder.next).toHaveBeenCalled();
     });
   });
 });

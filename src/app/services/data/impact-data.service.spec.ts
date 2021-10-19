@@ -98,37 +98,37 @@ describe('ImpactDataService', () => {
     it('should fire created impacts event', () => {
       // given
       const createImpacts = data.impacts[0];
-      spyOn(service.createdImpact, 'emit');
+      spyOn(service.createdImpact, 'next');
 
       // when
       service.createImpact(createImpacts);
 
       // then
-      expect(service.createdImpact.emit).toHaveBeenCalled();
+      expect(service.createdImpact.next).toHaveBeenCalled();
     });
 
     it('should fire updated impacts event', () => {
       // given
       const updateImpacts = data.impacts[0];
-      spyOn(service.updatedImpact, 'emit');
+      spyOn(service.updatedImpact, 'next');
 
       // when
       service.updateImpact(updateImpacts);
 
       // then
-      expect(service.updatedImpact.emit).toHaveBeenCalled();
+      expect(service.updatedImpact.next).toHaveBeenCalled();
     });
 
     it('should fire deleted impacts event', () => {
       // given
       const deleteImpacts = data.impacts[0];
-      spyOn(service.deletedImpact, 'emit');
+      spyOn(service.deletedImpact, 'next');
 
       // when
       service.deleteImpact(deleteImpacts);
 
       // then
-      expect(service.deletedImpact.emit).toHaveBeenCalled();
+      expect(service.deletedImpact.next).toHaveBeenCalled();
     });
   });
 });

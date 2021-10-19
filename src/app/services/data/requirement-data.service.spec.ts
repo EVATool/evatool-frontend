@@ -93,37 +93,37 @@ describe('RequirementDataService', () => {
     it('should fire created requirements event', () => {
       // given
       const createRequirements = data.requirements[0];
-      spyOn(service.createdRequirement, 'emit');
+      spyOn(service.createdRequirement, 'next');
 
       // when
       service.createRequirement(createRequirements);
 
       // then
-      expect(service.createdRequirement.emit).toHaveBeenCalled();
+      expect(service.createdRequirement.next).toHaveBeenCalled();
     });
 
     it('should fire updated requirements event', () => {
       // given
       const updateRequirements = data.requirements[0];
-      spyOn(service.updatedRequirement, 'emit');
+      spyOn(service.updatedRequirement, 'next');
 
       // when
       service.updateRequirement(updateRequirements);
 
       // then
-      expect(service.updatedRequirement.emit).toHaveBeenCalled();
+      expect(service.updatedRequirement.next).toHaveBeenCalled();
     });
 
     it('should fire deleted requirements event', () => {
       // given
       const deleteRequirements = data.requirements[0];
-      spyOn(service.deletedRequirement, 'emit');
+      spyOn(service.deletedRequirement, 'next');
 
       // when
       service.deleteRequirement(deleteRequirements);
 
       // then
-      expect(service.deletedRequirement.emit).toHaveBeenCalled();
+      expect(service.deletedRequirement.next).toHaveBeenCalled();
     });
   });
 });

@@ -98,37 +98,37 @@ describe('RequirementDeltaDeltaDataService', () => {
     it('should fire created requirementDeltas event', () => {
       // given
       const createRequirementDeltas = data.requirementDeltas[0];
-      spyOn(service.createdRequirementDelta, 'emit');
+      spyOn(service.createdRequirementDelta, 'next');
 
       // when
       service.createRequirementDelta(createRequirementDeltas);
 
       // then
-      expect(service.createdRequirementDelta.emit).toHaveBeenCalled();
+      expect(service.createdRequirementDelta.next).toHaveBeenCalled();
     });
 
     it('should fire updated requirementDeltas event', () => {
       // given
       const updateRequirementDeltas = data.requirementDeltas[0];
-      spyOn(service.updatedRequirementDelta, 'emit');
+      spyOn(service.updatedRequirementDelta, 'next');
 
       // when
       service.updateRequirementDelta(updateRequirementDeltas);
 
       // then
-      expect(service.updatedRequirementDelta.emit).toHaveBeenCalled();
+      expect(service.updatedRequirementDelta.next).toHaveBeenCalled();
     });
 
     it('should fire deleted requirementDeltas event', () => {
       // given
       const deleteRequirementDeltas = data.requirementDeltas[0];
-      spyOn(service.deletedRequirementDelta, 'emit');
+      spyOn(service.deletedRequirementDelta, 'next');
 
       // when
       service.deleteRequirementDelta(deleteRequirementDeltas);
 
       // then
-      expect(service.deletedRequirementDelta.emit).toHaveBeenCalled();
+      expect(service.deletedRequirementDelta.next).toHaveBeenCalled();
     });
   });
 });

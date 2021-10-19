@@ -127,73 +127,73 @@ describe('AnalysisDataService', () => {
   describe('event emitter', () => {
     it('should fire loaded analyses event', () => {
       // given
-      spyOn(service.loadedAnalyses, 'emit');
+      spyOn(service.loadedAnalyses, 'next');
 
       // when
       service.loadAnalyses();
 
       // then
-      expect(service.loadedAnalyses.emit).toHaveBeenCalled();
+      expect(service.loadedAnalyses.next).toHaveBeenCalled();
     });
 
     it('should fire change current analysis event', () => {
       // given
-      spyOn(service.loadedCurrentAnalysis, 'emit');
+      spyOn(service.loadedCurrentAnalysis, 'next');
 
       // when
       service.changeCurrentAnalysis('1');
 
       // then
-      expect(service.loadedCurrentAnalysis.emit).toHaveBeenCalled();
+      expect(service.loadedCurrentAnalysis.next).toHaveBeenCalled();
     });
 
     it('should fire createdAnalysis event when deep copying analysis', () => {
       // given
       const templateAnalysis = data.analyses[0];
       const analysis = data.analyses[1];
-      spyOn(service.createdAnalysis, 'emit');
+      spyOn(service.createdAnalysis, 'next');
 
       // when
       service.deepCopy(templateAnalysis, analysis);
 
       // then
-      expect(service.createdAnalysis.emit).toHaveBeenCalled();
+      expect(service.createdAnalysis.next).toHaveBeenCalled();
     });
 
     it('should fire created analysis event', () => {
       // given
       const createAnalysis = data.analyses[0];
-      spyOn(service.createdAnalysis, 'emit');
+      spyOn(service.createdAnalysis, 'next');
 
       // when
       service.createAnalysis(createAnalysis);
 
       // then
-      expect(service.createdAnalysis.emit).toHaveBeenCalled();
+      expect(service.createdAnalysis.next).toHaveBeenCalled();
     });
 
     it('should fire updated analysis event', () => {
       // given
       const updateAnalysis = data.analyses[0];
-      spyOn(service.updatedAnalysis, 'emit');
+      spyOn(service.updatedAnalysis, 'next');
 
       // when
       service.updateAnalysis(updateAnalysis);
 
       // then
-      expect(service.updatedAnalysis.emit).toHaveBeenCalled();
+      expect(service.updatedAnalysis.next).toHaveBeenCalled();
     });
 
     it('should fire deleted analysis event', () => {
       // given
       const deleteAnalysis = data.analyses[0];
-      spyOn(service.deletedAnalysis, 'emit');
+      spyOn(service.deletedAnalysis, 'next');
 
       // when
       service.deleteAnalysis(deleteAnalysis);
 
       // then
-      expect(service.deletedAnalysis.emit).toHaveBeenCalled();
+      expect(service.deletedAnalysis.next).toHaveBeenCalled();
     });
   });
 });

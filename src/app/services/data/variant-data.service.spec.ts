@@ -95,37 +95,37 @@ describe('VariantDataService', () => {
     it('should fire created variants event', () => {
       // given
       const createVariants = data.variants[0];
-      spyOn(service.createdVariant, 'emit');
+      spyOn(service.createdVariant, 'next');
 
       // when
       service.createVariant(createVariants);
 
       // then
-      expect(service.createdVariant.emit).toHaveBeenCalled();
+      expect(service.createdVariant.next).toHaveBeenCalled();
     });
 
     it('should fire updated variants event', () => {
       // given
       const updateVariants = data.variants[0];
-      spyOn(service.updatedVariant, 'emit');
+      spyOn(service.updatedVariant, 'next');
 
       // when
       service.updateVariant(updateVariants);
 
       // then
-      expect(service.updatedVariant.emit).toHaveBeenCalled();
+      expect(service.updatedVariant.next).toHaveBeenCalled();
     });
 
     it('should fire deleted variants event', () => {
       // given
       const deleteVariants = data.variants[0];
-      spyOn(service.deletedVariant, 'emit');
+      spyOn(service.deletedVariant, 'next');
 
       // when
       service.deleteVariant(deleteVariants);
 
       // then
-      expect(service.deletedVariant.emit).toHaveBeenCalled();
+      expect(service.deletedVariant.next).toHaveBeenCalled();
     });
   });
 });

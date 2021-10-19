@@ -94,37 +94,37 @@ describe('ValueDataService', () => {
     it('should fire created values event', () => {
       // given
       const createValues = data.values[0];
-      spyOn(service.createdValue, 'emit');
+      spyOn(service.createdValue, 'next');
 
       // when
       service.createValue(createValues);
 
       // then
-      expect(service.createdValue.emit).toHaveBeenCalled();
+      expect(service.createdValue.next).toHaveBeenCalled();
     });
 
     it('should fire updated values event', () => {
       // given
       const updateValues = data.values[0];
-      spyOn(service.updatedValue, 'emit');
+      spyOn(service.updatedValue, 'next');
 
       // when
       service.updateValue(updateValues);
 
       // then
-      expect(service.updatedValue.emit).toHaveBeenCalled();
+      expect(service.updatedValue.next).toHaveBeenCalled();
     });
 
     it('should fire deleted values event', () => {
       // given
       const deleteValues = data.values[0];
-      spyOn(service.deletedValue, 'emit');
+      spyOn(service.deletedValue, 'next');
 
       // when
       service.deleteValue(deleteValues);
 
       // then
-      expect(service.deletedValue.emit).toHaveBeenCalled();
+      expect(service.deletedValue.next).toHaveBeenCalled();
     });
   });
 });
