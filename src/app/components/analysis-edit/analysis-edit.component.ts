@@ -125,6 +125,6 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   navigateToSubRouteTab(path: string): void {
-    this.router.navigate([{outlets: {tabs: [path]}}]);
+    this.router.navigateByUrl(ROUTES.analysis + '/' + this.analysisData.currentAnalysis.id + '/' + path);
   }
 }
