@@ -130,9 +130,6 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  // TODO Use another nested/auxiliary router outlet for the tabs
-  //  Url should look like this: /analysis/UUID/Stakeholders
-  // TODO Tab change on reload causes tabs to be briefly shown when the tab change animation plays
   activateTabFromUrl(): void {
     const tab = this.route.snapshot.queryParams?.tab;
     if (!tab) {

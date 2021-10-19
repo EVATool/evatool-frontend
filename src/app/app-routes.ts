@@ -15,3 +15,12 @@ export const ROUTES = {
   settings: 'settings',
   any: '**'
 };
+
+export const TAB_ROUTES = {
+  stakeholder: 'stakeholder',
+  value: 'value',
+  impact: 'impact',
+  variant: 'variant',
+  requirement: 'requirement',
+  dashboard: 'dashboard'
+};
