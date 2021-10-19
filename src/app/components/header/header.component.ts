@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
 
   highlightTextChange(event: string): void {
     this.logger.debug(this, 'Highlight Text Changed');
-    this.crossUI.highlightTextChanged.emit(event);
+    this.crossUI.highlightTextChanged.next(event);
   }
 
   navigateToSettings(): void {

@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {DataService} from './data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -7,7 +7,7 @@ import {StakeholderMapperService} from '../mapper/stakeholder-mapper.service';
 import {Stakeholder} from '../../model/Stakeholder';
 import {Analysis} from '../../model/Analysis';
 import {StakeholderDto} from '../../dto/StakeholderDto';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
@@ -17,12 +17,12 @@ export class StakeholderDataService extends DataService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  @Output() loadedStakeholders: EventEmitter<Stakeholder[]> = new EventEmitter();
-  @Output() loadedStakeholderPriorities: EventEmitter<string[]> = new EventEmitter();
-  @Output() loadedStakeholderLevels: EventEmitter<string[]> = new EventEmitter();
-  @Output() createdStakeholder: EventEmitter<Stakeholder> = new EventEmitter();
-  @Output() updatedStakeholder: EventEmitter<Stakeholder> = new EventEmitter();
-  @Output() deletedStakeholder: EventEmitter<Stakeholder> = new EventEmitter();
+  loadedStakeholders: Subject<Stakeholder[]> = new ReplaySubject();
+  loadedStakeholderPriorities: Subject<string[]> = new ReplaySubject();
+  loadedStakeholderLevels: Subject<string[]> = new ReplaySubject();
+  createdStakeholder: Subject<Stakeholder> = new ReplaySubject();
+  updatedStakeholder: Subject<Stakeholder> = new ReplaySubject();
+  deletedStakeholder: Subject<Stakeholder> = new ReplaySubject();
 
   stakeholdersLoaded = false;
   stakeholders: Stakeholder[] = [];
@@ -56,7 +56,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
             });
             this.stakeholders = this.sortDefault(tempStakeholders);
             this.stakeholdersLoaded = true;
-            this.loadedStakeholders.emit(this.stakeholders);
+            this.loadedStakeholders.next(this.stakeholders);
             this.logger.debug(this, 'Stakeholders loaded');
           });
 
@@ -66,7 +66,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
           .subscribe((stakeholderPriorities: string[]) => {
             this.stakeholderPriorities = [];
             stakeholderPriorities.forEach((stakeholderPriority: string) => this.stakeholderPriorities.push(stakeholderPriority));
-            this.loadedStakeholderPriorities.emit(this.stakeholderPriorities);
+            this.loadedStakeholderPriorities.next(this.stakeholderPriorities);
           });
 
         // Load Stakeholder Levels.
@@ -75,7 +75,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
           .subscribe((stakeholderLevels: string[]) => {
             this.stakeholderLevels = [];
             stakeholderLevels.forEach((stakeholderLevel: string) => this.stakeholderLevels.push(stakeholderLevel));
-            this.loadedStakeholderLevels.emit(this.stakeholderLevels);
+            this.loadedStakeholderLevels.next(this.stakeholderLevels);
           });
       });
   }
@@ -91,7 +91,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
       .subscribe((stakeholderDto: StakeholderDto) => {
         const createdStakeholder = this.stakeholderMapper.fromDto(stakeholderDto, [this.analysisData.currentAnalysis]);
         this.stakeholders.push(createdStakeholder);
-        this.createdStakeholder.emit(createdStakeholder);
+        this.createdStakeholder.next(createdStakeholder);
         this.logger.debug(this, 'Stakeholder created');
       });
   }
@@ -101,7 +101,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((stakeholderDto: StakeholderDto) => {
         this.stakeholderMapper.updateFromDto(stakeholderDto, stakeholder, [this.analysisData.currentAnalysis]);
-        this.updatedStakeholder.emit(stakeholder);
+        this.updatedStakeholder.next(stakeholder);
         this.logger.debug(this, 'Stakeholder updated');
       });
   }
@@ -112,7 +112,7 @@ export class StakeholderDataService extends DataService implements OnDestroy {
       .subscribe(() => {
         const index: number = this.stakeholders.indexOf(stakeholder, 0);
         this.stakeholders.splice(index, 1);
-        this.deletedStakeholder.emit(stakeholder);
+        this.deletedStakeholder.next(stakeholder);
         this.logger.debug(this, 'Stakeholder deleted');
       });
   }

@@ -1,7 +1,6 @@
 import {HttpMarshallService} from '../http/http-marshall.service';
 import {HttpInfo} from '../http/HttpInfo';
 import {FunctionalErrorCodes} from './functional-error-codes';
-import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
 import {ImpactDataService} from '../data/impact-data.service';
 import {RequirementDeltaDataService} from '../data/requirement-delta-data.service';
 import {VariantDataService} from '../data/variant-data.service';
@@ -9,7 +8,6 @@ import {RequirementDataService} from '../data/requirement-data.service';
 import {StakeholderDataService} from '../data/stakeholder-data.service';
 import {ValueDataService} from '../data/value-data.service';
 import {AnalysisDataService} from '../data/analysis-data.service';
-import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {
   AnalysisDeletionFailedEvent,
@@ -47,6 +45,8 @@ import {ArchivedValueReferencedByImpact} from './events/local/ArchivedValueRefer
 import {ArchivedVariantReferencedByRequirement} from './events/local/ArchivedVariantReferencedByRequirement';
 import {ValuesReferencingValueType} from './events/http409/ValuesReferencingValueType';
 import {VariantsReferencingVariantType} from './events/http409/VariantsReferencingVariantType';
+import {Injectable, OnDestroy} from '@angular/core';
+import {ReplaySubject, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +55,7 @@ export class CrossUiEventService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  @Output() initComplete: EventEmitter<void> = new EventEmitter();
+  initComplete: Subject<void> = new ReplaySubject();
   initialized = false;
 
   // #####################
@@ -63,72 +63,72 @@ export class CrossUiEventService implements OnDestroy {
   // #####################
 
   // 400.
-  @Output() importExportJsonInvalid: EventEmitter<ImportExportJsonInvalidEvent> = new EventEmitter();
-  @Output() usernameInvalid: EventEmitter<UsernameInvalidEvent> = new EventEmitter();
-  @Output() realmInvalid: EventEmitter<RealmInvalidEvent> = new EventEmitter();
-  @Output() emailInvalid: EventEmitter<EmailInvalidEvent> = new EventEmitter();
+  importExportJsonInvalid: Subject<ImportExportJsonInvalidEvent> = new ReplaySubject();
+  usernameInvalid: Subject<UsernameInvalidEvent> = new ReplaySubject();
+  realmInvalid: Subject<RealmInvalidEvent> = new ReplaySubject();
+  emailInvalid: Subject<EmailInvalidEvent> = new ReplaySubject();
 
   // 401.
-  @Output() invalidCredentials: EventEmitter<InvalidCredentialsEvent> = new EventEmitter();
+  invalidCredentials: Subject<InvalidCredentialsEvent> = new ReplaySubject();
 
   // 403.
-  @Output() crossRealmAccess: EventEmitter<CrossRealmAccessEvent> = new EventEmitter();
-  @Output() remoteIpBlocked: EventEmitter<void> = new EventEmitter();
+  crossRealmAccess: Subject<CrossRealmAccessEvent> = new ReplaySubject();
+  remoteIpBlocked: Subject<void> = new ReplaySubject();
 
   // 404.
-  @Output() realmNotFound: EventEmitter<LoginRealmNotFoundEvent> = new EventEmitter();
-  @Output() usernameNotFound: EventEmitter<LoginUsernameNotFoundEvent> = new EventEmitter();
-  @Output() analysisNotFound: EventEmitter<AnalysisNotFoundEvent> = new EventEmitter();
+  realmNotFound: Subject<LoginRealmNotFoundEvent> = new ReplaySubject();
+  usernameNotFound: Subject<LoginUsernameNotFoundEvent> = new ReplaySubject();
+  analysisNotFound: Subject<AnalysisNotFoundEvent> = new ReplaySubject();
 
-  @Output() analysisDeletionFailed: EventEmitter<AnalysisDeletionFailedEvent> = new EventEmitter();
-  @Output() stakeholderDeletionFailed: EventEmitter<StakeholderDeletionFailedEvent> = new EventEmitter();
-  @Output() valueTypeDeletionFailed: EventEmitter<ValueTypeDeletionFailedEvent> = new EventEmitter();
-  @Output() valueDeletionFailed: EventEmitter<ValueDeletionFailedEvent> = new EventEmitter();
-  @Output() impactDeletionFailed: EventEmitter<ImpactDeletionFailedEvent> = new EventEmitter();
-  @Output() variantTypeDeletionFailed: EventEmitter<VariantTypeDeletionFailedEvent> = new EventEmitter();
-  @Output() variantDeletionFailed: EventEmitter<VariantDeletionFailedEvent> = new EventEmitter();
-  @Output() requirementDeletionFailed: EventEmitter<RequirementDeletionFailedEvent> = new EventEmitter();
-  @Output() requirementDeltaDeletionFailed: EventEmitter<RequirementDeltaDeletionFailedEvent> = new EventEmitter();
+  analysisDeletionFailed: Subject<AnalysisDeletionFailedEvent> = new ReplaySubject();
+  stakeholderDeletionFailed: Subject<StakeholderDeletionFailedEvent> = new ReplaySubject();
+  valueTypeDeletionFailed: Subject<ValueTypeDeletionFailedEvent> = new ReplaySubject();
+  valueDeletionFailed: Subject<ValueDeletionFailedEvent> = new ReplaySubject();
+  impactDeletionFailed: Subject<ImpactDeletionFailedEvent> = new ReplaySubject();
+  variantTypeDeletionFailed: Subject<VariantTypeDeletionFailedEvent> = new ReplaySubject();
+  variantDeletionFailed: Subject<VariantDeletionFailedEvent> = new ReplaySubject();
+  requirementDeletionFailed: Subject<RequirementDeletionFailedEvent> = new ReplaySubject();
+  requirementDeltaDeletionFailed: Subject<RequirementDeltaDeletionFailedEvent> = new ReplaySubject();
 
   // 409.
-  @Output() impactReferencedByRequirements: EventEmitter<RequirementDeltasReferencingImpactEvent> = new EventEmitter();
-  @Output() stakeholderReferencedByImpacts: EventEmitter<ImpactsReferencingStakeholderEvent> = new EventEmitter();
-  @Output() valueReferencedByImpacts: EventEmitter<ImpactsReferencingValueEvent> = new EventEmitter();
-  @Output() variantReferencedByRequirements: EventEmitter<RequirementsReferencingVariantEvent> = new EventEmitter();
-  @Output() valueTypeReferencedByValues: EventEmitter<ValuesReferencingValueType> = new EventEmitter();
-  @Output() variantTypeReferencedByVariants: EventEmitter<VariantsReferencingVariantType> = new EventEmitter();
+  impactReferencedByRequirements: Subject<RequirementDeltasReferencingImpactEvent> = new ReplaySubject();
+  stakeholderReferencedByImpacts: Subject<ImpactsReferencingStakeholderEvent> = new ReplaySubject();
+  valueReferencedByImpacts: Subject<ImpactsReferencingValueEvent> = new ReplaySubject();
+  variantReferencedByRequirements: Subject<RequirementsReferencingVariantEvent> = new ReplaySubject();
+  valueTypeReferencedByValues: Subject<ValuesReferencingValueType> = new ReplaySubject();
+  variantTypeReferencedByVariants: Subject<VariantsReferencingVariantType> = new ReplaySubject();
 
 
-  @Output() registerUsernameAlreadyExists: EventEmitter<RegisterUsernameAlreadyExistsEvent> = new EventEmitter();
-  @Output() registerEmailAlreadyExists: EventEmitter<RegisterEmailAlreadyExistsEvent> = new EventEmitter();
-  @Output() registerRealmAlreadyExists: EventEmitter<RegisterRealmAlreadyExistsEvent> = new EventEmitter();
+  registerUsernameAlreadyExists: Subject<RegisterUsernameAlreadyExistsEvent> = new ReplaySubject();
+  registerEmailAlreadyExists: Subject<RegisterEmailAlreadyExistsEvent> = new ReplaySubject();
+  registerRealmAlreadyExists: Subject<RegisterRealmAlreadyExistsEvent> = new ReplaySubject();
 
   // #####################
   // Non-functional errors.
   // #####################
-  @Output() authenticationFailed: EventEmitter<AuthenticationFailedEvent> = new EventEmitter();
-  @Output() authorizationFailed: EventEmitter<AuthorizationFailedEvent> = new EventEmitter();
+  authenticationFailed: Subject<AuthenticationFailedEvent> = new ReplaySubject();
+  authorizationFailed: Subject<AuthorizationFailedEvent> = new ReplaySubject();
 
   // #####################
   // Other events.
   // #####################
-  @Output() userWantsToSeeRequirementsReferencingImpact: EventEmitter<RequirementDeltasReferencingImpactEvent> = new EventEmitter();
-  @Output() userWantsToSeeImpactsReferencingStakeholder: EventEmitter<ImpactsReferencingStakeholderEvent> = new EventEmitter();
-  @Output() userWantsToSeeImpactsReferencingValue: EventEmitter<ImpactsReferencingValueEvent> = new EventEmitter();
-  @Output() userWantsToSeeRequirementsReferencingVariant: EventEmitter<RequirementsReferencingVariantEvent> = new EventEmitter();
-  @Output() userWantsToSeeValuesReferencingValueType: EventEmitter<ValuesReferencingValueType> = new EventEmitter();
-  @Output() userWantsToSeeVariantsReferencingVariantType: EventEmitter<VariantsReferencingVariantType> = new EventEmitter();
+  userWantsToSeeRequirementsReferencingImpact: Subject<RequirementDeltasReferencingImpactEvent> = new ReplaySubject();
+  userWantsToSeeImpactsReferencingStakeholder: Subject<ImpactsReferencingStakeholderEvent> = new ReplaySubject();
+  userWantsToSeeImpactsReferencingValue: Subject<ImpactsReferencingValueEvent> = new ReplaySubject();
+  userWantsToSeeRequirementsReferencingVariant: Subject<RequirementsReferencingVariantEvent> = new ReplaySubject();
+  userWantsToSeeValuesReferencingValueType: Subject<ValuesReferencingValueType> = new ReplaySubject();
+  userWantsToSeeVariantsReferencingVariantType: Subject<VariantsReferencingVariantType> = new ReplaySubject();
 
-  @Output() userWantsToSeeArchivedValueReferencedByImpact: EventEmitter<ArchivedValueReferencedByImpact> = new EventEmitter();
-  @Output() userWantsToSeeArchivedVariantReferencedByRequirement: EventEmitter<ArchivedVariantReferencedByRequirement> = new EventEmitter();
+  userWantsToSeeArchivedValueReferencedByImpact: Subject<ArchivedValueReferencedByImpact> = new ReplaySubject();
+  userWantsToSeeArchivedVariantReferencedByRequirement: Subject<ArchivedVariantReferencedByRequirement> = new ReplaySubject();
 
-  @Output() userWantsToNavigateToValueTab: EventEmitter<void> = new EventEmitter();
-  @Output() userWantsToNavigateToStakeholderTab: EventEmitter<void> = new EventEmitter();
+  userWantsToNavigateToValueTab: Subject<void> = new ReplaySubject();
+  userWantsToNavigateToStakeholderTab: Subject<void> = new ReplaySubject();
 
-  @Output() userNavigatedToAnalysis: EventEmitter<void> = new EventEmitter();
-  @Output() userLeftCurrentAnalysisEdit: EventEmitter<void> = new EventEmitter();
+  userNavigatedToAnalysis: Subject<void> = new ReplaySubject();
+  userLeftCurrentAnalysisEdit: Subject<void> = new ReplaySubject();
 
-  @Output() highlightTextChanged: EventEmitter<string> = new EventEmitter<string>();
+  highlightTextChanged: Subject<string> = new Subject<string>();
 
   constructor(private httpMarshall: HttpMarshallService,
               private analysisData: AnalysisDataService,
@@ -157,19 +157,19 @@ export class CrossUiEventService implements OnDestroy {
 
             // 400.
             case FunctionalErrorCodes.IMPORT_EXPORT_JSON_INVALID:
-              this.importExportJsonInvalid.emit(new ImportExportJsonInvalidEvent());
+              this.importExportJsonInvalid.next(new ImportExportJsonInvalidEvent());
               break;
 
             case FunctionalErrorCodes.USERNAME_INVALID:
-              this.usernameInvalid.emit(new UsernameInvalidEvent(httpInfo.tag.username));
+              this.usernameInvalid.next(new UsernameInvalidEvent(httpInfo.tag.username));
               break;
 
             case FunctionalErrorCodes.REALM_INVALID:
-              this.realmInvalid.emit(new RealmInvalidEvent(httpInfo.tag.realm));
+              this.realmInvalid.next(new RealmInvalidEvent(httpInfo.tag.realm));
               break;
 
             case FunctionalErrorCodes.EMAIL_INVALID:
-              this.emailInvalid.emit(new EmailInvalidEvent(httpInfo.tag.email));
+              this.emailInvalid.next(new EmailInvalidEvent(httpInfo.tag.email));
               break;
 
             case FunctionalErrorCodes.PASSWORD_EMPTY_OR_NULL:
@@ -181,29 +181,29 @@ export class CrossUiEventService implements OnDestroy {
             // 401.
             case FunctionalErrorCodes.INVALID_CREDENTIALS:
               const remainingLoginAttempts = httpInfo.tag.remainingLoginAttempts;
-              this.invalidCredentials.emit(new InvalidCredentialsEvent(remainingLoginAttempts));
+              this.invalidCredentials.next(new InvalidCredentialsEvent(remainingLoginAttempts));
               break;
 
             // 403.
             case FunctionalErrorCodes.CROSS_REALM_ACCESS:
-              this.crossRealmAccess.emit(new CrossRealmAccessEvent());
+              this.crossRealmAccess.next(new CrossRealmAccessEvent());
               break;
 
             case FunctionalErrorCodes.REMOTE_IP_BLOCKED:
-              this.remoteIpBlocked.emit();
+              this.remoteIpBlocked.next();
               break;
 
             // 404.
             case FunctionalErrorCodes.LOGIN_REALM_NOT_FOUND:
-              this.realmNotFound.emit(new LoginRealmNotFoundEvent(httpInfo.tag.realm));
+              this.realmNotFound.next(new LoginRealmNotFoundEvent(httpInfo.tag.realm));
               break;
 
             case FunctionalErrorCodes.LOGIN_USERNAME_NOT_FOUND:
-              this.usernameNotFound.emit(new LoginUsernameNotFoundEvent(httpInfo.tag.username));
+              this.usernameNotFound.next(new LoginUsernameNotFoundEvent(httpInfo.tag.username));
               break;
 
             case FunctionalErrorCodes.ANALYSIS_FIND_FAILED_NOT_FOUND:
-              this.analysisNotFound.emit(new AnalysisNotFoundEvent(httpInfo.tag.id));
+              this.analysisNotFound.next(new AnalysisNotFoundEvent(httpInfo.tag.id));
               break;
 
             case FunctionalErrorCodes.STAKEHOLDER_FIND_FAILED_NOT_FOUND:
@@ -271,8 +271,8 @@ export class CrossUiEventService implements OnDestroy {
               const impact = this.impactData.impacts.find(i => i.id = httpInfo.tag.impactId);
               const deltas = this.requirementDeltaData.requirementDeltas.filter(rd => httpInfo.tag.requirementDeltaIds.includes(rd.id));
               if (impact && deltas) {
-                this.impactReferencedByRequirements.emit(new RequirementDeltasReferencingImpactEvent(impact, deltas));
-                this.impactDeletionFailed.emit(new ImpactDeletionFailedEvent(impact, false));
+                this.impactReferencedByRequirements.next(new RequirementDeltasReferencingImpactEvent(impact, deltas));
+                this.impactDeletionFailed.next(new ImpactDeletionFailedEvent(impact, false));
               }
               break;
 
@@ -280,8 +280,8 @@ export class CrossUiEventService implements OnDestroy {
               const stakeholder = this.stakeholderData.stakeholders.find(s => s.id = httpInfo.tag.stakeholderId);
               const impactsStakeholder = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (stakeholder && impactsStakeholder) {
-                this.stakeholderReferencedByImpacts.emit(new ImpactsReferencingStakeholderEvent(stakeholder, impactsStakeholder));
-                this.stakeholderDeletionFailed.emit(new StakeholderDeletionFailedEvent(stakeholder, false));
+                this.stakeholderReferencedByImpacts.next(new ImpactsReferencingStakeholderEvent(stakeholder, impactsStakeholder));
+                this.stakeholderDeletionFailed.next(new StakeholderDeletionFailedEvent(stakeholder, false));
               }
               break;
 
@@ -289,8 +289,8 @@ export class CrossUiEventService implements OnDestroy {
               const valueType = this.valueTypeData.valueTypes.find(v => v.id = httpInfo.tag.valueTypeId);
               const valuesValueType = this.valueData.values.filter(i => httpInfo.tag.valueIds.includes(i.id));
               if (valueType && valuesValueType) {
-                this.valueTypeReferencedByValues.emit(new ValuesReferencingValueType(valueType, valuesValueType));
-                this.valueTypeDeletionFailed.emit(new ValueTypeDeletionFailedEvent(valueType, false));
+                this.valueTypeReferencedByValues.next(new ValuesReferencingValueType(valueType, valuesValueType));
+                this.valueTypeDeletionFailed.next(new ValueTypeDeletionFailedEvent(valueType, false));
               }
               break;
 
@@ -298,8 +298,8 @@ export class CrossUiEventService implements OnDestroy {
               const value = this.valueData.values.find(v => v.id = httpInfo.tag.valueId);
               const impactsValue = this.impactData.impacts.filter(i => httpInfo.tag.impactIds.includes(i.id));
               if (value && impactsValue) {
-                this.valueReferencedByImpacts.emit(new ImpactsReferencingValueEvent(value, impactsValue));
-                this.valueDeletionFailed.emit(new ValueDeletionFailedEvent(value, false));
+                this.valueReferencedByImpacts.next(new ImpactsReferencingValueEvent(value, impactsValue));
+                this.valueDeletionFailed.next(new ValueDeletionFailedEvent(value, false));
               }
               break;
 
@@ -307,8 +307,8 @@ export class CrossUiEventService implements OnDestroy {
               const variantType = this.variantTypeData.variantTypes.find(v => v.id = httpInfo.tag.variantTypeId);
               const variantsVariantType = this.variantData.variants.filter(i => httpInfo.tag.variantIds.includes(i.id));
               if (variantType && variantsVariantType) {
-                this.variantTypeReferencedByVariants.emit(new VariantsReferencingVariantType(variantType, variantsVariantType));
-                this.variantTypeDeletionFailed.emit(new VariantTypeDeletionFailedEvent(variantType, false));
+                this.variantTypeReferencedByVariants.next(new VariantsReferencingVariantType(variantType, variantsVariantType));
+                this.variantTypeDeletionFailed.next(new VariantTypeDeletionFailedEvent(variantType, false));
               }
               break;
 
@@ -316,21 +316,21 @@ export class CrossUiEventService implements OnDestroy {
               const variant = this.variantData.variants.find(v => v.id = httpInfo.tag.variantId);
               const requirements = this.requirementData.requirements.filter(r => httpInfo.tag.requirementIds.includes(r.id));
               if (variant && requirements) {
-                this.variantReferencedByRequirements.emit(new RequirementsReferencingVariantEvent(variant, requirements));
-                this.variantDeletionFailed.emit(new VariantDeletionFailedEvent(variant, false));
+                this.variantReferencedByRequirements.next(new RequirementsReferencingVariantEvent(variant, requirements));
+                this.variantDeletionFailed.next(new VariantDeletionFailedEvent(variant, false));
               }
               break;
 
             case FunctionalErrorCodes.REGISTER_USERNAME_ALREADY_EXISTS:
-              this.registerUsernameAlreadyExists.emit(new RegisterUsernameAlreadyExistsEvent(httpInfo.tag.username));
+              this.registerUsernameAlreadyExists.next(new RegisterUsernameAlreadyExistsEvent(httpInfo.tag.username));
               break;
 
             case FunctionalErrorCodes.REGISTER_EMAIL_ALREADY_EXISTS:
-              this.registerEmailAlreadyExists.emit(new RegisterEmailAlreadyExistsEvent(httpInfo.tag.email));
+              this.registerEmailAlreadyExists.next(new RegisterEmailAlreadyExistsEvent(httpInfo.tag.email));
               break;
 
             case FunctionalErrorCodes.REGISTER_REALM_ALREADY_EXISTS:
-              this.registerRealmAlreadyExists.emit(new RegisterRealmAlreadyExistsEvent(httpInfo.tag.realm));
+              this.registerRealmAlreadyExists.next(new RegisterRealmAlreadyExistsEvent(httpInfo.tag.realm));
               break;
 
             default:
@@ -341,11 +341,11 @@ export class CrossUiEventService implements OnDestroy {
           if (httpInfo.httpStatusCode === 401) {
             // A 401 is returned by the backend if keycloak cannot login properly with the provided token.
             // This is done by keycloak if a rest call to a normal API endpoint is made (e.g. /stakeholders).
-            this.authenticationFailed.emit(new AuthenticationFailedEvent());
+            this.authenticationFailed.next(new AuthenticationFailedEvent());
           } else if (httpInfo.httpStatusCode === 403) {
             // A 403 is returned by the backend if the user's token is not properly authorized.
             // This is done by keycloak if a rest call to a normal API endpoint is made (e.g. /stakeholders).
-            this.authorizationFailed.emit(new AuthorizationFailedEvent());
+            this.authorizationFailed.next(new AuthorizationFailedEvent());
           }
         }
       });

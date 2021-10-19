@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {DataService} from './data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -11,7 +11,7 @@ import {ImpactDto} from '../../dto/ImpactDto';
 import {Impact} from '../../model/Impact';
 import {Value} from '../../model/Value';
 import {Stakeholder} from '../../model/Stakeholder';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
@@ -21,10 +21,10 @@ export class ImpactDataService extends DataService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  @Output() loadedImpacts: EventEmitter<Impact[]> = new EventEmitter();
-  @Output() createdImpact: EventEmitter<Impact> = new EventEmitter();
-  @Output() updatedImpact: EventEmitter<Impact> = new EventEmitter();
-  @Output() deletedImpact: EventEmitter<Impact> = new EventEmitter();
+  loadedImpacts: Subject<Impact[]> = new ReplaySubject();
+  createdImpact: Subject<Impact> = new ReplaySubject();
+  updatedImpact: Subject<Impact> = new ReplaySubject();
+  deletedImpact: Subject<Impact> = new ReplaySubject();
 
   impactsLoaded = false;
   impacts: Impact[] = [];
@@ -84,7 +84,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
         });
         this.impacts = this.sortDefault(tempImpacts);
         this.impactsLoaded = true;
-        this.loadedImpacts.emit(this.impacts);
+        this.loadedImpacts.next(this.impacts);
         this.logger.debug(this, 'Impacts loaded');
       });
   }
@@ -98,7 +98,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
           this.valueData.values,
           this.stakeholderData.stakeholders);
         this.impacts.push(createdImpact);
-        this.createdImpact.emit(createdImpact);
+        this.createdImpact.next(createdImpact);
         this.logger.debug(this, 'Impact created');
       });
   }
@@ -112,7 +112,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
           [this.analysisData.currentAnalysis],
           this.valueData.values,
           this.stakeholderData.stakeholders);
-        this.updatedImpact.emit(impact);
+        this.updatedImpact.next(impact);
         this.logger.debug(this, 'Impact updated');
       });
   }
@@ -123,7 +123,7 @@ export class ImpactDataService extends DataService implements OnDestroy {
       .subscribe(() => {
         const index: number = this.impacts.indexOf(impact, 0);
         this.impacts.splice(index, 1);
-        this.deletedImpact.emit(impact);
+        this.deletedImpact.next(impact);
         this.logger.debug(this, 'Impact deleted');
       });
   }

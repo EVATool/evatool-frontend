@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {DataService} from './data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -7,7 +7,7 @@ import {VariantRestService} from '../rest/variant-rest.service';
 import {VariantMapperService} from '../mapper/variant-mapper.service';
 import {Analysis} from '../../model/Analysis';
 import {VariantDto} from '../../dto/VariantDto';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {VariantTypeDataService} from './variant-type-data.service';
 import {VariantType} from '../../model/VariantType';
@@ -19,10 +19,10 @@ export class VariantDataService extends DataService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  @Output() loadedVariants: EventEmitter<Variant[]> = new EventEmitter();
-  @Output() createdVariant: EventEmitter<Variant> = new EventEmitter();
-  @Output() updatedVariant: EventEmitter<Variant> = new EventEmitter();
-  @Output() deletedVariant: EventEmitter<Variant> = new EventEmitter();
+  loadedVariants: Subject<Variant[]> = new ReplaySubject();
+  createdVariant: Subject<Variant> = new ReplaySubject();
+  updatedVariant: Subject<Variant> = new ReplaySubject();
+  deletedVariant: Subject<Variant> = new ReplaySubject();
 
   variantsLoaded = false;
   variants: Variant[] = [];
@@ -73,7 +73,7 @@ export class VariantDataService extends DataService implements OnDestroy {
         });
         this.variants = this.sortDefault(tempVariants);
         this.variantsLoaded = true;
-        this.loadedVariants.emit(this.variants);
+        this.loadedVariants.next(this.variants);
         this.logger.debug(this, 'Variants loaded');
       });
   }
@@ -84,7 +84,7 @@ export class VariantDataService extends DataService implements OnDestroy {
       .subscribe((variantDto: VariantDto) => {
         const createdVariant = this.variantMapper.fromDto(variantDto, [this.analysisData.currentAnalysis], this.variantTypeData.variantTypes);
         this.variants.push(createdVariant);
-        this.createdVariant.emit(createdVariant);
+        this.createdVariant.next(createdVariant);
         this.logger.debug(this, 'Variant created');
       });
   }
@@ -94,7 +94,7 @@ export class VariantDataService extends DataService implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((variantDto: VariantDto) => {
         this.variantMapper.updateFromDto(variantDto, variant, [this.analysisData.currentAnalysis], this.variantTypeData.variantTypes);
-        this.updatedVariant.emit(variant);
+        this.updatedVariant.next(variant);
         this.logger.debug(this, 'Variant updated');
       });
   }
@@ -105,7 +105,7 @@ export class VariantDataService extends DataService implements OnDestroy {
       .subscribe(() => {
         const index: number = this.variants.indexOf(variant, 0);
         this.variants.splice(index, 1);
-        this.deletedVariant.emit(variant);
+        this.deletedVariant.next(variant);
         this.logger.debug(this, 'Variant deleted');
       });
   }

@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {DataService} from './data.service';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -11,7 +11,7 @@ import {Analysis} from '../../model/Analysis';
 import {RequirementDeltaDto} from '../../dto/RequirementDeltaDto';
 import {Requirement} from '../../model/Requirement';
 import {Impact} from '../../model/Impact';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
@@ -21,10 +21,10 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
 
   private ngUnsubscribe = new Subject();
 
-  @Output() loadedRequirementDeltas: EventEmitter<RequirementDelta[]> = new EventEmitter();
-  @Output() createdRequirementDelta: EventEmitter<RequirementDelta> = new EventEmitter();
-  @Output() updatedRequirementDelta: EventEmitter<RequirementDelta> = new EventEmitter();
-  @Output() deletedRequirementDelta: EventEmitter<RequirementDelta> = new EventEmitter();
+  loadedRequirementDeltas: Subject<RequirementDelta[]> = new ReplaySubject();
+  createdRequirementDelta: Subject<RequirementDelta> = new ReplaySubject();
+  updatedRequirementDelta: Subject<RequirementDelta> = new ReplaySubject();
+  deletedRequirementDelta: Subject<RequirementDelta> = new ReplaySubject();
 
   requirementDeltasLoaded = false;
   requirementDeltas: RequirementDelta[] = [];
@@ -84,7 +84,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
         });
         this.requirementDeltas = this.sortDefault(tempDeltas);
         this.requirementDeltasLoaded = true;
-        this.loadedRequirementDeltas.emit(this.requirementDeltas);
+        this.loadedRequirementDeltas.next(this.requirementDeltas);
         this.logger.debug(this, 'RequirementDeltas loaded');
       });
   }
@@ -97,7 +97,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
           this.requirementData.requirements,
           this.impactData.impacts);
         this.requirementDeltas.push(createdRequirementDelta);
-        this.createdRequirementDelta.emit(createdRequirementDelta);
+        this.createdRequirementDelta.next(createdRequirementDelta);
         this.logger.debug(this, 'RequirementDelta created');
       });
   }
@@ -110,7 +110,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
           requirementDelta,
           this.requirementData.requirements,
           this.impactData.impacts);
-        this.updatedRequirementDelta.emit(requirementDelta);
+        this.updatedRequirementDelta.next(requirementDelta);
         this.logger.debug(this, 'RequirementDelta updated');
       });
   }
@@ -121,7 +121,7 @@ export class RequirementDeltaDataService extends DataService implements OnDestro
       .subscribe(() => {
         const index: number = this.requirementDeltas.indexOf(requirementDelta, 0);
         this.requirementDeltas.splice(index, 1);
-        this.deletedRequirementDelta.emit(requirementDelta);
+        this.deletedRequirementDelta.next(requirementDelta);
         this.logger.debug(this, 'RequirementDelta deleted');
       });
   }

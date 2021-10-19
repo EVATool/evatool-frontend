@@ -56,7 +56,7 @@ export class VariantTableComponent extends EntityTableComponent implements OnIni
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(() => {
               this.logger.info(this, 'User wants to see the requirements referencing the variant');
-              this.crossUI.userWantsToSeeRequirementsReferencingVariant.emit(event);
+              this.crossUI.userWantsToSeeRequirementsReferencingVariant.next(event);
             });
         });
       });

@@ -1,6 +1,6 @@
-import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {DataService} from './data.service';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import {ValueType} from '../../model/ValueType';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
@@ -17,10 +17,10 @@ export class ValueTypeDataService extends DataService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  @Output() loadedValueTypes: EventEmitter<ValueType[]> = new EventEmitter();
-  @Output() createdValueType: EventEmitter<ValueType> = new EventEmitter();
-  @Output() updatedValueType: EventEmitter<ValueType> = new EventEmitter();
-  @Output() deletedValueType: EventEmitter<ValueType> = new EventEmitter();
+  loadedValueTypes: Subject<ValueType[]> = new ReplaySubject();
+  createdValueType: Subject<ValueType> = new ReplaySubject();
+  updatedValueType: Subject<ValueType> = new ReplaySubject();
+  deletedValueType: Subject<ValueType> = new ReplaySubject();
 
   valueTypesLoaded = false;
   valueTypes: ValueType[] = [];
@@ -54,7 +54,7 @@ export class ValueTypeDataService extends DataService implements OnDestroy {
             });
             this.valueTypes = this.sortDefault(tempValueTypes);
             this.valueTypesLoaded = true;
-            this.loadedValueTypes.emit(this.valueTypes);
+            this.loadedValueTypes.next(this.valueTypes);
             this.logger.debug(this, 'ValueTypes loaded');
           });
       });
@@ -71,7 +71,7 @@ export class ValueTypeDataService extends DataService implements OnDestroy {
       .subscribe((valueTypeDto: ValueTypeDto) => {
         const createdValueType = this.valueTypeMapper.fromDto(valueTypeDto, [this.analysisData.currentAnalysis]);
         this.valueTypes.push(createdValueType);
-        this.createdValueType.emit(createdValueType);
+        this.createdValueType.next(createdValueType);
         this.logger.debug(this, 'ValueType created');
       });
   }
@@ -81,7 +81,7 @@ export class ValueTypeDataService extends DataService implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((valueTypeDto: ValueTypeDto) => {
         this.valueTypeMapper.updateFromDto(valueTypeDto, valueType, [this.analysisData.currentAnalysis]);
-        this.updatedValueType.emit(valueType);
+        this.updatedValueType.next(valueType);
         this.logger.debug(this, 'ValueType updated');
       });
   }
@@ -92,7 +92,7 @@ export class ValueTypeDataService extends DataService implements OnDestroy {
       .subscribe(() => {
         const index: number = this.valueTypes.indexOf(valueType, 0);
         this.valueTypes.splice(index, 1);
-        this.deletedValueType.emit(valueType);
+        this.deletedValueType.next(valueType);
         this.logger.debug(this, 'ValueType deleted');
       });
   }

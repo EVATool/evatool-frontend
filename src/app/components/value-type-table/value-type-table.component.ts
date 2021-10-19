@@ -50,7 +50,7 @@ export class ValueTypeTableComponent implements OnInit, AfterViewInit, OnDestroy
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(() => {
               this.logger.info(this, 'User wants to see the impacts referencing the value');
-              this.crossUI.userWantsToSeeValuesReferencingValueType.emit(event);
+              this.crossUI.userWantsToSeeValuesReferencingValueType.next(event);
             });
         });
       });

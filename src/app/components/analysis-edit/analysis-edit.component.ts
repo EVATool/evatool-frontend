@@ -94,7 +94,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
         this.navigateToTabByName('Stakeholder');
       });
 
-    this.crossUI.userNavigatedToAnalysis.emit();
+    this.crossUI.userNavigatedToAnalysis.next();
   }
 
   ngAfterViewInit(): void {
@@ -102,7 +102,7 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.crossUI.userLeftCurrentAnalysisEdit.emit();
+    this.crossUI.userLeftCurrentAnalysisEdit.next();
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

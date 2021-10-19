@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {LogService} from '../log.service';
 import {AnalysisDataService} from './analysis-data.service';
 import {DataService} from './data.service';
@@ -8,7 +8,7 @@ import {Requirement} from '../../model/Requirement';
 import {Analysis} from '../../model/Analysis';
 import {RequirementDto} from '../../dto/RequirementDto';
 import {VariantDataService} from './variant-data.service';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
@@ -18,10 +18,10 @@ export class RequirementDataService extends DataService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  @Output() loadedRequirements: EventEmitter<Requirement[]> = new EventEmitter();
-  @Output() createdRequirement: EventEmitter<Requirement> = new EventEmitter();
-  @Output() updatedRequirement: EventEmitter<Requirement> = new EventEmitter();
-  @Output() deletedRequirement: EventEmitter<Requirement> = new EventEmitter();
+  loadedRequirements: Subject<Requirement[]> = new ReplaySubject();
+  createdRequirement: Subject<Requirement> = new ReplaySubject();
+  updatedRequirement: Subject<Requirement> = new ReplaySubject();
+  deletedRequirement: Subject<Requirement> = new ReplaySubject();
 
   requirementsLoaded = false;
   requirements: Requirement[] = [];
@@ -75,7 +75,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
         });
         this.requirements = this.sortDefault(tempRequirements);
         this.requirementsLoaded = true;
-        this.loadedRequirements.emit(this.requirements);
+        this.loadedRequirements.next(this.requirements);
         this.logger.debug(this, 'Requirements loaded');
       });
   }
@@ -88,7 +88,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
           [this.analysisData.currentAnalysis],
           this.variantData.variants);
         this.requirements.push(createdRequirement);
-        this.createdRequirement.emit(createdRequirement);
+        this.createdRequirement.next(createdRequirement);
         this.logger.debug(this, 'Requirement created');
       });
   }
@@ -101,7 +101,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
           requirement,
           [this.analysisData.currentAnalysis],
           this.variantData.variants);
-        this.updatedRequirement.emit(requirement);
+        this.updatedRequirement.next(requirement);
         this.logger.debug(this, 'Requirement updated');
       });
   }
@@ -112,7 +112,7 @@ export class RequirementDataService extends DataService implements OnDestroy {
       .subscribe(() => {
         const index: number = this.requirements.indexOf(requirement, 0);
         this.requirements.splice(index, 1);
-        this.deletedRequirement.emit(requirement);
+        this.deletedRequirement.next(requirement);
         this.logger.debug(this, 'Requirement deleted');
       });
   }

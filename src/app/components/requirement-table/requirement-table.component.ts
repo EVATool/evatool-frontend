@@ -382,6 +382,6 @@ export class RequirementTableComponent extends EntityTableComponent implements O
 
   emitArchivedReferenced(variants: Variant[], requirement: Requirement): void {
     const event = new ArchivedVariantReferencedByRequirement(variants, requirement);
-    this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement.emit(event);
+    this.crossUI.userWantsToSeeArchivedVariantReferencedByRequirement.next(event);
   }
 }

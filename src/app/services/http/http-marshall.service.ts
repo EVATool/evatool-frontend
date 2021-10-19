@@ -1,19 +1,20 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {LogService} from '../log.service';
 import {HttpInfo, HttpInfoType} from './HttpInfo';
 import {HttpRequest} from '@angular/common/http';
+import {ReplaySubject, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpMarshallService {
-  @Output() httpNext: EventEmitter<HttpInfo> = new EventEmitter();
-  @Output() httpError: EventEmitter<HttpInfo> = new EventEmitter();
-  @Output() httpComplete: EventEmitter<HttpInfo> = new EventEmitter();
+  httpNext: Subject<HttpInfo> = new ReplaySubject();
+  httpError: Subject<HttpInfo> = new ReplaySubject();
+  httpComplete: Subject<HttpInfo> = new ReplaySubject();
 
-  @Output() numHttpChanges: EventEmitter<number> = new EventEmitter();
-  @Output() httpActive: EventEmitter<void> = new EventEmitter();
-  @Output() httpNotActive: EventEmitter<HttpInfo> = new EventEmitter();
+  numHttpChanges: Subject<number> = new ReplaySubject();
+  httpActive: Subject<void> = new ReplaySubject();
+  httpNotActive: Subject<HttpInfo> = new ReplaySubject();
 
   numHttp = 0;
   private activeRequests: HttpRequest<any>[] = [];
@@ -24,7 +25,7 @@ export class HttpMarshallService {
   next(request: HttpRequest<any>): void {
     this.logger.debug(this, 'An http request started.');
     const httpInfo = this.buildHttpInfo(request, HttpInfoType.Next);
-    this.httpNext.emit(httpInfo);
+    this.httpNext.next(httpInfo);
     this.processHttpRequest(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
@@ -32,7 +33,7 @@ export class HttpMarshallService {
   error(request: HttpRequest<any>, httpStatusCode: number, functionalErrorCode: number, tag: any): void {
     this.logger.debug(this, 'An http response failed.');
     const httpInfo = this.buildHttpInfo(request, HttpInfoType.Error, functionalErrorCode, tag, httpStatusCode);
-    this.httpError.emit(httpInfo);
+    this.httpError.next(httpInfo);
     this.processHttpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
@@ -40,7 +41,7 @@ export class HttpMarshallService {
   complete(request: HttpRequest<any>): void {
     this.logger.debug(this, 'An http response was successful.');
     const httpInfo = this.buildHttpInfo(request, HttpInfoType.Complete);
-    this.httpComplete.emit(httpInfo);
+    this.httpComplete.next(httpInfo);
     this.processHttpResponse(request, httpInfo);
     this.logger.info(this, 'Active http requests: ' + this.numHttp);
   }
@@ -51,9 +52,9 @@ export class HttpMarshallService {
       this.activeRequests.push(request);
 
       this.numHttp++;
-      this.numHttpChanges.emit(this.numHttp);
+      this.numHttpChanges.next(this.numHttp);
       if (this.numHttp > 0) {
-        this.httpActive.emit();
+        this.httpActive.next();
       }
     }
   }
@@ -65,9 +66,9 @@ export class HttpMarshallService {
       this.activeRequests.splice(index, 1);
 
       this.numHttp--;
-      this.numHttpChanges.emit(this.numHttp);
+      this.numHttpChanges.next(this.numHttp);
       if (this.numHttp === 0) {
-        this.httpNotActive.emit(httpInfo);
+        this.httpNotActive.next(httpInfo);
       }
     }
   }

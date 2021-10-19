@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, OnDestroy, Output} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {DataService} from './data.service';
 import {LogService} from '../log.service';
 import {Analysis} from '../../model/Analysis';
@@ -6,7 +6,7 @@ import {AnalysisRestService} from '../rest/analysis-rest.service';
 import {AnalysisMapperService} from '../mapper/analysis-mapper.service';
 import {AnalysisDto} from '../../dto/AnalysisDto';
 import {ImportExportRestService} from '../rest/import-export-rest.service';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
@@ -16,12 +16,12 @@ export class AnalysisDataService extends DataService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  @Output() loadedAnalyses: EventEmitter<Analysis[]> = new EventEmitter();
-  @Output() loadedCurrentAnalysis: EventEmitter<Analysis> = new EventEmitter();
-  @Output() createdAnalysis: EventEmitter<Analysis> = new EventEmitter();
-  @Output() updatedAnalysis: EventEmitter<Analysis> = new EventEmitter();
-  @Output() deletedAnalysis: EventEmitter<Analysis> = new EventEmitter();
-  @Output() exportedAnalysis: EventEmitter<object> = new EventEmitter();
+  loadedAnalyses: Subject<Analysis[]> = new ReplaySubject();
+  loadedCurrentAnalysis: Subject<Analysis> = new ReplaySubject();
+  createdAnalysis: Subject<Analysis> = new ReplaySubject();
+  updatedAnalysis: Subject<Analysis> = new ReplaySubject();
+  deletedAnalysis: Subject<Analysis> = new ReplaySubject();
+  exportedAnalysis: Subject<object> = new ReplaySubject();
 
   analyses: Analysis[] = [];
   currentAnalysis!: Analysis;
@@ -51,7 +51,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
           tempAnalyses.push(this.analysisMapper.fromDto(analysisDto));
         });
         this.analyses = this.sortDefault(tempAnalyses);
-        this.loadedAnalyses.emit(this.analyses);
+        this.loadedAnalyses.next(this.analyses);
         this.logger.debug(this, 'Analyses loaded');
       });
   }
@@ -61,7 +61,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysisDto: AnalysisDto) => {
         this.currentAnalysis = this.analysisMapper.fromDto(analysisDto);
-        this.loadedCurrentAnalysis.emit(this.currentAnalysis);
+        this.loadedCurrentAnalysis.next(this.currentAnalysis);
         this.logger.debug(this, 'Current analysis loaded');
       });
   }
@@ -72,7 +72,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
       .subscribe((analysisDto: AnalysisDto) => {
         const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
         this.analyses.push(createdAnalysis);
-        this.createdAnalysis.emit(createdAnalysis);
+        this.createdAnalysis.next(createdAnalysis);
         this.logger.debug(this, 'Analysis deep copied');
       });
   }
@@ -83,7 +83,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
       .subscribe((analysisDto: AnalysisDto) => {
         const createdAnalysis = this.analysisMapper.fromDto(analysisDto);
         this.analyses.push(createdAnalysis);
-        this.createdAnalysis.emit(createdAnalysis);
+        this.createdAnalysis.next(createdAnalysis);
         this.logger.debug(this, 'Analysis created');
       });
   }
@@ -93,7 +93,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((analysisDto: AnalysisDto) => {
         this.analysisMapper.updateFromDto(analysisDto, analysis);
-        this.updatedAnalysis.emit(analysis);
+        this.updatedAnalysis.next(analysis);
         this.logger.debug(this, 'Analysis updated');
       });
   }
@@ -104,7 +104,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
       .subscribe(() => {
         const index: number = this.analyses.indexOf(analysis, 0);
         this.analyses.splice(index, 1);
-        this.deletedAnalysis.emit(analysis);
+        this.deletedAnalysis.next(analysis);
         this.logger.debug(this, 'Analysis deleted');
       });
   }
@@ -134,7 +134,7 @@ export class AnalysisDataService extends DataService implements OnDestroy {
     this.importExportRest.exportAnalyses(analysisIds, filename)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((exportAnalyses: object) => {
-        this.exportedAnalysis.emit(exportAnalyses);
+        this.exportedAnalysis.next(exportAnalyses);
       });
   }
 }

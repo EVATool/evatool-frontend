@@ -47,7 +47,7 @@ export class VariantTypeTableComponent implements OnInit, AfterViewInit, OnDestr
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(() => {
               this.logger.info(this, 'User wants to see the impacts referencing the variant');
-              this.crossUI.userWantsToSeeVariantsReferencingVariantType.emit(event);
+              this.crossUI.userWantsToSeeVariantsReferencingVariantType.next(event);
             });
         });
       });

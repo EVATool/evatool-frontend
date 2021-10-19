@@ -9,7 +9,7 @@ import {AuthTokenDto} from '../../dto/AuthTokenDto';
 import {AuthRegisterRealmDto} from '../../dto/AuthRegisterRealmDto';
 import {AuthRegisterUserDto} from '../../dto/AuthRegisterUserDto';
 import {environment} from '../../../environments/environment';
-import {Subject} from 'rxjs';
+import {ReplaySubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class AuthService extends RestService implements OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
-  @Output() realmRegistered: EventEmitter<string> = new EventEmitter();
+  realmRegistered: Subject<string> = new ReplaySubject();
 
   authenticated = false;
   isAutoRefreshing = false;
@@ -184,7 +184,7 @@ export class AuthService extends RestService implements OnDestroy {
     this.logger.debug(this, 'Http post to: ' + url);
     this.http.post<AuthRegisterRealmDto>(url, null, this.httpOptions)
       .pipe(takeUntil(this.ngUnsubscribe)).subscribe((response: AuthRegisterRealmDto) => {
-      this.realmRegistered.emit(response.realm);
+      this.realmRegistered.next(response.realm);
     });
   }
 

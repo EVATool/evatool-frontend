@@ -44,7 +44,7 @@ export class MasterService {
     this.stakeholderData.init();
     this.analysisData.init();
 
-    this.crossUI.initComplete.emit();
+    this.crossUI.initComplete.next();
     this.crossUI.initialized = true;
   }
 }

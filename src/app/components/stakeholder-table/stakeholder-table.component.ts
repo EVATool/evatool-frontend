@@ -52,7 +52,7 @@ export class StakeholderTableComponent extends EntityTableComponent implements O
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(() => {
               this.logger.info(this, 'User wants to see the impacts referencing the stakeholder');
-              this.crossUI.userWantsToSeeImpactsReferencingStakeholder.emit(event);
+              this.crossUI.userWantsToSeeImpactsReferencingStakeholder.next(event);
             });
         });
       });

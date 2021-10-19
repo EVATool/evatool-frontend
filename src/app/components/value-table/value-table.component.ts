@@ -58,7 +58,7 @@ export class ValueTableComponent extends EntityTableComponent implements OnInit,
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(() => {
               this.logger.info(this, 'User wants to see the impacts referencing the value');
-              this.crossUI.userWantsToSeeImpactsReferencingValue.emit(event);
+              this.crossUI.userWantsToSeeImpactsReferencingValue.next(event);
             });
         });
       });

@@ -81,7 +81,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(() => {
               this.logger.info(this, 'User wants to see the requirements referencing the impact');
-              this.crossUI.userWantsToSeeRequirementsReferencingImpact.emit(event);
+              this.crossUI.userWantsToSeeRequirementsReferencingImpact.next(event);
             });
         });
       });
@@ -171,7 +171,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
           this.snackBar.open(message, action, {duration: 5000}).onAction()
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(() => {
-              this.crossUI.userWantsToNavigateToStakeholderTab.emit();
+              this.crossUI.userWantsToNavigateToStakeholderTab.next();
             });
         });
       });
@@ -181,7 +181,7 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
           this.snackBar.open(message, action, {duration: 5000}).onAction()
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe(() => {
-              this.crossUI.userWantsToNavigateToValueTab.emit();
+              this.crossUI.userWantsToNavigateToValueTab.next();
             });
         });
       });
@@ -235,6 +235,6 @@ export class ImpactTableComponent extends EntityTableComponent implements OnInit
 
   emitArchivedReferenced(value: Value, impact: Impact): void {
     const event = new ArchivedValueReferencedByImpact(value, impact);
-    this.crossUI.userWantsToSeeArchivedValueReferencedByImpact.emit(event);
+    this.crossUI.userWantsToSeeArchivedValueReferencedByImpact.next(event);
   }
 }
