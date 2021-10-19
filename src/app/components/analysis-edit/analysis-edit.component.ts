@@ -16,7 +16,6 @@ import {ArchivedValueReferencedByImpact} from '../../services/event/events/local
 import {ArchivedVariantReferencedByRequirement} from '../../services/event/events/local/ArchivedVariantReferencedByRequirement';
 import {TranslateService} from '@ngx-translate/core';
 import {OUTLETS} from '../../app-outlets';
-import {outletTabAnimation} from '../../animations/OutletTabAnimation';
 
 @Component({
   selector: 'app-analysis-edit',
@@ -147,5 +146,9 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   navigateToSubRouteTab(path: string): void {
     this.router.navigateByUrl(ROUTES.analysis + '/' + this.analysisData.currentAnalysis.id + '/' + path);
+  }
+
+  getRouteIsActive(path: string): boolean {
+    return this.router.url.toString().includes(path);
   }
 }

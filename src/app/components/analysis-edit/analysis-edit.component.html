@@ -1,7 +1,8 @@
 <nav mat-tab-nav-bar mat-align-tabs="left">
   <a mat-tab-link
      *ngFor="let link of links"
-     (click)="navigateToTabByName(link.name)">
+     (click)="navigateToTabByName(link.name)"
+     [active]="getRouteIsActive(link.path)">
     {{link.translation | translate}}
   </a>
 </nav>
