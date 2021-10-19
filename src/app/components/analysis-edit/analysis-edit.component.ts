@@ -149,6 +149,11 @@ export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getRouteIsActive(path: string): boolean {
-    return this.router.url.toString().includes(path);
+    const url = this.router.url.toString();
+    if (url.includes('(')) {
+      return url.includes(path);
+    } else {
+      return path.includes(this.links[0].path);
+    }
   }
 }
