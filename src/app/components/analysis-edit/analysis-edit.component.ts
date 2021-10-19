@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {MatTabGroup} from '@angular/material/tabs';
 import {AnalysisDataService} from '../../services/data/analysis-data.service';
@@ -23,8 +23,6 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./analysis-edit.component.scss']
 })
 export class AnalysisEditComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  @Output()
 
   private ngUnsubscribe = new Subject();
 
