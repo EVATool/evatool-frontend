@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs';
 import {FilterCategoryComponent} from '../filter-category/filter-category.component';
 import {LogService} from '../../services/log.service';
@@ -12,7 +12,7 @@ import {VariantType} from '../../model/VariantType';
   templateUrl: './variant-filter-bar.component.html',
   styleUrls: ['./variant-filter-bar.component.scss']
 })
-export class VariantFilterBarComponent implements OnInit {
+export class VariantFilterBarComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
@@ -55,6 +55,11 @@ export class VariantFilterBarComponent implements OnInit {
       });
 
     this.updateVariantTypes();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateVariantTypes(): void {

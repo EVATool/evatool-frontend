@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {LogService} from '../../services/log.service';
 import {ValueTableFilterEvent} from './ValueTableFilterEvent';
 import {FilterCategoryComponent} from '../filter-category/filter-category.component';
@@ -12,7 +12,7 @@ import {ValueType} from '../../model/ValueType';
   templateUrl: './value-filter-bar.component.html',
   styleUrls: ['./value-filter-bar.component.scss']
 })
-export class ValueFilterBarComponent implements OnInit {
+export class ValueFilterBarComponent implements OnInit, OnDestroy {
 
   private ngUnsubscribe = new Subject();
 
@@ -55,6 +55,11 @@ export class ValueFilterBarComponent implements OnInit {
       });
 
     this.updateValueTypes();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateValueTypes(): void {
